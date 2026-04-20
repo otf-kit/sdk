@@ -1,3 +1,4 @@
+import { Nav } from '@/components/nav'
 import { Hero } from '@/components/hero'
 import { AiStrip } from '@/components/ai-strip'
 import { ComponentTeaser } from '@/components/component-teaser'
@@ -11,7 +12,8 @@ import { Footer } from '@/components/footer'
 
 export default function HomePage() {
   return (
-    <main className="flex flex-col min-h-dvh bg-[#09090b]">
+    <main className="flex flex-col min-h-dvh bg-[#0a0a0a]">
+      <Nav />
       <Hero />
       <AiStrip />
       <ComponentTeaser />

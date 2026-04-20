@@ -8,12 +8,12 @@ type Tab = (typeof tabs)[number]
 
 const platformColors: Record<string, string> = {
   Web: 'bg-blue-500/10 text-blue-400 border-blue-500/20',
-  Native: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20',
+  Native: 'bg-[#f97316]/10 text-orange-400 border-[#f97316]/20',
   Both: 'bg-violet-500/10 text-violet-400 border-violet-500/20',
 }
 
 const categoryColors: Record<string, string> = {
-  Primitives: 'text-zinc-400',
+  Primitives: 'text-[#737373]',
   Components: 'text-blue-400',
   Blocks: 'text-violet-400',
   Forms: 'text-orange-400',
@@ -21,7 +21,7 @@ const categoryColors: Record<string, string> = {
   Advanced: 'text-red-400',
   Charts: 'text-yellow-400',
   Engagement: 'text-pink-400',
-  Patterns: 'text-teal-400',
+  Patterns: 'text-[#f97316]',
   Interface: 'text-cyan-400',
 }
 
@@ -43,10 +43,10 @@ export function ComponentsClient() {
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors border ${
+            className={`px-4 py-1.5 rounded-md text-sm font-medium transition-colors border ${
               activeTab === tab
-                ? 'bg-indigo-600 border-indigo-500 text-white'
-                : 'border-zinc-700 text-[#a1a1aa] hover:border-zinc-500 hover:text-[#fafafa]'
+                ? 'bg-[#f97316] border-[#f97316] text-white'
+                : 'border-[#1f1f1f] text-[#737373] hover:border-[#333333] hover:text-white'
             }`}
           >
             {tab}
@@ -57,16 +57,15 @@ export function ComponentsClient() {
         {filtered.map((c) => (
           <div
             key={`${c.name}-${c.platform}`}
-            className="group relative bg-zinc-900/50 border border-zinc-800 rounded-xl p-4 flex flex-col gap-2 hover:border-indigo-500/40 transition-all"
-            style={{ boxShadow: 'var(--shadow-card)' }}
+            className="group relative bg-[#111111] border border-[#1f1f1f] rounded-xl p-4 flex flex-col gap-2 hover:border-[#f97316]/30 transition-all"
           >
-            <span className="font-mono text-xs text-[#fafafa] font-medium leading-tight">{c.name}</span>
+            <span className="font-mono text-xs text-white font-medium leading-tight">{c.name}</span>
             <span className={`text-xs px-1.5 py-0.5 rounded border self-start ${platformColors[c.platform]}`}>
               {c.platform}
             </span>
             <span className={`text-xs ${categoryColors[c.category]}`}>{c.category}</span>
             <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
-              <code className="text-xs font-mono text-indigo-300 bg-zinc-950/90 rounded px-2 py-1 w-full text-center truncate">
+              <code className="text-xs font-mono text-[#f97316] bg-[#0a0a0a]/95 rounded px-2 py-1 w-full text-center truncate border border-[#1f1f1f]">
                 pnpm add @otf/ui
               </code>
             </div>

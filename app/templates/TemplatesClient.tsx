@@ -80,10 +80,10 @@ export function TemplatesClient() {
           <button
             key={f}
             onClick={() => setActiveFilter(f)}
-            className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors border ${
+            className={`px-4 py-1.5 rounded-md text-sm font-medium transition-colors border ${
               activeFilter === f
-                ? 'bg-indigo-600 border-indigo-500 text-white'
-                : 'border-zinc-700 text-[#a1a1aa] hover:border-zinc-500 hover:text-[#fafafa]'
+                ? 'bg-[#f97316] border-[#f97316] text-white'
+                : 'border-[#1f1f1f] text-[#737373] hover:border-[#333333] hover:text-white'
             }`}
           >
             {f}
@@ -94,26 +94,25 @@ export function TemplatesClient() {
         {filtered.map((t) => (
           <div
             key={t.name}
-            className="bg-zinc-900/50 border border-zinc-800 rounded-xl p-6 flex flex-col gap-4"
-            style={{ boxShadow: 'var(--shadow-card)' }}
+            className="bg-[#111111] border border-[#1f1f1f] rounded-xl p-6 flex flex-col gap-4 hover:border-[#f97316]/20 transition-colors"
           >
             <div className="flex items-start justify-between gap-4">
               <div>
                 <div className="flex items-center gap-2 mb-1">
-                  <h3 className="font-semibold text-[#fafafa] text-lg">{t.name}</h3>
+                  <h3 className="font-semibold text-white text-lg">{t.name}</h3>
                 </div>
-                <p className="text-sm text-[#a1a1aa]">{t.subtitle}</p>
+                <p className="text-sm text-[#737373]">{t.subtitle}</p>
               </div>
-              <span className="font-bold text-[#fafafa] text-xl shrink-0">{t.price}</span>
+              <span className="font-bold text-white text-xl shrink-0">{t.price}</span>
             </div>
             <div className="flex items-center gap-2 flex-wrap">
-              <span className="text-xs px-2.5 py-1 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-indigo-400">
+              <span className="text-xs px-2.5 py-1 rounded-full border border-[#f97316]/30 bg-[#f97316]/10 text-orange-400">
                 {t.platform}
               </span>
               {t.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="text-xs px-2 py-0.5 rounded border border-zinc-700 text-zinc-400"
+                  className="text-xs px-2 py-0.5 rounded border border-[#1f1f1f] text-[#525252]"
                 >
                   {tag}
                 </span>
@@ -123,8 +122,8 @@ export function TemplatesClient() {
               <span
                 className={`text-xs px-2.5 py-1 rounded-full border font-medium ${
                   t.status === 'In Development'
-                    ? 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20'
-                    : 'bg-zinc-800 text-zinc-400 border-zinc-700'
+                    ? 'bg-[#f97316]/10 text-orange-400 border-[#f97316]/20'
+                    : 'bg-[#1f1f1f] text-[#525252] border-[#333333]'
                 }`}
               >
                 {t.status}
@@ -133,13 +132,13 @@ export function TemplatesClient() {
             <div className="flex gap-3 mt-auto">
               <button
                 disabled
-                className="flex-1 text-sm text-center px-4 py-2 border border-zinc-800 text-zinc-600 rounded-lg cursor-not-allowed"
+                className="flex-1 text-sm text-center px-4 py-2 border border-[#1f1f1f] text-[#525252] rounded-md cursor-not-allowed"
               >
                 View Demo
               </button>
               <a
                 href="/#waitlist"
-                className="flex-1 text-sm text-center px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg transition-colors"
+                className="flex-1 text-sm text-center px-4 py-2 bg-[#f97316] hover:bg-[#fb923c] text-white rounded-md transition-colors font-medium"
               >
                 Join Waitlist
               </a>

@@ -1,31 +1,29 @@
 @import "tailwindcss";
 
 :root {
-  --background: #09090b;
-  --foreground: #fafafa;
-  --primary: #6366f1;
-  --primary-foreground: #ffffff;
-  --accent: #8b5cf6;
-  --muted: #18181b;
-  --muted-foreground: #a1a1aa;
-  --border: #27272a;
-  --radius: 8px;
-  --radius-card: 12px;
-  --shadow-card: 0 0 0 1px rgba(99, 102, 241, 0.1), 0 4px 24px rgba(0, 0, 0, 0.4);
+  --background: #0a0a0a;
+  --foreground: #ffffff;
+  --primary: #f97316;
+  --primary-hover: #fb923c;
+  --primary-dim: rgba(249, 115, 22, 0.1);
+  --muted: #111111;
+  --muted-2: #161616;
+  --muted-foreground: #737373;
+  --border: #1f1f1f;
+  --border-subtle: #141414;
+  --radius: 6px;
+  --radius-card: 10px;
+  --shadow-card: 0 0 0 1px rgba(249, 115, 22, 0.08), 0 8px 32px rgba(0, 0, 0, 0.6);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-mono);
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+*, *::before, *::after { box-sizing: border-box; }
 
 html {
   color-scheme: dark;
@@ -35,22 +33,43 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   min-height: 100dvh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-.bg-grid {
-  background-image: linear-gradient(rgba(99, 102, 241, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(99, 102, 241, 0.05) 1px, transparent 1px);
+.bg-dot-grid {
+  background-image: radial-gradient(circle, rgba(249, 115, 22, 0.12) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.bg-line-grid {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
   background-size: 64px 64px;
 }
 
-details summary {
-  list-style: none;
+details summary { list-style: none; }
+details summary::-webkit-details-marker { display: none; }
+
+.text-glow {
+  text-shadow: 0 0 40px rgba(249, 115, 22, 0.4);
 }
 
-details summary::-webkit-details-marker {
-  display: none;
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.6s ease forwards;
+}
+
+.text-orange-gradient {
+  background: linear-gradient(135deg, #f97316, #fb923c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
