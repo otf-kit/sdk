@@ -20,6 +20,9 @@ export * from './backgrounds'
 
 // headers (ScrollHeader)
 export * from './headers'
+
+// data (DataGrid, Filters, ActionBar, SortableList)
+export * from './data'
 // ────────────────────────────────────────────────────────────────
 
 // primitives
