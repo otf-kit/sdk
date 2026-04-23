@@ -53,9 +53,37 @@ const config: Config = {
           from: { backgroundPosition: '200% 0' },
           to:   { backgroundPosition: '-200% 0' },
         },
+        'gradient-shift': {
+          '0%, 100%': { backgroundPosition: '0% 50%' },
+          '50%':      { backgroundPosition: '100% 50%' },
+        },
+        'gradient-pulse': {
+          '0%, 100%': { opacity: '1', transform: 'scale(1)' },
+          '50%':      { opacity: '0.7', transform: 'scale(1.08)' },
+        },
+        'blob-float-0': {
+          '0%, 100%': { transform: 'translate(0, 0) scale(1)' },
+          '33%':      { transform: 'translate(5%, 8%) scale(1.05)' },
+          '66%':      { transform: 'translate(-4%, 4%) scale(0.97)' },
+        },
+        'blob-float-1': {
+          '0%, 100%': { transform: 'translate(0, 0) scale(1)' },
+          '33%':      { transform: 'translate(-6%, -5%) scale(1.06)' },
+          '66%':      { transform: 'translate(3%, -8%) scale(0.96)' },
+        },
+        'blob-float-2': {
+          '0%, 100%': { transform: 'translate(0, 0) scale(1)' },
+          '33%':      { transform: 'translate(4%, -6%) scale(0.98)' },
+          '66%':      { transform: 'translate(-5%, 5%) scale(1.04)' },
+        },
       },
       animation: {
-        shimmer: 'shimmer 2s ease-in-out infinite',
+        shimmer:          'shimmer 2s ease-in-out infinite',
+        'gradient-shift': 'gradient-shift 8s ease infinite',
+        'gradient-pulse': 'gradient-pulse 6s ease-in-out infinite',
+        'blob-float-0':   'blob-float-0 12s ease-in-out infinite',
+        'blob-float-1':   'blob-float-1 18s ease-in-out infinite',
+        'blob-float-2':   'blob-float-2 24s ease-in-out infinite',
       },
     },
   },

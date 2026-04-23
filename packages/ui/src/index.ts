@@ -11,6 +11,15 @@ export * from './nav'
 
 // feedback (toast emitter + Toaster)
 export * from './feedback'
+
+// text (GradientHeading, AnimatedNumber, TextReveal, Typewriter)
+export * from './text'
+
+// backgrounds (GradientBackground, AnimatedGradient, DottedBackground, NoiseBackground)
+export * from './backgrounds'
+
+// headers (ScrollHeader)
+export * from './headers'
 // ────────────────────────────────────────────────────────────────
 
 // primitives
