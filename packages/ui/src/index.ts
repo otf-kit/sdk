@@ -21,8 +21,14 @@ export * from './backgrounds'
 // headers (ScrollHeader)
 export * from './headers'
 
+// motion (FadeIn, SlideIn, ScaleIn, Reveal, Stagger, Morph, Transition + motion primitives)
+export * from './motion'
+
 // data (DataGrid, Filters, ActionBar, SortableList)
 export * from './data'
+
+// app-shell (AppShell, Sidebar compound, WorkspacesMenu, UserMenu)
+export * from './app-shell'
 // ────────────────────────────────────────────────────────────────
 
 // primitives

@@ -1,0 +1,11 @@
+export * from './presets'
+export * from './FadeIn'
+export * from './SlideIn'
+export * from './ScaleIn'
+export * from './Reveal'
+export * from './Stagger'
+export * from './Morph'
+export * from './useLayoutId'
+export * from './Transition'
+// re-export useful motion primitives
+export { motion, AnimatePresence, useInView, useMotionValue, useSpring, useTransform, type Variants } from 'motion/react'
