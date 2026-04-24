@@ -121,13 +121,16 @@ const withTheme: Decorator = (Story, context) => {
     )
   }
 
-  // Center everything horizontally. Components with intrinsic width (tables,
-  // cards, buttons) visually center; components that self-size to 100%
-  // (AppShell, SplitPage) still fill the iframe.
+  const layout = (context.parameters?.layout as string | undefined) ?? 'centered'
+
+  // Fullscreen stories (Backgrounds, Layouts) fill the entire iframe.
+  // Padded stories get padding only. Centered (default) centers content.
+  if (layout === 'fullscreen') return <Story />
+
   return (
     <div
       style={{
-        display: 'flex',
+        display: layout === 'centered' ? 'flex' : 'block',
         justifyContent: 'center',
         alignItems: 'flex-start',
         padding: 24,
