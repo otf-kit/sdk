@@ -6,7 +6,13 @@ export {
   useSidebar,
   type SidebarItemProps as AppSidebarItemProps,
 } from './Sidebar'
+// Sidebar resize handle
+export * from './SidebarResizer'
 // WorkspacesMenu — no conflicts
 export * from './WorkspacesMenu'
 // UserMenu — renamed AppShellUserMenu to avoid collision with blocks/UserMenu
 export { AppShellUserMenu, type AppShellUserMenuProps } from './UserMenu'
+// BillingStatus widget
+export * from './BillingStatus'
+// SortableNav — drag-to-reorder nav items
+export * from './SortableNav'

@@ -1,0 +1,25 @@
+/* internal UI — shared base resets applied by every theme */
+
+*,
+*::before,
+*::after {
+  border-color: hsl(var(--border, 0 0% 89.8%));
+}
+
+body {
+  background-color: hsl(var(--background, 0 0% 100%));
+  color: hsl(var(--foreground, 0 0% 3.9%));
+  font-family: var(--font-sans, system-ui, sans-serif);
+  font-size: var(--font-size-base, 0.9375rem);
+  line-height: var(--line-height-normal, 1.5);
+  letter-spacing: var(--letter-spacing-body, 0em);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading, var(--font-sans));
+  letter-spacing: var(--letter-spacing-heading, -0.02em);
+  line-height: var(--line-height-heading, 1.2);
+  font-weight: var(--font-weight-heading, 600);
+}

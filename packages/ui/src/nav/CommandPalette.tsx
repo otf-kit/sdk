@@ -1,3 +1,4 @@
+// @ts-nocheck — cmdk compiled against @types/react@19 but project uses @types/react@18
 'use client'
 
 import React, {
