@@ -78,6 +78,9 @@ export * from './primitives/Toggle'
 export * from './primitives/ToggleGroup'
 export * from './primitives/Tooltip'
 
+// ── components ───────────────────────────────────────────────────
+export * from './components/EmptyState'
+
 // ── SDK stubs ──────────────────────────────────────────────
 // Commented out in Phase 1.5: these have broken relative imports
 // (../primitives/button, ../utils/cn etc) because the SDK

@@ -5,11 +5,14 @@
   "scripts": {
     "dev": "storybook dev -p 6006",
     "build": "storybook build",
+    "build-storybook": "storybook build",
     "preview": "npx serve storybook-static"
   },
   "dependencies": {
     "@otf/ui": "workspace:*",
-    "@otf/tokens": "workspace:*"
+    "@otf/tokens": "workspace:*",
+    "lucide-react": "^0.446.0",
+    "@tanstack/react-table": "^8.20.5"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^8.6.0",
