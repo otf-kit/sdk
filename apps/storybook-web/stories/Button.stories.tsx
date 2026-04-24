@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { Plus, Trash2, ArrowRight, Loader2 } from 'lucide-react'
-import { Button, IconButton } from '@otf/ui'
+import { Button } from '@otf/ui'
 
 const meta = {
   title: 'Primitives/Button',
@@ -66,7 +66,7 @@ export const WithIcon: Story = {
         <Trash2 className="h-4 w-4 mr-1.5" />
         Delete
       </Button>
-      <IconButton variant="ghost" aria-label="Add"><Plus /></IconButton>
+      <Button variant="ghost" size="icon" aria-label="Add"><Plus /></Button>
     </div>
   ),
 }

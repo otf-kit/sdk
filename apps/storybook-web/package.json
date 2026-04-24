@@ -6,13 +6,16 @@
     "dev": "storybook dev -p 6006",
     "build": "storybook build",
     "build-storybook": "storybook build",
-    "preview": "npx serve storybook-static"
+    "preview": "npx serve storybook-static",
+    "deploy": "set -a && . ../../.env && set +a && pnpm build && npx wrangler pages deploy storybook-static --project-name otf-storybook --commit-dirty=true"
   },
   "dependencies": {
     "@otf/ui": "workspace:*",
     "@otf/tokens": "workspace:*",
     "lucide-react": "^0.446.0",
-    "@tanstack/react-table": "^8.20.5"
+    "@tanstack/react-table": "^8.20.5",
+    "react-hook-form": "^7.71.2",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^8.6.0",
@@ -29,6 +32,8 @@
     "react": "^18.3.0",
     "react-dom": "^18.3.0",
     "typescript": "^5.6.0",
-    "vite": "^5.0.0"
+    "vite": "^5.0.0",
+    "@vitejs/plugin-react": "^4.3.0",
+    "tailwindcss-animate": "^1.0.7"
   }
 }

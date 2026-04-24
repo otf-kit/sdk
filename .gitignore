@@ -11,3 +11,9 @@ build
 coverage
 .DS_Store
 *.log
+
+# Storybook build output
+**/storybook-static/
+
+# Playwright MCP temp
+.playwright-mcp/
