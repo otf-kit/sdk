@@ -143,4 +143,8 @@ export * from './backgrounds'
 export * from './headers'
 export * from './motion'
 // export * from './data'      // conflicts with components/data-grid (DataGrid)
+export * from './data/DataList'
+export * from './data/GridList'
+export * from './forms/combobox'
+export * from './theme'
 export * from './app-shell'
