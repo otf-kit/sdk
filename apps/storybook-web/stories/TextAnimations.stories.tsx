@@ -20,16 +20,20 @@ export const TypewriterDemo: StoryObj = {
 
 export const TextRevealWords: StoryObj = {
   render: () => (
-    <TextReveal mode="words" className="text-xl text-foreground max-w-md">
-      Every template ships with extraordinary design, production-ready SDK, and AI-tool integration baked in.
-    </TextReveal>
+    <TextReveal
+      mode="words"
+      text="Every template ships with extraordinary design, production-ready SDK, and AI-tool integration baked in."
+      className="text-xl text-foreground max-w-md"
+    />
   ),
 }
 
 export const TextRevealChars: StoryObj = {
   render: () => (
-    <TextReveal mode="chars" className="text-3xl font-bold text-foreground">
-      Design System
-    </TextReveal>
+    <TextReveal
+      mode="chars"
+      text="Design System"
+      className="text-3xl font-bold text-foreground"
+    />
   ),
 }
