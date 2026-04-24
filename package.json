@@ -1,0 +1,40 @@
+{
+  "name": "@otf/workspace",
+  "version": "0.0.1",
+  "private": true,
+  "packageManager": "pnpm@9.15.9",
+  "description": "OpenTemplateForest — cross-platform templates for Expo + Next.js with AI configs",
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "test": "turbo run test",
+    "lint": "turbo run lint",
+    "type-check": "turbo run type-check",
+    "clean": "turbo run clean",
+    "import-sdk": "node scripts/import-from-SDK.mjs --platform all",
+    "landing:dev": "bun dev --cwd apps/landing",
+    "landing:build": "bun run build --cwd apps/landing",
+    "check-design": "npx tsx scripts/check-kit-design.ts",
+    "audit-a11y": "npx tsx scripts/audit-a11y.ts",
+    "prepare": "simple-git-hooks"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "npx lint-staged"
+  },
+  "lint-staged": {
+    "apps/**/*.{ts,tsx}": ["eslint --config eslint.config.mjs --no-warn-ignored"],
+    "kits/**/*.{ts,tsx}": ["eslint --config eslint.config.mjs --no-warn-ignored"]
+  },
+  "devDependencies": {
+    "turbo": "^2.0.0",
+    "typescript": "^5.6.0",
+    "prettier": "^3.3.0",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "eslint": "^9.0.0",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "simple-git-hooks": "^2.11.0",
+    "lint-staged": "^15.2.0",
+    "tsx": "^4.0.0"
+  }
+}

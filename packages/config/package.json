@@ -1,0 +1,10 @@
+{
+  "name": "@otf/config",
+  "version": "0.0.1",
+  "private": true,
+  "exports": {
+    "./eslint": "./eslint.js",
+    "./prettier": "./prettier.js",
+    "./tailwind": "./tailwind.js"
+  }
+}
