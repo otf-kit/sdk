@@ -135,7 +135,10 @@ export * from './layouts/split-page'
 export * from './layouts/stack'
 
 // OTF additions (not from SDK)
-export * from './layout'
+// export * from './layout'  // COLLISION: PageHeader in layout/PageLayout.tsx shadows layouts/page.tsx
+export { PageLayout } from './layout/PageLayout'
+export type { PageHeaderProps } from './layout/PageLayout'
+export { PageContainer, PageMain } from './layout/PageContainer'
 export * from './nav'
 export * from './feedback'
 export * from './text'
