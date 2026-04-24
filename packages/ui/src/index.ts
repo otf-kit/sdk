@@ -21,17 +21,17 @@ export * from './backgrounds'
 // headers (ScrollHeader)
 export * from './headers'
 
-// motion (FadeIn, SlideIn, ScaleIn, Reveal, Stagger, Morph, Transition + motion primitives)
+// motion (FadeIn, SlideIn, ScaleIn, Reveal, Stagger, Morph, Ripple, Parallax, Transition)
 export * from './motion'
 
 // data (DataGrid, Filters, ActionBar, SortableList)
 export * from './data'
 
-// app-shell (AppShell, Sidebar compound, WorkspacesMenu, UserMenu)
+// app-shell (AppShell, Sidebar compound, WorkspacesMenu, UserMenu, SidebarResizer, BillingStatus, SortableNav)
 export * from './app-shell'
 // ────────────────────────────────────────────────────────────────
 
-// primitives
+// primitives (Radix-based — from SDK import, curated)
 export * from './primitives/Accordion'
 export * from './primitives/Alert'
 export * from './primitives/AlertDialog'
@@ -45,7 +45,7 @@ export * from './primitives/Carousel'
 export * from './primitives/Chart'
 export * from './primitives/Checkbox'
 export * from './primitives/Collapsible'
-export * from './primitives/Command'
+// export * from './primitives/Command'     // collides with nav/CommandPalette (CommandGroup, CommandItem)
 export * from './primitives/ContextMenu'
 export * from './primitives/Dialog'
 export * from './primitives/Drawer'
@@ -68,7 +68,7 @@ export * from './primitives/Separator'
 export * from './primitives/Sheet'
 export * from './primitives/Skeleton'
 export * from './primitives/Slider'
-export * from './primitives/Sonner'
+// export * from './primitives/Sonner'      // collides with feedback/Toaster
 export * from './primitives/Spinner'
 export * from './primitives/Switch'
 export * from './primitives/Table'
@@ -78,85 +78,24 @@ export * from './primitives/Toggle'
 export * from './primitives/ToggleGroup'
 export * from './primitives/Tooltip'
 
-// components
-export * from './components/Banner'
-export * from './components/Breadcrumb'
-export * from './components/CommandItem'
-export * from './components/DataGrid'
-export * from './components/DataTable'
-export * from './components/EmptyState'
-export * from './components/Hotkeys'
-export * from './components/IconBadge'
-export * from './components/LoadingOverlay'
-export * from './components/Persona'
-export * from './components/PropertyList'
-export * from './components/Stat'
-export * from './components/Stepper'
-export * from './components/StructuredList'
-export * from './components/Timeline'
-export * from './components/Toaster'
-
-// blocks
-export * from './blocks/ChatDetail'
-export * from './blocks/FeedbackModal'
-export * from './blocks/FileCards'
-export * from './blocks/FilesList'
-export * from './blocks/IntegrationCard'
-export * from './blocks/InviteModal'
-export * from './blocks/ManageTagsModal'
-export * from './blocks/MessagesCard'
-export * from './blocks/MetricCard'
-export * from './blocks/NotificationSettings'
-export * from './blocks/OrganizationMenu'
-export * from './blocks/RolesMenu'
-export * from './blocks/SelectUsersModal'
-export * from './blocks/SidebarLayoutDashboard'
-export * from './blocks/SidebarLayoutGroups'
-export * from './blocks/SidebarLayoutMinimal'
-export * from './blocks/SidebarLayoutSearch'
-export * from './blocks/SidebarLayoutUser'
-export * from './blocks/SortableTaskList'
-export * from './blocks/StackedLayoutBranded'
-export * from './blocks/StackedLayoutTabs'
-export * from './blocks/TaskCard'
-export * from './blocks/UserMenu'
-export * from './blocks/WorkspaceMembers'
-
-// advanced
-export * from './advanced/BulkActions'
-export * from './advanced/CommandBar'
-export * from './advanced/Filters'
-export * from './advanced/Kanban'
-export * from './advanced/ToggleButton'
-
-// charts
-export * from './charts/AreaChart'
-export * from './charts/BarChart'
-export * from './charts/LineChart'
-export * from './charts/Sparkline'
-
-// engagement
-export * from './engagement/Beacon'
-export * from './engagement/Tour'
-
-// forms
-export * from './forms/ArrayField'
-export * from './forms/AutoForm'
-export * from './forms/DatePicker'
-export * from './forms/Field'
-export * from './forms/FileUpload'
-export * from './forms/Form'
-export * from './forms/ObjectField'
-export * from './forms/PasswordInput'
-export * from './forms/SearchInput'
-export * from './forms/StepForm'
-
-// layouts
-export * from './layouts/AppShell'
-export * from './layouts/Container'
-export * from './layouts/Navbar'
-export * from './layouts/Page'
-export * from './layouts/ResizeBox'
-export * from './layouts/Sidebar'
-export * from './layouts/SplitPage'
-export * from './layouts/Stack'
+// ── SDK stubs ──────────────────────────────────────────────
+// Commented out in Phase 1.5: these have broken relative imports
+// (../primitives/button, ../utils/cn etc) because the SDK
+// import script placed them at the wrong directory depth.
+// They will be properly ported on-demand in Phase 3.
+//
+// components: Banner, Breadcrumb, DataTable, Hotkeys, IconBadge,
+//   LoadingOverlay, Persona, PropertyList, Stat, Stepper,
+//   StructuredList, Timeline, CommandItem, DataGrid, EmptyState, Toaster
+// blocks: ChatDetail, FeedbackModal, FileCards, FilesList,
+//   IntegrationCard, InviteModal, ManageTagsModal, MessagesCard,
+//   MetricCard, NotificationSettings, OrganizationMenu, RolesMenu,
+//   SelectUsersModal, SidebarLayout*, StackedLayout*, TaskCard,
+//   UserMenu, WorkspaceMembers, SortableTaskList
+// advanced: BulkActions, CommandBar, Filters, Kanban, ToggleButton
+// charts: AreaChart, BarChart, LineChart, Sparkline
+// engagement: Beacon, Tour
+// forms: ArrayField, AutoForm, DatePicker, Field, FileUpload,
+//   Form, ObjectField, PasswordInput, SearchInput, StepForm
+// layouts: AppShell, Container, Navbar, Page, ResizeBox,
+//   Sidebar, SplitPage, Stack

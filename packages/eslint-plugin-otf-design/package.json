@@ -1,0 +1,12 @@
+{
+  "name": "@otf/eslint-plugin-otf-design",
+  "version": "0.1.0",
+  "description": "ESLint rules for OTF design system compliance — bans hex colors and default Tailwind palette classes",
+  "main": "src/index.js",
+  "type": "commonjs",
+  "scripts": {
+    "test": "node --test src/index.test.js"
+  },
+  "keywords": ["eslint", "eslint-plugin", "design-system", "otf"],
+  "license": "MIT"
+}
