@@ -27,6 +27,8 @@
     "dist/**/*.js",
     "dist/**/*.mjs",
     "dist/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.ts",
     "src/themes/*.css",
     "src/styles.css"
   ],
