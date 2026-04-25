@@ -1,104 +1,70 @@
 export function CrossPlatform() {
   return (
-    <section className="py-24 px-6">
+    <section className="py-24 px-6 bg-[#050505] border-t border-[#111111]">
       <div className="max-w-7xl mx-auto">
-        <div className="mb-12">
+        <div className="text-center mb-16">
           <p className="text-xs font-semibold text-[#f97316] uppercase tracking-widest mb-3">
-            Cross-platform
+            Open Source SDK
           </p>
-          <div className="h-px w-16 bg-[#f97316]/40 mb-6" />
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">
-            One codebase. Every platform.
+          <div className="h-px w-16 bg-[#f97316]/40 mb-6 mx-auto" />
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            Drop into any React project.
           </h2>
-          <p className="text-[#737373] text-lg max-w-2xl">
-            Write once, deploy to iOS, Android, and web — same design tokens, same component API.
+          <p className="text-[#737373] text-lg max-w-xl mx-auto">
+            Zero lock-in. Copy the components, install the package, or use the registry CLI — same design system, your codebase.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-[#111111] border border-[#1f1f1f] rounded-xl overflow-hidden">
-            <div className="flex items-center gap-2 px-4 py-3 bg-[#161616] border-b border-[#1f1f1f]">
-              <div className="flex gap-1.5">
-                <span className="w-3 h-3 rounded-full bg-[#1f1f1f]" />
-                <span className="w-3 h-3 rounded-full bg-[#1f1f1f]" />
-                <span className="w-3 h-3 rounded-full bg-[#1f1f1f]" />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          {[
+            {
+              label: 'Install via npm',
+              code: 'npm install @otf/ui @otf/tokens',
+              desc: 'Full package with all 180+ components, types, and tokens.',
+              badge: 'Recommended',
+              badgeColor: 'bg-[#f97316]/10 text-[#f97316] border-[#f97316]/20',
+            },
+            {
+              label: 'Registry CLI',
+              code: 'npx otf add button card dialog',
+              desc: 'shadcn-style — cherry-pick only what you need.',
+              badge: 'Coming soon',
+              badgeColor: 'bg-[#1f1f1f] text-[#525252] border-[#333333]',
+            },
+            {
+              label: 'Copy & Paste',
+              code: '// Source on GitHub — MIT licensed',
+              desc: 'Browse on GitHub and copy any component directly.',
+              badge: 'Always free',
+              badgeColor: 'bg-green-500/10 text-green-400 border-green-500/20',
+            },
+          ].map(item => (
+            <div key={item.label} className="bg-[#0d0d0d] border border-[#1f1f1f] rounded-xl p-5">
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-white text-sm font-semibold">{item.label}</span>
+                <span className={`text-[10px] px-2 py-0.5 rounded border font-semibold ${item.badgeColor}`}>{item.badge}</span>
               </div>
-              <span className="text-xs text-[#737373] font-mono ml-2">Web (Next.js 16)</span>
-            </div>
-            <div className="p-5 flex gap-3">
-              <div className="w-32 shrink-0 space-y-1">
-                <div className="h-6 bg-[#161616] rounded flex items-center px-2">
-                  <span className="text-[10px] text-[#525252] font-mono">Sidebar</span>
-                </div>
-                {['Dashboard', 'Analytics', 'Settings', 'Users'].map(item => (
-                  <div key={item} className="h-5 bg-[#0a0a0a] rounded flex items-center px-2">
-                    <span className="text-[10px] text-[#525252]">{item}</span>
-                  </div>
-                ))}
+              <div className="bg-[#111111] border border-[#1a1a1a] rounded-md px-3 py-2.5 mb-3 font-mono text-[11px] text-[#a3a3a3]">
+                {item.code}
               </div>
-              <div className="flex-1 space-y-2">
-                <div className="h-6 bg-[#161616] rounded" />
-                <div className="grid grid-cols-3 gap-1.5">
-                  {['MRR', 'Users', 'Churn'].map(stat => (
-                    <div key={stat} className="bg-[#0a0a0a] border border-[#1f1f1f] rounded p-2 text-center">
-                      <div className="text-[10px] font-mono text-[#f97316]">{stat}</div>
-                    </div>
-                  ))}
-                </div>
-                <div className="bg-[#0a0a0a] border border-[#1f1f1f] rounded p-2">
-                  <div className="text-[10px] font-mono text-[#525252] mb-1.5">DataTable</div>
-                  <div className="space-y-1">
-                    {[1, 2, 3].map(i => (
-                      <div key={i} className="h-1.5 bg-[#1f1f1f] rounded" />
-                    ))}
-                  </div>
-                </div>
-              </div>
+              <p className="text-[#525252] text-xs leading-relaxed">{item.desc}</p>
             </div>
-            <div className="px-5 pb-4">
-              <code className="text-[10px] font-mono text-[#525252]">@otf/ui (Radix + Tailwind)</code>
-            </div>
-          </div>
+          ))}
+        </div>
 
-          <div className="bg-[#111111] border border-[#1f1f1f] rounded-xl overflow-hidden">
-            <div className="flex items-center justify-between px-4 py-3 bg-[#161616] border-b border-[#1f1f1f]">
-              <span className="text-xs text-[#737373] font-mono">Mobile (Expo 54)</span>
-              <div className="w-12 h-1 bg-[#1f1f1f] rounded-full" />
+        {/* Stats row */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {[
+            { value: '180+', label: 'Components' },
+            { value: '5', label: 'Design themes' },
+            { value: 'MIT', label: 'License' },
+            { value: '0', label: 'Lock-in' },
+          ].map(stat => (
+            <div key={stat.label} className="bg-[#0d0d0d] border border-[#1f1f1f] rounded-xl p-5 text-center">
+              <div className="text-2xl font-black text-white mb-1">{stat.value}</div>
+              <div className="text-[#525252] text-xs uppercase tracking-widest font-medium">{stat.label}</div>
             </div>
-            <div className="p-5 flex justify-center">
-              <div className="w-48 border border-[#333333] rounded-[24px] p-3 space-y-2.5 bg-[#0a0a0a]">
-                <div className="h-5 bg-[#161616] rounded-full flex items-center justify-between px-3">
-                  <span className="text-[10px] text-[#525252]">9:41</span>
-                  <span className="text-[10px] text-[#525252]">●●●</span>
-                </div>
-                <div className="bg-[#111111] border border-[#1f1f1f] rounded-xl p-2.5">
-                  <div className="text-[10px] font-mono text-[#f97316] mb-1.5">ProfileHeader</div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-7 h-7 rounded-full bg-[#f97316]/20 border border-[#f97316]/30" />
-                    <div className="space-y-1">
-                      <div className="h-1.5 w-14 bg-[#1f1f1f] rounded" />
-                      <div className="h-1 w-10 bg-[#1f1f1f] rounded" />
-                    </div>
-                  </div>
-                </div>
-                <div className="bg-[#111111] border border-[#1f1f1f] rounded-xl p-2.5">
-                  <div className="text-[10px] font-mono text-[#525252] mb-1.5">Content</div>
-                  <div className="space-y-1">
-                    <div className="h-1.5 w-full bg-[#1f1f1f] rounded" />
-                    <div className="h-1.5 w-2/3 bg-[#1f1f1f] rounded" />
-                  </div>
-                </div>
-                <div className="bg-[#161616] rounded-xl p-2 flex justify-around">
-                  {['Home', 'Search', 'Profile'].map(tab => (
-                    <span key={tab} className="text-[10px] text-[#525252]">{tab}</span>
-                  ))}
-                </div>
-              </div>
-            </div>
-            <div className="px-5 pb-4">
-              <code className="text-[10px] font-mono text-[#525252]">@otf/ui-native (Tamagui)</code>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

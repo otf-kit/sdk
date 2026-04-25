@@ -1,67 +1,92 @@
+import Link from 'next/link'
+
 const links = {
   sdk: [
     { label: 'Components', href: '/components' },
     { label: 'Themes', href: '/components#themes' },
     { label: 'Tokens', href: '/components#tokens' },
-    { label: 'GitHub', href: 'https://github.com' },
+    { label: 'GitHub', href: 'https://github.com/open-template-forest', external: true },
   ],
   templates: [
-    { label: 'Browse', href: '/templates' },
+    { label: 'Browse Templates', href: '/templates' },
+    { label: 'SaaS Dashboard Kit', href: '/templates' },
     { label: 'Pricing', href: '/pricing' },
-    { label: 'Waitlist', href: '/#waitlist' },
+    { label: 'Join Waitlist', href: '/#waitlist' },
   ],
   company: [
-    { label: 'Docs', href: '/docs' },
-    { label: 'Contributing', href: '/contributing' },
-    { label: 'License (MIT)', href: '/license' },
+    { label: 'Changelog', href: '/changelog' },
+    { label: 'Privacy Policy', href: '/privacy' },
+    { label: 'License (MIT)', href: 'https://github.com/open-template-forest/blob/main/LICENSE', external: true },
+    { label: 'Contributing', href: 'https://github.com/open-template-forest', external: true },
   ],
 }
 
 export function Footer() {
   return (
-    <footer className="border-t border-[#1f1f1f] bg-[#0a0a0a] px-6 pt-16 pb-8">
+    <footer className="border-t border-[#111111] bg-[#050505] px-6 pt-16 pb-8">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+          {/* Brand */}
           <div className="col-span-2 md:col-span-1">
-            <div className="flex items-center gap-1.5 font-bold text-white text-lg mb-2">
-              OTF
-              <span className="w-2 h-2 rounded-full bg-[#f97316] inline-block" />
-            </div>
-            <p className="text-sm text-[#737373] mb-3 leading-relaxed">
-              Cross-platform templates for Expo + Next.js with AI-native developer configs. Built with Inter.
+            <Link href="/" className="flex items-center gap-2 mb-4">
+              <div className="w-7 h-7 rounded-md bg-[#f97316] flex items-center justify-center">
+                <span className="text-white text-xs font-black leading-none">O</span>
+              </div>
+              <span className="font-black text-white text-lg tracking-tight">OTF</span>
+            </Link>
+            <p className="text-sm text-[#525252] mb-4 leading-relaxed">
+              Open-source React component library + full-stack templates. AI configs pre-wired for Cursor, Claude, and Lovable.
             </p>
-            <p className="text-xs text-[#525252]">Not affiliated with internal.</p>
+            {/* Status dot */}
+            <div className="flex items-center gap-2 text-xs text-[#525252]">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
+              </span>
+              All systems operational
+            </div>
           </div>
+
           <div>
-            <h4 className="text-sm font-semibold text-white mb-4">SDK</h4>
-            <ul className="space-y-2">
+            <h4 className="text-xs font-semibold text-white uppercase tracking-widest mb-4">SDK</h4>
+            <ul className="space-y-2.5">
               {links.sdk.map((l) => (
                 <li key={l.label}>
-                  <a href={l.href} className="text-sm text-[#737373] hover:text-white transition-colors">
+                  <a
+                    href={l.href}
+                    {...(l.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                    className="text-sm text-[#525252] hover:text-white transition-colors"
+                  >
                     {l.label}
                   </a>
                 </li>
               ))}
             </ul>
           </div>
+
           <div>
-            <h4 className="text-sm font-semibold text-white mb-4">Templates</h4>
-            <ul className="space-y-2">
+            <h4 className="text-xs font-semibold text-white uppercase tracking-widest mb-4">Templates</h4>
+            <ul className="space-y-2.5">
               {links.templates.map((l) => (
                 <li key={l.label}>
-                  <a href={l.href} className="text-sm text-[#737373] hover:text-white transition-colors">
+                  <a href={l.href} className="text-sm text-[#525252] hover:text-white transition-colors">
                     {l.label}
                   </a>
                 </li>
               ))}
             </ul>
           </div>
+
           <div>
-            <h4 className="text-sm font-semibold text-white mb-4">Company</h4>
-            <ul className="space-y-2">
+            <h4 className="text-xs font-semibold text-white uppercase tracking-widest mb-4">Company</h4>
+            <ul className="space-y-2.5">
               {links.company.map((l) => (
                 <li key={l.label}>
-                  <a href={l.href} className="text-sm text-[#737373] hover:text-white transition-colors">
+                  <a
+                    href={l.href}
+                    {...(l.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                    className="text-sm text-[#525252] hover:text-white transition-colors"
+                  >
                     {l.label}
                   </a>
                 </li>
@@ -69,9 +94,26 @@ export function Footer() {
             </ul>
           </div>
         </div>
-        <div className="border-t border-[#1f1f1f] pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[#525252]">
-          <span>© 2026 Dave Soni • MIT License</span>
-          <a href="/privacy" className="hover:text-[#737373] transition-colors">Privacy</a>
+
+        {/* Built with row */}
+        <div className="border-t border-[#111111] pt-8 mb-6">
+          <div className="flex flex-wrap items-center justify-center gap-6 text-[#333333] text-xs font-medium uppercase tracking-widest">
+            <span>Built with</span>
+            {['React', 'Next.js', 'Tailwind', 'Hono', 'Drizzle', 'Better Auth', 'Polar'].map((tech, i) => (
+              <span key={tech} className="flex items-center gap-6">
+                {i > 0 && <span className="w-0.5 h-0.5 rounded-full bg-[#333333]" />}
+                {tech}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[#333333]">
+          <span>© 2026 OTF · MIT License · Not affiliated with any VC-backed company</span>
+          <div className="flex items-center gap-4">
+            <a href="/privacy" className="hover:text-[#525252] transition-colors">Privacy</a>
+            <a href="https://github.com/open-template-forest" target="_blank" rel="noopener noreferrer" className="hover:text-[#525252] transition-colors">GitHub</a>
+          </div>
         </div>
       </div>
     </footer>
