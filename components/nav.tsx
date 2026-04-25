@@ -32,11 +32,15 @@ export function Nav() {
       }`}>
         <div className="max-w-7xl mx-auto px-6 h-[60px] flex items-center justify-between gap-6">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2.5 font-black text-white text-lg tracking-tight shrink-0">
-            <div className="w-7 h-7 rounded-md bg-[#f97316] flex items-center justify-center">
-              <span className="text-white text-xs font-black leading-none">O</span>
+          <Link href="/" className="flex items-center gap-2 shrink-0 group">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-b from-[#f97316] to-[#ea580c] flex items-center justify-center shadow-[0_1px_0_0_rgba(255,255,255,0.15)_inset,0_-1px_0_0_rgba(0,0,0,0.3)_inset] group-hover:from-[#fb923c] group-hover:to-[#f97316] transition-all duration-200">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3 4.5C3 3.67 3.67 3 4.5 3h7C12.33 3 13 3.67 13 4.5v7c0 .83-.67 1.5-1.5 1.5h-7C3.67 13 3 12.33 3 11.5v-7Z" fill="white" fillOpacity="0.2"/>
+                <path d="M5.5 6C5.5 5.72 5.72 5.5 6 5.5h4c.28 0 .5.22.5.5v4c0 .28-.22.5-.5.5H6c-.28 0-.5-.22-.5-.5V6Z" fill="white"/>
+                <path d="M5.5 3v2M10.5 3v2M3 5.5h2M11 5.5h2M5.5 11v2M10.5 11v2M3 10.5h2M11 10.5h2" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeOpacity="0.6"/>
+              </svg>
             </div>
-            <span>OTF</span>
+            <span className="font-black text-white text-[17px] tracking-tight leading-none">OTF</span>
           </Link>
 
           {/* Desktop nav */}
