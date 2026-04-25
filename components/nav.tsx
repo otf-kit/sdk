@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 
 export function Nav() {
   const [scrolled, setScrolled] = useState(false)
@@ -22,10 +23,10 @@ export function Nav() {
           : 'bg-transparent'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
-        <a href="/" className="flex items-center gap-1.5 font-bold text-white text-base">
+      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        <a href="/" className="flex items-center gap-3 font-bold text-white text-2xl tracking-tight">
+          <Image src="/logo.svg" alt="OTF Logo" width={40} height={40} className="drop-shadow-sm" />
           OTF
-          <span className="w-2 h-2 rounded-full bg-[#f97316] inline-block" />
         </a>
 
         <nav className="hidden md:flex items-center gap-6">

@@ -1,113 +1,120 @@
-'use client'
+import { CodeIcon, LayoutIcon, SmartphoneIcon, LayersIcon, ZapIcon, PuzzleIcon } from 'lucide-react'
 
-import { useState } from 'react'
-
-type Component = {
-  name: string
-  platform: 'Web' | 'Native' | 'Both'
-  category: string
-}
-
-const allComponents: Component[] = [
-  { name: 'Button', platform: 'Web', category: 'Primitives' },
-  { name: 'DataTable', platform: 'Web', category: 'Components' },
-  { name: 'Kanban', platform: 'Web', category: 'Advanced' },
-  { name: 'PaywallScreen', platform: 'Native', category: 'Patterns' },
-  { name: 'Dialog', platform: 'Web', category: 'Primitives' },
-  { name: 'CommandBar', platform: 'Web', category: 'Advanced' },
-  { name: 'AreaChart', platform: 'Web', category: 'Charts' },
-  { name: 'LoginScreen', platform: 'Native', category: 'Patterns' },
-  { name: 'Input', platform: 'Both', category: 'Primitives' },
-  { name: 'Select', platform: 'Both', category: 'Forms' },
-  { name: 'Avatar', platform: 'Both', category: 'Primitives' },
-  { name: 'Badge', platform: 'Both', category: 'Primitives' },
-  { name: 'BottomSheet', platform: 'Native', category: 'Patterns' },
-  { name: 'Sidebar', platform: 'Web', category: 'Layouts' },
-  { name: 'DatePicker', platform: 'Web', category: 'Forms' },
-  { name: 'LineChart', platform: 'Web', category: 'Charts' },
+const features = [
+  {
+    title: '182 Components',
+    description: 'Fully typed, accessible, and themeable UI components for React and React Native.',
+    icon: PuzzleIcon,
+    color: 'text-orange-400',
+    bg: 'bg-orange-500/10',
+    border: 'border-orange-500/20'
+  },
+  {
+    title: 'Cross-Platform',
+    description: 'Build once, deploy everywhere. 100% parity between Next.js and Expo apps.',
+    icon: SmartphoneIcon,
+    color: 'text-blue-400',
+    bg: 'bg-blue-500/10',
+    border: 'border-blue-500/20'
+  },
+  {
+    title: 'AI Native',
+    description: 'Every component ships with tested LLM prompts and strict system instructions.',
+    icon: ZapIcon,
+    color: 'text-violet-400',
+    bg: 'bg-violet-500/10',
+    border: 'border-violet-500/20'
+  },
+  {
+    title: 'Copy & Paste',
+    description: 'Use the shadcn-style CLI or just copy the code directly into your project.',
+    icon: CodeIcon,
+    color: 'text-emerald-400',
+    bg: 'bg-emerald-500/10',
+    border: 'border-emerald-500/20'
+  },
+  {
+    title: 'Full Stack Kits',
+    description: 'Start with production-ready templates including auth, database, and payments.',
+    icon: LayersIcon,
+    color: 'text-pink-400',
+    bg: 'bg-pink-500/10',
+    border: 'border-pink-500/20'
+  },
+  {
+    title: 'Layout Systems',
+    description: 'Dashboard sidebars, mobile tab bars, and responsive grids ready to go.',
+    icon: LayoutIcon,
+    color: 'text-amber-400',
+    bg: 'bg-amber-500/10',
+    border: 'border-amber-500/20'
+  }
 ]
 
-const tabs = ['All', 'Primitives', 'Blocks', 'Forms', 'Native'] as const
-type Tab = (typeof tabs)[number]
-
-const platformColors: Record<string, string> = {
-  Web: 'bg-blue-500/10 text-blue-400 border-blue-500/20',
-  Native: 'bg-[#f97316]/10 text-orange-400 border-[#f97316]/20',
-  Both: 'bg-violet-500/10 text-violet-400 border-violet-500/20',
-}
-
-function filterByTab(tab: Tab): Component[] {
-  if (tab === 'All') return allComponents.slice(0, 8)
-  if (tab === 'Primitives') return allComponents.filter(c => c.category === 'Primitives').slice(0, 8)
-  if (tab === 'Blocks') return allComponents.filter(c => ['Layouts', 'Advanced'].includes(c.category)).slice(0, 8)
-  if (tab === 'Forms') return allComponents.filter(c => c.category === 'Forms').slice(0, 8)
-  if (tab === 'Native') return allComponents.filter(c => c.platform === 'Native').slice(0, 8)
-  return allComponents.slice(0, 8)
-}
-
 export function ComponentTeaser() {
-  const [activeTab, setActiveTab] = useState<Tab>('All')
-  const visible = filterByTab(activeTab)
-
   return (
-    <section className="py-24 px-6">
-      <div className="max-w-7xl mx-auto">
-        <div className="mb-12">
-          <p className="text-xs font-semibold text-[#f97316] uppercase tracking-widest mb-3">
-            182 Production-Ready Components
-          </p>
-          <div className="h-px w-16 bg-[#f97316]/40 mb-6" />
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">
-            For web and mobile. Open source. MIT licensed.
+    <section className="py-24 px-6 bg-[#0a0a0a] border-t border-[#1f1f1f]">
+      <div className="max-w-5xl mx-auto">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 tracking-tight">
+            Everything you need to build <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600">world-class</span> apps
           </h2>
+          <p className="text-[#737373] text-lg max-w-2xl mx-auto">
+            Stop wasting weeks on boilerplate. OTF provides a complete design system,
+            component library, and production templates for modern teams.
+          </p>
         </div>
 
-        <div className="flex gap-2 flex-wrap mb-8">
-          {tabs.map(tab => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`px-4 py-1.5 rounded-md text-sm font-medium transition-colors border ${
-                activeTab === tab
-                  ? 'bg-[#f97316] border-[#f97316] text-white'
-                  : 'border-[#1f1f1f] text-[#737373] hover:border-[#333333] hover:text-white'
-              }`}
-            >
-              {tab}
-              {tab === 'All' && (
-                <span className="ml-1.5 text-xs opacity-60">✓</span>
-              )}
-            </button>
-          ))}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {features.map((feature, i) => {
+            const Icon = feature.icon
+            return (
+              <div 
+                key={i} 
+                className="group relative bg-[#111111] border border-[#1f1f1f] hover:border-[#333333] rounded-2xl p-6 transition-all hover:shadow-[0_0_30px_rgba(249,115,22,0.05)]"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] to-transparent rounded-2xl pointer-events-none" />
+                
+                <div className={`w-12 h-12 rounded-xl ${feature.bg} ${feature.border} border flex items-center justify-center mb-6`}>
+                  <Icon className={`w-6 h-6 ${feature.color}`} />
+                </div>
+                
+                <h3 className="text-xl font-semibold text-white mb-3 tracking-tight">
+                  {feature.title}
+                </h3>
+                <p className="text-[#a3a3a3] leading-relaxed text-sm">
+                  {feature.description}
+                </p>
+              </div>
+            )
+          })}
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
-          {visible.map(c => (
-            <div
-              key={`${c.name}-${c.platform}`}
-              className="group relative bg-[#111111] border border-[#1f1f1f] rounded-lg p-4 flex flex-col gap-2 hover:border-[#f97316]/30 hover:bg-[#161616] transition-all cursor-default"
-            >
-              <span className="font-medium text-sm text-white">{c.name}</span>
-              <span className={`text-xs px-1.5 py-0.5 rounded border self-start ${platformColors[c.platform]}`}>
-                {c.platform}
-              </span>
-              <span className="text-xs text-[#525252]">{c.category}</span>
-              <div className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
-                <code className="text-xs font-mono text-[#f97316] bg-[#0a0a0a]/95 rounded px-2 py-1 w-full text-center truncate border border-[#1f1f1f]">
-                  pnpm add @otf/ui
-                </code>
+        <div className="mt-16 bg-[#111111] border border-[#1f1f1f] rounded-2xl overflow-hidden relative">
+          <div className="absolute inset-0 opacity-20 mix-blend-overlay pointer-events-none" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")' }}></div>
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#f97316]/10 blur-[100px] rounded-full pointer-events-none transform translate-x-1/2 -translate-y-1/2"></div>
+          
+          <div className="flex flex-col md:flex-row items-center relative z-10">
+            <div className="p-10 flex-1">
+              <h3 className="text-2xl font-bold text-white mb-4">Command line tools</h3>
+              <p className="text-[#a3a3a3] mb-6 leading-relaxed">
+                Add components to your project with a single command. The CLI automatically handles dependencies and configures your project.
+              </p>
+              <div className="bg-[#0a0a0a] border border-[#333333] rounded-lg p-4 font-mono text-sm shadow-inner overflow-x-auto">
+                <div className="flex gap-2 items-center mb-2">
+                  <div className="w-3 h-3 rounded-full bg-red-500/20 border border-red-500/50"></div>
+                  <div className="w-3 h-3 rounded-full bg-yellow-500/20 border border-yellow-500/50"></div>
+                  <div className="w-3 h-3 rounded-full bg-green-500/20 border border-green-500/50"></div>
+                </div>
+                <div className="text-[#a3a3a3]">
+                  <span className="text-[#f97316]">pnpm</span> dlx @otf/cli init
+                </div>
+                <div className="text-[#a3a3a3] mt-1">
+                  <span className="text-[#f97316]">pnpm</span> dlx @otf/cli add data-table card button
+                </div>
               </div>
             </div>
-          ))}
-        </div>
-
-        <div className="text-center">
-          <a
-            href="/components"
-            className="inline-flex items-center gap-2 text-[#f97316] hover:text-[#fb923c] font-medium transition-colors text-sm"
-          >
-            Browse all 182 →
-          </a>
+          </div>
         </div>
       </div>
     </section>
