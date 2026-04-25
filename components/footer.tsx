@@ -28,13 +28,8 @@ export function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
-            <Link href="/" className="flex items-center gap-2 mb-4 group">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-b from-[#f97316] to-[#ea580c] flex items-center justify-center shadow-[0_1px_0_0_rgba(255,255,255,0.15)_inset]">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <path d="M5.5 6C5.5 5.72 5.72 5.5 6 5.5h4c.28 0 .5.22.5.5v4c0 .28-.22.5-.5.5H6c-.28 0-.5-.22-.5-.5V6Z" fill="white"/>
-                  <path d="M5.5 3v2M10.5 3v2M3 5.5h2M11 5.5h2M5.5 11v2M10.5 11v2M3 10.5h2M11 10.5h2" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeOpacity="0.6"/>
-                </svg>
-              </div>
+            <Link href="/" className="flex items-center gap-2.5 mb-4 group">
+              <img src="/logo.svg" alt="OTF" className="w-8 h-8 group-hover:scale-105 transition-transform duration-200" />
               <span className="font-black text-white text-[17px] tracking-tight leading-none">OTF</span>
             </Link>
             <p className="text-sm text-[#525252] mb-4 leading-relaxed">

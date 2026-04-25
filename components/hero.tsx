@@ -93,9 +93,7 @@ function HeroBrowserChrome() {
         <div className="w-[200px] shrink-0 border-r border-[#1a1a1a] flex flex-col bg-[#0d0d0d]">
           {/* Workspace header */}
           <div className="h-[52px] border-b border-[#1a1a1a] flex items-center px-3 gap-2">
-            <div className="w-6 h-6 rounded-md bg-[#f97316] flex items-center justify-center shrink-0">
-              <span className="text-white text-[10px] font-black leading-none">O</span>
-            </div>
+            <img src="/logo.svg" alt="OTF" className="w-6 h-6 shrink-0" />
             <span className="text-white text-sm font-semibold truncate">OTF Workspace</span>
           </div>
           {/* Nav items */}
