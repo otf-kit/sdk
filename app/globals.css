@@ -58,6 +58,11 @@ details summary::-webkit-details-marker { display: none; }
   text-shadow: 0 0 40px rgba(249, 115, 22, 0.4);
 }
 
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
 @keyframes fade-up {
   from { opacity: 0; transform: translateY(16px); }
   to { opacity: 1; transform: translateY(0); }
