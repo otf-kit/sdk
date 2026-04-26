@@ -10,58 +10,72 @@ gsap.registerPlugin(ScrollTrigger, useGSAP)
 
 // ─── Inline Bento Previews (full-fidelity, no registry dependency) ─────────────
 
+// Exact same data & columns as DataDisplay.stories.tsx in storybook-web
+const TABLE_DATA = [
+  { id: 1, name: 'Alice Johnson', status: 'Active',   amount: '$1,200' },
+  { id: 2, name: 'Bob Smith',     status: 'Inactive', amount: '$800'   },
+  { id: 3, name: 'Carol White',   status: 'Active',   amount: '$3,400' },
+]
+const TABLE_COLS = ['ID', 'Name', 'Status', 'Amount']
+
+function SortIcon() {
+  return (
+    <svg className="w-3 h-3 opacity-50" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M7 16V4m0 0L3 8m4-4 4 4M17 8v12m0 0 4-4m-4 4-4-4" />
+    </svg>
+  )
+}
+
 function DataTablePreview() {
-  const rows = [
-    { name: 'Stripe Inc.', status: 'Active', mrr: '$12,400', trend: '+8.2%', positive: true },
-    { name: 'Linear Corp.', status: 'Trial', mrr: '$3,200', trend: '+24.1%', positive: true },
-    { name: 'Vercel Ltd.', status: 'Active', mrr: '$8,900', trend: '-1.4%', positive: false },
-    { name: 'Supabase', status: 'Active', mrr: '$6,100', trend: '+12.7%', positive: true },
-    { name: 'PlanetScale', status: 'Churned', mrr: '$0', trend: '-100%', positive: false },
-  ]
   return (
     <div className="w-full h-full flex flex-col bg-[#0a0a0a] rounded-2xl overflow-hidden border border-[#1f1f1f]">
-      {/* Table header toolbar */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-[#1f1f1f] shrink-0">
-        <div className="flex items-center gap-2">
-          <div className="text-white text-xs font-bold">Customers</div>
-          <span className="text-[9px] bg-[#f97316]/15 text-[#f97316] px-1.5 py-0.5 rounded font-bold">{rows.length}</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <div className="h-6 px-2.5 rounded bg-[#111] border border-[#1f1f1f] text-[10px] text-[#737373] flex items-center gap-1">
-            <svg className="w-2.5 h-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-            Filter
-          </div>
-          <div className="h-6 px-2.5 rounded bg-[#f97316] text-[10px] text-white font-bold flex items-center gap-1">+ Add</div>
+      {/* Search bar — matches storybook DataTableToolbar */}
+      <div className="px-4 pt-4 pb-3 shrink-0">
+        <div className="flex items-center gap-2 h-10 bg-[#111111] border border-[#1f1f1f] rounded-xl px-3">
+          <svg className="w-4 h-4 text-[#737373] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+          </svg>
+          <span className="text-[13px] text-[#737373]">Search...</span>
         </div>
       </div>
-      {/* Column headers */}
-      <div className="grid grid-cols-4 px-4 py-2 border-b border-[#111] bg-[#0a0a0a] shrink-0">
-        {['Customer', 'Status', 'MRR', 'Trend'].map(h => (
-          <div key={h} className="text-[10px] text-[#737373] font-bold uppercase tracking-wider">{h}</div>
-        ))}
-      </div>
-      {/* Rows */}
-      <div className="flex-1 overflow-hidden">
-        {rows.map((row, i) => (
-          <div key={i} className={`grid grid-cols-4 px-4 py-2.5 border-b border-[#0d0d0d] ${i === 0 ? 'bg-[#f97316]/4' : 'hover:bg-[#111]/50'}`}>
-            <div className="flex items-center gap-2">
-              <div className="w-5 h-5 rounded bg-[#111111] border border-[#1f1f1f] flex items-center justify-center text-[8px] text-[#737373] font-bold">
-                {row.name[0]}
-              </div>
-              <span className="text-[11px] text-white font-medium truncate">{row.name}</span>
+
+      {/* Table — matches storybook rounded-md border overflow-hidden */}
+      <div className="mx-4 rounded-xl border border-[#1f1f1f] overflow-hidden shrink-0">
+        {/* Head */}
+        <div className="grid grid-cols-4 bg-[#111111]/40">
+          {TABLE_COLS.map(h => (
+            <div key={h} className="flex items-center gap-1 px-4 py-3 text-[12px] font-medium text-[#737373]">
+              {h}
+              {h !== 'Status' && <SortIcon />}
             </div>
-            <div className="flex items-center gap-1.5">
-              <div className={`w-1.5 h-1.5 rounded-full shrink-0 ${
-                row.status === 'Active' ? 'bg-green-500' :
-                row.status === 'Trial' ? 'bg-blue-400' :
-                'bg-red-500'
-              }`} />
-              <span className="text-[11px] text-white font-normal">{row.status}</span>
-            </div>
-            <div className="text-[11px] text-white font-normal">{row.mrr}</div>
-            <div className={`text-[11px] font-normal ${row.positive ? 'text-green-400' : 'text-red-400'}`}>{row.trend}</div>
+          ))}
+        </div>
+        {/* Rows */}
+        {TABLE_DATA.map((row, i) => (
+          <div key={row.id} className={`grid grid-cols-4 border-t border-[#1f1f1f] ${i % 2 !== 0 ? 'bg-[#111111]/10' : ''}`}>
+            <div className="px-4 py-3 text-[13px] text-white">{row.id}</div>
+            <div className="px-4 py-3 text-[13px] text-white">{row.name}</div>
+            <div className="px-4 py-3 text-[13px] text-white">{row.status}</div>
+            <div className="px-4 py-3 text-[13px] text-white">{row.amount}</div>
           </div>
         ))}
+      </div>
+
+      {/* Pagination — matches storybook DataTablePagination */}
+      <div className="flex items-center justify-between px-4 py-3 shrink-0">
+        <span className="text-[13px] text-[#737373]">Page 1 of 2</span>
+        <div className="flex items-center gap-2">
+          <div className="h-8 w-[70px] rounded-xl border border-[#1f1f1f] bg-[#111111] flex items-center justify-between px-2">
+            <span className="text-[12px] text-[#737373]">10</span>
+            <svg className="w-3 h-3 text-[#737373]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="m6 9 6 6 6-6"/></svg>
+          </div>
+          <button className="h-8 w-8 rounded-xl border border-[#1f1f1f] bg-[#111111] flex items-center justify-center">
+            <svg className="w-4 h-4 text-[#737373]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7"/></svg>
+          </button>
+          <button className="h-8 w-8 rounded-xl border border-[#1f1f1f] bg-[#111111] flex items-center justify-center">
+            <svg className="w-4 h-4 text-[#737373]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </div>
       </div>
     </div>
   )
