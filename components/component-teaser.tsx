@@ -8,273 +8,302 @@ import { useGSAP } from '@gsap/react'
 
 gsap.registerPlugin(ScrollTrigger, useGSAP)
 
-// ─── Shared design tokens (match storybook exactly) ────────────────────────────
-// bg:       #111111  (card surfaces)
-// bg-deep:  #0d0d0d  (panel bg)
-// border:   #1f1f1f  (card borders)
-// muted:    #737373  (secondary text)
-// dim:      #404040  (tertiary text)
-// orange:   #f97316
+// ─── Inline Bento Previews (full-fidelity, no registry dependency) ─────────────
 
-// ─── 1. Kanban Board ──────────────────────────────────────────────────────────
+function DataTablePreview() {
+  const rows = [
+    { name: 'Stripe Inc.', status: 'Active', mrr: '$12,400', trend: '+8.2%', positive: true },
+    { name: 'Linear Corp.', status: 'Trial', mrr: '$3,200', trend: '+24.1%', positive: true },
+    { name: 'Vercel Ltd.', status: 'Active', mrr: '$8,900', trend: '-1.4%', positive: false },
+    { name: 'Supabase', status: 'Active', mrr: '$6,100', trend: '+12.7%', positive: true },
+    { name: 'PlanetScale', status: 'Churned', mrr: '$0', trend: '-100%', positive: false },
+  ]
+  return (
+    <div className="w-full h-full flex flex-col bg-[#0d0d0d] rounded-xl overflow-hidden border border-[#1a1a1a]">
+      {/* Table header toolbar */}
+      <div className="flex items-center justify-between px-4 py-3 border-b border-[#1a1a1a] shrink-0">
+        <div className="flex items-center gap-2">
+          <div className="text-white text-xs font-bold">Customers</div>
+          <span className="text-[9px] bg-[#f97316]/15 text-[#f97316] px-1.5 py-0.5 rounded font-bold">{rows.length}</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <div className="h-6 px-2.5 rounded bg-[#111] border border-[#222] text-[10px] text-[#525252] flex items-center gap-1">
+            <svg className="w-2.5 h-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            Filter
+          </div>
+          <div className="h-6 px-2.5 rounded bg-[#f97316] text-[10px] text-white font-bold flex items-center gap-1">+ Add</div>
+        </div>
+      </div>
+      {/* Column headers */}
+      <div className="grid grid-cols-4 px-4 py-2 border-b border-[#111] bg-[#080808] shrink-0">
+        {['Customer', 'Status', 'MRR', 'Trend'].map(h => (
+          <div key={h} className="text-[9px] text-[#333] font-semibold uppercase tracking-wider">{h}</div>
+        ))}
+      </div>
+      {/* Rows */}
+      <div className="flex-1 overflow-hidden">
+        {rows.map((row, i) => (
+          <div key={i} className={`grid grid-cols-4 px-4 py-2.5 border-b border-[#0d0d0d] ${i === 0 ? 'bg-[#f97316]/4' : 'hover:bg-[#111]/50'}`}>
+            <div className="flex items-center gap-2">
+              <div className="w-5 h-5 rounded bg-[#1a1a1a] border border-[#2a2a2a] flex items-center justify-center text-[8px] text-[#525252] font-bold">
+                {row.name[0]}
+              </div>
+              <span className="text-[10px] text-white font-medium truncate">{row.name}</span>
+            </div>
+            <div>
+              <span className={`text-[9px] px-1.5 py-0.5 rounded-full font-semibold ${
+                row.status === 'Active' ? 'bg-green-500/10 text-green-400' :
+                row.status === 'Trial' ? 'bg-blue-500/10 text-blue-400' :
+                'bg-red-500/10 text-red-400'
+              }`}>{row.status}</span>
+            </div>
+            <div className="text-[10px] text-white font-mono">{row.mrr}</div>
+            <div className={`text-[10px] font-semibold ${row.positive ? 'text-green-400' : 'text-red-400'}`}>{row.trend}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 function KanbanPreview() {
   const cols = [
     {
-      label: 'To Do', count: 2, cards: [
-        { title: 'Design login page', tag: 'UI', tagColor: 'text-[#f97316] bg-[#f97316]/10 border-[#f97316]/20' },
-        { title: 'Write API docs', tag: 'Docs', tagColor: 'text-amber-400 bg-amber-400/10 border-amber-400/20' },
+      label: 'Backlog', color: '#525252', count: 3,
+      cards: [
+        { title: 'Dark mode tokens', tag: 'Design', priority: 'low' },
+        { title: 'API rate limiting', tag: 'Backend', priority: 'med' },
       ]
     },
     {
-      label: 'In Progress', count: 1, cards: [
-        { title: 'Implement auth flow', tag: 'Backend', tagColor: 'text-blue-400 bg-blue-400/10 border-blue-400/20' },
+      label: 'In Progress', color: '#f59e0b', count: 4,
+      cards: [
+        { title: 'Component registry', tag: 'Frontend', priority: 'high' },
+        { title: 'Auth middleware', tag: 'Backend', priority: 'high' },
       ]
     },
     {
-      label: 'In Review', count: 1, cards: [
-        { title: 'Payment integration', tag: 'DevOps', tagColor: 'text-violet-400 bg-violet-400/10 border-violet-400/20' },
+      label: 'Review', color: '#3b82f6', count: 2,
+      cards: [
+        { title: 'Pricing page', tag: 'Design', priority: 'med' },
       ]
     },
     {
-      label: 'Done', count: 2, cards: [
-        { title: 'Set up CI/CD', tag: 'DevOps', tagColor: 'text-violet-400 bg-violet-400/10 border-violet-400/20' },
-        { title: 'Database schema', tag: 'Backend', tagColor: 'text-blue-400 bg-blue-400/10 border-blue-400/20' },
+      label: 'Done', color: '#22c55e', count: 8,
+      cards: [
+        { title: 'Navigation rebuild', tag: 'Frontend', priority: 'low' },
       ]
     },
   ]
-  return (
-    <div className="w-full h-full flex flex-col bg-[#0d0d0d] rounded-2xl overflow-hidden border border-[#1f1f1f]">
-      <div className="flex-1 flex gap-2.5 p-3 overflow-hidden">
-        {cols.map(col => (
-          <div key={col.label} className="flex-1 min-w-0 bg-[#111111] rounded-xl border border-[#1f1f1f] flex flex-col">
-            <div className="flex items-center justify-between px-3 py-2.5 border-b border-[#1f1f1f] shrink-0">
-              <span className="text-[11px] font-semibold text-white">{col.label}</span>
-              <span className="text-[10px] text-[#737373] bg-[#1a1a1a] border border-[#2a2a2a] px-1.5 py-0.5 rounded-md font-medium">{col.count}</span>
-            </div>
-            <div className="flex-1 p-2 space-y-2 overflow-hidden">
-              {col.cards.map((card, i) => (
-                <div key={i} className="bg-[#0d0d0d] border border-[#1f1f1f] rounded-lg p-2.5">
-                  <div className="text-[11px] font-semibold text-white leading-tight mb-2">{card.title}</div>
-                  <span className={`text-[9px] px-1.5 py-0.5 rounded border font-semibold ${card.tagColor}`}>{card.tag}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  )
-}
 
-// ─── 2. DataTable ─────────────────────────────────────────────────────────────
-function DataTablePreview() {
-  const rows = [
-    { id: 1, name: 'Alice Johnson', status: 'Active', amount: '$1,200' },
-    { id: 2, name: 'Bob Smith', status: 'Inactive', amount: '$800' },
-    { id: 3, name: 'Carol White', status: 'Active', amount: '$3,400' },
-  ]
   return (
-    <div className="w-full h-full flex flex-col bg-[#0d0d0d] rounded-2xl overflow-hidden border border-[#1f1f1f]">
-      {/* Search */}
-      <div className="px-4 py-3 border-b border-[#1f1f1f] shrink-0">
-        <div className="flex items-center gap-2 h-9 bg-[#111111] border border-[#1f1f1f] rounded-lg px-3">
-          <svg className="w-3.5 h-3.5 text-[#737373] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-          <span className="text-[12px] text-[#737373]">Search...</span>
-        </div>
-      </div>
-      {/* Table */}
-      <div className="flex-1 overflow-hidden">
-        {/* Head */}
-        <div className="grid grid-cols-4 px-4 py-2.5 border-b border-[#1f1f1f] bg-[#0d0d0d]">
-          {['ID', 'Name', 'Status', 'Amount'].map((h, i) => (
-            <div key={h} className="flex items-center gap-1 text-[10px] text-[#737373] font-semibold">
-              {h}
-              {i !== 1 && (
-                <svg className="w-2.5 h-2.5 text-[#404040]" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L8 8h8L12 2zm0 20 4-6H8l4 6z"/></svg>
-              )}
-            </div>
+    <div className="w-full h-full flex flex-col bg-[#0d0d0d] rounded-xl overflow-hidden border border-[#1a1a1a]">
+      <div className="flex items-center justify-between px-4 py-3 border-b border-[#1a1a1a] shrink-0">
+        <div className="text-white text-xs font-bold">Sprint Board</div>
+        <div className="flex items-center gap-1">
+          {[...Array(4)].map((_, i) => (
+            <div key={i} className="w-5 h-5 rounded-full bg-[#f97316]/20 border border-[#0d0d0d] flex items-center justify-center text-[7px] text-[#f97316] font-bold">{String.fromCharCode(65 + i)}</div>
           ))}
         </div>
-        {/* Rows */}
-        {rows.map((row, i) => (
-          <div key={row.id} className={`grid grid-cols-4 px-4 py-3 border-b border-[#111111] ${i === 0 ? 'bg-[#111111]/50' : ''}`}>
-            <span className="text-[12px] text-[#737373] font-mono">{row.id}</span>
-            <span className="text-[12px] text-white font-medium">{row.name}</span>
-            <span className={`text-[11px] font-semibold w-fit px-2 py-0.5 rounded-full ${row.status === 'Active' ? 'bg-green-500/10 text-green-400' : 'bg-[#333] text-[#737373]'}`}>{row.status}</span>
-            <span className="text-[12px] text-white font-medium">{row.amount}</span>
+      </div>
+      <div className="flex-1 flex gap-3 p-3 overflow-hidden">
+        {cols.map(col => (
+          <div key={col.label} className="flex-1 min-w-0 flex flex-col gap-2">
+            <div className="flex items-center gap-1.5 shrink-0">
+              <div className="w-1.5 h-1.5 rounded-full" style={{ background: col.color }} />
+              <span className="text-[9px] font-semibold text-[#525252] uppercase tracking-wider">{col.label}</span>
+              <span className="ml-auto text-[8px] bg-[#111] border border-[#1a1a1a] px-1 rounded text-[#333]">{col.count}</span>
+            </div>
+            {col.cards.map((card, i) => (
+              <div key={i} className="bg-[#111] border border-[#1a1a1a] rounded-lg p-2.5 space-y-1.5">
+                <div className="text-[10px] text-white font-medium leading-tight">{card.title}</div>
+                <div className="flex items-center justify-between">
+                  <span className="text-[8px] bg-[#1a1a1a] border border-[#222] text-[#525252] px-1.5 py-0.5 rounded">{card.tag}</span>
+                  <div className={`w-1.5 h-1.5 rounded-full ${card.priority === 'high' ? 'bg-red-500' : card.priority === 'med' ? 'bg-amber-500' : 'bg-[#333]'}`} />
+                </div>
+              </div>
+            ))}
+            <div className="border border-dashed border-[#1a1a1a] rounded-lg p-2 text-center">
+              <span className="text-[8px] text-[#2a2a2a]">+ Add card</span>
+            </div>
           </div>
         ))}
-      </div>
-      {/* Pagination */}
-      <div className="flex items-center justify-between px-4 py-2.5 border-t border-[#1f1f1f] shrink-0">
-        <span className="text-[10px] text-[#737373]">Page 1 of 2</span>
-        <div className="flex items-center gap-1">
-          <button className="w-6 h-6 rounded border border-[#1f1f1f] bg-[#111111] flex items-center justify-center">
-            <svg className="w-3 h-3 text-[#737373]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7"/></svg>
-          </button>
-          <button className="w-6 h-6 rounded border border-[#1f1f1f] bg-[#111111] flex items-center justify-center">
-            <svg className="w-3 h-3 text-[#737373]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7"/></svg>
-          </button>
-        </div>
       </div>
     </div>
   )
 }
 
-// ─── 3. Stat Cards ────────────────────────────────────────────────────────────
-function StatPreview() {
-  const stats = [
-    { label: 'Total Revenue', value: '$48,295', delta: '+12.5%', pos: true, icon: '▪' },
-    { label: 'Active Users', value: '2,340', delta: '-3.2%', pos: false, icon: '◎' },
-    { label: 'Avg Rating', value: '4.8', delta: '+0.3%', pos: true, icon: '☆' },
+function ChartPreview() {
+  const data = [40, 65, 45, 80, 60, 90, 75, 95, 70, 85, 78, 100]
+  const months = ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D']
+  return (
+    <div className="w-full h-full flex flex-col bg-[#0d0d0d] rounded-xl overflow-hidden border border-[#1a1a1a] p-4">
+      <div className="flex items-start justify-between mb-3 shrink-0">
+        <div>
+          <div className="text-[9px] text-[#525252] font-medium uppercase tracking-wider">Revenue</div>
+          <div className="text-xl font-black text-white leading-none mt-0.5">$84.2k</div>
+          <div className="text-[9px] text-green-400 font-semibold mt-0.5">↑ +23.4% vs last year</div>
+        </div>
+        <div className="text-[9px] text-[#333] bg-[#111] border border-[#1a1a1a] px-2 py-1 rounded">2025</div>
+      </div>
+      <div className="flex-1 flex items-end gap-1">
+        {data.map((h, i) => (
+          <div key={i} className="flex-1 flex flex-col items-center gap-1">
+            <div className="w-full rounded-sm"
+              style={{
+                height: `${h}%`,
+                background: i === data.length - 1
+                  ? 'linear-gradient(to top, #f97316, #fb923c)'
+                  : `rgba(249,115,22,${0.15 + i * 0.06})`
+              }} />
+            <span className="text-[7px] text-[#333]">{months[i]}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function MetricCardsPreview() {
+  const metrics = [
+    { label: 'Active Users', value: '24.8k', delta: '+12%', pos: true },
+    { label: 'Conversion', value: '3.6%', delta: '+0.4%', pos: true },
+    { label: 'Churn Rate', value: '1.2%', delta: '-0.3%', pos: true },
+    { label: 'ARR', value: '$1.04M', delta: '+$84k', pos: true },
   ]
   return (
-    <div className="w-full h-full flex flex-col justify-center gap-3 bg-[#0d0d0d] rounded-2xl border border-[#1f1f1f] p-4">
-      <div className="text-[10px] font-bold text-[#737373] uppercase tracking-widest mb-1">Live Metrics</div>
-      {stats.map(s => (
-        <div key={s.label} className="bg-[#111111] border border-[#1f1f1f] rounded-xl p-3 flex items-start justify-between">
+    <div className="w-full h-full grid grid-cols-2 gap-2 p-3 bg-[#080808] rounded-xl border border-[#1a1a1a]">
+      {metrics.map(m => (
+        <div key={m.label} className="bg-[#111] border border-[#1a1a1a] rounded-lg p-3 flex flex-col justify-between">
+          <div className="text-[9px] text-[#525252] font-medium uppercase tracking-wider">{m.label}</div>
           <div>
-            <div className="text-[10px] text-[#737373] font-medium mb-1">{s.label}</div>
-            <div className="text-xl font-black text-white leading-none">{s.value}</div>
-            <div className={`text-[10px] font-semibold mt-1.5 flex items-center gap-0.5 ${s.pos ? 'text-green-400' : 'text-red-400'}`}>
-              <span>{s.pos ? '↗' : '↘'}</span>
-              <span>{s.delta}</span>
-              <span className="text-[#737373] font-normal ml-1">vs last month</span>
-            </div>
+            <div className="text-base font-black text-white leading-none">{m.value}</div>
+            <div className={`text-[9px] mt-1 font-semibold ${m.pos ? 'text-green-400' : 'text-red-400'}`}>{m.delta}</div>
           </div>
-          <div className="text-[#1f1f1f] text-lg">{s.icon}</div>
         </div>
       ))}
     </div>
   )
 }
 
-// ─── 4. BulkActions ───────────────────────────────────────────────────────────
-function BulkActionsPreview() {
-  const files = [
-    { name: 'design-system-v2.fig', type: 'Figma', size: '4.2 MB', checked: true },
-    { name: 'brand-guidelines.pdf', type: 'PDF', size: '1.8 MB', checked: true },
-    { name: 'component-specs.md', type: 'Markdown', size: '42 KB', checked: true },
-    { name: 'export-tokens.json', type: 'JSON', size: '12 KB', checked: false },
+function CommandPalettePreview() {
+  const items = [
+    { icon: '⌘', label: 'New Issue', shortcut: 'C' },
+    { icon: '/', label: 'Search Everything', shortcut: 'K' },
+    { icon: '→', label: 'Go to Dashboard', shortcut: '' },
+    { icon: '◎', label: 'Switch Workspace', shortcut: '' },
   ]
   return (
-    <div className="w-full h-full flex flex-col bg-[#0d0d0d] rounded-2xl border border-[#1f1f1f] overflow-hidden relative">
-      {/* List */}
-      <div className="flex-1 overflow-hidden divide-y divide-[#111111]">
-        {files.map((f, i) => (
-          <div key={i} className={`flex items-center gap-3 px-4 py-3 ${f.checked ? 'bg-[#f97316]/4' : ''}`}>
-            <div className={`w-4 h-4 rounded border shrink-0 flex items-center justify-center ${f.checked ? 'bg-[#f97316] border-[#f97316]' : 'border-[#2a2a2a] bg-[#111]'}`}>
-              {f.checked && <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7"/></svg>}
+    <div className="w-full h-full flex items-center justify-center bg-[#080808] rounded-xl border border-[#1a1a1a] p-4">
+      <div className="w-full max-w-[280px] bg-[#111] border border-[#2a2a2a] rounded-xl overflow-hidden shadow-2xl">
+        <div className="flex items-center gap-2 px-3 py-2.5 border-b border-[#1a1a1a]">
+          <svg className="w-3 h-3 text-[#525252]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <span className="text-xs text-[#525252]">Search or jump to…</span>
+          <span className="ml-auto text-[9px] text-[#333] border border-[#2a2a2a] px-1 py-0.5 rounded">ESC</span>
+        </div>
+        <div className="py-1.5">
+          <div className="px-3 py-1 text-[9px] text-[#333] uppercase tracking-wider font-semibold">Quick actions</div>
+          {items.map((item, i) => (
+            <div key={i} className={`flex items-center gap-2.5 px-3 py-1.5 ${i === 0 ? 'bg-[#f97316]/8 text-white' : 'text-[#525252]'}`}>
+              <span className={`text-[11px] w-4 text-center ${i === 0 ? 'text-[#f97316]' : ''}`}>{item.icon}</span>
+              <span className="text-[10px] flex-1">{item.label}</span>
+              {item.shortcut && <kbd className="text-[8px] border border-[#2a2a2a] text-[#333] px-1 py-0.5 rounded font-mono">⌘{item.shortcut}</kbd>}
             </div>
-            <div className="flex-1 min-w-0">
-              <div className="text-[11px] font-semibold text-white truncate">{f.name}</div>
-              <div className="text-[9px] text-[#737373]">{f.type} · {f.size}</div>
-            </div>
-          </div>
-        ))}
-      </div>
-      {/* Floating action bar */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-1 bg-[#1a1a1a] border border-[#2a2a2a] rounded-full px-3 py-2 shadow-2xl">
-        <span className="text-[11px] font-semibold text-white px-2">3 selected</span>
-        <div className="w-px h-4 bg-[#2a2a2a] mx-1" />
-        {[
-          { label: 'Archive', icon: '⬚' },
-          { label: 'Download', icon: '↓' },
-        ].map(a => (
-          <button key={a.label} className="flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] text-[#737373] hover:text-white hover:bg-[#2a2a2a] font-medium transition-colors">
-            <span className="text-[11px]">{a.icon}</span>
-            {a.label}
-          </button>
-        ))}
-        <button className="flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] text-white bg-red-500 hover:bg-red-600 font-semibold transition-colors">
-          Delete
-        </button>
-        <button className="w-5 h-5 flex items-center justify-center rounded-full text-[#737373] hover:text-white text-[10px] ml-1">✕</button>
+          ))}
+        </div>
       </div>
     </div>
   )
 }
 
-// ─── 5. Sidebar Dashboard (full app shell) ────────────────────────────────────
-function SidebarDashboardPreview() {
-  const stats = [
-    { label: 'Total Revenue', value: '$48,295', delta: '+12.5%', pos: true },
-    { label: 'Active Users', value: '2,847', delta: '+8.3%', pos: true },
-    { label: 'New Orders', value: '384', delta: '+3.1%', pos: true },
-    { label: 'Conversion', value: '3.24%', delta: '-0.4%', pos: false },
-  ]
-  const projects = [
-    { name: 'Alpha Project', status: 'Active', team: 'Design', pct: 72 },
-    { name: 'Beta Launch', status: 'Review', team: 'Engineering', pct: 38 },
-    { name: 'Gamma Research', status: 'Active', team: 'Product', pct: 55 },
-  ]
+function SidebarAppPreview() {
   return (
-    <div className="w-full h-full flex bg-[#0d0d0d] rounded-2xl border border-[#1f1f1f] overflow-hidden">
+    <div className="w-full h-full flex bg-[#080808] rounded-xl border border-[#1a1a1a] overflow-hidden">
       {/* Sidebar */}
-      <div className="w-[140px] shrink-0 border-r border-[#1f1f1f] flex flex-col bg-[#0d0d0d]">
-        <div className="px-4 py-3.5 border-b border-[#1f1f1f] shrink-0">
-          <div className="text-[12px] font-bold text-white">Acme Inc</div>
+      <div className="w-[140px] shrink-0 border-r border-[#1a1a1a] flex flex-col">
+        <div className="h-10 border-b border-[#1a1a1a] flex items-center px-3 gap-2">
+          <img src="/logo.svg" alt="OTF" className="w-4 h-4" />
+          <span className="text-white text-[10px] font-semibold truncate">OTF</span>
         </div>
-        <div className="flex-1 py-2 px-2 space-y-0.5">
+        <div className="flex-1 p-1.5 space-y-0.5">
           {[
-            { label: 'Dashboard', icon: '▦', active: true },
-            { label: 'Projects', icon: '◫' },
-            { label: 'Team', icon: '◎' },
-            { label: 'Settings', icon: '⚙' },
+            { label: 'Dashboard', active: true },
+            { label: 'Issues' },
+            { label: 'Projects' },
+            { label: 'Members' },
+            { label: 'Settings' },
           ].map(item => (
-            <div key={item.label} className={`flex items-center gap-2 px-2.5 py-2 rounded-lg text-[11px] font-medium transition-colors ${item.active ? 'bg-[#1a1a1a] text-white' : 'text-[#737373] hover:text-white'}`}>
-              <span className="text-[12px]">{item.icon}</span>
+            <div key={item.label} className={`flex items-center gap-1.5 px-2 py-1 rounded text-[9px] ${item.active ? 'bg-[#f97316]/10 text-[#f97316] font-medium' : 'text-[#333]'}`}>
+              <div className={`w-1 h-1 rounded-full ${item.active ? 'bg-[#f97316]' : 'bg-[#222]'}`} />
               {item.label}
             </div>
           ))}
         </div>
-        <div className="border-t border-[#1f1f1f] px-4 py-3 shrink-0">
-          <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded-full bg-[#1f1f1f] border border-[#2a2a2a] flex items-center justify-center text-[9px] font-bold text-white">JD</div>
-            <span className="text-[10px] text-[#737373] truncate">Jane Doe</span>
+        <div className="border-t border-[#1a1a1a] p-2">
+          <div className="flex items-center gap-1.5">
+            <div className="w-4 h-4 rounded-full bg-[#f97316]/20 flex items-center justify-center">
+              <span className="text-[#f97316] text-[7px] font-bold">M</span>
+            </div>
+            <div className="text-[8px] text-[#525252] truncate">dave@otf.sh</div>
           </div>
         </div>
       </div>
-
       {/* Main */}
       <div className="flex-1 flex flex-col overflow-hidden">
-        {/* Header */}
-        <div className="flex items-center justify-between px-4 py-3 border-b border-[#1f1f1f] shrink-0">
-          <div className="text-[13px] font-bold text-white">Dashboard</div>
-          <div className="w-5 h-5 rounded-full bg-[#111111] border border-[#1f1f1f] flex items-center justify-center text-[10px] text-[#737373]">🔔</div>
+        <div className="h-10 border-b border-[#1a1a1a] flex items-center px-3">
+          <span className="text-white text-[10px] font-bold">Dashboard</span>
+          <div className="ml-auto h-5 px-2 rounded bg-[#f97316] text-white text-[8px] font-bold flex items-center">+ New</div>
         </div>
-
-        {/* Stats grid */}
-        <div className="grid grid-cols-2 gap-2 p-3 border-b border-[#1f1f1f] shrink-0">
-          {stats.map(s => (
-            <div key={s.label} className="bg-[#111111] border border-[#1f1f1f] rounded-xl p-2.5">
-              <div className="text-[9px] text-[#737373] font-medium mb-1">{s.label}</div>
-              <div className="text-[15px] font-black text-white leading-none">{s.value}</div>
-              <div className={`text-[9px] mt-1 font-semibold ${s.pos ? 'text-green-400' : 'text-red-400'}`}>
-                {s.pos ? '↗' : '↘'} {s.delta}
-              </div>
+        <div className="flex-1 p-2 grid grid-cols-2 gap-2 overflow-hidden">
+          {[
+            { label: 'Issues', v: '24' },
+            { label: 'Done', v: '18' },
+            { label: 'Team', v: '6' },
+            { label: 'MRR', v: '$12k' },
+          ].map(s => (
+            <div key={s.label} className="bg-[#111] border border-[#1a1a1a] rounded p-2">
+              <div className="text-[7px] text-[#333] uppercase tracking-wider">{s.label}</div>
+              <div className="text-sm font-black text-white leading-none mt-0.5">{s.v}</div>
             </div>
           ))}
         </div>
+      </div>
+    </div>
+  )
+}
 
-        {/* Projects mini table */}
-        <div className="flex-1 overflow-hidden">
-          <div className="grid grid-cols-4 px-3 py-2 border-b border-[#111111]">
-            {['Project', 'Status', 'Team', 'Progress'].map(h => (
-              <div key={h} className="text-[9px] text-[#737373] font-semibold uppercase tracking-wide">{h}</div>
-            ))}
-          </div>
-          {projects.map((p, i) => (
-            <div key={i} className="grid grid-cols-4 px-3 py-2 border-b border-[#0f0f0f] items-center">
-              <span className="text-[10px] text-white font-medium truncate">{p.name}</span>
-              <span className={`text-[9px] font-semibold w-fit px-1.5 py-0.5 rounded-full ${p.status === 'Active' ? 'bg-green-500/10 text-green-400' : 'bg-amber-500/10 text-amber-400'}`}>{p.status}</span>
-              <span className="text-[9px] text-[#737373]">{p.team}</span>
-              <div className="flex items-center gap-1.5">
-                <div className="flex-1 h-1 bg-[#1f1f1f] rounded-full overflow-hidden">
-                  <div className="h-full rounded-full bg-[#f97316]" style={{ width: `${p.pct}%` }} />
-                </div>
-              </div>
+function FormPreview() {
+  return (
+    <div className="w-full h-full flex items-center justify-center bg-[#080808] rounded-xl border border-[#1a1a1a] p-4">
+      <div className="w-full max-w-[240px] space-y-3">
+        <div className="text-xs font-bold text-white">Create project</div>
+        <div className="space-y-2">
+          <div>
+            <div className="text-[9px] text-[#525252] mb-1">Project name</div>
+            <div className="h-8 bg-[#111] border border-[#333] rounded-md px-2.5 flex items-center">
+              <span className="text-[10px] text-white">otf-design-system</span>
+              <span className="ml-0.5 w-0.5 h-3 bg-[#f97316] animate-pulse" />
             </div>
+          </div>
+          <div>
+            <div className="text-[9px] text-[#525252] mb-1">Template</div>
+            <div className="h-8 bg-[#111] border border-[#222] rounded-md px-2.5 flex items-center justify-between">
+              <span className="text-[10px] text-[#525252]">SaaS Dashboard Kit</span>
+              <svg className="w-2.5 h-2.5 text-[#333]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="m6 9 6 6 6-6"/></svg>
+            </div>
+          </div>
+          <div className="h-8 bg-white rounded-md flex items-center justify-center">
+            <span className="text-[10px] font-bold text-black">Create project →</span>
+          </div>
+        </div>
+        <div className="flex items-center gap-2">
+          <div className="flex-1 h-px bg-[#1a1a1a]" />
+          <span className="text-[8px] text-[#333]">3-step wizard</span>
+          <div className="flex-1 h-px bg-[#1a1a1a]" />
+        </div>
+        <div className="flex justify-center gap-1.5">
+          {[true, true, false].map((active, i) => (
+            <div key={i} className={`h-1 rounded-full ${active ? 'w-4 bg-[#f97316]' : 'w-2 bg-[#1a1a1a]'}`} />
           ))}
         </div>
       </div>
@@ -288,6 +317,7 @@ export function ComponentTeaser() {
   const sectionRef = useRef<HTMLDivElement>(null)
 
   useGSAP(() => {
+    // Header animation
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
@@ -298,21 +328,22 @@ export function ComponentTeaser() {
     })
 
     tl.from('.ct-label', { opacity: 0, y: -8, duration: 0.4 })
-      .from('.ct-title', { opacity: 0, y: 28, duration: 0.6, stagger: 0.07 }, '<0.1')
+      .from('.ct-title', { opacity: 0, y: 24, duration: 0.6, stagger: 0.06 }, '<0.1')
       .from('.ct-sub', { opacity: 0, y: 12, duration: 0.5 }, '<0.3')
-      .from('.ct-stat', { opacity: 0, y: 16, duration: 0.4, stagger: 0.07 }, '<0.2')
+      .from('.ct-stat', { opacity: 0, y: 16, duration: 0.4, stagger: 0.08 }, '<0.2')
       .from('.ct-cta', { opacity: 0, y: 8, duration: 0.4 }, '<0.2')
 
+    // Bento cell stagger
     gsap.utils.toArray<Element>('.bento-cell').forEach((cell, i) => {
       gsap.from(cell, {
         opacity: 0,
-        y: 36,
-        duration: 0.65,
-        delay: i * 0.06,
+        y: 40,
+        duration: 0.7,
+        delay: i * 0.07,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: cell,
-          start: 'top 88%',
+          start: 'top 85%',
           once: true,
         },
       })
@@ -323,116 +354,136 @@ export function ComponentTeaser() {
     <section ref={sectionRef} className="py-28 border-t border-[#111111] overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
 
-        {/* ── Header ──────────────────────────────────────────────────────── */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-10 mb-16">
+        {/* ── Header ─────────────────────────────────────────────────────── */}
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16">
           <div className="max-w-2xl">
-            <div className="ct-label inline-flex items-center gap-2 text-[11px] font-bold text-[#f97316] uppercase tracking-[0.18em] mb-6">
+            <div className="ct-label inline-flex items-center gap-2 text-[11px] font-bold text-[#f97316] uppercase tracking-[0.18em] mb-5">
               <span className="w-4 h-px bg-[#f97316]/60" />
               Component Library
             </div>
+
             <h2 className="tracking-tighter leading-[1.0]">
-              <span className="ct-title block text-[clamp(2.5rem,5vw,4rem)] font-black text-white uppercase">
-                Every component
+              <span className="ct-title block text-4xl sm:text-5xl lg:text-6xl font-black text-white uppercase">
+                180+ components.
               </span>
-              <span className="ct-title block text-[clamp(2.5rem,5vw,4rem)] font-black text-[#f97316] uppercase">
-                you'll ever need.
+              <span className="ct-title block text-4xl sm:text-5xl lg:text-6xl font-black text-[#2a2a2a] uppercase">
+                Every UI pattern,
+              </span>
+              <span className="ct-title block text-4xl sm:text-5xl lg:text-6xl font-black text-[#2a2a2a] uppercase">
+                covered.
               </span>
             </h2>
           </div>
 
-          <div className="shrink-0 space-y-5 lg:text-right">
-            <p className="ct-sub text-[#737373] text-sm leading-relaxed max-w-xs lg:ml-auto">
-              Data tables, kanban boards, sidebars, charts, forms — fully typed, accessible, and dark-mode native.
+          <div className="lg:text-right space-y-5 shrink-0">
+            <p className="ct-sub text-[#525252] text-sm leading-relaxed max-w-xs lg:ml-auto">
+              Buttons, data tables, charts, kanban boards, sidebars — fully typed, accessible, dark-mode native.
             </p>
 
-            <div className="ct-stat flex flex-wrap lg:justify-end gap-x-7 gap-y-3">
+            <div className="ct-stat flex flex-wrap lg:justify-end gap-x-6 gap-y-3">
               {[
                 { n: '180+', label: 'components' },
                 { n: '8', label: 'categories' },
                 { n: '100%', label: 'TypeScript' },
                 { n: 'MIT', label: 'license' },
               ].map(s => (
-                <div key={s.label} className="text-right">
-                  <div className="text-[1.15rem] font-black text-white leading-none">{s.n}</div>
-                  <div className="text-[9px] text-[#404040] uppercase tracking-widest mt-0.5">{s.label}</div>
+                <div key={s.label} className="text-center lg:text-right">
+                  <div className="text-lg font-black text-white leading-none">{s.n}</div>
+                  <div className="text-[9px] text-[#333] uppercase tracking-wider mt-0.5">{s.label}</div>
                 </div>
               ))}
             </div>
 
             <Link href="/components"
-              className="ct-cta inline-flex items-center gap-2 px-5 py-2.5 bg-[#f97316] hover:bg-[#fb923c] text-white font-bold rounded-lg transition-colors uppercase tracking-widest text-xs">
-              Browse all components
+              className="ct-cta inline-flex items-center gap-2 px-5 py-2.5 bg-white text-black hover:bg-[#f5f5f5] font-bold rounded-md transition-colors uppercase tracking-widest text-xs">
+              Browse all
               <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M12 5l7 7-7 7"/></svg>
             </Link>
           </div>
         </div>
 
-        {/* ── Bento grid ──────────────────────────────────────────────────── */}
+        {/* ── Bento grid ─────────────────────────────────────────────────── */}
         {/*
-          Row 1: [Kanban — 2col wide, tall] [Stat cards — 1col]
-          Row 2: [DataTable — 2col wide]    [BulkActions — 1col]
-          Row 3: [SidebarDashboard — full 3col]
+          Layout (3 rows):
+          Row 1: [DataTable — wide] [Chart — narrow]
+          Row 2: [Sidebar+App — medium] [Kanban — medium]
+          Row 3: [Metrics — narrow] [Command — narrow] [Form — narrow]
         */}
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-3 grid-rows-[auto_auto_auto] gap-3">
 
-          {/* R1C1 — Kanban (2 cols, taller) */}
-          <div className="bento-cell col-span-2 h-[300px] relative">
-            <CellLabel>Kanban Board</CellLabel>
-            <KanbanPreview />
-          </div>
-
-          {/* R1C3 — Stat cards */}
-          <div className="bento-cell col-span-1 h-[300px] relative">
-            <CellLabel>Stat / Metric</CellLabel>
-            <StatPreview />
-          </div>
-
-          {/* R2C1-2 — DataTable */}
-          <div className="bento-cell col-span-2 h-[280px] relative">
-            <CellLabel>Data Table</CellLabel>
+          {/* Row 1 — DataTable (spans 2 cols) */}
+          <div className="bento-cell col-span-2 h-[280px] relative group">
+            <div className="absolute top-3 left-3 z-10 flex items-center gap-1.5">
+              <span className="text-[9px] font-bold text-[#333] uppercase tracking-wider bg-[#080808]/80 border border-[#1a1a1a] px-2 py-1 rounded-md backdrop-blur-sm">Data Table</span>
+            </div>
             <DataTablePreview />
           </div>
 
-          {/* R2C3 — BulkActions */}
+          {/* Row 1 — Chart (1 col) */}
           <div className="bento-cell col-span-1 h-[280px] relative">
-            <CellLabel>Bulk Actions</CellLabel>
-            <BulkActionsPreview />
+            <div className="absolute top-3 left-3 z-10">
+              <span className="text-[9px] font-bold text-[#333] uppercase tracking-wider bg-[#080808]/80 border border-[#1a1a1a] px-2 py-1 rounded-md backdrop-blur-sm">Bar Chart</span>
+            </div>
+            <ChartPreview />
           </div>
 
-          {/* R3 — Sidebar Dashboard (full width) */}
-          <div className="bento-cell col-span-3 h-[320px] relative">
-            <CellLabel>Sidebar / Dashboard</CellLabel>
-            <SidebarDashboardPreview />
+          {/* Row 2 — Sidebar App (1 col) */}
+          <div className="bento-cell col-span-1 h-[260px] relative">
+            <div className="absolute top-3 left-3 z-10">
+              <span className="text-[9px] font-bold text-[#333] uppercase tracking-wider bg-[#080808]/80 border border-[#1a1a1a] px-2 py-1 rounded-md backdrop-blur-sm">App Shell</span>
+            </div>
+            <SidebarAppPreview />
+          </div>
+
+          {/* Row 2 — Kanban (spans 2 cols) */}
+          <div className="bento-cell col-span-2 h-[260px] relative">
+            <div className="absolute top-3 left-3 z-10">
+              <span className="text-[9px] font-bold text-[#333] uppercase tracking-wider bg-[#080808]/80 border border-[#1a1a1a] px-2 py-1 rounded-md backdrop-blur-sm">Kanban Board</span>
+            </div>
+            <KanbanPreview />
+          </div>
+
+          {/* Row 3 — Metrics (1 col) */}
+          <div className="bento-cell col-span-1 h-[220px] relative">
+            <div className="absolute top-3 left-3 z-10">
+              <span className="text-[9px] font-bold text-[#333] uppercase tracking-wider bg-[#080808]/80 border border-[#1a1a1a] px-2 py-1 rounded-md backdrop-blur-sm">Metrics</span>
+            </div>
+            <MetricCardsPreview />
+          </div>
+
+          {/* Row 3 — Command (1 col) */}
+          <div className="bento-cell col-span-1 h-[220px] relative">
+            <div className="absolute top-3 left-3 z-10">
+              <span className="text-[9px] font-bold text-[#333] uppercase tracking-wider bg-[#080808]/80 border border-[#1a1a1a] px-2 py-1 rounded-md backdrop-blur-sm">Command Palette</span>
+            </div>
+            <CommandPalettePreview />
+          </div>
+
+          {/* Row 3 — Form (1 col) */}
+          <div className="bento-cell col-span-1 h-[220px] relative">
+            <div className="absolute top-3 left-3 z-10">
+              <span className="text-[9px] font-bold text-[#333] uppercase tracking-wider bg-[#080808]/80 border border-[#1a1a1a] px-2 py-1 rounded-md backdrop-blur-sm">Form</span>
+            </div>
+            <FormPreview />
           </div>
         </div>
 
-        {/* ── Footer strip ────────────────────────────────────────────────── */}
-        <div className="flex flex-wrap items-center justify-between gap-4 mt-8 pt-6 border-t border-[#111111]">
-          <div className="flex items-center gap-5">
+        {/* ── Footer strip ───────────────────────────────────────────────── */}
+        <div className="flex flex-wrap items-center justify-between gap-4 mt-8 pt-6 border-t border-[#0f0f0f]">
+          <div className="flex items-center gap-6">
             {['React', 'TypeScript', 'Tailwind CSS', 'Radix UI'].map((t, i) => (
-              <span key={t} className="flex items-center gap-5">
-                {i > 0 && <span className="w-px h-3 bg-[#1f1f1f]" />}
-                <span className="text-[10px] text-[#404040] font-semibold uppercase tracking-widest">{t}</span>
+              <span key={t} className="flex items-center gap-6">
+                {i > 0 && <span className="w-0.5 h-0.5 rounded-full bg-[#1f1f1f]" />}
+                <span className="text-[10px] text-[#333] font-semibold uppercase tracking-widest">{t}</span>
               </span>
             ))}
           </div>
-          <div className="flex items-center gap-2 text-[10px] text-[#737373]">
+          <div className="flex items-center gap-1.5 text-[10px] text-[#525252]">
             <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
             Live previews · No screenshots
           </div>
         </div>
       </div>
     </section>
-  )
-}
-
-// Small helper so each cell gets a consistent floating label
-function CellLabel({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="absolute top-3 left-3 z-10">
-      <span className="text-[9px] font-bold text-[#737373] uppercase tracking-widest bg-[#0d0d0d]/90 border border-[#1f1f1f] px-2 py-1 rounded-md backdrop-blur-sm">
-        {children}
-      </span>
-    </div>
   )
 }
