@@ -26,25 +26,33 @@ function SortIcon() {
   )
 }
 
+// theme-minimal dark tokens (hsl computed):
+// --background: hsl(25 12% 8%)  = #161412
+// --card:       hsl(25 12% 10%) = #1a1714
+// --border:     hsl(25 12% 18%) = #2e2a26
+// --muted:      hsl(25 12% 14%) = #231f1d
+// --muted-foreground: hsl(25 10% 55%) = #9e9389
+// --foreground: hsl(35 15% 90%) = #e8e4df
+
 function DataTablePreview() {
   return (
-    <div className="w-full h-full flex flex-col bg-[#0a0a0a] rounded-2xl overflow-hidden border border-[#1f1f1f]">
-      {/* Search bar — matches storybook DataTableToolbar */}
+    <div className="w-full h-full flex flex-col rounded-2xl overflow-hidden" style={{ background: 'hsl(25 12% 8%)' }}>
+      {/* Search bar */}
       <div className="px-4 pt-4 pb-3 shrink-0">
-        <div className="flex items-center gap-2 h-10 bg-[#111111] border border-[#1f1f1f] rounded-xl px-3">
-          <svg className="w-4 h-4 text-[#737373] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <div className="flex items-center gap-2 h-10 rounded-xl px-3 border" style={{ background: 'hsl(25 12% 10%)', borderColor: 'hsl(25 12% 18%)' }}>
+          <svg className="w-4 h-4 shrink-0" style={{ color: 'hsl(25 10% 55%)' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
           </svg>
-          <span className="text-[13px] text-[#737373]">Search...</span>
+          <span className="text-[13px]" style={{ color: 'hsl(25 10% 55%)' }}>Search...</span>
         </div>
       </div>
 
-      {/* Table — matches storybook rounded-md border overflow-hidden */}
-      <div className="mx-4 rounded-xl border border-[#1f1f1f] overflow-hidden shrink-0">
+      {/* Table */}
+      <div className="mx-4 rounded-xl overflow-hidden shrink-0 border" style={{ borderColor: 'hsl(25 12% 18%)' }}>
         {/* Head */}
-        <div className="grid grid-cols-4 bg-[#111111]/40">
+        <div className="grid grid-cols-4" style={{ background: 'hsl(25 12% 14% / 0.6)' }}>
           {TABLE_COLS.map(h => (
-            <div key={h} className="flex items-center gap-1 px-4 py-3 text-[12px] font-medium text-[#737373]">
+            <div key={h} className="flex items-center gap-1 px-4 py-3 text-[12px] font-medium" style={{ color: 'hsl(25 10% 55%)' }}>
               {h}
               {h !== 'Status' && <SortIcon />}
             </div>
@@ -52,29 +60,31 @@ function DataTablePreview() {
         </div>
         {/* Rows */}
         {TABLE_DATA.map((row, i) => (
-          <div key={row.id} className={`grid grid-cols-4 border-t border-[#1f1f1f] ${i % 2 !== 0 ? 'bg-[#111111]/10' : ''}`}>
-            <div className="px-4 py-3 text-[13px] text-white">{row.id}</div>
-            <div className="px-4 py-3 text-[13px] text-white">{row.name}</div>
-            <div className="px-4 py-3 text-[13px] text-white">{row.status}</div>
-            <div className="px-4 py-3 text-[13px] text-white">{row.amount}</div>
+          <div key={row.id} className="grid grid-cols-4 border-t" style={{ borderColor: 'hsl(25 12% 18%)', background: i % 2 !== 0 ? 'hsl(25 12% 14% / 0.3)' : 'transparent' }}>
+            <div className="px-4 py-3 text-[13px]" style={{ color: 'hsl(35 15% 90%)' }}>{row.id}</div>
+            <div className="px-4 py-3 text-[13px]" style={{ color: 'hsl(35 15% 90%)' }}>{row.name}</div>
+            <div className="px-4 py-3 text-[13px]" style={{ color: 'hsl(35 15% 90%)' }}>{row.status}</div>
+            <div className="px-4 py-3 text-[13px]" style={{ color: 'hsl(35 15% 90%)' }}>{row.amount}</div>
           </div>
         ))}
       </div>
 
-      {/* Pagination — matches storybook DataTablePagination */}
+      {/* Pagination */}
       <div className="flex items-center justify-between px-4 py-3 shrink-0">
-        <span className="text-[13px] text-[#737373]">Page 1 of 2</span>
+        <span className="text-[13px]" style={{ color: 'hsl(25 10% 55%)' }}>Page 1 of 2</span>
         <div className="flex items-center gap-2">
-          <div className="h-8 w-[70px] rounded-xl border border-[#1f1f1f] bg-[#111111] flex items-center justify-between px-2">
-            <span className="text-[12px] text-[#737373]">10</span>
-            <svg className="w-3 h-3 text-[#737373]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="m6 9 6 6 6-6"/></svg>
+          <div className="h-8 w-[70px] rounded-xl border flex items-center justify-between px-2" style={{ background: 'hsl(25 12% 10%)', borderColor: 'hsl(25 12% 18%)' }}>
+            <span className="text-[12px]" style={{ color: 'hsl(25 10% 55%)' }}>10</span>
+            <svg className="w-3 h-3" style={{ color: 'hsl(25 10% 55%)' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="m6 9 6 6 6-6"/></svg>
           </div>
-          <button className="h-8 w-8 rounded-xl border border-[#1f1f1f] bg-[#111111] flex items-center justify-center">
-            <svg className="w-4 h-4 text-[#737373]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7"/></svg>
-          </button>
-          <button className="h-8 w-8 rounded-xl border border-[#1f1f1f] bg-[#111111] flex items-center justify-center">
-            <svg className="w-4 h-4 text-[#737373]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7"/></svg>
-          </button>
+          {[
+            <path key="l" strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7"/>,
+            <path key="r" strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7"/>,
+          ].map((path, i) => (
+            <button key={i} className="h-8 w-8 rounded-xl border flex items-center justify-center" style={{ background: 'hsl(25 12% 10%)', borderColor: 'hsl(25 12% 18%)' }}>
+              <svg className="w-4 h-4" style={{ color: 'hsl(25 10% 55%)' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>{path}</svg>
+            </button>
+          ))}
         </div>
       </div>
     </div>
