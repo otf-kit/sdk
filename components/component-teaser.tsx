@@ -50,12 +50,13 @@ function DataTablePreview() {
               </div>
               <span className="text-[10px] text-white font-medium truncate">{row.name}</span>
             </div>
-            <div>
-              <span className={`text-[9px] px-1.5 py-0.5 rounded-full font-semibold ${
-                row.status === 'Active' ? 'bg-green-500/10 text-green-400' :
-                row.status === 'Trial' ? 'bg-blue-500/10 text-blue-400' :
-                'bg-red-500/10 text-red-400'
-              }`}>{row.status}</span>
+            <div className="flex items-center gap-1.5">
+              <div className={`w-1.5 h-1.5 rounded-full shrink-0 ${
+                row.status === 'Active' ? 'bg-green-500' :
+                row.status === 'Trial' ? 'bg-blue-400' :
+                'bg-red-500'
+              }`} />
+              <span className="text-[10px] text-white">{row.status}</span>
             </div>
             <div className="text-[10px] text-white font-mono">{row.mrr}</div>
             <div className={`text-[10px] font-semibold ${row.positive ? 'text-green-400' : 'text-red-400'}`}>{row.trend}</div>
