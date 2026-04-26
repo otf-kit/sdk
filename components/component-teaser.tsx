@@ -19,15 +19,15 @@ function DataTablePreview() {
     { name: 'PlanetScale', status: 'Churned', mrr: '$0', trend: '-100%', positive: false },
   ]
   return (
-    <div className="w-full h-full flex flex-col bg-[#0d0d0d] rounded-xl overflow-hidden border border-[#1a1a1a]">
+    <div className="w-full h-full flex flex-col bg-[#0a0a0a] rounded-2xl overflow-hidden border border-[#1f1f1f]">
       {/* Table header toolbar */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-[#1a1a1a] shrink-0">
+      <div className="flex items-center justify-between px-4 py-3 border-b border-[#1f1f1f] shrink-0">
         <div className="flex items-center gap-2">
           <div className="text-white text-xs font-bold">Customers</div>
           <span className="text-[9px] bg-[#f97316]/15 text-[#f97316] px-1.5 py-0.5 rounded font-bold">{rows.length}</span>
         </div>
         <div className="flex items-center gap-2">
-          <div className="h-6 px-2.5 rounded bg-[#111] border border-[#222] text-[10px] text-[#525252] flex items-center gap-1">
+          <div className="h-6 px-2.5 rounded bg-[#111] border border-[#1f1f1f] text-[10px] text-[#737373] flex items-center gap-1">
             <svg className="w-2.5 h-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
             Filter
           </div>
@@ -35,7 +35,7 @@ function DataTablePreview() {
         </div>
       </div>
       {/* Column headers */}
-      <div className="grid grid-cols-4 px-4 py-2 border-b border-[#111] bg-[#080808] shrink-0">
+      <div className="grid grid-cols-4 px-4 py-2 border-b border-[#111] bg-[#0a0a0a] shrink-0">
         {['Customer', 'Status', 'MRR', 'Trend'].map(h => (
           <div key={h} className="text-[9px] text-[#333] font-semibold uppercase tracking-wider">{h}</div>
         ))}
@@ -45,7 +45,7 @@ function DataTablePreview() {
         {rows.map((row, i) => (
           <div key={i} className={`grid grid-cols-4 px-4 py-2.5 border-b border-[#0d0d0d] ${i === 0 ? 'bg-[#f97316]/4' : 'hover:bg-[#111]/50'}`}>
             <div className="flex items-center gap-2">
-              <div className="w-5 h-5 rounded bg-[#1a1a1a] border border-[#2a2a2a] flex items-center justify-center text-[8px] text-[#525252] font-bold">
+              <div className="w-5 h-5 rounded bg-[#111111] border border-[#1f1f1f] flex items-center justify-center text-[8px] text-[#737373] font-bold">
                 {row.name[0]}
               </div>
               <span className="text-[10px] text-white font-medium truncate">{row.name}</span>
@@ -97,8 +97,8 @@ function KanbanPreview() {
   ]
 
   return (
-    <div className="w-full h-full flex flex-col bg-[#0d0d0d] rounded-xl overflow-hidden border border-[#1a1a1a]">
-      <div className="flex items-center justify-between px-4 py-3 border-b border-[#1a1a1a] shrink-0">
+    <div className="w-full h-full flex flex-col bg-[#0a0a0a] rounded-2xl overflow-hidden border border-[#1f1f1f]">
+      <div className="flex items-center justify-between px-4 py-3 border-b border-[#1f1f1f] shrink-0">
         <div className="text-white text-xs font-bold">Sprint Board</div>
         <div className="flex items-center gap-1">
           {[...Array(4)].map((_, i) => (
@@ -111,20 +111,20 @@ function KanbanPreview() {
           <div key={col.label} className="flex-1 min-w-0 flex flex-col gap-2">
             <div className="flex items-center gap-1.5 shrink-0">
               <div className="w-1.5 h-1.5 rounded-full" style={{ background: col.color }} />
-              <span className="text-[9px] font-semibold text-[#525252] uppercase tracking-wider">{col.label}</span>
-              <span className="ml-auto text-[8px] bg-[#111] border border-[#1a1a1a] px-1 rounded text-[#333]">{col.count}</span>
+              <span className="text-[9px] font-semibold text-[#737373] uppercase tracking-wider">{col.label}</span>
+              <span className="ml-auto text-[8px] bg-[#111] border border-[#1f1f1f] px-1 rounded text-[#333]">{col.count}</span>
             </div>
             {col.cards.map((card, i) => (
-              <div key={i} className="bg-[#111] border border-[#1a1a1a] rounded-lg p-2.5 space-y-1.5">
+              <div key={i} className="bg-[#111] border border-[#1f1f1f] rounded-xl p-2.5 space-y-1.5">
                 <div className="text-[10px] text-white font-medium leading-tight">{card.title}</div>
                 <div className="flex items-center justify-between">
-                  <span className="text-[8px] bg-[#1a1a1a] border border-[#222] text-[#525252] px-1.5 py-0.5 rounded">{card.tag}</span>
+                  <span className="text-[8px] bg-[#111111] border border-[#1f1f1f] text-[#737373] px-1.5 py-0.5 rounded">{card.tag}</span>
                   <div className={`w-1.5 h-1.5 rounded-full ${card.priority === 'high' ? 'bg-red-500' : card.priority === 'med' ? 'bg-amber-500' : 'bg-[#333]'}`} />
                 </div>
               </div>
             ))}
-            <div className="border border-dashed border-[#1a1a1a] rounded-lg p-2 text-center">
-              <span className="text-[8px] text-[#2a2a2a]">+ Add card</span>
+            <div className="border border-dashed border-[#1f1f1f] rounded-xl p-2 text-center">
+              <span className="text-[8px] text-[#404040]">+ Add card</span>
             </div>
           </div>
         ))}
@@ -137,14 +137,14 @@ function ChartPreview() {
   const data = [40, 65, 45, 80, 60, 90, 75, 95, 70, 85, 78, 100]
   const months = ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D']
   return (
-    <div className="w-full h-full flex flex-col bg-[#0d0d0d] rounded-xl overflow-hidden border border-[#1a1a1a] p-4">
+    <div className="w-full h-full flex flex-col bg-[#0a0a0a] rounded-2xl overflow-hidden border border-[#1f1f1f] p-4">
       <div className="flex items-start justify-between mb-3 shrink-0">
         <div>
-          <div className="text-[9px] text-[#525252] font-medium uppercase tracking-wider">Revenue</div>
+          <div className="text-[9px] text-[#737373] font-medium uppercase tracking-wider">Revenue</div>
           <div className="text-xl font-black text-white leading-none mt-0.5">$84.2k</div>
           <div className="text-[9px] text-green-400 font-semibold mt-0.5">↑ +23.4% vs last year</div>
         </div>
-        <div className="text-[9px] text-[#333] bg-[#111] border border-[#1a1a1a] px-2 py-1 rounded">2025</div>
+        <div className="text-[9px] text-[#333] bg-[#111] border border-[#1f1f1f] px-2 py-1 rounded">2025</div>
       </div>
       <div className="flex-1 flex items-end gap-1">
         {data.map((h, i) => (
@@ -172,10 +172,10 @@ function MetricCardsPreview() {
     { label: 'ARR', value: '$1.04M', delta: '+$84k', pos: true },
   ]
   return (
-    <div className="w-full h-full grid grid-cols-2 gap-2 p-3 bg-[#080808] rounded-xl border border-[#1a1a1a]">
+    <div className="w-full h-full grid grid-cols-2 gap-2 p-3 bg-[#0a0a0a] rounded-2xl border border-[#1f1f1f]">
       {metrics.map(m => (
-        <div key={m.label} className="bg-[#111] border border-[#1a1a1a] rounded-lg p-3 flex flex-col justify-between">
-          <div className="text-[9px] text-[#525252] font-medium uppercase tracking-wider">{m.label}</div>
+        <div key={m.label} className="bg-[#111] border border-[#1f1f1f] rounded-xl p-3 flex flex-col justify-between">
+          <div className="text-[9px] text-[#737373] font-medium uppercase tracking-wider">{m.label}</div>
           <div>
             <div className="text-base font-black text-white leading-none">{m.value}</div>
             <div className={`text-[9px] mt-1 font-semibold ${m.pos ? 'text-green-400' : 'text-red-400'}`}>{m.delta}</div>
@@ -194,20 +194,20 @@ function CommandPalettePreview() {
     { icon: '◎', label: 'Switch Workspace', shortcut: '' },
   ]
   return (
-    <div className="w-full h-full flex items-center justify-center bg-[#080808] rounded-xl border border-[#1a1a1a] p-4">
-      <div className="w-full max-w-[280px] bg-[#111] border border-[#2a2a2a] rounded-xl overflow-hidden shadow-2xl">
-        <div className="flex items-center gap-2 px-3 py-2.5 border-b border-[#1a1a1a]">
-          <svg className="w-3 h-3 text-[#525252]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-          <span className="text-xs text-[#525252]">Search or jump to…</span>
-          <span className="ml-auto text-[9px] text-[#333] border border-[#2a2a2a] px-1 py-0.5 rounded">ESC</span>
+    <div className="w-full h-full flex items-center justify-center bg-[#0a0a0a] rounded-2xl border border-[#1f1f1f] p-4">
+      <div className="w-full max-w-[280px] bg-[#111] border border-[#1f1f1f] rounded-2xl overflow-hidden shadow-2xl">
+        <div className="flex items-center gap-2 px-3 py-2.5 border-b border-[#1f1f1f]">
+          <svg className="w-3 h-3 text-[#737373]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <span className="text-xs text-[#737373]">Search or jump to…</span>
+          <span className="ml-auto text-[9px] text-[#333] border border-[#1f1f1f] px-1 py-0.5 rounded">ESC</span>
         </div>
         <div className="py-1.5">
           <div className="px-3 py-1 text-[9px] text-[#333] uppercase tracking-wider font-semibold">Quick actions</div>
           {items.map((item, i) => (
-            <div key={i} className={`flex items-center gap-2.5 px-3 py-1.5 ${i === 0 ? 'bg-[#f97316]/8 text-white' : 'text-[#525252]'}`}>
+            <div key={i} className={`flex items-center gap-2.5 px-3 py-1.5 ${i === 0 ? 'bg-[#f97316]/8 text-white' : 'text-[#737373]'}`}>
               <span className={`text-[11px] w-4 text-center ${i === 0 ? 'text-[#f97316]' : ''}`}>{item.icon}</span>
               <span className="text-[10px] flex-1">{item.label}</span>
-              {item.shortcut && <kbd className="text-[8px] border border-[#2a2a2a] text-[#333] px-1 py-0.5 rounded font-mono">⌘{item.shortcut}</kbd>}
+              {item.shortcut && <kbd className="text-[8px] border border-[#1f1f1f] text-[#333] px-1 py-0.5 rounded font-mono">⌘{item.shortcut}</kbd>}
             </div>
           ))}
         </div>
@@ -218,10 +218,10 @@ function CommandPalettePreview() {
 
 function SidebarAppPreview() {
   return (
-    <div className="w-full h-full flex bg-[#080808] rounded-xl border border-[#1a1a1a] overflow-hidden">
+    <div className="w-full h-full flex bg-[#0a0a0a] rounded-2xl border border-[#1f1f1f] overflow-hidden">
       {/* Sidebar */}
-      <div className="w-[140px] shrink-0 border-r border-[#1a1a1a] flex flex-col">
-        <div className="h-10 border-b border-[#1a1a1a] flex items-center px-3 gap-2">
+      <div className="w-[140px] shrink-0 border-r border-[#1f1f1f] flex flex-col">
+        <div className="h-10 border-b border-[#1f1f1f] flex items-center px-3 gap-2">
           <img src="/logo.svg" alt="OTF" className="w-4 h-4" />
           <span className="text-white text-[10px] font-semibold truncate">OTF</span>
         </div>
@@ -239,18 +239,18 @@ function SidebarAppPreview() {
             </div>
           ))}
         </div>
-        <div className="border-t border-[#1a1a1a] p-2">
+        <div className="border-t border-[#1f1f1f] p-2">
           <div className="flex items-center gap-1.5">
             <div className="w-4 h-4 rounded-full bg-[#f97316]/20 flex items-center justify-center">
               <span className="text-[#f97316] text-[7px] font-bold">M</span>
             </div>
-            <div className="text-[8px] text-[#525252] truncate">dave@otf.sh</div>
+            <div className="text-[8px] text-[#737373] truncate">dave@otf.sh</div>
           </div>
         </div>
       </div>
       {/* Main */}
       <div className="flex-1 flex flex-col overflow-hidden">
-        <div className="h-10 border-b border-[#1a1a1a] flex items-center px-3">
+        <div className="h-10 border-b border-[#1f1f1f] flex items-center px-3">
           <span className="text-white text-[10px] font-bold">Dashboard</span>
           <div className="ml-auto h-5 px-2 rounded bg-[#f97316] text-white text-[8px] font-bold flex items-center">+ New</div>
         </div>
@@ -261,7 +261,7 @@ function SidebarAppPreview() {
             { label: 'Team', v: '6' },
             { label: 'MRR', v: '$12k' },
           ].map(s => (
-            <div key={s.label} className="bg-[#111] border border-[#1a1a1a] rounded p-2">
+            <div key={s.label} className="bg-[#111] border border-[#1f1f1f] rounded p-2">
               <div className="text-[7px] text-[#333] uppercase tracking-wider">{s.label}</div>
               <div className="text-sm font-black text-white leading-none mt-0.5">{s.v}</div>
             </div>
@@ -274,36 +274,36 @@ function SidebarAppPreview() {
 
 function FormPreview() {
   return (
-    <div className="w-full h-full flex items-center justify-center bg-[#080808] rounded-xl border border-[#1a1a1a] p-4">
+    <div className="w-full h-full flex items-center justify-center bg-[#0a0a0a] rounded-2xl border border-[#1f1f1f] p-4">
       <div className="w-full max-w-[240px] space-y-3">
         <div className="text-xs font-bold text-white">Create project</div>
         <div className="space-y-2">
           <div>
-            <div className="text-[9px] text-[#525252] mb-1">Project name</div>
-            <div className="h-8 bg-[#111] border border-[#333] rounded-md px-2.5 flex items-center">
+            <div className="text-[9px] text-[#737373] mb-1">Project name</div>
+            <div className="h-8 bg-[#111] border border-[#333] rounded-lg px-2.5 flex items-center">
               <span className="text-[10px] text-white">otf-design-system</span>
               <span className="ml-0.5 w-0.5 h-3 bg-[#f97316] animate-pulse" />
             </div>
           </div>
           <div>
-            <div className="text-[9px] text-[#525252] mb-1">Template</div>
-            <div className="h-8 bg-[#111] border border-[#222] rounded-md px-2.5 flex items-center justify-between">
-              <span className="text-[10px] text-[#525252]">SaaS Dashboard Kit</span>
+            <div className="text-[9px] text-[#737373] mb-1">Template</div>
+            <div className="h-8 bg-[#111] border border-[#1f1f1f] rounded-lg px-2.5 flex items-center justify-between">
+              <span className="text-[10px] text-[#737373]">SaaS Dashboard Kit</span>
               <svg className="w-2.5 h-2.5 text-[#333]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="m6 9 6 6 6-6"/></svg>
             </div>
           </div>
-          <div className="h-8 bg-white rounded-md flex items-center justify-center">
+          <div className="h-8 bg-white rounded-lg flex items-center justify-center">
             <span className="text-[10px] font-bold text-black">Create project →</span>
           </div>
         </div>
         <div className="flex items-center gap-2">
-          <div className="flex-1 h-px bg-[#1a1a1a]" />
+          <div className="flex-1 h-px bg-[#111111]" />
           <span className="text-[8px] text-[#333]">3-step wizard</span>
-          <div className="flex-1 h-px bg-[#1a1a1a]" />
+          <div className="flex-1 h-px bg-[#111111]" />
         </div>
         <div className="flex justify-center gap-1.5">
           {[true, true, false].map((active, i) => (
-            <div key={i} className={`h-1 rounded-full ${active ? 'w-4 bg-[#f97316]' : 'w-2 bg-[#1a1a1a]'}`} />
+            <div key={i} className={`h-1 rounded-full ${active ? 'w-4 bg-[#f97316]' : 'w-2 bg-[#111111]'}`} />
           ))}
         </div>
       </div>
@@ -366,17 +366,17 @@ export function ComponentTeaser() {
               <span className="ct-title block text-4xl sm:text-5xl lg:text-6xl font-black text-white uppercase">
                 180+ components.
               </span>
-              <span className="ct-title block text-4xl sm:text-5xl lg:text-6xl font-black text-[#2a2a2a] uppercase">
+              <span className="ct-title block text-4xl sm:text-5xl lg:text-6xl font-black text-[#404040] uppercase">
                 Every UI pattern,
               </span>
-              <span className="ct-title block text-4xl sm:text-5xl lg:text-6xl font-black text-[#2a2a2a] uppercase">
+              <span className="ct-title block text-4xl sm:text-5xl lg:text-6xl font-black text-[#404040] uppercase">
                 covered.
               </span>
             </h2>
           </div>
 
           <div className="lg:text-right space-y-5 shrink-0">
-            <p className="ct-sub text-[#525252] text-sm leading-relaxed max-w-xs lg:ml-auto">
+            <p className="ct-sub text-[#737373] text-sm leading-relaxed max-w-xs lg:ml-auto">
               Buttons, data tables, charts, kanban boards, sidebars — fully typed, accessible, dark-mode native.
             </p>
 
@@ -395,7 +395,7 @@ export function ComponentTeaser() {
             </div>
 
             <Link href="/components"
-              className="ct-cta inline-flex items-center gap-2 px-5 py-2.5 bg-white text-black hover:bg-[#f5f5f5] font-bold rounded-md transition-colors uppercase tracking-widest text-xs">
+              className="ct-cta inline-flex items-center gap-2 px-5 py-2.5 bg-white text-black hover:bg-[#f5f5f5] font-bold rounded-lg transition-colors uppercase tracking-widest text-xs">
               Browse all
               <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M12 5l7 7-7 7"/></svg>
             </Link>
@@ -414,7 +414,7 @@ export function ComponentTeaser() {
           {/* Row 1 — DataTable (spans 2 cols) */}
           <div className="bento-cell col-span-2 h-[280px] relative group">
             <div className="absolute top-3 left-3 z-10 flex items-center gap-1.5">
-              <span className="text-[9px] font-bold text-[#333] uppercase tracking-wider bg-[#080808]/80 border border-[#1a1a1a] px-2 py-1 rounded-md backdrop-blur-sm">Data Table</span>
+              <span className="text-[9px] font-bold text-[#333] uppercase tracking-wider bg-[#0a0a0a]/80 border border-[#1f1f1f] px-2 py-1 rounded-lg backdrop-blur-sm">Data Table</span>
             </div>
             <DataTablePreview />
           </div>
@@ -422,7 +422,7 @@ export function ComponentTeaser() {
           {/* Row 1 — Chart (1 col) */}
           <div className="bento-cell col-span-1 h-[280px] relative">
             <div className="absolute top-3 left-3 z-10">
-              <span className="text-[9px] font-bold text-[#333] uppercase tracking-wider bg-[#080808]/80 border border-[#1a1a1a] px-2 py-1 rounded-md backdrop-blur-sm">Bar Chart</span>
+              <span className="text-[9px] font-bold text-[#333] uppercase tracking-wider bg-[#0a0a0a]/80 border border-[#1f1f1f] px-2 py-1 rounded-lg backdrop-blur-sm">Bar Chart</span>
             </div>
             <ChartPreview />
           </div>
@@ -430,7 +430,7 @@ export function ComponentTeaser() {
           {/* Row 2 — Sidebar App (1 col) */}
           <div className="bento-cell col-span-1 h-[260px] relative">
             <div className="absolute top-3 left-3 z-10">
-              <span className="text-[9px] font-bold text-[#333] uppercase tracking-wider bg-[#080808]/80 border border-[#1a1a1a] px-2 py-1 rounded-md backdrop-blur-sm">App Shell</span>
+              <span className="text-[9px] font-bold text-[#333] uppercase tracking-wider bg-[#0a0a0a]/80 border border-[#1f1f1f] px-2 py-1 rounded-lg backdrop-blur-sm">App Shell</span>
             </div>
             <SidebarAppPreview />
           </div>
@@ -438,7 +438,7 @@ export function ComponentTeaser() {
           {/* Row 2 — Kanban (spans 2 cols) */}
           <div className="bento-cell col-span-2 h-[260px] relative">
             <div className="absolute top-3 left-3 z-10">
-              <span className="text-[9px] font-bold text-[#333] uppercase tracking-wider bg-[#080808]/80 border border-[#1a1a1a] px-2 py-1 rounded-md backdrop-blur-sm">Kanban Board</span>
+              <span className="text-[9px] font-bold text-[#333] uppercase tracking-wider bg-[#0a0a0a]/80 border border-[#1f1f1f] px-2 py-1 rounded-lg backdrop-blur-sm">Kanban Board</span>
             </div>
             <KanbanPreview />
           </div>
@@ -446,7 +446,7 @@ export function ComponentTeaser() {
           {/* Row 3 — Metrics (1 col) */}
           <div className="bento-cell col-span-1 h-[220px] relative">
             <div className="absolute top-3 left-3 z-10">
-              <span className="text-[9px] font-bold text-[#333] uppercase tracking-wider bg-[#080808]/80 border border-[#1a1a1a] px-2 py-1 rounded-md backdrop-blur-sm">Metrics</span>
+              <span className="text-[9px] font-bold text-[#333] uppercase tracking-wider bg-[#0a0a0a]/80 border border-[#1f1f1f] px-2 py-1 rounded-lg backdrop-blur-sm">Metrics</span>
             </div>
             <MetricCardsPreview />
           </div>
@@ -454,7 +454,7 @@ export function ComponentTeaser() {
           {/* Row 3 — Command (1 col) */}
           <div className="bento-cell col-span-1 h-[220px] relative">
             <div className="absolute top-3 left-3 z-10">
-              <span className="text-[9px] font-bold text-[#333] uppercase tracking-wider bg-[#080808]/80 border border-[#1a1a1a] px-2 py-1 rounded-md backdrop-blur-sm">Command Palette</span>
+              <span className="text-[9px] font-bold text-[#333] uppercase tracking-wider bg-[#0a0a0a]/80 border border-[#1f1f1f] px-2 py-1 rounded-lg backdrop-blur-sm">Command Palette</span>
             </div>
             <CommandPalettePreview />
           </div>
@@ -462,7 +462,7 @@ export function ComponentTeaser() {
           {/* Row 3 — Form (1 col) */}
           <div className="bento-cell col-span-1 h-[220px] relative">
             <div className="absolute top-3 left-3 z-10">
-              <span className="text-[9px] font-bold text-[#333] uppercase tracking-wider bg-[#080808]/80 border border-[#1a1a1a] px-2 py-1 rounded-md backdrop-blur-sm">Form</span>
+              <span className="text-[9px] font-bold text-[#333] uppercase tracking-wider bg-[#0a0a0a]/80 border border-[#1f1f1f] px-2 py-1 rounded-lg backdrop-blur-sm">Form</span>
             </div>
             <FormPreview />
           </div>
@@ -478,7 +478,7 @@ export function ComponentTeaser() {
               </span>
             ))}
           </div>
-          <div className="flex items-center gap-1.5 text-[10px] text-[#525252]">
+          <div className="flex items-center gap-1.5 text-[10px] text-[#737373]">
             <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
             Live previews · No screenshots
           </div>

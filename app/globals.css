@@ -9,11 +9,13 @@
   --muted: #111111;
   --muted-2: #161616;
   --muted-foreground: #737373;
+  --muted-dim: #404040;
   --border: #1f1f1f;
   --border-subtle: #141414;
-  --radius: 6px;
-  --radius-card: 10px;
-  --shadow-card: 0 0 0 1px rgba(249, 115, 22, 0.08), 0 8px 32px rgba(0, 0, 0, 0.6);
+  --radius: 8px;
+  --radius-card: 12px;
+  --radius-lg: 16px;
+  --shadow-card: 0 0 0 1px rgba(249, 115, 22, 0.06), 0 8px 32px rgba(0, 0, 0, 0.6);
 }
 
 @theme inline {
