@@ -36,7 +36,7 @@ function SortIcon() {
 
 function DataTablePreview() {
   return (
-    <div className="w-full h-full flex flex-col bg-[#0a0a0a] rounded-2xl overflow-hidden">
+    <div className="w-full h-full flex flex-col bg-[#0a0a0a] rounded-2xl overflow-hidden border border-[#1f1f1f]">
       {/* Search bar */}
       <div className="px-4 pt-4 pb-3 shrink-0">
         <div className="flex items-center gap-2 h-10 rounded-xl px-3 border" style={{ background: 'hsl(25 12% 10%)', borderColor: 'hsl(25 12% 18%)' }}>
