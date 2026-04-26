@@ -2,6 +2,7 @@ import { Nav } from '@/components/nav'
 import { Hero } from '@/components/hero'
 import { AiStrip } from '@/components/ai-strip'
 import { ComponentTeaser } from '@/components/component-teaser'
+import { AdvancedTeaser } from '@/components/advanced-teaser'
 import { TemplateCatalog } from '@/components/template-catalog'
 import { CrossPlatform } from '@/components/cross-platform'
 import { TechStack } from '@/components/tech-stack'
@@ -17,6 +18,7 @@ export default function HomePage() {
       <Hero />
       <AiStrip />
       <ComponentTeaser />
+      <AdvancedTeaser />
       <TemplateCatalog />
       <CrossPlatform />
       <TechStack />
