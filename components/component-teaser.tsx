@@ -135,31 +135,67 @@ function KanbanPreview() {
 }
 
 function ChartPreview() {
-  const data = [40, 65, 45, 80, 60, 90, 75, 95, 70, 85, 78, 100]
-  const months = ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D']
+  const data = [38, 55, 42, 70, 58, 82, 68, 90, 72, 88, 80, 100]
+  const months = ['J','F','M','A','M','J','J','A','S','O','N','D']
+  const W = 300, H = 120, pad = 4
+  const pts = data.map((v, i) => ({
+    x: pad + (i / (data.length - 1)) * (W - pad * 2),
+    y: pad + (1 - v / 100) * (H - pad * 2),
+  }))
+  // smooth curve using cubic bezier
+  const pathD = pts.reduce((acc, p, i) => {
+    if (i === 0) return `M${p.x},${p.y}`
+    const prev = pts[i - 1]
+    const cpx = (prev.x + p.x) / 2
+    return acc + ` C${cpx},${prev.y} ${cpx},${p.y} ${p.x},${p.y}`
+  }, '')
+  const areaD = `${pathD} L${pts[pts.length-1].x},${H} L${pts[0].x},${H} Z`
+
   return (
     <div className="w-full h-full flex flex-col bg-[#0a0a0a] rounded-2xl overflow-hidden border border-[#1f1f1f] p-4">
       <div className="flex items-start justify-between mb-3 shrink-0">
         <div>
-          <div className="text-[9px] text-[#737373] font-medium uppercase tracking-wider">Revenue</div>
-          <div className="text-xl font-black text-white leading-none mt-0.5">$84.2k</div>
-          <div className="text-[9px] text-green-400 font-semibold mt-0.5">↑ +23.4% vs last year</div>
+          <div className="text-[9px] text-[#737373] font-medium uppercase tracking-wider mb-1">Revenue</div>
+          <div className="text-xl font-black text-white leading-none">$84.2k</div>
+          <div className="text-[9px] text-green-400 font-normal mt-1">↑ +23.4% vs last year</div>
         </div>
-        <div className="text-[9px] text-[#333] bg-[#111] border border-[#1f1f1f] px-2 py-1 rounded">2025</div>
+        <div className="text-[9px] text-[#737373] bg-[#111111] border border-[#1f1f1f] px-2 py-1 rounded-lg">2025</div>
       </div>
-      <div className="flex-1 flex items-end gap-1">
-        {data.map((h, i) => (
-          <div key={i} className="flex-1 flex flex-col items-center gap-1">
-            <div className="w-full rounded-sm"
-              style={{
-                height: `${h}%`,
-                background: i === data.length - 1
-                  ? 'linear-gradient(to top, #f97316, #fb923c)'
-                  : `rgba(249,115,22,${0.15 + i * 0.06})`
-              }} />
-            <span className="text-[7px] text-[#333]">{months[i]}</span>
-          </div>
-        ))}
+
+      {/* SVG area chart */}
+      <div className="flex-1 relative min-h-0">
+        <svg viewBox={`0 0 ${W} ${H + 20}`} className="w-full h-full" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#f97316" stopOpacity="0.25" />
+              <stop offset="100%" stopColor="#f97316" stopOpacity="0.02" />
+            </linearGradient>
+          </defs>
+          {/* Grid lines */}
+          {[0.25, 0.5, 0.75].map((t, i) => (
+            <line key={i} x1={pad} y1={pad + t * (H - pad * 2)} x2={W - pad} y2={pad + t * (H - pad * 2)}
+              stroke="#1f1f1f" strokeWidth="0.5" />
+          ))}
+          {/* Area fill */}
+          <path d={areaD} fill="url(#areaGrad)" />
+          {/* Line */}
+          <path d={pathD} fill="none" stroke="#f97316" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          {/* Last point dot */}
+          <circle cx={pts[pts.length-1].x} cy={pts[pts.length-1].y} r="3" fill="#f97316" />
+          <circle cx={pts[pts.length-1].x} cy={pts[pts.length-1].y} r="5" fill="#f97316" fillOpacity="0.2" />
+          {/* Month labels */}
+          {months.map((m, i) => (
+            <text key={i}
+              x={pad + (i / (data.length - 1)) * (W - pad * 2)}
+              y={H + 15}
+              textAnchor="middle"
+              fontSize="9"
+              fill="#404040"
+              fontFamily="Inter, sans-serif">
+              {m}
+            </text>
+          ))}
+        </svg>
       </div>
     </div>
   )
