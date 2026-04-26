@@ -48,7 +48,7 @@ function DataTablePreview() {
               <div className="w-5 h-5 rounded bg-[#111111] border border-[#1f1f1f] flex items-center justify-center text-[8px] text-[#737373] font-bold">
                 {row.name[0]}
               </div>
-              <span className="text-[11px] text-white font-semibold truncate">{row.name}</span>
+              <span className="text-[11px] text-white font-medium truncate">{row.name}</span>
             </div>
             <div className="flex items-center gap-1.5">
               <div className={`w-1.5 h-1.5 rounded-full shrink-0 ${
@@ -56,10 +56,10 @@ function DataTablePreview() {
                 row.status === 'Trial' ? 'bg-blue-400' :
                 'bg-red-500'
               }`} />
-              <span className="text-[11px] text-white font-semibold">{row.status}</span>
+              <span className="text-[11px] text-white font-normal">{row.status}</span>
             </div>
-            <div className="text-[11px] text-white font-semibold font-mono">{row.mrr}</div>
-            <div className={`text-[11px] font-bold ${row.positive ? 'text-green-400' : 'text-red-400'}`}>{row.trend}</div>
+            <div className="text-[11px] text-white font-normal">{row.mrr}</div>
+            <div className={`text-[11px] font-normal ${row.positive ? 'text-green-400' : 'text-red-400'}`}>{row.trend}</div>
           </div>
         ))}
       </div>
