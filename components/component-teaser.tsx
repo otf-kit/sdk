@@ -127,7 +127,7 @@ function KanbanPreview() {
         <div className="text-white text-xs font-bold">Sprint Board</div>
         <div className="flex items-center gap-1">
           {[...Array(4)].map((_, i) => (
-            <div key={i} className="w-5 h-5 rounded-full bg-[#f97316]/20 border border-[#0d0d0d] flex items-center justify-center text-[7px] text-[#f97316] font-bold">{String.fromCharCode(65 + i)}</div>
+            <div key={i} className="w-5 h-5 rounded-full bg-[#f97316]/20 border border-[#1f1f1f] flex items-center justify-center text-[7px] text-[#f97316] font-bold">{String.fromCharCode(65 + i)}</div>
           ))}
         </div>
       </div>
@@ -137,13 +137,13 @@ function KanbanPreview() {
             <div className="flex items-center gap-1.5 shrink-0">
               <div className="w-1.5 h-1.5 rounded-full" style={{ background: col.color }} />
               <span className="text-[9px] font-semibold text-[#737373] uppercase tracking-wider">{col.label}</span>
-              <span className="ml-auto text-[8px] bg-[#111] border border-[#1f1f1f] px-1 rounded text-[#333]">{col.count}</span>
+              <span className="ml-auto text-[8px] bg-[#111111] border border-[#1f1f1f] px-1 rounded text-[#737373]">{col.count}</span>
             </div>
             {col.cards.map((card, i) => (
-              <div key={i} className="bg-[#111] border border-[#1f1f1f] rounded-xl p-2.5 space-y-1.5">
+              <div key={i} className="bg-[#111111] border border-[#1f1f1f] rounded-xl p-2.5 space-y-1.5">
                 <div className="text-[10px] text-white font-medium leading-tight">{card.title}</div>
                 <div className="flex items-center justify-between">
-                  <span className="text-[8px] bg-[#111111] border border-[#1f1f1f] text-[#737373] px-1.5 py-0.5 rounded">{card.tag}</span>
+                  <span className="text-[8px] bg-[#1a1a1a] border border-[#1f1f1f] text-[#737373] px-1.5 py-0.5 rounded">{card.tag}</span>
                   <div className={`w-1.5 h-1.5 rounded-full ${card.priority === 'high' ? 'bg-red-500' : card.priority === 'med' ? 'bg-amber-500' : 'bg-[#333]'}`} />
                 </div>
               </div>
@@ -235,7 +235,7 @@ function MetricCardsPreview() {
   return (
     <div className="w-full h-full grid grid-cols-2 gap-2 p-3 bg-[#0a0a0a] rounded-2xl border border-[#1f1f1f]">
       {metrics.map(m => (
-        <div key={m.label} className="bg-[#111] border border-[#1f1f1f] rounded-xl p-3 flex flex-col justify-between">
+        <div key={m.label} className="bg-[#111111] border border-[#1f1f1f] rounded-xl p-3 flex flex-col justify-between">
           <div className="text-[9px] text-[#737373] font-medium uppercase tracking-wider">{m.label}</div>
           <div>
             <div className="text-base font-black text-white leading-none">{m.value}</div>
@@ -256,19 +256,19 @@ function CommandPalettePreview() {
   ]
   return (
     <div className="w-full h-full flex items-center justify-center bg-[#0a0a0a] rounded-2xl border border-[#1f1f1f] p-4">
-      <div className="w-full max-w-[280px] bg-[#111] border border-[#1f1f1f] rounded-2xl overflow-hidden shadow-2xl">
+      <div className="w-full max-w-[280px] bg-[#111111] border border-[#1f1f1f] rounded-2xl overflow-hidden shadow-2xl">
         <div className="flex items-center gap-2 px-3 py-2.5 border-b border-[#1f1f1f]">
           <svg className="w-3 h-3 text-[#737373]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
           <span className="text-xs text-[#737373]">Search or jump to…</span>
-          <span className="ml-auto text-[9px] text-[#333] border border-[#1f1f1f] px-1 py-0.5 rounded">ESC</span>
+          <span className="ml-auto text-[9px] text-[#737373] border border-[#1f1f1f] px-1 py-0.5 rounded">ESC</span>
         </div>
         <div className="py-1.5">
-          <div className="px-3 py-1 text-[9px] text-[#333] uppercase tracking-wider font-semibold">Quick actions</div>
+          <div className="px-3 py-1 text-[9px] text-[#737373] uppercase tracking-wider font-semibold">Quick actions</div>
           {items.map((item, i) => (
-            <div key={i} className={`flex items-center gap-2.5 px-3 py-1.5 ${i === 0 ? 'bg-[#f97316]/8 text-white' : 'text-[#737373]'}`}>
+            <div key={i} className={`flex items-center gap-2.5 px-3 py-1.5 ${i === 0 ? 'bg-[#f97316]/10 text-white' : 'text-[#737373]'}`}>
               <span className={`text-[11px] w-4 text-center ${i === 0 ? 'text-[#f97316]' : ''}`}>{item.icon}</span>
               <span className="text-[10px] flex-1">{item.label}</span>
-              {item.shortcut && <kbd className="text-[8px] border border-[#1f1f1f] text-[#333] px-1 py-0.5 rounded font-mono">⌘{item.shortcut}</kbd>}
+              {item.shortcut && <kbd className="text-[8px] border border-[#1f1f1f] text-[#737373] px-1 py-0.5 rounded font-mono">⌘{item.shortcut}</kbd>}
             </div>
           ))}
         </div>
@@ -294,8 +294,8 @@ function SidebarAppPreview() {
             { label: 'Members' },
             { label: 'Settings' },
           ].map(item => (
-            <div key={item.label} className={`flex items-center gap-1.5 px-2 py-1 rounded text-[9px] ${item.active ? 'bg-[#f97316]/10 text-[#f97316] font-medium' : 'text-[#333]'}`}>
-              <div className={`w-1 h-1 rounded-full ${item.active ? 'bg-[#f97316]' : 'bg-[#222]'}`} />
+            <div key={item.label} className={`flex items-center gap-1.5 px-2 py-1 rounded text-[9px] ${item.active ? 'bg-[#f97316]/10 text-[#f97316] font-medium' : 'text-[#737373]'}`}>
+              <div className={`w-1 h-1 rounded-full ${item.active ? 'bg-[#f97316]' : 'bg-[#333]'}`} />
               {item.label}
             </div>
           ))}
@@ -322,8 +322,8 @@ function SidebarAppPreview() {
             { label: 'Team', v: '6' },
             { label: 'MRR', v: '$12k' },
           ].map(s => (
-            <div key={s.label} className="bg-[#111] border border-[#1f1f1f] rounded p-2">
-              <div className="text-[7px] text-[#333] uppercase tracking-wider">{s.label}</div>
+            <div key={s.label} className="bg-[#111111] border border-[#1f1f1f] rounded p-2">
+              <div className="text-[7px] text-[#737373] uppercase tracking-wider">{s.label}</div>
               <div className="text-sm font-black text-white leading-none mt-0.5">{s.v}</div>
             </div>
           ))}
@@ -470,62 +470,48 @@ export function ComponentTeaser() {
           Row 2: [Sidebar+App — medium] [Kanban — medium]
           Row 3: [Metrics — narrow] [Command — narrow] [Form — narrow]
         */}
-        <div className="grid grid-cols-3 grid-rows-[auto_auto_auto] gap-3">
+        <div className="grid grid-cols-3 gap-3">
 
           {/* Row 1 — DataTable (spans 2 cols) */}
-          <div className="bento-cell col-span-2 h-[280px] relative group">
-            <div className="absolute top-3 left-3 z-10 flex items-center gap-1.5">
-              <span className="text-[9px] font-bold text-[#333] uppercase tracking-wider bg-[#0a0a0a]/80 border border-[#1f1f1f] px-2 py-1 rounded-lg backdrop-blur-sm">Data Table</span>
-            </div>
-            <DataTablePreview />
+          <div className="bento-cell col-span-2 flex flex-col gap-2">
+            <BentoLabel>Data Table</BentoLabel>
+            <div className="flex-1 h-[260px]"><DataTablePreview /></div>
           </div>
 
           {/* Row 1 — Chart (1 col) */}
-          <div className="bento-cell col-span-1 h-[280px] relative">
-            <div className="absolute top-3 left-3 z-10">
-              <span className="text-[9px] font-bold text-[#333] uppercase tracking-wider bg-[#0a0a0a]/80 border border-[#1f1f1f] px-2 py-1 rounded-lg backdrop-blur-sm">Bar Chart</span>
-            </div>
-            <ChartPreview />
+          <div className="bento-cell col-span-1 flex flex-col gap-2">
+            <BentoLabel>Area Chart</BentoLabel>
+            <div className="flex-1 h-[260px]"><ChartPreview /></div>
           </div>
 
           {/* Row 2 — Sidebar App (1 col) */}
-          <div className="bento-cell col-span-1 h-[260px] relative">
-            <div className="absolute top-3 left-3 z-10">
-              <span className="text-[9px] font-bold text-[#333] uppercase tracking-wider bg-[#0a0a0a]/80 border border-[#1f1f1f] px-2 py-1 rounded-lg backdrop-blur-sm">App Shell</span>
-            </div>
-            <SidebarAppPreview />
+          <div className="bento-cell col-span-1 flex flex-col gap-2">
+            <BentoLabel>App Shell</BentoLabel>
+            <div className="flex-1 h-[240px]"><SidebarAppPreview /></div>
           </div>
 
           {/* Row 2 — Kanban (spans 2 cols) */}
-          <div className="bento-cell col-span-2 h-[260px] relative">
-            <div className="absolute top-3 left-3 z-10">
-              <span className="text-[9px] font-bold text-[#333] uppercase tracking-wider bg-[#0a0a0a]/80 border border-[#1f1f1f] px-2 py-1 rounded-lg backdrop-blur-sm">Kanban Board</span>
-            </div>
-            <KanbanPreview />
+          <div className="bento-cell col-span-2 flex flex-col gap-2">
+            <BentoLabel>Kanban Board</BentoLabel>
+            <div className="flex-1 h-[240px]"><KanbanPreview /></div>
           </div>
 
           {/* Row 3 — Metrics (1 col) */}
-          <div className="bento-cell col-span-1 h-[220px] relative">
-            <div className="absolute top-3 left-3 z-10">
-              <span className="text-[9px] font-bold text-[#333] uppercase tracking-wider bg-[#0a0a0a]/80 border border-[#1f1f1f] px-2 py-1 rounded-lg backdrop-blur-sm">Metrics</span>
-            </div>
-            <MetricCardsPreview />
+          <div className="bento-cell col-span-1 flex flex-col gap-2">
+            <BentoLabel>Metrics</BentoLabel>
+            <div className="flex-1 h-[200px]"><MetricCardsPreview /></div>
           </div>
 
           {/* Row 3 — Command (1 col) */}
-          <div className="bento-cell col-span-1 h-[220px] relative">
-            <div className="absolute top-3 left-3 z-10">
-              <span className="text-[9px] font-bold text-[#333] uppercase tracking-wider bg-[#0a0a0a]/80 border border-[#1f1f1f] px-2 py-1 rounded-lg backdrop-blur-sm">Command Palette</span>
-            </div>
-            <CommandPalettePreview />
+          <div className="bento-cell col-span-1 flex flex-col gap-2">
+            <BentoLabel>Command Palette</BentoLabel>
+            <div className="flex-1 h-[200px]"><CommandPalettePreview /></div>
           </div>
 
           {/* Row 3 — Form (1 col) */}
-          <div className="bento-cell col-span-1 h-[220px] relative">
-            <div className="absolute top-3 left-3 z-10">
-              <span className="text-[9px] font-bold text-[#333] uppercase tracking-wider bg-[#0a0a0a]/80 border border-[#1f1f1f] px-2 py-1 rounded-lg backdrop-blur-sm">Form</span>
-            </div>
-            <FormPreview />
+          <div className="bento-cell col-span-1 flex flex-col gap-2">
+            <BentoLabel>Form</BentoLabel>
+            <div className="flex-1 h-[200px]"><FormPreview /></div>
           </div>
         </div>
 
@@ -546,5 +532,13 @@ export function ComponentTeaser() {
         </div>
       </div>
     </section>
+  )
+}
+
+function BentoLabel({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="text-[9px] font-bold text-[#404040] uppercase tracking-[0.15em]">
+      {children}
+    </div>
   )
 }
