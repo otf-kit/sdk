@@ -91,66 +91,44 @@ function DataTablePreview() {
   )
 }
 
-function KanbanPreview() {
-  const cols = [
-    {
-      label: 'Backlog', color: '#525252', count: 3,
-      cards: [
-        { title: 'Dark mode tokens', tag: 'Design', priority: 'low' },
-        { title: 'API rate limiting', tag: 'Backend', priority: 'med' },
-      ]
-    },
-    {
-      label: 'In Progress', color: '#f59e0b', count: 4,
-      cards: [
-        { title: 'Component registry', tag: 'Frontend', priority: 'high' },
-        { title: 'Auth middleware', tag: 'Backend', priority: 'high' },
-      ]
-    },
-    {
-      label: 'Review', color: '#3b82f6', count: 2,
-      cards: [
-        { title: 'Pricing page', tag: 'Design', priority: 'med' },
-      ]
-    },
-    {
-      label: 'Done', color: '#22c55e', count: 8,
-      cards: [
-        { title: 'Navigation rebuild', tag: 'Frontend', priority: 'low' },
-      ]
-    },
-  ]
+// Exact same data as Advanced.stories.tsx kanbanCols
+const KANBAN_COLS = [
+  { id: 'todo', title: 'To Do', color: '#525252', cards: [
+    { id: 'c1', title: 'Design login page', description: 'Wireframes + hi-fi', badge: 'UI' },
+    { id: 'c2', title: 'Write API docs', badge: 'Docs' },
+  ]},
+  { id: 'progress', title: 'In Progress', color: '#f59e0b', cards: [
+    { id: 'c3', title: 'Implement auth flow', description: 'OAuth + JWT tokens', badge: 'Backend' },
+  ]},
+  { id: 'review', title: 'In Review', color: '#3b82f6', cards: [
+    { id: 'c4', title: 'Payment integration', description: 'Stripe webhooks' },
+  ]},
+  { id: 'done', title: 'Done', color: '#22c55e', cards: [
+    { id: 'c5', title: 'Set up CI/CD', badge: 'DevOps' },
+    { id: 'c6', title: 'Database schema', description: 'PostgreSQL migrations' },
+  ]},
+]
 
+function KanbanPreview() {
   return (
     <div className="w-full h-full flex flex-col bg-[#0a0a0a] rounded-2xl overflow-hidden border border-[#1f1f1f]">
-      <div className="flex items-center justify-between px-4 py-3 border-b border-[#1f1f1f] shrink-0">
-        <div className="text-white text-xs font-bold">Sprint Board</div>
-        <div className="flex items-center gap-1">
-          {[...Array(4)].map((_, i) => (
-            <div key={i} className="w-5 h-5 rounded-full bg-[#f97316]/20 border border-[#1f1f1f] flex items-center justify-center text-[7px] text-[#f97316] font-bold">{String.fromCharCode(65 + i)}</div>
-          ))}
-        </div>
-      </div>
-      <div className="flex-1 flex gap-3 p-3 overflow-hidden">
-        {cols.map(col => (
-          <div key={col.label} className="flex-1 min-w-0 flex flex-col gap-2">
-            <div className="flex items-center gap-1.5 shrink-0">
+      <div className="flex gap-2.5 p-3 overflow-hidden h-full">
+        {KANBAN_COLS.map(col => (
+          <div key={col.id} className="flex-1 min-w-0 flex flex-col gap-1.5">
+            <div className="flex items-center gap-1.5 shrink-0 mb-0.5">
               <div className="w-1.5 h-1.5 rounded-full" style={{ background: col.color }} />
-              <span className="text-[9px] font-semibold text-[#737373] uppercase tracking-wider">{col.label}</span>
-              <span className="ml-auto text-[8px] bg-[#111111] border border-[#1f1f1f] px-1 rounded text-[#737373]">{col.count}</span>
+              <span className="text-[9px] font-semibold text-[#737373] truncate">{col.title}</span>
+              <span className="ml-auto text-[8px] bg-[#111111] border border-[#1f1f1f] px-1 rounded text-[#555] shrink-0">{col.cards.length}</span>
             </div>
-            {col.cards.map((card, i) => (
-              <div key={i} className="bg-[#111111] border border-[#1f1f1f] rounded-xl p-2.5 space-y-1.5">
-                <div className="text-[10px] text-white font-medium leading-tight">{card.title}</div>
-                <div className="flex items-center justify-between">
-                  <span className="text-[8px] bg-[#1a1a1a] border border-[#1f1f1f] text-[#737373] px-1.5 py-0.5 rounded">{card.tag}</span>
-                  <div className={`w-1.5 h-1.5 rounded-full ${card.priority === 'high' ? 'bg-red-500' : card.priority === 'med' ? 'bg-amber-500' : 'bg-[#333]'}`} />
-                </div>
+            {col.cards.map(card => (
+              <div key={card.id} className="bg-[#111111] border border-[#1f1f1f] rounded-xl p-2 space-y-1">
+                <div className="text-[9.5px] text-white font-medium leading-tight">{card.title}</div>
+                {card.description && <div className="text-[8px] text-[#555] leading-tight">{card.description}</div>}
+                {card.badge && (
+                  <span className="inline-block text-[7.5px] bg-[#1a1a1a] border border-[#2a2a2a] text-[#888] px-1.5 py-0.5 rounded-md">{card.badge}</span>
+                )}
               </div>
             ))}
-            <div className="border border-dashed border-[#1f1f1f] rounded-xl p-2 text-center">
-              <span className="text-[8px] text-[#404040]">+ Add card</span>
-            </div>
           </div>
         ))}
       </div>
@@ -225,21 +203,58 @@ function ChartPreview() {
   )
 }
 
-function MetricCardsPreview() {
-  const metrics = [
-    { label: 'Active Users', value: '24.8k', delta: '+12%', pos: true },
-    { label: 'Conversion', value: '3.6%', delta: '+0.4%', pos: true },
-    { label: 'Churn Rate', value: '1.2%', delta: '-0.3%', pos: true },
-    { label: 'ARR', value: '$1.04M', delta: '+$84k', pos: true },
-  ]
+// Exact same data as DataDisplay.stories.tsx StatStory
+// <Stat label="Total Revenue" value="$48,295" trend={12.5} trendLabel="vs last month" icon={<BarChart2 />} />
+// <Stat label="Active Users" value="2,340" trend={-3.2} trendLabel="vs last week" icon={<User />} />
+// <Stat label="Avg Rating" value="4.8" trend={0.3} trendLabel="this quarter" icon={<Star />} />
+const STAT_DATA = [
+  { label: 'Total Revenue', value: '$48,295', trend: 12.5, trendLabel: 'vs last month', pos: true, icon: 'barchart' },
+  { label: 'Active Users', value: '2,340', trend: 3.2, trendLabel: 'vs last week', pos: false, icon: 'user' },
+  { label: 'Avg Rating', value: '4.8', trend: 0.3, trendLabel: 'this quarter', pos: true, icon: 'star' },
+]
+
+function StatIcon({ type }: { type: string }) {
+  if (type === 'barchart') return (
+    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M3 13.5h4v7H3v-7zm7-6h4v13h-4V7.5zm7-4h4v17h-4V3.5z"/>
+    </svg>
+  )
+  if (type === 'user') return (
+    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
+    </svg>
+  )
+  // star
   return (
-    <div className="w-full h-full grid grid-cols-2 gap-2 p-3 bg-[#0a0a0a] rounded-2xl border border-[#1f1f1f]">
-      {metrics.map(m => (
-        <div key={m.label} className="bg-[#111111] border border-[#1f1f1f] rounded-xl p-3 flex flex-col justify-between">
-          <div className="text-[9px] text-[#737373] font-medium uppercase tracking-wider">{m.label}</div>
-          <div>
-            <div className="text-base font-black text-white leading-none">{m.value}</div>
-            <div className={`text-[9px] mt-1 font-semibold ${m.pos ? 'text-green-400' : 'text-red-400'}`}>{m.delta}</div>
+    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.562.562 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"/>
+    </svg>
+  )
+}
+
+function MetricCardsPreview() {
+  return (
+    <div className="w-full h-full flex gap-3 p-3 bg-[#0a0a0a] rounded-2xl border border-[#1f1f1f]">
+      {STAT_DATA.map(s => (
+        <div key={s.label} className="flex-1 bg-[#111111] border border-[#1f1f1f] rounded-xl p-4 flex flex-col justify-between min-w-0">
+          {/* Label + icon row */}
+          <div className="flex items-start justify-between gap-2">
+            <div className="text-[11px] font-medium text-[#737373] leading-tight">{s.label}</div>
+            <div className="text-[#555] shrink-0"><StatIcon type={s.icon} /></div>
+          </div>
+          {/* Value */}
+          <div className="text-2xl font-bold text-white mt-2 leading-none">{s.value}</div>
+          {/* Trend */}
+          <div className="flex items-center gap-1 mt-2">
+            <span className={`flex items-center gap-0.5 text-[11px] font-medium ${s.pos ? 'text-green-500' : 'text-red-500'}`}>
+              {s.pos ? (
+                <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 015.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941"/></svg>
+              ) : (
+                <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6 9 12.75l4.306-4.306a11.95 11.95 0 015.814 5.518l2.74 1.22m0 0-5.94 2.281m5.94-2.28-2.28-5.941"/></svg>
+              )}
+              {s.trend}%
+            </span>
+            <span className="text-[11px] text-[#555]">{s.trendLabel}</span>
           </div>
         </div>
       ))}
@@ -277,95 +292,154 @@ function CommandPalettePreview() {
   )
 }
 
+// Exact same data as SidebarLayoutDashboard.tsx
+const SIDEBAR_NAV = ['Dashboard', 'Projects', 'Team', 'Settings']
+const SIDEBAR_KPIS = [
+  { label: 'Revenue', value: '$48,295' },
+  { label: 'MRR', value: '$2,847' },
+  { label: 'Users', value: '384' },
+  { label: 'Churn', value: '3.24%' },
+]
+const SIDEBAR_ROWS = [
+  { name: 'Alpha Project', progress: 72, status: 'Active' },
+  { name: 'Beta Launch', progress: 45, status: 'Review' },
+  { name: 'Gamma Research', progress: 90, status: 'Done' },
+]
+
 function SidebarAppPreview() {
   return (
     <div className="w-full h-full flex bg-[#0a0a0a] rounded-2xl border border-[#1f1f1f] overflow-hidden">
       {/* Sidebar */}
-      <div className="w-[140px] shrink-0 border-r border-[#1f1f1f] flex flex-col">
-        <div className="h-10 border-b border-[#1f1f1f] flex items-center px-3 gap-2">
-          <img src="/logo.svg" alt="OTF" className="w-4 h-4" />
-          <span className="text-white text-[10px] font-semibold truncate">OTF</span>
+      <div className="w-[100px] shrink-0 border-r border-[#1f1f1f] flex flex-col">
+        {/* Logo / workspace */}
+        <div className="h-9 border-b border-[#1f1f1f] flex items-center px-2.5 gap-1.5 shrink-0">
+          <div className="w-4 h-4 rounded bg-[#f97316] flex items-center justify-center text-[7px] font-black text-white shrink-0">A</div>
+          <span className="text-white text-[9px] font-semibold truncate">Acme Inc</span>
         </div>
-        <div className="flex-1 p-1.5 space-y-0.5">
-          {[
-            { label: 'Dashboard', active: true },
-            { label: 'Issues' },
-            { label: 'Projects' },
-            { label: 'Members' },
-            { label: 'Settings' },
-          ].map(item => (
-            <div key={item.label} className={`flex items-center gap-1.5 px-2 py-1 rounded text-[9px] ${item.active ? 'bg-[#f97316]/10 text-[#f97316] font-medium' : 'text-[#737373]'}`}>
-              <div className={`w-1 h-1 rounded-full ${item.active ? 'bg-[#f97316]' : 'bg-[#333]'}`} />
-              {item.label}
+        {/* Nav */}
+        <div className="flex-1 p-1.5 space-y-0.5 overflow-hidden">
+          {SIDEBAR_NAV.map((item, i) => (
+            <div key={item} className={`flex items-center gap-1.5 px-2 py-1 rounded text-[9px] ${i === 0 ? 'bg-[#f97316]/10 text-[#f97316] font-medium' : 'text-[#555]'}`}>
+              <div className={`w-1 h-1 rounded-full shrink-0 ${i === 0 ? 'bg-[#f97316]' : 'bg-[#333]'}`} />
+              <span className="truncate">{item}</span>
             </div>
           ))}
         </div>
-        <div className="border-t border-[#1f1f1f] p-2">
-          <div className="flex items-center gap-1.5">
-            <div className="w-4 h-4 rounded-full bg-[#f97316]/20 flex items-center justify-center">
-              <span className="text-[#f97316] text-[7px] font-bold">M</span>
-            </div>
-            <div className="text-[8px] text-[#737373] truncate">dave@otf.sh</div>
-          </div>
+        {/* User */}
+        <div className="border-t border-[#1f1f1f] p-2 shrink-0">
+          <div className="w-5 h-5 rounded-full bg-[#1f1f1f] border border-[#2f2f2f] flex items-center justify-center text-[7px] font-bold text-[#737373]">U</div>
         </div>
       </div>
-      {/* Main */}
-      <div className="flex-1 flex flex-col overflow-hidden">
-        <div className="h-10 border-b border-[#1f1f1f] flex items-center px-3">
-          <span className="text-white text-[10px] font-bold">Dashboard</span>
-          <div className="ml-auto h-5 px-2 rounded bg-[#f97316] text-white text-[8px] font-bold flex items-center">+ New</div>
+      {/* Main content */}
+      <div className="flex-1 flex flex-col overflow-hidden min-w-0">
+        {/* Header */}
+        <div className="h-9 border-b border-[#1f1f1f] flex items-center px-2.5 gap-2 shrink-0">
+          <span className="text-white text-[9px] font-bold flex-1">Dashboard</span>
         </div>
-        <div className="flex-1 p-2 grid grid-cols-2 gap-2 overflow-hidden">
-          {[
-            { label: 'Issues', v: '24' },
-            { label: 'Done', v: '18' },
-            { label: 'Team', v: '6' },
-            { label: 'MRR', v: '$12k' },
-          ].map(s => (
-            <div key={s.label} className="bg-[#111111] border border-[#1f1f1f] rounded p-2">
-              <div className="text-[7px] text-[#737373] uppercase tracking-wider">{s.label}</div>
-              <div className="text-sm font-black text-white leading-none mt-0.5">{s.v}</div>
+        {/* KPI grid */}
+        <div className="grid grid-cols-2 gap-1.5 p-2 shrink-0">
+          {SIDEBAR_KPIS.map(k => (
+            <div key={k.label} className="bg-[#111111] border border-[#1f1f1f] rounded-lg p-1.5">
+              <div className="text-[7px] text-[#555] mb-0.5 truncate">{k.label}</div>
+              <div className="text-[10px] font-black text-white leading-none">{k.value}</div>
             </div>
           ))}
+        </div>
+        {/* Table */}
+        <div className="flex-1 px-2 pb-2 overflow-hidden">
+          <div className="bg-[#111111] border border-[#1f1f1f] rounded-lg overflow-hidden h-full">
+            {SIDEBAR_ROWS.map((row, i) => (
+              <div key={row.name} className={`flex items-center gap-2 px-2 py-1.5 ${i > 0 ? 'border-t border-[#1a1a1a]' : ''}`}>
+                <div className="flex-1 min-w-0">
+                  <div className="text-[8.5px] text-white font-medium truncate">{row.name}</div>
+                  <div className="mt-0.5 h-1 bg-[#1f1f1f] rounded-full overflow-hidden">
+                    <div className="h-full bg-[#f97316] rounded-full" style={{ width: `${row.progress}%` }} />
+                  </div>
+                </div>
+                <div className="text-[7px] text-[#555] shrink-0">{row.status}</div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
   )
 }
 
+// Exact same data as Layouts.stories.tsx SplitPageLayout
+const SPLIT_EMAILS = ['Team meeting notes', 'Q4 report draft', 'Design review feedback', 'Onboarding docs', 'Release changelog']
+
 function FormPreview() {
   return (
-    <div className="w-full h-full flex items-center justify-center bg-[#0a0a0a] rounded-2xl border border-[#1f1f1f] p-4">
-      <div className="w-full max-w-[240px] space-y-3">
-        <div className="text-xs font-bold text-white">Create project</div>
-        <div className="space-y-2">
-          <div>
-            <div className="text-[9px] text-[#737373] mb-1">Project name</div>
-            <div className="h-8 bg-[#111] border border-[#333] rounded-lg px-2.5 flex items-center">
-              <span className="text-[10px] text-white">otf-design-system</span>
-              <span className="ml-0.5 w-0.5 h-3 bg-[#f97316] animate-pulse" />
-            </div>
-          </div>
-          <div>
-            <div className="text-[9px] text-[#737373] mb-1">Template</div>
-            <div className="h-8 bg-[#111] border border-[#1f1f1f] rounded-lg px-2.5 flex items-center justify-between">
-              <span className="text-[10px] text-[#737373]">SaaS Dashboard Kit</span>
-              <svg className="w-2.5 h-2.5 text-[#333]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="m6 9 6 6 6-6"/></svg>
-            </div>
-          </div>
-          <div className="h-8 bg-white rounded-lg flex items-center justify-center">
-            <span className="text-[10px] font-bold text-black">Create project →</span>
-          </div>
+    <div className="w-full h-full flex bg-[#0a0a0a] rounded-2xl border border-[#1f1f1f] overflow-hidden">
+      {/* Left list */}
+      <div className="w-[48%] border-r border-[#1f1f1f] flex flex-col">
+        <div className="px-2.5 py-2 border-b border-[#1f1f1f] shrink-0">
+          <div className="text-[9px] font-bold text-white">Inbox</div>
         </div>
-        <div className="flex items-center gap-2">
-          <div className="flex-1 h-px bg-[#111111]" />
-          <span className="text-[8px] text-[#333]">3-step wizard</span>
-          <div className="flex-1 h-px bg-[#111111]" />
-        </div>
-        <div className="flex justify-center gap-1.5">
-          {[true, true, false].map((active, i) => (
-            <div key={i} className={`h-1 rounded-full ${active ? 'w-4 bg-[#f97316]' : 'w-2 bg-[#111111]'}`} />
+        <div className="flex-1 overflow-hidden">
+          {SPLIT_EMAILS.map((email, i) => (
+            <div key={email} className={`px-2.5 py-2 border-b border-[#111111] cursor-default ${i === 0 ? 'bg-[#f97316]/8' : ''}`}>
+              <div className={`text-[8.5px] font-medium leading-tight ${i === 0 ? 'text-white' : 'text-[#737373]'}`}>{email}</div>
+            </div>
           ))}
+        </div>
+      </div>
+      {/* Right detail */}
+      <div className="flex-1 flex flex-col p-2.5 overflow-hidden">
+        <div className="text-[9px] font-bold text-white mb-1.5">Team meeting notes</div>
+        <div className="flex-1 bg-[#111111] border border-[#1f1f1f] rounded-lg p-2 overflow-hidden">
+          <div className="text-[7.5px] text-[#555] leading-relaxed">
+            Discussed Q4 roadmap priorities and team velocity. Action items assigned to engineering leads. Next sync in two weeks.
+          </div>
+        </div>
+        <div className="mt-2 flex gap-1.5">
+          <div className="flex-1 h-6 bg-[#1f1f1f] rounded-lg border border-[#2a2a2a] flex items-center px-2">
+            <span className="text-[7.5px] text-[#333]">Reply…</span>
+          </div>
+          <div className="h-6 px-2 bg-[#f97316] rounded-lg flex items-center">
+            <span className="text-[7.5px] font-bold text-white">Send</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// Exact same as Blocks.stories.tsx FeedbackModalStory
+const REACTIONS = ['😊', '😐', '😕', '😡', '🤩']
+
+function FeedbackModalPreview() {
+  return (
+    <div className="w-full h-full flex items-center justify-center bg-[#0a0a0a] rounded-2xl border border-[#1f1f1f] p-3">
+      <div className="w-full max-w-[240px] bg-[#111111] border border-[#1f1f1f] rounded-xl overflow-hidden">
+        {/* Header */}
+        <div className="px-4 pt-4 pb-2">
+          <div className="text-[11px] font-bold text-white">Share your feedback</div>
+          <div className="text-[8.5px] text-[#737373] mt-0.5">How are you feeling today?</div>
+        </div>
+        {/* Reactions */}
+        <div className="flex justify-between px-4 py-2">
+          {REACTIONS.map((r, i) => (
+            <button key={r} className={`text-base p-1 rounded-lg transition-all ${i === 4 ? 'bg-[#f97316]/15 ring-1 ring-[#f97316]/40 scale-110' : 'opacity-60'}`}>
+              {r}
+            </button>
+          ))}
+        </div>
+        {/* Textarea */}
+        <div className="px-4 pb-3">
+          <div className="bg-[#0a0a0a] border border-[#2a2a2a] rounded-lg p-2 h-14">
+            <span className="text-[8px] text-[#333]">Tell us more…</span>
+          </div>
+        </div>
+        {/* Buttons */}
+        <div className="flex gap-2 px-4 pb-4">
+          <div className="flex-1 h-7 border border-[#2a2a2a] rounded-lg flex items-center justify-center">
+            <span className="text-[8.5px] text-[#737373]">Cancel</span>
+          </div>
+          <div className="flex-1 h-7 bg-[#f97316] rounded-lg flex items-center justify-center">
+            <span className="text-[8.5px] font-bold text-white">Submit</span>
+          </div>
         </div>
       </div>
     </div>
@@ -465,10 +539,11 @@ export function ComponentTeaser() {
 
         {/* ── Bento grid ─────────────────────────────────────────────────── */}
         {/*
-          Layout (3 rows):
-          Row 1: [DataTable — wide] [Chart — narrow]
-          Row 2: [Sidebar+App — medium] [Kanban — medium]
-          Row 3: [Metrics — narrow] [Command — narrow] [Form — narrow]
+          Layout (4 rows):
+          Row 1: [DataTable — 2 cols] [Chart — 1 col]
+          Row 2: [Sidebar App — 1 col] [Kanban — 2 cols]
+          Row 3: [Metrics — full 3 cols, 3 cards side-by-side]
+          Row 4: [Command — 1 col] [Split Page — 1 col] [Feedback — 1 col]
         */}
         <div className="grid grid-cols-3 gap-3">
 
@@ -496,22 +571,26 @@ export function ComponentTeaser() {
             <div className="flex-1 h-[240px]"><KanbanPreview /></div>
           </div>
 
-          {/* Row 3 — Metrics (1 col) */}
-          <div className="bento-cell col-span-1 flex flex-col gap-2">
+          {/* Row 3 — Metrics (full 3 cols so 3 cards sit side by side nicely) */}
+          <div className="bento-cell col-span-3 flex flex-col gap-2">
             <BentoLabel>Metrics</BentoLabel>
-            <div className="flex-1 h-[200px]"><MetricCardsPreview /></div>
+            <div className="flex-1 h-[180px]"><MetricCardsPreview /></div>
           </div>
 
-          {/* Row 3 — Command (1 col) */}
+          {/* Row 4 — Command (1 col) + Split Page (1 col) + Feedback Modal (1 col) */}
           <div className="bento-cell col-span-1 flex flex-col gap-2">
             <BentoLabel>Command Palette</BentoLabel>
-            <div className="flex-1 h-[200px]"><CommandPalettePreview /></div>
+            <div className="flex-1 h-[240px]"><CommandPalettePreview /></div>
           </div>
 
-          {/* Row 3 — Form (1 col) */}
           <div className="bento-cell col-span-1 flex flex-col gap-2">
-            <BentoLabel>Form</BentoLabel>
-            <div className="flex-1 h-[200px]"><FormPreview /></div>
+            <BentoLabel>Split Page Layout</BentoLabel>
+            <div className="flex-1 h-[240px]"><FormPreview /></div>
+          </div>
+
+          <div className="bento-cell col-span-1 flex flex-col gap-2">
+            <BentoLabel>Feedback Modal</BentoLabel>
+            <div className="flex-1 h-[240px]"><FeedbackModalPreview /></div>
           </div>
         </div>
 
