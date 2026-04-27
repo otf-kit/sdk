@@ -186,43 +186,60 @@ const BadgePreview = () => (
   </PreviewShell>
 )
 
+// DiceBear notionists — clean illustrated portraits, render perfectly in circles
+const AVATARS = [
+  { seed: 'Dave',   name: 'Dave Soni',  role: 'Admin',     status: c2, bg: '#fa6817' },
+  { seed: 'Kate',   name: 'Kate Lee',   role: 'Developer', status: c4, bg: '#3b82f6' },
+  { seed: 'Alex',   name: 'Alex Reed',  role: 'Designer',  status: c2, bg: '#8b5cf6' },
+  { seed: 'Jordan', name: 'Jordan K.',  role: 'Product',   status: mfg,bg: '#22c55e' },
+]
+const dicebear = (seed: string) =>
+  `https://api.dicebear.com/9.x/notionists-neutral/svg?seed=${seed}&backgroundColor=transparent`
+
 const AvatarPreview = () => (
   <PreviewShell>
-    <div style={{ width: '100%', maxWidth: 240 }}>
-      <Card style={{ padding: 16 }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-          <span style={{ fontSize: 11, fontWeight: 600, color: fg }}>Team</span>
-          <span style={{ fontSize: 10, color: mfg, fontFamily: FONT_MONO }}>5 members</span>
+    <div style={{ width: '100%', maxWidth: 256 }}>
+      <Card style={{ padding: '16px 18px' }}>
+        {/* Header */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 14 }}>
+          <span style={{ fontSize: 12, fontWeight: 600, color: fg }}>Team</span>
+          <span style={{ fontSize: 10, color: mfg, fontFamily: FONT_MONO }}>4 members</span>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
-          <div style={{ display: 'flex', marginRight: 4 }}>
-            {['#fa6817','#3b82f6','#8b5cf6','#22c55e'].map((c, i) => (
-              <div key={i} style={{ width: 32, height: 32, borderRadius: '50%', background: c, border: `2px solid ${bg}`, marginLeft: i > 0 ? -10 : 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 700, color: 'white', fontFamily: FONT_SANS, zIndex: 4 - i }}>
-                {['MS','KL','AR','JD'][i]}
+
+        {/* Avatar stack + presence */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 14, padding: '10px 12px', background: sec, borderRadius: 9, border: `1px solid ${bdr}` }}>
+          <div style={{ display: 'flex' }}>
+            {AVATARS.map((a, i) => (
+              <div key={a.seed} style={{ width: 34, height: 34, borderRadius: '50%', overflow: 'hidden', border: `2px solid ${bg}`, marginLeft: i > 0 ? -10 : 0, zIndex: 4 - i, background: `${a.bg}30`, flexShrink: 0 }}>
+                <img src={dicebear(a.seed)} alt={a.name} width={34} height={34} style={{ width: '100%', height: '100%', display: 'block' }} loading="lazy" />
               </div>
             ))}
-            <div style={{ width: 32, height: 32, borderRadius: '50%', background: sec, border: `2px solid ${bg}`, marginLeft: -10, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, color: mfg, fontFamily: FONT_MONO }}>+4</div>
           </div>
           <div>
-            <div style={{ fontSize: 11, color: fg, fontWeight: 500 }}>Active now</div>
-            <div style={{ fontSize: 10, color: mfg }}>2 online · 3 away</div>
+            <div style={{ fontSize: 11, fontWeight: 600, color: fg }}>Active now</div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 5, marginTop: 2 }}>
+              <span style={{ width: 6, height: 6, borderRadius: '50%', background: c2, display: 'inline-block' }} />
+              <span style={{ fontSize: 9.5, color: mfg }}>2 online</span>
+              <span style={{ fontSize: 9.5, color: `${mfg}60` }}>· 2 away</span>
+            </div>
           </div>
         </div>
-        <div style={{ borderTop: `1px solid ${bdr}`, paddingTop: 10 }}>
-          {[
-            { init: 'MS', color: pri,    name: 'Dave Soni',  role: 'Admin',     status: c2 },
-            { init: 'KL', color: c3,     name: 'Kate Lee',   role: 'Developer', status: c4 },
-          ].map(m => (
-            <div key={m.init} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '5px 0' }}>
-              <div style={{ position: 'relative' }}>
-                <div style={{ width: 30, height: 30, borderRadius: '50%', background: `${m.color}20`, border: `1px solid ${m.color}40`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, fontWeight: 700, color: m.color, fontFamily: FONT_SANS }}>{m.init}</div>
+
+        {/* Member list */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+          {AVATARS.slice(0, 3).map(m => (
+            <div key={m.seed} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '6px 8px', borderRadius: 7 }}>
+              <div style={{ position: 'relative', flexShrink: 0 }}>
+                <div style={{ width: 30, height: 30, borderRadius: '50%', overflow: 'hidden', background: `${m.bg}25`, border: `1px solid ${m.bg}40` }}>
+                  <img src={dicebear(m.seed)} alt={m.name} width={30} height={30} style={{ width: '100%', height: '100%', display: 'block' }} loading="lazy" />
+                </div>
                 <div style={{ position: 'absolute', bottom: 0, right: 0, width: 8, height: 8, borderRadius: '50%', background: m.status, border: `1.5px solid ${bg}` }} />
               </div>
-              <div style={{ flex: 1 }}>
-                <div style={{ fontSize: 11, color: fg, fontWeight: 500 }}>{m.name}</div>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ fontSize: 11.5, color: fg, fontWeight: 500 }}>{m.name}</div>
                 <div style={{ fontSize: 9.5, color: mfg }}>{m.role}</div>
               </div>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={mfg} strokeWidth="1.5"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={mfg} strokeWidth="1.5" style={{ flexShrink: 0 }}><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
             </div>
           ))}
         </div>
