@@ -80,8 +80,7 @@ export function ComponentTeaser() {
           <div className="max-w-2xl">
             <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">— Component Library</p>
             <h2 className="mt-3 text-balance text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl">
-              {total}+ components.{' '}
-              <span className="text-muted-foreground/40">Every UI pattern, covered.</span>
+              Every UI pattern, covered.
             </h2>
             <p className="mt-3 max-w-xl text-muted-foreground text-sm sm:text-base">
               Buttons, data tables, charts, kanban boards, sidebars — fully typed, accessible, dark-mode native.
