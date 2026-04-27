@@ -42,7 +42,7 @@ function BentoCard({ name, height }: { name: string; height: number }) {
 // Heights calibrated so every preview has breathing room — no clipping.
 const ROWS: Array<{ items: Array<{ name: string; span?: 2 }>; height: number }> = [
   { height: 340, items: [{ name: 'DataGrid', span: 2 }, { name: 'DonutChart' }] },
-  { height: 200, items: [{ name: 'Button' }, { name: 'Badge' }, { name: 'Avatar' }] },
+  { height: 220, items: [{ name: 'Button' }, { name: 'Badge' }, { name: 'Avatar' }] },
   { height: 340, items: [{ name: 'AppShell', span: 2 }, { name: 'Sidebar' }] },
   { height: 240, items: [{ name: 'Dialog' }, { name: 'Select' }, { name: 'Input' }] },
   { height: 300, items: [{ name: 'Kanban', span: 2 }, { name: 'MetricCard' }] },
