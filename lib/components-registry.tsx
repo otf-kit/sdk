@@ -226,7 +226,7 @@ const AvatarPreview = () => (
 
         {/* Member rows */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-          {MEMBERS.slice(0, 2).map(m => (
+          {MEMBERS.slice(0, 1).map(m => (
             <div key={m.seed} style={{ display: 'flex', alignItems: 'center', gap: 9, padding: '6px 6px', borderRadius: 6 }}>
               <div style={{ position: 'relative', flexShrink: 0 }}>
                 <div style={{ width: 28, height: 28, borderRadius: '50%', overflow: 'hidden', background: `${m.accent}18`, border: `1px solid ${m.accent}35` }}>
