@@ -281,8 +281,15 @@ export function Hero() {
       <div className="pointer-events-none absolute inset-x-0 top-0 h-[70%]"
         style={{ background: 'radial-gradient(ellipse 90% 60% at 50% -10%, rgba(249,115,22,0.22) 0%, transparent 70%)' }}
         aria-hidden />
-      {/* Subtle warm dot grid */}
-      <div className="absolute inset-0 bg-dot-grid opacity-20" aria-hidden />
+      {/* Dot grid */}
+      <div
+        className="absolute inset-0"
+        style={{
+          backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px)',
+          backgroundSize: '24px 24px',
+        }}
+        aria-hidden
+      />
       {/* Bottom fade */}
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-background to-transparent" aria-hidden />
       {/* Side vignettes */}
