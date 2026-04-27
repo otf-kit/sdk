@@ -44,6 +44,9 @@ const THEME: CSSProperties = {
   '--chart-3': '217 91% 60%',  // blue    info / todo
   '--chart-4': '38 92% 50%',   // amber   warning / in-progress
   '--chart-5': '280 65% 60%',  // purple  accent / special
+  // ── Match marketing page fonts exactly ─────────────────────────────────────
+  '--font-sans': 'var(--font-geist, var(--font-inter)), ui-sans-serif, system-ui, sans-serif',
+  '--font-mono': 'var(--font-geist-mono), "JetBrains Mono", "Fira Code", ui-monospace, monospace',
 } as CSSProperties
 
 // ─── Preview shell ────────────────────────────────────────────────────────────
@@ -51,7 +54,13 @@ function PreviewShell({ children, className = '' }: { children: React.ReactNode;
   return (
     <div
       className={`w-full h-full flex items-center justify-center p-5 ${className}`}
-      style={{ ...THEME, background: 'hsl(var(--background))' }}
+      style={{
+        ...THEME,
+        background: 'hsl(var(--background))',
+        fontFamily: 'var(--font-sans)',
+        WebkitFontSmoothing: 'antialiased',
+        MozOsxFontSmoothing: 'grayscale',
+      }}
     >
       {children}
     </div>
