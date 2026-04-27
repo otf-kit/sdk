@@ -44,10 +44,18 @@ const THEME: CSSProperties = {
   '--chart-3': '217 91% 60%',  // blue    info / todo
   '--chart-4': '38 92% 50%',   // amber   warning / in-progress
   '--chart-5': '280 65% 60%',  // purple  accent / special
-  // ── Match marketing page fonts exactly ─────────────────────────────────────
-  '--font-sans': 'var(--font-geist, var(--font-inter)), ui-sans-serif, system-ui, sans-serif',
-  '--font-mono': 'var(--font-geist-mono), "JetBrains Mono", "Fira Code", ui-monospace, monospace',
 } as CSSProperties
+
+// ─── Font references — Next.js loads these as CSS vars on <html> in layout.tsx
+// layout.tsx: Inter → --font-geist, JetBrains Mono → --font-geist-mono
+// --font-geist  (Inter, loaded with variable: '--font-geist')
+// --font-geist-mono (JetBrains Mono, loaded with variable: '--font-geist-mono')
+const FONT_SANS = 'var(--font-geist, var(--font-inter), Inter, ui-sans-serif, system-ui, sans-serif)'
+const FONT_MONO = 'var(--font-geist-mono, "JetBrains Mono", "Fira Code", ui-monospace, monospace)'
+
+// Inject font vars into the THEME so Tailwind's font-mono / font-sans utilities resolve correctly
+;(THEME as Record<string, string>)['--font-mono'] = FONT_MONO
+;(THEME as Record<string, string>)['--font-sans'] = FONT_SANS
 
 // ─── Preview shell ────────────────────────────────────────────────────────────
 function PreviewShell({ children, className = '' }: { children: React.ReactNode; className?: string }) {
@@ -57,7 +65,7 @@ function PreviewShell({ children, className = '' }: { children: React.ReactNode;
       style={{
         ...THEME,
         background: 'hsl(var(--background))',
-        fontFamily: 'var(--font-sans)',
+        fontFamily: FONT_SANS,
         WebkitFontSmoothing: 'antialiased',
         MozOsxFontSmoothing: 'grayscale',
       }}
