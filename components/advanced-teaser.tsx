@@ -453,7 +453,7 @@ export function AdvancedTeaser() {
   }, { scope: sectionRef })
 
   return (
-    <section ref={sectionRef} className="py-28 border-t border-[#111111] overflow-hidden">
+    <section ref={sectionRef} className="py-28 border-t border-border overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* ── Header ──────────────────────────────────────────────────────── */}

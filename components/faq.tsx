@@ -44,7 +44,7 @@ export function Faq() {
   const [open, setOpen] = useState<number | null>(null)
 
   return (
-    <section className="py-24 px-6 border-t border-[#111111]">
+    <section className="py-24 px-6 border-t border-border">
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-12">
           <p className="text-xs font-semibold text-[#f97316] uppercase tracking-widest mb-3">

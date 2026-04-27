@@ -23,7 +23,7 @@ const links = {
 
 export function Footer() {
   return (
-    <footer className="border-t border-[#111111] bg-[#050505] px-6 pt-16 pb-8">
+    <footer className="border-t border-border bg-[#050505] px-6 pt-16 pb-8">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
           {/* Brand */}
@@ -94,7 +94,7 @@ export function Footer() {
         </div>
 
         {/* Built with row */}
-        <div className="border-t border-[#111111] pt-8 mb-6">
+        <div className="border-t border-border pt-8 mb-6">
           <div className="flex flex-wrap items-center justify-center gap-6 text-[#333333] text-xs font-medium uppercase tracking-widest">
             <span>Built with</span>
             {['React', 'Next.js', 'Tailwind', 'Hono', 'Drizzle', 'Better Auth', 'Polar'].map((tech, i) => (
