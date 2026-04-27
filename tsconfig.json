@@ -20,7 +20,7 @@
     ],
     "paths": {
       "@/*": ["./*"],
-      "@otf/ui/*": ["../../packages/ui/src/*"]
+      "@otf/ui": ["../../packages/ui/dist/index.mjs"]
     }
   },
   "include": [
