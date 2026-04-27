@@ -15,7 +15,7 @@ const tools = [
   { id: 'supabase', label: 'Supabase',   angle: 230, slug: 'supabase' },
 ]
 
-const SIZE = 480, RADIUS = 175, TILE = 60, CENTER_TILE = 96
+const SIZE = 480, RADIUS = 175, TILE = 60, CENTER_TILE = 80
 
 function angleToXY(angle: number) {
   const rad = (angle * Math.PI) / 180
@@ -98,12 +98,12 @@ export function Compatibility() {
               ))}
             </svg>
 
-            {/* Center node */}
-            <div className="compat-center absolute flex flex-col items-center justify-center gap-1.5 rounded-2xl border border-border bg-card shadow-2xl shadow-primary/20"
+            {/* Center node — just the icon with orange glow, no card */}
+            <div className="compat-center absolute flex items-center justify-center"
               style={{ left: `${(cx / SIZE) * 100}%`, top: `${(cy / SIZE) * 100}%`, width: `${(CENTER_TILE / SIZE) * 100}%`, height: `${(CENTER_TILE / SIZE) * 100}%`, transform: 'translate(-50%, -50%)' }}>
-              <span className="pointer-events-none absolute -inset-px rounded-2xl" style={{ boxShadow: '0 0 0 1px rgba(249,115,22,0.5), 0 0 40px 8px rgba(249,115,22,0.35)' }} aria-hidden />
-              <img src="/logo.svg" alt="OTF" className="relative h-10 w-10" />
-              <span className="relative font-mono text-[11px] font-semibold tracking-wide text-foreground">otf</span>
+              {/* glow ring */}
+              <span className="pointer-events-none absolute inset-0 rounded-full" style={{ boxShadow: '0 0 32px 12px rgba(249,115,22,0.45), 0 0 0 1px rgba(249,115,22,0.3)' }} aria-hidden />
+              <img src="/logo.svg" alt="OTF" className="relative h-14 w-14 drop-shadow-[0_0_12px_rgba(249,115,22,0.8)]" />
             </div>
 
             {/* Surrounding tiles */}
@@ -128,7 +128,7 @@ export function Compatibility() {
         }
         .compat-center {
           opacity: 0;
-          transform: translate(-50%, -50%) scale(0.6);
+          transform: translate(-50%, -50%) scale(0.4);
         }
         .compat-section.compat-visible .compat-tile {
           animation: compatTileIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
