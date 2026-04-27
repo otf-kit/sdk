@@ -1,0 +1,13 @@
+# Railway upload filter.
+# Force-include vendor/ (gitignored but needed by Dockerfile at build time).
+!vendor
+!vendor/**
+
+# Intermediate backups created mid-deploy
+package.json.bak
+bun.lock.bak
+
+# Local dev artifacts
+.next
+node_modules
+.build-timestamp
