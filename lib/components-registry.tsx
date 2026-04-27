@@ -33,7 +33,17 @@ const THEME: CSSProperties = {
   '--border':                '25 12% 18%',
   '--primary':               '25 95% 58%',
   '--primary-foreground':    '0 0% 100%',
+  '--destructive':           '0 84% 60%',
+  '--destructive-foreground':'0 0% 100%',
   '--radius':                '0.5rem',
+  // ── Chart / semantic accent tokens ─────────────────────────────────────────
+  // Matches what each theme defines; minimal-dark uses these defaults.
+  // green=done/success  blue=info/todo  amber=warning/in-progress  purple=accent
+  '--chart-1': '25 95% 58%',   // orange  (= primary)
+  '--chart-2': '142 71% 45%',  // green   success / done
+  '--chart-3': '217 91% 60%',  // blue    info / todo
+  '--chart-4': '38 92% 50%',   // amber   warning / in-progress
+  '--chart-5': '280 65% 60%',  // purple  accent / special
 } as CSSProperties
 
 // ─── Preview shell ────────────────────────────────────────────────────────────
@@ -48,7 +58,7 @@ function PreviewShell({ children, className = '' }: { children: React.ReactNode;
   )
 }
 
-// Shorthand vars for inline styles (so we don't repeat the full hsl() everywhere)
+// Shorthand vars for inline styles
 const bg    = 'hsl(var(--background))'
 const card  = 'hsl(var(--card))'
 const sec   = 'hsl(var(--secondary))'
@@ -57,6 +67,13 @@ const bdr   = 'hsl(var(--border))'
 const fg    = 'hsl(var(--foreground))'
 const mfg   = 'hsl(var(--muted-foreground))'
 const pri   = 'hsl(var(--primary))'
+const err   = 'hsl(var(--destructive))'
+// Chart / semantic colors — come from theme, NOT hardcoded
+const c1    = 'hsl(var(--chart-1))'  // orange (primary)
+const c2    = 'hsl(var(--chart-2))'  // green  (success / done)
+const c3    = 'hsl(var(--chart-3))'  // blue   (info / todo)
+const c4    = 'hsl(var(--chart-4))'  // amber  (warning / in-progress)
+const c5    = 'hsl(var(--chart-5))'  // purple (accent / special)
 
 // ─── Primitives ───────────────────────────────────────────────────────────────
 
@@ -98,11 +115,11 @@ const BadgePreview = () => (
     <div className="flex flex-wrap gap-2 justify-center">
       {[
         { label: 'New',    bg: pri,              color: 'hsl(var(--primary-foreground))' },
-        { label: 'Beta',   bg: 'rgba(59,130,246,0.1)',  color: '#60a5fa', border: 'rgba(59,130,246,0.2)' },
-        { label: 'Done',   bg: 'rgba(34,197,94,0.1)',   color: '#4ade80', border: 'rgba(34,197,94,0.2)' },
-        { label: 'Urgent', bg: 'rgba(239,68,68,0.1)',   color: '#f87171', border: 'rgba(239,68,68,0.2)' },
+        { label: 'Beta',   bg: `${c3}1a`,  color: c3, border: `${c3}33` },
+        { label: 'Done',   bg: `${c2}1a`,   color: c2, border: `${c2}33` },
+        { label: 'Urgent', bg: `${err}1a`,   color: err, border: `${err}33` },
         { label: 'Draft',  bg: card,             color: mfg,   border: bdr },
-        { label: 'Pro',    bg: 'rgba(167,139,250,0.1)', color: '#a78bfa', border: 'rgba(167,139,250,0.2)' },
+        { label: 'Pro',    bg: `${c5}1a`, color: c5, border: 'rgba(167,139,250,0.2)' },
       ].map(b => (
         <span key={b.label} className="text-[10px] px-2.5 py-1 rounded-full font-semibold uppercase tracking-wide"
           style={{ background: b.bg, color: b.color, border: `1px solid ${b.border ?? 'transparent'}` }}>
@@ -119,9 +136,9 @@ const AvatarPreview = () => (
       <div className="flex -space-x-3">
         {[
           { initials: 'MS', bg: pri },
-          { initials: 'KL', bg: '#3b82f6' },
-          { initials: 'AR', bg: '#8b5cf6' },
-          { initials: 'JD', bg: '#22c55e' },
+          { initials: 'KL', bg: c3 },
+          { initials: 'AR', bg: c5 },
+          { initials: 'JD', bg: c2 },
           { initials: '+4', bg: sec },
         ].map((a) => (
           <div key={a.initials}
@@ -170,7 +187,7 @@ const SelectPreview = () => (
         {['Backlog', 'Todo', 'In Progress', 'Done', 'Cancelled'].map((s, i) => (
           <div key={s} className="px-3 py-1.5 text-xs flex items-center gap-2"
             style={{ background: i === 2 ? `${pri}15` : 'transparent', color: i === 2 ? pri : mfg }}>
-            <div className="w-1.5 h-1.5 rounded-full" style={{ background: ['#6b7280','#3b82f6','#f59e0b','#22c55e','#ef4444'][i] }} />
+            <div className="w-1.5 h-1.5 rounded-full" style={{ background: ['#6b7280',c3,c4,c2,err][i] }} />
             {s}
           </div>
         ))}
@@ -257,8 +274,8 @@ const SliderPreview = () => (
     <div className="w-full max-w-[220px] space-y-5">
       {[
         { val: 65, color: pri,       label: 'Volume' },
-        { val: 40, color: '#3b82f6', label: 'Bass' },
-        { val: 80, color: '#22c55e', label: 'Treble' },
+        { val: 40, color: c3, label: 'Bass' },
+        { val: 80, color: c2, label: 'Treble' },
       ].map(s => (
         <div key={s.label}>
           <div className="flex justify-between mb-1.5">
@@ -279,9 +296,9 @@ const SliderPreview = () => (
 
 const DataGridPreview = () => {
   const rows = [
-    { id: '#101', title: 'Auth guards',    status: 'Done',        priority: 'High',   sc: '#4ade80', pc: pri },
-    { id: '#102', title: 'Build DataGrid', status: 'In Progress', priority: 'Urgent', sc: '#fbbf24', pc: '#f87171' },
-    { id: '#103', title: 'Polish hero',    status: 'Todo',        priority: 'Medium', sc: '#60a5fa', pc: '#fbbf24' },
+    { id: '#101', title: 'Auth guards',    status: 'Done',        priority: 'High',   sc: c2, pc: pri },
+    { id: '#102', title: 'Build DataGrid', status: 'In Progress', priority: 'Urgent', sc: c4, pc: err },
+    { id: '#103', title: 'Polish hero',    status: 'Todo',        priority: 'Medium', sc: c3, pc: c4 },
     { id: '#104', title: 'AI prompts',     status: 'Backlog',     priority: 'Low',    sc: mfg,       pc: mfg },
   ]
   return (
@@ -315,8 +332,8 @@ const TimelinePreview = () => (
     <div className="space-y-3 w-full max-w-[220px]">
       {[
         { label: 'Issue created',        time: '2m ago',  color: pri },
-        { label: 'Assigned to Dave',     time: '5m ago',  color: '#3b82f6' },
-        { label: 'Status → In Progress', time: '12m ago', color: '#f59e0b' },
+        { label: 'Assigned to Dave',     time: '5m ago',  color: c3 },
+        { label: 'Status → In Progress', time: '12m ago', color: c4 },
         { label: 'Commented on issue',   time: '1h ago',  color: mfg },
       ].map((item, i) => (
         <div key={i} className="flex gap-3">
@@ -341,10 +358,10 @@ const MetricCardPreview = () => (
   <PreviewShell>
     <div className="grid grid-cols-2 gap-2 w-full max-w-[220px]">
       {[
-        { label: 'MRR',    value: '$4,820', trend: '+18%', tc: '#4ade80' },
+        { label: 'MRR',    value: '$4,820', trend: '+18%', tc: c2 },
         { label: 'Users',  value: '1,240',  trend: '+7%',  tc: pri },
-        { label: 'Churn',  value: '2.1%',   trend: '-0.4%',tc: '#4ade80' },
-        { label: 'Issues', value: '50',      trend: '+12%', tc: '#60a5fa' },
+        { label: 'Churn',  value: '2.1%',   trend: '-0.4%',tc: c2 },
+        { label: 'Issues', value: '50',      trend: '+12%', tc: c3 },
       ].map(m => (
         <div key={m.label} className="rounded-lg p-3" style={{ background: card, border: `1px solid ${bdr}` }}>
           <div className="text-[8px] uppercase tracking-wider mb-1" style={{ color: mfg }}>{m.label}</div>
@@ -361,8 +378,8 @@ const ProgressPreview = () => (
     <div className="w-full max-w-[220px] space-y-4">
       {[
         { label: 'Sprint 4',   val: 72, color: pri },
-        { label: 'Q2 Goals',   val: 45, color: '#3b82f6' },
-        { label: 'Onboarding', val: 90, color: '#22c55e' },
+        { label: 'Q2 Goals',   val: 45, color: c3 },
+        { label: 'Onboarding', val: 90, color: c2 },
       ].map(p => (
         <div key={p.label}>
           <div className="flex justify-between text-[10px] mb-1.5">
@@ -380,9 +397,9 @@ const ProgressPreview = () => (
 
 const KanbanPreview = () => {
   const cols = [
-    { label: 'Todo',        color: '#3b82f6', count: 3 },
-    { label: 'In Progress', color: '#f59e0b', count: 2 },
-    { label: 'Done',        color: '#22c55e', count: 5 },
+    { label: 'Todo',        color: c3, count: 3 },
+    { label: 'In Progress', color: c4, count: 2 },
+    { label: 'Done',        color: c2, count: 5 },
   ]
   return (
     <PreviewShell>
@@ -522,9 +539,9 @@ const ToastPreview = () => (
   <PreviewShell>
     <div className="space-y-2 w-full max-w-[240px]">
       {[
-        { icon: '✓', label: 'Issue created',    desc: 'OTF-105 was added to the backlog', color: '#22c55e', bg: 'rgba(34,197,94,0.08)',  border: 'rgba(34,197,94,0.2)' },
-        { icon: '!', label: 'Deploy failed',     desc: 'Build error on production branch', color: '#ef4444', bg: 'rgba(239,68,68,0.08)',  border: 'rgba(239,68,68,0.2)' },
-        { icon: 'ℹ', label: 'Update available', desc: 'OTF v2.1 is ready to install',     color: '#3b82f6', bg: 'rgba(59,130,246,0.08)', border: 'rgba(59,130,246,0.2)' },
+        { icon: '✓', label: 'Issue created',    desc: 'OTF-105 was added to the backlog', color: c2, bg: `${c2}14`,  border: `${c2}33` },
+        { icon: '!', label: 'Deploy failed',     desc: 'Build error on production branch', color: err, bg: `${err}14`,  border: `${err}33` },
+        { icon: 'ℹ', label: 'Update available', desc: 'OTF v2.1 is ready to install',     color: c3, bg: `${c3}14`, border: `${c3}33` },
       ].map(t => (
         <div key={t.label} className="flex items-start gap-3 rounded-lg p-3"
           style={{ background: t.bg, border: `1px solid ${t.border}` }}>
@@ -543,9 +560,9 @@ const AlertPreview = () => (
   <PreviewShell>
     <div className="space-y-2.5 w-full max-w-[240px]">
       {[
-        { label: 'Payment succeeded', desc: 'Your subscription has been renewed.',  icon: '✓', color: '#22c55e', border: 'rgba(34,197,94,0.25)',  bg: 'rgba(34,197,94,0.06)' },
-        { label: 'Action required',   desc: 'Verify your email to continue.',       icon: '⚠', color: '#f59e0b', border: 'rgba(245,158,11,0.25)', bg: 'rgba(245,158,11,0.06)' },
-        { label: 'Feature deprecated',desc: 'Migrate to the new API by June.',      icon: 'ℹ', color: '#3b82f6', border: 'rgba(59,130,246,0.25)', bg: 'rgba(59,130,246,0.06)' },
+        { label: 'Payment succeeded', desc: 'Your subscription has been renewed.',  icon: '✓', color: c2, border: `${c2}40`,  bg: `${c2}0f` },
+        { label: 'Action required',   desc: 'Verify your email to continue.',       icon: '⚠', color: c4, border: `${c4}40`, bg: `${c4}0f` },
+        { label: 'Feature deprecated',desc: 'Migrate to the new API by June.',      icon: 'ℹ', color: c3, border: `${c3}40`, bg: `${c3}0f` },
       ].map(a => (
         <div key={a.label} className="flex gap-2.5 rounded-lg px-3 py-2" style={{ background: a.bg, border: `1px solid ${a.border}` }}>
           <span className="text-xs font-bold mt-0.5 shrink-0" style={{ color: a.color }}>{a.icon}</span>
@@ -769,9 +786,9 @@ const LineChartPreview = () => {
 
 const DonutChartPreview = () => {
   const segments = [
-    { label: 'Done',        pct: 36, color: '#22c55e' },
-    { label: 'In Progress', pct: 24, color: '#f59e0b' },
-    { label: 'Todo',        pct: 24, color: '#3b82f6' },
+    { label: 'Done',        pct: 36, color: c2 },
+    { label: 'In Progress', pct: 24, color: c4 },
+    { label: 'Todo',        pct: 24, color: c3 },
     { label: 'Backlog',     pct: 16, color: mfg },
   ]
   return (
@@ -820,8 +837,8 @@ const WorkspaceMembersPreview = () => (
     <div className="w-full max-w-[220px] space-y-2">
       {[
         { name: 'Dave Soni', role: 'Admin',     initials: 'MS', color: pri },
-        { name: 'Sarah K.',  role: 'Developer', initials: 'SK', color: '#3b82f6' },
-        { name: 'Alex R.',   role: 'Designer',  initials: 'AR', color: '#22c55e' },
+        { name: 'Sarah K.',  role: 'Developer', initials: 'SK', color: c3 },
+        { name: 'Alex R.',   role: 'Designer',  initials: 'AR', color: c2 },
       ].map(m => (
         <div key={m.name} className="flex items-center gap-2.5 px-3 py-2 rounded-lg" style={{ background: card, border: `1px solid ${bdr}` }}>
           <div className="w-7 h-7 rounded-full flex items-center justify-center text-[9px] font-bold shrink-0"
@@ -843,10 +860,10 @@ const FileCardsPreview = () => (
   <PreviewShell>
     <div className="grid grid-cols-2 gap-2 w-full max-w-[220px]">
       {[
-        { name: 'design.fig',  size: '4.2 MB', icon: '🎨', color: '#a78bfa' },
-        { name: 'schema.sql',  size: '18 KB',  icon: '🗄', color: '#22c55e' },
-        { name: 'spec.pdf',    size: '1.1 MB', icon: '📄', color: '#f59e0b' },
-        { name: 'app.zip',     size: '9.4 MB', icon: '📦', color: '#3b82f6' },
+        { name: 'design.fig',  size: '4.2 MB', icon: '🎨', color: c5 },
+        { name: 'schema.sql',  size: '18 KB',  icon: '🗄', color: c2 },
+        { name: 'spec.pdf',    size: '1.1 MB', icon: '📄', color: c4 },
+        { name: 'app.zip',     size: '9.4 MB', icon: '📦', color: c3 },
       ].map(f => (
         <div key={f.name} className="rounded-lg p-2.5 transition-colors" style={{ background: card, border: `1px solid ${bdr}` }}>
           <div className="text-lg mb-1.5">{f.icon}</div>

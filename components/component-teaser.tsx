@@ -20,21 +20,20 @@ function BentoCard({ name, height }: { name: string; height: number }) {
   const slug = def.name.toLowerCase().replace(/\s+/g, '-')
   return (
     <Link href={`/components/${slug}`} className="flex flex-col gap-1.5 group">
-      <BentoLabel>{def.category}</BentoLabel>
+      {/* Component name as label above the card */}
+      <div className="flex items-center justify-between">
+        <BentoLabel>{def.name}</BentoLabel>
+        <ArrowUpRight className="h-3 w-3 text-muted-foreground/40 opacity-0 transition-opacity group-hover:opacity-100" strokeWidth={1.75} />
+      </div>
       <div
         className="relative overflow-hidden rounded-xl border border-border bg-[#080808] transition-colors duration-200 group-hover:border-primary/30"
         style={{ height }}
       >
         {/* grid bg */}
         <div className="absolute inset-0 bg-dot-grid opacity-15 pointer-events-none" />
-        {/* preview */}
+        {/* preview — fills the full card, no name overlay */}
         <div className="absolute inset-0">
           {def.preview}
-        </div>
-        {/* name badge */}
-        <div className="absolute bottom-0 inset-x-0 flex items-center justify-between px-3 py-2.5 bg-gradient-to-t from-[#080808]/95 via-[#080808]/60 to-transparent">
-          <span className="font-medium text-[11px] text-foreground/90">{def.name}</span>
-          <ArrowUpRight className="h-3 w-3 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" strokeWidth={1.75} />
         </div>
       </div>
     </Link>
