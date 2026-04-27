@@ -4,101 +4,92 @@ import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
 import { COMPONENTS } from '@/lib/components-registry'
 
-// ── Which slugs get col-span-2 in the bento ──────────────────────────────────
-const WIDE = new Set(['DataGrid', 'AppShell', 'Kanban', 'BarChart', 'SplitPage'])
-
-// ── Ordered bento layout (4-col grid on lg) ──────────────────────────────────
-// Row 1: DataGrid(2) + BarChart(1) + Kanban(1)
-// Row 2: Button(1) + Input(1) + Badge(1) + Avatar(1)
-// Row 3: AppShell(2) + Sidebar(1) + CommandPalette(1)
-// Row 4: Dialog(1) + Select(1) + Tooltip(1) + Checkbox(1)
-// Row 5: LineChart(1) + DonutChart(1) + MetricCard(1) + Progress(1)
-// Row 6: Tabs(1) + Slider(1) + TextureCard(1) + Timeline(1)
-// Row 7: Toast(1) + Alert(1) + Skeleton(1) + EmptyState(1)
-// Row 8: SplitPage(2) + Form(1) + DatePicker(1)
-// Row 9: Breadcrumb(1) + StepForm(1) + WorkspaceMembers(1) + FileCards(1)
-const BENTO_ORDER = [
-  'DataGrid', 'BarChart', 'Kanban',
-  'Button', 'Input', 'Badge', 'Avatar',
-  'AppShell', 'Sidebar', 'CommandPalette',
-  'Dialog', 'Select', 'Tooltip', 'Checkbox',
-  'LineChart', 'DonutChart', 'MetricCard', 'Progress',
-  'Tabs', 'Slider', 'TextureCard', 'Timeline',
-  'Toast', 'Alert', 'Skeleton', 'EmptyState',
-  'SplitPage', 'AutoForm', 'DatePicker',
-  'Breadcrumb', 'StepForm', 'WorkspaceMembers', 'FileCards',
-]
-
-const ORDERED = BENTO_ORDER
-  .map((name) => COMPONENTS.find((c) => c.name === name))
-  .filter(Boolean) as typeof COMPONENTS
-
-// Append any that weren't in the explicit order list
-const REMAINING = COMPONENTS.filter((c) => !BENTO_ORDER.includes(c.name))
-const ALL_BENTO = [...ORDERED, ...REMAINING]
-
-// ── Category colors ───────────────────────────────────────────────────────────
-const CAT_COLOR: Record<string, string> = {
-  Primitives:    'text-orange-400 border-orange-400/20 bg-orange-400/5',
-  'Data Display':'text-blue-400 border-blue-400/20 bg-blue-400/5',
-  Navigation:    'text-violet-400 border-violet-400/20 bg-violet-400/5',
-  Feedback:      'text-green-400 border-green-400/20 bg-green-400/5',
-  Layout:        'text-amber-400 border-amber-400/20 bg-amber-400/5',
-  Forms:         'text-pink-400 border-pink-400/20 bg-pink-400/5',
-  Blocks:        'text-cyan-400 border-cyan-400/20 bg-cyan-400/5',
-  Charts:        'text-rose-400 border-rose-400/20 bg-rose-400/5',
+// ── Label (like old bento design) ────────────────────────────────────────────
+function BentoLabel({ children }: { children: React.ReactNode }) {
+  return (
+    <p className="font-mono text-[9px] uppercase tracking-[0.14em] text-muted-foreground/60 select-none">
+      {children}
+    </p>
+  )
 }
 
-// ── Component card ────────────────────────────────────────────────────────────
-function BentoCard({ def, wide }: { def: typeof COMPONENTS[number]; wide: boolean }) {
-  const catCls = CAT_COLOR[def.category] ?? 'text-muted-foreground border-border bg-secondary/40'
+// ── Preview card ──────────────────────────────────────────────────────────────
+function BentoCard({ name, height }: { name: string; height: number }) {
+  const def = COMPONENTS.find((c) => c.name === name)
+  if (!def) return null
+  const slug = def.name.toLowerCase().replace(/\s+/g, '-')
   return (
-    <Link
-      href={`/components/${def.name.toLowerCase().replace(/\s+/g, '-')}`}
-      className={`group relative flex flex-col overflow-hidden bg-card transition-all duration-300 hover:bg-secondary/40 ${wide ? 'col-span-2' : 'col-span-1'}`}
-    >
-      {/* shine sweep */}
-      <div className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-foreground/[0.04] to-transparent transition-transform duration-700 group-hover:translate-x-full" aria-hidden />
-      {/* arrow */}
-      <ArrowUpRight className="absolute right-3 top-3 h-3.5 w-3.5 -translate-y-0.5 translate-x-0.5 text-muted-foreground opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100" strokeWidth={1.75} />
-
-      {/* Preview area */}
-      <div className="relative h-[160px] overflow-hidden border-b border-border bg-[#080808]">
+    <Link href={`/components/${slug}`} className="flex flex-col gap-1.5 group">
+      <BentoLabel>{def.category}</BentoLabel>
+      <div
+        className="relative overflow-hidden rounded-xl border border-border bg-[#080808] transition-colors duration-200 group-hover:border-primary/30"
+        style={{ height }}
+      >
+        {/* grid bg */}
         <div className="absolute inset-0 bg-dot-grid opacity-15 pointer-events-none" />
+        {/* preview */}
         <div className="absolute inset-0">
           {def.preview}
         </div>
-      </div>
-
-      {/* Meta */}
-      <div className="flex items-start justify-between gap-2 p-3">
-        <div className="min-w-0">
-          <p className="text-sm font-medium text-foreground truncate">{def.name}</p>
-          <p className="mt-0.5 text-xs text-muted-foreground line-clamp-1">{def.description.split('.')[0]}.</p>
+        {/* name badge */}
+        <div className="absolute bottom-0 inset-x-0 flex items-center justify-between px-3 py-2.5 bg-gradient-to-t from-[#080808]/95 via-[#080808]/60 to-transparent">
+          <span className="font-medium text-[11px] text-foreground/90">{def.name}</span>
+          <ArrowUpRight className="h-3 w-3 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" strokeWidth={1.75} />
         </div>
-        <span className={`shrink-0 rounded-full border px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-wide ${catCls}`}>
-          {def.category.split(' ')[0]}
-        </span>
       </div>
     </Link>
   )
 }
 
-// ── Main section ──────────────────────────────────────────────────────────────
+// ── Bento grid ────────────────────────────────────────────────────────────────
+// 3-column grid, rows with explicit equal heights per row.
+// Heights are chosen to let each component breathe — no squeezing.
+const ROWS: Array<{ items: Array<{ name: string; span?: 2 }>; height: number }> = [
+  // Row 1 — large data blocks
+  { height: 300, items: [{ name: 'DataGrid', span: 2 }, { name: 'DonutChart' }] },
+  // Row 2 — basic primitives (small, need little height)
+  { height: 180, items: [{ name: 'Button' }, { name: 'Badge' }, { name: 'Avatar' }] },
+  // Row 3 — app layout block + sidebar
+  { height: 280, items: [{ name: 'AppShell', span: 2 }, { name: 'Sidebar' }] },
+  // Row 4 — form primitives
+  { height: 200, items: [{ name: 'Dialog' }, { name: 'Select' }, { name: 'Input' }] },
+  // Row 5 — board + kpi
+  { height: 260, items: [{ name: 'Kanban', span: 2 }, { name: 'MetricCard' }] },
+  // Row 6 — controls
+  { height: 190, items: [{ name: 'Checkbox' }, { name: 'Tabs' }, { name: 'Slider' }] },
+  // Row 7 — charts
+  { height: 240, items: [{ name: 'BarChart', span: 2 }, { name: 'LineChart' }] },
+  // Row 8 — content + tooltip
+  { height: 200, items: [{ name: 'TextureCard' }, { name: 'Tooltip' }, { name: 'CommandPalette' }] },
+  // Row 9 — 2-pane + timeline
+  { height: 240, items: [{ name: 'SplitPage', span: 2 }, { name: 'Timeline' }] },
+  // Row 10 — notifications
+  { height: 220, items: [{ name: 'Toast' }, { name: 'Alert' }, { name: 'Progress' }] },
+  // Row 11 — states
+  { height: 200, items: [{ name: 'Skeleton' }, { name: 'EmptyState' }, { name: 'Breadcrumb' }] },
+  // Row 12 — forms
+  { height: 240, items: [{ name: 'AutoForm' }, { name: 'DatePicker' }, { name: 'StepForm' }] },
+  // Row 13 — blocks
+  { height: 200, items: [{ name: 'WorkspaceMembers' }, { name: 'FileCards', span: 2 }] },
+]
+
+// ── Section ───────────────────────────────────────────────────────────────────
 export function ComponentTeaser() {
+  const total = COMPONENTS.length
   return (
     <section className="relative overflow-hidden border-b border-border">
       <div className="absolute inset-0 bg-pattern-grid opacity-[0.10]" aria-hidden />
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" aria-hidden />
 
       <div className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6">
-        {/* ── Header ────────────────────────────────────────────────────────── */}
+
+        {/* ── Header ──────────────────────────────────────────────────────── */}
         <div className="mb-12 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
           <div className="max-w-2xl">
             <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">— Component Library</p>
             <h2 className="mt-3 text-balance text-4xl font-semibold tracking-tight sm:text-5xl">
-              {COMPONENTS.length}+ components.{' '}
-              <span className="text-muted-foreground/50">Every UI pattern, covered.</span>
+              {total}+ components.{' '}
+              <span className="text-muted-foreground/40">Every UI pattern, covered.</span>
             </h2>
             <p className="mt-3 max-w-xl text-muted-foreground">
               Buttons, data tables, charts, kanban boards, sidebars — fully typed, accessible, dark-mode native.
@@ -108,41 +99,46 @@ export function ComponentTeaser() {
           <div className="shrink-0 space-y-4 md:text-right">
             <div className="flex flex-wrap gap-x-6 gap-y-2 md:justify-end">
               {[
-                { n: `${COMPONENTS.length}+`, label: 'components' },
-                { n: '8',    label: 'categories' },
-                { n: '100%', label: 'TypeScript' },
-                { n: 'MIT',  label: 'license' },
+                { n: `${total}+`, label: 'components' },
+                { n: '8',         label: 'categories' },
+                { n: '100%',      label: 'TypeScript'  },
+                { n: 'MIT',       label: 'license'     },
               ].map((s) => (
                 <div key={s.label} className="text-center md:text-right">
-                  <div className="text-lg font-bold text-foreground leading-none">{s.n}</div>
+                  <div className="text-lg font-bold leading-none">{s.n}</div>
                   <div className="mt-0.5 font-mono text-[9px] uppercase tracking-widest text-muted-foreground/60">{s.label}</div>
                 </div>
               ))}
             </div>
             <Link
               href="/components"
-              className="inline-flex items-center gap-2 rounded-md border border-border bg-secondary/40 px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-secondary"
+              className="inline-flex items-center gap-2 rounded-md border border-border bg-secondary/40 px-4 py-2 text-sm font-medium transition-colors hover:bg-secondary"
             >
-              Browse all components
-              <ArrowUpRight className="h-3.5 w-3.5" />
+              Browse all <ArrowUpRight className="h-3.5 w-3.5" />
             </Link>
           </div>
         </div>
 
-        {/* ── Bento grid ────────────────────────────────────────────────────── */}
-        <div className="grid gap-px overflow-hidden rounded-xl border border-border bg-border grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
-          {ALL_BENTO.map((def) => (
-            <BentoCard key={def.name} def={def} wide={WIDE.has(def.name)} />
+        {/* ── Bento grid ──────────────────────────────────────────────────── */}
+        <div className="flex flex-col gap-3">
+          {ROWS.map((row, ri) => (
+            <div key={ri} className="grid grid-cols-3 gap-3">
+              {row.items.map((item) => (
+                <div key={item.name} className={item.span === 2 ? 'col-span-2' : 'col-span-1'}>
+                  <BentoCard name={item.name} height={row.height} />
+                </div>
+              ))}
+            </div>
           ))}
         </div>
 
-        {/* ── Footer strip ──────────────────────────────────────────────────── */}
-        <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
+        {/* ── Footer strip ────────────────────────────────────────────────── */}
+        <div className="mt-8 flex flex-wrap items-center justify-between gap-3 border-t border-border pt-6">
           <div className="flex items-center gap-6">
             {['React', 'TypeScript', 'Tailwind CSS', 'Radix UI'].map((t, i) => (
               <span key={t} className="flex items-center gap-6">
-                {i > 0 && <span className="w-px h-3 bg-border" />}
-                <span className="font-mono text-[10px] text-muted-foreground/50 uppercase tracking-widest">{t}</span>
+                {i > 0 && <span className="h-3 w-px bg-border" />}
+                <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground/50">{t}</span>
               </span>
             ))}
           </div>
