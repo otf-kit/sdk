@@ -15,7 +15,7 @@ const tools = [
   { id: 'supabase', label: 'Supabase',   angle: 230, slug: 'supabase' },
 ]
 
-const SIZE = 480, RADIUS = 175, TILE = 60
+const SIZE = 480, RADIUS = 175, TILE = 60, CENTER_TILE = 96
 
 function angleToXY(angle: number) {
   const rad = (angle * Math.PI) / 180
@@ -99,11 +99,11 @@ export function Compatibility() {
             </svg>
 
             {/* Center node */}
-            <div className="compat-center absolute flex flex-col items-center justify-center rounded-2xl border border-border bg-card font-mono text-xs font-semibold leading-tight text-foreground shadow-2xl shadow-primary/20"
-              style={{ left: `${(cx / SIZE) * 100}%`, top: `${(cy / SIZE) * 100}%`, width: `${(TILE * 1.5 / SIZE) * 100}%`, height: `${(TILE * 1.5 / SIZE) * 100}%`, transform: 'translate(-50%, -50%)' }}>
-              <span className="pointer-events-none absolute -inset-px rounded-2xl" style={{ boxShadow: '0 0 0 1px rgba(249,115,22,0.5), 0 0 32px 4px rgba(249,115,22,0.35)' }} aria-hidden />
-              <img src="/logo.svg" alt="OTF" className="h-6 w-6" />
-              <span className="mt-1.5 text-[10px]">otf</span>
+            <div className="compat-center absolute flex flex-col items-center justify-center gap-1.5 rounded-2xl border border-border bg-card shadow-2xl shadow-primary/20"
+              style={{ left: `${(cx / SIZE) * 100}%`, top: `${(cy / SIZE) * 100}%`, width: `${(CENTER_TILE / SIZE) * 100}%`, height: `${(CENTER_TILE / SIZE) * 100}%`, transform: 'translate(-50%, -50%)' }}>
+              <span className="pointer-events-none absolute -inset-px rounded-2xl" style={{ boxShadow: '0 0 0 1px rgba(249,115,22,0.5), 0 0 40px 8px rgba(249,115,22,0.35)' }} aria-hidden />
+              <img src="/logo.svg" alt="OTF" className="relative h-10 w-10" />
+              <span className="relative font-mono text-[11px] font-semibold tracking-wide text-foreground">otf</span>
             </div>
 
             {/* Surrounding tiles */}
