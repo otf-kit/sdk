@@ -1,3 +1,6 @@
+'use client'
+
+import { useEffect } from 'react'
 import { Navbar }         from '@/components/kibo/Navbar'
 import { Hero }           from '@/components/kibo/Hero'
 import { ComponentTeaser }from '@/components/component-teaser'
@@ -12,6 +15,11 @@ import { Footer }         from '@/components/kibo/Footer'
 import { Reveal }         from '@/components/kibo/Reveal'
 
 export default function HomePage() {
+  // Scroll to top on every mount so back-navigation always starts at the hero.
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' })
+  }, [])
+
   return (
     <main className="flex flex-col min-h-dvh bg-background">
       <Navbar />

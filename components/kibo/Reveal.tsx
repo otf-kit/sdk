@@ -47,6 +47,15 @@ export function Reveal({
       setShown(true)
       return
     }
+
+    // Immediately show elements already visible in viewport (handles back-navigation
+    // with restored scroll position — avoids blank screen).
+    const rect = el.getBoundingClientRect()
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      setShown(true)
+      return
+    }
+
     const obs = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
