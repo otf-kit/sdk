@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
 import { COMPONENTS } from '@/lib/components-registry'
 
-// ── Label (like old bento design) ────────────────────────────────────────────
+// ── Label ─────────────────────────────────────────────────────────────────────
 function BentoLabel({ children }: { children: React.ReactNode }) {
   return (
     <p className="font-mono text-[9px] uppercase tracking-[0.14em] text-muted-foreground/60 select-none">
@@ -20,56 +20,49 @@ function BentoCard({ name, height }: { name: string; height: number }) {
   const slug = def.name.toLowerCase().replace(/\s+/g, '-')
   return (
     <Link href={`/components/${slug}`} className="flex flex-col gap-1.5 group">
-      {/* Component name as label above the card */}
       <div className="flex items-center justify-between">
         <BentoLabel>{def.name}</BentoLabel>
-        <ArrowUpRight className="h-3 w-3 text-muted-foreground/40 opacity-0 transition-opacity group-hover:opacity-100" strokeWidth={1.75} />
+        <ArrowUpRight
+          className="h-3 w-3 text-muted-foreground/40 opacity-0 transition-opacity group-hover:opacity-100"
+          strokeWidth={1.75}
+        />
       </div>
       <div
         className="relative overflow-hidden rounded-xl border border-border bg-[#080808] transition-colors duration-200 group-hover:border-primary/30"
         style={{ height }}
       >
-        {/* grid bg */}
         <div className="absolute inset-0 bg-dot-grid opacity-15 pointer-events-none" />
-        {/* preview — fills the full card, no name overlay */}
-        <div className="absolute inset-0">
-          {def.preview}
-        </div>
+        <div className="absolute inset-0">{def.preview}</div>
       </div>
     </Link>
   )
 }
 
-// ── Bento grid ────────────────────────────────────────────────────────────────
-// 3-column grid, rows with explicit equal heights per row.
-// Heights are chosen to let each component breathe — no squeezing.
+// ── Desktop bento layout (3-col grid, rows with equal height per row) ─────────
+// Heights calibrated so every preview has breathing room — no clipping.
 const ROWS: Array<{ items: Array<{ name: string; span?: 2 }>; height: number }> = [
-  // Row 1 — large data blocks
-  { height: 300, items: [{ name: 'DataGrid', span: 2 }, { name: 'DonutChart' }] },
-  // Row 2 — basic primitives (small, need little height)
-  { height: 180, items: [{ name: 'Button' }, { name: 'Badge' }, { name: 'Avatar' }] },
-  // Row 3 — app layout block + sidebar
-  { height: 280, items: [{ name: 'AppShell', span: 2 }, { name: 'Sidebar' }] },
-  // Row 4 — form primitives
-  { height: 200, items: [{ name: 'Dialog' }, { name: 'Select' }, { name: 'Input' }] },
-  // Row 5 — board + kpi
-  { height: 260, items: [{ name: 'Kanban', span: 2 }, { name: 'MetricCard' }] },
-  // Row 6 — controls
-  { height: 190, items: [{ name: 'Checkbox' }, { name: 'Tabs' }, { name: 'Slider' }] },
-  // Row 7 — charts
-  { height: 240, items: [{ name: 'BarChart', span: 2 }, { name: 'LineChart' }] },
-  // Row 8 — content + tooltip
-  { height: 200, items: [{ name: 'TextureCard' }, { name: 'Tooltip' }, { name: 'CommandPalette' }] },
-  // Row 9 — 2-pane + timeline
-  { height: 240, items: [{ name: 'SplitPage', span: 2 }, { name: 'Timeline' }] },
-  // Row 10 — notifications
-  { height: 220, items: [{ name: 'Toast' }, { name: 'Alert' }, { name: 'Progress' }] },
-  // Row 11 — states
-  { height: 200, items: [{ name: 'Skeleton' }, { name: 'EmptyState' }, { name: 'Breadcrumb' }] },
-  // Row 12 — forms
-  { height: 240, items: [{ name: 'AutoForm' }, { name: 'DatePicker' }, { name: 'StepForm' }] },
-  // Row 13 — blocks
-  { height: 200, items: [{ name: 'WorkspaceMembers' }, { name: 'FileCards', span: 2 }] },
+  { height: 340, items: [{ name: 'DataGrid', span: 2 }, { name: 'DonutChart' }] },
+  { height: 200, items: [{ name: 'Button' }, { name: 'Badge' }, { name: 'Avatar' }] },
+  { height: 340, items: [{ name: 'AppShell', span: 2 }, { name: 'Sidebar' }] },
+  { height: 240, items: [{ name: 'Dialog' }, { name: 'Select' }, { name: 'Input' }] },
+  { height: 300, items: [{ name: 'Kanban', span: 2 }, { name: 'MetricCard' }] },
+  { height: 220, items: [{ name: 'Checkbox' }, { name: 'Tabs' }, { name: 'Slider' }] },
+  { height: 280, items: [{ name: 'BarChart', span: 2 }, { name: 'LineChart' }] },
+  { height: 260, items: [{ name: 'TextureCard' }, { name: 'Tooltip' }, { name: 'CommandPalette' }] },
+  { height: 280, items: [{ name: 'SplitPage', span: 2 }, { name: 'Timeline' }] },
+  { height: 260, items: [{ name: 'Toast' }, { name: 'Alert' }, { name: 'Progress' }] },
+  { height: 240, items: [{ name: 'Skeleton' }, { name: 'EmptyState' }, { name: 'Breadcrumb' }] },
+  { height: 340, items: [{ name: 'AutoForm' }, { name: 'DatePicker' }, { name: 'StepForm' }] },
+  { height: 260, items: [{ name: 'WorkspaceMembers' }, { name: 'FileCards', span: 2 }] },
+]
+
+// ── Mobile: top 5 featured components shown vertically ───────────────────────
+const MOBILE_FEATURED = [
+  'CommandPalette',
+  'DataGrid',
+  'DatePicker',
+  'TextureCard',
+  'Kanban',
 ]
 
 // ── Section ───────────────────────────────────────────────────────────────────
@@ -80,17 +73,17 @@ export function ComponentTeaser() {
       <div className="absolute inset-0 bg-pattern-grid opacity-[0.10]" aria-hidden />
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" aria-hidden />
 
-      <div className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6">
+      <div className="relative mx-auto max-w-7xl px-4 py-16 sm:py-24 sm:px-6">
 
-        {/* ── Header ──────────────────────────────────────────────────────── */}
-        <div className="mb-12 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
+        {/* ── Header ────────────────────────────────────────────────────────── */}
+        <div className="mb-10 sm:mb-12 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
           <div className="max-w-2xl">
             <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">— Component Library</p>
-            <h2 className="mt-3 text-balance text-4xl font-semibold tracking-tight sm:text-5xl">
+            <h2 className="mt-3 text-balance text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl">
               {total}+ components.{' '}
               <span className="text-muted-foreground/40">Every UI pattern, covered.</span>
             </h2>
-            <p className="mt-3 max-w-xl text-muted-foreground">
+            <p className="mt-3 max-w-xl text-muted-foreground text-sm sm:text-base">
               Buttons, data tables, charts, kanban boards, sidebars — fully typed, accessible, dark-mode native.
             </p>
           </div>
@@ -118,8 +111,22 @@ export function ComponentTeaser() {
           </div>
         </div>
 
-        {/* ── Bento grid ──────────────────────────────────────────────────── */}
-        <div className="flex flex-col gap-3">
+        {/* ── Mobile: single-column top 5 + View All ────────────────────────── */}
+        <div className="flex flex-col gap-3 md:hidden">
+          {MOBILE_FEATURED.map((name) => (
+            <BentoCard key={name} name={name} height={260} />
+          ))}
+          <Link
+            href="/components"
+            className="mt-2 flex items-center justify-center gap-2 rounded-xl border border-border bg-secondary/40 py-4 text-sm font-semibold text-foreground transition-colors hover:bg-secondary hover:border-primary/30"
+          >
+            View all {total} components
+            <ArrowUpRight className="h-4 w-4" strokeWidth={2} />
+          </Link>
+        </div>
+
+        {/* ── Desktop: 3-column bento grid ──────────────────────────────────── */}
+        <div className="hidden md:flex flex-col gap-3">
           {ROWS.map((row, ri) => (
             <div key={ri} className="grid grid-cols-3 gap-3">
               {row.items.map((item) => (
@@ -131,11 +138,11 @@ export function ComponentTeaser() {
           ))}
         </div>
 
-        {/* ── Footer strip ────────────────────────────────────────────────── */}
+        {/* ── Footer strip ──────────────────────────────────────────────────── */}
         <div className="mt-8 flex flex-wrap items-center justify-between gap-3 border-t border-border pt-6">
-          <div className="flex items-center gap-6">
+          <div className="flex flex-wrap items-center gap-4 sm:gap-6">
             {['React', 'TypeScript', 'Tailwind CSS', 'Radix UI'].map((t, i) => (
-              <span key={t} className="flex items-center gap-6">
+              <span key={t} className="flex items-center gap-4 sm:gap-6">
                 {i > 0 && <span className="h-3 w-px bg-border" />}
                 <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground/50">{t}</span>
               </span>
