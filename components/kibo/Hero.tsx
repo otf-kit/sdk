@@ -2,9 +2,8 @@
 
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
-import { ArrowRight, Check, Copy, Star } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { GithubIcon as Github } from './icons'
-import { MagneticCTA } from './MagneticCTA'
 
 // ── Mini floating component cards ─────────────────────────────────────────────
 
@@ -357,7 +356,12 @@ export function Hero() {
 
         {/* CTAs */}
         <div ref={ctaRef} className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <MagneticCTA href="/templates" pill>Browse templates</MagneticCTA>
+          <a
+            href="/templates"
+            className="inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3 text-sm font-semibold text-primary-foreground shadow-[0_8px_32px_-8px_rgba(249,115,22,0.7)] transition-all hover:scale-[1.03] hover:shadow-[0_12px_40px_-8px_rgba(249,115,22,0.8)] active:scale-[0.98]"
+          >
+            Browse templates <ArrowRight className="h-4 w-4" strokeWidth={2.5} />
+          </a>
           <a
             href="https://github.com/open-template-forest"
             target="_blank"
