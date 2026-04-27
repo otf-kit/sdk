@@ -7,12 +7,12 @@ const templates = [
     name: 'SaaS Dashboard Kit',
     subtitle: 'Linear-class project tracker with auth, payments, and team management',
     platform: 'Vite + Hono',
-    tags: ['TypeScript', 'React 19', 'Hono', 'Drizzle', 'Better Auth', 'Polar'],
+    tags: ['TypeScript', 'React 19', 'Hono', 'Drizzle', 'Better Auth', 'Stripe'],
     price: '$149',
     status: 'available',
     category: 'Full-stack',
+    kitSlug: 'saas-dashboard',
     demo: 'https://saas-dashboard-production-ae3f.up.railway.app',
-    purchase: '/templates/saas-dashboard',
     accent: '#f97316',
     screens: 11,
     description: 'Full-stack SaaS starter with 11 screens, real Postgres data, auth, and AI configs pre-wired.',
@@ -25,12 +25,12 @@ const templates = [
     name: 'AI Wrapper Kit',
     subtitle: 'LLM-powered app with streaming chat, tools, and usage billing',
     platform: 'Next.js + Hono',
-    tags: ['TypeScript', 'AI SDK', 'Streaming', 'Polar', 'Drizzle'],
+    tags: ['TypeScript', 'AI SDK', 'Streaming', 'Stripe', 'Drizzle'],
     price: '$149',
     status: 'soon',
     category: 'Full-stack',
+    kitSlug: null,
     demo: null,
-    purchase: null,
     accent: '#a78bfa',
     screens: 8,
     description: 'Chat interface, tool calls, streaming responses, and credit-based billing out of the box.',
@@ -44,8 +44,8 @@ const templates = [
     price: '$199',
     status: 'soon',
     category: 'Full-stack',
+    kitSlug: null,
     demo: null,
-    purchase: null,
     accent: '#22c55e',
     screens: 12,
     description: 'Full marketplace with seller onboarding, listings, search, and split payments.',
@@ -59,8 +59,8 @@ const templates = [
     price: '$149',
     status: 'soon',
     category: 'Full-stack',
+    kitSlug: null,
     demo: null,
-    purchase: null,
     accent: '#f59e0b',
     screens: 10,
     description: 'Product catalog, cart, checkout, and admin inventory panel — all type-safe.',
@@ -70,6 +70,21 @@ const templates = [
 
 const filters = ['All', 'Full-stack', 'Available'] as const
 type Filter = typeof filters[number]
+
+// ── Stripe Checkout redirect ───────────────────────────────────────────────
+async function startCheckout(kitSlug: string): Promise<void> {
+  const res = await fetch('/api/checkout', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ kit: kitSlug }),
+  })
+  const { url, error } = await res.json()
+  if (error || !url) {
+    alert(`Checkout error: ${error ?? 'Please try again'}`)
+    return
+  }
+  window.location.href = url
+}
 
 function SaasDashboardPreview({ accent }: { accent: string }) {
   return (
@@ -157,6 +172,13 @@ function ComingSoonPreview({ accent, name }: { accent: string; name: string }) {
 
 export function TemplatesClient() {
   const [activeFilter, setActiveFilter] = useState<Filter>('All')
+  const [purchasing, setPurchasing] = useState<string | null>(null)
+
+  const handlePurchase = async (kitSlug: string) => {
+    setPurchasing(kitSlug)
+    await startCheckout(kitSlug)
+    setPurchasing(null) // only reached on error (success redirects away)
+  }
 
   const filtered = templates.filter((t) => {
     if (activeFilter === 'All') return true
@@ -273,14 +295,22 @@ export function TemplatesClient() {
                     Demo soon
                   </button>
                 )}
-                {t.status === 'available' ? (
-                  <a
-                    href={t.purchase ?? '#'}
-                    className="flex-1 text-sm text-center px-4 py-2.5 rounded-md transition-colors font-bold text-white"
-                    style={{ background: t.accent }}
+                {t.status === 'available' && t.kitSlug ? (
+                  <button
+                    onClick={() => handlePurchase(t.kitSlug!)}
+                    disabled={purchasing === t.kitSlug}
+                    className="flex-1 text-sm text-center px-4 py-2.5 rounded-md transition-all font-bold text-white disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                    style={{ background: t.accent, boxShadow: `0 4px 16px ${t.accent}40` }}
                   >
-                    Get template →
-                  </a>
+                    {purchasing === t.kitSlug ? (
+                      <>
+                        <span className="w-3.5 h-3.5 rounded-full border-2 border-white/40 border-t-white animate-spin" />
+                        Redirecting…
+                      </>
+                    ) : (
+                      <>Get this kit — {t.price}</>
+                    )}
+                  </button>
                 ) : (
                   <a
                     href="/#waitlist"
