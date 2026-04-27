@@ -25,9 +25,8 @@ export function MagneticCTA({ href, children, pill = false }: Props) {
     if (!wrap || !inner || !arrow || !halo) return
 
     const ctx = gsap.context(() => {
-      const wrapX   = gsap.quickTo(wrap,  'x',        { duration: 0.55, ease: 'elastic.out(1, 0.6)' })
-      const wrapY   = gsap.quickTo(wrap,  'y',        { duration: 0.55, ease: 'elastic.out(1, 0.6)' })
-      const wrapRot = gsap.quickTo(wrap,  'rotation', { duration: 0.6,  ease: 'power3.out' })
+      const wrapX   = gsap.quickTo(wrap,  'x', { duration: 0.55, ease: 'elastic.out(1, 0.6)' })
+      const wrapY   = gsap.quickTo(wrap,  'y', { duration: 0.55, ease: 'elastic.out(1, 0.6)' })
       const innerX  = gsap.quickTo(inner, 'x',        { duration: 0.5,  ease: 'power3.out' })
       const innerY  = gsap.quickTo(inner, 'y',        { duration: 0.5,  ease: 'power3.out' })
       const haloX   = gsap.quickTo(halo,  'x',        { duration: 0.35, ease: 'power3.out' })
@@ -41,7 +40,7 @@ export function MagneticCTA({ href, children, pill = false }: Props) {
         const dx = e.clientX - cx
         const dy = e.clientY - cy
 
-        wrapX(dx * 0.28);  wrapY(dy * 0.45);  wrapRot(dx * 0.04)
+        wrapX(dx * 0.28);  wrapY(dy * 0.45)
         innerX(-dx * 0.08); innerY(-dy * 0.12)
         haloX(e.clientX - r.left); haloY(e.clientY - r.top)
         arrowX(Math.max(-3, Math.min(8, dx * 0.06)))
@@ -54,7 +53,7 @@ export function MagneticCTA({ href, children, pill = false }: Props) {
       }
 
       const onLeave = () => {
-        wrapX(0); wrapY(0); wrapRot(0)
+        wrapX(0); wrapY(0)
         innerX(0); innerY(0); arrowX(0)
         gsap.to(wrap, { scale: 1, duration: 0.5, ease: 'elastic.out(1, 0.5)' })
         gsap.to(halo, { opacity: 0, duration: 0.4, ease: 'power2.out' })
