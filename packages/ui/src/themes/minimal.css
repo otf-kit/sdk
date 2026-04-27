@@ -111,3 +111,12 @@
   --shadow-lg: 0 4px 16px 0 rgb(0 0 0 / 0.4);
   --shadow-card: 0 0 0 1px hsl(var(--border));
 }
+
+/* ── Chart / semantic accent tokens ────────────── */
+.theme-minimal, .theme-minimal.dark {
+  --chart-1: 25 95% 58%;    /* orange  — brand / primary  */
+  --chart-2: 142 71% 45%;   /* green   — success / done   */
+  --chart-3: 217 91% 60%;   /* blue    — info / todo       */
+  --chart-4: 38 92% 50%;    /* amber   — warning / in-prog */
+  --chart-5: 280 65% 60%;   /* purple  — accent / special  */
+}

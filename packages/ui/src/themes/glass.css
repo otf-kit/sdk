@@ -132,3 +132,12 @@
   --shadow-lg: 0 8px 32px 0 rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.3);
   --shadow-card: var(--glass-shadow);
 }
+
+/* ── Chart / semantic accent tokens ────────────── */
+.theme-glass, .theme-glass.dark {
+  --chart-1: 221 83% 53%;   /* blue    — brand / primary  */
+  --chart-2: 142 71% 45%;   /* green   — success / done   */
+  --chart-3: 200 80% 55%;   /* cyan    — info / todo       */
+  --chart-4: 38 92% 50%;    /* amber   — warning / in-prog */
+  --chart-5: 280 65% 60%;   /* purple  — accent / special  */
+}

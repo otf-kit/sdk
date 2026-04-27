@@ -121,3 +121,12 @@
   --shadow-card: 0 0 0 1px hsl(var(--border));
   color-scheme: light;
 }
+
+/* ── Chart / semantic accent tokens ────────────── */
+:root, .theme-midnight {
+  --chart-1: 263 90% 68%;   /* violet  — brand / primary  */
+  --chart-2: 160 60% 45%;   /* teal    — success / done   */
+  --chart-3: 200 80% 55%;   /* cyan    — info / todo       */
+  --chart-4: 38 90% 55%;    /* amber   — warning / in-prog */
+  --chart-5: 300 65% 65%;   /* pink    — accent / special  */
+}
