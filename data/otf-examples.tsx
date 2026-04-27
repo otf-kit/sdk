@@ -1,7 +1,7 @@
 // @ts-nocheck — @otf/ui forwardRef types don't resolve from JS bundle without .d.ts; safe at runtime
 'use client'
 
-import { useState } from 'react'
+import { useState, type CSSProperties } from 'react'
 import {
   Button,
   Avatar, AvatarImage, AvatarFallback,
@@ -20,11 +20,40 @@ import {
 } from '@otf/ui'
 import { BarChart3, User, Star, Mail, Lock, ArrowRight, Check } from 'lucide-react'
 
+// HSL token set that @otf/ui components expect (hsl(var(--X)) inline styles)
+const OTF_DARK_THEME: CSSProperties = {
+  '--background':            '25 12% 8%',
+  '--foreground':            '35 15% 90%',
+  '--card':                  '25 12% 10%',
+  '--card-foreground':       '35 15% 90%',
+  '--popover':               '25 12% 11%',
+  '--popover-foreground':    '35 15% 90%',
+  '--primary':               '25 95% 58%',
+  '--primary-foreground':    '0 0% 100%',
+  '--secondary':             '25 12% 15%',
+  '--secondary-foreground':  '35 15% 80%',
+  '--muted':                 '25 12% 14%',
+  '--muted-foreground':      '25 10% 55%',
+  '--accent':                '25 12% 15%',
+  '--accent-foreground':     '25 95% 58%',
+  '--destructive':           '0 84% 60%',
+  '--destructive-foreground':'0 0% 100%',
+  '--border':                '25 12% 18%',
+  '--input':                 '25 12% 18%',
+  '--ring':                  '25 95% 58%',
+  '--radius':                '0.5rem',
+  '--radius-sm':             '0.375rem',
+  '--radius-md':             '0.625rem',
+  '--radius-lg':             '1rem',
+  '--radius-xl':             '1.5rem',
+} as CSSProperties
+
 // ── Scaled block wrapper for large layout demos ───────────────────────────────
 function ScaledBlock({ children, naturalHeight, previewHeight = 400 }: { children: React.ReactNode; naturalHeight: number; previewHeight?: number }) {
   const scale = previewHeight / naturalHeight
   return (
-    <div className="w-full overflow-hidden rounded-lg border border-border" style={{ height: `${previewHeight}px` }}>
+    <div className="w-full overflow-hidden rounded-lg border border-[hsl(25_12%_18%)] bg-[hsl(25_12%_8%)]"
+      style={{ height: `${previewHeight}px`, ...OTF_DARK_THEME }}>
       <div style={{
         transform: `scale(${scale})`,
         transformOrigin: 'top left',

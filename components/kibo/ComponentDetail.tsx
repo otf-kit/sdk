@@ -1,10 +1,38 @@
 'use client'
 
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react'
 import Link from 'next/link'
-import { ArrowLeft, ArrowRight, Check, ChevronRight, Code2, Copy, Eye, Maximize2, Search, Sparkles, Wrench, Zap } from 'lucide-react'
-import { components, componentBySlug, type ComponentMeta } from '@/data/component-registry'
+import { ArrowLeft, ArrowRight, Check, ChevronRight, Code2, Copy, ExternalLink, Eye, Search, Sparkles, Wrench } from 'lucide-react'
+import { components, componentBySlug, type ComponentMeta, STORYBOOK_URL } from '@/data/component-registry'
 import { examples } from '@/data/component-examples'
+
+// HSL token set that @otf/ui components expect (matches storybook preview.tsx)
+const OTF_DARK_THEME: CSSProperties = {
+  '--background':            '25 12% 8%',
+  '--foreground':            '35 15% 90%',
+  '--card':                  '25 12% 10%',
+  '--card-foreground':       '35 15% 90%',
+  '--popover':               '25 12% 11%',
+  '--popover-foreground':    '35 15% 90%',
+  '--primary':               '25 95% 58%',
+  '--primary-foreground':    '0 0% 100%',
+  '--secondary':             '25 12% 15%',
+  '--secondary-foreground':  '35 15% 80%',
+  '--muted':                 '25 12% 14%',
+  '--muted-foreground':      '25 10% 55%',
+  '--accent':                '25 12% 15%',
+  '--accent-foreground':     '25 95% 58%',
+  '--destructive':           '0 84% 60%',
+  '--destructive-foreground':'0 0% 100%',
+  '--border':                '25 12% 18%',
+  '--input':                 '25 12% 18%',
+  '--ring':                  '25 95% 58%',
+  '--radius':                '0.5rem',
+  '--radius-sm':             '0.375rem',
+  '--radius-md':             '0.625rem',
+  '--radius-lg':             '1rem',
+  '--radius-xl':             '1.5rem',
+} as CSSProperties
 
 type Props = { slug: string }
 
@@ -41,14 +69,55 @@ export function ComponentDetail({ slug }: Props) {
   }
 
   if (!meta) {
+    // Unknown slug — synthesize a placeholder meta and show coming-soon state
+    const placeholderMeta: ComponentMeta = {
+      slug,
+      name: slug.split('-').map((w) => w[0].toUpperCase() + w.slice(1)).join(' '),
+      description: 'This component is on the roadmap. Check back soon.',
+      category: 'Display',
+      tags: [slug],
+      hasExample: false,
+    }
     return (
-      <div className="flex flex-1 items-center justify-center py-32 text-center">
-        <div>
-          <p className="text-sm text-muted-foreground">Component not found</p>
-          <Link href="/components" className="mt-3 inline-block text-sm font-medium text-primary hover:underline">
-            ← Back to components
-          </Link>
-        </div>
+      <div className="mx-auto flex max-w-7xl gap-8 px-4 py-8 sm:px-6">
+        <aside className="sticky top-24 hidden h-[calc(100vh-7rem)] w-60 shrink-0 flex-col gap-3 lg:flex">
+          <div className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">Components ({components.length})</div>
+          <nav className="flex-1 overflow-y-auto pb-6 [scrollbar-width:thin]">
+            {components.map((c) => (
+              <Link key={c.slug} href={`/components/${c.slug}`}
+                className="flex items-center justify-between rounded-md px-2.5 py-1.5 text-sm text-foreground/75 transition-colors hover:bg-secondary hover:text-foreground">
+                <span>{c.name}</span>
+                {c.hasExample && <span className="h-1.5 w-1.5 rounded-full bg-primary shadow-[0_0_8px_rgba(249,115,22,0.7)]" />}
+              </Link>
+            ))}
+          </nav>
+        </aside>
+        <main className="flex min-w-0 flex-1 flex-col gap-8 pb-20">
+          <nav className="flex items-center gap-1.5 font-mono text-xs text-muted-foreground">
+            <Link href="/" className="hover:text-foreground">Home</Link>
+            <ChevronRight className="h-3 w-3" />
+            <Link href="/components" className="hover:text-foreground">Components</Link>
+            <ChevronRight className="h-3 w-3" />
+            <span className="text-foreground">{placeholderMeta.name}</span>
+          </nav>
+          <div className="overflow-hidden rounded-xl border border-border bg-card shadow-lg">
+            <div className="border-b border-border bg-secondary/30 px-3 py-2">
+              <div className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
+                <Eye className="h-3 w-3" /> Preview
+              </div>
+            </div>
+            <div className="relative flex min-h-[360px] items-center justify-center overflow-hidden bg-pattern-grid p-6 sm:p-10">
+              <div className="absolute inset-0 bg-gradient-to-b from-background/20 to-background/60" aria-hidden />
+              <div className="relative z-10 flex w-full items-center justify-center" style={OTF_DARK_THEME}>
+                <ComingSoon meta={placeholderMeta} />
+              </div>
+            </div>
+          </div>
+          <section>
+            <h3 className="font-mono text-xs uppercase tracking-widest text-muted-foreground">Installation</h3>
+            <InstallSnippet slug={slug} />
+          </section>
+        </main>
       </div>
     )
   }
@@ -115,14 +184,16 @@ export function ComponentDetail({ slug }: Props) {
             {meta.tags.map((t) => (
               <span key={t} className="rounded-full border border-border bg-secondary/30 px-2 py-0.5 font-mono text-[10px] text-muted-foreground">#{t}</span>
             ))}
-            <a
-              href={`https://otf-storybook.pages.dev/?path=/docs/${meta.slug}`}
-              target="_blank"
-              rel="noreferrer"
-              className="ml-auto inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground"
-            >
-              View in Storybook <Zap className="h-3 w-3" />
-            </a>
+            {meta.storybookId && (
+              <a
+                href={`${STORYBOOK_URL}/?path=/story/${meta.storybookId}`}
+                target="_blank"
+                rel="noreferrer"
+                className="ml-auto inline-flex items-center gap-1 text-xs text-muted-foreground transition-colors hover:text-foreground"
+              >
+                View in Storybook <ExternalLink className="h-3 w-3" />
+              </a>
+            )}
           </div>
         </header>
 
@@ -157,14 +228,27 @@ export function ComponentDetail({ slug }: Props) {
           </div>
 
           {tab === 'preview' ? (
-            <div className="relative flex min-h-[360px] items-center justify-center overflow-hidden bg-pattern-grid p-6 sm:p-10">
-              <div className="absolute inset-0 bg-gradient-to-b from-background/20 to-background/60" aria-hidden />
-              <div className="relative z-10 flex w-full items-center justify-center">
-                {example
-                  ? <example.Demo />
-                  : <ComingSoon meta={meta} />
-                }
-              </div>
+            <div className="relative overflow-hidden">
+              {meta.storybookId ? (
+                // Storybook iframe — exact same rendering as deployed Storybook
+                <StorybookPreview storybookId={meta.storybookId} />
+              ) : example ? (
+                // Inline demo fallback
+                <div className="relative flex min-h-[360px] items-center justify-center overflow-hidden bg-pattern-grid p-6 sm:p-10">
+                  <div className="absolute inset-0 bg-gradient-to-b from-background/20 to-background/60" aria-hidden />
+                  <div className="relative z-10 flex w-full items-center justify-center" style={OTF_DARK_THEME}>
+                    <example.Demo />
+                  </div>
+                </div>
+              ) : (
+                // Coming soon
+                <div className="relative flex min-h-[360px] items-center justify-center overflow-hidden bg-pattern-grid p-6 sm:p-10">
+                  <div className="absolute inset-0 bg-gradient-to-b from-background/20 to-background/60" aria-hidden />
+                  <div className="relative z-10 flex w-full items-center justify-center" style={OTF_DARK_THEME}>
+                    <ComingSoon meta={meta} />
+                  </div>
+                </div>
+              )}
             </div>
           ) : (
             <pre className="max-h-[480px] overflow-x-auto bg-[#0d0d0d] p-5 font-mono text-xs leading-relaxed">
@@ -214,6 +298,30 @@ export function ComponentDetail({ slug }: Props) {
           ) : null}
         </nav>
       </main>
+    </div>
+  )
+}
+
+// ── Storybook iframe embed ────────────────────────────────────────────────────
+function StorybookPreview({ storybookId }: { storybookId: string }) {
+  const [loaded, setLoaded] = useState(false)
+  const src = `${STORYBOOK_URL}/iframe.html?id=${storybookId}&viewMode=story`
+  return (
+    <div className="relative w-full" style={{ height: '520px' }}>
+      {!loaded && (
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-card text-muted-foreground">
+          <div className="h-5 w-5 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+          <span className="font-mono text-xs">Loading Storybook preview…</span>
+        </div>
+      )}
+      <iframe
+        src={src}
+        title={storybookId}
+        className="h-full w-full border-0"
+        onLoad={() => setLoaded(true)}
+        style={{ opacity: loaded ? 1 : 0, transition: 'opacity 0.3s ease' }}
+        allow="fullscreen"
+      />
     </div>
   )
 }

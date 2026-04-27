@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import { notFound } from 'next/navigation'
 import { Navbar }          from '@/components/kibo/Navbar'
 import { Footer }          from '@/components/kibo/Footer'
 import { ComponentDetail } from '@/components/kibo/ComponentDetail'
@@ -10,7 +9,7 @@ type Props = { params: Promise<{ slug: string }> }
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const meta = componentBySlug(slug)
-  if (!meta) return { title: 'Component not found — OTF' }
+  if (!meta) return { title: `${slug} — OTF Components` }
   return {
     title: `${meta.name} — OTF Components`,
     description: meta.description,
@@ -19,9 +18,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ComponentPage({ params }: Props) {
   const { slug } = await params
-  const meta = componentBySlug(slug)
-  if (!meta) notFound()
-
+  // Don't 404 — ComponentDetail renders a "coming soon" state for unknown slugs
   return (
     <div className="flex flex-col min-h-dvh bg-background">
       <Navbar />

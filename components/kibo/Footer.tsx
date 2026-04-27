@@ -81,7 +81,6 @@ export function Footer() {
         {/* Bottom bar */}
         <div className="mt-8 flex flex-col items-start justify-between gap-3 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row sm:items-center">
           <p className="font-mono">© 2026 Open Template Forest — MIT Licensed (SDK)</p>
-          <p>Built on Radix, Tailwind, and shadcn/ui. Not affiliated with internal.</p>
         </div>
       </div>
     </footer>
