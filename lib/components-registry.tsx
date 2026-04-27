@@ -188,10 +188,10 @@ const BadgePreview = () => (
 
 // DiceBear lorelei — clean illustrated portrait style, professional, loads fast as SVG
 const MEMBERS = [
-  { seed: 'Felix',   name: 'Dave Soni',  role: 'Admin',     status: c2,  accent: pri },
-  { seed: 'Riley',   name: 'Kate Lee',   role: 'Developer', status: c4,  accent: c3  },
-  { seed: 'Avery',   name: 'Alex Reed',  role: 'Designer',  status: c2,  accent: c5  },
-  { seed: 'Morgan',  name: 'Jordan K.',  role: 'Product',   status: mfg, accent: c2  },
+  { seed: 'Riley',   name: 'Kate Lee',   role: 'Admin',     status: c2,  accent: c3  },
+  { seed: 'Avery',   name: 'Alex Reed',  role: 'Developer', status: c4,  accent: c5  },
+  { seed: 'Morgan',  name: 'Jordan K.',  role: 'Designer',  status: c2,  accent: c2  },
+  { seed: 'Sam',     name: 'Sam Chen',   role: 'Product',   status: mfg, accent: pri },
 ]
 const avatar = (seed: string, size = 36) =>
   `https://api.dicebear.com/9.x/lorelei/svg?seed=${seed}&radius=50&size=${size}&backgroundColor=transparent`
