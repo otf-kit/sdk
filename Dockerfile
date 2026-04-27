@@ -17,7 +17,8 @@ COPY . .
 RUN bun run build
 
 # ── runner ───────────────────────────────────────────────────────────────────
-FROM oven/bun:1.3.3-slim AS runner
+# Use real Node (not bun) — Next.js standalone server.js expects Node CJS resolution.
+FROM node:20-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production
 ENV PORT=3000
