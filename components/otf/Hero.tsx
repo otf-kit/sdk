@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ArrowRight } from 'lucide-react'
 import { GithubIcon as Github } from './icons'
+import { AIToolsMarquee } from './AIToolsMarquee'
 
 // ── Mini floating component cards ─────────────────────────────────────────────
 
@@ -324,8 +325,7 @@ export function Hero() {
             <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
           </span>
           <span className="font-mono uppercase tracking-widest text-foreground/80">
-            <span className="sm:hidden">Pre-loaded for every AI tool</span>
-            <span className="hidden sm:inline">Pre-loaded for Cursor · Claude · Lovable · Bolt · and more</span>
+            SaaS Dashboard Kit — available now
           </span>
         </a>
 
@@ -339,8 +339,13 @@ export function Hero() {
 
         {/* Subtitle */}
         <p ref={subRef} className="mx-auto mt-6 max-w-xl text-base text-muted-foreground sm:text-lg">
-          Every kit ships with CLAUDE.md, .cursorrules, and 20+ tested prompts. Open in Cursor, Claude, Lovable, Bolt, or any AI coding tool — it already understands your entire codebase.
+          Every kit ships with CLAUDE.md, .cursorrules, and 20+ tested prompts — so your AI understands the codebase before you type a single word.
         </p>
+
+        {/* AI tools marquee */}
+        <div className="mx-auto mt-8 max-w-xl text-left">
+          <AIToolsMarquee />
+        </div>
 
         {/* Stats row */}
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
