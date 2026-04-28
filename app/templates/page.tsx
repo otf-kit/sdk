@@ -20,12 +20,12 @@ export default function TemplatesPage() {
           <div className="h-px w-16 bg-[#f97316]/40 mb-6" />
           <div className="flex flex-col md:flex-row md:items-end gap-6 md:gap-12">
             <div>
-              <h1 className="text-4xl md:text-5xl font-black text-white tracking-tight mb-3 uppercase">
-                Ship in days,<br />
-                <span className="text-[#737373]">not months.</span>
+              <h1 className="text-4xl md:text-5xl font-black text-white tracking-tight mb-3">
+                Your idea, already<br />
+                <span className="text-[#f97316]">half-built.</span>
               </h1>
               <p className="text-[#525252] text-lg max-w-xl leading-relaxed">
-                Full-stack apps with auth, payments, and AI configs pre-wired — drop in and ship.
+                Open any kit in Cursor or Claude Code. Describe what your product does. Ship in days — not months.
               </p>
             </div>
             <div className="flex gap-6 shrink-0">
@@ -45,10 +45,10 @@ export default function TemplatesPage() {
 
         <div className="flex flex-wrap items-center gap-6 mb-10 py-4 px-5 rounded-xl bg-[#0d0d0d] border border-[#1a1a1a]">
           {[
+            'Works with Cursor, Claude Code & Lovable',
+            'CLAUDE.md + .cursorrules in every kit',
+            'One-time payment — no subscription ever',
             '14-day refund guarantee',
-            'One-time payment, no subscription',
-            'Commercial use included',
-            'Lifetime access + 1 year updates',
           ].map(item => (
             <div key={item} className="flex items-center gap-2 text-sm text-[#737373]">
               <span className="text-[#f97316] font-bold text-xs">✓</span>

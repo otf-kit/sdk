@@ -5,70 +5,106 @@ import { useState } from 'react'
 const templates = [
   {
     name: 'SaaS Dashboard Kit',
-    subtitle: 'Linear-class project tracker with auth, payments, and team management',
+    subtitle: 'Your idea is already half-built. Describe the rest to Claude.',
     platform: 'Vite + Hono',
-    tags: ['TypeScript', 'React 19', 'Hono', 'Drizzle', 'Better Auth', 'Stripe'],
+    tags: ['Cursor-ready', 'CLAUDE.md included', '11 screens', 'Stripe wired'],
     price: '$149',
     status: 'available',
-    category: 'Full-stack',
+    category: 'SaaS',
     kitSlug: 'saas-dashboard',
     demo: 'https://saas-dashboard-production-ae3f.up.railway.app',
     accent: '#f97316',
     screens: 11,
-    description: 'Full-stack SaaS starter with 11 screens, real Postgres data, auth, and AI configs pre-wired.',
+    description: 'Auth, database, payments, and a full dashboard already working. Open it in Cursor and describe what your product does — Claude already knows the codebase.',
+    claudePrompt: '"Add a new project type called Marketing Campaign with a budget field"',
     preview: {
       sidebar: ['Dashboard', 'Issues', 'Board', 'Backlog', 'Projects', 'Teams'],
       stat: { label: 'Issues', value: '50', trend: '+12%', trendColor: 'text-green-400' },
     },
   },
   {
-    name: 'AI Wrapper Kit',
-    subtitle: 'LLM-powered app with streaming chat, tools, and usage billing',
-    platform: 'Next.js + Hono',
-    tags: ['TypeScript', 'AI SDK', 'Streaming', 'Stripe', 'Drizzle'],
+    name: 'Booking & Appointments Kit',
+    subtitle: 'For coaches, tutors, salons — take appointments and get paid.',
+    platform: 'Next.js + Expo',
+    tags: ['Cursor-ready', 'CLAUDE.md included', '8 screens', 'Stripe wired'],
     price: '$149',
     status: 'soon',
-    category: 'Full-stack',
+    category: 'Services',
     kitSlug: null,
     demo: null,
-    accent: '#a78bfa',
+    accent: '#3b82f6',
     screens: 8,
-    description: 'Chat interface, tool calls, streaming responses, and credit-based billing out of the box.',
+    description: 'Calendar booking, Stripe payments, email reminders, and client history. No more Calendly fees — own your booking system.',
+    claudePrompt: '"Change this to dog grooming sessions at $60/hour, add a breed field"',
     preview: null,
   },
   {
-    name: 'Marketplace Kit',
-    subtitle: 'Buy/sell platform with listings, search, reviews, and Stripe Connect',
+    name: 'Event & Ticketing Kit',
+    subtitle: 'Run events. Sell tickets. Keep 100% of the revenue.',
     platform: 'Next.js + Hono',
-    tags: ['TypeScript', 'Stripe Connect', 'Search', 'S3'],
-    price: '$199',
-    status: 'soon',
-    category: 'Full-stack',
-    kitSlug: null,
-    demo: null,
-    accent: '#22c55e',
-    screens: 12,
-    description: 'Full marketplace with seller onboarding, listings, search, and split payments.',
-    preview: null,
-  },
-  {
-    name: 'E-commerce Kit',
-    subtitle: 'Shopify-style store with cart, checkout, and inventory management',
-    platform: 'Next.js + Hono',
-    tags: ['TypeScript', 'Stripe', 'Inventory', 'Cart'],
+    tags: ['Cursor-ready', 'CLAUDE.md included', '8 screens', 'Stripe wired'],
     price: '$149',
     status: 'soon',
-    category: 'Full-stack',
+    category: 'Events',
     kitSlug: null,
     demo: null,
     accent: '#f59e0b',
-    screens: 10,
-    description: 'Product catalog, cart, checkout, and admin inventory panel — all type-safe.',
+    screens: 8,
+    description: 'Event pages, ticket tiers, QR check-in, and attendee management. Eventbrite charges 6-8% — this is $149 once.',
+    claudePrompt: '"Add a VIP tier at $499 with a dinner label, limit to 20 seats"',
+    preview: null,
+  },
+  {
+    name: 'Directory & Listings Kit',
+    subtitle: 'Build the best [X] directory in your niche.',
+    platform: 'Next.js + Hono',
+    tags: ['Cursor-ready', 'CLAUDE.md included', '9 screens', 'Stripe wired'],
+    price: '$149',
+    status: 'soon',
+    category: 'Directory',
+    kitSlug: null,
+    demo: null,
+    accent: '#22c55e',
+    screens: 9,
+    description: 'Submit listings, browse and filter, featured placements, and SEO-ready pages. One kit — job boards, tool directories, local guides, resource hubs.',
+    claudePrompt: '"Change this into a directory of AI tools for lawyers, add a monthly pricing filter"',
+    preview: null,
+  },
+  {
+    name: 'Newsletter & Blog Kit',
+    subtitle: 'Your own Substack. No 10% cut. Forever.',
+    platform: 'Next.js + Hono',
+    tags: ['Cursor-ready', 'CLAUDE.md included', '8 screens', 'Stripe wired'],
+    price: '$149',
+    status: 'soon',
+    category: 'Creator',
+    kitSlug: null,
+    demo: null,
+    accent: '#8b5cf6',
+    screens: 8,
+    description: 'Write, publish, and charge subscribers — free and paid tiers. Email delivery included. Own your audience, not rent it.',
+    claudePrompt: '"Set up a paid tier at $9/month for premium posts, free users get 3 posts/month"',
+    preview: null,
+  },
+  {
+    name: 'Creator Hub Kit',
+    subtitle: 'Your Linktree — but you own it, and you can charge for it.',
+    platform: 'Next.js',
+    tags: ['Cursor-ready', 'CLAUDE.md included', '6 screens', 'Stripe wired'],
+    price: '$99',
+    status: 'soon',
+    category: 'Creator',
+    kitSlug: null,
+    demo: null,
+    accent: '#ec4899',
+    screens: 6,
+    description: 'Link page, click analytics, pay-to-view content, and email capture. Linktree charges $24/month — this is $99 once.',
+    claudePrompt: '"Add a section where fans can pay $199 to book a 1-hour call with me"',
     preview: null,
   },
 ]
 
-const filters = ['All', 'Full-stack', 'Available'] as const
+const filters = ['All', 'SaaS', 'Services', 'Events', 'Directory', 'Creator'] as const
 type Filter = typeof filters[number]
 
 // ── Stripe Checkout redirect ───────────────────────────────────────────────
@@ -182,9 +218,7 @@ export function TemplatesClient() {
 
   const filtered = templates.filter((t) => {
     if (activeFilter === 'All') return true
-    if (activeFilter === 'Full-stack') return t.category === 'Full-stack'
-    if (activeFilter === 'Available') return t.status === 'available'
-    return true
+    return t.category === activeFilter
   })
 
   return (
@@ -262,19 +296,23 @@ export function TemplatesClient() {
 
               <p className="text-[#737373] text-xs leading-relaxed">{t.description}</p>
 
+              {/* Claude prompt example */}
+              {'claudePrompt' in t && t.claudePrompt && (
+                <div className="rounded-md border border-[#1f1f1f] bg-[#0d0d0d] px-3 py-2.5">
+                  <div className="flex items-center gap-1.5 mb-1.5">
+                    <span className="text-[9px] font-mono uppercase tracking-widest text-[#f97316]/70">Example Claude prompt</span>
+                  </div>
+                  <p className="text-[11px] text-[#a3a3a3] font-mono leading-relaxed italic">{(t as typeof t & { claudePrompt: string }).claudePrompt}</p>
+                </div>
+              )}
+
               <div className="flex items-center gap-1.5 flex-wrap">
                 <span className="text-[10px] px-2 py-0.5 rounded border border-[#1f1f1f] text-[#525252]">{t.screens} screens</span>
-                <span className="text-[10px] px-2 py-0.5 rounded border" style={{ borderColor: `${t.accent}30`, color: t.accent, background: `${t.accent}08` }}>
-                  {t.platform}
-                </span>
-                {t.tags.slice(0, 3).map((tag) => (
+                {t.tags.map((tag) => (
                   <span key={tag} className="text-[10px] px-2 py-0.5 rounded border border-[#1a1a1a] text-[#525252]">
                     {tag}
                   </span>
                 ))}
-                {t.tags.length > 3 && (
-                  <span className="text-[10px] text-[#333333]">+{t.tags.length - 3}</span>
-                )}
               </div>
 
               <div className="flex gap-2 mt-auto pt-1">
