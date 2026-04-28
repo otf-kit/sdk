@@ -323,7 +323,10 @@ export function Hero() {
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-70" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
           </span>
-          <span className="font-mono uppercase tracking-widest text-foreground/80">Works with every AI tool — Cursor · Claude · Lovable · Bolt</span>
+          <span className="font-mono uppercase tracking-widest text-foreground/80">
+            <span className="sm:hidden">Pre-loaded for every AI tool</span>
+            <span className="hidden sm:inline">Pre-loaded for Cursor · Claude · Lovable · Bolt · and more</span>
+          </span>
         </a>
 
         {/* Headline */}
