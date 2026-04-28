@@ -341,7 +341,14 @@ export function TemplatesClient() {
               </div>
 
               <div className="flex gap-2 mt-auto pt-1">
-                {t.demo ? (
+                {'detailSlug' in t && t.detailSlug ? (
+                  <Link
+                    href={`/templates/${t.detailSlug}`}
+                    className="flex-1 text-sm text-center px-4 py-2.5 border border-[#333333] text-white hover:bg-[#111111] rounded-md transition-colors font-medium"
+                  >
+                    View details →
+                  </Link>
+                ) : t.demo ? (
                   <a
                     href={t.demo}
                     target="_blank"
@@ -350,13 +357,6 @@ export function TemplatesClient() {
                   >
                     View demo →
                   </a>
-                ) : 'detailSlug' in t && t.detailSlug ? (
-                  <Link
-                    href={`/templates/${t.detailSlug}`}
-                    className="flex-1 text-sm text-center px-4 py-2.5 border border-[#333333] text-white hover:bg-[#111111] rounded-md transition-colors font-medium"
-                  >
-                    View details →
-                  </Link>
                 ) : (
                   <button
                     disabled
