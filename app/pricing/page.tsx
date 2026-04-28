@@ -27,7 +27,7 @@ export default function PricingPage() {
       {/* Page header */}
       <header className="relative border-b border-border overflow-hidden">
         {/* grid pattern */}
-        <div className="bg-pattern-grid absolute inset-0 opacity-[0.03]" aria-hidden />
+        <div className="absolute inset-0 bg-pattern-grid opacity-[0.12]" aria-hidden />
         {/* gradient fade at bottom */}
         <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-background to-transparent" aria-hidden />
 
@@ -61,7 +61,7 @@ export default function PricingPage() {
 
       {/* Pricing cards — reuse PricingSection but strip its outer section padding/border */}
       <div className="flex-1">
-        <PricingSection />
+        <PricingSection showHeader={false} />
 
         {/* Coming soon callout */}
         <div className="max-w-7xl mx-auto px-6 pb-12">

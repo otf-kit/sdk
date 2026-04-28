@@ -60,22 +60,29 @@ const tiers = [
   },
 ]
 
-export function PricingSection() {
+interface PricingSectionProps {
+  /** Hide the section eyebrow/heading — use when the page already has its own header */
+  showHeader?: boolean
+}
+
+export function PricingSection({ showHeader = true }: PricingSectionProps) {
   return (
     <section className="py-24 px-6 border-t border-border">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-14">
-          <p className="text-xs font-semibold text-primary uppercase tracking-widest mb-3">
-            Pricing
-          </p>
-          <div className="h-px w-16 bg-primary/40 mb-6 mx-auto" />
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Simple, honest pricing.
-          </h2>
-          <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-            Free SDK forever. Pay once for full-stack templates — no subscriptions, no seats per month.
-          </p>
-        </div>
+        {showHeader && (
+          <div className="text-center mb-14">
+            <p className="text-xs font-semibold text-primary uppercase tracking-widest mb-3">
+              Pricing
+            </p>
+            <div className="h-px w-16 bg-primary/40 mb-6 mx-auto" />
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+              Simple, honest pricing.
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-xl mx-auto">
+              Free SDK forever. Pay once for full-stack templates — no subscriptions, no seats per month.
+            </p>
+          </div>
+        )}
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-5xl mx-auto">
           {tiers.map((tier) => (
