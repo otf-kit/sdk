@@ -7,7 +7,7 @@ const features = [
   { Icon: Paintbrush,   title: 'Themable',         desc: 'Tailwind v4 + CSS variables. 5 palettes: Slate, Warm, Cosmic, Terminal, and Custom.' },
   { Icon: GitBranch,    title: 'Open Source',      desc: 'MIT licensed SDK. Read the code, fork it, contribute back — no strings attached.' },
   { Icon: Feather,      title: 'Zero runtime',     desc: 'Components copied into your codebase. No package bloat, no version lock-in.' },
-  { Icon: FileCode2,    title: 'AI-native',        desc: 'Every kit ships tested CLAUDE.md, .cursorrules, and 20+ AI prompts for instant context.' },
+  { Icon: FileCode2,    title: 'Every AI tool',    desc: 'Ships with CLAUDE.md, .cursorrules, and 20+ tested prompts. Cursor, Claude, Lovable, Bolt — your AI hits the ground running.' },
 ]
 
 export function Features() {

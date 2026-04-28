@@ -5,7 +5,7 @@ import { TemplatesClient } from './TemplatesClient'
 
 export const metadata: Metadata = {
   title: 'Templates — OTF',
-  description: 'Full-stack templates with auth, payments, and AI configs pre-wired. Drop in and ship.',
+  description: 'Full-stack kits pre-loaded with CLAUDE.md, .cursorrules, and 20+ tested prompts. Works with Cursor, Claude, Lovable, Bolt — your AI already knows the codebase.',
 }
 
 export default function TemplatesPage() {
@@ -21,11 +21,11 @@ export default function TemplatesPage() {
           <div className="flex flex-col md:flex-row md:items-end gap-6 md:gap-12">
             <div>
               <h1 className="text-4xl md:text-5xl font-black text-white tracking-tight mb-3">
-                Your idea, already<br />
-                <span className="text-[#f97316]">half-built.</span>
+                Your AI already knows<br />
+                <span className="text-[#f97316]">this codebase.</span>
               </h1>
               <p className="text-[#525252] text-lg max-w-xl leading-relaxed">
-                Open any kit in Cursor or Claude Code. Describe what your product does. Ship in days — not months.
+                Every kit ships pre-loaded with CLAUDE.md, .cursorrules, and tested prompts. Open in any AI tool — Cursor, Claude, Lovable, Bolt — and just describe what to build.
               </p>
             </div>
             <div className="flex gap-6 shrink-0">
@@ -45,8 +45,8 @@ export default function TemplatesPage() {
 
         <div className="flex flex-wrap items-center gap-6 mb-10 py-4 px-5 rounded-xl bg-[#0d0d0d] border border-[#1a1a1a]">
           {[
-            'Works with Cursor, Claude Code & Lovable',
-            'CLAUDE.md + .cursorrules in every kit',
+            'Cursor · Claude · Lovable · Bolt · Windsurf — all supported',
+            'CLAUDE.md + .cursorrules + 20 tested prompts in every kit',
             'One-time payment — no subscription ever',
             '14-day refund guarantee',
           ].map(item => (

@@ -39,10 +39,10 @@ export function CTA() {
           <div className="relative mx-auto max-w-2xl text-center">
             <p className="font-mono text-xs uppercase tracking-widest text-primary mb-3">Early Access</p>
             <h2 className="text-balance text-4xl font-semibold tracking-tight sm:text-5xl">
-              Be the first to ship with OTF.
+              Get notified when the next kit drops.
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
-              Join the waitlist for early access pricing, sneak previews, and a Slack invite when new kits drop.
+              New kits every month — each one pre-loaded for Cursor, Claude, Lovable, and Bolt. Early access pricing + a Slack invite when they ship.
             </p>
 
             {formState === 'success' ? (

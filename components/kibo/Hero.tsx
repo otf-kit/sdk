@@ -323,20 +323,20 @@ export function Hero() {
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-70" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
           </span>
-          <span className="font-mono uppercase tracking-widest text-foreground/80">SaaS Kit now live</span>
+          <span className="font-mono uppercase tracking-widest text-foreground/80">Works with every AI tool — Cursor · Claude · Lovable · Bolt</span>
         </a>
 
         {/* Headline */}
         <h1 ref={headlineRef} className="text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
-          <span className="block text-foreground">Ship faster,</span>
+          <span className="block text-foreground">Describe your idea.</span>
           <span className="block font-mono italic text-foreground" style={{ fontStyle: 'italic' }}>
-            look better
+            Your AI already knows.
           </span>
         </h1>
 
         {/* Subtitle */}
         <p ref={subRef} className="mx-auto mt-6 max-w-xl text-base text-muted-foreground sm:text-lg">
-          Production-ready UI components and full-stack kits for Expo + Next.js — with AI configs for Cursor, Claude Code, and Lovable pre-wired.
+          Every kit ships with CLAUDE.md, .cursorrules, and 20+ tested prompts. Open in Cursor, Claude, Lovable, Bolt, or any AI coding tool — it already understands your entire codebase.
         </p>
 
         {/* Stats row */}
@@ -345,7 +345,7 @@ export function Hero() {
             { value: '180+', label: 'components' },
             { value: '5',    label: 'themes'     },
             { value: 'MIT',  label: 'license'    },
-            { value: 'AI',   label: 'native'     },
+            { value: 'All',  label: 'AI tools'   },
           ].map((s) => (
             <div key={s.label} className="flex items-center gap-1.5 rounded-full border border-border bg-card/60 px-3.5 py-1.5 backdrop-blur-sm">
               <span className="text-sm font-bold text-foreground">{s.value}</span>

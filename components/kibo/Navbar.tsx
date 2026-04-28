@@ -50,8 +50,8 @@ export function Navbar() {
           <span className="inline-flex items-center gap-1.5 bg-primary/15 text-primary text-[10px] font-black px-2 py-0.5 rounded-sm tracking-wider uppercase">NEW</span>
           <span className="text-foreground font-semibold">SaaS Dashboard Kit</span>
           <span className="hidden sm:inline text-muted-foreground/60">·</span>
-          <span className="hidden sm:inline">Full-stack starter with auth, payments, and AI configs pre-wired →</span>
-          <span className="inline sm:hidden">Ship in days →</span>
+          <span className="hidden sm:inline">Pre-loaded into Cursor, Claude, Lovable + every AI tool →</span>
+          <span className="inline sm:hidden">AI-ready from day one →</span>
         </a>
       </div>
 
