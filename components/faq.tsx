@@ -44,14 +44,14 @@ export function Faq() {
   const [open, setOpen] = useState<number | null>(null)
 
   return (
-    <section className="py-24 px-6 border-t border-border">
+    <section className="py-24 border-t border-border">
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-12">
-          <p className="text-xs font-semibold text-[#f97316] uppercase tracking-widest mb-3">
+          <p className="text-xs font-semibold text-primary uppercase tracking-widest mb-3">
             FAQ
           </p>
-          <div className="h-px w-16 bg-[#f97316]/40 mb-6 mx-auto" />
-          <h2 className="text-3xl md:text-4xl font-bold text-white">
+          <div className="h-px w-16 bg-primary/40 mb-6 mx-auto" />
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground">
             Frequently asked questions
           </h2>
         </div>
@@ -60,26 +60,28 @@ export function Faq() {
             <div
               key={faq.question}
               className={`border rounded-xl overflow-hidden transition-colors ${
-                open === i ? 'border-[#f97316]/20 bg-[#0d0d0d]' : 'border-[#1a1a1a] bg-[#0a0a0a] hover:border-[#2a2a2a]'
+                open === i
+                  ? 'border-primary/20 bg-card'
+                  : 'border-border bg-background hover:border-border/60'
               }`}
             >
               <button
                 className="w-full flex items-center justify-between px-6 py-4 cursor-pointer text-left select-none"
                 onClick={() => setOpen(open === i ? null : i)}
               >
-                <span className={`text-sm font-medium transition-colors ${open === i ? 'text-white' : 'text-[#a3a3a3]'}`}>
+                <span className={`text-sm font-medium transition-colors ${open === i ? 'text-foreground' : 'text-foreground/70'}`}>
                   {faq.question}
                 </span>
                 <span className={`ml-4 shrink-0 w-5 h-5 rounded-full border flex items-center justify-center transition-all text-xs font-bold ${
                   open === i
-                    ? 'border-[#f97316]/40 text-[#f97316] bg-[#f97316]/10 rotate-45'
-                    : 'border-[#333333] text-[#525252]'
+                    ? 'border-primary/40 text-primary bg-primary/10 rotate-45'
+                    : 'border-border text-muted-foreground'
                 }`}>
                   +
                 </span>
               </button>
               {open === i && (
-                <div className="px-6 pb-5 text-[#737373] leading-relaxed text-sm border-t border-[#1a1a1a] pt-4">
+                <div className="px-6 pb-5 text-muted-foreground leading-relaxed text-sm border-t border-border pt-4">
                   {faq.answer}
                 </div>
               )}
