@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { useState } from 'react'
 
 const templates = [
@@ -12,6 +13,7 @@ const templates = [
     status: 'available',
     category: 'SaaS',
     kitSlug: 'saas-dashboard',
+    detailSlug: 'saas-dashboard',
     demo: 'https://saas-dashboard-production-ae3f.up.railway.app',
     accent: '#f97316',
     screens: 11,
@@ -21,6 +23,23 @@ const templates = [
       sidebar: ['Dashboard', 'Issues', 'Board', 'Backlog', 'Projects', 'Teams'],
       stat: { label: 'Issues', value: '50', trend: '+12%', trendColor: 'text-green-400' },
     },
+  },
+  {
+    name: 'Fitness App Kit',
+    subtitle: 'Workouts, nutrition, progress charts — all wired for Claude.',
+    platform: 'Expo + Hono',
+    tags: ['Cursor-ready', 'CLAUDE.md included', '25 screens', 'iOS + Android'],
+    price: '$149',
+    status: 'soon',
+    category: 'Mobile',
+    kitSlug: null,
+    detailSlug: 'fitness-app',
+    demo: null,
+    accent: '#22c55e',
+    screens: 25,
+    description: 'Full React Native + Expo template — workout tracking, meal logging, calorie counter, progress charts, and onboarding. Reskin it for any niche with one Claude prompt.',
+    claudePrompt: '"Reskin this for runners — swap meals for run logs, add a pace tracker"',
+    preview: null,
   },
   {
     name: 'Booking & Appointments Kit',
@@ -104,7 +123,7 @@ const templates = [
   },
 ]
 
-const filters = ['All', 'SaaS', 'Services', 'Events', 'Directory', 'Creator'] as const
+const filters = ['All', 'SaaS', 'Mobile', 'Services', 'Events', 'Directory', 'Creator'] as const
 type Filter = typeof filters[number]
 
 // ── Stripe Checkout redirect ───────────────────────────────────────────────
@@ -279,7 +298,13 @@ export function TemplatesClient() {
               <div className="flex items-start justify-between gap-3">
                 <div>
                   <div className="flex items-center gap-2 mb-0.5">
-                    <h3 className="font-bold text-white text-base">{t.name}</h3>
+                    {'detailSlug' in t && t.detailSlug ? (
+                      <Link href={`/templates/${t.detailSlug}`} className="font-bold text-white text-base hover:text-[#f97316] transition-colors">
+                        {t.name}
+                      </Link>
+                    ) : (
+                      <h3 className="font-bold text-white text-base">{t.name}</h3>
+                    )}
                     {t.status === 'available' ? (
                       <span className="text-[9px] px-2 py-0.5 rounded-full bg-green-500/10 text-green-400 border border-green-500/20 font-bold uppercase tracking-wide">Live</span>
                     ) : (
@@ -325,6 +350,13 @@ export function TemplatesClient() {
                   >
                     View demo →
                   </a>
+                ) : 'detailSlug' in t && t.detailSlug ? (
+                  <Link
+                    href={`/templates/${t.detailSlug}`}
+                    className="flex-1 text-sm text-center px-4 py-2.5 border border-[#333333] text-white hover:bg-[#111111] rounded-md transition-colors font-medium"
+                  >
+                    View details →
+                  </Link>
                 ) : (
                   <button
                     disabled
