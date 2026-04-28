@@ -47,10 +47,9 @@ export function Faq() {
     <section className="py-24 border-t border-border">
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-12">
-          <p className="text-xs font-semibold text-primary uppercase tracking-widest mb-3">
-            FAQ
+          <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground mb-6">
+            — FAQ
           </p>
-          <div className="h-px w-16 bg-primary/40 mb-6 mx-auto" />
           <h2 className="text-3xl md:text-4xl font-bold text-foreground">
             Frequently asked questions
           </h2>

@@ -32,10 +32,9 @@ export default function PricingPage() {
         <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-background to-transparent" aria-hidden />
 
         <div className="relative max-w-7xl mx-auto px-6 pt-24 pb-16">
-          <p className="font-mono text-xs uppercase tracking-widest text-primary mb-3">
-            Pricing
+          <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground mb-6">
+            — Pricing
           </p>
-          <div className="h-px w-12 bg-primary/40 mb-6" />
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4 max-w-2xl">
             Simple,{' '}
             <span className="text-primary">transparent</span>{' '}
