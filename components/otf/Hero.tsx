@@ -182,9 +182,9 @@ const FLOAT_CARDS = [
   { id: 'buttons',  side: 'left',  x:  '3%', y: '14%', rotate: -5, depth: 0.5, node: <MiniButtons /> },
   { id: 'badges',   side: 'left',  x:  '1%', y: '58%', rotate:  3, depth: 0.4, node: <MiniBadges /> },
   { id: 'metrics',  side: 'left',  x:  '6%', y: '82%', rotate: -3, depth: 0.35, node: <MiniMetrics /> },
-  { id: 'chart',    side: 'right', x: '59%', y:  '8%', rotate:  5, depth: 0.6, node: <MiniChart /> },
-  { id: 'command',  side: 'right', x: '62%', y: '52%', rotate: -4, depth: 0.5, node: <MiniCommand /> },
-  { id: 'kanban',   side: 'right', x: '57%', y: '78%', rotate:  3, depth: 0.4, node: <MiniKanban /> },
+  { id: 'chart',    side: 'right', x: '66%', y: '10%', rotate:  5, depth: 0.6, node: <MiniChart /> },
+  { id: 'command',  side: 'right', x: '68%', y: '55%', rotate: -4, depth: 0.5, node: <MiniCommand /> },
+  { id: 'kanban',   side: 'right', x: '63%', y: '80%', rotate:  3, depth: 0.4, node: <MiniKanban /> },
 ]
 
 // ── Hero ──────────────────────────────────────────────────────────────────────
@@ -325,7 +325,7 @@ export function Hero() {
           </span>
           <span className="font-mono uppercase tracking-widest text-foreground/80">
             <span className="sm:hidden">Pre-loaded for every AI tool</span>
-            <span className="hidden sm:inline">Works with every AI tool — Cursor · Claude · Lovable · Bolt</span>
+            <span className="hidden sm:inline">Pre-loaded for Cursor · Claude · Lovable · Bolt · and more</span>
           </span>
         </a>
 
