@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { Navbar } from '@/components/kibo/Navbar'
-import { Footer } from '@/components/kibo/Footer'
+import { Navbar } from '@/components/otf/Navbar'
+import { Footer } from '@/components/otf/Footer'
 
 export const metadata: Metadata = {
   title: 'Purchase Complete — OTF',

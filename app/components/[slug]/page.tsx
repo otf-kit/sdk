@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
-import { Navbar }          from '@/components/kibo/Navbar'
-import { Footer }          from '@/components/kibo/Footer'
-import { ComponentDetail } from '@/components/kibo/ComponentDetail'
+import { Navbar }          from '@/components/otf/Navbar'
+import { Footer }          from '@/components/otf/Footer'
+import { ComponentDetail } from '@/components/otf/ComponentDetail'
 import { componentBySlug } from '@/data/component-registry'
 
 type Props = { params: Promise<{ slug: string }> }

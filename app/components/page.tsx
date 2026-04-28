@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
-import { Navbar }           from '@/components/kibo/Navbar'
-import { Footer }           from '@/components/kibo/Footer'
+import { Navbar }           from '@/components/otf/Navbar'
+import { Footer }           from '@/components/otf/Footer'
 import { ComponentsGrid }   from './ComponentsGrid'
 import { components }       from '@/data/component-registry'
 
