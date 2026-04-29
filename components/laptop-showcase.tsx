@@ -1,23 +1,33 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import Link from 'next/link'
 import { ArrowUpRight, Pause, Play } from 'lucide-react'
-import { COMPONENTS } from '@/lib/components-registry'
 
 // Hand-picked components that look great inside a laptop screen.
-const SHOWCASE = [
-  'AppShell',
-  'DataGrid',
-  'Kanban',
-  'BarChart',
-  'CommandPalette',
-  'AutoForm',
-  'DonutChart',
-  'WorkspaceMembers',
-] as const
+// Each maps to a real Storybook story — the iframe loads the actual
+// component running in storybook (not a static screenshot).
+const STORYBOOK_BASE = 'https://otf-storybook.pages.dev'
 
-const CYCLE_MS = 5000
+interface ShowcaseEntry {
+  name: string
+  /** Storybook story id (kebab-cased meta.title + '--' + kebab-cased export name) */
+  storyId: string
+  /** Pretty path shown in the fake browser URL bar */
+  prettyPath: string
+}
+
+const SHOWCASE: ShowcaseEntry[] = [
+  { name: 'AppShell',         storyId: 'layouts--app-shell-layout',          prettyPath: 'layouts/app-shell' },
+  { name: 'DataTable',        storyId: 'data-display--data-table-story',     prettyPath: 'data-display/data-table' },
+  { name: 'Kanban',           storyId: 'advanced--kanban-story',             prettyPath: 'advanced/kanban' },
+  { name: 'BarChart',         storyId: 'charts-areachart--bar-stacked',      prettyPath: 'charts/bar-stacked' },
+  { name: 'Heatmap',          storyId: 'charts-areachart--heatmap-primary-ramp', prettyPath: 'charts/heatmap' },
+  { name: 'ActivityHeatmap',  storyId: 'charts-areachart--activity-heatmap-with-filters', prettyPath: 'charts/activity-heatmap' },
+  { name: 'AutoForm',         storyId: 'forms--form-story',                  prettyPath: 'forms/auto-form' },
+  { name: 'WorkspaceMembers', storyId: 'blocks--members-settings',           prettyPath: 'blocks/members' },
+]
+
+const CYCLE_MS = 6000
 
 export function LaptopShowcase() {
   const [index, setIndex] = useState(0)
@@ -34,10 +44,9 @@ export function LaptopShowcase() {
     }
   }, [paused])
 
-  const activeName = SHOWCASE[index]
-  const activeDef = COMPONENTS.find((c) => c.name === activeName)
-  if (!activeDef) return null
-  const slug = activeName.toLowerCase().replace(/\s+/g, '-')
+  const active = SHOWCASE[index]
+  const iframeSrc = `${STORYBOOK_BASE}/iframe?id=${active.storyId}&viewMode=story`
+  const fullStoryUrl = `${STORYBOOK_BASE}/?path=/story/${active.storyId}`
 
   return (
     <section className="relative overflow-hidden border-b border-border">
@@ -80,36 +89,37 @@ export function LaptopShowcase() {
                 {/* Screen */}
                 <div className="relative aspect-[16/10] rounded-[7px] overflow-hidden bg-[#080808]">
                   {/* Faux OS chrome */}
-                  <div className="absolute inset-x-0 top-0 z-30 flex items-center gap-2 px-3 py-2 border-b border-border/80 bg-background/40 backdrop-blur-sm">
+                  <div className="absolute inset-x-0 top-0 z-30 flex items-center gap-2 px-3 py-2 border-b border-border/80 bg-background/60 backdrop-blur-sm">
                     <div className="flex items-center gap-1">
                       <span className="h-2 w-2 rounded-full bg-red-500/70" />
                       <span className="h-2 w-2 rounded-full bg-yellow-500/70" />
                       <span className="h-2 w-2 rounded-full bg-green-500/70" />
                     </div>
                     <div className="flex-1 flex justify-center">
-                      <span className="rounded-md bg-background/60 border border-border/60 px-2 py-0.5 font-mono text-[10px] tracking-tight text-muted-foreground/70">
-                        otf.sh/{slug}
-                      </span>
+                      <a
+                        href={fullStoryUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="rounded-md bg-background/60 border border-border/60 px-2 py-0.5 font-mono text-[10px] tracking-tight text-muted-foreground/70 hover:text-foreground hover:border-primary/40 transition-colors"
+                      >
+                        storybook.otf.sh/{active.prettyPath}
+                      </a>
                     </div>
                     <span className="h-2 w-2" aria-hidden />
                   </div>
 
-                  {/* Dot grid backdrop */}
-                  <div className="absolute inset-0 bg-dot-grid opacity-10 pointer-events-none" />
-                  {/* Ambient primary glow */}
-                  <div
-                    aria-hidden
-                    className="pointer-events-none absolute -inset-x-8 -top-32 h-72 opacity-60"
-                    style={{ background: 'radial-gradient(ellipse at 50% 0%, hsl(var(--primary) / 0.18), transparent 70%)' }}
+                  {/* Live Storybook iframe — actual component rendering, not a static preview */}
+                  <iframe
+                    key={active.storyId}
+                    src={iframeSrc}
+                    title={`${active.name} story`}
+                    loading="lazy"
+                    className="absolute inset-0 h-full w-full pt-9 bg-[#080808] laptop-screen-fade"
+                    style={{ colorScheme: 'dark' }}
                   />
 
-                  {/* Component preview — keyed for fade-in transition */}
-                  <div key={activeName} className="absolute inset-0 pt-9 laptop-screen-fade">
-                    {activeDef.preview}
-                  </div>
-
                   {/* Subtle scanline sweep on each switch */}
-                  <div key={`scan-${activeName}`} className="laptop-scanline pointer-events-none" />
+                  <div key={`scan-${active.storyId}`} className="laptop-scanline pointer-events-none" />
                 </div>
               </div>
 
@@ -156,16 +166,16 @@ export function LaptopShowcase() {
               {paused ? 'Resume' : 'Pause'}
             </button>
             <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground/60">
-              {String(index + 1).padStart(2, '0')} / {String(SHOWCASE.length).padStart(2, '0')} · {activeName}
+              {String(index + 1).padStart(2, '0')} / {String(SHOWCASE.length).padStart(2, '0')} · {active.name}
             </span>
           </div>
 
           <div className="flex flex-wrap justify-center gap-2 max-w-3xl">
-            {SHOWCASE.map((name, i) => {
+            {SHOWCASE.map((entry, i) => {
               const isActive = i === index
               return (
                 <button
-                  key={name}
+                  key={entry.storyId}
                   onClick={() => { setIndex(i); setPaused(true) }}
                   className={
                     'group relative inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-xs font-medium transition-all ' +
@@ -174,7 +184,7 @@ export function LaptopShowcase() {
                       : 'border-border bg-secondary/30 text-muted-foreground hover:bg-secondary hover:text-foreground')
                   }
                 >
-                  <span className="relative z-10">{name}</span>
+                  <span className="relative z-10">{entry.name}</span>
                   {isActive && !paused && (
                     <span className="absolute inset-x-0 bottom-0 h-0.5 origin-left bg-primary laptop-progress-bar" />
                   )}
@@ -183,12 +193,14 @@ export function LaptopShowcase() {
             })}
           </div>
 
-          <Link
-            href={`/components/${slug}`}
+          <a
+            href={fullStoryUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
           >
-            See {activeName} live <ArrowUpRight className="h-3.5 w-3.5" />
-          </Link>
+            Open {active.name} in Storybook <ArrowUpRight className="h-3.5 w-3.5" />
+          </a>
         </div>
       </div>
 
