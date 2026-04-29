@@ -1,7 +1,9 @@
 import React from 'react'
 import {
   BarChart as RechartsBarChart,
+  ComposedChart,
   Bar,
+  Line,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -36,6 +38,12 @@ export interface BarChartProps {
   maxBarSize?: number
   /** Gap between bar groups. Defaults to '45%' for generous whitespace. */
   barCategoryGap?: number | string
+  /** Optional line overlay key — switches to ComposedChart with second Y axis */
+  lineDataKey?: string
+  lineColor?: string
+  lineStrokeWidth?: number
+  rightAxisFormatter?: (v: number) => string
+  rightAxisDomain?: [number | string, number | string]
   className?: string
 }
 
@@ -53,18 +61,24 @@ export function BarChart({
   barSize = 28,
   maxBarSize,
   barCategoryGap = '45%',
+  lineDataKey,
+  lineColor = 'hsl(var(--foreground))',
+  lineStrokeWidth = 2,
+  rightAxisFormatter,
+  rightAxisDomain,
   className,
 }: BarChartProps) {
   const keys = Array.isArray(dataKey) ? dataKey : [dataKey]
   const isVertical = layout === 'vertical'
+  const Chart = lineDataKey ? ComposedChart : RechartsBarChart
 
   return (
     <div className={cn('w-full overflow-hidden', className)} style={{ minWidth: 0 }}>
       <ResponsiveContainer width="100%" height={height}>
-        <RechartsBarChart
+        <Chart
           data={data}
           layout={layout}
-          margin={{ top: 4, right: 4, left: -20, bottom: 0 }}
+          margin={{ top: 4, right: lineDataKey ? 8 : 4, left: -20, bottom: 0 }}
           barSize={barSize}
           maxBarSize={maxBarSize}
           barCategoryGap={barCategoryGap}
@@ -78,7 +92,18 @@ export function BarChart({
           ) : (
             <>
               <XAxis dataKey={xAxisKey} tick={{ fontSize: 12, fill: 'hsl(var(--muted-foreground))' }} axisLine={false} tickLine={false} />
-              <YAxis tick={{ fontSize: 12, fill: 'hsl(var(--muted-foreground))' }} axisLine={false} tickLine={false} />
+              <YAxis yAxisId="left" tick={{ fontSize: 12, fill: 'hsl(var(--muted-foreground))' }} axisLine={false} tickLine={false} />
+              {lineDataKey && (
+                <YAxis
+                  yAxisId="right"
+                  orientation="right"
+                  tick={{ fontSize: 12, fill: 'hsl(var(--muted-foreground))' }}
+                  axisLine={false}
+                  tickLine={false}
+                  domain={rightAxisDomain}
+                  tickFormatter={rightAxisFormatter}
+                />
+              )}
             </>
           )}
           {showTooltip && (
@@ -97,12 +122,24 @@ export function BarChart({
             <Bar
               key={key}
               dataKey={key}
+              yAxisId={isVertical ? undefined : 'left'}
               fill={colors[i % colors.length]}
               radius={isVertical ? [0, 6, 6, 0] : [6, 6, 0, 0]}
               stackId={stacked ? 'stack' : undefined}
             />
           ))}
-        </RechartsBarChart>
+          {lineDataKey && !isVertical && (
+            <Line
+              type="monotone"
+              dataKey={lineDataKey}
+              yAxisId="right"
+              stroke={lineColor}
+              strokeWidth={lineStrokeWidth}
+              dot={false}
+              activeDot={{ r: 4 }}
+            />
+          )}
+        </Chart>
       </ResponsiveContainer>
     </div>
   )
