@@ -148,11 +148,10 @@ export interface ThemePickerOption {
 }
 
 export const DEFAULT_THEME_OPTIONS: ThemePickerOption[] = [
-  { value: BRAND_SENTINEL, label: 'Brand',    color: '#F97316' },
-  { value: 'theme-slate',  label: 'Slate',    color: '#6366F1' },
-  { value: 'theme-warm',   label: 'Warm',     color: '#D97706' },
-  { value: 'theme-cosmic', label: 'Cosmic',   color: '#7C3AED' },
-  { value: 'theme-terminal', label: 'Terminal', color: '#16A34A' },
+  { value: 'theme-minimal',  label: 'Minimal',  color: '#F97316' },
+  { value: 'theme-linear',   label: 'Linear',   color: '#171717' },
+  { value: 'theme-glass',    label: 'Glass',    color: '#3B82F6' },
+  { value: 'theme-midnight', label: 'Midnight', color: '#7C3AED' },
 ]
 
 function readStoredTheme(): string {
