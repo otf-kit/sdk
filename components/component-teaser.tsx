@@ -13,26 +13,6 @@ function BentoLabel({ children }: { children: React.ReactNode }) {
   )
 }
 
-// ── Browser chrome ────────────────────────────────────────────────────────────
-// Tiny mac-style top bar to make every preview feel like a real product screenshot.
-function BrowserChrome({ slug }: { slug: string }) {
-  return (
-    <div className="absolute inset-x-0 top-0 z-20 flex items-center gap-2 px-3 py-2 border-b border-border/80 bg-background/40 backdrop-blur-sm">
-      <div className="flex items-center gap-1">
-        <span className="h-2 w-2 rounded-full bg-red-500/70" />
-        <span className="h-2 w-2 rounded-full bg-yellow-500/70" />
-        <span className="h-2 w-2 rounded-full bg-green-500/70" />
-      </div>
-      <div className="flex-1 flex justify-center">
-        <span className="rounded-md bg-background/60 border border-border/60 px-2 py-0.5 font-mono text-[9px] tracking-tight text-muted-foreground/70 max-w-[60%] truncate">
-          otf.sh/{slug}
-        </span>
-      </div>
-      <span className="h-2 w-2" aria-hidden />
-    </div>
-  )
-}
-
 // ── Preview card ──────────────────────────────────────────────────────────────
 function BentoCard({ name, height }: { name: string; height: number }) {
   const def = COMPONENTS.find((c) => c.name === name)
@@ -48,18 +28,11 @@ function BentoCard({ name, height }: { name: string; height: number }) {
         />
       </div>
       <div
-        className="relative overflow-hidden rounded-xl border border-border bg-[#080808] transition-all duration-200 group-hover:border-primary/30 group-hover:shadow-[0_8px_32px_-8px_hsl(var(--primary)/0.25)]"
+        className="relative overflow-hidden rounded-xl border border-border bg-[#080808] transition-colors duration-200 group-hover:border-primary/30"
         style={{ height }}
       >
         <div className="absolute inset-0 bg-dot-grid opacity-15 pointer-events-none" />
-        {/* Soft top→bottom ambient glow that subtly shifts on hover */}
-        <div
-          aria-hidden
-          className="absolute -inset-x-8 -top-32 h-72 opacity-0 transition-opacity duration-300 group-hover:opacity-100 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse at 50% 0%, hsl(var(--primary) / 0.18), transparent 70%)' }}
-        />
-        <BrowserChrome slug={slug} />
-        <div className="absolute inset-0 pt-9">{def.preview}</div>
+        <div className="absolute inset-0">{def.preview}</div>
       </div>
     </Link>
   )
@@ -68,19 +41,19 @@ function BentoCard({ name, height }: { name: string; height: number }) {
 // ── Desktop bento layout (3-col grid, rows with equal height per row) ─────────
 // Heights calibrated so every preview has breathing room — no clipping.
 const ROWS: Array<{ items: Array<{ name: string; span?: 2 }>; height: number }> = [
-  { height: 376, items: [{ name: 'DataGrid', span: 2 }, { name: 'DonutChart' }] },
-  { height: 256, items: [{ name: 'Button' }, { name: 'Badge' }, { name: 'Avatar' }] },
-  { height: 376, items: [{ name: 'AppShell', span: 2 }, { name: 'Sidebar' }] },
-  { height: 276, items: [{ name: 'Dialog' }, { name: 'Select' }, { name: 'Input' }] },
-  { height: 336, items: [{ name: 'Kanban', span: 2 }, { name: 'MetricCard' }] },
-  { height: 256, items: [{ name: 'Checkbox' }, { name: 'Tabs' }, { name: 'Slider' }] },
-  { height: 316, items: [{ name: 'BarChart', span: 2 }, { name: 'LineChart' }] },
-  { height: 296, items: [{ name: 'TextureCard' }, { name: 'Tooltip' }, { name: 'CommandPalette' }] },
-  { height: 316, items: [{ name: 'SplitPage', span: 2 }, { name: 'Timeline' }] },
-  { height: 296, items: [{ name: 'Toast' }, { name: 'Alert' }, { name: 'Progress' }] },
-  { height: 276, items: [{ name: 'Skeleton' }, { name: 'EmptyState' }, { name: 'Breadcrumb' }] },
-  { height: 376, items: [{ name: 'AutoForm' }, { name: 'DatePicker' }, { name: 'StepForm' }] },
-  { height: 296, items: [{ name: 'WorkspaceMembers' }, { name: 'FileCards', span: 2 }] },
+  { height: 340, items: [{ name: 'DataGrid', span: 2 }, { name: 'DonutChart' }] },
+  { height: 220, items: [{ name: 'Button' }, { name: 'Badge' }, { name: 'Avatar' }] },
+  { height: 340, items: [{ name: 'AppShell', span: 2 }, { name: 'Sidebar' }] },
+  { height: 240, items: [{ name: 'Dialog' }, { name: 'Select' }, { name: 'Input' }] },
+  { height: 300, items: [{ name: 'Kanban', span: 2 }, { name: 'MetricCard' }] },
+  { height: 220, items: [{ name: 'Checkbox' }, { name: 'Tabs' }, { name: 'Slider' }] },
+  { height: 280, items: [{ name: 'BarChart', span: 2 }, { name: 'LineChart' }] },
+  { height: 260, items: [{ name: 'TextureCard' }, { name: 'Tooltip' }, { name: 'CommandPalette' }] },
+  { height: 280, items: [{ name: 'SplitPage', span: 2 }, { name: 'Timeline' }] },
+  { height: 260, items: [{ name: 'Toast' }, { name: 'Alert' }, { name: 'Progress' }] },
+  { height: 240, items: [{ name: 'Skeleton' }, { name: 'EmptyState' }, { name: 'Breadcrumb' }] },
+  { height: 340, items: [{ name: 'AutoForm' }, { name: 'DatePicker' }, { name: 'StepForm' }] },
+  { height: 260, items: [{ name: 'WorkspaceMembers' }, { name: 'FileCards', span: 2 }] },
 ]
 
 // ── Mobile: top 5 featured components shown vertically ───────────────────────
@@ -140,7 +113,7 @@ export function ComponentTeaser() {
         {/* ── Mobile: single-column top 5 + View All ────────────────────────── */}
         <div className="flex flex-col gap-3 md:hidden">
           {MOBILE_FEATURED.map((name) => (
-            <BentoCard key={name} name={name} height={296} />
+            <BentoCard key={name} name={name} height={260} />
           ))}
           <Link
             href="/components"
