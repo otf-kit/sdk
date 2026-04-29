@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
-import { TrendingUp, Users, ShoppingCart } from 'lucide-react'
+import { TrendingUp, Users, ShoppingCart, Settings, Bell } from 'lucide-react'
 import {
   SidebarLayoutDashboard, SidebarLayoutMinimal, SidebarLayoutGroups,
   SidebarLayoutUser, SidebarLayoutSearch,
@@ -12,6 +12,8 @@ import {
   ChatDetail, MessagesCard,
   FileCards, FilesList,
   TaskCard, TaskCardWithLabels, SortableTaskList,
+  FloatingActionButton, FloatingThemePicker,
+  Switch,
 } from '@otf/ui'
 
 const meta: Meta = { title: 'Blocks', tags: ['autodocs'] }
@@ -97,3 +99,51 @@ export const TaskCards: StoryObj = {
   ),
 }
 export const TaskListStory: StoryObj = { name: 'Tasks / Sortable List', render: () => <div className="max-w-lg"><SortableTaskList /></div> }
+
+export const FABThemePicker: StoryObj = {
+  name: 'FAB / Theme Picker',
+  parameters: { layout: 'fullscreen' },
+  render: () => (
+    <div className="relative w-full h-[400px] bg-background flex items-center justify-center">
+      <div className="text-center space-y-1">
+        <p className="text-sm font-semibold text-foreground">FloatingThemePicker</p>
+        <p className="text-xs text-muted-foreground">Click the palette button — bottom right</p>
+      </div>
+      <FloatingThemePicker />
+    </div>
+  ),
+}
+
+export const FABGeneric: StoryObj = {
+  name: 'FAB / Generic (custom sections)',
+  parameters: { layout: 'fullscreen' },
+  render: () => (
+    <div className="relative w-full h-[400px] bg-background flex items-center justify-center">
+      <div className="text-center space-y-1">
+        <p className="text-sm font-semibold text-foreground">FloatingActionButton</p>
+        <p className="text-xs text-muted-foreground">Generic FAB — any icon, any sections</p>
+      </div>
+      <FloatingActionButton
+        icon={<Settings className="h-[18px] w-[18px]" />}
+        label="Open settings"
+        title="Quick Settings"
+        position="bottom-right"
+        sections={[
+          {
+            label: 'Notifications',
+            content: (
+              <div className="space-y-2">
+                {['Email alerts', 'Push', 'Digest'].map(item => (
+                  <div key={item} className="flex items-center justify-between">
+                    <span className="text-xs text-foreground">{item}</span>
+                    <Switch />
+                  </div>
+                ))}
+              </div>
+            ),
+          },
+        ]}
+      />
+    </div>
+  ),
+}

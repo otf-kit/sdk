@@ -30,6 +30,12 @@ export interface BarChartProps {
   showLegend?: boolean
   layout?: 'vertical' | 'horizontal'
   stacked?: boolean
+  /** Exact bar width/height in px. Defaults to 28 for a slim, elegant look. */
+  barSize?: number
+  /** Maximum bar width/height in px */
+  maxBarSize?: number
+  /** Gap between bar groups. Defaults to '45%' for generous whitespace. */
+  barCategoryGap?: number | string
   className?: string
 }
 
@@ -44,6 +50,9 @@ export function BarChart({
   showLegend = false,
   layout = 'horizontal',
   stacked = false,
+  barSize = 28,
+  maxBarSize,
+  barCategoryGap = '45%',
   className,
 }: BarChartProps) {
   const keys = Array.isArray(dataKey) ? dataKey : [dataKey]
@@ -52,7 +61,14 @@ export function BarChart({
   return (
     <div className={cn('w-full overflow-hidden', className)} style={{ minWidth: 0 }}>
       <ResponsiveContainer width="100%" height={height}>
-        <RechartsBarChart data={data} layout={layout} margin={{ top: 4, right: 4, left: -20, bottom: 0 }}>
+        <RechartsBarChart
+          data={data}
+          layout={layout}
+          margin={{ top: 4, right: 4, left: -20, bottom: 0 }}
+          barSize={barSize}
+          maxBarSize={maxBarSize}
+          barCategoryGap={barCategoryGap}
+        >
           {showGrid && <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />}
           {isVertical ? (
             <>
@@ -67,6 +83,7 @@ export function BarChart({
           )}
           {showTooltip && (
             <Tooltip
+              cursor={false}
               contentStyle={{
                 background: 'hsl(var(--card))',
                 border: '1px solid hsl(var(--border))',
@@ -81,7 +98,7 @@ export function BarChart({
               key={key}
               dataKey={key}
               fill={colors[i % colors.length]}
-              radius={isVertical ? [0, 4, 4, 0] : [4, 4, 0, 0]}
+              radius={isVertical ? [0, 6, 6, 0] : [6, 6, 0, 0]}
               stackId={stacked ? 'stack' : undefined}
             />
           ))}

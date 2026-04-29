@@ -48,10 +48,14 @@ export function ColorSchemeSelect({
   onChange,
   className,
 }: ColorSchemeSelectProps) {
-  const fallback = defaultValue ?? options[0]?.value ?? 'theme-linear'
+  const fallback = defaultValue ?? options[0]?.value ?? ''
   const [value, setValue] = React.useState<string>(() => readInitial(fallback))
+  const didMount = React.useRef(false)
 
   React.useEffect(() => {
+    // Skip on initial mount — the app-level init script (index.html) already
+    // applied the persisted theme class. Only re-apply when the user changes it.
+    if (!didMount.current) { didMount.current = true; return }
     apply(value)
     try { localStorage.setItem(STORAGE_KEY, value) } catch {}
     onChange?.(value)
