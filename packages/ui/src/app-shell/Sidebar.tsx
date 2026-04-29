@@ -70,8 +70,16 @@ function SidebarRoot({ children, storageKey = 'sidebar-collapsed', defaultCollap
 
 // ── Header ───────────────────────────────────────────────────────
 function SidebarHeader({ children, className }: { children: React.ReactNode; className?: string }) {
+  const { collapsed } = useSidebar()
   return (
-    <div data-slot="sidebar-header" className={cn('flex items-center px-3 h-14 shrink-0 border-b border-border overflow-hidden', className)}>
+    <div
+      data-slot="sidebar-header"
+      className={cn(
+        'flex items-center h-14 shrink-0 border-b border-border overflow-hidden',
+        collapsed ? 'justify-center px-0' : 'px-3',
+        className,
+      )}
+    >
       {children}
     </div>
   )
@@ -107,7 +115,8 @@ function SidebarItem({ icon, label, href, active, badge, onClick, className }: S
       data-slot="sidebar-item"
       data-active={active || undefined}
       className={cn(
-        'flex items-center gap-2.5 w-full rounded-md px-2 py-1.5',
+        'flex items-center gap-2.5 w-full rounded-md py-1.5',
+        collapsed ? 'justify-center px-0' : 'px-2',
         'text-sm font-medium transition-colors',
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
         active
@@ -125,8 +134,16 @@ function SidebarItem({ icon, label, href, active, badge, onClick, className }: S
 
 // ── Footer ───────────────────────────────────────────────────────
 function SidebarFooter({ children, className }: { children: React.ReactNode; className?: string }) {
+  const { collapsed } = useSidebar()
   return (
-    <div data-slot="sidebar-footer" className={cn('shrink-0 border-t border-border px-2 py-2', className)}>
+    <div
+      data-slot="sidebar-footer"
+      className={cn(
+        'shrink-0 border-t border-border py-2',
+        collapsed ? 'flex flex-col items-center px-0' : 'px-2',
+        className,
+      )}
+    >
       {children}
     </div>
   )

@@ -9,6 +9,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '../primitives/dropdown-menu'
+import { useSidebar } from '../app-shell/Sidebar'
 
 const ORGS = [
   { id: '1', name: 'Acme Corp', slug: 'acme', plan: 'Pro' },
@@ -30,16 +31,23 @@ export function OrgMenu({
   className,
 }: OrgMenuProps) {
   const current = ORGS.find(o => o.id === currentOrgId) ?? ORGS[0]
+  const { collapsed } = useSidebar()
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className={cn('flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors hover:bg-[hsl(var(--accent))] focus:outline-none', className)}>
-          <div className="flex h-6 w-6 items-center justify-center rounded bg-[hsl(var(--primary))] text-[10px] font-bold text-[hsl(var(--primary-foreground))]">
+        <button
+          className={cn(
+            'flex items-center rounded-md py-1.5 text-sm transition-colors hover:bg-[hsl(var(--accent))] focus:outline-none',
+            collapsed ? 'justify-center px-0' : 'gap-2 px-2',
+            className,
+          )}
+        >
+          <div className="flex h-6 w-6 items-center justify-center rounded bg-[hsl(var(--primary))] text-[10px] font-bold text-[hsl(var(--primary-foreground))] shrink-0">
             {current.name[0]}
           </div>
-          <span className="font-medium max-w-[120px] truncate">{current.name}</span>
-          <ChevronDown className="h-3.5 w-3.5 text-[hsl(var(--muted-foreground))]" />
+          {!collapsed && <span className="font-medium max-w-[120px] truncate">{current.name}</span>}
+          {!collapsed && <ChevronDown className="h-3.5 w-3.5 text-[hsl(var(--muted-foreground))]" />}
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start" className="w-52">
