@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
 import {
-  AreaChart, BarChart, LineChart, Sparkline,
+  AreaChart, BarChart, LineChart, Sparkline, Heatmap, BarList, ActivityHeatmap,
   Beacon, Tour, TourStep, useTour,
   Button,
 } from '@otf/ui'
@@ -160,4 +160,137 @@ function TourDemo() {
 export const TourStory: StoryObj = {
   name: 'Tour / Guided tour',
   render: () => (<Tour totalSteps={3}><TourDemo /></Tour>),
+}
+
+const HEATMAP_DATA = (() => {
+  const out: { date: string; value: number }[] = []
+  let seed = 42
+  const rng = () => { seed = (seed * 9301 + 49297) % 233280; return seed / 233280 }
+  const today = new Date('2026-04-29')
+  const start = new Date(today); start.setDate(start.getDate() - 365)
+  const cursor = new Date(start)
+  while (cursor <= today) {
+    const dow = cursor.getDay()
+    const isWeekend = dow === 0 || dow === 6
+    out.push({
+      date: `${cursor.getFullYear()}-${String(cursor.getMonth() + 1).padStart(2, '0')}-${String(cursor.getDate()).padStart(2, '0')}`,
+      value: Math.max(0, Math.round(rng() * (isWeekend ? 6 : 22))),
+    })
+    cursor.setDate(cursor.getDate() + 1)
+  }
+  return out
+})()
+
+export const HeatmapBasic: StoryObj<typeof Heatmap> = {
+  name: 'Heatmap / Basic',
+  render: () => (
+    <div className="p-4">
+      <Heatmap
+        data={HEATMAP_DATA}
+        endDate={new Date('2026-04-29')}
+        weeks={53}
+        cellSize={11}
+        gap={3}
+      />
+    </div>
+  ),
+}
+
+export const HeatmapPrimaryRamp: StoryObj<typeof Heatmap> = {
+  name: 'Heatmap / Primary opacity ramp',
+  render: () => (
+    <div className="p-4">
+      <Heatmap
+        data={HEATMAP_DATA}
+        endDate={new Date('2026-04-29')}
+        weeks={53}
+        cellSize={11}
+        gap={3}
+        colorScale={[
+          'hsl(var(--muted))',
+          'hsl(var(--primary) / 0.25)',
+          'hsl(var(--primary) / 0.5)',
+          'hsl(var(--primary) / 0.75)',
+          'hsl(var(--primary))',
+        ]}
+        formatTooltip={(d) => `${d.value} events on ${d.date}`}
+      />
+    </div>
+  ),
+}
+
+const BARLIST_DATA = [
+  { label: 'web-app',       value: 84, color: 'hsl(var(--chart-1) / 0.35)' },
+  { label: 'api-gateway',   value: 47, color: 'hsl(var(--chart-2) / 0.35)' },
+  { label: 'mobile-client', value: 29, color: 'hsl(var(--chart-3) / 0.35)' },
+  { label: 'data-pipeline', value: 18, color: 'hsl(var(--chart-4) / 0.35)' },
+  { label: 'docs',          value: 7,  color: 'hsl(var(--chart-5) / 0.35)' },
+]
+
+export const BarListBasic: StoryObj<typeof BarList> = {
+  name: 'BarList / Basic',
+  render: () => (
+    <div className="p-4 max-w-md">
+      <BarList data={BARLIST_DATA} />
+    </div>
+  ),
+}
+
+export const BarListWithLinks: StoryObj<typeof BarList> = {
+  name: 'BarList / Linked rows',
+  render: () => (
+    <div className="p-4 max-w-md">
+      <BarList data={BARLIST_DATA.map(r => ({ ...r, href: `https://github.com/example/${r.label}` }))} />
+    </div>
+  ),
+}
+
+export const ActivityHeatmapBasic: StoryObj<typeof ActivityHeatmap> = {
+  name: 'ActivityHeatmap / Basic',
+  render: () => (
+    <div className="p-4 max-w-5xl">
+      <ActivityHeatmap
+        caption="Activity"
+        total={1_847_392}
+        data={HEATMAP_DATA}
+        endDate={new Date('2026-04-29')}
+        stats={[
+          { label: 'Most Active Month', value: 'March' },
+          { label: 'Most Active Day',   value: 'Mar 18, 2026' },
+          { label: 'Longest Streak',    value: '64d' },
+          { label: 'Current Streak',    value: '21d' },
+        ]}
+      />
+    </div>
+  ),
+}
+
+export const ActivityHeatmapWithFilters: StoryObj<typeof ActivityHeatmap> = {
+  name: 'ActivityHeatmap / With filters',
+  render: function ActivityHeatmapFiltered() {
+    const [filter, setFilter] = React.useState('all')
+    return (
+      <div className="p-4 max-w-5xl">
+        <ActivityHeatmap
+          caption="Activity"
+          total={1_847_392}
+          data={HEATMAP_DATA}
+          endDate={new Date('2026-04-29')}
+          filters={[
+            { value: 'all', label: 'All' },
+            { value: 'web', label: 'Web' },
+            { value: 'api', label: 'API' },
+          ]}
+          filterValue={filter}
+          onFilterChange={setFilter}
+          stats={[
+            { label: 'Most Active Month', value: 'March' },
+            { label: 'Most Active Day',   value: 'Mar 18, 2026' },
+            { label: 'Longest Streak',    value: '64d' },
+            { label: 'Current Streak',    value: '21d' },
+          ]}
+        />
+      </div>
+    )
+  },
 }
