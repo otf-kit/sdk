@@ -35,8 +35,12 @@ export interface ThemeSwitchProps {
 
 export function ThemeSwitch({ defaultMode, onChange, className, variant = 'segmented' }: ThemeSwitchProps) {
   const [mode, setMode] = React.useState<Mode>(() => defaultMode ?? readInitial())
+  const didMount = React.useRef(false)
 
   React.useEffect(() => {
+    // Skip on initial mount — the app-level init script (index.html) already
+    // applied the persisted preference. Only re-apply when the user changes it.
+    if (!didMount.current) { didMount.current = true; return }
     apply(mode)
     try { localStorage.setItem(STORAGE_KEY, mode) } catch {}
     onChange?.(mode)

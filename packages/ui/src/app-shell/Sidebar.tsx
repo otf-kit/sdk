@@ -116,9 +116,9 @@ function SidebarItem({ icon, label, href, active, badge, onClick, className }: S
         className
       )}
     >
-      {icon && <span className="h-4 w-4 shrink-0 [&>svg]:h-4 [&>svg]:w-4">{icon}</span>}
-      {!collapsed && <span className="flex-1 truncate">{label}</span>}
-      {!collapsed && badge && <span className="shrink-0">{badge}</span>}
+      {icon && <span className="flex h-4 w-4 shrink-0 items-center justify-center [&>svg]:h-4 [&>svg]:w-4">{icon}</span>}
+      {!collapsed && <span className="min-w-0 truncate">{label}</span>}
+      {!collapsed && badge && <span className="ml-auto shrink-0">{badge}</span>}
     </Tag>
   )
 }
