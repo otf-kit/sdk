@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { ChevronDown, Check, Plus } from 'lucide-react'
 import { cn } from '../utils/cn'
 import {
@@ -18,20 +18,31 @@ const ORGS = [
 ]
 
 export interface OrgMenuProps {
+  /** Controlled mode — pass to manage selection externally. If omitted, the menu manages its own state. */
   currentOrgId?: string
+  /** Default selection in uncontrolled mode. Defaults to the first org. */
+  defaultOrgId?: string
   onSwitch?: (orgId: string) => void
   onCreateOrg?: () => void
   className?: string
 }
 
 export function OrgMenu({
-  currentOrgId = '1',
+  currentOrgId,
+  defaultOrgId,
   onSwitch,
   onCreateOrg,
   className,
 }: OrgMenuProps) {
-  const current = ORGS.find(o => o.id === currentOrgId) ?? ORGS[0]
+  const [internalId, setInternalId] = useState(defaultOrgId ?? ORGS[0]?.id ?? '1')
+  const activeId = currentOrgId ?? internalId
+  const current = ORGS.find(o => o.id === activeId) ?? ORGS[0]
   const { collapsed } = useSidebar()
+
+  function handleSwitch(orgId: string) {
+    if (currentOrgId === undefined) setInternalId(orgId)
+    onSwitch?.(orgId)
+  }
 
   return (
     <DropdownMenu>
@@ -54,14 +65,14 @@ export function OrgMenu({
         <DropdownMenuLabel>Organizations</DropdownMenuLabel>
         <DropdownMenuSeparator />
         {ORGS.map(org => (
-          <DropdownMenuItem key={org.id} onClick={() => onSwitch?.(org.id)} className="justify-between">
+          <DropdownMenuItem key={org.id} onClick={() => handleSwitch(org.id)} className="justify-between">
             <div className="flex items-center gap-2">
               <div className="flex h-5 w-5 items-center justify-center rounded bg-[hsl(var(--muted))] text-[10px] font-bold">
                 {org.name[0]}
               </div>
               <span>{org.name}</span>
             </div>
-            {org.id === currentOrgId && <Check className="h-3.5 w-3.5 text-[hsl(var(--primary))]" />}
+            {org.id === activeId && <Check className="h-3.5 w-3.5 text-[hsl(var(--primary))]" />}
           </DropdownMenuItem>
         ))}
         <DropdownMenuSeparator />
