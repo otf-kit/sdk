@@ -50,7 +50,7 @@ export function AreaChart({
   return (
     <div className={cn('w-full overflow-hidden', className)} style={{ minWidth: 0 }}>
       <ResponsiveContainer width="100%" height={height}>
-        <RechartsAreaChart data={[...data]} margin={{ top: 4, right: 4, left: -20, bottom: 0 }}>
+        <RechartsAreaChart data={data.map((d) => ({ ...d }))} margin={{ top: 4, right: 4, left: -20, bottom: 0 }}>
           {showGrid && <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />}
           <XAxis dataKey={xAxisKey} tick={{ fontSize: 12, fill: 'hsl(var(--muted-foreground))' }} axisLine={false} tickLine={false} />
           <YAxis tick={{ fontSize: 12, fill: 'hsl(var(--muted-foreground))' }} axisLine={false} tickLine={false} />

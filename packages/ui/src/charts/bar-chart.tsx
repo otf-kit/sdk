@@ -76,7 +76,7 @@ export function BarChart({
     <div className={cn('w-full overflow-hidden', className)} style={{ minWidth: 0 }}>
       <ResponsiveContainer width="100%" height={height}>
         <Chart
-          data={data}
+          data={data.map((d) => ({ ...d }))}
           layout={layout}
           margin={{ top: 4, right: lineDataKey ? 8 : 4, left: -20, bottom: 0 }}
           barSize={barSize}
