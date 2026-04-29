@@ -1,20 +1,40 @@
 'use client'
 
 import Link from 'next/link'
-import { ArrowUpRight } from 'lucide-react'
-import { COMPONENTS } from '@/lib/components-registry'
+import { useMemo, useState } from 'react'
+import { ArrowUpRight, ArrowRight } from 'lucide-react'
+import { COMPONENTS, type ComponentCategory } from '@/lib/components-registry'
 
-// ── Label ─────────────────────────────────────────────────────────────────────
-function BentoLabel({ children }: { children: React.ReactNode }) {
-  return (
-    <p className="font-mono text-[9px] uppercase tracking-[0.14em] text-muted-foreground/60 select-none">
-      {children}
-    </p>
-  )
-}
+// ── Featured showcases ────────────────────────────────────────────────────────
+// Three hand-picked components get a full-width "story" block with narrative
+// copy beside the preview. These are the headliners — the ones that sell the kit.
+const FEATURED: Array<{ name: string; eyebrow: string; headline: string; copy: string; bullets: string[] }> = [
+  {
+    name: 'DataGrid',
+    eyebrow: 'Data tables',
+    headline: 'Tables your users actually scroll.',
+    copy: 'Virtualized rows, sortable columns, bulk actions, column visibility — wired up with TanStack Table and ready for hundreds of thousands of rows.',
+    bullets: ['Virtualized scroll', 'Multi-column sort', 'Filter + bulk actions'],
+  },
+  {
+    name: 'Kanban',
+    eyebrow: 'Boards',
+    headline: 'Drag, drop, ship.',
+    copy: 'A real Kanban board — keyboard-accessible drag-and-drop, optimistic updates, persistent column order. The same component that powers your sprint planning.',
+    bullets: ['Optimistic updates', 'Keyboard-accessible DnD', 'Persistent column state'],
+  },
+  {
+    name: 'AppShell',
+    eyebrow: 'Layout',
+    headline: 'A real app shell, not a demo.',
+    copy: 'Sidebar with workspace switcher, mobile-responsive nav, command palette — the full app frame so you can focus on your product, not the chrome.',
+    bullets: ['Collapsible sidebar', '⌘K command palette', 'Mobile-first responsive'],
+  },
+]
+
+const FEATURED_NAMES = new Set(FEATURED.map((f) => f.name))
 
 // ── Browser chrome ────────────────────────────────────────────────────────────
-// Tiny mac-style top bar to make every preview feel like a real product screenshot.
 function BrowserChrome({ slug }: { slug: string }) {
   return (
     <div className="absolute inset-x-0 top-0 z-20 flex items-center gap-2 px-3 py-2 border-b border-border/80 bg-background/40 backdrop-blur-sm">
@@ -33,98 +53,162 @@ function BrowserChrome({ slug }: { slug: string }) {
   )
 }
 
-// ── Preview card ──────────────────────────────────────────────────────────────
-function BentoCard({ name, height }: { name: string; height: number }) {
+// ── Featured showcase block ───────────────────────────────────────────────────
+function FeaturedShowcase({
+  feature,
+  index,
+}: {
+  feature: (typeof FEATURED)[number]
+  index: number
+}) {
+  const def = COMPONENTS.find((c) => c.name === feature.name)
+  if (!def) return null
+  const slug = feature.name.toLowerCase().replace(/\s+/g, '-')
+  const reversed = index % 2 === 1
+  return (
+    <div className="grid lg:grid-cols-2 gap-8 lg:gap-14 items-center">
+      <div className={`order-2 ${reversed ? 'lg:order-2' : 'lg:order-1'} space-y-5`}>
+        <div className="flex items-center gap-3">
+          <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-primary">
+            {String(index + 1).padStart(2, '0')} · {feature.eyebrow}
+          </span>
+          <span className="h-px flex-1 bg-border" />
+        </div>
+        <h3 className="text-3xl sm:text-4xl font-semibold tracking-tight leading-[1.1]">
+          {feature.headline}
+        </h3>
+        <p className="text-base text-muted-foreground leading-relaxed max-w-md">{feature.copy}</p>
+        <ul className="space-y-2">
+          {feature.bullets.map((b) => (
+            <li key={b} className="flex items-center gap-3 text-sm">
+              <span className="h-1 w-1 rounded-full bg-primary" />
+              <span className="text-foreground/80">{b}</span>
+            </li>
+          ))}
+        </ul>
+        <Link
+          href={`/components/${slug}`}
+          className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+        >
+          See it live <ArrowRight className="h-3.5 w-3.5" />
+        </Link>
+      </div>
+
+      <Link
+        href={`/components/${slug}`}
+        className={`order-1 ${reversed ? 'lg:order-1' : 'lg:order-2'} group block`}
+      >
+        <div
+          className="relative overflow-hidden rounded-xl border border-border bg-[#080808] transition-all duration-300 group-hover:border-primary/30 group-hover:shadow-[0_24px_64px_-16px_hsl(var(--primary)/0.4)]"
+          style={{ height: 420 }}
+        >
+          <div className="absolute inset-0 bg-dot-grid opacity-15 pointer-events-none" />
+          <div
+            aria-hidden
+            className="absolute -inset-x-8 -top-32 h-72 opacity-60 pointer-events-none"
+            style={{ background: 'radial-gradient(ellipse at 50% 0%, hsl(var(--primary) / 0.18), transparent 70%)' }}
+          />
+          <BrowserChrome slug={slug} />
+          <div className="absolute inset-0 pt-9">{def.preview}</div>
+        </div>
+      </Link>
+    </div>
+  )
+}
+
+// ── Compact card (used in browse grid) ────────────────────────────────────────
+function CompactCard({ name }: { name: string }) {
   const def = COMPONENTS.find((c) => c.name === name)
   if (!def) return null
-  const slug = def.name.toLowerCase().replace(/\s+/g, '-')
+  const slug = name.toLowerCase().replace(/\s+/g, '-')
   return (
-    <Link href={`/components/${slug}`} className="flex flex-col gap-1.5 group">
-      <div className="flex items-center justify-between">
-        <BentoLabel>{def.name}</BentoLabel>
-        <ArrowUpRight
-          className="h-3 w-3 text-muted-foreground/40 opacity-0 transition-opacity group-hover:opacity-100"
-          strokeWidth={1.75}
-        />
-      </div>
-      <div
-        className="relative overflow-hidden rounded-xl border border-border bg-[#080808] transition-all duration-200 group-hover:border-primary/30 group-hover:shadow-[0_8px_32px_-8px_hsl(var(--primary)/0.25)]"
-        style={{ height }}
-      >
-        <div className="absolute inset-0 bg-dot-grid opacity-15 pointer-events-none" />
-        {/* Soft top→bottom ambient glow that subtly shifts on hover */}
+    <Link href={`/components/${slug}`} className="group flex flex-col gap-3">
+      <div className="relative overflow-hidden rounded-lg border border-border bg-[#080808] transition-all duration-200 group-hover:border-primary/30 group-hover:shadow-[0_8px_24px_-8px_hsl(var(--primary)/0.25)] h-44">
+        <div className="absolute inset-0 bg-dot-grid opacity-12 pointer-events-none" />
         <div
           aria-hidden
-          className="absolute -inset-x-8 -top-32 h-72 opacity-0 transition-opacity duration-300 group-hover:opacity-100 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse at 50% 0%, hsl(var(--primary) / 0.18), transparent 70%)' }}
+          className="absolute -inset-x-4 -top-16 h-40 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
+          style={{ background: 'radial-gradient(ellipse at 50% 0%, hsl(var(--primary) / 0.15), transparent 70%)' }}
         />
-        <BrowserChrome slug={slug} />
-        <div className="absolute inset-0 pt-9">{def.preview}</div>
+        <div className="absolute inset-0 scale-[0.78] origin-top">{def.preview}</div>
+      </div>
+      <div className="flex items-start justify-between gap-2">
+        <div className="min-w-0">
+          <div className="flex items-center gap-2">
+            <span className="text-sm font-semibold tracking-tight">{name}</span>
+            <ArrowUpRight className="h-3 w-3 text-muted-foreground/40 opacity-0 -translate-x-1 transition-all group-hover:opacity-100 group-hover:translate-x-0" />
+          </div>
+          <p className="mt-0.5 text-xs text-muted-foreground line-clamp-2">{def.description}</p>
+        </div>
       </div>
     </Link>
   )
 }
 
-// ── Desktop bento layout (3-col grid, rows with equal height per row) ─────────
-// Heights calibrated so every preview has breathing room — no clipping.
-const ROWS: Array<{ items: Array<{ name: string; span?: 2 }>; height: number }> = [
-  { height: 376, items: [{ name: 'DataGrid', span: 2 }, { name: 'DonutChart' }] },
-  { height: 256, items: [{ name: 'Button' }, { name: 'Badge' }, { name: 'Avatar' }] },
-  { height: 376, items: [{ name: 'AppShell', span: 2 }, { name: 'Sidebar' }] },
-  { height: 276, items: [{ name: 'Dialog' }, { name: 'Select' }, { name: 'Input' }] },
-  { height: 336, items: [{ name: 'Kanban', span: 2 }, { name: 'MetricCard' }] },
-  { height: 256, items: [{ name: 'Checkbox' }, { name: 'Tabs' }, { name: 'Slider' }] },
-  { height: 316, items: [{ name: 'BarChart', span: 2 }, { name: 'LineChart' }] },
-  { height: 296, items: [{ name: 'TextureCard' }, { name: 'Tooltip' }, { name: 'CommandPalette' }] },
-  { height: 316, items: [{ name: 'SplitPage', span: 2 }, { name: 'Timeline' }] },
-  { height: 296, items: [{ name: 'Toast' }, { name: 'Alert' }, { name: 'Progress' }] },
-  { height: 276, items: [{ name: 'Skeleton' }, { name: 'EmptyState' }, { name: 'Breadcrumb' }] },
-  { height: 376, items: [{ name: 'AutoForm' }, { name: 'DatePicker' }, { name: 'StepForm' }] },
-  { height: 296, items: [{ name: 'WorkspaceMembers' }, { name: 'FileCards', span: 2 }] },
-]
-
-// ── Mobile: top 5 featured components shown vertically ───────────────────────
-const MOBILE_FEATURED = [
-  'CommandPalette',
-  'DataGrid',
-  'DatePicker',
-  'TextureCard',
-  'Kanban',
+// ── Category filter pill ──────────────────────────────────────────────────────
+const CATEGORIES: Array<{ value: 'All' | ComponentCategory; label: string }> = [
+  { value: 'All',          label: 'All' },
+  { value: 'Primitives',   label: 'Primitives' },
+  { value: 'Data Display', label: 'Data' },
+  { value: 'Charts',       label: 'Charts' },
+  { value: 'Forms',        label: 'Forms' },
+  { value: 'Navigation',   label: 'Navigation' },
+  { value: 'Feedback',     label: 'Feedback' },
+  { value: 'Layout',       label: 'Layout' },
+  { value: 'Blocks',       label: 'Blocks' },
 ]
 
 // ── Section ───────────────────────────────────────────────────────────────────
 export function ComponentTeaser() {
-  const total = COMPONENTS.length
+  const [active, setActive] = useState<'All' | ComponentCategory>('All')
+  const browseable = useMemo(
+    () => COMPONENTS.filter((c) => !FEATURED_NAMES.has(c.name)),
+    [],
+  )
+  const filtered = useMemo(() => {
+    if (active === 'All') return browseable
+    return browseable.filter((c) => c.category === active)
+  }, [active, browseable])
+
+  const counts = useMemo(() => {
+    const map: Record<string, number> = { All: browseable.length }
+    for (const c of browseable) map[c.category] = (map[c.category] ?? 0) + 1
+    return map
+  }, [browseable])
+
   return (
     <section className="relative overflow-hidden border-b border-border">
       <div className="absolute inset-0 bg-pattern-grid opacity-[0.10]" aria-hidden />
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" aria-hidden />
 
-      <div className="relative mx-auto max-w-7xl px-4 py-16 sm:py-24 sm:px-6">
+      <div className="relative mx-auto max-w-7xl px-4 py-20 sm:py-28 sm:px-6 space-y-24">
 
-        {/* ── Header ────────────────────────────────────────────────────────── */}
-        <div className="mb-10 sm:mb-12 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
-          <div className="max-w-2xl">
-            <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">— Component Library</p>
-            <h2 className="mt-3 text-balance text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl">
-              Every UI pattern, covered.
+        {/* ── Editorial header ───────────────────────────────────────────── */}
+        <header className="grid lg:grid-cols-[1.6fr_1fr] gap-10 items-end">
+          <div>
+            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground mb-5">— Component Library</p>
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight leading-[1.05] text-balance">
+              Every UI pattern.{' '}
+              <span className="italic font-light bg-gradient-to-r from-primary via-primary/70 to-primary/50 bg-clip-text text-transparent">
+                crafted right.
+              </span>
             </h2>
-            <p className="mt-3 max-w-xl text-muted-foreground text-sm sm:text-base">
-              Buttons, data tables, charts, kanban boards, sidebars — fully typed, accessible, dark-mode native.
+            <p className="mt-5 max-w-xl text-base sm:text-lg text-muted-foreground leading-relaxed">
+              From data tables to drag-and-drop boards, from forms that don't suck to charts that match your theme. Every component lives in a real working app — no isolated demos.
             </p>
           </div>
 
-          <div className="shrink-0 space-y-4 md:text-right">
-            <div className="flex flex-wrap gap-x-6 gap-y-2 md:justify-end">
+          <div className="space-y-6 lg:text-right">
+            <div className="grid grid-cols-4 gap-3 lg:gap-5">
               {[
-                { n: `${total}+`, label: 'components' },
-                { n: '8',         label: 'categories' },
-                { n: '100%',      label: 'TypeScript'  },
-                { n: 'MIT',       label: 'license'     },
+                { n: `${COMPONENTS.length}+`, label: 'components' },
+                { n: '8',                      label: 'categories' },
+                { n: '100%',                   label: 'TypeScript' },
+                { n: 'MIT',                    label: 'license' },
               ].map((s) => (
-                <div key={s.label} className="text-center md:text-right">
-                  <div className="text-lg font-bold leading-none">{s.n}</div>
-                  <div className="mt-0.5 font-mono text-[9px] uppercase tracking-widest text-muted-foreground/60">{s.label}</div>
+                <div key={s.label} className="space-y-0.5 lg:text-right">
+                  <div className="text-2xl sm:text-3xl font-semibold tracking-tight tabular-nums">{s.n}</div>
+                  <div className="font-mono text-[9px] uppercase tracking-widest text-muted-foreground/60">{s.label}</div>
                 </div>
               ))}
             </div>
@@ -135,37 +219,67 @@ export function ComponentTeaser() {
               Browse all <ArrowUpRight className="h-3.5 w-3.5" />
             </Link>
           </div>
-        </div>
+        </header>
 
-        {/* ── Mobile: single-column top 5 + View All ────────────────────────── */}
-        <div className="flex flex-col gap-3 md:hidden">
-          {MOBILE_FEATURED.map((name) => (
-            <BentoCard key={name} name={name} height={296} />
+        {/* ── Featured showcases ─────────────────────────────────────────── */}
+        <div className="space-y-24 sm:space-y-28">
+          {FEATURED.map((f, i) => (
+            <FeaturedShowcase key={f.name} feature={f} index={i} />
           ))}
-          <Link
-            href="/components"
-            className="mt-2 flex items-center justify-center gap-2 rounded-xl border border-border bg-secondary/40 py-4 text-sm font-semibold text-foreground transition-colors hover:bg-secondary hover:border-primary/30"
-          >
-            View all {total} components
-            <ArrowUpRight className="h-4 w-4" strokeWidth={2} />
-          </Link>
         </div>
 
-        {/* ── Desktop: 3-column bento grid ──────────────────────────────────── */}
-        <div className="hidden md:flex flex-col gap-3">
-          {ROWS.map((row, ri) => (
-            <div key={ri} className="grid grid-cols-3 gap-3">
-              {row.items.map((item) => (
-                <div key={item.name} className={item.span === 2 ? 'col-span-2' : 'col-span-1'}>
-                  <BentoCard name={item.name} height={row.height} />
-                </div>
-              ))}
+        {/* ── Browse divider ─────────────────────────────────────────────── */}
+        <div className="space-y-10">
+          <div className="flex items-end justify-between gap-6 flex-wrap">
+            <div>
+              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground mb-3">— And {browseable.length} more</p>
+              <h3 className="text-2xl sm:text-3xl font-semibold tracking-tight">
+                The rest of the library
+              </h3>
             </div>
-          ))}
+            {/* Category filter */}
+            <div className="flex flex-wrap gap-1.5">
+              {CATEGORIES.map((cat) => {
+                const count = counts[cat.value] ?? 0
+                if (count === 0 && cat.value !== 'All') return null
+                const isActive = active === cat.value
+                return (
+                  <button
+                    key={cat.value}
+                    onClick={() => setActive(cat.value)}
+                    className={
+                      'inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition-all border ' +
+                      (isActive
+                        ? 'bg-primary text-primary-foreground border-primary shadow-sm'
+                        : 'border-border bg-secondary/30 text-muted-foreground hover:bg-secondary hover:text-foreground')
+                    }
+                  >
+                    {cat.label}
+                    <span className={'font-mono text-[10px] tabular-nums ' + (isActive ? 'text-primary-foreground/70' : 'text-muted-foreground/60')}>
+                      {count}
+                    </span>
+                  </button>
+                )
+              })}
+            </div>
+          </div>
+
+          {/* ── Dense grid ───────────────────────────────────────────────── */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-5 gap-y-9">
+            {filtered.map((c) => (
+              <CompactCard key={c.name} name={c.name} />
+            ))}
+          </div>
+
+          {filtered.length === 0 && (
+            <div className="rounded-xl border border-border bg-secondary/20 px-6 py-16 text-center text-sm text-muted-foreground">
+              No components in this category yet.
+            </div>
+          )}
         </div>
 
-        {/* ── Footer strip ──────────────────────────────────────────────────── */}
-        <div className="mt-8 flex flex-wrap items-center justify-between gap-3 border-t border-border pt-6">
+        {/* ── Tech footer ────────────────────────────────────────────────── */}
+        <div className="flex flex-wrap items-center justify-between gap-3 border-t border-border pt-7">
           <div className="flex flex-wrap items-center gap-4 sm:gap-6">
             {['React', 'TypeScript', 'Tailwind CSS', 'Radix UI'].map((t, i) => (
               <span key={t} className="flex items-center gap-4 sm:gap-6">
