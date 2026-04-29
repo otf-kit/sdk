@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { Navbar }         from '@/components/otf/Navbar'
 import { Hero }           from '@/components/otf/Hero'
 import { ComponentTeaser }from '@/components/component-teaser'
+import { LaptopShowcase } from '@/components/laptop-showcase'
 import { Components }     from '@/components/otf/Components'
 import { Compatibility }  from '@/components/otf/Compatibility'
 import { Features }       from '@/components/otf/Features'
@@ -24,6 +25,7 @@ export default function HomePage() {
     <main className="flex flex-col min-h-dvh bg-background">
       <Navbar />
       <Hero />
+      <Reveal direction="up" distance={32}><LaptopShowcase /></Reveal>
       <Reveal direction="up" distance={32}><ComponentTeaser /></Reveal>
       <Reveal direction="up" distance={32}><Components /></Reveal>
       <Reveal direction="up" distance={32}><Compatibility /></Reveal>
