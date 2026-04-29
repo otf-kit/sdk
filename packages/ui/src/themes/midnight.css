@@ -8,7 +8,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 
-:root,
 .theme-midnight {
   /* ── Colors ───────────────────────────────── */
   --background: 240 10% 4%;
@@ -123,7 +122,7 @@
 }
 
 /* ── Chart / semantic accent tokens ────────────── */
-:root, .theme-midnight {
+.theme-midnight {
   --chart-1: 263 90% 68%;   /* violet  — brand / primary  */
   --chart-2: 160 60% 45%;   /* teal    — success / done   */
   --chart-3: 200 80% 55%;   /* cyan    — info / todo       */
