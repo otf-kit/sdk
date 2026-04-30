@@ -2,7 +2,12 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
-import { ArrowUpRight } from 'lucide-react'
+import {
+  ArrowUpRight,
+  Home, Layers, BarChart3, Inbox, FolderKanban, Users as UsersIcon,
+  ClipboardList, Timer, CheckCircle2, AlertTriangle,
+  Plus, Search, TrendingUp,
+} from 'lucide-react'
 
 const templates = [
   {
@@ -133,61 +138,157 @@ async function startCheckout(kitSlug: string): Promise<void> {
   window.location.href = url
 }
 
+// Faithful mini-render of kits/saas-dashboard `pages/home/dashboard.tsx`:
+// real Sidebar items, greeting topbar, 4 KPI cards using `MetricCardWithIcon`
+// shape, then a "Issue Trend" AreaChart + "Status Distribution" BarChart row.
 function MiniDashboardPreview({ accent }: { accent: string }) {
+  const navItems = [
+    { Icon: Home,         label: 'Dashboard', active: true },
+    { Icon: Layers,       label: 'All Issues' },
+    { Icon: BarChart3,    label: 'Analytics' },
+    { Icon: Inbox,        label: 'Inbox', badge: '5' },
+    { Icon: FolderKanban, label: 'Projects' },
+    { Icon: UsersIcon,    label: 'Teams' },
+  ]
+  const kpis = [
+    { Icon: ClipboardList, label: 'Total',       value: '27', change: '9 open',   tint: accent    },
+    { Icon: Timer,         label: 'In Progress', value: '8',  change: '30%',      tint: '#3b82f6' },
+    { Icon: CheckCircle2,  label: 'Completed',   value: '18', change: '67% rate', tint: '#22c55e' },
+    { Icon: AlertTriangle, label: 'Open',        value: '9',  change: '2 urgent', tint: '#ef4444' },
+  ]
+  // status distribution heights (proportional)
+  const statusBars = [
+    { label: 'Bk', h: 28, color: '#737373' },
+    { label: 'Td', h: 56, color: '#a1a1aa' },
+    { label: 'IP', h: 78, color: '#3b82f6' },
+    { label: 'Rv', h: 38, color: '#a855f7' },
+    { label: 'Dn', h: 96, color: '#22c55e' },
+  ]
   return (
-    <div className="h-[190px] bg-background flex overflow-hidden">
-      <div className="w-[100px] shrink-0 border-r border-border flex flex-col">
-        <div className="h-7 border-b border-border flex items-center px-2 gap-1.5">
-          <div className="w-3.5 h-3.5 rounded-sm flex items-center justify-center" style={{ background: accent }}>
-            <span className="text-white text-[6px] font-black">O</span>
-          </div>
-          <span className="text-foreground text-[8px] font-semibold">OTF</span>
+    <div className="h-[280px] bg-background flex overflow-hidden">
+      {/* ── Sidebar ─────────────────────────────────────────────────── */}
+      <aside className="w-[118px] shrink-0 border-r border-border bg-secondary/15 flex flex-col">
+        <div className="h-9 px-2.5 flex items-center gap-1.5 border-b border-border">
+          <div className="h-4 w-4 rounded-[3px] flex items-center justify-center text-white text-[7px] font-black" style={{ background: accent }}>O</div>
+          <span className="text-foreground text-[10px] font-bold tracking-tight">OTF</span>
         </div>
-        <div className="flex-1 p-1.5 space-y-0.5">
-          {['Dashboard', 'Issues', 'Board', 'Projects', 'Teams'].map((item, i) => (
+        <nav className="flex-1 p-1.5 flex flex-col gap-px">
+          {navItems.map(({ Icon, label, active, badge }) => (
             <div
-              key={item}
-              className={`flex items-center gap-1.5 px-1.5 py-1 rounded text-[7px] ${i === 0 ? 'text-foreground font-medium' : 'text-muted-foreground'}`}
-              style={i === 0 ? { background: `${accent}18`, borderLeft: `1.5px solid ${accent}` } : {}}
+              key={label}
+              className={`flex items-center gap-1.5 px-1.5 py-1 rounded-[4px] text-[9px] transition-colors ${
+                active
+                  ? 'font-semibold text-foreground'
+                  : 'font-medium text-muted-foreground'
+              }`}
+              style={active ? { background: `${accent}18` } : {}}
             >
-              <div className="w-1 h-1 rounded-full shrink-0" style={{ background: i === 0 ? accent : '#333' }} />
-              {item}
+              <Icon className="h-2.5 w-2.5 shrink-0" style={active ? { color: accent } : {}} strokeWidth={active ? 2.25 : 2} />
+              <span className="flex-1 truncate leading-none">{label}</span>
+              {badge && (
+                <span className="text-[7px] font-mono font-bold px-1 rounded-[3px] leading-tight" style={{ background: `${accent}25`, color: accent }}>
+                  {badge}
+                </span>
+              )}
             </div>
           ))}
+        </nav>
+        <div className="border-t border-border p-1.5 flex items-center gap-1.5">
+          <div className="h-4 w-4 rounded-full flex items-center justify-center text-[6.5px] font-bold text-foreground" style={{ background: `${accent}25`, color: accent }}>SC</div>
+          <div className="flex-1 min-w-0 leading-none">
+            <div className="text-[7.5px] font-semibold text-foreground truncate">Sarah Chen</div>
+            <div className="text-[6.5px] text-muted-foreground truncate mt-0.5">sarah@acme.com</div>
+          </div>
         </div>
-      </div>
-      <div className="flex-1 flex flex-col overflow-hidden">
-        <div className="h-7 border-b border-border flex items-center px-3">
-          <span className="text-foreground text-[8px] font-bold">Dashboard</span>
-          <div className="ml-auto h-4 px-2 rounded text-[7px] text-white font-bold flex items-center" style={{ background: accent }}>+ New</div>
-        </div>
-        <div className="grid grid-cols-2 gap-1 p-1.5 border-b border-border">
-          {[{ label: 'Total', value: '50' }, { label: 'Done', value: '18' }, { label: 'Active', value: '12' }, { label: 'Open', value: '32' }].map(s => (
-            <div key={s.label} className="bg-card border border-border rounded p-1.5">
-              <div className="text-[6px] text-muted-foreground uppercase">{s.label}</div>
-              <div className="text-[11px] font-black text-foreground">{s.value}</div>
+      </aside>
+
+      {/* ── Main ────────────────────────────────────────────────────── */}
+      <div className="flex-1 flex flex-col overflow-hidden bg-background">
+        {/* topbar — greeting + meta + new button (mirrors PageHeader) */}
+        <div className="h-9 border-b border-border flex items-center px-3 gap-2">
+          <div className="flex flex-col gap-0.5 leading-none">
+            <span className="text-[10px] font-semibold text-foreground">Good morning, Sarah</span>
+            <span className="text-[7.5px] text-muted-foreground">27 issues · 67% resolved</span>
+          </div>
+          <div className="ml-auto flex items-center gap-1.5">
+            <div className="h-4 px-1.5 rounded-[4px] border border-border bg-secondary/40 flex items-center gap-1 text-[7.5px] text-muted-foreground">
+              <Search className="h-2 w-2" /> Search
             </div>
-          ))}
-        </div>
-        <div className="flex-1 p-1.5 flex gap-1.5">
-          <div className="flex-1 bg-card border border-border rounded p-1.5 flex flex-col">
-            <div className="text-[6px] text-muted-foreground mb-1">Trend</div>
-            <div className="flex-1 flex items-end gap-0.5">
-              {[30,45,35,60,50,75,65,80,70,85,78,90].map((h, i) => (
-                <div key={i} className="flex-1 rounded-sm" style={{ height: `${h}%`, background: i === 11 ? accent : `${accent}25` }} />
-              ))}
+            <div className="h-4 px-1.5 rounded-[4px] flex items-center gap-0.5 text-[7.5px] font-semibold text-white" style={{ background: accent }}>
+              <Plus className="h-2 w-2" strokeWidth={3} /> New
             </div>
           </div>
-          <div className="flex-1 bg-card border border-border rounded p-1.5">
-            <div className="text-[6px] text-muted-foreground mb-1.5">Status</div>
-            <div className="space-y-1">
-              {[{ p: 36, c: '#22c55e' }, { p: 24, c: '#f59e0b' }, { p: 24, c: '#3b82f6' }, { p: 16, c: '#525252' }].map((s, i) => (
-                <div key={i} className="flex items-center gap-1">
-                  <div className="flex-1 h-1 bg-border rounded-full overflow-hidden">
-                    <div className="h-full rounded-full" style={{ width: `${s.p}%`, background: s.c }} />
-                  </div>
+        </div>
+
+        {/* body — KPI strip + charts row */}
+        <div className="flex-1 p-2 flex flex-col gap-1.5 overflow-hidden">
+          {/* KPI strip — MetricCardWithIcon shape */}
+          <div className="grid grid-cols-4 gap-1.5">
+            {kpis.map(({ Icon, label, value, change, tint }) => (
+              <div key={label} className="rounded-md border border-border bg-card px-1.5 py-1.5 flex items-start justify-between gap-1">
+                <div className="min-w-0">
+                  <div className="text-[6.5px] text-muted-foreground leading-none">{label}</div>
+                  <div className="text-[13px] font-bold text-foreground tracking-tight leading-none mt-1">{value}</div>
+                  <div className="text-[6.5px] text-muted-foreground leading-none mt-1.5">{change}</div>
                 </div>
-              ))}
+                <div className="h-4 w-4 rounded-[3px] flex items-center justify-center shrink-0" style={{ background: `${tint}18` }}>
+                  <Icon className="h-2 w-2" style={{ color: tint }} strokeWidth={2.25} />
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Charts row — Issue Trend (area) + Status Distribution (bar) */}
+          <div className="flex-1 grid grid-cols-5 gap-1.5 min-h-0">
+            {/* Trend — 3/5 width */}
+            <div className="col-span-3 rounded-md border border-border bg-card p-2 flex flex-col gap-1 min-h-0">
+              <div className="flex items-center justify-between">
+                <div className="leading-none">
+                  <div className="text-[8.5px] font-semibold text-foreground">Issue Trend</div>
+                  <div className="text-[6.5px] text-muted-foreground mt-0.5">Total vs completed</div>
+                </div>
+                <div className="flex items-center gap-1 text-[7px] font-mono px-1 py-0.5 rounded-[3px] border border-border bg-secondary/40 text-muted-foreground">
+                  <TrendingUp className="h-2 w-2" style={{ color: accent }} /> 67%
+                </div>
+              </div>
+              <div className="flex-1 relative">
+                <svg viewBox="0 0 100 40" preserveAspectRatio="none" className="absolute inset-0 w-full h-full">
+                  <defs>
+                    <linearGradient id={`area-${accent}`} x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%"   stopColor={accent} stopOpacity="0.45" />
+                      <stop offset="100%" stopColor={accent} stopOpacity="0" />
+                    </linearGradient>
+                  </defs>
+                  {/* horizontal grid lines */}
+                  {[10, 20, 30].map(y => (
+                    <line key={y} x1="0" y1={y} x2="100" y2={y} stroke="currentColor" className="text-border" strokeWidth="0.3" strokeDasharray="1 2" />
+                  ))}
+                  {/* completed area + line */}
+                  <path d="M0,32 L15,30 L30,26 L45,22 L60,17 L75,11 L90,7 L100,5 L100,40 L0,40 Z" fill={`url(#area-${accent})`} />
+                  <path d="M0,32 L15,30 L30,26 L45,22 L60,17 L75,11 L90,7 L100,5" fill="none" stroke={accent} strokeWidth="1.4" strokeLinecap="round" />
+                  {/* total dashed line above */}
+                  <path d="M0,22 L15,20 L30,17 L45,15 L60,12 L75,8 L90,5 L100,3" fill="none" stroke={accent} strokeOpacity="0.4" strokeWidth="1" strokeDasharray="2 2" />
+                </svg>
+              </div>
+              <div className="flex justify-between text-[6.5px] text-muted-foreground font-mono">
+                {['W1','W2','W3','W4','W5','W6'].map(w => <span key={w}>{w}</span>)}
+              </div>
+            </div>
+
+            {/* Status — 2/5 width */}
+            <div className="col-span-2 rounded-md border border-border bg-card p-2 flex flex-col gap-1 min-h-0">
+              <div className="leading-none">
+                <div className="text-[8.5px] font-semibold text-foreground">Status</div>
+                <div className="text-[6.5px] text-muted-foreground mt-0.5">By stage</div>
+              </div>
+              <div className="flex-1 flex items-end gap-1.5">
+                {statusBars.map(s => (
+                  <div key={s.label} className="flex-1 flex flex-col items-center gap-0.5 h-full justify-end">
+                    <div className="w-[55%] rounded-[2px]" style={{ height: `${s.h}%`, background: s.color, opacity: 0.85 }} />
+                    <span className="text-[6.5px] text-muted-foreground font-mono leading-none">{s.label}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
