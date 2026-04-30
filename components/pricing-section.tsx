@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { ArrowUpRight } from 'lucide-react'
 
 const tiers = [
   {
@@ -67,20 +68,27 @@ interface PricingSectionProps {
 
 export function PricingSection({ showHeader = true }: PricingSectionProps) {
   return (
-    <section className="py-24 px-6 border-t border-border">
-      <div className="max-w-7xl mx-auto">
+    <section className="relative overflow-hidden border-t border-border">
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" aria-hidden />
+      <div className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6">
         {showHeader && (
-          <div className="text-center mb-14">
-            <p className="text-xs font-semibold text-primary uppercase tracking-widest mb-3">
-              Pricing
-            </p>
-            <div className="h-px w-16 bg-primary/40 mb-6 mx-auto" />
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Simple, honest pricing.
-            </h2>
-            <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-              Free SDK forever. Pay once for full-stack templates — no subscriptions, no seats per month.
-            </p>
+          <div className="mb-14 flex flex-col items-start justify-between gap-4 md:flex-row md:items-end">
+            <div>
+              <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">— Pricing</p>
+              <h2 className="mt-3 text-balance text-4xl font-semibold tracking-tight sm:text-5xl">
+                Simple, honest pricing.
+              </h2>
+              <p className="mt-3 max-w-xl text-muted-foreground">
+                Free SDK forever. Pay once for full-stack templates — no subscriptions, no seats per month.
+              </p>
+            </div>
+            <a
+              href="#faq"
+              className="group inline-flex items-center gap-2 font-mono text-sm text-muted-foreground transition-colors hover:text-foreground"
+            >
+              Read the FAQ
+              <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </a>
           </div>
         )}
 

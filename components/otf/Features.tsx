@@ -12,8 +12,9 @@ const features = [
 
 export function Features() {
   return (
-    <section className="border-b border-border bg-secondary/30">
-      <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6">
+    <section className="relative overflow-hidden border-b border-border bg-secondary/30">
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" aria-hidden />
+      <div className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6">
         <Reveal direction="up" distance={20}>
           <div className="max-w-2xl">
             <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">— Why OTF</p>

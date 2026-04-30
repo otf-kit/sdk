@@ -79,6 +79,7 @@ export function Testimonials() {
   return (
     <section id="testimonials" className="relative overflow-hidden border-b border-border bg-secondary/30">
       <div className="absolute inset-0 bg-pattern-grid opacity-[0.12]" aria-hidden />
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" aria-hidden />
       <div className="absolute -top-40 left-1/2 h-[400px] w-[800px] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" aria-hidden />
       <div className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6">
         <div className="mb-12 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">

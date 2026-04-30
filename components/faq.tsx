@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { ArrowUpRight } from 'lucide-react'
 
 const faqs = [
   {
@@ -44,16 +45,28 @@ export function Faq() {
   const [open, setOpen] = useState<number | null>(null)
 
   return (
-    <section className="py-24 border-t border-border">
-      <div className="max-w-3xl mx-auto">
-        <div className="text-center mb-12">
-          <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground mb-6">
-            — FAQ
-          </p>
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-            Frequently asked questions
-          </h2>
+    <section id="faq" className="relative overflow-hidden border-t border-border">
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" aria-hidden />
+      <div className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6">
+        <div className="mb-12 flex flex-col items-start justify-between gap-4 md:flex-row md:items-end">
+          <div>
+            <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">— FAQ</p>
+            <h2 className="mt-3 text-balance text-4xl font-semibold tracking-tight sm:text-5xl">
+              Frequently asked questions
+            </h2>
+            <p className="mt-3 max-w-xl text-muted-foreground">
+              Quick answers on the SDK, templates, licensing, and supported AI tools.
+            </p>
+          </div>
+          <a
+            href="mailto:support@otf.dev"
+            className="group inline-flex items-center gap-2 font-mono text-sm text-muted-foreground transition-colors hover:text-foreground"
+          >
+            Still stuck? Email support
+            <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </a>
         </div>
+        <div className="max-w-3xl mx-auto">
         <div className="space-y-2">
           {faqs.map((faq, i) => (
             <div
@@ -86,6 +99,7 @@ export function Faq() {
               )}
             </div>
           ))}
+        </div>
         </div>
       </div>
     </section>

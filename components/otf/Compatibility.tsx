@@ -42,6 +42,7 @@ export function Compatibility() {
       <div className="pointer-events-none absolute inset-0 opacity-60"
         style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(249,115,22,0.10) 0%, transparent 55%)' }} aria-hidden />
       <div className="absolute inset-0 bg-pattern-grid opacity-[0.10]" aria-hidden />
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" aria-hidden />
 
       <div className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6">
         <Reveal direction="up" distance={20}>

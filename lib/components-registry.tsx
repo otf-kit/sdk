@@ -504,29 +504,116 @@ const TimelinePreview = () => (
   </PreviewShell>
 )
 
-const MetricCardPreview = () => (
-  <PreviewShell>
-    <div style={{ width: '100%', maxWidth: 280 }}>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-        {[
-          { label: 'MRR',       value: '$4,820', trend: '+18%', icon: '↗', tColor: c2,  bg: `${c2}10`  },
-          { label: 'Users',     value: '1,240',  trend: '+7%',  icon: '↗', tColor: pri, bg: `${pri}10` },
-          { label: 'Churn',     value: '2.1%',   trend: '−0.4%',icon: '↘', tColor: c2,  bg: `${c2}10`  },
-          { label: 'Open Bugs', value: '12',      trend: '+3',  icon: '↗', tColor: err, bg: `${err}10` },
-        ].map(m => (
-          <div key={m.label} style={{ background: card, border: `1px solid ${bdr}`, borderRadius: 10, padding: '12px 14px' }}>
-            <div style={{ fontSize: 9, color: mfg, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 6, fontFamily: FONT_MONO }}>{m.label}</div>
-            <div style={{ fontSize: 20, fontWeight: 700, color: fg, letterSpacing: '-0.02em', lineHeight: 1 }}>{m.value}</div>
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 3, marginTop: 6, padding: '2px 6px', borderRadius: 5, background: m.bg }}>
-              <span style={{ fontSize: 9, color: m.tColor, fontWeight: 700 }}>{m.icon}</span>
-              <span style={{ fontSize: 9.5, color: m.tColor, fontWeight: 600, fontFamily: FONT_MONO }}>{m.trend}</span>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </PreviewShell>
+// Lucide-style inline SVG icons (matches @otf/ui MetricCardWithIcon)
+const IconDollarSign = ({ color = fg, size = 16 }: { color?: string; size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <line x1="12" y1="2" x2="12" y2="22" />
+    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+  </svg>
 )
+const IconUsers = ({ color = fg, size = 16 }: { color?: string; size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+    <circle cx="9" cy="7" r="4" />
+    <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+  </svg>
+)
+const IconActivity = ({ color = fg, size = 16 }: { color?: string; size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+  </svg>
+)
+const IconBug = ({ color = fg, size = 16 }: { color?: string; size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="m8 2 1.88 1.88" />
+    <path d="M14.12 3.88 16 2" />
+    <path d="M9 7.13v-1a3.003 3.003 0 1 1 6 0v1" />
+    <path d="M12 20c-3.3 0-6-2.7-6-6v-3a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v3c0 3.3-2.7 6-6 6" />
+    <path d="M12 20v-9" />
+    <path d="M6.53 9C4.6 8.8 3 7.1 3 5" />
+    <path d="M6 13H2" />
+    <path d="M3 21c0-2.1 1.7-3.9 3.8-4" />
+    <path d="M20.97 5c0 2.1-1.6 3.8-3.5 4" />
+    <path d="M22 13h-4" />
+    <path d="M17.2 17c2.1.1 3.8 1.9 3.8 4" />
+  </svg>
+)
+const IconTrendUp = ({ color = c2, size = 13 }: { color?: string; size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
+    <polyline points="16 7 22 7 22 13" />
+  </svg>
+)
+const IconTrendDown = ({ color = c2, size = 13 }: { color?: string; size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="22 17 13.5 8.5 8.5 13.5 2 7" />
+    <polyline points="16 17 22 17 22 11" />
+  </svg>
+)
+
+const MetricCardPreview = () => {
+  // Matches @otf/ui <MetricCardWithIcon /> — label + value + trend on the left,
+  // tinted icon tile on the right. 2×2 grid for dashboard density.
+  const metrics = [
+    { label: 'MRR',       value: '$4,820', trend: '+18%',  up: true,  icon: <IconDollarSign color={c2} />,  tint: c2  },
+    { label: 'Users',     value: '1,240',  trend: '+7.2%', up: true,  icon: <IconUsers      color={pri} />, tint: pri },
+    { label: 'Churn',     value: '2.1%',   trend: '−0.4%', up: false, icon: <IconActivity   color={c3} />,  tint: c3  },
+    { label: 'Open bugs', value: '12',     trend: '+3',    up: false, icon: <IconBug        color={err} />, tint: err },
+  ]
+  return (
+    <PreviewShell>
+      <div style={{ width: '100%', maxWidth: 320 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+          {metrics.map(m => {
+            const trendColor = m.up ? c2 : err
+            return (
+              <div
+                key={m.label}
+                style={{
+                  background: card,
+                  border: `1px solid ${bdr}`,
+                  borderRadius: 10,
+                  padding: '12px 13px',
+                  display: 'flex',
+                  alignItems: 'flex-start',
+                  justifyContent: 'space-between',
+                  gap: 8,
+                }}
+              >
+                <div style={{ minWidth: 0, flex: 1 }}>
+                  <div style={{ fontSize: 10, color: mfg, lineHeight: 1.2 }}>{m.label}</div>
+                  <div style={{ fontSize: 18, fontWeight: 700, color: fg, letterSpacing: '-0.02em', lineHeight: 1.1, marginTop: 4 }}>
+                    {m.value}
+                  </div>
+                  <div style={{ display: 'inline-flex', alignItems: 'center', gap: 3, marginTop: 5 }}>
+                    {m.up ? <IconTrendUp color={trendColor} /> : <IconTrendDown color={trendColor} />}
+                    <span style={{ fontSize: 9.5, color: trendColor, fontWeight: 600, fontFamily: FONT_MONO }}>{m.trend}</span>
+                  </div>
+                </div>
+                <div
+                  style={{
+                    flexShrink: 0,
+                    width: 30,
+                    height: 30,
+                    borderRadius: 7,
+                    background: `${m.tint}14`,
+                    border: `1px solid ${m.tint}22`,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  {m.icon}
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+    </PreviewShell>
+  )
+}
 
 const ProgressPreview = () => (
   <PreviewShell>
@@ -556,38 +643,118 @@ const ProgressPreview = () => (
   </PreviewShell>
 )
 
-const KanbanPreview = () => (
+const KanbanPreview = () => {
+  const columns = [
+    {
+      title: 'Todo',
+      cards: [
+        { title: 'Design login page',  desc: 'Wireframes + states' },
+        { title: 'Write API docs' },
+        { title: 'Sprint planning' },
+      ],
+    },
+    {
+      title: 'In Progress',
+      cards: [
+        { title: 'Auth flow refactor', desc: 'Better Auth + sessions', badge: 'High' },
+        { title: 'Payment integration' },
+      ],
+    },
+    {
+      title: 'Done',
+      cards: [
+        { title: 'CI/CD setup' },
+        { title: 'DB schema' },
+        { title: 'Onboarding flow' },
+      ],
+    },
+  ]
+  const totalCards = columns.reduce((n, c) => n + c.cards.length, 0)
+  return (
   <PreviewShell>
-    <div style={{ width: '100%', maxWidth: 400, display: 'flex', gap: 10 }}>
-      {[
-        { label: 'Todo',        color: c3,  cards: ['Design login page', 'Write API docs'] },
-        { label: 'In Progress', color: c4,  cards: ['Auth flow', 'Payment integration'] },
-        { label: 'Done',        color: c2,  cards: ['CI/CD setup', 'DB schema', 'Setup'] },
-      ].map(col => (
-        <div key={col.label} style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 6 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '0 2px 6px', borderBottom: `2px solid ${col.color}40` }}>
-            <div style={{ width: 7, height: 7, borderRadius: '50%', background: col.color, boxShadow: `0 0 6px ${col.color}80` }} />
-            <span style={{ fontSize: 10.5, fontWeight: 600, color: fg }}>{col.label}</span>
-            <span style={{ marginLeft: 'auto', fontSize: 9, color: mfg, fontFamily: FONT_MONO, background: sec, padding: '1px 5px', borderRadius: 4, border: `1px solid ${bdr}` }}>{col.cards.length}</span>
+    <div style={{ width: '100%', maxWidth: 440, marginTop: 14 }}>
+      <Card style={{ padding: 12 }}>
+        {/* Card header — same shape as FileCards: title left, mono count right */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
+          <span style={{ fontSize: 12, fontWeight: 600, color: fg }}>Project board</span>
+          <span style={{ fontSize: 10, color: mfg, fontFamily: FONT_MONO }}>{totalCards} tasks</span>
+        </div>
+        <div style={{ display: 'flex', gap: 8 }}>
+      {columns.map(col => (
+        <div
+          key={col.title}
+          style={{
+            flex: 1,
+            minWidth: 0,
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 6,
+            background: `${muted}66`,
+            border: `1px solid ${bdr}40`,
+            borderRadius: 8,
+            padding: 8,
+          }}
+        >
+          {/* Column header — title + count pill (matches Storybook) */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1px 2px 4px' }}>
+            <span style={{ fontSize: 11, fontWeight: 600, color: fg, letterSpacing: '-0.005em' }}>{col.title}</span>
+            <span
+              style={{
+                fontSize: 9,
+                color: mfg,
+                background: muted,
+                borderRadius: 999,
+                padding: '1px 7px',
+                fontFamily: FONT_MONO,
+                lineHeight: 1.4,
+              }}
+            >
+              {col.cards.length}
+            </span>
           </div>
-          {col.cards.map((card, i) => (
-            <div key={i} style={{ background: card, border: `1px solid ${bdr}`, borderRadius: 7, padding: '7px 9px', borderLeft: `2px solid ${col.color}50` }}>
-              <div style={{ fontSize: 10.5, color: fg, fontWeight: 500, lineHeight: 1.3, marginBottom: 5 }}>{card}</div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <div style={{ width: 18, height: 18, borderRadius: '50%', background: `${col.color}20`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 8, color: col.color, fontWeight: 700 }}>
-                  {['MS','KL','AR'][i % 3]}
-                </div>
-                <div style={{ height: 3, width: 28, background: muted, borderRadius: 2, overflow: 'hidden' }}>
-                  <div style={{ height: '100%', width: `${[70, 40, 90, 55, 30][i] || 60}%`, background: col.color, borderRadius: 2 }} />
-                </div>
+          {/* Cards — clean card surface, optional desc + primary-tinted badge */}
+          {col.cards.map((c, i) => (
+            <div
+              key={i}
+              style={{
+                background: card,
+                border: `1px solid ${bdr}`,
+                borderRadius: 6,
+                padding: '7px 9px',
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 6 }}>
+                <span style={{ fontSize: 10.5, color: fg, fontWeight: 500, lineHeight: 1.3 }}>{c.title}</span>
+                {('badge' in c && c.badge) && (
+                  <span
+                    style={{
+                      flexShrink: 0,
+                      fontSize: 8.5,
+                      fontWeight: 600,
+                      color: pri,
+                      background: `${pri}1a`,
+                      padding: '1px 5px',
+                      borderRadius: 999,
+                      lineHeight: 1.5,
+                    }}
+                  >
+                    {c.badge}
+                  </span>
+                )}
               </div>
+              {('desc' in c && c.desc) && (
+                <div style={{ marginTop: 3, fontSize: 9.5, color: mfg, lineHeight: 1.3 }}>{c.desc}</div>
+              )}
             </div>
           ))}
         </div>
       ))}
+        </div>
+      </Card>
     </div>
   </PreviewShell>
-)
+  )
+}
 
 const TextureCardPreview = () => (
   <PreviewShell>
@@ -744,28 +911,115 @@ const BreadcrumbPreview = () => (
 
 // ─── Feedback ─────────────────────────────────────────────────────────────────
 
-const ToastPreview = () => (
-  <PreviewShell>
-    <div style={{ width: '100%', maxWidth: 260, display: 'flex', flexDirection: 'column', gap: 8 }}>
-      {[
-        { icon: '✓', title: 'Issue created',     sub: 'OTF-105 added to backlog',  color: c2,  bg: `${c2}10`,  border: `${c2}25` },
-        { icon: '!', title: 'Deploy failed',      sub: 'Build error on main branch', color: err, bg: `${err}10`, border: `${err}25` },
-        { icon: 'ℹ', title: 'Update available',  sub: 'OTF v2.1 is ready',         color: c3,  bg: `${c3}10`,  border: `${c3}25` },
-      ].map(t => (
-        <div key={t.title} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, padding: '10px 12px', borderRadius: 9, background: t.bg, border: `1px solid ${t.border}`, boxShadow: `0 4px 12px ${bg}60` }}>
-          <div style={{ width: 22, height: 22, borderRadius: 6, background: `${t.color}20`, border: `1px solid ${t.color}30`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontSize: 11, fontWeight: 700, color: t.color }}>
-            {t.icon}
+const ToastPreview = () => {
+  // Mirrors @otf/ui <Toaster /> variant styling: subtle tinted border + very faint
+  // bg overlay on top of card surface, inline status icon, title + muted description,
+  // close affordance on the right. Sonner-style — no heavy color blocks.
+  const toasts = [
+    {
+      kind: 'success',
+      color: c2,
+      title: 'Issue created',
+      desc: 'OTF-105 added to backlog',
+      icon: (
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={c2} strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="12" cy="12" r="10" />
+          <path d="m9 12 2 2 4-4" />
+        </svg>
+      ),
+    },
+    {
+      kind: 'error',
+      color: err,
+      title: 'Deploy failed',
+      desc: 'Build error on main branch',
+      icon: (
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={err} strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="12" cy="12" r="10" />
+          <path d="M12 8v4M12 16h.01" />
+        </svg>
+      ),
+    },
+    {
+      kind: 'info',
+      color: c3,
+      title: 'Update available',
+      desc: 'OTF v2.1 is ready',
+      icon: (
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={c3} strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="12" cy="12" r="10" />
+          <path d="M12 16v-4M12 8h.01" />
+        </svg>
+      ),
+    },
+  ] as const
+
+  return (
+    <PreviewShell>
+      <div style={{ width: '100%', maxWidth: 280, display: 'flex', flexDirection: 'column', gap: 8 }}>
+        {toasts.map(t => (
+          <div
+            key={t.kind}
+            style={{
+              position: 'relative',
+              display: 'flex',
+              alignItems: 'flex-start',
+              gap: 10,
+              padding: '11px 28px 11px 12px',
+              borderRadius: 8,
+              background: card,
+              border: `1px solid ${t.color}40`,
+              boxShadow: '0 1px 2px rgba(0,0,0,0.05), 0 6px 16px -8px rgba(0,0,0,0.4)',
+              overflow: 'hidden',
+            }}
+          >
+            {/* faint variant tint overlay — matches dark `bg-{color}-950/30` */}
+            <span
+              aria-hidden
+              style={{
+                position: 'absolute',
+                inset: 0,
+                background: `${t.color}0e`,
+                pointerEvents: 'none',
+              }}
+            />
+            <div style={{ flexShrink: 0, marginTop: 1, position: 'relative', zIndex: 1 }}>{t.icon}</div>
+            <div style={{ flex: 1, minWidth: 0, position: 'relative', zIndex: 1 }}>
+              <div style={{ fontSize: 12, fontWeight: 600, color: fg, letterSpacing: '-0.005em', lineHeight: 1.35 }}>
+                {t.title}
+              </div>
+              <div style={{ fontSize: 10.5, color: mfg, marginTop: 2, lineHeight: 1.4 }}>{t.desc}</div>
+            </div>
+            <button
+              aria-label="Dismiss"
+              style={{
+                position: 'absolute',
+                top: 8,
+                right: 8,
+                width: 14,
+                height: 14,
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                background: 'transparent',
+                border: 'none',
+                color: mfg,
+                opacity: 0.6,
+                cursor: 'pointer',
+                padding: 0,
+                zIndex: 1,
+              }}
+            >
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round">
+                <path d="M18 6 6 18M6 6l12 12" />
+              </svg>
+            </button>
           </div>
-          <div style={{ flex: 1, minWidth: 0 }}>
-            <div style={{ fontSize: 11.5, fontWeight: 600, color: fg }}>{t.title}</div>
-            <div style={{ fontSize: 10, color: mfg, marginTop: 1 }}>{t.sub}</div>
-          </div>
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={mfg} strokeWidth="1.5" style={{ flexShrink: 0, marginTop: 2 }}><path d="M18 6 6 18M6 6l12 12"/></svg>
-        </div>
-      ))}
-    </div>
-  </PreviewShell>
-)
+        ))}
+      </div>
+    </PreviewShell>
+  )
+}
 
 const AlertPreview = () => (
   <PreviewShell>
@@ -929,13 +1183,12 @@ const SplitPagePreview = () => (
 
 const FormPreview = () => (
   <PreviewShell>
-    <div style={{ width: '100%', maxWidth: 240 }}>
+    <div style={{ width: '100%', maxWidth: 240, marginTop: 14 }}>
       <Card style={{ padding: 16 }}>
         <div style={{ fontSize: 12.5, fontWeight: 600, color: fg, marginBottom: 14 }}>Profile settings</div>
         {[
-          { label: 'Display name', value: 'Dave Soni',  type: 'text',  valid: true },
-          { label: 'Username',     value: '@dave',      type: 'text',  valid: true },
-          { label: 'Email',        value: 'dave@otf.sh',type: 'email', valid: true },
+          { label: 'Username', value: '@sarah',         type: 'text',  valid: true },
+          { label: 'Email',    value: 'sarah@acme.com', type: 'email', valid: true },
         ].map(f => (
           <div key={f.label} style={{ marginBottom: 10 }}>
             <div style={{ fontSize: 9.5, color: mfg, fontFamily: FONT_MONO, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 5 }}>{f.label}</div>
