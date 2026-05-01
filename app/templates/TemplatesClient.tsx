@@ -27,20 +27,20 @@ const templates = [
     claudePrompt: '"Add a new project type called Marketing Campaign with a budget field"',
   },
   {
-    name: 'Fitness App Kit',
-    subtitle: 'Workouts, nutrition, progress charts — all wired for Claude.',
+    name: 'Fitness & Wellness Kit',
+    subtitle: 'Apple-Fitness-style activity rings, workout logging, awards. Reskin it for anything in 10 minutes.',
     platform: 'Expo + Hono',
-    tags: ['Cursor-ready', 'CLAUDE.md included', '25 screens', 'iOS + Android'],
+    tags: ['Cursor-ready', 'CLAUDE.md included', '12 screens', 'iOS + Android + web'],
     price: '$149',
-    status: 'soon',
+    status: 'available',
     category: 'Mobile',
-    kitSlug: null,
-    detailSlug: 'fitness-app',
+    kitSlug: 'fitness-kit',
+    detailSlug: 'fitness-kit',
     demo: null,
-    accent: '#22c55e',
-    screens: 25,
-    description: 'Full React Native + Expo template — workout tracking, meal logging, calorie counter, progress charts, and onboarding. Reskin it for any niche with one Claude prompt.',
-    claudePrompt: '"Reskin this for runners — swap meals for run logs, add a pace tracker"',
+    accent: '#ff375f',
+    screens: 12,
+    description: 'Mobile-first fitness template — Expo SDK 54 + Hono + Drizzle + Better Auth. One codebase ships iOS, Android, and web. Activity rings widget, workout logging, weekly trends, awards, and a friend-activity feed.',
+    claudePrompt: '"Reskin this for runners — swap calories for pace, add a route map placeholder"',
   },
   {
     name: 'Booking & Appointments Kit',
@@ -436,6 +436,121 @@ function MiniKanbanPreview({ accent }: { accent: string }) {
   )
 }
 
+// Mini Fitness Summary — mirrors `kits/fitness-kit/app/(home)/summary.tsx`:
+// Apple-Fitness-style activity rings + 2x2 metric grid in a phone frame.
+function MiniFitnessSummaryPreview({ accent }: { accent: string }) {
+  // 3 concentric ring values (move/exercise/stand)
+  const rings = [
+    { progress: 0.78, color: accent,    label: 'Move',     value: '352',  unit: 'CAL' },
+    { progress: 0.92, color: '#a3ff12', label: 'Exercise', value: '28',   unit: 'MIN' },
+    { progress: 0.55, color: '#00d4d4', label: 'Stand',    value: '7',    unit: 'HRS' },
+  ]
+  const RING_RADII = [42, 32, 22]
+  const STROKE = 7
+
+  const metrics = [
+    { label: 'Steps',    value: '8,420', accent: '#00d4d4' },
+    { label: 'Distance', value: '6.2',  unit: 'km', accent: '#fbbf24' },
+    { label: 'Sessions', value: '3',    accent: '#a3ff12' },
+    { label: 'Awards',   value: '5',    accent: '#a78bfa' },
+  ]
+
+  return (
+    <div className="h-[280px] bg-background flex items-center justify-center px-6 py-3">
+      {/* Phone frame */}
+      <div
+        className="relative h-full w-[160px] rounded-[18px] border bg-[#0a0a0a] overflow-hidden flex flex-col"
+        style={{ borderColor: '#1f1f1f' }}
+      >
+        {/* Status bar */}
+        <div className="flex justify-between items-center px-3 py-1.5 text-[8px] text-white/60 font-mono">
+          <span>9:41</span>
+          <span>●●●</span>
+        </div>
+
+        {/* Header */}
+        <div className="px-3 pb-1">
+          <div className="text-[7px] tracking-wider text-white/40 font-bold">WED, MAY 1</div>
+          <div className="text-[12px] text-white font-bold leading-tight">Summary</div>
+        </div>
+
+        {/* Activity ring card */}
+        <div className="mx-2 mt-1 rounded-md bg-[#171717] p-2 flex items-center gap-2">
+          <svg width={92} height={92} viewBox="0 0 100 100" style={{ transform: 'rotate(-90deg)' }}>
+            {rings.map((r, i) => {
+              const radius = RING_RADII[i]!
+              const circ = 2 * Math.PI * radius
+              return (
+                <g key={i}>
+                  <circle cx={50} cy={50} r={radius} stroke={r.color + '33'} strokeWidth={STROKE} fill="none" />
+                  <circle
+                    cx={50} cy={50} r={radius}
+                    stroke={r.color}
+                    strokeWidth={STROKE}
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeDasharray={`${circ * r.progress} ${circ}`}
+                  />
+                </g>
+              )
+            })}
+          </svg>
+          <div className="flex-1 flex flex-col gap-1">
+            {rings.map((r) => (
+              <div key={r.label} className="flex items-baseline gap-1">
+                <div className="w-1 h-1 rounded-full" style={{ background: r.color }} />
+                <div className="text-[6px] text-white/50 font-bold tracking-wide w-8">{r.label.toUpperCase()}</div>
+                <div className="text-[8px] text-white font-bold">{r.value}</div>
+                <div className="text-[6px] text-white/40 font-bold">{r.unit}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* 2x2 metric grid */}
+        <div className="mx-2 mt-2 grid grid-cols-2 gap-1.5">
+          {metrics.map((m) => (
+            <div key={m.label} className="rounded bg-[#171717] p-1.5">
+              <div className="text-[6px] tracking-wider text-white/40 font-bold uppercase">
+                {m.label}
+              </div>
+              <div className="flex items-baseline gap-0.5 mt-0.5">
+                <div className="text-[12px] font-bold leading-none" style={{ color: m.accent }}>
+                  {m.value}
+                </div>
+                {m.unit ? <div className="text-[6px] text-white/40">{m.unit}</div> : null}
+              </div>
+              <div className="flex items-end gap-px h-2 mt-1">
+                {Array.from({ length: 7 }).map((_, j) => (
+                  <div
+                    key={j}
+                    className="flex-1 rounded-sm"
+                    style={{
+                      background: m.accent,
+                      opacity: 0.35 + (j / 9),
+                      height: `${20 + ((j * 17) % 80)}%`,
+                    }}
+                  />
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Floating tab pill */}
+        <div
+          className="absolute bottom-1.5 left-3 right-3 h-6 rounded-full flex items-center justify-around text-[7px] font-bold"
+          style={{ background: '#1a1a1a' }}
+        >
+          <div className="px-2 py-0.5 rounded-full bg-[#0a0a0a] text-white">Summary</div>
+          <div className="text-white/50">Workout</div>
+          <div className="text-white/50">Sharing</div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function ComingSoonPreview({ accent, name }: { accent: string; name: string }) {
   return (
     <div className="h-[190px] bg-background flex items-center justify-center">
@@ -466,6 +581,9 @@ const KIT_TABS_BY_KIT: Record<string, Array<{ id: string; label: string; render:
   'saas-dashboard': [
     { id: 'dashboard', label: 'Dashboard',    render: (a) => <MiniDashboardPreview accent={a} />, path: '/home/dashboard' },
     { id: 'board',     label: 'Issues board', render: (a) => <MiniKanbanPreview accent={a} />,    path: '/home/issues-board' },
+  ],
+  'fitness-kit': [
+    { id: 'summary',   label: 'Summary',      render: (a) => <MiniFitnessSummaryPreview accent={a} />, path: '/summary' },
   ],
 }
 
