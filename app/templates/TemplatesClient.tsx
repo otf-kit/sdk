@@ -36,7 +36,7 @@ const templates = [
     category: 'Mobile',
     kitSlug: 'fitness-kit',
     detailSlug: 'fitness-kit',
-    demo: null,
+    demo: 'https://fitness-kit-production.up.railway.app',
     accent: '#ff375f',
     screens: 12,
     description: 'Mobile-first fitness template — Expo SDK 54 + Hono + Drizzle + Better Auth. One codebase ships iOS, Android, and web. Activity rings widget, workout logging, weekly trends, awards, and a friend-activity feed.',
