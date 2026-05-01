@@ -297,6 +297,145 @@ function MiniDashboardPreview({ accent }: { accent: string }) {
   )
 }
 
+// Mini Kanban — mirrors the kit's `/home/issues-board` (5 status columns,
+// drag-card visual) at preview density. Same Sidebar shell as MiniDashboardPreview
+// so the multi-tab story reads like a single coherent app.
+function MiniKanbanPreview({ accent }: { accent: string }) {
+  const navItems = [
+    { Icon: Home,         label: 'Dashboard' },
+    { Icon: Layers,       label: 'All Issues', active: true },
+    { Icon: BarChart3,    label: 'Analytics' },
+    { Icon: Inbox,        label: 'Inbox', badge: '5' },
+    { Icon: FolderKanban, label: 'Projects' },
+    { Icon: UsersIcon,    label: 'Teams' },
+  ]
+  const columns: Array<{ title: string; tone: string; cards: Array<{ title: string; badge?: string }> }> = [
+    {
+      title: 'Backlog',
+      tone: '#737373',
+      cards: [
+        { title: 'Add Stripe annual plans' },
+        { title: 'Migrate to Drizzle 1.0' },
+        { title: 'Refactor toast emitter' },
+      ],
+    },
+    {
+      title: 'Todo',
+      tone: '#a1a1aa',
+      cards: [
+        { title: 'Wire forgot password', badge: 'P2' },
+        { title: 'Onboarding tour' },
+      ],
+    },
+    {
+      title: 'In Progress',
+      tone: '#3b82f6',
+      cards: [
+        { title: 'Auth flow refactor', badge: 'High' },
+        { title: 'Payment integration' },
+      ],
+    },
+    {
+      title: 'In Review',
+      tone: '#a855f7',
+      cards: [
+        { title: 'PR #421 — analytics' },
+      ],
+    },
+    {
+      title: 'Done',
+      tone: '#22c55e',
+      cards: [
+        { title: 'CI/CD setup' },
+        { title: 'DB schema' },
+        { title: 'Onboarding flow' },
+      ],
+    },
+  ]
+  return (
+    <div className="h-[280px] bg-background flex overflow-hidden">
+      {/* Sidebar — identical shell to MiniDashboardPreview so tabs feel like the same app */}
+      <aside className="w-[118px] shrink-0 border-r border-border bg-secondary/15 flex flex-col">
+        <div className="h-9 px-2.5 flex items-center gap-1.5 border-b border-border">
+          <div className="h-4 w-4 rounded-[3px] flex items-center justify-center text-white text-[7px] font-black" style={{ background: accent }}>O</div>
+          <span className="text-foreground text-[10px] font-bold tracking-tight">OTF</span>
+        </div>
+        <nav className="flex-1 p-1.5 flex flex-col gap-px">
+          {navItems.map(({ Icon, label, active, badge }) => (
+            <div
+              key={label}
+              className={`flex items-center gap-1.5 px-1.5 py-1 rounded-[4px] text-[9px] transition-colors ${
+                active ? 'font-semibold text-foreground' : 'font-medium text-muted-foreground'
+              }`}
+              style={active ? { background: `${accent}18` } : {}}
+            >
+              <Icon className="h-2.5 w-2.5 shrink-0" style={active ? { color: accent } : {}} strokeWidth={active ? 2.25 : 2} />
+              <span className="flex-1 truncate leading-none">{label}</span>
+              {badge && (
+                <span className="text-[7px] font-mono font-bold px-1 rounded-[3px] leading-tight" style={{ background: `${accent}25`, color: accent }}>
+                  {badge}
+                </span>
+              )}
+            </div>
+          ))}
+        </nav>
+      </aside>
+
+      {/* Main */}
+      <div className="flex-1 flex flex-col overflow-hidden bg-background">
+        {/* Topbar */}
+        <div className="h-9 border-b border-border flex items-center px-3 gap-2">
+          <div className="flex flex-col gap-0.5 leading-none">
+            <span className="text-[10px] font-semibold text-foreground">Issues board</span>
+            <span className="text-[7.5px] text-muted-foreground">12 open · 3 in review</span>
+          </div>
+          <div className="ml-auto flex items-center gap-1.5">
+            <div className="h-4 px-1.5 rounded-[4px] flex items-center gap-0.5 text-[7.5px] font-semibold text-white" style={{ background: accent }}>
+              <Plus className="h-2 w-2" strokeWidth={3} /> New
+            </div>
+          </div>
+        </div>
+
+        {/* Board — 5 columns */}
+        <div className="flex-1 p-2 overflow-x-auto">
+          <div className="grid grid-cols-5 gap-1.5 h-full min-w-0">
+            {columns.map((col) => (
+              <div key={col.title} className="flex flex-col gap-1 min-w-0 rounded-md bg-[hsl(var(--muted)/0.4)] p-1.5">
+                {/* Column header */}
+                <div className="flex items-center justify-between px-0.5 pb-0.5">
+                  <div className="flex items-center gap-1 min-w-0">
+                    <span className="h-1.5 w-1.5 rounded-full shrink-0" style={{ background: col.tone }} />
+                    <span className="text-[8.5px] font-semibold text-foreground truncate">{col.title}</span>
+                  </div>
+                  <span className="text-[7px] font-mono text-muted-foreground tabular-nums shrink-0">{col.cards.length}</span>
+                </div>
+                {/* Cards */}
+                <div className="flex flex-col gap-1 min-h-0">
+                  {col.cards.map((c, i) => (
+                    <div key={i} className="rounded-[4px] border border-border bg-card px-1.5 py-1">
+                      <div className="flex items-start justify-between gap-1">
+                        <span className="text-[8px] font-medium text-foreground leading-tight line-clamp-2">{c.title}</span>
+                        {c.badge && (
+                          <span
+                            className="shrink-0 text-[6.5px] font-bold px-1 rounded-full leading-tight"
+                            style={{ background: `${accent}1a`, color: accent }}
+                          >
+                            {c.badge}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function ComingSoonPreview({ accent, name }: { accent: string; name: string }) {
   return (
     <div className="h-[190px] bg-background flex items-center justify-center">
@@ -312,6 +451,80 @@ function ComingSoonPreview({ accent, name }: { accent: string; name: string }) {
         <div className="text-muted-foreground text-xs font-medium">{name}</div>
         <div className="text-muted-foreground/40 text-[10px] mt-0.5">Coming soon</div>
       </div>
+    </div>
+  )
+}
+
+// ── Tabbed live preview wrapper ────────────────────────────────────────────
+// For "available" kits, shows a browser-chrome shell with a small tab strip
+// (Dashboard | Issues board) so visitors can flip between two real screen
+// previews. Coming-soon kits show the placeholder.
+
+type Template = (typeof templates)[number]
+
+const KIT_TABS_BY_KIT: Record<string, Array<{ id: string; label: string; render: (accent: string) => React.ReactNode; path: string }>> = {
+  'saas-dashboard': [
+    { id: 'dashboard', label: 'Dashboard',    render: (a) => <MiniDashboardPreview accent={a} />, path: '/home/dashboard' },
+    { id: 'board',     label: 'Issues board', render: (a) => <MiniKanbanPreview accent={a} />,    path: '/home/issues-board' },
+  ],
+}
+
+function KitPreview({ template: t }: { template: Template }) {
+  const tabs = t.kitSlug ? KIT_TABS_BY_KIT[t.kitSlug] : undefined
+  const [tabIdx, setTabIdx] = useState(0)
+  const activeTab = tabs?.[tabIdx]
+  const urlPath = activeTab?.path ?? ''
+  const urlBase = t.demo ? t.demo.replace('https://', '') : `${t.name.toLowerCase().replace(/\s+/g, '-')}.otf.sh`
+  const url = urlBase + urlPath
+
+  return (
+    <div className="border-b border-border">
+      {/* Chrome — traffic lights + URL pill + tab strip on the right */}
+      <div className="h-9 flex items-center px-3 gap-2 bg-secondary/40 border-b border-border">
+        <div className="flex gap-1.5 shrink-0">
+          <div className="w-2.5 h-2.5 rounded-full bg-destructive/60" />
+          <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/60" />
+          <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/60" />
+        </div>
+        <div className="flex-1 flex justify-center">
+          <div className="bg-background border border-border rounded px-3 py-0.5 text-[10px] text-muted-foreground font-mono max-w-[260px] w-full text-center truncate">
+            {url}
+          </div>
+        </div>
+        {tabs ? (
+          <div className="flex items-center gap-0.5 shrink-0 rounded-md bg-background/60 border border-border p-0.5">
+            {tabs.map((tab, i) => (
+              <button
+                key={tab.id}
+                onClick={(e) => { e.preventDefault(); setTabIdx(i) }}
+                className={`px-2 py-0.5 rounded text-[10px] font-medium transition-colors ${
+                  i === tabIdx
+                    ? 'bg-card text-foreground shadow-sm'
+                    : 'text-muted-foreground hover:text-foreground'
+                }`}
+                style={i === tabIdx ? { color: t.accent } : {}}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+        ) : (
+          <div className="w-10 shrink-0" />
+        )}
+      </div>
+
+      {/* Body */}
+      {t.status === 'available' && tabs
+        ? <div key={tabIdx} className="kit-preview-fade">{activeTab!.render(t.accent)}</div>
+        : t.status === 'available'
+          ? <MiniDashboardPreview accent={t.accent} />
+          : <ComingSoonPreview accent={t.accent} name={t.name} />
+      }
+      <style>{`
+        .kit-preview-fade { animation: kit-preview-fade 220ms ease-out; }
+        @keyframes kit-preview-fade { from { opacity: 0 } to { opacity: 1 } }
+        @media (prefers-reduced-motion: reduce) { .kit-preview-fade { animation: none } }
+      `}</style>
     </div>
   )
 }
@@ -403,26 +616,8 @@ export function TemplatesClient() {
                   : 'border-border bg-card hover:border-border/80'
               }`}
             >
-              {/* Browser chrome + preview */}
-              <div className="border-b border-border">
-                <div className="h-8 flex items-center px-3 gap-2 bg-secondary/40 border-b border-border">
-                  <div className="flex gap-1.5">
-                    <div className="w-2.5 h-2.5 rounded-full bg-destructive/60" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/60" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/60" />
-                  </div>
-                  <div className="flex-1 flex justify-center">
-                    <div className="bg-background border border-border rounded px-3 py-0.5 text-[10px] text-muted-foreground font-mono max-w-[200px] w-full text-center truncate">
-                      {t.demo ? t.demo.replace('https://', '') : `${t.name.toLowerCase().replace(/\s+/g, '-')}.otf.sh`}
-                    </div>
-                  </div>
-                  <div className="w-10" />
-                </div>
-                {t.status === 'available'
-                  ? <MiniDashboardPreview accent={t.accent} />
-                  : <ComingSoonPreview accent={t.accent} name={t.name} />
-                }
-              </div>
+              {/* Browser chrome + tabbed preview */}
+              <KitPreview template={t} />
 
               {/* Card body */}
               <div className="p-5 flex flex-col gap-3.5 flex-1">
