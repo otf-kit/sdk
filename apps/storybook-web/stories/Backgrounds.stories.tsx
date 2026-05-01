@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { GradientBackground, AnimatedGradient, DottedBackground, NoiseBackground } from '@otf/ui'
+import { GradientBackground, AnimatedGradient, DottedBackground, NoiseBackground, HeroShaderA } from '@otf/ui'
 
 const meta = {
   title: 'Backgrounds/All',
@@ -56,6 +56,66 @@ export const NoiseBackgroundDemo: StoryObj = {
       <NoiseBackground />
       <div className="relative z-10 flex items-center justify-center h-full">
         <span className="text-foreground text-lg">Noise overlay</span>
+      </div>
+    </div>
+  ),
+}
+
+export const HeroShaderADefault: StoryObj = {
+  render: () => (
+    <div className="relative h-screen w-full bg-black">
+      <HeroShaderA />
+      <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center">
+        <p className="font-mono text-xs uppercase tracking-[0.22em] text-white/60">— hero shader A</p>
+        <h1 className="mt-4 text-5xl sm:text-6xl font-semibold tracking-tight text-white">
+          Built for builders <span className="italic font-light text-white/70">who ship.</span>
+        </h1>
+        <p className="mt-4 max-w-xl text-base text-white/70">
+          A clean-room WebGL aurora — three drifting blobs lit by your theme tokens. Pauses when offscreen, falls back to a CSS gradient if WebGL is unavailable.
+        </p>
+      </div>
+    </div>
+  ),
+}
+
+export const HeroShaderASlow: StoryObj = {
+  name: 'HeroShaderA — slow drift',
+  render: () => (
+    <div className="relative h-screen w-full bg-black">
+      <HeroShaderA speed={0.4} intensity={0.55} />
+      <div className="relative z-10 flex h-full items-center justify-center">
+        <span className="text-white text-2xl font-light italic">slower · subtler</span>
+      </div>
+    </div>
+  ),
+}
+
+export const HeroShaderACustomColors: StoryObj = {
+  name: 'HeroShaderA — custom palette',
+  render: () => (
+    <div className="relative h-screen w-full bg-black">
+      <HeroShaderA
+        colors={[
+          [0.20, 0.85, 0.55],
+          [0.10, 0.45, 0.95],
+          [0.85, 0.35, 0.80],
+        ]}
+        background={[0.02, 0.04, 0.08]}
+      />
+      <div className="relative z-10 flex h-full items-center justify-center">
+        <span className="text-white text-2xl font-light tracking-tight">teal · blue · magenta</span>
+      </div>
+    </div>
+  ),
+}
+
+export const HeroShaderAFrozen: StoryObj = {
+  name: 'HeroShaderA — frozen (reduced motion)',
+  render: () => (
+    <div className="relative h-screen w-full bg-black">
+      <HeroShaderA speed={0} />
+      <div className="relative z-10 flex h-full items-center justify-center">
+        <span className="text-white/80 text-xl">single static frame</span>
       </div>
     </div>
   ),
