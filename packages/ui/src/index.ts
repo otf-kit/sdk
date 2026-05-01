@@ -27,6 +27,7 @@ export * from './primitives/hover-card'
 export * from './primitives/input-otp'
 export * from './primitives/input'
 export * from './primitives/label'
+export * from './primitives/logo-carousel'
 export * from './primitives/menubar'
 export * from './primitives/navigation-menu'
 export * from './primitives/pagination'
@@ -115,6 +116,8 @@ export * from './charts/heatmap'
 // engagement
 export * from './engagement/beacon'
 export * from './engagement/tour'
+export * from './engagement/checklist'
+export * from './engagement/intro-disclosure'
 
 // forms
 export * from './forms/array-field'
