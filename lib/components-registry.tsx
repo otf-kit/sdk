@@ -474,35 +474,72 @@ const DataGridPreview = () => (
   </PreviewShell>
 )
 
-const TimelinePreview = () => (
-  <PreviewShell>
-    <div style={{ width: '100%', maxWidth: 270 }}>
-      <Card style={{ padding: 16 }}>
-        <div style={{ fontSize: 12, fontWeight: 600, color: fg, marginBottom: 14 }}>Recent activity</div>
-        {[
-          { label: 'Issue #101 created',      sub: 'by Dave Soni',       time: '2m ago',  color: pri, icon: '+' },
-          { label: 'Assigned to Kate Lee',    sub: 'Engineering lead',   time: '5m ago',  color: c3,  icon: '→' },
-          { label: 'Status: In Progress',     sub: 'Sprint 4',           time: '12m ago', color: c4,  icon: '↻' },
-          { label: 'Comment added',           sub: '"Looks great!"',     time: '1h ago',  color: mfg, icon: '·' },
-        ].map((item, i) => (
-          <div key={i} style={{ display: 'flex', gap: 10, marginBottom: i < 3 ? 12 : 0 }}>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flexShrink: 0 }}>
-              <div style={{ width: 24, height: 24, borderRadius: '50%', background: `${item.color}18`, border: `1px solid ${item.color}35`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 700, color: item.color, flexShrink: 0 }}>{item.icon}</div>
-              {i < 3 && <div style={{ width: 1, flex: 1, background: `${item.color}18`, marginTop: 4 }} />}
-            </div>
-            <div style={{ paddingBottom: i < 3 ? 8 : 0 }}>
-              <div style={{ fontSize: 11.5, color: fg, fontWeight: 500, lineHeight: 1.3 }}>{item.label}</div>
-              <div style={{ display: 'flex', gap: 8, marginTop: 2 }}>
-                <span style={{ fontSize: 10, color: mfg }}>{item.sub}</span>
-                <span style={{ fontSize: 10, color: `${mfg}70`, fontFamily: FONT_MONO }}>{item.time}</span>
-              </div>
-            </div>
+const TimelinePreview = () => {
+  // Mirrors @otf/ui <Timeline /> + <TimelineItem /> shape: small variant-color
+  // dot with bg-background border, vertical connector line absolutely positioned
+  // from dot bottom to next dot, title (font-medium) + right-aligned timestamp
+  // + muted description line. No icons inside the dot.
+  const items: Array<{ title: string; desc: string; time: string; variant: 'default' | 'success' | 'error' | 'warning' }> = [
+    { title: 'Sprint 4 kicked off',         desc: '8 issues planned',         time: 'now',    variant: 'default' },
+    { title: 'PR #421 ready for review',    desc: 'Auth flow refactor',       time: '2h',     variant: 'default' },
+    { title: 'Deploy failed on main',       desc: 'Build error · staging',    time: '4h',     variant: 'error'   },
+    { title: 'OTF-118 marked done',         desc: 'CI/CD setup complete',     time: '1d',     variant: 'success' },
+  ]
+  const dotColor = (v: typeof items[number]['variant']) =>
+    v === 'success' ? c2 : v === 'error' ? err : v === 'warning' ? c4 : pri
+  return (
+    <PreviewShell>
+      <div style={{ width: '100%', maxWidth: 280 }}>
+        <Card style={{ padding: 14 }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: fg, marginBottom: 14 }}>Recent activity</div>
+          <div>
+            {items.map((it, i) => {
+              const isLast = i === items.length - 1
+              return (
+                <div key={i} style={{ position: 'relative', display: 'flex', gap: 12, paddingBottom: isLast ? 0 : 14 }}>
+                  {/* Dot column */}
+                  <div style={{ position: 'relative', flex: 'none' }}>
+                    <div
+                      style={{
+                        width: 12,
+                        height: 12,
+                        marginTop: 2,
+                        borderRadius: '50%',
+                        background: dotColor(it.variant),
+                        border: `2px solid ${card}`,
+                        boxShadow: `0 0 0 1px ${dotColor(it.variant)}40`,
+                      }}
+                    />
+                    {!isLast && (
+                      <div
+                        style={{
+                          position: 'absolute',
+                          left: 5,
+                          top: 16,
+                          bottom: -4,
+                          width: 2,
+                          background: bdr,
+                        }}
+                      />
+                    )}
+                  </div>
+                  {/* Content */}
+                  <div style={{ flex: 1, minWidth: 0, paddingBottom: 1 }}>
+                    <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: 8 }}>
+                      <span style={{ fontSize: 11.5, fontWeight: 500, color: fg, lineHeight: 1.35 }}>{it.title}</span>
+                      <span style={{ fontSize: 10, color: mfg, fontFamily: FONT_MONO, flexShrink: 0 }}>{it.time}</span>
+                    </div>
+                    <div style={{ fontSize: 10.5, color: mfg, marginTop: 2, lineHeight: 1.35 }}>{it.desc}</div>
+                  </div>
+                </div>
+              )
+            })}
           </div>
-        ))}
-      </Card>
-    </div>
-  </PreviewShell>
-)
+        </Card>
+      </div>
+    </PreviewShell>
+  )
+}
 
 // Lucide-style inline SVG icons (matches @otf/ui MetricCardWithIcon)
 const IconDollarSign = ({ color = fg, size = 16 }: { color?: string; size?: number }) => (
@@ -1280,45 +1317,97 @@ const BarChartPreview = () => {
 }
 
 const LineChartPreview = () => {
-  const points = [20, 35, 28, 55, 42, 68, 58, 75, 65, 82, 78, 92]
-  const max = Math.max(...points), min = Math.min(...points)
-  const norm = (v: number) => ((v - min) / (max - min)) * 100
-  const svgPoints = points.map((p, i) => `${(i / (points.length - 1)) * 100},${100 - norm(p)}`).join(' ')
+  // Matches @otf/ui <LineChart /> visual language: monotone curve with strokeWidth=2,
+  // dashed CartesianGrid (3 3), no fill, axis ticks. Composed inside a Card with
+  // h3 title + muted description + Badge (mirrors saas-dashboard chart wrappers).
+  const issues    = [42, 48, 45, 52, 58, 56, 64, 70, 68, 75, 82, 88]
+  const completed = [22, 28, 30, 36, 42, 45, 50, 55, 58, 64, 70, 76]
+  const all = [...issues, ...completed]
+  const max = Math.max(...all), min = Math.min(...all)
+  const norm = (v: number) => 95 - ((v - min) / (max - min)) * 85
+  const toPath = (vals: number[]) => {
+    const pts = vals.map((v, i) => [(i / (vals.length - 1)) * 100, norm(v)] as const)
+    // monotone-ish curve via simple cubic bezier between points
+    let d = `M ${pts[0][0]},${pts[0][1]}`
+    for (let i = 1; i < pts.length; i++) {
+      const [x0, y0] = pts[i - 1]
+      const [x1, y1] = pts[i]
+      const cx = (x0 + x1) / 2
+      d += ` C ${cx},${y0} ${cx},${y1} ${x1},${y1}`
+    }
+    return d
+  }
   return (
     <PreviewShell>
-      <div style={{ width: '100%', maxWidth: 320 }}>
-        <Card style={{ padding: 16 }}>
-          <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 14 }}>
+      <div style={{ width: '100%', maxWidth: 340 }}>
+        <Card style={{ padding: 14 }}>
+          {/* Header — matches kit dashboard pattern: h3 + description + Badge */}
+          <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 8, marginBottom: 12 }}>
             <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: fg }}>MRR Growth</div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 2 }}>
-                <span style={{ fontSize: 20, fontWeight: 700, color: fg, letterSpacing: '-0.02em' }}>$4,820</span>
-                <span style={{ fontSize: 10, color: c2, background: `${c2}15`, padding: '2px 6px', borderRadius: 5, fontWeight: 600 }}>↗ +18%</span>
-              </div>
+              <div style={{ fontSize: 12, fontWeight: 600, color: fg, lineHeight: 1.3 }}>Issue Trend</div>
+              <div style={{ fontSize: 10, color: mfg, marginTop: 2, lineHeight: 1.3 }}>Total vs completed</div>
             </div>
-            <div style={{ display: 'flex', gap: 4 }}>
-              {['1M','3M','1Y'].map((t, i) => (
-                <button key={t} style={{ padding: '3px 7px', borderRadius: 4, background: i===2 ? `${pri}15` : 'transparent', color: i===2 ? pri : mfg, fontSize: 9.5, fontFamily: FONT_MONO, border: `1px solid ${i===2 ? `${pri}30` : 'transparent'}` }}>{t}</button>
+            <span
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 4,
+                fontSize: 9.5,
+                fontWeight: 600,
+                color: c2,
+                background: `${c2}14`,
+                border: `1px solid ${c2}30`,
+                padding: '2px 7px',
+                borderRadius: 999,
+                fontFamily: FONT_MONO,
+              }}
+            >
+              <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke={c2} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
+                <polyline points="16 7 22 7 22 13" />
+              </svg>
+              +18%
+            </span>
+          </div>
+
+          {/* Chart */}
+          <div style={{ display: 'flex', gap: 6 }}>
+            {/* Y axis ticks */}
+            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: 78, paddingBottom: 8, paddingTop: 4 }}>
+              {[100, 50, 0].map(t => (
+                <span key={t} style={{ fontSize: 8.5, color: mfg, fontFamily: FONT_MONO, lineHeight: 1 }}>{t}</span>
               ))}
             </div>
+            <div style={{ flex: 1 }}>
+              <svg viewBox="0 0 100 100" preserveAspectRatio="none" style={{ width: '100%', height: 78, display: 'block' }}>
+                {/* CartesianGrid — 3-3 dash, three horizontal lines */}
+                {[10, 47.5, 85].map(y => (
+                  <line key={y} x1="0" y1={y} x2="100" y2={y} stroke={bdr} strokeWidth="0.4" strokeDasharray="3 3" />
+                ))}
+                {/* completed (chart-1 / primary) */}
+                <path d={toPath(completed)} fill="none" stroke={pri} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                {/* total issues (chart-3) */}
+                <path d={toPath(issues)} fill="none" stroke={c3} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              {/* X axis ticks */}
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 4 }}>
+                {['Jan', 'Mar', 'May', 'Jul', 'Sep', 'Nov'].map(m => (
+                  <span key={m} style={{ fontSize: 8.5, color: mfg, fontFamily: FONT_MONO }}>{m}</span>
+                ))}
+              </div>
+            </div>
           </div>
-          <svg viewBox="0 0 100 50" preserveAspectRatio="none" style={{ width: '100%', height: 70 }}>
-            <defs>
-              <linearGradient id="line-grad" x1="0" x2="0" y1="0" y2="1">
-                <stop offset="0%" stopColor={pri} stopOpacity="0.3"/>
-                <stop offset="100%" stopColor={pri} stopOpacity="0"/>
-              </linearGradient>
-            </defs>
-            {[25, 50, 75].map(y => (
-              <line key={y} x1="0" y1={y} x2="100" y2={y} stroke={bdr} strokeWidth="0.4" strokeDasharray="2 2"/>
-            ))}
-            <polygon points={`0,100 ${svgPoints} 100,100`} fill="url(#line-grad)"/>
-            <polyline points={svgPoints} fill="none" stroke={pri} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            <circle cx={(11/11)*100} cy={100 - norm(points[11])} r="2.5" fill={pri} filter={`drop-shadow(0 0 3px ${pri})`}/>
-          </svg>
-          <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 4 }}>
-            {['Jan','Mar','May','Jul','Sep','Nov'].map(m => (
-              <span key={m} style={{ fontSize: 9, color: mfg, fontFamily: FONT_MONO }}>{m}</span>
+
+          {/* Legend */}
+          <div style={{ display: 'flex', gap: 12, marginTop: 8 }}>
+            {[
+              { label: 'Total',     color: c3 },
+              { label: 'Completed', color: pri },
+            ].map(s => (
+              <div key={s.label} style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+                <span style={{ width: 8, height: 2, background: s.color, borderRadius: 1 }} />
+                <span style={{ fontSize: 9.5, color: mfg }}>{s.label}</span>
+              </div>
             ))}
           </div>
         </Card>
@@ -1328,40 +1417,66 @@ const LineChartPreview = () => {
 }
 
 const DonutChartPreview = () => {
+  // Composed in the saas-dashboard "Status Distribution" pattern: Card + h3 +
+  // muted description, donut on the left (with center stat), legend rows on
+  // the right showing label / count / percentage. Uses chart-token colors.
+  const total = 50
   const segs = [
-    { label: 'Done',        pct: 36, color: c2 },
-    { label: 'In Progress', pct: 24, color: c4 },
-    { label: 'Todo',        pct: 24, color: c3 },
-    { label: 'Backlog',     pct: 16, color: mfg },
+    { label: 'Done',        count: 18, pct: 36, color: pri },
+    { label: 'In Progress', count: 12, pct: 24, color: c3  },
+    { label: 'Todo',        count: 12, pct: 24, color: c4  },
+    { label: 'Backlog',     count: 8,  pct: 16, color: c2  },
   ]
   const r = 14, C = 2 * Math.PI * r
   return (
     <PreviewShell>
-      <div style={{ width: '100%', maxWidth: 250 }}>
-        <Card style={{ padding: 16 }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: fg, marginBottom: 14 }}>Issue distribution</div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-            <div style={{ position: 'relative', width: 80, height: 80, flexShrink: 0 }}>
-              <svg viewBox="0 0 36 36" style={{ transform: 'rotate(-90deg)', width: 80, height: 80 }}>
+      <div style={{ width: '100%', maxWidth: 270 }}>
+        <Card style={{ padding: 14 }}>
+          <div style={{ marginBottom: 12 }}>
+            <div style={{ fontSize: 12, fontWeight: 600, color: fg, lineHeight: 1.3 }}>Status Distribution</div>
+            <div style={{ fontSize: 10, color: mfg, marginTop: 2, lineHeight: 1.3 }}>Issues by current status</div>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 18 }}>
+            {/* Donut */}
+            <div style={{ position: 'relative', width: 84, height: 84, flexShrink: 0 }}>
+              <svg viewBox="0 0 36 36" style={{ transform: 'rotate(-90deg)', width: 84, height: 84 }}>
+                {/* track */}
+                <circle cx="18" cy="18" r={r} fill="none" stroke={bdr} strokeWidth="3.5" />
+                {/* segments */}
                 {segs.reduce((acc, s, i) => {
                   const da = (s.pct / 100) * C
-                  acc.els.push(<circle key={i} cx="18" cy="18" r={r} fill="none" stroke={s.color} strokeWidth="4.5" strokeDasharray={`${da} ${C - da}`} strokeDashoffset={-acc.off}/>)
+                  acc.els.push(
+                    <circle
+                      key={i}
+                      cx="18"
+                      cy="18"
+                      r={r}
+                      fill="none"
+                      stroke={s.color}
+                      strokeWidth="3.5"
+                      strokeDasharray={`${da} ${C - da}`}
+                      strokeDashoffset={-acc.off}
+                      strokeLinecap="butt"
+                    />,
+                  )
                   acc.off += da
                   return acc
                 }, { els: [] as React.ReactNode[], off: 0 }).els}
-                <circle cx="18" cy="18" r="9" fill={card}/>
               </svg>
-              <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-                <div style={{ fontSize: 16, fontWeight: 700, color: fg, lineHeight: 1 }}>50</div>
-                <div style={{ fontSize: 8.5, color: mfg, marginTop: 1 }}>total</div>
+              <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', lineHeight: 1 }}>
+                <div style={{ fontSize: 19, fontWeight: 700, color: fg, letterSpacing: '-0.02em' }}>{total}</div>
+                <div style={{ fontSize: 8.5, color: mfg, marginTop: 3, fontFamily: FONT_MONO, textTransform: 'uppercase', letterSpacing: '0.08em' }}>total</div>
               </div>
             </div>
-            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 6 }}>
+
+            {/* Legend */}
+            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 5, minWidth: 0 }}>
               {segs.map(s => (
                 <div key={s.label} style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
-                  <div style={{ width: 8, height: 8, borderRadius: 2, background: s.color, flexShrink: 0 }}/>
-                  <span style={{ fontSize: 10.5, color: mfg, flex: 1 }}>{s.label}</span>
-                  <span style={{ fontSize: 11, color: s.color, fontWeight: 700, fontFamily: FONT_MONO }}>{s.pct}%</span>
+                  <span style={{ width: 7, height: 7, borderRadius: '50%', background: s.color, flexShrink: 0 }} />
+                  <span style={{ fontSize: 10.5, color: fg, flex: 1, fontWeight: 500, lineHeight: 1.3 }}>{s.label}</span>
+                  <span style={{ fontSize: 9.5, color: mfg, fontFamily: FONT_MONO }}>{s.count}</span>
+                  <span style={{ fontSize: 10, color: mfg, fontFamily: FONT_MONO, minWidth: 26, textAlign: 'right' }}>{s.pct}%</span>
                 </div>
               ))}
             </div>
