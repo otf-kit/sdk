@@ -17,3 +17,17 @@ coverage
 
 # Playwright MCP temp
 .playwright-mcp/
+
+# graphify outputs + chats
+graphify-out/
+.graphifyignore
+.chats/
+
+# reference reference screenshots (downloaded, not shipped)
+reference-*.png
+
+# Temporary scheduled task locks
+.claude/scheduled_tasks.lock
+
+# Kit-local TODO tracker
+kits/*/TODO.md
