@@ -83,6 +83,7 @@
     "react-colorful": "^5.6.1",
     "react-day-picker": "^9.14.0",
     "react-hook-form": "^7.71.2",
+    "react-image-crop": "^11.0.10",
     "react-resizable-panels": "^4.7.5",
     "recharts": "^3.8.0",
     "shiki": "^4.0.2",
