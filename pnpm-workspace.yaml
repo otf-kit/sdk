@@ -2,4 +2,4 @@ packages:
   - 'packages/*'
   - 'apps/*'
   - 'tools/*'
-  - '!apps/ui-native-storybook'
+  - '!apps/ui-native-showcase'
