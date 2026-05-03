@@ -4,6 +4,7 @@ import { Marquee } from '@otf/ui'
 const meta: Meta<typeof Marquee> = {
   title: 'Primitives/Marquee',
   component: Marquee,
+  parameters: { layout: 'centered' },
   tags: ['autodocs'],
 }
 export default meta

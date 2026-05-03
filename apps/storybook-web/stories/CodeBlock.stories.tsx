@@ -4,6 +4,7 @@ import { CodeBlock } from '@otf/ui'
 const meta: Meta<typeof CodeBlock> = {
   title: 'Primitives/CodeBlock',
   component: CodeBlock,
+  parameters: { layout: 'centered' },
   tags: ['autodocs'],
 }
 export default meta

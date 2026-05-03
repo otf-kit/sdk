@@ -108,7 +108,9 @@ export * from './blocks/workspace-members'
 export * from './advanced/bulk-actions'
 export * from './advanced/command-bar'
 export * from './advanced/filters'
+export * from './advanced/gantt'
 export * from './advanced/kanban'
+export * from './advanced/rich-editor'
 export * from './advanced/toggle-button'
 
 // charts

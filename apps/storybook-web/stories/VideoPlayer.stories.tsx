@@ -20,7 +20,7 @@ const meta: Meta<typeof VideoPlayer> = {
   component: VideoPlayer,
   tags: ['autodocs'],
   parameters: {
-    layout: 'padded',
+    layout: 'centered',
   },
 }
 export default meta

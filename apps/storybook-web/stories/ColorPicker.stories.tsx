@@ -5,6 +5,7 @@ import { ColorPicker } from '@otf/ui'
 const meta: Meta<typeof ColorPicker> = {
   title: 'Forms/ColorPicker',
   component: ColorPicker,
+  parameters: { layout: 'centered' },
   tags: ['autodocs'],
 }
 export default meta

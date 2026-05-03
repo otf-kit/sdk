@@ -6,6 +6,7 @@ import { Rating } from '@otf/ui'
 const meta: Meta<typeof Rating> = {
   title: 'Primitives/Rating',
   component: Rating,
+  parameters: { layout: 'centered' },
   tags: ['autodocs'],
 }
 export default meta
