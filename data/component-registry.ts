@@ -42,8 +42,18 @@ export type ComponentMeta = {
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const components: ComponentMeta[] = [
-  // ── Primitives/Button → primitivesbutton ─────────────────────────────────
+  // ── Primitives/Button → primitives-button ────────────────────────────────
   { slug: 'button',        name: 'Button',        description: 'Solid, outline, ghost, and destructive variants with icon and loading state support.',        category: 'Input',    tags: ['action', 'cta', 'form'],           stack: 'web', hasExample: true, storybookId: 'primitives-button--all-variants' },
+  // ── Primitives/Marquee → primitives-marquee ──────────────────────────────
+  { slug: 'marquee',       name: 'Marquee',       description: 'Infinite-scrolling row of children — logos, testimonials, badges. Pure CSS, fade edges, pause-on-hover.', category: 'Display',  tags: ['marquee', 'scroll', 'logos'],      stack: 'web', hasExample: true, storybookId: 'primitives-marquee--default' },
+  // ── Primitives/Rating → primitives-rating ────────────────────────────────
+  { slug: 'rating',        name: 'Rating',        description: 'Interactive 0..N star rating with half-step support and full keyboard control.',               category: 'Input',    tags: ['rating', 'stars', 'review'],       stack: 'web', hasExample: true, storybookId: 'primitives-rating--default' },
+  // ── Primitives/QrCode → primitives-qrcode ────────────────────────────────
+  { slug: 'qr-code',       name: 'QR Code',       description: 'Theme-aware QR code generator with adjustable size, error-correction level, and optional center logo.', category: 'Display',  tags: ['qr', 'generator', 'url'],          stack: 'web', hasExample: true, storybookId: 'primitives-qrcode--default' },
+  // ── Primitives/CodeBlock → primitives-codeblock ──────────────────────────
+  { slug: 'code-block',    name: 'Code Block',    description: 'Syntax-highlighted code preview powered by Shiki, with copy button, line numbers, and line highlights.', category: 'Display',  tags: ['code', 'syntax', 'shiki'],         stack: 'web', hasExample: true, storybookId: 'primitives-codeblock--default' },
+  // ── Primitives/Comparison → primitives-comparison ────────────────────────
+  { slug: 'comparison',    name: 'Comparison',    description: 'Before / after image slider with horizontal or vertical orientation and full keyboard support.',  category: 'Display',  tags: ['comparison', 'slider', 'before-after'], stack: 'web', hasExample: true, storybookId: 'primitives-comparison--default' },
   // ── Primitives/Display → primitivesdisplay ───────────────────────────────
   { slug: 'avatar',        name: 'Avatar',        description: 'User avatar with image, fallback initials, and optional status indicator.',                   category: 'Display',  tags: ['user', 'profile', 'identity'],     stack: 'web', hasExample: true, storybookId: 'primitives-display--avatar-story' },
   { slug: 'badge',         name: 'Badge',         description: 'Status and category labels in default, secondary, destructive, and outline variants.',         category: 'Display',  tags: ['label', 'tag', 'status'],          stack: 'web', hasExample: true, storybookId: 'primitives-display--badge-story' },

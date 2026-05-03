@@ -9,7 +9,7 @@ const components = [
   { slug: 'code-block',  name: 'Code Block',    desc: 'Syntax highlighted code with copy',             Icon: Code2,        tag: 'Live'    },
   { slug: 'color-picker',name: 'Color Picker',  desc: 'Composable color picker with eye-dropper',      Icon: Palette                    },
   { slug: 'calendar',    name: 'Calendar',       desc: 'Full-featured event calendar',                  Icon: Calendar                   },
-  { slug: 'table',       name: 'Data Table',     desc: 'Powerful data table with sort + filter',        Icon: Table2                     },
+  { slug: 'data-table',  name: 'Data Table',     desc: 'Powerful data table with sort + filter',        Icon: Table2                     },
   { slug: 'tags',        name: 'Tags',           desc: 'Multi-select tag input',                        Icon: Tag                        },
   { slug: 'tree',        name: 'Tree',           desc: 'Recursive file tree component',                 Icon: ListTree                   },
   { slug: 'qr-code',    name: 'QR Code',        desc: 'Customizable QR code generator',                Icon: QrCode                     },
@@ -17,7 +17,7 @@ const components = [
   { slug: 'image-crop',  name: 'Image Crop',     desc: 'Drag-to-crop image utility',                    Icon: Image                      },
   { slug: 'rating',      name: 'Rating',         desc: 'Star rating with half steps',                   Icon: Star,         tag: 'Live'  },
   { slug: 'comparison',  name: 'Comparison',     desc: 'Before / after image slider',                   Icon: Columns3                   },
-  { slug: 'editor',      name: 'Rich Editor',    desc: 'Rich text editor on Tiptap',                    Icon: Mic,          tag: 'New'   },
+  { slug: 'rich-editor', name: 'Rich Editor',    desc: 'Rich text editor on Tiptap',                    Icon: Mic,          tag: 'New'   },
   { slug: 'marquee',     name: 'Marquee',        desc: 'Infinite scrolling row',                        Icon: Sparkles,     tag: 'Live'  },
 ]
 
