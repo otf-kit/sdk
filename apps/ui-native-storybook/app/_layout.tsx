@@ -3,6 +3,7 @@ import { Platform, View, Pressable as RNPressable } from 'react-native'
 import { Slot } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
 import * as SplashScreen from 'expo-splash-screen'
+import { SafeAreaInsetsContext, useSafeAreaInsets } from 'react-native-safe-area-context'
 import {
   OtfProvider,
   Pressable,
@@ -17,7 +18,30 @@ import {
 } from '@otf/ui-native'
 import { ShowcaseThemeProvider, useShowcaseTheme } from '../components/ThemeContext'
 import { ThemePicker } from '../components/ThemePicker'
+import { FloatingThemePicker } from '../components/FloatingThemePicker'
 import { CategorySidebar } from '../components/CategorySidebar'
+
+// Mirrors fitness-kit's WebSafeAreaShim. ONLY when iframed by the preview
+// shell, override the safe-area top inset so the shell clears the iPhone
+// dynamic island. Standalone web (browsing the storybook directly) gets
+// no inset — edge-to-edge. Native passes through to real device insets.
+const isWebIframed =
+  typeof window !== 'undefined' && window.self !== window.top
+const WEB_SAFE_AREA_INSETS = {
+  top: isWebIframed ? 56 : 0,
+  right: 0,
+  bottom: 0,
+  left: 0,
+}
+
+function WebSafeAreaShim({ children }: { children: React.ReactNode }) {
+  if (Platform.OS !== 'web') return <>{children}</>
+  return (
+    <SafeAreaInsetsContext.Provider value={WEB_SAFE_AREA_INSETS}>
+      {children}
+    </SafeAreaInsetsContext.Provider>
+  )
+}
 
 SplashScreen.preventAutoHideAsync().catch(() => {})
 
@@ -150,6 +174,7 @@ function ShellHeader({ onMenuPress, isMobile }: { onMenuPress?: () => void; isMo
 function ThemedShell({ children }: { children: React.ReactNode }) {
   const { palette, mode } = useShowcaseTheme()
   const media = useMedia()
+  const insets = useSafeAreaInsets()
   // Mobile breakpoint: <gtSm. On native (no media), default to mobile mode.
   const isMobile = !media.gtSm
   const fallbackBg = mode === 'dark' ? '#0a0a0a' : '#fafafa'
@@ -165,7 +190,7 @@ function ThemedShell({ children }: { children: React.ReactNode }) {
     <Theme name={mode}>
       <Theme name={palette.id}>
         <ThemedBodyBg />
-        <View style={{ flex: 1, backgroundColor: fallbackBg }}>
+        <View style={{ flex: 1, backgroundColor: fallbackBg, paddingTop: insets.top }}>
           <YStack flex={1}>
             <ShellHeader isMobile={isMobile} onMenuPress={() => setDrawerOpen((v) => !v)} />
             <XStack flex={1}>
@@ -227,10 +252,13 @@ export default function RootLayout() {
     <OtfProvider config={config} defaultTheme="dark">
       <InjectWebStyles />
       <ShowcaseThemeProvider>
-        <ThemedShell>
-          <Slot />
-          <StatusBar style="auto" />
-        </ThemedShell>
+        <WebSafeAreaShim>
+          <ThemedShell>
+            <Slot />
+            <FloatingThemePicker />
+            <StatusBar style="auto" />
+          </ThemedShell>
+        </WebSafeAreaShim>
       </ShowcaseThemeProvider>
     </OtfProvider>
   )
