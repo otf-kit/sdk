@@ -215,10 +215,10 @@ export const components: ComponentMeta[] = [
   // ── Theme/Controls → theme-controls ──────────────────────────────────────
   { slug: 'theme-switch',         name: 'Theme Switch',         description: 'Segmented dark / light / system theme switcher with smooth icon transitions.',         category: 'Input',    tags: ['theme', 'toggle', 'dark-mode'],    stack: 'web', hasExample: true, storybookId: 'theme-controls--theme-switch-segmented' },
   { slug: 'color-scheme-select',  name: 'Color Scheme Select',  description: 'Color palette picker dropdown — switch between branded color schemes.',                category: 'Input',    tags: ['theme', 'color', 'palette'],       stack: 'web', hasExample: true, storybookId: 'theme-controls--color-scheme' },
-  // ── No Storybook story yet ────────────────────────────────────────────────
-  { slug: 'accordion',     name: 'Accordion',     description: 'Collapsible sections with smooth spring animation and keyboard support.',                    category: 'Layout',   tags: ['collapse', 'faq', 'disclosure'],   stack: 'web' },
-  { slug: 'scroll-area',   name: 'Scroll Area',   description: 'Custom scrollbar with cross-browser styling consistency.',                                   category: 'Layout',   tags: ['scroll', 'overflow'],              stack: 'web' },
-  { slug: 'dropdown-menu', name: 'Dropdown Menu', description: 'Radix dropdown menu with groups, separators, shortcuts, and icons.',                        category: 'Input',    tags: ['menu', 'navigation', 'actions'],   stack: 'web' },
+  // ── Final 3 primitives → primitives-* (Radix wrappers, just got stories) ─
+  { slug: 'accordion',     name: 'Accordion',     description: 'Collapsible sections with smooth spring animation and keyboard support — single + multiple modes.', category: 'Layout',   tags: ['collapse', 'faq', 'disclosure'],   stack: 'web', hasExample: true, storybookId: 'primitives-accordion--default' },
+  { slug: 'scroll-area',   name: 'Scroll Area',   description: 'Custom scrollbar with cross-browser styling consistency — vertical, horizontal, both.',           category: 'Layout',   tags: ['scroll', 'overflow'],              stack: 'web', hasExample: true, storybookId: 'primitives-scrollarea--default' },
+  { slug: 'dropdown-menu', name: 'Dropdown Menu', description: 'Radix dropdown menu with groups, separators, shortcuts, icons, checkboxes, and radio items.',     category: 'Input',    tags: ['menu', 'navigation', 'actions'],   stack: 'web', hasExample: true, storybookId: 'primitives-dropdownmenu--default' },
 
   // ─── @otf/ui-native (mobile) ─────────────────────────────────────────────
   // Primitives
