@@ -12,8 +12,9 @@ bun.lockb
 .env.*
 !.env.example
 
-# Vendor (created by scripts/deploy-railway.sh, restored on exit)
-vendor
+# Wrangler cache
+.wrangler
+node_modules/.cache/wrangler
 
 # Build cache
 .build-timestamp

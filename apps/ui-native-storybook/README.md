@@ -15,9 +15,9 @@ of their prop variants on every palette in light + dark.
 - `app/` — Expo Router routes. One screen per primitive.
 - `components/` — `ShowcaseFrame`, `ThemePicker`, `CategorySidebar`,
   `ThemeContext`, and the `catalog.ts` registry.
-- `server/static.ts` — Bun static-file server for the deployed demo.
-- `scripts/deploy-railway.sh` — local-build deploy script (mirrors fitness-kit).
-- `Dockerfile` — slim runner for the deployed dist/.
+- `wrangler.toml` — Cloudflare Pages config. Project name
+  `otf-ui-native-storybook`, output `dist/`, `not_found_handling =
+  "single-page-application"` so Expo Router deep-links work on hard refresh.
 
 ## Run locally
 
@@ -99,23 +99,31 @@ requires wiring `getOtfThemePalettes()` through `createThemes()` from
 ## Build for production
 
 ```bash
-bun run build      # expo export -> dist/, server bundle -> dist/server/static.js
-bun run start      # serves dist/ on PORT (default 3001)
+bun run build      # expo export --platform web --output-dir dist
+bun run preview    # local serve of dist/ for sanity check
 ```
 
 ## Deploy
 
+Deployed to Cloudflare Pages, mirroring how `apps/storybook-web/` ships:
+
 ```bash
-bash scripts/deploy-railway.sh
+pnpm --filter @otf/ui-native-storybook deploy
+# or from this directory
+bun run deploy
 ```
 
-Provision the Railway project + service first, then either export
-`RAILWAY_PROJECT_ID` / `RAILWAY_SERVICE_NAME` or hardcode them in the script.
-The deploy mirrors `kits/fitness-kit/scripts/deploy-railway.sh` exactly:
+The script `set -a && . ../../.env && set +a && pnpm build && npx wrangler
+pages deploy dist --project-name otf-ui-native-storybook --commit-dirty=true`
+sources Cloudflare credentials from the repo-root `.env`
+(`CLOUDFLARE_ACCOUNT_ID` + `CLOUDFLARE_API_TOKEN`), runs the Expo web
+export, and ships the static `dist/` to Cloudflare.
 
-1. Build `@otf/tokens` + `@otf/ui-native` (workspace deps the bundler reads).
-2. `bun run build` -> `dist/` (web export + server bundle).
-3. `railway up --detach --ci` ships the slim Bun runtime.
+First-time setup: provision the Pages project once via
+`npx wrangler pages project create otf-ui-native-storybook` (run from this
+dir after sourcing `.env`). Subsequent deploys reuse the project.
+
+Live URL after first deploy: `https://otf-ui-native-storybook.pages.dev`.
 
 ## Out of scope for v1
 
