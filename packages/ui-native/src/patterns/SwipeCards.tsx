@@ -33,6 +33,7 @@ export function SwipeCards<T extends SwipeCardItem>({
   const handleSwipe = useCallback((dir: 'left' | 'right') => {
     if (isEmpty) return
     const current = items[index]
+    if (!current) return
     setExitDir(dir)
     const timer = setTimeout(() => {
       setExitDir(null)
@@ -41,7 +42,8 @@ export function SwipeCards<T extends SwipeCardItem>({
         if (next >= items.length) onEmpty?.()
         return next
       })
-      dir === 'left' ? onSwipeLeft?.(current) : onSwipeRight?.(current)
+      if (dir === 'left') onSwipeLeft?.(current)
+      else onSwipeRight?.(current)
     }, 250)
     return () => clearTimeout(timer)
   }, [isEmpty, index, items, onEmpty, onSwipeLeft, onSwipeRight])
@@ -61,7 +63,7 @@ export function SwipeCards<T extends SwipeCardItem>({
           {remaining.slice(0, STACK_SIZE).reverse().map((item, reverseIdx) => {
             const stackIdx = Math.min(remaining.length, STACK_SIZE) - 1 - reverseIdx
             const isTop = stackIdx === 0
-            const offset = CARD_OFFSETS[stackIdx] ?? CARD_OFFSETS[2]
+            const offset = CARD_OFFSETS[stackIdx] ?? CARD_OFFSETS[2] ?? { scale: 1, y: 0, opacity: 1 }
             const exitX = exitDir === 'left' ? -400 : exitDir === 'right' ? 400 : 0
             const exitRotate = exitDir === 'left' ? '-15deg' : exitDir === 'right' ? '15deg' : '0deg'
 

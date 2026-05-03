@@ -1,0 +1,26 @@
+node_modules
+dist
+.expo
+.expo-shared
+*.tsbuildinfo
+
+# Bun
+bun.lockb
+
+# Env
+.env
+.env.*
+!.env.example
+
+# Vendor (created by scripts/deploy-railway.sh, restored on exit)
+vendor
+
+# Build cache
+.build-timestamp
+
+# Logs
+*.log
+.DS_Store
+
+# @generated expo-cli
+expo-env.d.ts

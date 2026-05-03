@@ -30,6 +30,7 @@ export default defineConfig({
     '@tamagui/alert-dialog',
     '@tamagui/lucide-icons',
     '@tamagui/portal',
+    'react-native-reanimated',
     'react-native-svg',
   ],
   esbuildOptions(options) {

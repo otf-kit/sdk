@@ -1,0 +1,32 @@
+{
+  "expo": {
+    "name": "OTF Native UI Showcase",
+    "slug": "otf-ui-native-showcase",
+    "version": "0.1.0",
+    "scheme": "otf-uinative-showcase",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "runtimeVersion": { "policy": "sdkVersion" },
+    "platforms": ["ios", "android", "web"],
+    "web": {
+      "bundler": "metro",
+      "output": "single"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-font"
+    ],
+    "experiments": { "typedRoutes": true },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.otf.uinative-showcase"
+    },
+    "android": {
+      "package": "com.otf.uinative_showcase"
+    },
+    "extra": {
+      "router": { "origin": false }
+    }
+  }
+}
