@@ -195,21 +195,27 @@ export function ComponentDetail({ slug }: Props) {
                 <a
                   // Opens the phone-framed preview shell (same as shown in
                   // Preview tab) in a new tab — matches what users see here.
+                  // Mobile: render icon-only to prevent the long label from
+                  // pushing past the tab buttons on narrow viewports.
                   href={`${NATIVE_STORYBOOK_PREVIEW_URL}/?src=${encodeURIComponent(`${NATIVE_STORYBOOK_URL}/${meta.nativeCategory}/${meta.nativeSlug}`)}`}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1 rounded-md px-2.5 py-1 text-xs text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+                  aria-label="View in Mobile Storybook"
+                  className="inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground sm:px-2.5"
                 >
-                  View in Mobile Storybook <ExternalLink className="h-3 w-3" />
+                  <span className="hidden sm:inline">View in Mobile Storybook</span>
+                  <ExternalLink className="h-3 w-3" />
                 </a>
               ) : meta.storybookId ? (
                 <a
                   href={`${STORYBOOK_URL}/?path=/story/${meta.storybookId}`}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1 rounded-md px-2.5 py-1 text-xs text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+                  aria-label="View in Storybook"
+                  className="inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground sm:px-2.5"
                 >
-                  View in Storybook <ExternalLink className="h-3 w-3" />
+                  <span className="hidden sm:inline">View in Storybook</span>
+                  <ExternalLink className="h-3 w-3" />
                 </a>
               ) : null}
             </div>

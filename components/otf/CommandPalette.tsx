@@ -21,7 +21,11 @@ const componentItems: Item[] = componentRegistry.map((c) => ({
   group: 'Components',
   icon: Component,
   hint: c.description,
-  hasLive: !!examples[c.slug],
+  // "Live" = any working preview path (in-process React demo, Storybook
+  // iframe, or mobile-showcase iframe). The registry's `hasExample` flag
+  // is the single source of truth for this — every entry that's wired to
+  // render gets the orange dot.
+  hasLive: c.hasExample === true || !!examples[c.slug],
 }))
 
 const allItems: Item[] = [
@@ -79,7 +83,11 @@ export function CommandPalette({ open, onClose, initialScope = 'all' }: Props) {
     const term = q.trim().toLowerCase()
     const scopeGroup = scopes.find((s) => s.id === scope)?.group
     const pool = scopeGroup ? allItems.filter((i) => i.group === scopeGroup) : allItems
-    if (!term) return pool.slice(0, 60)
+    // Cap raised from 60 → 300 to fit the full 212-component pool plus
+    // docs/blocks/patterns. Originally 60 was a safe-default for a small
+    // catalog; with 212 components, it silently truncated 70%+ of results.
+    const CAP = 300
+    if (!term) return pool.slice(0, CAP)
     return pool
       .map((item) => {
         const labelL = item.label.toLowerCase()
@@ -95,7 +103,7 @@ export function CommandPalette({ open, onClose, initialScope = 'all' }: Props) {
       })
       .filter((r) => r.score >= 0)
       .sort((a, b) => a.score - b.score || a.item.label.localeCompare(b.item.label))
-      .slice(0, 60)
+      .slice(0, CAP)
       .map((r) => r.item)
   }, [q, scope])
 
