@@ -277,6 +277,33 @@ export type WheelPickerOption<T extends string | number = string> = {
 export const RulerScrubber: any
 export type RulerScrubberProps = any
 
+export const CardScroller: <T>(props: {
+  data: readonly T[]
+  renderItem: (item: T, index: number) => React.ReactNode
+  keyExtractor: (item: T, index: number) => string
+  itemWidth?: number | `${number}%`
+  gap?: number
+  initialIndex?: number
+  paddingHorizontal?: number
+  snap?: 'center' | 'start'
+  fadeOff?: boolean
+  onIndexChange?: (index: number) => void
+  accessibilityLabel?: string
+}) => JSX.Element
+export type CardScrollerProps<T = unknown> = {
+  data: readonly T[]
+  renderItem: (item: T, index: number) => React.ReactNode
+  keyExtractor: (item: T, index: number) => string
+  itemWidth?: number | `${number}%`
+  gap?: number
+  initialIndex?: number
+  paddingHorizontal?: number
+  snap?: 'center' | 'start'
+  fadeOff?: boolean
+  onIndexChange?: (index: number) => void
+  accessibilityLabel?: string
+}
+
 // ─── Hooks ─────────────────────────────────────────────────────────────────
 export const useCollapsibleHeader: any
 export type UseCollapsibleHeaderOptions = any
