@@ -8,7 +8,7 @@ const meta: Meta<typeof Tree> = {
   component: Tree,
   tags: ['autodocs'],
   parameters: {
-    layout: 'padded',
+    layout: 'centered',
   },
 }
 export default meta

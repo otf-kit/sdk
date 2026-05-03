@@ -5,6 +5,7 @@ import { Tags } from '@otf/ui'
 const meta: Meta<typeof Tags> = {
   title: 'Forms/Tags',
   component: Tags,
+  parameters: { layout: 'centered' },
   tags: ['autodocs'],
 }
 export default meta

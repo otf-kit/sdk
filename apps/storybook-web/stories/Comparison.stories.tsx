@@ -4,6 +4,7 @@ import { Comparison } from '@otf/ui'
 const meta: Meta<typeof Comparison> = {
   title: 'Primitives/Comparison',
   component: Comparison,
+  parameters: { layout: 'centered' },
   tags: ['autodocs'],
 }
 export default meta

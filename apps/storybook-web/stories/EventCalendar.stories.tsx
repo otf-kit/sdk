@@ -6,7 +6,7 @@ const meta: Meta<typeof EventCalendar> = {
   title: 'Data/EventCalendar',
   component: EventCalendar,
   tags: ['autodocs'],
-  parameters: { layout: 'padded' },
+  parameters: { layout: 'centered' },
 }
 export default meta
 type Story = StoryObj<typeof EventCalendar>

@@ -4,6 +4,7 @@ import { QrCode } from '@otf/ui'
 const meta: Meta<typeof QrCode> = {
   title: 'Primitives/QrCode',
   component: QrCode,
+  parameters: { layout: 'centered' },
   tags: ['autodocs'],
 }
 export default meta
