@@ -7,10 +7,9 @@
   "scripts": {
     "dev": "EXPO_NO_TELEMETRY=1 expo start --web --port 3010",
     "dev:native": "EXPO_NO_TELEMETRY=1 expo start",
-    "build": "bun run build:web && bun run build:server",
-    "build:web": "EXPO_NO_TELEMETRY=1 expo export --platform web --output-dir dist",
-    "build:server": "bun build server/static.ts --outdir dist/server --target bun --minify",
-    "start": "NODE_ENV=production bun dist/server/static.js",
+    "build": "EXPO_NO_TELEMETRY=1 expo export --platform web --output-dir dist",
+    "preview": "npx serve dist",
+    "deploy": "set -a && . ../../.env && set +a && pnpm build && npx wrangler pages deploy dist --project-name otf-ui-native-storybook --commit-dirty=true",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
