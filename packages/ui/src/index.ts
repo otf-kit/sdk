@@ -127,6 +127,7 @@ export * from './engagement/intro-disclosure'
 // forms
 export * from './forms/array-field'
 export * from './forms/auto-form'
+export * from './forms/color-picker'
 export * from './forms/date-picker'
 export * from './forms/field'
 export * from './forms/file-upload'
@@ -135,6 +136,7 @@ export * from './forms/object-field'
 export * from './forms/password-input'
 export * from './forms/search-input'
 export * from './forms/step-form'
+export * from './forms/tags'
 
 // layouts
 export * from './layouts/app-shell'
@@ -160,6 +162,7 @@ export * from './motion'
 // export * from './data'      // conflicts with components/data-grid (DataGrid)
 export * from './data/DataList'
 export * from './data/GridList'
+export * from './data/Tree'
 export * from './forms/combobox'
 export * from './theme'
 export * from './app-shell'
