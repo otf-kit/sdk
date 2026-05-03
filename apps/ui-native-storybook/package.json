@@ -11,8 +11,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@otf/ui-native": "file:../../packages/ui-native",
     "@otf/tokens": "file:../../packages/tokens",
+    "@otf/ui-native": "file:../../packages/ui-native",
     "@tamagui/lucide-icons": "^1.144.4",
     "@tamagui/portal": "^1.144.4",
     "expo": "~54.0.25",
@@ -23,6 +23,7 @@
     "expo-splash-screen": "~31.0.13",
     "expo-status-bar": "~3.0.8",
     "expo-system-ui": "~6.0.8",
+    "prism-react-renderer": "^2.4.1",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-native": "0.81.5",

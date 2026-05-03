@@ -11,7 +11,47 @@ import {
   TrendingUp,
 } from '@otf/ui-native'
 import type { OnboardingStep } from '@otf/ui-native'
-import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
+import { Section } from '../../components/ShowcaseFrame'
+import { DocsPage } from '../../components/DocsPage'
+import type { ComponentMeta } from '../../components/types'
+
+export const meta: ComponentMeta = {
+  name: 'Onboarding Carousel',
+  slug: 'onboarding-carousel',
+  category: 'Patterns',
+  description:
+    'Multi-step intro with progress dots and primary CTA. Six variants — default, calm-gradient, card-tilt, editorial, selection-step, permission-prompt — all share a single steps[] data shape.',
+  tags: ['onboarding', 'carousel', 'tour', 'intro'],
+  exports: ['OnboardingCarousel', 'type OnboardingStep'],
+  usage: `import { OnboardingCarousel } from '@otf/ui-native'
+import type { OnboardingStep } from '@otf/ui-native'
+
+const STEPS: OnboardingStep[] = [
+  { title: 'Track your training', description: 'Log workouts in seconds.' },
+  { title: 'Hit your goals',      description: 'Pick a target and we adapt.' },
+  { title: 'See your streak',     description: 'Daily check-ins build the chart.' },
+]
+
+export default function Onboarding() {
+  return (
+    <OnboardingCarousel
+      steps={STEPS}
+      onSkip={() => {}}
+      onComplete={() => {}}
+    />
+  )
+}`,
+  props: [
+    { name: 'steps',         type: 'OnboardingStep[]',                                                                  required: true,  description: 'Slides to show. Each step accepts title, description, optional eyebrow, icon, and hero ReactNode.' },
+    { name: 'onComplete',    type: '() => void',                                                                        required: true,  description: 'Fired when the user advances past the last step.' },
+    { name: 'onSkip',        type: '() => void',                                                                        required: false, description: 'When provided, renders a top-right Skip link. Omit to hide.' },
+    { name: 'variant',       type: "'default' | 'calm-gradient' | 'card-tilt' | 'editorial' | 'selection-step' | 'permission-prompt'", default: "'default'", required: false, description: 'Visual treatment. Default is the apple-fitness-flavored solid hero; other variants change typography + backdrop.' },
+    { name: 'completeLabel', type: 'string',                                                                            default: "'Continue'", required: false, description: 'Label for the final-step CTA. Earlier steps always read "Next".' },
+    { name: 'skipLabel',     type: 'string',                                                                            default: "'Skip'", required: false, description: 'Label for the top-right skip link.' },
+    { name: 'initialIndex',  type: 'number',                                                                            default: '0',     required: false, description: 'Step index to start on. Useful for resuming a paused onboarding.' },
+  ],
+  docPath: 'packages/ui-native/src/patterns/OnboardingCarousel.tsx',
+}
 
 const DEFAULT_STEPS: OnboardingStep[] = [
   {
@@ -108,11 +148,7 @@ function ScreenFrame({ children }: { children: React.ReactNode }) {
 
 export default function OnboardingCarouselShowcase() {
   return (
-    <ShowcaseFrame
-      title="Onboarding Carousel"
-      description="Multi-step intro with progress dots and primary CTA. Six variants — default, calm-gradient, card-tilt, editorial, selection-step, permission-prompt."
-      docPath="packages/ui-native/src/patterns/OnboardingCarousel.tsx"
-    >
+    <DocsPage meta={meta}>
       <Section title="Default" hint="circular hero, centered title">
         <ScreenFrame>
           <OnboardingCarousel
@@ -188,6 +224,6 @@ export default function OnboardingCarouselShowcase() {
           />
         </ScreenFrame>
       </Section>
-    </ShowcaseFrame>
+    </DocsPage>
   )
 }
