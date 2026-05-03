@@ -280,3 +280,51 @@ export type {
   FinanceQuickAction,
   FinanceDashboardSection,
 } from './patterns/FinanceDashboard'
+
+// ─── reference-parity primitives (Phase A — Wave 1, 2026-05-03) ──────────────
+// Universal lifts confirmed across 5 paid Expo template audits. See
+// docs/design-references/reference templates-* and
+// kits/fitness-kit/.todo/mobile flow primitives/PRD.md for the full rationale.
+
+export { MultiStep, Step, useMultiStep } from './patterns/MultiStep'
+export type {
+  MultiStepProps,
+  StepProps,
+  MultiStepTransition,
+  MultiStepProgress,
+  UseMultiStep,
+} from './patterns/MultiStep'
+
+export { Selectable, SelectableGroup } from './patterns/Selectable'
+export type {
+  SelectableProps,
+  SelectableGroupProps,
+  SelectableOption,
+} from './patterns/Selectable'
+
+export { AnimatedView } from './patterns/AnimatedView'
+export type {
+  AnimatedViewProps,
+  AnimationPreset,
+  AnimatedViewTrigger,
+} from './patterns/AnimatedView'
+
+export { Expandable } from './patterns/Expandable'
+export type { ExpandableProps } from './patterns/Expandable'
+
+export { WheelPicker } from './patterns/WheelPicker'
+export type { WheelPickerProps, WheelPickerOption } from './patterns/WheelPicker'
+
+export { RulerScrubber } from './patterns/RulerScrubber'
+export type { RulerScrubberProps } from './patterns/RulerScrubber'
+
+export { CardScroller } from './patterns/CardScroller'
+export type { CardScrollerProps } from './patterns/CardScroller'
+
+// ─── Hooks ──────────────────────────────────────────────────────────────────
+
+export { useCollapsibleHeader } from './hooks/useCollapsibleHeader'
+export type {
+  UseCollapsibleHeaderOptions,
+  UseCollapsibleHeaderReturn,
+} from './hooks/useCollapsibleHeader'

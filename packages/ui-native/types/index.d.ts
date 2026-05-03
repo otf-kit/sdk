@@ -237,3 +237,47 @@ export type FinanceDashboardProps = any
 export type FinanceMetric = any
 export type FinanceQuickAction = any
 export type FinanceDashboardSection = any
+
+// ─── reference-parity primitives (Phase A — Wave 1, 2026-05-03) ──────────────
+export const MultiStep: any
+export const Step: any
+export const useMultiStep: any
+export type MultiStepProps = any
+export type StepProps = any
+export type MultiStepTransition = any
+export type MultiStepProgress = any
+export type UseMultiStep = any
+
+export const Selectable: any
+export const SelectableGroup: any
+export type SelectableProps = any
+export type SelectableGroupProps = any
+export type SelectableOption<T extends string | number = string> = {
+  value: T
+  label: string
+  description?: string
+  icon?: any
+}
+
+export const AnimatedView: any
+export type AnimatedViewProps = any
+export type AnimationPreset = any
+export type AnimatedViewTrigger = any
+
+export const Expandable: any
+export type ExpandableProps = any
+
+export const WheelPicker: any
+export type WheelPickerProps = any
+export type WheelPickerOption<T extends string | number = string> = {
+  value: T
+  label: string
+}
+
+export const RulerScrubber: any
+export type RulerScrubberProps = any
+
+// ─── Hooks ─────────────────────────────────────────────────────────────────
+export const useCollapsibleHeader: any
+export type UseCollapsibleHeaderOptions = any
+export type UseCollapsibleHeaderReturn = any
