@@ -51,7 +51,7 @@ const ShowcaseThemeContext = createContext<ShowcaseTheme | null>(null)
 
 const STORAGE_KEY_PALETTE = 'otf-showcase-palette'
 const STORAGE_KEY_MODE = 'otf-showcase-mode'
-const DEFAULT_PALETTE: ShowcasePaletteId = 'gray'
+const DEFAULT_PALETTE: ShowcasePaletteId = 'orange'
 const DEFAULT_MODE: Mode = 'dark'
 
 function readPersisted<T extends string>(key: string, fallback: T): T {

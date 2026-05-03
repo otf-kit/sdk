@@ -1,10 +1,11 @@
-import { useEffect, useMemo } from 'react'
-import { Platform, View } from 'react-native'
+import { useEffect, useMemo, useState } from 'react'
+import { Platform, View, Pressable as RNPressable } from 'react-native'
 import { Slot } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
 import * as SplashScreen from 'expo-splash-screen'
 import {
   OtfProvider,
+  Pressable,
   Theme,
   XStack,
   YStack,
@@ -99,51 +100,114 @@ function ThemedBodyBg() {
   return null
 }
 
-function ShellHeader() {
+function ShellHeader({ onMenuPress, isMobile }: { onMenuPress?: () => void; isMobile: boolean }) {
   return (
     <XStack
-      paddingHorizontal="$4"
+      paddingHorizontal="$3"
       paddingVertical="$3"
       alignItems="center"
       justifyContent="space-between"
       borderBottomWidth={1}
       borderBottomColor="$borderColor"
       backgroundColor="$background"
-      gap="$3"
+      gap="$2"
     >
-      <YStack gap="$0.5">
-        <SizableText size="$5" fontWeight="700" color="$color12">
-          @otf/ui-native showcase
-        </SizableText>
-        <SizableText size="$1" color="$color10">
-          Every primitive, every prop, every theme.
-        </SizableText>
-      </YStack>
+      <XStack alignItems="center" gap="$2" flex={1} minWidth={0}>
+        {isMobile ? (
+          <Pressable
+            onPress={onMenuPress}
+            width={36}
+            height={36}
+            borderRadius="$3"
+            alignItems="center"
+            justifyContent="center"
+            borderWidth={1}
+            borderColor="$borderColor"
+            pressStyle={{ opacity: 0.6 }}
+          >
+            <SizableText size="$5" color="$color12">≡</SizableText>
+          </Pressable>
+        ) : null}
+        <YStack gap="$0.5" flex={1} minWidth={0}>
+          <SizableText size={isMobile ? '$3' : '$5'} fontWeight="700" color="$color12" numberOfLines={1}>
+            @otf/ui-native
+          </SizableText>
+          {!isMobile ? (
+            <SizableText size="$1" color="$color10" numberOfLines={1}>
+              Every primitive, every prop, every theme.
+            </SizableText>
+          ) : null}
+        </YStack>
+      </XStack>
       <ThemePicker />
     </XStack>
   )
 }
 
-// Two-pane layout on >= sm: sidebar + scrollable content.
-// Single-pane below that: header + sidebar collapses to nothing
-// (the landing page acts as the index when sidebar is hidden).
+// Three-pane layout on >= md: sidebar always visible.
+// On smaller widths, sidebar collapses into a slide-over drawer
+// triggered from the header. The drawer auto-closes when a route is tapped.
 function ThemedShell({ children }: { children: React.ReactNode }) {
   const { palette, mode } = useShowcaseTheme()
   const media = useMedia()
-  const showSidebar = media.gtSm
+  // Mobile breakpoint: <gtSm. On native (no media), default to mobile mode.
+  const isMobile = !media.gtSm
   const fallbackBg = mode === 'dark' ? '#0a0a0a' : '#fafafa'
+  const overlayBg = mode === 'dark' ? 'rgba(0,0,0,0.55)' : 'rgba(0,0,0,0.35)'
+  const [drawerOpen, setDrawerOpen] = useState(false)
+
+  // Reset drawer state when crossing breakpoints so we don't get stuck.
+  useEffect(() => {
+    if (!isMobile) setDrawerOpen(false)
+  }, [isMobile])
+
   return (
     <Theme name={mode}>
       <Theme name={palette.id}>
         <ThemedBodyBg />
         <View style={{ flex: 1, backgroundColor: fallbackBg }}>
           <YStack flex={1}>
-            <ShellHeader />
+            <ShellHeader isMobile={isMobile} onMenuPress={() => setDrawerOpen((v) => !v)} />
             <XStack flex={1}>
-              {showSidebar ? <CategorySidebar /> : null}
+              {!isMobile ? <CategorySidebar /> : null}
               <YStack flex={1}>{children}</YStack>
             </XStack>
           </YStack>
+
+          {/* Mobile drawer + scrim */}
+          {isMobile && drawerOpen ? (
+            <>
+              <RNPressable
+                onPress={() => setDrawerOpen(false)}
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  backgroundColor: overlayBg,
+                  zIndex: 50,
+                }}
+              />
+              <View
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  bottom: 0,
+                  left: 0,
+                  width: 280,
+                  backgroundColor: fallbackBg,
+                  zIndex: 60,
+                  borderRightWidth: 1,
+                  borderRightColor: mode === 'dark' ? '#1f1f1f' : '#e5e5e5',
+                }}
+              >
+                <YStack flex={1} onPress={() => setDrawerOpen(false)}>
+                  <CategorySidebar />
+                </YStack>
+              </View>
+            </>
+          ) : null}
         </View>
       </Theme>
     </Theme>
