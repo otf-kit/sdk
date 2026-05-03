@@ -2,6 +2,10 @@
 
 export const STORYBOOK_URL = 'https://otf-storybook.pages.dev'
 export const NATIVE_STORYBOOK_URL = 'https://otf-ui-native-storybook.pages.dev'
+// Phone-framed preview shell — wraps the native storybook in a Manus-style
+// iPhone mockup. Pass `?src=<storybook URL>` to load a specific component
+// route inside the frame. Used by the components/[slug] preview tab.
+export const NATIVE_STORYBOOK_PREVIEW_URL = 'https://otf-ui-native-storybook-preview.pages.dev'
 
 export type ComponentMeta = {
   slug: string

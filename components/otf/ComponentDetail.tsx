@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react'
 import Link from 'next/link'
 import { ArrowLeft, ArrowRight, Check, ChevronRight, Code2, Copy, ExternalLink, Eye, Search, Sparkles, Wrench } from 'lucide-react'
-import { components, componentBySlug, type ComponentMeta, STORYBOOK_URL, NATIVE_STORYBOOK_URL } from '@/data/component-registry'
+import { components, componentBySlug, type ComponentMeta, STORYBOOK_URL, NATIVE_STORYBOOK_URL, NATIVE_STORYBOOK_PREVIEW_URL } from '@/data/component-registry'
 import { examples } from '@/data/component-examples'
 
 // HSL token set that @otf/ui components expect (matches storybook preview.tsx)
@@ -40,7 +40,7 @@ export function ComponentDetail({ slug }: Props) {
   const meta    = componentBySlug(slug)
   const example = examples[slug]
 
-  const [tab,     setTab]     = useState<'preview' | 'code'>('preview')
+  const [tab,     setTab]     = useState<'preview' | 'details'>('preview')
   const [copied,  setCopied]  = useState(false)
   const [filter,  setFilter]  = useState('')
   const sidebarRef = useRef<HTMLAnchorElement>(null)
@@ -80,8 +80,16 @@ export function ComponentDetail({ slug }: Props) {
       hasExample: false,
     }
     return (
-      <div className="mx-auto flex max-w-7xl gap-8 px-4 py-8 sm:px-6">
+      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
+        <div className="flex gap-8">
         <aside className="sticky top-24 hidden h-[calc(100vh-7rem)] w-60 shrink-0 flex-col gap-3 lg:flex">
+          <nav className="flex items-center gap-1.5 font-mono text-xs text-muted-foreground">
+            <Link href="/" className="hover:text-foreground">Home</Link>
+            <ChevronRight className="h-3 w-3" />
+            <Link href="/components" className="hover:text-foreground">Components</Link>
+            <ChevronRight className="h-3 w-3" />
+            <span className="truncate text-foreground">{placeholderMeta.name}</span>
+          </nav>
           <div className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">Components ({components.length})</div>
           <nav className="flex-1 overflow-y-auto pb-6 [scrollbar-width:thin]">
             {components.map((c) => (
@@ -94,13 +102,6 @@ export function ComponentDetail({ slug }: Props) {
           </nav>
         </aside>
         <main className="flex min-w-0 flex-1 flex-col gap-8 pb-20">
-          <nav className="flex items-center gap-1.5 font-mono text-xs text-muted-foreground">
-            <Link href="/" className="hover:text-foreground">Home</Link>
-            <ChevronRight className="h-3 w-3" />
-            <Link href="/components" className="hover:text-foreground">Components</Link>
-            <ChevronRight className="h-3 w-3" />
-            <span className="text-foreground">{placeholderMeta.name}</span>
-          </nav>
           <div className="overflow-hidden rounded-xl border border-border bg-card shadow-lg">
             <div className="border-b border-border bg-secondary/30 px-3 py-2">
               <div className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
@@ -119,14 +120,26 @@ export function ComponentDetail({ slug }: Props) {
             <InstallSnippet slug={slug} />
           </section>
         </main>
+        </div>
       </div>
     )
   }
 
   return (
-    <div className="mx-auto flex max-w-7xl gap-8 px-4 py-8 sm:px-6">
+    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
+      <div className="flex gap-8">
       {/* ── Sidebar ─────────────────────────────────────────────────────── */}
       <aside className="sticky top-24 hidden h-[calc(100vh-7rem)] w-60 shrink-0 flex-col gap-3 lg:flex">
+        {/* Breadcrumb sits in the sidebar column so the Preview/Details
+            card on the right starts at the very top of the row — no
+            wasted vertical space above the card. */}
+        <nav className="flex items-center gap-1.5 font-mono text-xs text-muted-foreground">
+          <Link href="/" className="hover:text-foreground">Home</Link>
+          <ChevronRight className="h-3 w-3" />
+          <Link href="/components" className="hover:text-foreground">Components</Link>
+          <ChevronRight className="h-3 w-3" />
+          <span className="truncate text-foreground">{meta.name}</span>
+        </nav>
         <div className="relative">
           <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
           <input
@@ -163,51 +176,8 @@ export function ComponentDetail({ slug }: Props) {
 
       {/* ── Main ────────────────────────────────────────────────────────── */}
       <main className="flex min-w-0 flex-1 flex-col gap-8 pb-20">
-        {/* Breadcrumb */}
-        <nav className="flex items-center gap-1.5 font-mono text-xs text-muted-foreground">
-          <Link href="/" className="hover:text-foreground">Home</Link>
-          <ChevronRight className="h-3 w-3" />
-          <Link href="/components" className="hover:text-foreground">Components</Link>
-          <ChevronRight className="h-3 w-3" />
-          <span className="text-foreground">{meta.name}</span>
-        </nav>
-
-        {/* Header */}
-        <header>
-          <div className="flex items-center gap-3">
-            <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">{meta.name}</h1>
-            <span className="rounded-md border border-border bg-secondary/40 px-2 py-0.5 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-              {meta.category}
-            </span>
-          </div>
-          <p className="mt-3 max-w-2xl text-base text-muted-foreground">{meta.description}</p>
-          <div className="mt-4 flex flex-wrap items-center gap-2">
-            {meta.tags.map((t) => (
-              <span key={t} className="rounded-full border border-border bg-secondary/30 px-2 py-0.5 font-mono text-[10px] text-muted-foreground">#{t}</span>
-            ))}
-            {meta.stack === 'mobile' && meta.nativeCategory && meta.nativeSlug ? (
-              <a
-                href={`${NATIVE_STORYBOOK_URL}/${meta.nativeCategory}/${meta.nativeSlug}`}
-                target="_blank"
-                rel="noreferrer"
-                className="ml-auto inline-flex items-center gap-1 text-xs text-muted-foreground transition-colors hover:text-foreground"
-              >
-                View in Mobile Storybook <ExternalLink className="h-3 w-3" />
-              </a>
-            ) : meta.storybookId && (
-              <a
-                href={`${STORYBOOK_URL}/?path=/story/${meta.storybookId}`}
-                target="_blank"
-                rel="noreferrer"
-                className="ml-auto inline-flex items-center gap-1 text-xs text-muted-foreground transition-colors hover:text-foreground"
-              >
-                View in Storybook <ExternalLink className="h-3 w-3" />
-              </a>
-            )}
-          </div>
-        </header>
-
-        {/* Preview / Code tabs */}
+        {/* Preview / Details tabs — metadata moved INTO Details so the
+            Preview tab gets the full canvas for the phone frame. */}
         <div className="overflow-hidden rounded-xl border border-border bg-card shadow-lg">
           <div className="flex items-center justify-between border-b border-border bg-secondary/30 px-3 py-2">
             <div className="flex gap-1">
@@ -215,32 +185,40 @@ export function ComponentDetail({ slug }: Props) {
                 className={`flex items-center gap-1.5 rounded-md px-2.5 py-1 text-xs font-medium transition-colors ${tab === 'preview' ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'}`}>
                 <Eye className="h-3 w-3" /> Preview
               </button>
-              <button onClick={() => setTab('code')}
-                className={`flex items-center gap-1.5 rounded-md px-2.5 py-1 text-xs font-medium transition-colors ${tab === 'code' ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'}`}>
-                <Code2 className="h-3 w-3" /> Code
+              <button onClick={() => setTab('details')}
+                className={`flex items-center gap-1.5 rounded-md px-2.5 py-1 text-xs font-medium transition-colors ${tab === 'details' ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'}`}>
+                <Code2 className="h-3 w-3" /> Details
               </button>
             </div>
             <div className="flex items-center gap-1">
-              {tab === 'code' && (
-                <button onClick={handleCopy}
-                  className="flex items-center gap-1.5 rounded-md px-2.5 py-1 text-xs text-muted-foreground hover:bg-secondary hover:text-foreground">
-                  {copied ? <Check className="h-3 w-3 text-emerald-500" /> : <Copy className="h-3 w-3" />}
-                  {copied ? 'Copied!' : 'Copy'}
-                </button>
-              )}
-              {tab === 'preview' && (
-                <span className="flex items-center gap-1 font-mono text-[10px] text-muted-foreground/60">
-                  <Sparkles className="h-3 w-3 text-primary" />
-                  live
-                </span>
-              )}
+              {meta.stack === 'mobile' && meta.nativeCategory && meta.nativeSlug ? (
+                <a
+                  // Opens the phone-framed preview shell (same as shown in
+                  // Preview tab) in a new tab — matches what users see here.
+                  href={`${NATIVE_STORYBOOK_PREVIEW_URL}/?src=${encodeURIComponent(`${NATIVE_STORYBOOK_URL}/${meta.nativeCategory}/${meta.nativeSlug}`)}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1 rounded-md px-2.5 py-1 text-xs text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+                >
+                  View in Mobile Storybook <ExternalLink className="h-3 w-3" />
+                </a>
+              ) : meta.storybookId ? (
+                <a
+                  href={`${STORYBOOK_URL}/?path=/story/${meta.storybookId}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1 rounded-md px-2.5 py-1 text-xs text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+                >
+                  View in Storybook <ExternalLink className="h-3 w-3" />
+                </a>
+              ) : null}
             </div>
           </div>
 
           {tab === 'preview' ? (
             <div className="relative overflow-hidden">
               {meta.stack === 'mobile' && meta.nativeCategory && meta.nativeSlug ? (
-                // iPhone SVG mockup wrapping the @otf/ui-native storybook route
+                // iPhone preview shell iframed — see apps/ui-native-storybook-preview/
                 <MobilePreview category={meta.nativeCategory} slug={meta.nativeSlug} title={meta.name} />
               ) : meta.storybookId ? (
                 // Storybook iframe — exact same rendering as deployed Storybook
@@ -264,11 +242,43 @@ export function ComponentDetail({ slug }: Props) {
               )}
             </div>
           ) : (
-            <pre className="max-h-[480px] overflow-x-auto bg-[#0d0d0d] p-5 font-mono text-xs leading-relaxed">
-              <code className="text-foreground/90 whitespace-pre">
-                {example?.code ?? generateCodeStub(meta)}
-              </code>
-            </pre>
+            <div className="flex flex-col gap-6 p-6 sm:p-8">
+              {/* Component name + category — tags pushed to the right of
+                  the title row so they don't claim a separate baseline. */}
+              <div>
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+                  <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">{meta.name}</h1>
+                  <span className="rounded-md border border-border bg-secondary/40 px-2 py-0.5 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+                    {meta.category}
+                  </span>
+                  <div className="ml-auto flex flex-wrap items-center gap-2">
+                    {meta.tags.map((t) => (
+                      <span key={t} className="rounded-full border border-border bg-secondary/30 px-2 py-0.5 font-mono text-[10px] text-muted-foreground">#{t}</span>
+                    ))}
+                  </div>
+                </div>
+                <p className="mt-3 max-w-2xl text-base text-muted-foreground">{meta.description}</p>
+              </div>
+
+              {/* Code section */}
+              <div className="overflow-hidden rounded-md border border-border bg-[#0d0d0d]">
+                <div className="flex items-center justify-between border-b border-border bg-secondary/30 px-3 py-2">
+                  <span className="flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+                    <Code2 className="h-3 w-3" /> Code
+                  </span>
+                  <button onClick={handleCopy}
+                    className="flex items-center gap-1.5 rounded-md px-2.5 py-1 text-xs text-muted-foreground hover:bg-secondary hover:text-foreground">
+                    {copied ? <Check className="h-3 w-3 text-emerald-500" /> : <Copy className="h-3 w-3" />}
+                    {copied ? 'Copied!' : 'Copy'}
+                  </button>
+                </div>
+                <pre className="max-h-[480px] overflow-x-auto p-5 font-mono text-xs leading-relaxed">
+                  <code className="text-foreground/90 whitespace-pre">
+                    {example?.code ?? generateCodeStub(meta)}
+                  </code>
+                </pre>
+              </div>
+            </div>
           )}
         </div>
 
@@ -311,6 +321,7 @@ export function ComponentDetail({ slug }: Props) {
           ) : null}
         </nav>
       </main>
+      </div>
     </div>
   )
 }
@@ -339,69 +350,39 @@ function StorybookPreview({ storybookId }: { storybookId: string }) {
   )
 }
 
-// ── Mobile preview — iPhone SVG mockup wrapping the ui-native storybook route ─
+// ── Mobile preview — iframe to the phone-framed preview shell ────────────────
+// Single source of truth: `apps/ui-native-storybook-preview/`. We just embed
+// it and pass `?src=` so it loads the right component route inside its own
+// phone frame. No SVG geometry duplicated here — fixes once propagate.
 const NATIVE_IFRAME_ALLOW = 'accelerometer *; autoplay *; camera *; clipboard-read *; clipboard-write *; display-capture *; encrypted-media *; fullscreen *; gamepad *; geolocation *; gyroscope *; hid *; idle-detection *; magnetometer *; microphone *; midi *; payment *; picture-in-picture *; publickey-credentials-get *; screen-wake-lock *; serial *; storage-access *; usb *; web-share *; xr-spatial-tracking *'
 
 function MobilePreview({ category, slug, title }: { category: string; slug: string; title: string }) {
   const [loaded, setLoaded] = useState(false)
-  const src = `${NATIVE_STORYBOOK_URL}/${category}/${slug}`
+  const storybookUrl = `${NATIVE_STORYBOOK_URL}/${category}/${slug}`
+  const previewUrl = `${NATIVE_STORYBOOK_PREVIEW_URL}/?src=${encodeURIComponent(storybookUrl)}`
 
   return (
-    <div className="relative flex w-full items-center justify-center bg-pattern-grid px-4 py-6 sm:px-8 sm:py-10">
-      <div className="absolute inset-0 bg-gradient-to-b from-background/20 to-background/60" aria-hidden />
+    <div
+      className="relative w-full"
+      // Viewport-aware: tuned so the entire preview card fits without
+      // scrolling on standard laptop viewports. Reserves ~11rem for the
+      // sticky navbar + announcement banner + tab header + card padding.
+      style={{ height: 'clamp(560px, calc(100vh - 11rem), 860px)' }}
+    >
       {!loaded && (
-        <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-card/40 text-muted-foreground backdrop-blur-sm">
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-card text-muted-foreground">
           <div className="h-5 w-5 animate-spin rounded-full border-2 border-primary border-t-transparent" />
           <span className="font-mono text-xs">Loading mobile preview…</span>
         </div>
       )}
-      {/* Manus-style sizing — height-driven so the phone never gets cut off
-          by a constrained parent. max-h caps it and aspect-ratio handles
-          the width. */}
-      <svg
-        className="relative z-10 max-h-[640px] 2xl:max-h-[820px] w-auto shrink-0"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 475 998"
-        aria-label={`${title} preview`}
-      >
-        <defs>
-          <clipPath id={`otf-phone-clip-${slug}`}>
-            <rect x="13.6691" y="13.6691" width="447.662" height="970.504" rx="66.0671" fill="white" />
-          </clipPath>
-        </defs>
-        <g clipPath={`url(#otf-phone-clip-${slug})`}>
-          {/* Body */}
-          <rect x="0" y="0" width="475" height="998" rx="76.8885" fill="black" />
-          {/* Inner screen background */}
-          <rect x="13.6691" y="13.6691" width="447.662" height="970.504" rx="66.0671" fill="black" />
-          {/* Screen content — starts BELOW the dynamic island (y=78) so the
-              iframe never renders behind the island. The empty 64px strip
-              above the iframe is where iOS' status bar would sit. */}
-          <foreignObject x="13.6691" y="78" width="447.662" height="906">
-            <iframe
-              src={src}
-              title={`${title} mobile preview`}
-              onLoad={() => setLoaded(true)}
-              allow={NATIVE_IFRAME_ALLOW}
-              className="h-full w-full"
-              style={{ border: 0, background: 'black', transition: 'opacity 0.3s ease', opacity: loaded ? 1 : 0 }}
-            />
-          </foreignObject>
-
-          {/* Dynamic island — only chrome the showcase needs.
-              Status bar icons (time / battery / cellular / wifi) intentionally
-              removed — the showcase content is what users came to see; chrome
-              icons compete with it and feel fake. Mirrors the the SDK
-              landing reference, where only the dynamic island is rendered and
-              app content starts below it. */}
-          <rect x="164.598" y="26.575" width="142.386" height="41.7704" rx="20.8852" fill="black" />
-
-          {/* Bezel rings */}
-          <rect x="9.68226" y="9.68226" width="455.635" height="978.477" rx="70.054" stroke="black" strokeWidth="9.97362" />
-          <rect x="2.84771" y="2.84771" width="469.305" height="992.146" rx="76.8885" stroke="black" strokeWidth="5.69544" />
-        </g>
-      </svg>
+      <iframe
+        src={previewUrl}
+        title={`${title} mobile preview`}
+        onLoad={() => setLoaded(true)}
+        allow={NATIVE_IFRAME_ALLOW}
+        className="h-full w-full border-0"
+        style={{ background: 'transparent', transition: 'opacity 0.3s ease', opacity: loaded ? 1 : 0 }}
+      />
     </div>
   )
 }
