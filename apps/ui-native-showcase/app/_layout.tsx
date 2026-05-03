@@ -125,6 +125,12 @@ function ThemedBodyBg() {
 // render the Tabs navigator. Tab bar tinting reads palette.preview (the
 // human-friendly hex used in the palette swatches) so the active tab
 // indicator matches the picked accent.
+//
+// When iframed by the phone-preview shell (apps/ui-native-storybook-preview)
+// — which is how the landing app at otf.sh/components embeds these routes
+// inside the iPhone frame — we hide the bottom Tab bar entirely. The phone
+// frame already provides its own visual chrome; a competing Tab bar inside
+// the iframe just looks like clutter and steals vertical space.
 function ThemedTabsShell() {
   const { palette, mode } = useShowcaseTheme()
   const isDark = mode === 'dark'
@@ -136,14 +142,16 @@ function ThemedTabsShell() {
         <Tabs
           screenOptions={{
             headerShown: false,
-            tabBarStyle: {
-              backgroundColor: isDark ? '#0a0a0a' : '#f5f5f5',
-              borderTopColor: isDark ? '#1f1f1f' : '#e5e5e5',
-              borderTopWidth: 0.5,
-              height: 56,
-              paddingBottom: 6,
-              paddingTop: 6,
-            },
+            tabBarStyle: isWebIframed
+              ? { display: 'none' }
+              : {
+                  backgroundColor: isDark ? '#0a0a0a' : '#f5f5f5',
+                  borderTopColor: isDark ? '#1f1f1f' : '#e5e5e5',
+                  borderTopWidth: 0.5,
+                  height: 56,
+                  paddingBottom: 6,
+                  paddingTop: 6,
+                },
             tabBarActiveTintColor: palette.preview,
             tabBarInactiveTintColor: isDark ? '#525252' : '#a3a3a3',
             tabBarLabelStyle: { fontSize: 11, fontWeight: '600' },

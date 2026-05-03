@@ -10,17 +10,14 @@
     "dev:native": "EXPO_NO_TELEMETRY=1 npx expo start",
     "prebuild:web": "bash scripts/install-workspace-deps.sh",
     "build:web": "EXPO_NO_TELEMETRY=1 npx expo export --platform web --output-dir dist",
-    "deploy": "npm run build:web && npx wrangler pages deploy dist --project-name otf-ui-native-showcase --commit-dirty=true",
+    "deploy": "npm run build:web && npx wrangler pages deploy dist --project-name otf-ui-native-storybook --commit-dirty=true",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@otf/ui-native": "file:../../packages/ui-native",
     "@otf/tokens": "file:../../packages/tokens",
-    "@tamagui/config": "^1.144.4",
-    "@tamagui/core": "^1.144.4",
     "@tamagui/lucide-icons": "^1.144.4",
     "@tamagui/portal": "^1.144.4",
-    "tamagui": "^1.144.4",
     "expo": "~54.0.25",
     "expo-font": "~14.0.9",
     "expo-linear-gradient": "~15.0.8",
