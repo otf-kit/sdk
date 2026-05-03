@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Search, ArrowRight, Component, Blocks, FileText, Layers, X, Sparkles } from 'lucide-react'
-import { componentLinks, blockLinks, patternLinks, docsLinks } from '@/data/kibo-links'
+import { componentLinks, blockLinks, patternLinks, docsLinks } from '@/data/otf-links'
 import { components as componentRegistry } from '@/data/component-registry'
 import { examples } from '@/data/component-examples'
 
@@ -33,13 +33,20 @@ const allItems: Item[] = [
 
 type Scope = 'all' | 'components' | 'blocks' | 'patterns' | 'docs'
 
-const scopes: { id: Scope; label: string; group?: Item['group'] }[] = [
+// Filter scopes whose underlying link source is empty so we don't show a
+// tab with `0` count. Blocks / Patterns ship empty until those route trees
+// land — see otf-links.ts.
+const allScopes: { id: Scope; label: string; group?: Item['group'] }[] = [
   { id: 'all',        label: 'All' },
   { id: 'components', label: 'Components', group: 'Components' },
   { id: 'blocks',     label: 'Blocks',     group: 'Blocks' },
   { id: 'patterns',   label: 'Patterns',   group: 'Patterns' },
   { id: 'docs',       label: 'Docs',       group: 'Docs' },
 ]
+
+const scopes = allScopes.filter(
+  (s) => !s.group || allItems.some((i) => i.group === s.group)
+)
 
 type Props = {
   open: boolean

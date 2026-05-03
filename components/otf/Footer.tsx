@@ -1,5 +1,5 @@
 import { GithubIcon as Github } from './icons'
-import { docsLinks, componentLinks, blockLinks, patternLinks, communityLinks } from '@/data/kibo-links'
+import { docsLinks, componentLinks, blockLinks, patternLinks, communityLinks } from '@/data/otf-links'
 
 const featuredComponents = componentLinks.slice(0, 12)
 const featuredBlocks     = blockLinks.slice(0, 8)

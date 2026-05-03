@@ -3,16 +3,21 @@
 import { useEffect, useState } from 'react'
 import { X, ArrowUpRight } from 'lucide-react'
 import { GithubIcon as Github } from './icons'
-import { componentLinks, blockLinks, patternLinks, docsLinks } from '@/data/kibo-links'
+import { componentLinks, blockLinks, patternLinks, docsLinks } from '@/data/otf-links'
 
 type Props = { open: boolean; onClose: () => void }
 
-const tabs = [
+// Tabs with empty `items` arrays are filtered out below — keeps Blocks /
+// Patterns tabs hidden until their routes ship (`otf-links.ts` exports
+// empty arrays for those today).
+const allTabs = [
   { id: 'docs',       label: 'Docs',       items: docsLinks },
   { id: 'components', label: 'Components', items: componentLinks },
   { id: 'blocks',     label: 'Blocks',     items: blockLinks },
   { id: 'patterns',   label: 'Patterns',   items: patternLinks },
 ] as const
+
+const tabs = allTabs.filter((t) => t.items.length > 0)
 
 export function MobileNavSheet({ open, onClose }: Props) {
   const [tab, setTab] = useState<typeof tabs[number]['id']>('components')
