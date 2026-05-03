@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react'
 import Link from 'next/link'
 import { ArrowLeft, ArrowRight, Check, ChevronRight, Code2, Copy, ExternalLink, Eye, Search, Sparkles, Wrench } from 'lucide-react'
-import { components, componentBySlug, type ComponentMeta, STORYBOOK_URL } from '@/data/component-registry'
+import { components, componentBySlug, type ComponentMeta, STORYBOOK_URL, NATIVE_STORYBOOK_URL } from '@/data/component-registry'
 import { examples } from '@/data/component-examples'
 
 // HSL token set that @otf/ui components expect (matches storybook preview.tsx)
@@ -76,6 +76,7 @@ export function ComponentDetail({ slug }: Props) {
       description: 'This component is on the roadmap. Check back soon.',
       category: 'Display',
       tags: [slug],
+      stack: 'web',
       hasExample: false,
     }
     return (
@@ -184,7 +185,16 @@ export function ComponentDetail({ slug }: Props) {
             {meta.tags.map((t) => (
               <span key={t} className="rounded-full border border-border bg-secondary/30 px-2 py-0.5 font-mono text-[10px] text-muted-foreground">#{t}</span>
             ))}
-            {meta.storybookId && (
+            {meta.stack === 'mobile' && meta.nativeCategory && meta.nativeSlug ? (
+              <a
+                href={`${NATIVE_STORYBOOK_URL}/${meta.nativeCategory}/${meta.nativeSlug}`}
+                target="_blank"
+                rel="noreferrer"
+                className="ml-auto inline-flex items-center gap-1 text-xs text-muted-foreground transition-colors hover:text-foreground"
+              >
+                View in Mobile Storybook <ExternalLink className="h-3 w-3" />
+              </a>
+            ) : meta.storybookId && (
               <a
                 href={`${STORYBOOK_URL}/?path=/story/${meta.storybookId}`}
                 target="_blank"
@@ -229,7 +239,10 @@ export function ComponentDetail({ slug }: Props) {
 
           {tab === 'preview' ? (
             <div className="relative overflow-hidden">
-              {meta.storybookId ? (
+              {meta.stack === 'mobile' && meta.nativeCategory && meta.nativeSlug ? (
+                // iPhone SVG mockup wrapping the @otf/ui-native storybook route
+                <MobilePreview category={meta.nativeCategory} slug={meta.nativeSlug} title={meta.name} />
+              ) : meta.storybookId ? (
                 // Storybook iframe — exact same rendering as deployed Storybook
                 <StorybookPreview storybookId={meta.storybookId} />
               ) : example ? (
@@ -262,7 +275,7 @@ export function ComponentDetail({ slug }: Props) {
         {/* Installation */}
         <section>
           <h3 className="font-mono text-xs uppercase tracking-widest text-muted-foreground">Installation</h3>
-          <InstallSnippet slug={meta.slug} />
+          <InstallSnippet slug={meta.slug} stack={meta.stack} />
         </section>
 
         {/* Import */}
@@ -270,9 +283,9 @@ export function ComponentDetail({ slug }: Props) {
           <h3 className="font-mono text-xs uppercase tracking-widest text-muted-foreground">Import</h3>
           <div className="mt-3 rounded-md border border-border bg-card/80 px-4 py-2.5 font-mono text-sm">
             <span className="text-primary">import</span>
-            {' { '}<span className="text-foreground">{meta.name.replace(/\s+/g, '')}</span>{' } '}
+            {' { '}<span className="text-foreground">{meta.name.replace(/[^A-Za-z0-9]/g, '')}</span>{' } '}
             <span className="text-primary">from</span>
-            {' '}<span className="text-emerald-400">&apos;@otf/ui&apos;</span>
+            {' '}<span className="text-emerald-400">&apos;{meta.stack === 'mobile' ? '@otf/ui-native' : '@otf/ui'}&apos;</span>
           </div>
         </section>
 
@@ -326,10 +339,86 @@ function StorybookPreview({ storybookId }: { storybookId: string }) {
   )
 }
 
+// ── Mobile preview — iPhone SVG mockup wrapping the ui-native storybook route ─
+const NATIVE_IFRAME_ALLOW = 'accelerometer *; autoplay *; camera *; clipboard-read *; clipboard-write *; display-capture *; encrypted-media *; fullscreen *; gamepad *; geolocation *; gyroscope *; hid *; idle-detection *; magnetometer *; microphone *; midi *; payment *; picture-in-picture *; publickey-credentials-get *; screen-wake-lock *; serial *; storage-access *; usb *; web-share *; xr-spatial-tracking *'
+
+function MobilePreview({ category, slug, title }: { category: string; slug: string; title: string }) {
+  const [loaded, setLoaded] = useState(false)
+  const src = `${NATIVE_STORYBOOK_URL}/${category}/${slug}`
+
+  return (
+    <div className="relative flex w-full items-center justify-center overflow-hidden bg-pattern-grid px-4 py-8 sm:px-8 sm:py-12">
+      <div className="absolute inset-0 bg-gradient-to-b from-background/20 to-background/60" aria-hidden />
+      {!loaded && (
+        <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-card/40 text-muted-foreground backdrop-blur-sm">
+          <div className="h-5 w-5 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+          <span className="font-mono text-xs">Loading mobile preview…</span>
+        </div>
+      )}
+      <svg
+        className="relative z-10 h-auto w-full max-w-[300px] shrink-0 overflow-hidden md:max-w-[375px] 2xl:max-w-[420px]"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 475 998"
+        aria-label={`${title} preview`}
+      >
+        <defs>
+          <clipPath id={`otf-phone-clip-${slug}`}>
+            <rect x="13.6691" y="13.6691" width="447.662" height="970.504" rx="66.0671" fill="white" />
+          </clipPath>
+        </defs>
+        <g clipPath={`url(#otf-phone-clip-${slug})`}>
+          {/* Body */}
+          <rect x="0" y="0" width="475" height="998" rx="76.8885" fill="black" />
+          {/* Inner screen background */}
+          <rect x="13.6691" y="13.6691" width="447.662" height="970.504" rx="66.0671" fill="black" />
+          {/* Screen content */}
+          <foreignObject x="13.6691" y="13.6691" width="447.662" height="970.504">
+            <iframe
+              src={src}
+              title={`${title} mobile preview`}
+              onLoad={() => setLoaded(true)}
+              allow={NATIVE_IFRAME_ALLOW}
+              className="h-full w-full"
+              style={{ border: 0, background: 'black', borderRadius: 66, transition: 'opacity 0.3s ease', opacity: loaded ? 1 : 0 }}
+            />
+          </foreignObject>
+
+          {/* Status bar — clock */}
+          <text x="78" y="53" fontFamily="SF Pro Text, Inter, system-ui, -apple-system, sans-serif" fontSize="18" fill="#ffffff" fontWeight="550">9:41</text>
+
+          {/* Battery */}
+          <rect opacity="0.35" x="394.121" y="39.2265" width="27.3381" height="13.6691" rx="4.32854" stroke="#ffffff" strokeWidth="1.13909" />
+          <path opacity="0.4" d="M423.054 43.9728V48.5291C423.971 48.1432 424.567 47.2455 424.567 46.251C424.567 45.2564 423.971 44.3587 423.054 43.9728" fill="#ffffff" />
+          <rect x="395.83" y="40.9352" width="23.9209" height="10.2518" rx="2.84772" fill="#ffffff" />
+
+          {/* Cellular bars */}
+          <path d="M340.74 51.054C340.74 51.6826 341.249 52.1923 341.878 52.1923H343.586C344.214 52.1923 344.724 51.6826 344.724 51.054V44.6463C344.724 44.0177 344.214 43.5081 343.586 43.5081H341.878C341.249 43.5081 340.74 44.0177 340.74 44.6463V51.054Z" fill="#ffffff" />
+          <path d="M348.072 51.0539C348.072 51.6825 348.582 52.1922 349.21 52.1922H350.918C351.547 52.1922 352.057 51.6825 352.057 51.0539V40.9352C352.057 40.3066 351.547 39.7969 350.918 39.7969H349.21C348.582 39.7969 348.072 40.3066 348.072 40.9352V51.0539Z" fill="#ffffff" />
+          <path d="M355.405 51.054C355.405 51.6826 355.915 52.1923 356.543 52.1923H358.251C358.879 52.1923 359.389 51.6826 359.389 51.054V36.9554C359.389 36.3268 358.879 35.8171 358.251 35.8171H356.543C355.915 35.8171 355.405 36.3268 355.405 36.9554V51.054Z" fill="#ffffff" />
+          <path d="M362.737 51.0539C362.737 51.6825 363.247 52.1922 363.876 52.1922H365.584C366.212 52.1922 366.722 51.6825 366.722 51.0539V32.4039C366.722 31.7753 366.212 31.2656 365.584 31.2656H363.876C363.247 31.2656 362.737 31.7753 362.737 32.4039V51.0539Z" fill="#ffffff" />
+
+          {/* WiFi */}
+          <path fillRule="evenodd" clipRule="evenodd" d="M381.605 38.0249C384.733 38.026 387.741 39.2284 390.013 41.3849C390.184 41.5527 390.458 41.5507 390.626 41.3805L392.262 39.7305C392.347 39.6443 392.395 39.528 392.394 39.4067C392.393 39.2855 392.345 39.1696 392.258 39.0846C386.328 33.4035 376.879 33.4035 370.949 39.0846C370.863 39.1696 370.814 39.2854 370.813 39.4067C370.813 39.5279 370.86 39.6443 370.946 39.7305L372.582 41.3805C372.749 41.5509 373.024 41.5529 373.194 41.3849C375.467 39.2283 378.476 38.0258 381.605 38.0249ZM381.605 43.4017C383.323 43.4016 384.98 44.0413 386.252 45.1959C386.425 45.3604 386.696 45.3568 386.866 45.1879L388.5 43.5379C388.585 43.4511 388.633 43.3338 388.632 43.2118C388.631 43.0898 388.581 42.9734 388.493 42.8881C384.609 39.2696 378.604 39.2696 374.72 42.8881C374.633 42.9734 374.583 43.0899 374.582 43.2119C374.581 43.3339 374.629 43.4511 374.715 43.5379L376.349 45.1879C376.518 45.3568 376.789 45.3604 376.962 45.1959C378.234 44.042 379.889 43.4023 381.605 43.4017ZM385.069 47.0769C385.071 47.1991 385.022 47.3171 384.935 47.4023L381.911 50.4536C381.829 50.5359 381.717 50.5821 381.601 50.5821C381.485 50.5821 381.374 50.5359 381.292 50.4536L378.267 47.4023C378.181 47.317 378.132 47.199 378.134 47.0768C378.136 46.9546 378.189 46.8385 378.279 46.7565C380.197 45.1192 383.005 45.1192 384.923 46.7565C385.013 46.8385 385.066 46.9547 385.069 47.0769Z" fill="#ffffff" />
+
+          {/* Dynamic island */}
+          <rect x="164.598" y="26.575" width="142.386" height="41.7704" rx="20.8852" fill="black" />
+
+          {/* Bezel rings */}
+          <rect x="9.68226" y="9.68226" width="455.635" height="978.477" rx="70.054" stroke="black" strokeWidth="9.97362" />
+          <rect x="2.84771" y="2.84771" width="469.305" height="992.146" rx="76.8885" stroke="black" strokeWidth="5.69544" />
+        </g>
+      </svg>
+    </div>
+  )
+}
+
 // ── Install snippet with copy ─────────────────────────────────────────────────
-function InstallSnippet({ slug }: { slug: string }) {
+function InstallSnippet({ slug, stack = 'web' }: { slug: string; stack?: 'web' | 'mobile' }) {
   const [copied, setCopied] = useState(false)
-  const cmd = `pnpm dlx shadcn@latest add https://otf.sh/r/${slug}.json`
+  const cmd = stack === 'mobile'
+    ? 'pnpm add @otf/ui-native'
+    : `pnpm dlx shadcn@latest add https://otf.sh/r/${slug}.json`
   return (
     <div className="mt-3 flex items-center gap-3 rounded-md border border-border bg-card/80 px-4 py-2.5 font-mono text-sm shadow-md">
       <span className="text-muted-foreground">$</span>
