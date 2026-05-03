@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react'
-import { Platform } from 'react-native'
 import {
   YStack,
   XStack,
@@ -78,6 +77,11 @@ interface SectionProps {
 
 // Titled grouping inside a ShowcaseFrame body. One per prop axis:
 // "Variants", "Sizes", "Selected state", "With remove", etc.
+//
+// FLAT layout — mirrors the SDK showcase. No surrounding card,
+// no padding, no border. Just title → separator → demo. This avoids the
+// "card-on-card" effect that crushed components like FinanceDashboard or
+// PaywallScreen which already render their own card surfaces inside.
 export function Section({ title, hint, children }: SectionProps) {
   return (
     <YStack gap="$3">
@@ -94,20 +98,7 @@ export function Section({ title, hint, children }: SectionProps) {
         </XStack>
         <Separator />
       </YStack>
-      <YStack
-        padding="$4"
-        borderRadius="$4"
-        borderWidth={1}
-        borderColor="$borderColor"
-        backgroundColor="$backgroundHover"
-        gap="$3"
-        // Web: subtle inner glow to lift the demo surface above the page bg.
-        {...(Platform.OS === 'web'
-          ? { style: { boxShadow: '0 1px 0 rgba(255,255,255,0.02) inset' } }
-          : {})}
-      >
-        {children}
-      </YStack>
+      <YStack gap="$3">{children}</YStack>
     </YStack>
   )
 }
