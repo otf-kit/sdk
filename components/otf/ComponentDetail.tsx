@@ -375,15 +375,17 @@ function MobilePreview({ category, slug, title }: { category: string; slug: stri
           <rect x="0" y="0" width="475" height="998" rx="76.8885" fill="black" />
           {/* Inner screen background */}
           <rect x="13.6691" y="13.6691" width="447.662" height="970.504" rx="66.0671" fill="black" />
-          {/* Screen content */}
-          <foreignObject x="13.6691" y="13.6691" width="447.662" height="970.504">
+          {/* Screen content — starts BELOW the dynamic island (y=78) so the
+              iframe never renders behind the island. The empty 64px strip
+              above the iframe is where iOS' status bar would sit. */}
+          <foreignObject x="13.6691" y="78" width="447.662" height="906">
             <iframe
               src={src}
               title={`${title} mobile preview`}
               onLoad={() => setLoaded(true)}
               allow={NATIVE_IFRAME_ALLOW}
               className="h-full w-full"
-              style={{ border: 0, background: 'black', borderRadius: 66, transition: 'opacity 0.3s ease', opacity: loaded ? 1 : 0 }}
+              style={{ border: 0, background: 'black', transition: 'opacity 0.3s ease', opacity: loaded ? 1 : 0 }}
             />
           </foreignObject>
 
@@ -392,7 +394,7 @@ function MobilePreview({ category, slug, title }: { category: string; slug: stri
               removed — the showcase content is what users came to see; chrome
               icons compete with it and feel fake. Mirrors the the SDK
               landing reference, where only the dynamic island is rendered and
-              app content starts from the top of the screen. */}
+              app content starts below it. */}
           <rect x="164.598" y="26.575" width="142.386" height="41.7704" rx="20.8852" fill="black" />
 
           {/* Bezel rings */}
