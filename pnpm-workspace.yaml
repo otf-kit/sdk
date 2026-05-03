@@ -2,3 +2,4 @@ packages:
   - 'packages/*'
   - 'apps/*'
   - 'tools/*'
+  - '!apps/ui-native-storybook'

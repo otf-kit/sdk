@@ -32,6 +32,15 @@ export default defineConfig({
     '@tamagui/portal',
     'react-native-reanimated',
     'react-native-svg',
+    // Expo deps used by MultiStep / ListItem / AvatarUploader / etc — must be
+    // marked external so tsup doesn't try to compile their JSX-in-.js files.
+    'expo-router',
+    'expo-haptics',
+    'expo-image-picker',
+    'expo-blur',
+    'expo-linear-gradient',
+    'lucide-react-native',
+    /^@react-navigation\//,
   ],
   esbuildOptions(options) {
     options.jsx = 'automatic'
