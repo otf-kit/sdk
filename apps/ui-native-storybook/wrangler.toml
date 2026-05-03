@@ -1,9 +1,3 @@
 name = "otf-ui-native-storybook"
+pages_build_output_dir = "./dist"
 compatibility_date = "2024-01-01"
-pages_build_output_dir = "dist"
-
-# Expo Router exports a SPA. Tell Cloudflare Pages to serve index.html
-# for any unmatched route so client-side navigation works on hard
-# refresh / direct deep links.
-[assets]
-not_found_handling = "single-page-application"
