@@ -31,7 +31,7 @@ const meta: Meta<typeof AreaChart> = {
   title: 'Charts/AreaChart',
   component: AreaChart,
   tags: ['autodocs'],
-  parameters: { layout: 'padded' },
+  parameters: { layout: 'centered' },
   decorators: [(Story) => <div style={{ width: '100%', maxWidth: 800 }}><Story /></div>],
 }
 export default meta

@@ -2,8 +2,12 @@ import type { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
 import { VideoPlayer, type VideoChapter } from '@otf/ui'
 
+// NOTE: Google's `commondatastorage.googleapis.com/.../BigBuckBunny.mp4` was
+// the agent's first pick — that URL now returns HTTP 403 Forbidden, leaving
+// `MediaError code 4` (NETWORK_NO_SOURCE) and duration=null forever.
+// Using Blender's official Peach archive instead — stable + CORS-friendly.
 const SAMPLE_SRC =
-  'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'
+  'https://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4'
 const SAMPLE_POSTER =
   'https://peach.blender.org/wp-content/uploads/title_anouncement.jpg'
 
@@ -28,7 +32,7 @@ type Story = StoryObj<typeof VideoPlayer>
 
 export const Default: Story = {
   render: () => (
-    <div className="max-w-3xl">
+    <div className="w-[800px]">
       <VideoPlayer src={SAMPLE_SRC} poster={SAMPLE_POSTER} />
     </div>
   ),
@@ -36,7 +40,7 @@ export const Default: Story = {
 
 export const WithChapters: Story = {
   render: () => (
-    <div className="max-w-3xl">
+    <div className="w-[800px]">
       <VideoPlayer src={SAMPLE_SRC} poster={SAMPLE_POSTER} chapters={CHAPTERS} />
     </div>
   ),
@@ -44,7 +48,7 @@ export const WithChapters: Story = {
 
 export const Autoplay: Story = {
   render: () => (
-    <div className="max-w-3xl">
+    <div className="w-[800px]">
       <VideoPlayer
         src={SAMPLE_SRC}
         poster={SAMPLE_POSTER}
@@ -59,7 +63,7 @@ export const Autoplay: Story = {
 
 export const MinimalControls: Story = {
   render: () => (
-    <div className="max-w-3xl">
+    <div className="w-[800px]">
       <VideoPlayer
         src={SAMPLE_SRC}
         poster={SAMPLE_POSTER}
@@ -75,7 +79,7 @@ export const WithCallbacks: Story = {
     const push = (msg: string) =>
       setLog((l) => [`${new Date().toLocaleTimeString()}  ${msg}`, ...l].slice(0, 8))
     return (
-      <div className="max-w-3xl space-y-3">
+      <div className="w-[800px] space-y-3">
         <VideoPlayer
           src={SAMPLE_SRC}
           poster={SAMPLE_POSTER}

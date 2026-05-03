@@ -324,7 +324,7 @@ export const VideoPlayer = React.forwardRef<HTMLDivElement, VideoPlayerProps>(
             loop={loop}
             muted={isMuted}
             preload="metadata"
-            onClick={!controlsEnabled ? togglePlay : undefined}
+            onClick={togglePlay}
             onPlay={handlePlay}
             onPause={handlePause}
             onTimeUpdate={handleTimeUpdate}
@@ -336,8 +336,7 @@ export const VideoPlayer = React.forwardRef<HTMLDivElement, VideoPlayerProps>(
             onVolumeChange={handleVolumeChange}
             playsInline
             className={cn(
-              'block h-full w-full object-cover',
-              !controlsEnabled && 'cursor-pointer',
+              'block h-full w-full cursor-pointer object-cover',
               className,
             )}
             {...videoProps}
@@ -431,6 +430,7 @@ export const VideoPlayer = React.forwardRef<HTMLDivElement, VideoPlayerProps>(
                           const pct = v[0] ?? 0
                           if (duration > 0) seekTo((pct / 100) * duration)
                         }}
+                        className="cursor-pointer [&_[data-orientation=horizontal]>span]:cursor-pointer [&_[role=slider]]:cursor-pointer"
                       />
                     </div>
                   </TooltipTrigger>
@@ -487,6 +487,7 @@ export const VideoPlayer = React.forwardRef<HTMLDivElement, VideoPlayerProps>(
                           setVolume(next / 100)
                           if (next > 0) setIsMuted(false)
                         }}
+                        className="cursor-pointer [&_[role=slider]]:cursor-pointer"
                       />
                     </div>
                   </div>
