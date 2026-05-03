@@ -15,6 +15,7 @@ import {
   createTamagui,
   tamaguiDefaultConfig,
   useMedia,
+  useTheme,
 } from '@otf/ui-native'
 import { ShowcaseThemeProvider, useShowcaseTheme } from '../components/ThemeContext'
 import { ThemePicker } from '../components/ThemePicker'
@@ -111,16 +112,23 @@ function InjectWebStyles() {
 
 // Patch html/body backgroundColor on web whenever the theme toggles so no
 // part of the viewport leaks a stale default color through.
+//
+// IMPORTANT: read the actual resolved Tamagui `$background` value (not a
+// hardcoded `#0a0a0a`) so the body bg matches what `ShellHeader` and screens
+// paint via `$background`. Otherwise the iframed-preview's dynamic-island
+// clearance band shows a hardcoded shade while content shows a Tamagui shade,
+// producing a visible seam at the top of the phone-frame.
 function ThemedBodyBg() {
-  const { mode } = useShowcaseTheme()
+  const theme = useTheme()
+  const bgVal = theme.background?.get?.() ?? theme.background?.val
   useEffect(() => {
     if (Platform.OS !== 'web' || typeof document === 'undefined') return
-    const bg = mode === 'dark' ? '#0a0a0a' : '#fafafa'
-    document.documentElement.style.backgroundColor = bg
-    document.body.style.backgroundColor = bg
+    if (typeof bgVal !== 'string') return
+    document.documentElement.style.backgroundColor = bgVal
+    document.body.style.backgroundColor = bgVal
     const root = document.getElementById('root')
-    if (root) root.style.backgroundColor = bg
-  }, [mode])
+    if (root) root.style.backgroundColor = bgVal
+  }, [bgVal])
   return null
 }
 
@@ -177,7 +185,9 @@ function ThemedShell({ children }: { children: React.ReactNode }) {
   const insets = useSafeAreaInsets()
   // Mobile breakpoint: <gtSm. On native (no media), default to mobile mode.
   const isMobile = !media.gtSm
-  const fallbackBg = mode === 'dark' ? '#0a0a0a' : '#fafafa'
+  // Wrapper bg uses the Tamagui `$background` token (NOT a hardcoded hex)
+  // so the dynamic-island clearance band matches the ShellHeader + content
+  // bg exactly when iframed by the preview shell — no visible seam.
   const overlayBg = mode === 'dark' ? 'rgba(0,0,0,0.55)' : 'rgba(0,0,0,0.35)'
   const [drawerOpen, setDrawerOpen] = useState(false)
 
@@ -190,7 +200,7 @@ function ThemedShell({ children }: { children: React.ReactNode }) {
     <Theme name={mode}>
       <Theme name={palette.id}>
         <ThemedBodyBg />
-        <View style={{ flex: 1, backgroundColor: fallbackBg, paddingTop: insets.top }}>
+        <YStack flex={1} backgroundColor="$background" paddingTop={insets.top}>
           <YStack flex={1}>
             <ShellHeader isMobile={isMobile} onMenuPress={() => setDrawerOpen((v) => !v)} />
             <XStack flex={1}>
@@ -214,26 +224,24 @@ function ThemedShell({ children }: { children: React.ReactNode }) {
                   zIndex: 50,
                 }}
               />
-              <View
-                style={{
-                  position: 'absolute',
-                  top: 0,
-                  bottom: 0,
-                  left: 0,
-                  width: 280,
-                  backgroundColor: fallbackBg,
-                  zIndex: 60,
-                  borderRightWidth: 1,
-                  borderRightColor: mode === 'dark' ? '#1f1f1f' : '#e5e5e5',
-                }}
+              <YStack
+                position="absolute"
+                top={0}
+                bottom={0}
+                left={0}
+                width={280}
+                backgroundColor="$background"
+                zIndex={60}
+                borderRightWidth={1}
+                borderRightColor={mode === 'dark' ? '#1f1f1f' : '#e5e5e5'}
               >
                 <YStack flex={1} onPress={() => setDrawerOpen(false)}>
                   <CategorySidebar />
                 </YStack>
-              </View>
+              </YStack>
             </>
           ) : null}
-        </View>
+        </YStack>
       </Theme>
     </Theme>
   )
