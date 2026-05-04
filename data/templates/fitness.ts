@@ -100,13 +100,13 @@ export const fitnessTemplate: TemplateConfig = {
     sdk54: {
       title: 'Try the Fitness Kit in Expo Go',
       description: 'Scan with Expo Go (SDK 54) to open the live kit instantly — no build step needed.',
-      qr: 'https://qr.expo.dev/eas-update?projectId=847f75b9-332b-4f4a-8c86-91490ba676c7&channel=preview',
+      qr: 'https://qr.expo.dev/eas-update?projectId=847f75b9-332b-4f4a-8c86-91490ba676c7&runtimeVersion=exposdk%3A54.0.0&channel=preview',
       cta: { label: 'Get the kit', href: BUY },
     },
     sdk53: {
       title: 'Try the OTF Native UI Showcase',
       description: 'Explore every component, block, and pattern from the OTF design system — all running live in Expo Go.',
-      qr: 'https://qr.expo.dev/eas-update?projectId=31d0aa44-4713-44d9-91aa-c2e2c58c08ad&channel=preview',
+      qr: 'https://qr.expo.dev/eas-update?projectId=31d0aa44-4713-44d9-91aa-c2e2c58c08ad&runtimeVersion=exposdk%3A54.0.0&channel=preview',
     },
   },
   techStack: {
