@@ -7,8 +7,8 @@ const BUY    = '/templates'
 const BUNDLE = '/templates'
 
 export const fitnessTemplate: TemplateConfig = {
-  id: 'fitness-app',
-  name: 'Fitness App',
+  id: 'fitness-kit',
+  name: 'Fitness Kit',
   mockupShape: 'phone',
   hero: {
     eyebrow: 'Fitness App Kit · Expo + Hono',
