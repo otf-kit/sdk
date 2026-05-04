@@ -17,7 +17,28 @@ const KIT_LINKS: Record<string, { docs: string; demo: string }> = {
     docs: 'https://github.com/open-template-forest/saas-dashboard-kit',
     demo: 'https://saas-dashboard-production-ae3f.up.railway.app',
   },
+  'fitness-kit': {
+    docs: 'https://github.com/open-template-forest/fitness-kit',
+    demo: 'https://fitness-kit-production.up.railway.app',
+  },
+  'starter-bundle': {
+    docs: 'https://github.com/open-template-forest',
+    demo: 'https://fitness-kit-production.up.railway.app',
+  },
 }
+
+// ── Kit-specific "What's included" blurbs ────────────────────────────────────
+const KIT_INCLUDES: Record<string, string> = {
+  'saas-dashboard':
+    '✓ Full source code (Vite 5 + React 19 + Hono + Drizzle + Better Auth)<br>\n          ✓ 11 screens, all wired to real Postgres data<br>\n          ✓ AI configs for Cursor, Claude Code, and Lovable<br>\n          ✓ 1 year of updates<br>\n          ✓ 14-day refund guarantee',
+  'fitness-kit':
+    '✓ Full source code (Expo SDK 54 + React Native + Hono + Drizzle)<br>\n          ✓ 25+ screens — workout tracking, nutrition, progress charts<br>\n          ✓ iOS, Android &amp; web export in one codebase<br>\n          ✓ AI configs for Cursor, Claude Code, and Bolt<br>\n          ✓ 1 year of updates<br>\n          ✓ 14-day refund guarantee',
+  'starter-bundle':
+    '✓ All current kits — Fitness Kit + SaaS Dashboard Kit<br>\n          ✓ All future kits included (new kits drop monthly)<br>\n          ✓ AI configs for Cursor, Claude Code, Lovable &amp; Bolt<br>\n          ✓ Priority support + Slack channel access<br>\n          ✓ All future updates<br>\n          ✓ 14-day refund guarantee',
+}
+
+const DEFAULT_INCLUDES =
+  '✓ Full source code<br>\n          ✓ AI configs for Cursor, Claude Code, and Lovable<br>\n          ✓ 1 year of updates<br>\n          ✓ 14-day refund guarantee'
 
 // ── Send license delivery email via Resend ────────────────────────────────────
 async function sendLicenseEmail({
@@ -36,6 +57,7 @@ async function sendLicenseEmail({
   }
 
   const links = KIT_LINKS[kitSlug] ?? { docs: 'https://otf.dev', demo: 'https://otf.dev' }
+  const includes = KIT_INCLUDES[kitSlug] ?? DEFAULT_INCLUDES
 
   const html = `
 <!DOCTYPE html>
@@ -86,11 +108,7 @@ async function sendLicenseEmail({
       <div style="margin-bottom:24px;">
         <div style="font-size:13px;font-weight:600;color:#f0ede9;margin-bottom:12px;">What's included</div>
         <div style="font-size:13px;color:#737373;line-height:1.8;">
-          ✓ Full source code (Vite 5 + React 19 + Hono + Drizzle + Better Auth)<br>
-          ✓ 11 screens, all wired to real Postgres data<br>
-          ✓ AI configs for Cursor, Claude Code, and Lovable<br>
-          ✓ 1 year of updates<br>
-          ✓ 14-day refund guarantee
+          ${includes}
         </div>
       </div>
 

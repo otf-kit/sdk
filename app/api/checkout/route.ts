@@ -9,6 +9,16 @@ const KITS: Record<string, { priceEnvKey: string; name: string; slug: string }> 
     name: 'SaaS Dashboard Kit',
     slug: 'saas-dashboard',
   },
+  'fitness-kit': {
+    priceEnvKey: 'STRIPE_PRICE_FITNESS_KIT',
+    name: 'OTF Fitness Kit',
+    slug: 'fitness-kit',
+  },
+  'starter-bundle': {
+    priceEnvKey: 'STRIPE_PRICE_STARTER_BUNDLE',
+    name: 'OTF Starter Bundle',
+    slug: 'starter-bundle',
+  },
 }
 
 const schema = z.object({

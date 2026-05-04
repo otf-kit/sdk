@@ -10,7 +10,7 @@ export function ExpoGo({ data }: { data: ExpoGoSection }) {
             <p className="mt-3 text-muted-foreground">{data.sdk54.description}</p>
             <div className="mt-8 flex items-center gap-6">
               <div className="rounded-2xl border border-border bg-background p-3">
-                <img src={data.sdk54.qr} alt="SDK 54 QR Code" className="h-32 w-32" />
+                <img src={data.sdk54.qr} alt="Expo Go QR code — Fitness Kit" className="h-32 w-32" />
               </div>
               <a
                 href={data.sdk54.cta.href}
@@ -27,7 +27,7 @@ export function ExpoGo({ data }: { data: ExpoGoSection }) {
             <p className="mt-3 text-muted-foreground">{data.sdk53.description}</p>
             <div className="mt-8">
               <div className="inline-block rounded-2xl border border-border bg-background p-3">
-                <img src={data.sdk53.qr} alt="SDK 53 QR Code" className="h-32 w-32" />
+                <img src={data.sdk53.qr} alt="Expo Go QR code — OTF Native UI Showcase" className="h-32 w-32" />
               </div>
             </div>
           </div>

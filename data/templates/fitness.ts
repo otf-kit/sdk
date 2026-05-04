@@ -98,15 +98,15 @@ export const fitnessTemplate: TemplateConfig = {
   },
   expoGo: {
     sdk54: {
-      title: 'Try it in Expo Go (SDK 54)',
-      description: 'Scan the QR code or click the button to open in Expo Go.',
-      qr: `${BASE}/qr.svg`,
+      title: 'Try the Fitness Kit in Expo Go',
+      description: 'Scan with Expo Go (SDK 54) to open the live kit instantly — no build step needed.',
+      qr: 'https://qr.expo.dev/eas-update?projectId=847f75b9-332b-4f4a-8c86-91490ba676c7&channel=preview',
       cta: { label: 'Get the kit', href: BUY },
     },
     sdk53: {
-      title: 'Try it in Expo Go (SDK 53)',
-      description: "If you don't have SDK 54, you can try the previous Expo Go version.",
-      qr: `${BASE}/sdk-53.svg`,
+      title: 'Try the OTF Native UI Showcase',
+      description: 'Explore every component, block, and pattern from the OTF design system — all running live in Expo Go.',
+      qr: 'https://qr.expo.dev/eas-update?projectId=31d0aa44-4713-44d9-91aa-c2e2c58c08ad&channel=preview',
     },
   },
   techStack: {
