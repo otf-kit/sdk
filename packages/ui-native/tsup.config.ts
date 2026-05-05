@@ -5,9 +5,8 @@ export default defineConfig({
   format: ['cjs', 'esm'],
   // dts emit disabled — Tamagui's React 18-pinned types collide with the kit's
   // hoisted React 19 (Expo SDK 54 requirement). Consumers in this monorepo
-  // resolve types from src/ via the "types" entry in package.json. SDK's
-  // npm package ships prebuilt dts because it builds in a uniform React 18
-  // sandbox; we ship the JS bundle (identical) and source types.
+  // resolve types from src/ via the "types" entry in package.json. We ship the
+  // JS bundle and a hand-written `types/index.d.ts` stub for npm consumers.
   dts: false,
   splitting: false,
   sourcemap: true,

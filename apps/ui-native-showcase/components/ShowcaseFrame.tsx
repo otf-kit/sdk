@@ -12,8 +12,7 @@ import {
 interface ShowcaseFrameProps {
   title: string
   description?: string
-  // Path to the design-references brief / PATTERNS.md doc for this primitive.
-  // Rendered as muted footer text. Optional.
+  // Optional path to additional component documentation, rendered as muted footer text.
   docPath?: string
   children: ReactNode
 }
@@ -78,10 +77,10 @@ interface SectionProps {
 // Titled grouping inside a ShowcaseFrame body. One per prop axis:
 // "Variants", "Sizes", "Selected state", "With remove", etc.
 //
-// FLAT layout — mirrors the SDK showcase. No surrounding card,
-// no padding, no border. Just title → separator → demo. This avoids the
-// "card-on-card" effect that crushed components like FinanceDashboard or
-// PaywallScreen which already render their own card surfaces inside.
+// FLAT layout — no surrounding card, no padding, no border. Just title →
+// separator → demo. This avoids the "card-on-card" effect that crushed
+// components like FinanceDashboard or PaywallScreen which already render
+// their own card surfaces inside.
 export function Section({ title, hint, children }: SectionProps) {
   return (
     <YStack gap="$3">
@@ -112,8 +111,8 @@ interface ComingSoonProps {
 // AnimatedView, Expandable). Keeps the route browsable so the sidebar stays
 // a complete map of where the SDK is headed.
 export function ComingSoon({
-  title = 'Coming in Wave 1',
-  body = 'This primitive is on the mobile flow primitives milestone backlog. See the PRD for shape + acceptance.',
+  title = 'Coming soon',
+  body = 'This primitive is on the milestone backlog.',
 }: ComingSoonProps) {
   return (
     <YStack

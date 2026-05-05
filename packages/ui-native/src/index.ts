@@ -281,10 +281,7 @@ export type {
   FinanceDashboardSection,
 } from './patterns/FinanceDashboard'
 
-// ─── reference-parity primitives (Phase A — Wave 1, 2026-05-03) ──────────────
-// Universal lifts confirmed across 5 paid Expo template audits. See
-// docs/design-references/reference templates-* and
-// kits/fitness-kit/.todo/mobile flow primitives/PRD.md for the full rationale.
+// ─── Mobile flow primitives (MultiStep, Selectable, Expandable, etc.) ──────
 
 export { MultiStep, Step, useMultiStep } from './patterns/MultiStep'
 export type {

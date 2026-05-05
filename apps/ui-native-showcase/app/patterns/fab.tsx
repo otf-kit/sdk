@@ -28,7 +28,7 @@ export default function FloatingActionButtonShowcase() {
   return (
     <ShowcaseFrame
       title="Floating Action Button"
-      description="Anchored CTA over content. Single-action mode is the legacy circle/pill; passing `actions` enables an expanding menu pattern (reference + reference + reference) — tap to fan out chips, backdrop to dismiss, hardware-back closes. Reduced-motion respected."
+      description="Anchored CTA over content. Single-action mode is the legacy circle/pill; passing `actions` enables an expanding menu pattern — tap to fan out chips, backdrop to dismiss, hardware-back closes. Reduced-motion respected."
     >
       <Section title="Legacy — circle (icon only)">
         <Stage>

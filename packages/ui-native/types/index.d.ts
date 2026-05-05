@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-// Hand-written stub for @otf/ui-native so the kit's React 19 typecheck doesn't
-// walk into Tamagui's React 18-pinned types. Mirrors the export surface of
-// SDK's mobile-ui v2.0.0 published dist/index.d.ts. The runtime JS bundle
+// Hand-written type stub for @otf/ui-native. The kit's React 19 typecheck
+// otherwise walks into Tamagui's React 18-pinned types. The runtime JS bundle
 // is produced from src/ via tsup; this file only exists to satisfy the type
 // resolver in consumer kits.
 
@@ -238,7 +237,7 @@ export type FinanceMetric = any
 export type FinanceQuickAction = any
 export type FinanceDashboardSection = any
 
-// ─── reference-parity primitives (Phase A — Wave 1, 2026-05-03) ──────────────
+// ─── Mobile flow primitives ────────────────────────────────────────────────
 export const MultiStep: any
 export const Step: any
 export const useMultiStep: any

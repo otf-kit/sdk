@@ -28,7 +28,6 @@ export interface ScrollHeaderProps {
 
 /**
  * ScrollHeader — title shrinks + header gains backdrop on scroll.
- * Mirrors reference's `ScrollHeader.tsx` pattern.
  */
 export const ScrollHeader = React.forwardRef<HTMLDivElement, ScrollHeaderProps>(
   (

@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { Toaster as SonnerToaster, toast } from 'sonner'
-import { useOtfUI } from '../provider/internal-ui-provider'
+import { useOtfUI } from '../../provider/otf-ui-provider'
 
 export interface ToasterProps extends React.ComponentProps<typeof SonnerToaster> {}
 

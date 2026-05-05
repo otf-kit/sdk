@@ -4,15 +4,10 @@
  * State machine + transition coordinator for multi-step flows (onboarding,
  * KYC, checkout, log-workout). COMPOSES with `<StepPageLayout>`: a `<Step>` is
  * just a slot — pass `<StepPageLayout title="…">` as its child to get the
- * reference-style hero header, then your inputs, then call `next()` from a CTA.
+ * hero header, then your inputs, then call `next()` from a CTA.
  *
- * API sketch + anti-patterns are tracked in:
- *   docs/design-references/reference templates-reference/PATTERNS.md  (entry 5)
- *   docs/design-references/reference templates-reference/PATTERNS.md (entry 1)
- *   kits/fitness-kit/.todo/mobile flow primitives/PRD.md  (section "1. MultiStep")
- *
- * Anti-patterns explicitly avoided: reference's BackHandlerManager global
- * singleton, reference's legacy `Animated` API, mutable module-scope state.
+ * Anti-patterns explicitly avoided: BackHandler global singletons, the
+ * legacy `Animated` API, mutable module-scope state.
  */
 
 import {

@@ -1,4 +1,4 @@
-// from SDK — rebranded: internal → Otf
+// @otf/tokens — design theme IDs
 
 export type OtfDesignThemeId =
   | 'mono'

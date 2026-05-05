@@ -11,7 +11,6 @@
     "lint": "turbo run lint",
     "type-check": "turbo run type-check",
     "clean": "turbo run clean",
-    "import-sdk": "node scripts/import-from-SDK.mjs --platform all",
     "landing:dev": "bun dev --cwd apps/landing",
     "landing:build": "bun run build --cwd apps/landing",
     "check-design": "npx tsx scripts/check-kit-design.ts",

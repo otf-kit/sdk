@@ -12,9 +12,6 @@
  * without per-item interpolation. A11y exposes adjustable role +
  * increment/decrement actions for VoiceOver.
  *
- * Clean-room implementation. API derived from mobile flow primitives PRD section 9
- * + reference patterns brief section 4. No code lifted from sibling templates.
- *
  * @example
  * <WheelPicker
  *   options={Array.from({ length: 121 }, (_, i) => ({ value: 140 + i, label: String(140 + i) }))}

@@ -81,7 +81,7 @@ export const CATALOG: Category[] = [
     title: 'Patterns',
     description: 'Composed components — chips, sheets, headers, multi-step flows, full-screen surfaces.',
     entries: [
-      // T1 mobile flow primitives primitives
+      // T1 mobile flow primitives
       { slug: 'chip', title: 'Chip', description: 'Selectable pill — variant, size, selected, with-remove.', status: 'ready' },
       { slug: 'multistep', title: 'MultiStep', description: 'Declarative wizard — bar/dots/segments progress, slide+fade transitions.', status: 'ready' },
       { slug: 'selectable', title: 'Selectable', description: 'Single + multi option cards (card / row / tile variants).', status: 'ready' },
@@ -92,7 +92,7 @@ export const CATALOG: Category[] = [
       { slug: 'fab', title: 'Floating Action Button', description: 'Anchored CTA — legacy circle/pill + expanding actions menu w/ backdrop.', status: 'ready' },
       { slug: 'wheel-picker', title: 'WheelPicker', description: 'iOS-flavored vertical scroll-wheel for height / weight / enums.', status: 'ready' },
       { slug: 'ruler-scrubber', title: 'RulerScrubber', description: 'Horizontal ruler scrubber with snap, ticks, value display.', status: 'ready' },
-      // Premium screens (top internal demos)
+      // Premium screens
       { slug: 'paywall-screen', title: 'Paywall Screen', description: 'Subscription wall — default, social-proof, comparison, countdown urgency.', status: 'ready' },
       { slug: 'login-screen', title: 'Login Screen', description: 'Email + provider auth — providers, email-only, editorial, branded.', status: 'ready' },
       { slug: 'onboarding-carousel', title: 'Onboarding Carousel', description: 'Swipeable intro — default, calm-gradient, card-tilt, editorial.', status: 'ready' },

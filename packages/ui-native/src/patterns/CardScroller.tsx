@@ -17,10 +17,6 @@
  * exposes `adjustable` role + an `accessibilityValue.text` describing the
  * current index.
  *
- * Clean-room implementation. API derived from the mobile flow primitives PRD Tier 2
- * section + reference templates-reference/reference PATTERNS briefs. No code lifted
- * from sibling templates.
- *
  * @example
  * <CardScroller
  *   data={workoutTypes}

@@ -18,15 +18,6 @@ pnpm lint         # run ESLint across workspace
 pnpm test         # run all tests
 ```
 
-## Importing components from SDK
-
-```bash
-pnpm import-sdk              # import all platforms
-pnpm import-sdk:web          # web only
-pnpm import-sdk:native       # native only
-pnpm import-sdk -- --force   # overwrite existing files
-```
-
 ## Pull Requests
 
 1. Branch from `main`: `git checkout -b feat/your-feature`

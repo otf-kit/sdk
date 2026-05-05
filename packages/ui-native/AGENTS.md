@@ -77,23 +77,21 @@ Every primitive ships a showcase entry in `apps/ui-native-storybook/` exercising
 - Hooks live in `src/hooks/use*.ts` and export both the hook and any related types.
 - Add the export to `src/index.ts` in the same PR — barrel-only consumption from kits.
 
-## Cross-template clean-room rule
+## Clean-room rule
 
-The 6 paid Expo templates audited 2026-05-03 (reference, reference, reference, reference, reference, reference) are studied references — `docs/design-references/reference templates-*/PATTERNS.md` carries every API sketch. **Never copy code blocks, helpers, constants, or directory structure** from those templates. Re-implement from the API sketches in our stack, with our motion vocabulary, our token system, our naming.
+Every primitive in this package is a clean-room implementation. **Never copy code blocks, helpers, constants, or directory structure** from any third-party template. Re-implement in our stack with our motion vocabulary, token system, and naming.
 
 ## How to add a new primitive (checklist)
 
-1. Read the relevant `docs/design-references/.../PATTERNS.md` brief — copy the API sketch into a comment at the top of your new file.
-2. Confirm the component doesn't already exist in `src/{primitives,patterns,layouts,interface}/` (most "new" ideas overlap with something we already shipped — extend, don't duplicate).
-3. Implement with strict TS, Tamagui tokens, Reanimated 4 only, useReducedMotion, A11y labels.
-4. Add export to `src/index.ts`.
-5. Add a showcase entry to `apps/ui-native-storybook/`.
-6. Wire into at least one kit (fitness-kit is the test bed) — confirm typecheck clean.
-7. Update `docs/lessons.md` if you learned something the next person needs to know.
+1. Confirm the component doesn't already exist in `src/{primitives,patterns,layouts,interface}/` (most "new" ideas overlap with something we already shipped — extend, don't duplicate).
+2. Implement with strict TS, Tamagui tokens, Reanimated 4 only, useReducedMotion, A11y labels.
+3. Add export to `src/index.ts`.
+4. Add a showcase entry to `apps/ui-native-storybook/`.
+5. Wire into at least one kit (fitness-kit is the test bed) — confirm typecheck clean.
+6. Update `docs/lessons.md` if you learned something the next person needs to know.
 
 ## See also
 
 - Root standards: `../../AGENTS.md`
 - Engineering lessons: `../../docs/lessons.md`
 - Mobile-primitives ADR: `../../docs/adr/2026-05-03-mobile-primitives-decisions.md`
-- Active milestone PRD: `../../kits/fitness-kit/.todo/mobile flow primitives/PRD.md`

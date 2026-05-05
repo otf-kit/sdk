@@ -16,7 +16,6 @@ const gradientMap = {
 
 /**
  * TextureCard — 4-ring nested border surface.
- * Ports the premium TextureCard pattern (clean-room).
  * Each concentric div has a half-alpha border + decreasing radius,
  * creating beveled depth without shadows.
  */
