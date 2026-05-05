@@ -1,0 +1,27 @@
+node_modules
+dist
+.expo
+.expo-shared
+*.tsbuildinfo
+
+# Bun
+bun.lockb
+
+# Env
+.env
+.env.*
+!.env.example
+
+# Wrangler cache
+.wrangler
+node_modules/.cache/wrangler
+
+# Build cache
+.build-timestamp
+
+# Logs
+*.log
+.DS_Store
+
+# @generated expo-cli
+expo-env.d.ts

@@ -1,0 +1,4 @@
+packages:
+  - 'packages/*'
+  - 'apps/*'
+  - '!apps/ui-native-showcase'

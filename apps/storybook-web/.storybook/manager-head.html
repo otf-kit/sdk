@@ -1,0 +1,186 @@
+<!-- Dark Storybook manager chrome -->
+<style>
+  /* Match Minimal Dark theme for the sidebar + toolbar */
+  :root {
+    color-scheme: dark;
+  }
+</style>
+
+<!-- Top-level onboarding for the manager toolbar -->
+<script>
+(function () {
+  var KEY = 'otf-storybook-onboarded-v2';
+
+  var STEPS = [
+    {
+      title: 'Welcome to the OTF Storybook',
+      body: 'Every component in @otfdashkit/ui — rendered in isolation and themeable. This short guide walks through the toolbar above so you can get the most out of it.',
+      hint: '⌘K / Ctrl-K searches the sidebar.'
+    },
+    {
+      title: 'Reload · Zoom · Reset',
+      body: 'First four toolbar icons: reload the preview, zoom in, zoom out, reset zoom. Handy for inspecting fine spacing + motion.',
+    },
+    {
+      title: 'Grid & Side-by-side',
+      body: 'The two box icons toggle a background grid and a side-by-side variants view — useful when comparing densities or comparing states.',
+    },
+    {
+      title: 'Theme picker (🎨)',
+      body: 'The paintbrush flips between 7 themes: Minimal Dark (default), Minimal Light, Linear, Glass (light/dark), and Midnight. Every component re-renders instantly.',
+    },
+    {
+      title: 'All-themes mode (mirror icon)',
+      body: 'Next to the theme picker is an "All themes" toggle. Flip it on and the current story renders once in every theme side-by-side — great for regression checks.',
+    },
+    {
+      title: 'Outline / Measure',
+      body: 'The two icons on the right of the toolbar toggle element outlines and a measurement overlay. Useful for auditing spacing without dev tools.',
+    },
+    {
+      title: 'Fullscreen · Open in new tab · Copy link',
+      body: 'Top-right icons: fullscreen the preview, pop the story into its own tab, or copy a permalink. Shareable URLs preserve theme + other toolbar state.',
+    },
+    {
+      title: 'Re-open this guide',
+      body: 'The "?" floating button in the bottom-right replays this walkthrough whenever you want. Dismissal is remembered per-browser.',
+    }
+  ];
+
+  function loaded(fn) {
+    if (document.readyState !== 'loading') fn();
+    else document.addEventListener('DOMContentLoaded', fn);
+  }
+
+  function el(tag, style, attrs) {
+    var node = document.createElement(tag);
+    if (style) node.setAttribute('style', style);
+    if (attrs) Object.keys(attrs).forEach(function (k) { node.setAttribute(k, attrs[k]); });
+    return node;
+  }
+
+  loaded(function () {
+    var step = 0;
+    var overlay = null;
+
+    function build() {
+      overlay = el('div', [
+        'position:fixed',
+        'inset:0',
+        'background:rgba(0,0,0,0.6)',
+        'display:flex',
+        'align-items:center',
+        'justify-content:center',
+        'padding:24px',
+        'z-index:2147483646',
+        'font-family:system-ui, -apple-system, Segoe UI, Roboto, sans-serif'
+      ].join(';'), { role: 'dialog', 'aria-modal': 'true' });
+
+      var card = el('div', [
+        'background:#15181e',
+        'color:#e8eaed',
+        'border:1px solid #2a2e35',
+        'border-radius:12px',
+        'max-width:460px',
+        'width:100%',
+        'padding:24px',
+        'box-shadow:0 20px 60px rgba(0,0,0,0.5)'
+      ].join(';'));
+
+      var progress = el('div', 'display:flex; gap:4px; margin-bottom:16px');
+      STEPS.forEach(function () {
+        progress.appendChild(el('div', 'height:3px; flex:1; border-radius:2px; background:#2a2e35; transition:background 200ms'));
+      });
+
+      var title = el('h2', 'margin:0; font-size:17px; font-weight:600; color:#fff');
+      var body  = el('p', 'margin:10px 0 0; font-size:14px; line-height:1.55; color:#b3b8c1');
+      var hint  = el('p', 'margin:10px 0 0; font-size:12px; color:#b3b8c1; opacity:0.75');
+
+      var footer = el('div', 'display:flex; justify-content:space-between; align-items:center; margin-top:20px');
+      var skipBtn = el('button', 'background:transparent; border:none; color:#9aa0a6; cursor:pointer; font-size:13px', { type: 'button' });
+      skipBtn.textContent = 'Skip';
+
+      var actions = el('div', 'display:flex; gap:8px');
+      var backBtn = el('button', 'padding:8px 14px; border-radius:6px; border:1px solid #2a2e35; background:transparent; color:#e8eaed; cursor:pointer; font-size:13px', { type: 'button' });
+      backBtn.textContent = 'Back';
+      var nextBtn = el('button', 'padding:8px 14px; border-radius:6px; border:none; background:#f97316; color:white; cursor:pointer; font-size:13px; font-weight:500', { type: 'button' });
+      nextBtn.textContent = 'Next';
+
+      actions.appendChild(backBtn);
+      actions.appendChild(nextBtn);
+      footer.appendChild(skipBtn);
+      footer.appendChild(actions);
+
+      card.appendChild(progress);
+      card.appendChild(title);
+      card.appendChild(body);
+      card.appendChild(hint);
+      card.appendChild(footer);
+      overlay.appendChild(card);
+      document.body.appendChild(overlay);
+
+      function render() {
+        var s = STEPS[step];
+        title.textContent = s.title;
+        body.textContent = s.body;
+        hint.textContent = s.hint || '';
+        hint.style.display = s.hint ? '' : 'none';
+        Array.prototype.forEach.call(progress.children, function (dot, i) {
+          dot.style.background = i <= step ? '#f97316' : '#2a2e35';
+        });
+        backBtn.style.display = step === 0 ? 'none' : '';
+        nextBtn.textContent = step === STEPS.length - 1 ? 'Got it' : 'Next';
+      }
+
+      function close() {
+        if (overlay && overlay.parentNode) overlay.parentNode.removeChild(overlay);
+        overlay = null;
+        step = 0;
+        try { localStorage.setItem(KEY, '1'); } catch (e) {}
+      }
+
+      skipBtn.addEventListener('click', close);
+      backBtn.addEventListener('click', function () { if (step > 0) { step--; render(); } });
+      nextBtn.addEventListener('click', function () {
+        if (step === STEPS.length - 1) close();
+        else { step++; render(); }
+      });
+      overlay.addEventListener('click', function (e) { if (e.target === overlay) close(); });
+
+      render();
+    }
+
+    function replay() {
+      step = 0;
+      if (!overlay) build();
+    }
+
+    // Floating "?" button in the manager UI
+    var btn = el('button', [
+      'position:fixed',
+      'right:16px',
+      'bottom:16px',
+      'width:36px',
+      'height:36px',
+      'border-radius:50%',
+      'background:#f97316',
+      'color:white',
+      'border:none',
+      'cursor:pointer',
+      'font-size:18px',
+      'font-weight:600',
+      'box-shadow:0 4px 12px rgba(0,0,0,0.4)',
+      'z-index:2147483645',
+      'font-family:system-ui'
+    ].join(';'), { 'aria-label': 'Show onboarding guide', type: 'button' });
+    btn.textContent = '?';
+    btn.addEventListener('click', replay);
+    document.body.appendChild(btn);
+
+    // Auto-open first time
+    try {
+      if (!localStorage.getItem(KEY)) replay();
+    } catch (e) {}
+  });
+})();
+</script>

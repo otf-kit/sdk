@@ -1,0 +1,121 @@
+/* OTF UI — Minimal theme
+   Inspired by Notion + Cal.com: airy, warm, generous whitespace, content-first.
+   Font: Plus Jakarta Sans — warm, approachable, humanist
+   Radius: warm and rounded, but not pill-shaped
+   Shadows: barely-there, warm-toned
+   Motion: natural, unhurried
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+
+.theme-minimal {
+  /* ── Colors (warm light) ───────────────────── */
+  --background: 40 33% 97%;
+  --foreground: 25 15% 15%;
+  --card: 0 0% 100%;
+  --card-foreground: 25 15% 15%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 25 15% 15%;
+  --primary: 25 95% 53%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 35 25% 93%;
+  --secondary-foreground: 25 15% 25%;
+  --muted: 35 20% 94%;
+  --muted-foreground: 25 10% 45%;
+  --accent: 35 25% 93%;
+  --accent-foreground: 25 95% 48%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 35 15% 88%;
+  --input: 35 15% 90%;
+  --ring: 25 95% 53%;
+
+  /* ── Typography (airy, humanist) ──────────── */
+  --font-sans: 'Plus Jakarta Sans', 'DM Sans', system-ui, sans-serif;
+  --font-heading: 'Plus Jakarta Sans', 'DM Sans', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'Fira Code', monospace;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.3125rem;
+  --font-size-2xl: 1.625rem;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-heading: 700;
+  --line-height-tight: 1.35;
+  --line-height-normal: 1.65;
+  --line-height-relaxed: 1.8;
+  --line-height-heading: 1.3;
+  --letter-spacing-tight: -0.01em;
+  --letter-spacing-body: 0.005em;
+  --letter-spacing-heading: -0.01em;
+
+  /* ── Border radius (warm, medium-large) ─────── */
+  --radius: 0.625rem;
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* ── Shadow tokens (granular) ────────────────── */
+  --shadow-color: 25 40% 30%;
+  --shadow-opacity: 0.08;
+  --shadow-blur: 8px;
+  --shadow-spread: 0px;
+  --shadow-offset-x: 0px;
+  --shadow-offset-y: 2px;
+
+  /* ── Shadows (warm, barely-there) ────────────── */
+  --shadow-sm: 0 1px 3px 0 rgba(120, 80, 40, 0.06);
+  --shadow-md: 0 2px 8px 0 rgba(120, 80, 40, 0.08), 0 0 0 1px rgba(120, 80, 40, 0.04);
+  --shadow-lg: 0 4px 16px 0 rgba(120, 80, 40, 0.1), 0 1px 4px rgba(120, 80, 40, 0.06);
+  --shadow-xl: 0 8px 32px 0 rgba(120, 80, 40, 0.12), 0 2px 8px rgba(120, 80, 40, 0.06);
+  --shadow-card: 0 0 0 1px hsl(var(--border)), 0 1px 3px rgba(120, 80, 40, 0.06);
+
+  /* ── Animation (natural, unhurried) ─────────── */
+  --duration-fast: 100ms;
+  --duration-normal: 200ms;
+  --duration-slow: 350ms;
+  --easing-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --easing-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+  --easing-bounce: cubic-bezier(0.34, 1.3, 0.64, 1);
+}
+
+.theme-minimal.dark {
+  --background: 25 12% 8%;
+  --foreground: 35 15% 90%;
+  --card: 25 12% 10%;
+  --card-foreground: 35 15% 90%;
+  --popover: 25 12% 11%;
+  --popover-foreground: 35 15% 90%;
+  --primary: 25 95% 58%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 25 12% 15%;
+  --secondary-foreground: 35 15% 80%;
+  --muted: 25 12% 14%;
+  --muted-foreground: 25 10% 55%;
+  --accent: 25 12% 15%;
+  --accent-foreground: 25 95% 58%;
+  --border: 25 12% 18%;
+  --input: 25 12% 18%;
+  --ring: 25 95% 58%;
+
+  --shadow-color: 0 0% 0%;
+  --shadow-opacity: 0.3;
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.25);
+  --shadow-md: 0 2px 8px 0 rgb(0 0 0 / 0.35);
+  --shadow-lg: 0 4px 16px 0 rgb(0 0 0 / 0.4);
+  --shadow-card: 0 0 0 1px hsl(var(--border));
+}
+
+/* ── Chart / semantic accent tokens ────────────── */
+.theme-minimal, .theme-minimal.dark {
+  --chart-1: 25 95% 58%;    /* orange  — brand / primary  */
+  --chart-2: 142 71% 45%;   /* green   — success / done   */
+  --chart-3: 217 91% 60%;   /* blue    — info / todo       */
+  --chart-4: 38 92% 50%;    /* amber   — warning / in-prog */
+  --chart-5: 280 65% 60%;   /* purple  — accent / special  */
+}

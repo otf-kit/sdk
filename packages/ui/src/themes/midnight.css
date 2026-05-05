@@ -1,0 +1,131 @@
+/* OTF UI — Midnight theme
+   Inspired by Raycast + Arc: dark premium, neon accents, developer-first depth.
+   Font: Space Grotesk — geometric, techy, modern
+   Radius: medium, slightly angular
+   Shadows: neon glow shadows matched to accent color
+   Motion: snappy, minimal but precise
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+.theme-midnight {
+  /* ── Colors ───────────────────────────────── */
+  --background: 240 10% 4%;
+  --foreground: 0 0% 95%;
+  --card: 240 10% 6.5%;
+  --card-foreground: 0 0% 95%;
+  --popover: 240 10% 7%;
+  --popover-foreground: 0 0% 95%;
+  --primary: 263 90% 68%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 240 10% 11%;
+  --secondary-foreground: 0 0% 90%;
+  --muted: 240 10% 11%;
+  --muted-foreground: 240 5% 55%;
+  --accent: 263 90% 68%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 72% 51%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 240 10% 14%;
+  --input: 240 10% 14%;
+  --ring: 263 90% 68%;
+
+  /* ── Midnight-specific ──────────────────────── */
+  --neon: hsl(263 90% 68%);
+  --neon-glow: 0 0 20px hsl(263 90% 68% / 0.35), 0 0 40px hsl(263 90% 68% / 0.15);
+  --neon-subtle: 0 0 10px hsl(263 90% 68% / 0.2);
+
+  /* ── Typography ────────────────────────────── */
+  --font-sans: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  --font-heading: 'Space Grotesk', 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Cascadia Code', 'Fira Code', monospace;
+  --font-size-xs: 0.6875rem;
+  --font-size-sm: 0.8125rem;
+  --font-size-base: 0.9375rem;
+  --font-size-lg: 1.0625rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-heading: 600;
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.6;
+  --line-height-heading: 1.15;
+  --letter-spacing-tight: -0.02em;
+  --letter-spacing-body: -0.01em;
+  --letter-spacing-heading: -0.025em;
+
+  /* ── Border radius (medium, slightly angular) ── */
+  --radius: 0.5rem;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-full: 9999px;
+
+  /* ── Shadow tokens (granular) ────────────────── */
+  --shadow-color: 0 0% 0%;
+  --shadow-opacity: 0.5;
+  --shadow-blur: 8px;
+  --shadow-spread: 0px;
+  --shadow-offset-x: 0px;
+  --shadow-offset-y: 2px;
+
+  /* ── Shadows (neon glow) ─────────────────────── */
+  --shadow-sm: 0 1px 4px 0 rgb(0 0 0 / 0.5);
+  --shadow-md: 0 2px 8px 0 rgb(0 0 0 / 0.6), 0 0 0 1px hsl(var(--border));
+  --shadow-lg: 0 8px 24px 0 rgb(0 0 0 / 0.6), 0 0 0 1px hsl(var(--border));
+  --shadow-xl: 0 16px 40px 0 rgb(0 0 0 / 0.7), 0 0 32px hsl(var(--primary) / 0.08);
+  --shadow-card: 0 0 0 1px hsl(var(--border)), 0 2px 8px rgb(0 0 0 / 0.4);
+  --shadow-glow: var(--neon-glow);
+
+  /* ── Animation (snappy, precise) ────────────── */
+  --duration-fast: 80ms;
+  --duration-normal: 120ms;
+  --duration-slow: 200ms;
+  --easing-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --easing-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+  --easing-bounce: cubic-bezier(0.34, 1.15, 0.64, 1);
+
+  /* Force dark color-scheme */
+  color-scheme: dark;
+}
+
+.theme-midnight.light {
+  --background: 240 10% 96%;
+  --foreground: 240 10% 4%;
+  --card: 0 0% 100%;
+  --card-foreground: 240 10% 4%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 240 10% 4%;
+  --primary: 263 70% 50%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 240 10% 92%;
+  --secondary-foreground: 240 10% 4%;
+  --muted: 240 10% 92%;
+  --muted-foreground: 240 5% 45%;
+  --accent: 240 10% 92%;
+  --accent-foreground: 263 70% 50%;
+  --border: 240 10% 85%;
+  --input: 240 10% 85%;
+  --ring: 263 70% 50%;
+  --neon-glow: none;
+
+  --shadow-color: 0 0% 0%;
+  --shadow-opacity: 0.06;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.06);
+  --shadow-md: 0 2px 8px 0 rgb(0 0 0 / 0.08);
+  --shadow-card: 0 0 0 1px hsl(var(--border));
+  color-scheme: light;
+}
+
+/* ── Chart / semantic accent tokens ────────────── */
+.theme-midnight {
+  --chart-1: 263 90% 68%;   /* violet  — brand / primary  */
+  --chart-2: 160 60% 45%;   /* teal    — success / done   */
+  --chart-3: 200 80% 55%;   /* cyan    — info / todo       */
+  --chart-4: 38 90% 55%;    /* amber   — warning / in-prog */
+  --chart-5: 300 65% 65%;   /* pink    — accent / special  */
+}

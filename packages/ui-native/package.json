@@ -1,0 +1,62 @@
+{
+  "name": "@otfdashkit/ui-native",
+  "version": "0.1.0",
+  "description": "OTF UI Native — Tamagui-powered component library for Expo",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist/**"
+  ],
+  "scripts": {
+    "build": "tsup && cp types/index.d.ts dist/index.d.ts",
+    "dev": "tsup --watch",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@tamagui/portal": ">=1.100.0"
+  },
+  "devDependencies": {
+    "@tamagui/config": "^1.141.5",
+    "@tamagui/core": "^1.141.5",
+    "@tamagui/lucide-icons": "^1.144.4",
+    "@types/react": "^18.0.0",
+    "expo-router": "^6.0.0",
+    "react": "^18.3.0",
+    "react-native": "^0.76.0",
+    "react-native-reanimated": "^4.1.0",
+    "react-native-svg": "^15.15.4",
+    "tamagui": "^1.141.5",
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0"
+  },
+  "peerDependencies": {
+    "@tamagui/config": ">=1.100.0",
+    "@tamagui/core": ">=1.100.0",
+    "@tamagui/lucide-icons": ">=1.100.0",
+    "react": ">=18.0.0",
+    "react-native": ">=0.76.0",
+    "react-native-svg": ">=13.0.0",
+    "tamagui": ">=1.100.0"
+  },
+  "peerDependenciesMeta": {
+    "expo-router": {
+      "optional": true
+    },
+    "react-native-reanimated": {
+      "optional": true
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -1,0 +1,6 @@
+/* @otfdashkit/ui — import this file in your app's index.css to get all themes */
+@import './themes/base.css';
+@import './themes/linear.css';
+@import './themes/glass.css';
+@import './themes/midnight.css';
+@import './themes/minimal.css';
