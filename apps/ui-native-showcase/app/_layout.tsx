@@ -40,9 +40,10 @@ function WebSafeAreaShim({ children }: { children: React.ReactNode }) {
 
 SplashScreen.preventAutoHideAsync().catch(() => {})
 
-// Mirror fitness-kit: Tamagui's default system-font stack with a sane
-// weight ramp via createFont so headings don't render as 300-weight thins.
-const FONT_FAMILY = '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif'
+// Mirror fitness-kit: Roboto first so the web preview matches the Android
+// mobile experience the design is calibrated against (otherwise a Mac browser
+// would render San Francisco). Native still uses the OS UI font.
+const FONT_FAMILY = 'Roboto, -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif'
 
 const interFont = createFont({
   family: FONT_FAMILY,
@@ -82,11 +83,17 @@ const tamaguiConfig = createTamagui({
 function InjectWebStyles() {
   useEffect(() => {
     if (Platform.OS !== 'web' || typeof document === 'undefined') return
+    const fontLink = document.createElement('link')
+    fontLink.id = 'otf-showcase-web-font'
+    fontLink.rel = 'stylesheet'
+    fontLink.href = 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;800;900&display=swap'
+    document.head.appendChild(fontLink)
+
     const style = document.createElement('style')
     style.id = 'otf-showcase-web-styles'
     style.textContent = `
       html, body, #root {
-        font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        font-family: 'Roboto', -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
         margin: 0;
         padding: 0;
       }
@@ -99,6 +106,7 @@ function InjectWebStyles() {
     document.head.appendChild(style)
     return () => {
       document.head.removeChild(style)
+      document.head.removeChild(fontLink)
     }
   }, [])
   return null
