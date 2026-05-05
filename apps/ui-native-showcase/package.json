@@ -14,8 +14,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@otfdashkit/ui-native": "file:../../packages/ui-native",
-    "@otfdashkit/tokens": "file:../../packages/tokens",
+    "@otfdashkit/ui-native": "^0.1.0",
+    "@otfdashkit/tokens": "^0.1.0",
     "@tamagui/lucide-icons": "^1.144.4",
     "@tamagui/portal": "^1.144.4",
     "expo": "~54.0.25",
