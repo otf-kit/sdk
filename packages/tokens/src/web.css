@@ -223,7 +223,7 @@ h1, h2, h3, h4, h5, h6 {
   --ring: 262 83% 68%;
 }
 
-/* ── Cosmic palette (premium-inspired) ─────────────────────────── */
+/* ── Cosmic palette ─────────────────────────────────────────────── */
 .theme-cosmic {
   --background: 0 0% 100%;
   --foreground: 270 50% 11%;

@@ -26,7 +26,7 @@ const buttonVariants = cva(
           'bg-destructive text-destructive-foreground hover:bg-destructive/90 active:bg-destructive/80',
         link:
           'text-primary underline-offset-4 hover:underline',
-        /** Gradient stack — premium inspired */
+        /** Gradient stack — premium variant */
         gradient: [
           'bg-gradient-to-b from-primary to-[hsl(var(--primary)/0.8)]',
           'text-primary-foreground',

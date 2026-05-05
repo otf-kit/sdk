@@ -24,7 +24,7 @@ import {
 } from 'lucide-react'
 import { cn } from '../utils/cn'
 
-// ── Local primitives (avoid broken SDK paths) ─────────────
+// ── Local primitives ─────────────────────────────────────────────
 
 function Checkbox({
   checked,

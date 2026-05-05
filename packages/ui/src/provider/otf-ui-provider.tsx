@@ -51,7 +51,7 @@ export function OtfUIProvider({
 
   useEffect(() => {
     const root = document.documentElement
-    // Remove all internal theme classes
+    // Remove any prior theme class so we apply exactly one
     root.classList.remove('theme-linear', 'theme-glass', 'theme-midnight', 'theme-minimal')
     root.classList.remove('dark', 'light')
     root.classList.add(`theme-${theme}`)

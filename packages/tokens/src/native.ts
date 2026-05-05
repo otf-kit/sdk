@@ -63,7 +63,7 @@ export const warmLightColors = {
   color12: 'hsl(20, 14%, 11%)',
 } as const
 
-// ── Cosmic palette (premium-inspired) ───────────────────────────────
+// ── Cosmic palette ──────────────────────────────────────────────────
 export const cosmicDarkColors = {
   color1:  'hsl(270, 50%, 4%)',   // bg
   color2:  'hsl(270, 40%, 6%)',   // sidebar bg

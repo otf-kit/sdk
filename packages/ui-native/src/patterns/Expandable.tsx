@@ -14,7 +14,7 @@
  * Motion: Reanimated 4 (`useSharedValue` + `useAnimatedStyle` + `withTiming`).
  * Honors `useReducedMotion()` by snapping height/opacity/rotation to target.
  *
- * API sketch (from `kits/fitness-kit/.todo/mobile flow primitives/PRD.md` §4):
+ * @example
  *   <Expandable
  *     icon={<ChevronRight />}
  *     title="Why is my goal lower than yesterday?"

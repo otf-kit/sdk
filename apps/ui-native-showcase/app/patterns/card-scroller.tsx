@@ -48,7 +48,7 @@ export default function CardScrollerShowcase() {
   return (
     <ShowcaseFrame
       title="CardScroller"
-      description="Snap-to-card horizontal scroller. Center-snap auto-aligns the focused card to viewport center; off-center cards fade + scale down. Source: reference + reference patterns."
+      description="Snap-to-card horizontal scroller. Center-snap auto-aligns the focused card to viewport center; off-center cards fade + scale down."
     >
       <Section title="Center snap (default)">
         <YStack height={180}>

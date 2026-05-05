@@ -23,9 +23,6 @@ graphify-out/
 .graphifyignore
 .chats/
 
-# reference reference screenshots (downloaded, not shipped)
-reference-*.png
-
 # Temporary scheduled task locks
 .claude/scheduled_tasks.lock
 

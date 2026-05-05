@@ -3,7 +3,6 @@ import { cn } from '../utils/cn'
 
 /**
  * PageContainer — responsive max-width ladder.
- * Mirrors reference's `PageContainer` (`src/interface/layout/PageContainer.tsx`).
  */
 export const PageContainer = React.forwardRef<
   HTMLDivElement,

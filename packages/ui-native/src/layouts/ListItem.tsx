@@ -4,7 +4,7 @@
  * Layout primitive for list rows. Used universally for settings, devices,
  * notifications, links, and any "icon + title + subtitle (+ trailing)" row.
  *
- * Right-slot variants (added 2026-05-03 per mobile flow primitives PRD section 6):
+ * Right-slot variants:
  *   - `'chevron'`              → ChevronRight icon (default when `href` is set)
  *   - `'switch'`               → Tamagui Switch driven by `switchValue` + `onSwitchChange`
  *   - `{ value: string }`      → right-aligned muted label

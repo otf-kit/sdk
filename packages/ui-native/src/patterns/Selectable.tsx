@@ -2,8 +2,8 @@
  * Selectable + SelectableGroup
  *
  * Onboarding-grade option cards. Three visual variants —
- *   - `card`  : padded vertical card (reference-style), icon top-left, label + description, check top-right.
- *   - `row`   : horizontal row (reference-style), icon left, label right, check trailing.
+ *   - `card`  : padded vertical card, icon top-left, label + description, check top-right.
+ *   - `row`   : horizontal row, icon left, label right, check trailing.
  *   - `tile`  : square 1:1 grid item, icon centered, label below. Self-sizing flex-1.
  *
  * Selected state: border tweens 250ms from `$color5` to `accent` (default `$color9`); a check
@@ -12,9 +12,6 @@
  *
  * `<SelectableGroup>` is generic over the option value type and supports single (radio) or
  * multi (checkbox) selection. Layout is vertical for `card`/`row` and a 2-col grid for `tile`.
- *
- * Clean-room implementation. API derived from mobile flow primitives PRD section 2 + reference/reference/
- * reference pattern audits. No code lifted from sibling templates.
  */
 
 import { type ReactNode, useCallback } from 'react'

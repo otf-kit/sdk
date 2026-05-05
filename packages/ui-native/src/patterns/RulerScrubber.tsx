@@ -8,11 +8,6 @@
  * static ticks when `useReducedMotion()` is on. Optional iOS haptic on every
  * step crossed.
  *
- * Clean-room implementation. API derived from mobile flow primitives PRD §10 and the
- * reference batch PATTERNS §5 (RulerScrubber). No code lifted from the source
- * template — the underlying mechanics (snap math, half-viewport padding, tick
- * interpolation) are written from scratch.
- *
  * @example Target weight (50–120 kg, half-kg steps)
  * const [weight, setWeight] = useState(70)
  * <RulerScrubber min={50} max={120} step={0.5} value={weight} onChange={setWeight} unit="kg" />
