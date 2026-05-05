@@ -70,7 +70,7 @@ Banned:
 - Any lib that requires custom native modules outside the Expo managed flow
 
 ### Stories + showcase
-Every primitive ships a showcase entry in `apps/ui-native-storybook/` exercising every prop variant, with light + dark + at least 2 palettes (Slate + one accent). The showcase deploys to `https://otf-storybook-native.pages.dev` (or similar). See ADR for shape.
+Every primitive ships a showcase entry in `apps/ui-native-storybook/` exercising every prop variant, with light + dark + at least 2 palettes (Slate + one accent). The showcase deploys to `https://native.otf-kit.dev` (or similar). See ADR for shape.
 
 ### Naming + exports
 - Component file = component name (`MultiStep.tsx` → `export function MultiStep`).
