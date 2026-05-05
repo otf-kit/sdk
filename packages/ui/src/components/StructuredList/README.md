@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { StructuredList } from '@otf/ui'
+import { StructuredList } from '@otfdashkit/ui'
 
 export function Example() {
   return <StructuredList />

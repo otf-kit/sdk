@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { Skeleton } from '@otf/ui'
+import { Skeleton } from '@otfdashkit/ui'
 
 export function Example() {
   return <Skeleton />

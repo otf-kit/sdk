@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { Calendar } from '@otf/ui'
+import { Calendar } from '@otfdashkit/ui'
 
 export function Example() {
   return <Calendar />

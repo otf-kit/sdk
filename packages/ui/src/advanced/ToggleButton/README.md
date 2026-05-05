@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { ToggleButton } from '@otf/ui'
+import { ToggleButton } from '@otfdashkit/ui'
 
 export function Example() {
   return <ToggleButton />

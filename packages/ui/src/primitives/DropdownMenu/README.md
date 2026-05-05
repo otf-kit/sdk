@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { DropdownMenu } from '@otf/ui'
+import { DropdownMenu } from '@otfdashkit/ui'
 
 export function Example() {
   return <DropdownMenu />

@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { Stepper } from '@otf/ui'
+import { Stepper } from '@otfdashkit/ui'
 
 export function Example() {
   return <Stepper />

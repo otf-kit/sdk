@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { DataTable } from '@otf/ui'
+import { DataTable } from '@otfdashkit/ui'
 
 export function Example() {
   return <DataTable />

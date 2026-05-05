@@ -1,6 +1,6 @@
 import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
-import { Checkbox, RadioGroup, RadioGroupItem, Switch, Slider } from '@otf/ui'
+import { Checkbox, RadioGroup, RadioGroupItem, Switch, Slider } from '@otfdashkit/ui'
 
 const meta: Meta = { title: 'Primitives/Controls', tags: ['autodocs'] }
 export default meta

@@ -8,7 +8,7 @@ import {
   AlertTriangle,
   Trash2,
   LogOut,
-} from '@otf/ui-native'
+} from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
 
 export default function ConfirmDialogShowcase() {

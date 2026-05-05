@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { FileUpload } from '@otf/ui'
+import { FileUpload } from '@otfdashkit/ui'
 
 export function Example() {
   return <FileUpload />

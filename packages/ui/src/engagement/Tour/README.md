@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { Tour } from '@otf/ui'
+import { Tour } from '@otfdashkit/ui'
 
 export function Example() {
   return <Tour />

@@ -5,7 +5,7 @@ import {
   XStack,
   YStack,
   SizableText,
-} from '@otf/ui-native'
+} from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
 
 const STEPS = ['Account', 'Profile', 'Plan', 'Confirm']

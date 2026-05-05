@@ -4,7 +4,7 @@ import {
   AreaChart, BarChart, LineChart, Sparkline, Heatmap, BarList, ActivityHeatmap,
   Beacon, Tour, TourStep, useTour,
   Button,
-} from '@otf/ui'
+} from '@otfdashkit/ui'
 
 const MONTHLY_DATA = [
   { month: 'Jan', revenue: 4200, users: 240, churn: 12 },

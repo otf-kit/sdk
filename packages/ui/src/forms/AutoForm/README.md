@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { AutoForm } from '@otf/ui'
+import { AutoForm } from '@otfdashkit/ui'
 
 export function Example() {
   return <AutoForm />

@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { SidebarLayoutSearch } from '@otf/ui'
+import { SidebarLayoutSearch } from '@otfdashkit/ui'
 
 export function Example() {
   return <SidebarLayoutSearch />

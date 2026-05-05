@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { WorkspaceMembers } from '@otf/ui'
+import { WorkspaceMembers } from '@otfdashkit/ui'
 
 export function Example() {
   return <WorkspaceMembers />

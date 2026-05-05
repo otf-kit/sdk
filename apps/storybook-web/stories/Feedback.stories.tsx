@@ -1,6 +1,6 @@
 import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
-import { Banner, LoadingOverlay, Stepper } from '@otf/ui'
+import { Banner, LoadingOverlay, Stepper } from '@otfdashkit/ui'
 
 const meta: Meta = { title: 'Feedback/Banner, LoadingOverlay, Stepper', tags: ['autodocs'] }
 export default meta

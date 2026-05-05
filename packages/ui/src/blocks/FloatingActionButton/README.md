@@ -7,7 +7,7 @@ A generic fixed floating action button (FAB) that opens a popover panel. Accepts
 ## Usage — Generic FAB
 
 ```tsx
-import { FloatingActionButton } from '@otf/ui'
+import { FloatingActionButton } from '@otfdashkit/ui'
 import { Settings } from 'lucide-react'
 
 export default function App() {
@@ -35,7 +35,7 @@ export default function App() {
 ## Usage — FloatingThemePicker (pre-wired)
 
 ```tsx
-import { FloatingThemePicker } from '@otf/ui'
+import { FloatingThemePicker } from '@otfdashkit/ui'
 
 export default function App() {
   return (
@@ -85,7 +85,7 @@ type FabPosition = 'bottom-right' | 'bottom-left' | 'top-right' | 'top-left'
 ## Default palette options
 
 ```ts
-import { DEFAULT_THEME_OPTIONS } from '@otf/ui'
+import { DEFAULT_THEME_OPTIONS } from '@otfdashkit/ui'
 // [
 //   { value: '__brand__',      label: 'Brand',    color: '#F97316' },
 //   { value: 'theme-slate',    label: 'Slate',    color: '#6366F1' },

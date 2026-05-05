@@ -1,13 +1,13 @@
-# @otf/ui-native showcase
+# @otfdashkit/ui-native showcase
 
-The "Storybook home" for `@otf/ui-native` — a custom Expo-web shell that
+The "Storybook home" for `@otfdashkit/ui-native` — a custom Expo-web shell that
 exercises every primitive, interface block, layout, and pattern with all
 of their prop variants on every palette in light + dark.
 
 > Why custom and not `@storybook/react-native`?
 > See the ADR: `docs/adr/2026-05-03-mobile-primitives-decisions.md` (sec. 5).
 > Short version: Storybook RN's web export is brittle and we already run a
-> custom shell at `apps/storybook-web/` for `@otf/ui` — same approach, native
+> custom shell at `apps/storybook-web/` for `@otfdashkit/ui` — same approach, native
 > flavor.
 
 ## What's here
@@ -25,9 +25,9 @@ From the repo root:
 
 ```bash
 pnpm install                                        # workspace-wide
-pnpm --filter @otf/tokens    build                  # one-time
-pnpm --filter @otf/ui-native build                  # one-time
-pnpm --filter @otf/ui-native-storybook dev          # web -> http://localhost:3010
+pnpm --filter @otfdashkit/tokens    build                  # one-time
+pnpm --filter @otfdashkit/ui-native build                  # one-time
+pnpm --filter @otfdashkit/ui-native-storybook dev          # web -> http://localhost:3010
 ```
 
 Or from this directory:
@@ -42,7 +42,7 @@ bun run dev:native        # iOS / Android via Expo Dev Tools
 
 1. **Drop a screen** at `app/<category>/<slug>.tsx`.
    Use `ShowcaseFrame` + `Section` from `../../components/ShowcaseFrame`.
-   Import primitives only from `@otf/ui-native` — never raw Tamagui.
+   Import primitives only from `@otfdashkit/ui-native` — never raw Tamagui.
 
 2. **Register it** in `components/catalog.ts`:
 
@@ -55,7 +55,7 @@ bun run dev:native        # iOS / Android via Expo Dev Tools
    }
    ```
 
-3. **Confirm the sidebar** picks it up (`pnpm --filter @otf/ui-native-storybook dev`)
+3. **Confirm the sidebar** picks it up (`pnpm --filter @otfdashkit/ui-native-storybook dev`)
    and that every prop variant has a `<Section>` block.
 
 That's it — the route is auto-discovered by Expo Router and the sidebar reads
@@ -65,7 +65,7 @@ from the catalog.
 
 ```tsx
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
-import { Chip, XStack } from '@otf/ui-native'
+import { Chip, XStack } from '@otfdashkit/ui-native'
 
 export default function MyShowcase() {
   return (
@@ -108,7 +108,7 @@ bun run preview    # local serve of dist/ for sanity check
 Deployed to Cloudflare Pages, mirroring how `apps/storybook-web/` ships:
 
 ```bash
-pnpm --filter @otf/ui-native-storybook deploy
+pnpm --filter @otfdashkit/ui-native-storybook deploy
 # or from this directory
 bun run deploy
 ```

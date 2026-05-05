@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { Carousel } from '@otf/ui'
+import { Carousel } from '@otfdashkit/ui'
 
 export function Example() {
   return <Carousel />

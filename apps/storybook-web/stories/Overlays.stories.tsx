@@ -3,8 +3,8 @@ import {
   Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle, SheetDescription,
   Popover, PopoverTrigger, PopoverContent,
   Tooltip, TooltipProvider, TooltipTrigger, TooltipContent,
-} from '@otf/ui'
-import { Button } from '@otf/ui'
+} from '@otfdashkit/ui'
+import { Button } from '@otfdashkit/ui'
 
 const meta = {
   title: 'Overlays/All',

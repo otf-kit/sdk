@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { Sonner } from '@otf/ui'
+import { Sonner } from '@otfdashkit/ui'
 
 export function Example() {
   return <Sonner />

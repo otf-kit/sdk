@@ -6,7 +6,7 @@ import {
   Tour, TourStep, useTour,
   Beacon,
   Button,
-} from '@otf/ui'
+} from '@otfdashkit/ui'
 import { Sparkles, Users, GitBranch, Rocket, KeyRound } from 'lucide-react'
 
 const meta: Meta = { title: 'Engagement', tags: ['autodocs'] }

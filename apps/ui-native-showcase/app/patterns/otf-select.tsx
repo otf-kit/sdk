@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { OtfSelect, YStack, type OtfSelectItem } from '@otf/ui-native'
+import { OtfSelect, YStack, type OtfSelectItem } from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
 
 const REGIONS: OtfSelectItem[] = [

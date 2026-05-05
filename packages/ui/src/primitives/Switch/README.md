@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { Switch } from '@otf/ui'
+import { Switch } from '@otfdashkit/ui'
 
 export function Example() {
   return <Switch />

@@ -4,7 +4,7 @@ import { Platform } from 'react-native'
 // Tamagui-shipped accent palettes from @tamagui/config/v5. These are the
 // theme names the runtime knows about — wrapping <Theme name="blue"> swaps
 // the active accent ramp ($color1..12 → blue1..12). The OTF design-theme
-// IDs (`mono`, `ocean-teal`, etc.) live in @otf/ui-native and would require
+// IDs (`mono`, `ocean-teal`, etc.) live in @otfdashkit/ui-native and would require
 // a custom createThemes() in this app's tamagui config to actually swap;
 // that's a separate piece of work. For the showcase v1 we use the Tamagui
 // defaults so the picker is wired end-to-end.

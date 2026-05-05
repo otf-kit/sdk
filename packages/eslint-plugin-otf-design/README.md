@@ -1,4 +1,4 @@
-# @otf/eslint-plugin-otf-design
+# @otfdashkit/eslint-plugin-otf-design
 
 Local ESLint plugin that enforces OTF design system token compliance across all apps and kits.
 
@@ -13,15 +13,15 @@ Local ESLint plugin that enforces OTF design system token compliance across all 
 
 ```js
 // eslint.config.mjs
-import otfDesign from '@otf/eslint-plugin-otf-design/src/index.js'
+import otfDesign from '@otfdashkit/eslint-plugin-otf-design/src/index.js'
 
 export default [
   {
-    plugins: { '@otf/otf-design': otfDesign },
+    plugins: { '@otfdashkit/otf-design': otfDesign },
     rules: {
       ...otfDesign.configs.recommended.rules,
       // Override: allow hex in test files
-      '@otf/otf-design/no-hex-colors': ['error', { allowFiles: ['theme.ts', 'tokens.ts', '*.test.ts'] }],
+      '@otfdashkit/otf-design/no-hex-colors': ['error', { allowFiles: ['theme.ts', 'tokens.ts', '*.test.ts'] }],
     },
   },
 ]

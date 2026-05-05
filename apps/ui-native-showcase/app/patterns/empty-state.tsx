@@ -7,7 +7,7 @@ import {
   Users,
   WifiOff,
   FileText,
-} from '@otf/ui-native'
+} from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
 
 function EmptyFrame({ children }: { children: React.ReactNode }) {

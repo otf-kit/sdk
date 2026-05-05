@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem, SelectGroup, SelectLabel } from '@otf/ui'
-import { Checkbox } from '@otf/ui'
-import { Switch } from '@otf/ui'
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem, SelectGroup, SelectLabel } from '@otfdashkit/ui'
+import { Checkbox } from '@otfdashkit/ui'
+import { Switch } from '@otfdashkit/ui'
 
 const meta = {
   title: 'Forms/Controls',

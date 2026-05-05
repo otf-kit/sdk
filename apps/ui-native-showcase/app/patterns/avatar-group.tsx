@@ -1,4 +1,4 @@
-import { AvatarGroup, YStack, XStack, SizableText } from '@otf/ui-native'
+import { AvatarGroup, YStack, XStack, SizableText } from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
 
 const TEAM = [

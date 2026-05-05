@@ -10,7 +10,7 @@ import {
   User,
   Activity,
   Compass,
-} from '@otf/ui-native'
+} from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
 
 function TabBarFrame({ children }: { children: React.ReactNode }) {

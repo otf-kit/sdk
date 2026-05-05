@@ -10,7 +10,7 @@ import {
   User,
   Bell,
   HelpCircle,
-} from '@otf/ui-native'
+} from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
 
 function MenuRow({

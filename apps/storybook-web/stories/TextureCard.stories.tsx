@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { TextureCard, TextureCardHeader, TextureCardTitle, TextureCardDescription } from '@otf/ui'
-import { Button } from '@otf/ui'
+import { TextureCard, TextureCardHeader, TextureCardTitle, TextureCardDescription } from '@otfdashkit/ui'
+import { Button } from '@otfdashkit/ui'
 
 const meta = {
   title: 'Primitives/TextureCard',

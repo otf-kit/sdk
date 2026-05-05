@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { Popover } from '@otf/ui'
+import { Popover } from '@otfdashkit/ui'
 
 export function Example() {
   return <Popover />

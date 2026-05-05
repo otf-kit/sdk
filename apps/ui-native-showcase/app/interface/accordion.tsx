@@ -1,13 +1,13 @@
-import { OtfAccordion, SizableText, YStack } from '@otf/ui-native'
+import { OtfAccordion, SizableText, YStack } from '@otfdashkit/ui-native'
 import { Section, ShowcaseFrame } from '../../components/ShowcaseFrame'
 
 const FAQ_ITEMS = [
   {
     id: 'install',
-    title: 'How do I install @otf/ui-native?',
+    title: 'How do I install @otfdashkit/ui-native?',
     content: (
       <SizableText size="$3" color="$color11">
-        Run <SizableText fontFamily="$mono">bun add @otf/ui-native</SizableText> at any
+        Run <SizableText fontFamily="$mono">bun add @otfdashkit/ui-native</SizableText> at any
         Expo or Next.js workspace. The package ships pre-bundled tokens and
         themes — no extra setup beyond wrapping your app in OtfProvider.
       </SizableText>

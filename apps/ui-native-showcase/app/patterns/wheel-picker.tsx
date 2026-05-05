@@ -4,7 +4,7 @@ import {
   YStack,
   SizableText,
   type WheelPickerOption,
-} from '@otf/ui-native'
+} from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
 
 const HEIGHT_OPTIONS: WheelPickerOption<number>[] = Array.from(

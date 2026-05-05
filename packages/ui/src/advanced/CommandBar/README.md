@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { CommandBar } from '@otf/ui'
+import { CommandBar } from '@otfdashkit/ui'
 
 export function Example() {
   return <CommandBar />

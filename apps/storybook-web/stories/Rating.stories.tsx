@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
 import { Heart } from 'lucide-react'
-import { Rating } from '@otf/ui'
+import { Rating } from '@otfdashkit/ui'
 
 const meta: Meta<typeof Rating> = {
   title: 'Primitives/Rating',

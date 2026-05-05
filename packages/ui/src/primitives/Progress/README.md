@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { Progress } from '@otf/ui'
+import { Progress } from '@otfdashkit/ui'
 
 export function Example() {
   return <Progress />

@@ -1,4 +1,4 @@
-import { Avatar, XStack, YStack, SizableText, Circle } from '@otf/ui-native'
+import { Avatar, XStack, YStack, SizableText, Circle } from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
 
 const PEOPLE = [

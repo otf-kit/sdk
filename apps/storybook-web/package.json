@@ -1,5 +1,5 @@
 {
-  "name": "@otf/storybook-web",
+  "name": "@otfdashkit/storybook-web",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -10,8 +10,8 @@
     "deploy": "set -a && . ../../.env && set +a && pnpm build && npx wrangler pages deploy storybook-static --project-name otf-storybook --commit-dirty=true"
   },
   "dependencies": {
-    "@otf/ui": "workspace:*",
-    "@otf/tokens": "workspace:*",
+    "@otfdashkit/ui": "workspace:*",
+    "@otfdashkit/tokens": "workspace:*",
     "lucide-react": "^0.446.0",
     "@tanstack/react-table": "^8.20.5",
     "react-hook-form": "^7.71.2",

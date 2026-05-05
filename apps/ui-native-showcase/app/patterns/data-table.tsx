@@ -1,4 +1,4 @@
-import { DataTable, StatusBadge, SizableText } from '@otf/ui-native'
+import { DataTable, StatusBadge, SizableText } from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
 
 type Row = {

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { Marquee } from '@otf/ui'
+import { Marquee } from '@otfdashkit/ui'
 
 const meta: Meta<typeof Marquee> = {
   title: 'Primitives/Marquee',

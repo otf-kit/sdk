@@ -3,7 +3,7 @@
 <!-- TODO: add 3+ tested prompts -->
 
 ## Add a Sonner
-"Add a Sonner to [location] in my app. Use @otf/ui."
+"Add a Sonner to [location] in my app. Use @otfdashkit/ui."
 
 ## Customize Sonner
 "Update the Sonner in [file] to [change]. Keep existing props."

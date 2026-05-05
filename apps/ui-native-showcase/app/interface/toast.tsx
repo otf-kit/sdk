@@ -1,4 +1,4 @@
-import { OtfButton, SizableText, XStack, YStack, toast, useOtfToast } from '@otf/ui-native'
+import { OtfButton, SizableText, XStack, YStack, toast, useOtfToast } from '@otfdashkit/ui-native'
 import { Section, ShowcaseFrame } from '../../components/ShowcaseFrame'
 
 export default function ToastShowcase() {

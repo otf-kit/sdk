@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { Filters } from '@otf/ui'
+import { Filters } from '@otfdashkit/ui'
 
 export function Example() {
   return <Filters />

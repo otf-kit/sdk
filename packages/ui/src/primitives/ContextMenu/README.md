@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { ContextMenu } from '@otf/ui'
+import { ContextMenu } from '@otfdashkit/ui'
 
 export function Example() {
   return <ContextMenu />

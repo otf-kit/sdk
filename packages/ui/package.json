@@ -1,6 +1,6 @@
 {
-  "name": "@otf/ui",
-  "version": "0.0.1",
+  "name": "@otfdashkit/ui",
+  "version": "0.1.0",
   "description": "OTF UI — production-quality React component library (Radix + Tailwind)",
   "keywords": [
     "otf",

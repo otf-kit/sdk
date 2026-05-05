@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { StepForm } from '@otf/ui'
+import { StepForm } from '@otfdashkit/ui'
 
 export function Example() {
   return <StepForm />

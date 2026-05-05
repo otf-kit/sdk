@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Button, XStack, SizableText, Heart } from '@otf/ui-native'
+import { Button, XStack, SizableText, Heart } from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
 
 export default function ButtonShowcase() {

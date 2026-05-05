@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import type { ColumnDef } from '@tanstack/react-table'
-import { DataGrid } from '@otf/ui'
+import { DataGrid } from '@otfdashkit/ui'
 
 interface User {
   id: string

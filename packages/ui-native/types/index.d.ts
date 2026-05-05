@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-// Hand-written type stub for @otf/ui-native. The kit's React 19 typecheck
+// Hand-written type stub for @otfdashkit/ui-native. The kit's React 19 typecheck
 // otherwise walks into Tamagui's React 18-pinned types. The runtime JS bundle
 // is produced from src/ via tsup; this file only exists to satisfy the type
 // resolver in consumer kits.

@@ -267,7 +267,7 @@ export { OtfPopover } from './patterns/OtfPopover'
 export type { OtfPopoverProps } from './patterns/OtfPopover'
 
 // ─── Lucide Icons re-export ──────────────────────────────────────────────────
-// Re-exported so consumers only need: import { Heart, Star } from '@otf/ui-native'
+// Re-exported so consumers only need: import { Heart, Star } from '@otfdashkit/ui-native'
 export * from '@tamagui/lucide-icons'
 
 export { ImmersiveMediaScreen } from './patterns/ImmersiveMediaScreen'

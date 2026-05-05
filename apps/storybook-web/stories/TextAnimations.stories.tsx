@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { Typewriter, TextReveal } from '@otf/ui'
+import { Typewriter, TextReveal } from '@otfdashkit/ui'
 
 const meta = {
   title: 'Text/TextAnimations',

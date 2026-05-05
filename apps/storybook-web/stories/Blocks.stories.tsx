@@ -14,7 +14,7 @@ import {
   TaskCard, TaskCardWithLabels, SortableTaskList,
   FloatingActionButton, FloatingThemePicker,
   Switch,
-} from '@otf/ui'
+} from '@otfdashkit/ui'
 
 const meta: Meta = { title: 'Blocks', tags: ['autodocs'] }
 export default meta

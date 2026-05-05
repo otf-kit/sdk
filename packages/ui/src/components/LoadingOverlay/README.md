@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { LoadingOverlay } from '@otf/ui'
+import { LoadingOverlay } from '@otfdashkit/ui'
 
 export function Example() {
   return <LoadingOverlay />

@@ -14,7 +14,7 @@ import {
   Trash2,
   Share2,
   Edit3,
-} from '@otf/ui-native'
+} from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
 
 export default function BottomSheetShowcase() {

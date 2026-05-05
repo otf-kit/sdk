@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { Hotkeys } from '@otf/ui'
+import { Hotkeys } from '@otfdashkit/ui'
 
 export function Example() {
   return <Hotkeys />

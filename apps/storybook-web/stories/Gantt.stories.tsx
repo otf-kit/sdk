@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { useMemo, useState } from 'react'
-import { Gantt, type GanttItem } from '@otf/ui'
+import { Gantt, type GanttItem } from '@otfdashkit/ui'
 
 const meta: Meta<typeof Gantt> = {
   title: 'Advanced/Gantt',

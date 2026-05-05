@@ -1,4 +1,4 @@
-import { TestimonialCard, XStack, YStack } from '@otf/ui-native'
+import { TestimonialCard, XStack, YStack } from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
 
 const SARAH = 'https://i.pravatar.cc/120?u=sarah-chen'

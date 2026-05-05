@@ -4,7 +4,7 @@
 "Add a FloatingActionButton to my app's root layout with a Settings icon. It should have two sections: 'Notifications' with toggle switches, and 'Display' with a font-size slider."
 
 ## Add FloatingThemePicker to an app
-"Add a FloatingThemePicker to my app's root layout. Import it from @otf/ui and place it after the main content."
+"Add a FloatingThemePicker to my app's root layout. Import it from @otfdashkit/ui and place it after the main content."
 
 ## Custom palettes
 "Update the FloatingThemePicker in [file] to show only Slate and Cosmic palettes."

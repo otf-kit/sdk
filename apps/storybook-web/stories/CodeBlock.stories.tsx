@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { CodeBlock } from '@otf/ui'
+import { CodeBlock } from '@otfdashkit/ui'
 
 const meta: Meta<typeof CodeBlock> = {
   title: 'Primitives/CodeBlock',
@@ -10,7 +10,7 @@ const meta: Meta<typeof CodeBlock> = {
 export default meta
 type Story = StoryObj<typeof CodeBlock>
 
-const TSX_SAMPLE = `import { Button } from '@otf/ui'
+const TSX_SAMPLE = `import { Button } from '@otfdashkit/ui'
 
 export function Hero() {
   return (
@@ -26,16 +26,16 @@ export function Hero() {
 }`
 
 const BASH_SAMPLE = `# Install
-bun add @otf/ui
+bun add @otfdashkit/ui
 
 # Tailwind: scan the lib for classes
-content: ['./node_modules/@otf/ui/dist/**/*.{js,mjs}']
+content: ['./node_modules/@otfdashkit/ui/dist/**/*.{js,mjs}']
 
 # Import the theme tokens
-@import '@otf/ui/styles';`
+@import '@otfdashkit/ui/styles';`
 
 const JSON_SAMPLE = `{
-  "name": "@otf/ui",
+  "name": "@otfdashkit/ui",
   "version": "0.1.0",
   "exports": {
     ".": "./dist/index.mjs",

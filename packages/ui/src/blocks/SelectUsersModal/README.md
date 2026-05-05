@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { SelectUsersModal } from '@otf/ui'
+import { SelectUsersModal } from '@otfdashkit/ui'
 
 export function Example() {
   return <SelectUsersModal />

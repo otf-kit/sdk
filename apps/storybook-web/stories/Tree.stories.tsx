@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { useMemo, useState } from 'react'
 import { File, FolderClosed, FolderOpen } from 'lucide-react'
-import { Tree, type TreeNode, type TreeMovePosition } from '@otf/ui'
+import { Tree, type TreeNode, type TreeMovePosition } from '@otfdashkit/ui'
 
 const meta: Meta<typeof Tree> = {
   title: 'Data/Tree',

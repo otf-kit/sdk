@@ -25,12 +25,12 @@
     "noFallthroughCasesInSwitch": true,
     "noImplicitOverride": true,
     "paths": {
-      "@otf/tokens": ["./packages/tokens/src/index.ts"],
-      "@otf/tokens/*": ["./packages/tokens/src/*"],
-      "@otf/ui": ["./packages/ui/src/index.ts"],
-      "@otf/ui/*": ["./packages/ui/src/*"],
-      "@otf/ui-native": ["./packages/ui-native/src/index.ts"],
-      "@otf/ui-native/*": ["./packages/ui-native/src/*"]
+      "@otfdashkit/tokens": ["./packages/tokens/src/index.ts"],
+      "@otfdashkit/tokens/*": ["./packages/tokens/src/*"],
+      "@otfdashkit/ui": ["./packages/ui/src/index.ts"],
+      "@otfdashkit/ui/*": ["./packages/ui/src/*"],
+      "@otfdashkit/ui-native": ["./packages/ui-native/src/index.ts"],
+      "@otfdashkit/ui-native/*": ["./packages/ui-native/src/*"]
     }
   },
   "exclude": ["node_modules", "dist", "build", ".turbo"]

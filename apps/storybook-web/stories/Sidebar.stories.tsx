@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { AppSidebar, useSidebar, Shell, BillingStatus, SidebarResizer } from '@otf/ui'
-import { Button } from '@otf/ui'
+import { AppSidebar, useSidebar, Shell, BillingStatus, SidebarResizer } from '@otfdashkit/ui'
+import { Button } from '@otfdashkit/ui'
 import { Home, Settings, Users, BarChart3, FileText, Bell } from 'lucide-react'
 
 const meta = {

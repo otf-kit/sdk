@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { Stack } from '@otf/ui'
+import { Stack } from '@otfdashkit/ui'
 
 export function Example() {
   return <Stack />

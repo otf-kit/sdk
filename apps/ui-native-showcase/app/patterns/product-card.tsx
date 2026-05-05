@@ -4,7 +4,7 @@ import {
   XStack,
   YStack,
   SizableText,
-} from '@otf/ui-native'
+} from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
 
 const SHOE = 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&q=80'

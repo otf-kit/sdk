@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { RulerScrubber, YStack, SizableText } from '@otf/ui-native'
+import { RulerScrubber, YStack, SizableText } from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
 
 interface CurrentValueProps {

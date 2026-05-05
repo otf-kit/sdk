@@ -7,7 +7,7 @@ import {
   Settings,
   Bell,
   Lock,
-} from '@otf/ui-native'
+} from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
 
 const FAQ = [

@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { ManageTagsModal } from '@otf/ui'
+import { ManageTagsModal } from '@otfdashkit/ui'
 
 export function Example() {
   return <ManageTagsModal />

@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { ScrollArea } from '@otf/ui'
+import { ScrollArea } from '@otfdashkit/ui'
 
 export function Example() {
   return <ScrollArea />

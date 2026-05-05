@@ -1,4 +1,4 @@
-import { EventCard, OtfButton, YStack } from '@otf/ui-native'
+import { EventCard, OtfButton, YStack } from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
 
 export default function EventCardShowcase() {

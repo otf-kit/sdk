@@ -15,7 +15,7 @@ import {
   Settings,
   Star,
   User,
-} from '@otf/ui-native'
+} from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
 
 const SAMPLE = [
@@ -37,7 +37,7 @@ export default function IconShowcase() {
   return (
     <ShowcaseFrame
       title="Icon"
-      description="Lucide icon set re-exported from @otf/ui-native — same import surface on web and native."
+      description="Lucide icon set re-exported from @otfdashkit/ui-native — same import surface on web and native."
       docPath="packages/ui-native/src/index.ts (lucide re-exports)"
     >
       <Section title="Sizes">

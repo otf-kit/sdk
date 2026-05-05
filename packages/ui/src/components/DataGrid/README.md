@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { DataGrid } from '@otf/ui'
+import { DataGrid } from '@otfdashkit/ui'
 
 export function Example() {
   return <DataGrid />

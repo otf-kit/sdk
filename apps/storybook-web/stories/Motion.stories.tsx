@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { FadeIn, SlideIn, ScaleIn, Stagger, Ripple, Parallax, Reveal, Morph, Transition } from '@otf/ui'
+import { FadeIn, SlideIn, ScaleIn, Stagger, Ripple, Parallax, Reveal, Morph, Transition } from '@otfdashkit/ui'
 import React, { useState } from 'react'
 
 const meta = {

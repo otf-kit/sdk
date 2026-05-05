@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { SwipeCards, YStack, SizableText } from '@otf/ui-native'
+import { SwipeCards, YStack, SizableText } from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
 
 type Profile = {

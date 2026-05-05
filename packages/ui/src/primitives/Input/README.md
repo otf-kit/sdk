@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { Input } from '@otf/ui'
+import { Input } from '@otfdashkit/ui'
 
 export function Example() {
   return <Input />

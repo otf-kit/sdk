@@ -5,7 +5,7 @@ import {
   XStack,
   SizableText,
   Circle,
-} from '@otf/ui-native'
+} from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
 
 type Row = { id: string; title: string; subtitle: string; initial: string }

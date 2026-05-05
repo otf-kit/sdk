@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { NotificationSettings } from '@otf/ui'
+import { NotificationSettings } from '@otfdashkit/ui'
 
 export function Example() {
   return <NotificationSettings />

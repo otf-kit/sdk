@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { Plus, Trash2, ArrowRight, Loader2 } from 'lucide-react'
-import { Button } from '@otf/ui'
+import { Button } from '@otfdashkit/ui'
 
 const meta = {
   title: 'Primitives/Button',

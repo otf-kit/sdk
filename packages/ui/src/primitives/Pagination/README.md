@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { Pagination } from '@otf/ui'
+import { Pagination } from '@otfdashkit/ui'
 
 export function Example() {
   return <Pagination />

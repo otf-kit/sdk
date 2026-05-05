@@ -10,8 +10,8 @@ import {
   Lock,
   Shield,
   Award,
-} from '@otf/ui-native'
-import type { PlanOption, PaywallFeature, PaywallComparisonRow, PaywallTestimonial } from '@otf/ui-native'
+} from '@otfdashkit/ui-native'
+import type { PlanOption, PaywallFeature, PaywallComparisonRow, PaywallTestimonial } from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
 
 const PLANS: PlanOption[] = [

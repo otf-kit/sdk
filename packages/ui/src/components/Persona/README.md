@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { Persona } from '@otf/ui'
+import { Persona } from '@otfdashkit/ui'
 
 export function Example() {
   return <Persona />

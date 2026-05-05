@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { Label } from '@otf/ui'
+import { Label } from '@otfdashkit/ui'
 
 export function Example() {
   return <Label />

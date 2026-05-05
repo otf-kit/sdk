@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { ArrayField } from '@otf/ui'
+import { ArrayField } from '@otfdashkit/ui'
 
 export function Example() {
   return <ArrayField />

@@ -7,7 +7,7 @@ import {
   OtfButton,
   OtfCard,
   type AnimationPreset,
-} from '@otf/ui-native'
+} from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
 
 const PRESETS: AnimationPreset[] = [

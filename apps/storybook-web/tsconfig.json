@@ -13,8 +13,8 @@
     "allowImportingTsExtensions": true,
     "baseUrl": ".",
     "paths": {
-      "@otf/ui": ["../../packages/ui/src/index.ts"],
-      "@otf/tokens": ["../../packages/tokens/src/index.ts"]
+      "@otfdashkit/ui": ["../../packages/ui/src/index.ts"],
+      "@otfdashkit/tokens": ["../../packages/tokens/src/index.ts"]
     }
   },
   "include": ["stories/**/*", ".storybook/**/*"]

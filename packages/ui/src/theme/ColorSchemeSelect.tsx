@@ -6,7 +6,7 @@ import { Combobox, type ComboboxOption } from '../forms/combobox'
 /**
  * ColorSchemeSelect — pick an OTF theme class and apply it to
  * <html>. Persists in localStorage under `otf-theme`. Theme classes
- * live in `@otf/ui/styles` (linear, glass, midnight, minimal, etc.).
+ * live in `@otfdashkit/ui/styles` (linear, glass, midnight, minimal, etc.).
  */
 
 const STORAGE_KEY = 'otf-theme'

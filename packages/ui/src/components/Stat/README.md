@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { Stat } from '@otf/ui'
+import { Stat } from '@otfdashkit/ui'
 
 export function Example() {
   return <Stat />

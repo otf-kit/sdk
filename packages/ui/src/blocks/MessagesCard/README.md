@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { MessagesCard } from '@otf/ui'
+import { MessagesCard } from '@otfdashkit/ui'
 
 export function Example() {
   return <MessagesCard />

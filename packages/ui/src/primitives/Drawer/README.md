@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { Drawer } from '@otf/ui'
+import { Drawer } from '@otfdashkit/ui'
 
 export function Example() {
   return <Drawer />

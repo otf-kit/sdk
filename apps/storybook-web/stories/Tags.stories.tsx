@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
-import { Tags } from '@otf/ui'
+import { Tags } from '@otfdashkit/ui'
 
 const meta: Meta<typeof Tags> = {
   title: 'Forms/Tags',

@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { Accordion } from '@otf/ui'
+import { Accordion } from '@otfdashkit/ui'
 
 export function Example() {
   return <Accordion />

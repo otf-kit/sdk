@@ -6,7 +6,7 @@ import {
   YStack,
   dialogConfirm,
   showError,
-} from '@otf/ui-native'
+} from '@otfdashkit/ui-native'
 import { Section, ShowcaseFrame } from '../../components/ShowcaseFrame'
 
 export default function DialogShowcase() {

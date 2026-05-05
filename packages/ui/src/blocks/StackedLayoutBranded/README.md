@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { StackedLayoutBranded } from '@otf/ui'
+import { StackedLayoutBranded } from '@otfdashkit/ui'
 
 export function Example() {
   return <StackedLayoutBranded />

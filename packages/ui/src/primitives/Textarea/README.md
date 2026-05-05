@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { Textarea } from '@otf/ui'
+import { Textarea } from '@otfdashkit/ui'
 
 export function Example() {
   return <Textarea />

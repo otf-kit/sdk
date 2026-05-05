@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
-import { RichEditor } from '@otf/ui'
+import { RichEditor } from '@otfdashkit/ui'
 
 const meta: Meta<typeof RichEditor> = {
   title: 'Advanced/RichEditor',

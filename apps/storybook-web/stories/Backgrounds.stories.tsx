@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { GradientBackground, AnimatedGradient, DottedBackground, NoiseBackground, HeroShaderA } from '@otf/ui'
+import { GradientBackground, AnimatedGradient, DottedBackground, NoiseBackground, HeroShaderA } from '@otfdashkit/ui'
 
 const meta = {
   title: 'Backgrounds/All',

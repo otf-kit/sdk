@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { BulkActions } from '@otf/ui'
+import { BulkActions } from '@otfdashkit/ui'
 
 export function Example() {
   return <BulkActions />

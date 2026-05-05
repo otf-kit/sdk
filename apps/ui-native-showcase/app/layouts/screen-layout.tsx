@@ -6,7 +6,7 @@ import {
   SizableText,
   OtfButton,
   Separator,
-} from '@otf/ui-native'
+} from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
 
 // Wraps a ScreenLayout in a fixed-height, bordered frame so its variants
