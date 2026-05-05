@@ -28,3 +28,6 @@ graphify-out/
 
 # Kit-local TODO tracker
 kits/*/TODO.md
+
+# Railway deploy script byproduct (rebuild marker)
+.build-timestamp
