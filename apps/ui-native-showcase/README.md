@@ -123,7 +123,7 @@ First-time setup: provision the Pages project once via
 `npx wrangler pages project create otf-ui-native-storybook` (run from this
 dir after sourcing `.env`). Subsequent deploys reuse the project.
 
-Live URL after first deploy: `https://otf-ui-native-storybook.pages.dev`.
+Live URL after first deploy: `https://native.otf-kit.dev`.
 
 ## Out of scope for v1
 
