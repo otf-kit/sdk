@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { EmptyState } from '@otf/ui'
+import { EmptyState } from '@otfdashkit/ui'
 
 export function Example() {
   return <EmptyState />

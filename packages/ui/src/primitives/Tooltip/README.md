@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { Tooltip } from '@otf/ui'
+import { Tooltip } from '@otfdashkit/ui'
 
 export function Example() {
   return <Tooltip />

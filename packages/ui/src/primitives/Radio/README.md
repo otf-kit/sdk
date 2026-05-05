@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { Radio } from '@otf/ui'
+import { Radio } from '@otfdashkit/ui'
 
 export function Example() {
   return <Radio />

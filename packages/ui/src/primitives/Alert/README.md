@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { Alert } from '@otf/ui'
+import { Alert } from '@otfdashkit/ui'
 
 export function Example() {
   return <Alert />

@@ -6,7 +6,7 @@ import {
   Card,
   XStack,
   OtfAvatar,
-} from '@otf/ui-native'
+} from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
 
 type Tile = { id: string; title: string; subtitle: string }

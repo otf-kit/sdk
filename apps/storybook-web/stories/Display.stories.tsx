@@ -8,7 +8,7 @@ import {
   Separator,
   Progress,
   Button,
-} from '@otf/ui'
+} from '@otfdashkit/ui'
 
 const meta: Meta = { title: 'Primitives/Display', tags: ['autodocs'] }
 export default meta

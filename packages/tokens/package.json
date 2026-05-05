@@ -1,6 +1,6 @@
 {
-  "name": "@otf/tokens",
-  "version": "0.0.1",
+  "name": "@otfdashkit/tokens",
+  "version": "0.1.0",
   "description": "OTF design tokens — CSS variables (web) + Tamagui tokens (native)",
   "main": "dist/index.js",
   "module": "dist/index.mjs",

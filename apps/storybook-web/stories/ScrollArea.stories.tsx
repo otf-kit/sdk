@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { ScrollArea, Separator } from '@otf/ui'
+import { ScrollArea, Separator } from '@otfdashkit/ui'
 
 const meta: Meta<typeof ScrollArea> = {
   title: 'Primitives/ScrollArea',

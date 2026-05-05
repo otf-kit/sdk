@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { Dialog } from '@otf/ui'
+import { Dialog } from '@otfdashkit/ui'
 
 export function Example() {
   return <Dialog />

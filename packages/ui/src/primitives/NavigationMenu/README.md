@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { NavigationMenu } from '@otf/ui'
+import { NavigationMenu } from '@otfdashkit/ui'
 
 export function Example() {
   return <NavigationMenu />

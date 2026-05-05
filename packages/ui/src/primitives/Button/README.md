@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { Button } from '@otf/ui'
+import { Button } from '@otfdashkit/ui'
 
 export function Example() {
   return <Button />

@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { InviteModal } from '@otf/ui'
+import { InviteModal } from '@otfdashkit/ui'
 
 export function Example() {
   return <InviteModal />

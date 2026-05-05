@@ -7,7 +7,7 @@ import {
   Droplet,
   YStack,
   SizableText,
-} from '@otf/ui-native'
+} from '@otfdashkit/ui-native'
 import { Section, ShowcaseFrame } from '../../components/ShowcaseFrame'
 
 // FAB renders into the current viewport as `position: absolute`. To keep

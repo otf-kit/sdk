@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { AspectRatio } from '@otf/ui'
+import { AspectRatio } from '@otfdashkit/ui'
 
 export function Example() {
   return <AspectRatio />

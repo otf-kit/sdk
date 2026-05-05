@@ -3,7 +3,7 @@
  * to Tamagui-compatible theme palettes via createThemes.
  *
  * Usage:
- *   import { createOtfThemes, OTF_DESIGN_THEMES } from '@otf/ui-native'
+ *   import { createOtfThemes, OTF_DESIGN_THEMES } from '@otfdashkit/ui-native'
  *   const themes = createOtfThemes('ocean-teal')
  *   const config = createTamagui({ ...tamaguiDefaultConfig, themes })
  */
@@ -175,7 +175,7 @@ function generateDarkPalette(p: OtfColorPalette): string[] {
  * Usage with createThemes:
  * ```ts
  * import { createThemes } from '@tamagui/theme-builder'
- * import { getOtfThemePalettes } from '@otf/ui-native'
+ * import { getOtfThemePalettes } from '@otfdashkit/ui-native'
  *
  * const palettes = getOtfThemePalettes('ocean-teal')
  * const themes = createThemes({

@@ -29,7 +29,7 @@ pnpm test         # run all tests
 
 | Package | Description |
 |---------|-------------|
-| `@otf/tokens` | CSS variables + Tamagui tokens + design themes |
-| `@otf/ui` | Web components (Radix UI + Tailwind) |
-| `@otf/ui-native` | Mobile components (Tamagui) |
-| `@otf/config` | Shared ESLint / Prettier / Tailwind configs |
+| `@otfdashkit/tokens` | CSS variables + Tamagui tokens + design themes |
+| `@otfdashkit/ui` | Web components (Radix UI + Tailwind) |
+| `@otfdashkit/ui-native` | Mobile components (Tamagui) |
+| `@otfdashkit/config` | Shared ESLint / Prettier / Tailwind configs |

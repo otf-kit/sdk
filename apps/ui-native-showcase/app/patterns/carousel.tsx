@@ -1,4 +1,4 @@
-import { Carousel, MediaCard, YStack, SizableText } from '@otf/ui-native'
+import { Carousel, MediaCard, YStack, SizableText } from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
 
 const CARDS = [

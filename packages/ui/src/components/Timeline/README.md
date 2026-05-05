@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { Timeline } from '@otf/ui'
+import { Timeline } from '@otfdashkit/ui'
 
 export function Example() {
   return <Timeline />

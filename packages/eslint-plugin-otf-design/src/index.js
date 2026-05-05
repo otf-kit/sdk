@@ -93,10 +93,10 @@ module.exports = {
 
   configs: {
     recommended: {
-      plugins: { '@otf/otf-design': module.exports },
+      plugins: { '@otfdashkit/otf-design': module.exports },
       rules: {
-        '@otf/otf-design/no-hex-colors': 'error',
-        '@otf/otf-design/no-default-tailwind-colors': 'warn',
+        '@otfdashkit/otf-design/no-hex-colors': 'error',
+        '@otfdashkit/otf-design/no-default-tailwind-colors': 'warn',
       },
     },
   },

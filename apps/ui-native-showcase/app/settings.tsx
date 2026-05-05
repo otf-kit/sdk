@@ -14,7 +14,7 @@ import {
   Moon,
   Palette,
   useMedia,
-} from '@otf/ui-native'
+} from '@otfdashkit/ui-native'
 import { useShowcaseTheme, SHOWCASE_PALETTES } from '../components/ThemeContext'
 import type { ShowcasePalette } from '../components/ThemeContext'
 

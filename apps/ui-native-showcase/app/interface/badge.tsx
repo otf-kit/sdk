@@ -1,4 +1,4 @@
-import { Badge, XStack, YStack, SizableText } from '@otf/ui-native'
+import { Badge, XStack, YStack, SizableText } from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
 
 export default function BadgeShowcase() {

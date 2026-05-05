@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { OrganizationMenu } from '@otf/ui'
+import { OrganizationMenu } from '@otfdashkit/ui'
 
 export function Example() {
   return <OrganizationMenu />

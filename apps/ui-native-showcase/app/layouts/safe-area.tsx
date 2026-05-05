@@ -1,4 +1,4 @@
-import { SafeArea, YStack, SizableText } from '@otf/ui-native'
+import { SafeArea, YStack, SizableText } from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
 
 // Each demo wraps SafeArea in a fixed-size box so the inset shows up. The

@@ -3,7 +3,7 @@
 <!-- TODO: add 3+ tested prompts -->
 
 ## Add a Skeleton
-"Add a Skeleton to [location] in my app. Use @otf/ui."
+"Add a Skeleton to [location] in my app. Use @otfdashkit/ui."
 
 ## Customize Skeleton
 "Update the Skeleton in [file] to [change]. Keep existing props."

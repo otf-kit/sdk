@@ -5,8 +5,8 @@ import {
   SizableText,
   Circle,
   Activity,
-} from '@otf/ui-native'
-import type { AuthProvider } from '@otf/ui-native'
+} from '@otfdashkit/ui-native'
+import type { AuthProvider } from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
 
 const PROVIDERS: AuthProvider[] = [

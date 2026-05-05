@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { Input } from '@otf/ui'
+import { Input } from '@otfdashkit/ui'
 import { Mail, Lock, Search, Eye } from 'lucide-react'
 
 const meta = {

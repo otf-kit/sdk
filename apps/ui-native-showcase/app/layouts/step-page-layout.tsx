@@ -8,7 +8,7 @@ import {
   OtfInput,
   Label,
   Selectable,
-} from '@otf/ui-native'
+} from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
 
 // Renders StepPageLayout inside a bordered frame so the title + description +

@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { Beacon } from '@otf/ui'
+import { Beacon } from '@otfdashkit/ui'
 
 export function Example() {
   return <Beacon />

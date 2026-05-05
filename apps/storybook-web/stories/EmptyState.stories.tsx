@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { EmptyState } from '@otf/ui'
-import { Button } from '@otf/ui'
+import { EmptyState } from '@otfdashkit/ui'
+import { Button } from '@otfdashkit/ui'
 import { Inbox, FileX, Search } from 'lucide-react'
 
 const meta = {

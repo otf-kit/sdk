@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { PasswordInput } from '@otf/ui'
+import { PasswordInput } from '@otfdashkit/ui'
 
 export function Example() {
   return <PasswordInput />

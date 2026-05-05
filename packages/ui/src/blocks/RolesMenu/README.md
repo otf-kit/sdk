@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { RolesMenu } from '@otf/ui'
+import { RolesMenu } from '@otfdashkit/ui'
 
 export function Example() {
   return <RolesMenu />

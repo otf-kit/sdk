@@ -7,8 +7,8 @@ import {
   ToggleButton, ToggleButtonGroup,
   CommandBar, CommandBarGroup, CommandBarItem, useCommandBar,
   Kanban,
-} from '@otf/ui'
-import type { FilterDef, FilterValue, KanbanColumnDef } from '@otf/ui'
+} from '@otfdashkit/ui'
+import type { FilterDef, FilterValue, KanbanColumnDef } from '@otfdashkit/ui'
 
 const meta: Meta = { title: 'Advanced', tags: ['autodocs'] }
 export default meta

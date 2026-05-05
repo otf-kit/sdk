@@ -17,7 +17,7 @@ import {
   Sun,
   Moon,
   type SelectableOption,
-} from '@otf/ui-native'
+} from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
 
 type Goal = 'lose' | 'maintain' | 'gain'

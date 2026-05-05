@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import React, { useState } from 'react'
 import { Home, Settings, Users, FileText, BarChart3, Bell, Search, Plus, LogOut } from 'lucide-react'
-import { AppShell, AppShellSidebar, AppShellMain } from '@otf/ui/layouts-app-shell'
-import { Sidebar, SidebarHeader, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupLabel, SidebarItem, SidebarSeparator } from '@otf/ui/layouts-sidebar'
-import { Navbar, NavbarBrand, NavbarContent, NavbarItem } from '@otf/ui/layouts-navbar'
-import { Page, PageHeader, PageTitle, PageDescription, PageActions, PageBody } from '@otf/ui/layouts-page'
-import { SplitPage, SplitPageList, SplitPageDetail } from '@otf/ui/layouts-split-page'
-import { Stack, HStack, VStack } from '@otf/ui/layouts-stack'
-import { Container } from '@otf/ui/layouts-container'
-import { ResizeBox, ResizeHandle } from '@otf/ui/layouts-resize-box'
+import { AppShell, AppShellSidebar, AppShellMain } from '@otfdashkit/ui/layouts-app-shell'
+import { Sidebar, SidebarHeader, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupLabel, SidebarItem, SidebarSeparator } from '@otfdashkit/ui/layouts-sidebar'
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem } from '@otfdashkit/ui/layouts-navbar'
+import { Page, PageHeader, PageTitle, PageDescription, PageActions, PageBody } from '@otfdashkit/ui/layouts-page'
+import { SplitPage, SplitPageList, SplitPageDetail } from '@otfdashkit/ui/layouts-split-page'
+import { Stack, HStack, VStack } from '@otfdashkit/ui/layouts-stack'
+import { Container } from '@otfdashkit/ui/layouts-container'
+import { ResizeBox, ResizeHandle } from '@otfdashkit/ui/layouts-resize-box'
 
 const meta: Meta = { title: 'Layouts', tags: ['autodocs'] }
 export default meta

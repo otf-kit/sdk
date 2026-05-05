@@ -6,7 +6,7 @@ import {
   SizableText,
   Circle,
   Separator,
-} from '@otf/ui-native'
+} from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
 
 type Item = { id: string; title: string; meta: string; initial: string }

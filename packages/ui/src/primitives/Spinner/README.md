@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { Spinner } from '@otf/ui'
+import { Spinner } from '@otfdashkit/ui'
 
 export function Example() {
   return <Spinner />

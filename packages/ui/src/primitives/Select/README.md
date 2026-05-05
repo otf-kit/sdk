@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { Select } from '@otf/ui'
+import { Select } from '@otfdashkit/ui'
 
 export function Example() {
   return <Select />

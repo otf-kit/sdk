@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
-import { VideoPlayer, type VideoChapter } from '@otf/ui'
+import { VideoPlayer, type VideoChapter } from '@otfdashkit/ui'
 
 // NOTE: Google's `commondatastorage.googleapis.com/.../BigBuckBunny.mp4` was
 // the agent's first pick — that URL now returns HTTP 403 Forbidden, leaving

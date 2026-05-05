@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { CommandItem } from '@otf/ui'
+import { CommandItem } from '@otfdashkit/ui'
 
 export function Example() {
   return <CommandItem />

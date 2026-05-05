@@ -1,4 +1,4 @@
-import { MediaCard, XStack, YStack } from '@otf/ui-native'
+import { MediaCard, XStack, YStack } from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
 
 const COVER_1 = 'https://images.unsplash.com/photo-1529693662653-9d480530a697?w=1200&q=80'

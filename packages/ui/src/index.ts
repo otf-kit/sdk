@@ -1,4 +1,4 @@
-// @otf/ui — barrel exports
+// @otfdashkit/ui — barrel exports
 
 export { cn } from './utils/cn'
 

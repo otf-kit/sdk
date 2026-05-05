@@ -39,7 +39,7 @@ import {
   AppHeader,
   OnboardingCarousel,
   type OnboardingStep,
-} from '@otf/ui-native'
+} from '@otfdashkit/ui-native'
 
 // ── Primitives ──────────────────────────────────────────────────────────
 

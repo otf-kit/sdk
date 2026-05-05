@@ -8,7 +8,7 @@ AI-native, cross-platform template shop. Working name; final branding TBD.
 
 A Turborepo + pnpm monorepo containing:
 
-- **Free SDK**: `@otf/ui` (web, Radix + Tailwind), `@otf/ui-native` (mobile, Tamagui-core), `@otf/tokens`, `@otf/ai` (AI config generator CLI). MIT licensed.
+- **Free SDK**: `@otfdashkit/ui` (web, Radix + Tailwind), `@otfdashkit/ui-native` (mobile, Tamagui-core), `@otfdashkit/tokens`, `@otfdashkit/ai` (AI config generator CLI). MIT licensed.
 - **Paid kits**: full-stack app kits (mobile Expo + web Next.js + API + AI configs) at `$149/kit`, `$399 bundle`, `$799 team`.
 - **Pro components** (private): advanced components at `$199 lifetime`.
 - **Docs + landing**: Next.js 16 apps on Cloudflare Pages.

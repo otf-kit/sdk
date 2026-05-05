@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { OtfToggleGroup, SizableText, YStack } from '@otf/ui-native'
+import { OtfToggleGroup, SizableText, YStack } from '@otfdashkit/ui-native'
 import { Section, ShowcaseFrame } from '../../components/ShowcaseFrame'
 
 const VIEW_OPTIONS = [

@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { Slider } from '@otf/ui'
+import { Slider } from '@otfdashkit/ui'
 
 export function Example() {
   return <Slider />

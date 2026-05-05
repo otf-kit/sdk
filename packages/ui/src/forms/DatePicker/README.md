@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { DatePicker } from '@otf/ui'
+import { DatePicker } from '@otfdashkit/ui'
 
 export function Example() {
   return <DatePicker />

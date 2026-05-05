@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { Form } from '@otf/ui'
+import { Form } from '@otfdashkit/ui'
 
 export function Example() {
   return <Form />

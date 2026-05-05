@@ -33,7 +33,7 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from '@otf/ui'
+} from '@otfdashkit/ui'
 
 const meta: Meta<typeof DropdownMenu> = {
   title: 'Primitives/DropdownMenu',

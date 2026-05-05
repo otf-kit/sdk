@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { Tabs } from '@otf/ui'
+import { Tabs } from '@otfdashkit/ui'
 
 export function Example() {
   return <Tabs />

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { Heading, Body, Caption, Code } from '@otf/ui'
+import { Heading, Body, Caption, Code } from '@otfdashkit/ui'
 
 const meta: Meta = { title: 'Text/Typography', tags: ['autodocs'] }
 export default meta
@@ -72,9 +72,9 @@ export const CodeStory: StoryObj = {
   render: () => (
     <div className="max-w-xl space-y-4">
       <Body>
-        Install OTF with <Code>pnpm add @otf/ui</Code> or the shadcn-style CLI.
+        Install OTF with <Code>pnpm add @otfdashkit/ui</Code> or the shadcn-style CLI.
       </Body>
-      <Code block>{`import { Button } from '@otf/ui'
+      <Code block>{`import { Button } from '@otfdashkit/ui'
 
 export function MyComponent() {
   return <Button variant="gradient">Ship it</Button>
@@ -94,8 +94,8 @@ export const Composition: StoryObj = {
         usual back-and-forth with design.
       </Body>
       <Body>
-        Start with <Code>@otf/ui</Code> for web, <Code>@otf/ui-native</Code> for
-        mobile, and <Code>@otf/tokens</Code> for the palette system. All MIT,
+        Start with <Code>@otfdashkit/ui</Code> for web, <Code>@otfdashkit/ui-native</Code> for
+        mobile, and <Code>@otfdashkit/tokens</Code> for the palette system. All MIT,
         all tree-shakeable, all AI-tool-ready.
       </Body>
     </article>

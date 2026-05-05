@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { UserPreferences, type PreferenceSection } from '@otf/ui-native'
+import { UserPreferences, type PreferenceSection } from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
 
 type Prefs = {

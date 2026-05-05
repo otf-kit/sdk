@@ -7,7 +7,7 @@ import {
   OtfInput,
   SizableText,
   Label,
-} from '@otf/ui-native'
+} from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
 
 // On a real device, KeyboardStickyFooter sits above the keyboard so the

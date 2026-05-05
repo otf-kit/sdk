@@ -1,4 +1,4 @@
-import { YStack, Sun, Moon, Pressable } from '@otf/ui-native'
+import { YStack, Sun, Moon, Pressable } from '@otfdashkit/ui-native'
 import { useShowcaseTheme } from './ThemeContext'
 
 // Slim header control — just the dark/light icon toggle. Palette selection

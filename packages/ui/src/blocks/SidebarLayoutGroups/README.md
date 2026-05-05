@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { SidebarLayoutGroups } from '@otf/ui'
+import { SidebarLayoutGroups } from '@otfdashkit/ui'
 
 export function Example() {
   return <SidebarLayoutGroups />

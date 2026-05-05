@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { AnimatedNumber } from '@otf/ui'
+import { AnimatedNumber } from '@otfdashkit/ui'
 
 const meta = {
   title: 'Text/AnimatedNumber',

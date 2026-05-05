@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { Kanban } from '@otf/ui'
+import { Kanban } from '@otfdashkit/ui'
 
 export function Example() {
   return <Kanban />

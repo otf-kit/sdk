@@ -1,5 +1,5 @@
 {
-  "name": "@otf/workspace",
+  "name": "@otfdashkit/workspace",
   "version": "0.0.1",
   "private": true,
   "packageManager": "pnpm@9.15.9",

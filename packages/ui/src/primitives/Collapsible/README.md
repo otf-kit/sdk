@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { Collapsible } from '@otf/ui'
+import { Collapsible } from '@otfdashkit/ui'
 
 export function Example() {
   return <Collapsible />

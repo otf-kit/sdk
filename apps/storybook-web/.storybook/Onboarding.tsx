@@ -7,7 +7,7 @@ type Step = { title: string; body: string; hint?: string }
 const STEPS: Step[] = [
   {
     title: 'Welcome to OTF Storybook',
-    body: 'Every component in @otf/ui rendered in isolation. Browse the sidebar to explore primitives, blocks, layouts, charts, and more.',
+    body: 'Every component in @otfdashkit/ui rendered in isolation. Browse the sidebar to explore primitives, blocks, layouts, charts, and more.',
     hint: 'Tip: the sidebar has a ⌘K / Ctrl-K search.',
   },
   {

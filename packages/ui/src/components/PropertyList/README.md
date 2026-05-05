@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { PropertyList } from '@otf/ui'
+import { PropertyList } from '@otfdashkit/ui'
 
 export function Example() {
   return <PropertyList />

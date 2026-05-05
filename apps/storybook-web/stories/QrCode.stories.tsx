@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { QrCode } from '@otf/ui'
+import { QrCode } from '@otfdashkit/ui'
 
 const meta: Meta<typeof QrCode> = {
   title: 'Primitives/QrCode',

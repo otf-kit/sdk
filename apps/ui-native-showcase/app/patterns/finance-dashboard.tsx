@@ -15,7 +15,7 @@ import {
   type FinanceMetric,
   type FinanceQuickAction,
   type FinanceDashboardSection,
-} from '@otf/ui-native'
+} from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
 
 function FrameBox({ children }: { children: React.ReactNode }) {

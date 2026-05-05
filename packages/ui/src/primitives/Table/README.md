@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { Table } from '@otf/ui'
+import { Table } from '@otfdashkit/ui'
 
 export function Example() {
   return <Table />

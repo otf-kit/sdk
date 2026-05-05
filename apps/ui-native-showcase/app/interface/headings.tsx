@@ -1,4 +1,4 @@
-import { SepHeading, SizableText, SubHeading, YStack } from '@otf/ui-native'
+import { SepHeading, SizableText, SubHeading, YStack } from '@otfdashkit/ui-native'
 import { Section, ShowcaseFrame } from '../../components/ShowcaseFrame'
 
 export default function HeadingsShowcase() {

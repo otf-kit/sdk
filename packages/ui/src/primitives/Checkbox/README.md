@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { Checkbox } from '@otf/ui'
+import { Checkbox } from '@otfdashkit/ui'
 
 export function Example() {
   return <Checkbox />

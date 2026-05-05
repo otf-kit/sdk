@@ -1,4 +1,4 @@
-import { GlassCard, YStack, XStack, SizableText, H4 } from '@otf/ui-native'
+import { GlassCard, YStack, XStack, SizableText, H4 } from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
 
 function ColorBackdrop({ children }: { children: React.ReactNode }) {

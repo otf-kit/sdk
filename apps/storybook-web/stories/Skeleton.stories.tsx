@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { Skeleton } from '@otf/ui'
+import { Skeleton } from '@otfdashkit/ui'
 
 const meta = {
   title: 'Primitives/Skeleton',

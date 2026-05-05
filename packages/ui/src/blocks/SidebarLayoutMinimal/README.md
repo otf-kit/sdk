@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { SidebarLayoutMinimal } from '@otf/ui'
+import { SidebarLayoutMinimal } from '@otfdashkit/ui'
 
 export function Example() {
   return <SidebarLayoutMinimal />

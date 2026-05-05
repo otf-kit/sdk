@@ -13,8 +13,8 @@ import {
   ObjectField,
   AutoForm,
   Input,
-} from '@otf/ui'
-import { Form, FormField, FormItem, FormLabel, FormControl, FormDescription, FormMessage } from '@otf/ui/forms-form'
+} from '@otfdashkit/ui'
+import { Form, FormField, FormItem, FormLabel, FormControl, FormDescription, FormMessage } from '@otfdashkit/ui/forms-form'
 
 const meta: Meta = { title: 'Forms', tags: ['autodocs'] }
 export default meta

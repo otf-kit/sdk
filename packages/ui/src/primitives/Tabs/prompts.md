@@ -3,7 +3,7 @@
 <!-- TODO: add 3+ tested prompts -->
 
 ## Add a Tabs
-"Add a Tabs to [location] in my app. Use @otf/ui."
+"Add a Tabs to [location] in my app. Use @otfdashkit/ui."
 
 ## Customize Tabs
 "Update the Tabs in [file] to [change]. Keep existing props."

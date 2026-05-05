@@ -3,7 +3,7 @@
 <!-- TODO: add 3+ tested prompts -->
 
 ## Add a Switch
-"Add a Switch to [location] in my app. Use @otf/ui."
+"Add a Switch to [location] in my app. Use @otfdashkit/ui."
 
 ## Customize Switch
 "Update the Switch in [file] to [change]. Keep existing props."

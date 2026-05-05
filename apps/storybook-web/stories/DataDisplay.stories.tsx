@@ -11,8 +11,8 @@ import {
   Persona,
   IconBadge,
   StructuredList, StructuredListSection, StructuredListItem,
-} from '@otf/ui'
-import { CommandItem } from '@otf/ui/command-item'
+} from '@otfdashkit/ui'
+import { CommandItem } from '@otfdashkit/ui/command-item'
 
 const meta: Meta = { title: 'Data Display', tags: ['autodocs'] }
 export default meta

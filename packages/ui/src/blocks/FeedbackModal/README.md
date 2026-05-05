@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { FeedbackModal } from '@otf/ui'
+import { FeedbackModal } from '@otfdashkit/ui'
 
 export function Example() {
   return <FeedbackModal />

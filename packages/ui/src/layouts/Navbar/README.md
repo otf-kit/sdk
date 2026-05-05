@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { Navbar } from '@otf/ui'
+import { Navbar } from '@otfdashkit/ui'
 
 export function Example() {
   return <Navbar />

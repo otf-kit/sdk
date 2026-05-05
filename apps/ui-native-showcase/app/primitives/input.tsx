@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Input, YStack, XStack, SizableText, Label, Search } from '@otf/ui-native'
+import { Input, YStack, XStack, SizableText, Label, Search } from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
 
 export default function InputShowcase() {

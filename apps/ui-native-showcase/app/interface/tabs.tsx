@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { OtfTabs, SizableText, YStack } from '@otf/ui-native'
+import { OtfTabs, SizableText, YStack } from '@otfdashkit/ui-native'
 import { Section, ShowcaseFrame } from '../../components/ShowcaseFrame'
 
 const PROFILE_TABS = [

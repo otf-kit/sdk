@@ -1,6 +1,6 @@
 import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
-import { ThemeSwitch, ColorSchemeSelect, Heading, Body, Caption } from '@otf/ui'
+import { ThemeSwitch, ColorSchemeSelect, Heading, Body, Caption } from '@otfdashkit/ui'
 
 const meta: Meta = { title: 'Theme/Controls', tags: ['autodocs'] }
 export default meta

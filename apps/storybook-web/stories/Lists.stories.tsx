@@ -1,7 +1,7 @@
 import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 import { Bell, Shield, CreditCard, User, FileText, Image, Folder } from 'lucide-react'
-import { DataList, DataListItem, GridList, GridListItem, Heading, Body, Caption } from '@otf/ui'
+import { DataList, DataListItem, GridList, GridListItem, Heading, Body, Caption } from '@otfdashkit/ui'
 
 const meta: Meta = { title: 'Data/Lists', tags: ['autodocs'] }
 export default meta

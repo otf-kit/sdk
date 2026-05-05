@@ -7,7 +7,7 @@ import {
   Settings,
   MessageCircle,
   UserPlus,
-} from '@otf/ui-native'
+} from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
 
 const SARAH_AVATAR =

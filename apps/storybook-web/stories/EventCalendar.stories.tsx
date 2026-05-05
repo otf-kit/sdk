@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { useMemo, useState } from 'react'
-import { EventCalendar, type CalendarEvent, type EventCalendarView } from '@otf/ui'
+import { EventCalendar, type CalendarEvent, type EventCalendarView } from '@otfdashkit/ui'
 
 const meta: Meta<typeof EventCalendar> = {
   title: 'Data/EventCalendar',

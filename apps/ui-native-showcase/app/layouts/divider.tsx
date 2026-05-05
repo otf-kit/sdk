@@ -1,4 +1,4 @@
-import { Divider, SizableText, YStack, XStack } from '@otf/ui-native'
+import { Divider, SizableText, YStack, XStack } from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
 
 export default function DividerShowcase() {

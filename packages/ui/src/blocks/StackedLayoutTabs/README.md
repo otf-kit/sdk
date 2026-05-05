@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { StackedLayoutTabs } from '@otf/ui'
+import { StackedLayoutTabs } from '@otfdashkit/ui'
 
 export function Example() {
   return <StackedLayoutTabs />

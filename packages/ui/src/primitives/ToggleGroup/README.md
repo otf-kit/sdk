@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { ToggleGroup } from '@otf/ui'
+import { ToggleGroup } from '@otfdashkit/ui'
 
 export function Example() {
   return <ToggleGroup />

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { GradientHeading } from '@otf/ui'
+import { GradientHeading } from '@otfdashkit/ui'
 
 const meta = {
   title: 'Text/GradientHeading',

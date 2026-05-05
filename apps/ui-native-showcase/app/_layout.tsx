@@ -13,7 +13,7 @@ import {
   useTheme,
   Layers,
   Settings,
-} from '@otf/ui-native'
+} from '@otfdashkit/ui-native'
 import { ShowcaseThemeProvider, useShowcaseTheme } from '../components/ThemeContext'
 
 // Mirrors fitness-kit's WebSafeAreaShim. ONLY when iframed by the preview

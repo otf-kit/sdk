@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { Comparison } from '@otf/ui'
+import { Comparison } from '@otfdashkit/ui'
 
 const meta: Meta<typeof Comparison> = {
   title: 'Primitives/Comparison',

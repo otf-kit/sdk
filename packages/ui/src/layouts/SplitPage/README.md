@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { SplitPage } from '@otf/ui'
+import { SplitPage } from '@otfdashkit/ui'
 
 export function Example() {
   return <SplitPage />

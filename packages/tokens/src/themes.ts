@@ -1,4 +1,4 @@
-// @otf/tokens — design theme IDs
+// @otfdashkit/tokens — design theme IDs
 
 export type OtfDesignThemeId =
   | 'mono'

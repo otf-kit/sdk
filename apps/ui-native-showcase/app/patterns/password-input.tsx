@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { PasswordInput, YStack } from '@otf/ui-native'
+import { PasswordInput, YStack } from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
 
 export default function PasswordInputShowcase() {

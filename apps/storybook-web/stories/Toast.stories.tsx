@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { toast } from '@otf/ui'
-import { Button } from '@otf/ui'
-import { Toaster } from '@otf/ui'
+import { toast } from '@otfdashkit/ui'
+import { Button } from '@otfdashkit/ui'
+import { Toaster } from '@otfdashkit/ui'
 
 const meta = {
   title: 'Feedback/Toast',

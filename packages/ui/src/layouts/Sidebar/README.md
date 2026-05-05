@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { Sidebar } from '@otf/ui'
+import { Sidebar } from '@otfdashkit/ui'
 
 export function Example() {
   return <Sidebar />

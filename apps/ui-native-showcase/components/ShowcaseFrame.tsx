@@ -7,7 +7,7 @@ import {
   ScrollView,
   Separator,
   useMedia,
-} from '@otf/ui-native'
+} from '@otfdashkit/ui-native'
 
 interface ShowcaseFrameProps {
   title: string

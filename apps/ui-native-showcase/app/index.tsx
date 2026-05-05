@@ -12,7 +12,7 @@ import {
   Pressable,
   ArrowRight,
   useMedia,
-} from '@otf/ui-native'
+} from '@otfdashkit/ui-native'
 import { CATALOG } from '../components/catalog'
 import type { Category, Entry } from '../components/catalog'
 import { INLINE_DEMOS } from '../components/inline-demos'

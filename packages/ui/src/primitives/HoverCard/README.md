@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { HoverCard } from '@otf/ui'
+import { HoverCard } from '@otfdashkit/ui'
 
 export function Example() {
   return <HoverCard />

@@ -5,7 +5,7 @@ import {
   Card, CardContent, CardDescription, CardHeader, CardTitle,
   Button,
   Input,
-} from '@otf/ui'
+} from '@otfdashkit/ui'
 
 const meta: Meta<typeof Tabs> = {
   title: 'Primitives/Tabs',

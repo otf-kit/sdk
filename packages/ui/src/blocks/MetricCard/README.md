@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { MetricCard } from '@otf/ui'
+import { MetricCard } from '@otfdashkit/ui'
 
 export function Example() {
   return <MetricCard />

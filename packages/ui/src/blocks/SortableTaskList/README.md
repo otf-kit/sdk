@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { SortableTaskList } from '@otf/ui'
+import { SortableTaskList } from '@otfdashkit/ui'
 
 export function Example() {
   return <SortableTaskList />

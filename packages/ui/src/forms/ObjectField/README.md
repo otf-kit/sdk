@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { ObjectField } from '@otf/ui'
+import { ObjectField } from '@otfdashkit/ui'
 
 export function Example() {
   return <ObjectField />

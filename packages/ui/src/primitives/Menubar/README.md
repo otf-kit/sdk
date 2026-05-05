@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { Menubar } from '@otf/ui'
+import { Menubar } from '@otfdashkit/ui'
 
 export function Example() {
   return <Menubar />

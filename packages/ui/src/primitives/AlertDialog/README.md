@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { AlertDialog } from '@otf/ui'
+import { AlertDialog } from '@otfdashkit/ui'
 
 export function Example() {
   return <AlertDialog />

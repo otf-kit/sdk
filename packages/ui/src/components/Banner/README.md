@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { Banner } from '@otf/ui'
+import { Banner } from '@otfdashkit/ui'
 
 export function Example() {
   return <Banner />

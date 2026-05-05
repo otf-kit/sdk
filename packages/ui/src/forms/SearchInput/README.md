@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { SearchInput } from '@otf/ui'
+import { SearchInput } from '@otfdashkit/ui'
 
 export function Example() {
   return <SearchInput />

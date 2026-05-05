@@ -1,6 +1,6 @@
 import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
-import { Combobox } from '@otf/ui'
+import { Combobox } from '@otfdashkit/ui'
 
 const meta: Meta<typeof Combobox> = {
   title: 'Forms/Combobox',

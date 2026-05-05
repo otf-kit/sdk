@@ -3,7 +3,7 @@ import {
   YStack,
   XStack,
   SizableText,
-} from '@otf/ui-native'
+} from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
 
 export default function SkeletonShowcase() {

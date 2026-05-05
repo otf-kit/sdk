@@ -1,4 +1,4 @@
-import { Info, OtfButton, OtfTooltip, SizableText, XStack, YStack } from '@otf/ui-native'
+import { Info, OtfButton, OtfTooltip, SizableText, XStack, YStack } from '@otfdashkit/ui-native'
 import { Section, ShowcaseFrame } from '../../components/ShowcaseFrame'
 
 export default function TooltipShowcase() {

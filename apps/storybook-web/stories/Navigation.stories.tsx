@@ -1,6 +1,6 @@
 import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
-import { Breadcrumb, BreadcrumbItem, BreadcrumbPage, Hotkeys, HotkeyBadge } from '@otf/ui'
+import { Breadcrumb, BreadcrumbItem, BreadcrumbPage, Hotkeys, HotkeyBadge } from '@otfdashkit/ui'
 
 const meta: Meta = { title: 'Navigation', tags: ['autodocs'] }
 export default meta

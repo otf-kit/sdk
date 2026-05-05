@@ -1,4 +1,4 @@
-import { Image, SizableText, XStack, YStack } from '@otf/ui-native'
+import { Image, SizableText, XStack, YStack } from '@otfdashkit/ui-native'
 import { Section, ShowcaseFrame } from '../../components/ShowcaseFrame'
 
 const PORTRAIT = 'https://images.unsplash.com/photo-1517849845537-4d257902454a?w=600&q=70'

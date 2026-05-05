@@ -1,16 +1,16 @@
-# AGENTS.md — `@otf/ui-native`
+# AGENTS.md — `@otfdashkit/ui-native`
 
 > Mobile component library for OTF kits (Expo + Tamagui-core, MIT). Every kit imports primitives, patterns, and layouts from here — feature code in kits MUST NOT reach into raw Tamagui or Radix.
 
 ## What belongs here
 
-A component goes into `@otf/ui-native` if either:
+A component goes into `@otfdashkit/ui-native` if either:
 1. It appears (or could appear) in **2 or more kits**, OR
 2. It's a foundational primitive (`Button`, `Text`, `Input`, etc.) every kit needs
 
 A component stays **kit-local** if it's truly domain-specific:
 - ✅ Kit-local: `ActivityRings` (fitness), `AnatomyMap` (fitness), `MealCard` (nutrition-only flavor)
-- ❌ NOT kit-local: anything that smells like a generic primitive — push to `@otf/ui-native` and let kits configure via props
+- ❌ NOT kit-local: anything that smells like a generic primitive — push to `@otfdashkit/ui-native` and let kits configure via props
 
 ## Package layout
 
@@ -33,7 +33,7 @@ src/
 ### Styling
 - **Tamagui tokens only** (`$color1..12`, `$background`, `$space.lg`). Never hardcode hex in feature code.
 - Surface tokens (bg / text / border) reference theme, never literal.
-- Domain colors (chart palettes, ring colors, brand accent) live in `@otf/tokens` — import from there, don't redefine.
+- Domain colors (chart palettes, ring colors, brand accent) live in `@otfdashkit/tokens` — import from there, don't redefine.
 
 ### Motion
 - **Reanimated 4 only.** Never `react-native/Animated` (legacy).

@@ -9,8 +9,8 @@ import {
   Lock,
   Sparkles,
   TrendingUp,
-} from '@otf/ui-native'
-import type { OnboardingStep } from '@otf/ui-native'
+} from '@otfdashkit/ui-native'
+import type { OnboardingStep } from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
 
 const DEFAULT_STEPS: OnboardingStep[] = [

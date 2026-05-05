@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { Chart } from '@otf/ui'
+import { Chart } from '@otfdashkit/ui'
 
 export function Example() {
   return <Chart />

@@ -1,6 +1,6 @@
 {
-  "name": "@otf/ui-native",
-  "version": "0.0.1",
+  "name": "@otfdashkit/ui-native",
+  "version": "0.1.0",
   "description": "OTF UI Native — Tamagui-powered component library for Expo",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -49,8 +49,12 @@
     "tamagui": ">=1.100.0"
   },
   "peerDependenciesMeta": {
-    "expo-router": { "optional": true },
-    "react-native-reanimated": { "optional": true }
+    "expo-router": {
+      "optional": true
+    },
+    "react-native-reanimated": {
+      "optional": true
+    }
   },
   "publishConfig": {
     "access": "public"

@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { Separator } from '@otf/ui'
+import { Separator } from '@otfdashkit/ui'
 
 export function Example() {
   return <Separator />

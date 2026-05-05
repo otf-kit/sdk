@@ -30,7 +30,7 @@ const noHexColors = {
       description: 'Disallow hex/rgb/hsl color literals in feature code — use design tokens instead.',
     },
     messages: {
-      noHexColor: 'Avoid hex/rgb/hsl color literals. Use design tokens (CSS variables) from @otf/tokens instead.',
+      noHexColor: 'Avoid hex/rgb/hsl color literals. Use design tokens (CSS variables) from @otfdashkit/tokens instead.',
     },
     schema: [],
   },

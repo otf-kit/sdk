@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@otf/ui'
-import { Button } from '@otf/ui'
+import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@otfdashkit/ui'
+import { Button } from '@otfdashkit/ui'
 
 const meta = {
   title: 'Primitives/Dialog',

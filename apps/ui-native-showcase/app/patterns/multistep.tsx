@@ -11,7 +11,7 @@ import {
   H4,
   type MultiStepProgress,
   type MultiStepTransition,
-} from '@otf/ui-native'
+} from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
 
 function StepBody({ title, body }: { title: string; body: string }) {

@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { Badge } from '@otf/ui'
+import { Badge } from '@otfdashkit/ui'
 
 export function Example() {
   return <Badge />

@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { Avatar } from '@otf/ui'
+import { Avatar } from '@otfdashkit/ui'
 
 export function Example() {
   return <Avatar />

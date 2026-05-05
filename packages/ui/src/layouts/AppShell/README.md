@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { AppShell } from '@otf/ui'
+import { AppShell } from '@otfdashkit/ui'
 
 export function Example() {
   return <AppShell />

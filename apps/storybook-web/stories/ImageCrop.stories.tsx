@@ -1,6 +1,6 @@
 import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
-import { ImageCrop } from '@otf/ui'
+import { ImageCrop } from '@otfdashkit/ui'
 
 const SAMPLE =
   'https://images.unsplash.com/photo-1500964757637-c85e8a162699?w=1200&h=900&fit=crop&q=80'

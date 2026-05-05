@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { Breadcrumb } from '@otf/ui'
+import { Breadcrumb } from '@otfdashkit/ui'
 
 export function Example() {
   return <Breadcrumb />

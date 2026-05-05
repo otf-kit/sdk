@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import { Resizable } from '@otf/ui'
+import { Resizable } from '@otfdashkit/ui'
 
 export function Example() {
   return <Resizable />

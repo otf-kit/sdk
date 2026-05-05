@@ -4,7 +4,7 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '@otf/ui'
+} from '@otfdashkit/ui'
 
 const meta: Meta<typeof Accordion> = {
   title: 'Primitives/Accordion',
@@ -26,7 +26,7 @@ const FAQ_ITEMS = [
   },
   {
     q: 'How is theming handled?',
-    a: 'Every component reads from the same CSS-variable token set. Drop in a theme file (e.g. @otf/ui/themes/midnight.css) and the whole tree restyles.',
+    a: 'Every component reads from the same CSS-variable token set. Drop in a theme file (e.g. @otfdashkit/ui/themes/midnight.css) and the whole tree restyles.',
   },
   {
     q: 'Can I use just one component?',

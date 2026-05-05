@@ -1,4 +1,4 @@
-import { ChatBubble, YStack, type ChatMessage } from '@otf/ui-native'
+import { ChatBubble, YStack, type ChatMessage } from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
 
 const SARAH_AVATAR = 'https://i.pravatar.cc/64?u=sarah-chen'
