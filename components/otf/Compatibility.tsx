@@ -3,19 +3,24 @@
 import { useEffect, useRef } from 'react'
 import { Reveal } from './Reveal'
 
-const tools = [
-  { id: 'react',    label: 'React',      angle: 270, slug: 'react' },
-  { id: 'next',     label: 'Next.js',    angle: 310, slug: 'nextdotjs' },
-  { id: 'expo',     label: 'Expo',       angle: 350, slug: 'expo' },
-  { id: 'tailwind', label: 'Tailwind',   angle: 30,  slug: 'tailwindcss' },
-  { id: 'radix',    label: 'Radix',      angle: 70,  slug: 'radixui' },
-  { id: 'hono',     label: 'Hono',       angle: 110, slug: 'hono' },
-  { id: 'shadcn',   label: 'shadcn/ui',  angle: 150, slug: 'shadcnui' },
-  { id: 'ts',       label: 'TypeScript', angle: 190, slug: 'typescript' },
-  { id: 'supabase', label: 'Supabase',   angle: 230, slug: 'supabase' },
+// Brand-color icons via SimpleIcons CDN. `color` overrides default brand
+// where: (a) the brand color reads poorly on dark (e.g. Next.js black mark
+// → white), or (b) the brand uses near-white that needs adjustment.
+type Tool = { id: string; label: string; angle: number; slug: string; color?: string }
+
+const tools: Tool[] = [
+  { id: 'react',    label: 'React',      angle: 270, slug: 'react'        },                  // #61DAFB cyan
+  { id: 'next',     label: 'Next.js',    angle: 310, slug: 'nextdotjs',   color: 'ffffff' },  // monochrome on black mark — render white
+  { id: 'expo',     label: 'Expo',       angle: 350, slug: 'expo',        color: 'ffffff' },  // brand is near-black, force white
+  { id: 'tailwind', label: 'Tailwind',   angle: 30,  slug: 'tailwindcss'  },                  // #38BDF8 sky
+  { id: 'radix',    label: 'Radix',      angle: 70,  slug: 'radixui',     color: 'ffffff' },  // monochrome wordmark
+  { id: 'hono',     label: 'Hono',       angle: 110, slug: 'hono'         },                  // #E36002 orange flame
+  { id: 'shadcn',   label: 'shadcn/ui',  angle: 150, slug: 'shadcnui',    color: 'ffffff' },  // monochrome
+  { id: 'ts',       label: 'TypeScript', angle: 190, slug: 'typescript'   },                  // #3178C6 blue
+  { id: 'supabase', label: 'Supabase',   angle: 230, slug: 'supabase'     },                  // #3FCF8E green
 ]
 
-const SIZE = 480, RADIUS = 175, TILE = 60, CENTER_TILE = 80
+const SIZE = 480, RADIUS = 175, TILE = 64, CENTER_TILE = 80
 
 function angleToXY(angle: number) {
   const rad = (angle * Math.PI) / 180
@@ -72,9 +77,13 @@ export function Compatibility() {
                   <stop offset="60%"  stopColor="#f97316" stopOpacity="0.5" />
                   <stop offset="100%" stopColor="#f97316" stopOpacity="0" />
                 </radialGradient>
-                {tools.map((t) => {
+                {tools.map((t, i) => {
                   const { x, y } = angleToXY(t.angle)
-                  return <path key={`p-${t.id}`} id={`path-${t.id}`} d={`M ${cx} ${cy} L ${x} ${y}`} />
+                  // Alternate direction so half the sparks travel inward (frameworks → OTF)
+                  // and half outward (OTF → frameworks). Reads as bidirectional compatibility.
+                  const inward = i % 2 === 0
+                  const d = inward ? `M ${x} ${y} L ${cx} ${cy}` : `M ${cx} ${cy} L ${x} ${y}`
+                  return <path key={`p-${t.id}`} id={`path-${t.id}`} d={d} />
                 })}
               </defs>
 
@@ -83,20 +92,28 @@ export function Compatibility() {
                 return <line key={`l-${t.id}`} x1={cx} y1={cy} x2={x} y2={y} stroke="#1f1f1f" strokeWidth="1" strokeDasharray="2 4" opacity="0.6" />
               })}
 
-              {tools.map((t, i) => (
-                <g key={`pulse-${t.id}`}>
-                  <circle r="8" fill="url(#pulseGlow)" opacity="0.7">
-                    <animateMotion dur={`${2.4 + (i % 4) * 0.4}s`} repeatCount="indefinite" begin={`${i * 0.25}s`} rotate="auto">
-                      <mpath href={`#path-${t.id}`} />
-                    </animateMotion>
-                  </circle>
-                  <circle r="2.5" fill="#f97316">
-                    <animateMotion dur={`${2.4 + (i % 4) * 0.4}s`} repeatCount="indefinite" begin={`${i * 0.25}s`}>
-                      <mpath href={`#path-${t.id}`} />
-                    </animateMotion>
-                  </circle>
-                </g>
-              ))}
+              {tools.map((t, i) => {
+                // Cadence: 3.6–5.6s with phase-staggered start. Slower + further apart
+                // = less swarm, more refined.
+                const dur   = `${3.6 + (i % 4) * 0.5}s`
+                const begin = `${i * 0.45}s`
+                return (
+                  <g key={`pulse-${t.id}`}>
+                    {/* Soft glow halo — small + lower opacity to feel like a spark, not a fireball */}
+                    <circle r="5" fill="url(#pulseGlow)" opacity="0.45">
+                      <animateMotion dur={dur} repeatCount="indefinite" begin={begin} rotate="auto">
+                        <mpath href={`#path-${t.id}`} />
+                      </animateMotion>
+                    </circle>
+                    {/* Bright core dot */}
+                    <circle r="1.5" fill="#f97316">
+                      <animateMotion dur={dur} repeatCount="indefinite" begin={begin}>
+                        <mpath href={`#path-${t.id}`} />
+                      </animateMotion>
+                    </circle>
+                  </g>
+                )
+              })}
             </svg>
 
             {/* Center node — just the icon with orange glow, no card */}
@@ -114,7 +131,7 @@ export function Compatibility() {
                 <div key={t.id} className="compat-tile absolute flex items-center justify-center rounded-xl border border-border bg-card shadow-lg backdrop-blur-sm"
                   style={{ left: `${(x / SIZE) * 100}%`, top: `${(y / SIZE) * 100}%`, width: `${(TILE / SIZE) * 100}%`, height: `${(TILE / SIZE) * 100}%`, transform: 'translate(-50%, -50%)', animationDelay: `${i * 80}ms` }}
                   title={t.label}>
-                  <img src={`https://cdn.simpleicons.org/${t.slug}/ffffff`} alt={t.label} width={22} height={22} loading="lazy" className="opacity-90" />
+                  <img src={`https://cdn.simpleicons.org/${t.slug}/${t.color ?? 'default'}`} alt={t.label} width={26} height={26} loading="lazy" className="drop-shadow-[0_0_8px_rgba(0,0,0,0.4)]" />
                 </div>
               )
             })}

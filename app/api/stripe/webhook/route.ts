@@ -15,15 +15,15 @@ function generateLicenseKey(): string {
 const KIT_LINKS: Record<string, { docs: string; demo: string }> = {
   'saas-dashboard': {
     docs: 'https://github.com/open-template-forest/saas-dashboard-kit',
-    demo: 'https://saas-dashboard-production-ae3f.up.railway.app',
+    demo: 'https://saas.otf-kit.dev',
   },
   'fitness-kit': {
     docs: 'https://github.com/open-template-forest/fitness-kit',
-    demo: 'https://fitness-kit-production.up.railway.app',
+    demo: 'https://fitness.otf-kit.dev',
   },
   'starter-bundle': {
     docs: 'https://github.com/open-template-forest',
-    demo: 'https://fitness-kit-production.up.railway.app',
+    demo: 'https://fitness.otf-kit.dev',
   },
 }
 

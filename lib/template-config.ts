@@ -80,6 +80,8 @@ export interface BundleSection {
 export interface TemplateConfig {
   id: string
   name: string
+  /** Stripe kit slug — when set, CTA hrefs of '#checkout' trigger Stripe checkout */
+  kitSlug?: string
   mockupShape: MockupShape
   hero: HeroSection
   claudeCursor?: ClaudeCursorSection

@@ -7,7 +7,7 @@ const TEMPLATES = [
     price: '$149',
     status: 'available' as const,
     stack: ['React', 'Hono', 'Postgres', 'Better Auth', 'Polar'],
-    demo: 'https://saas-dashboard-production-ae3f.up.railway.app',
+    demo: 'https://saas.otf-kit.dev',
     screens: 11,
     accent: '#f97316',
   },

@@ -8,6 +8,8 @@ import { MobileNavSheet } from './MobileNavSheet'
 
 const navLinks = [
   { label: 'Components', href: '/components' },
+  { label: 'Blocks',     href: '/blocks' },
+  { label: 'Patterns',   href: '/patterns' },
   { label: 'Templates',  href: '/templates', badge: '2 NEW' },
   { label: 'Pricing',    href: '/pricing' },
 ]

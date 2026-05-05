@@ -1,6 +1,7 @@
 import type { BundleSection } from '@/lib/template-config'
+import { CheckoutButton } from './CheckoutButton'
 
-export function Bundle({ data }: { data: BundleSection }) {
+export function Bundle({ data, kitSlug }: { data: BundleSection; kitSlug?: string }) {
   return (
     <section className="border-b border-border/60 py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -23,14 +24,22 @@ export function Bundle({ data }: { data: BundleSection }) {
                   </li>
                 ))}
               </ul>
-              <a
-                href={data.cta.href}
-                target="_blank"
-                rel="noreferrer"
-                className="mt-8 inline-flex items-center gap-2 rounded-full bg-background px-6 py-3 text-sm font-semibold text-foreground transition hover:opacity-90"
-              >
-                {data.cta.label}
-              </a>
+              {kitSlug && data.cta.href === '#checkout' ? (
+                <CheckoutButton
+                  kitSlug={kitSlug}
+                  label={data.cta.label}
+                  className="mt-8 inline-flex items-center gap-2 rounded-full bg-background px-6 py-3 text-sm font-semibold text-foreground transition hover:opacity-90 disabled:opacity-60 disabled:cursor-not-allowed"
+                />
+              ) : (
+                <a
+                  href={data.cta.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-8 inline-flex items-center gap-2 rounded-full bg-background px-6 py-3 text-sm font-semibold text-foreground transition hover:opacity-90"
+                >
+                  {data.cta.label}
+                </a>
+              )}
             </div>
             <div>
               <img src={data.image} alt="Bundle" className="w-full rounded-2xl" />

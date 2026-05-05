@@ -3,12 +3,13 @@ import type { TemplateConfig } from '@/lib/template-config'
 const BASE  = 'https://www.reference site/img/reference'
 const ICONS = 'https://www.reference site/img'
 
-const BUY    = '/templates'
+const BUY    = '#checkout'
 const BUNDLE = '/templates'
 
 export const fitnessTemplate: TemplateConfig = {
   id: 'fitness-kit',
   name: 'Fitness Kit',
+  kitSlug: 'fitness-kit',
   mockupShape: 'phone',
   hero: {
     eyebrow: 'Fitness App Kit · Expo + Hono',
@@ -17,6 +18,7 @@ export const fitnessTemplate: TemplateConfig = {
     description:
       'A React Native + Expo template with workout tracking, nutrition analysis, progress charts, and full onboarding. Pre-loaded for Cursor, Claude, Lovable & Bolt — describe your idea and ship.',
     primaryCta: { label: 'Get this kit — $149', href: BUY },
+    secondaryCta: { label: 'View demo', href: 'https://fitness-preview.otf-kit.dev/' },
     badges: [
       { src: `${ICONS}/expo.svg`,       alt: 'Expo SDK' },
       { src: `${ICONS}/nativewind.svg`, alt: 'NativeWind' },

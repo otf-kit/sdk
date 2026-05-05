@@ -1,11 +1,11 @@
 // OTF component registry — metadata for search, navigation, and detail pages
 
-export const STORYBOOK_URL = 'https://otf-storybook.pages.dev'
-export const NATIVE_STORYBOOK_URL = 'https://otf-ui-native-storybook.pages.dev'
+export const STORYBOOK_URL = 'https://ui.otf-kit.dev'
+export const NATIVE_STORYBOOK_URL = 'https://native.otf-kit.dev'
 // Phone-framed preview shell — wraps the native storybook in a Manus-style
 // iPhone mockup. Pass `?src=<storybook URL>` to load a specific component
 // route inside the frame. Used by the components/[slug] preview tab.
-export const NATIVE_STORYBOOK_PREVIEW_URL = 'https://otf-ui-native-storybook-preview.pages.dev'
+export const NATIVE_STORYBOOK_PREVIEW_URL = 'https://native-preview.otf-kit.dev'
 
 export type ComponentMeta = {
   slug: string
@@ -306,6 +306,51 @@ export const components: ComponentMeta[] = [
 ]
 
 export const componentBySlug = (slug: string) => components.find((c) => c.slug === slug)
+
+// ─── Kind taxonomy ───────────────────────────────────────────────────────────
+// Three top-level buckets, derived from the existing storybookId prefix or
+// nativeCategory — no per-entry edits needed.
+//
+//   Component  = atomic UI primitives (Button, Input, Avatar, BarChart…)
+//   Block      = composed sections you drop into a page (Sidebar layout, Metric
+//                Card, Invite Modal, App Shell, native screen patterns…)
+//   Pattern    = motion / vibe / engagement (Aurora bg, Reveal, Tour, Beacon…)
+//
+// Mapping (matches reference site/blocks taxonomy):
+export type Kind = 'component' | 'block' | 'pattern'
+
+const BLOCK_WEB_PREFIXES   = new Set(['blocks', 'appshell', 'advanced'])
+const PATTERN_WEB_PREFIXES = new Set(['backgrounds', 'motion', 'engagement'])
+// Mobile: native:layouts + native:patterns are compositions. Primitives + interface stay atomic.
+const BLOCK_NATIVE_CATS    = new Set(['layouts', 'patterns'])
+
+export function getKind(c: ComponentMeta): Kind {
+  if (c.stack === 'mobile') {
+    if (c.nativeCategory && BLOCK_NATIVE_CATS.has(c.nativeCategory)) return 'block'
+    return 'component'
+  }
+  // web — derive from first segment of storybookId (before first `-`)
+  const prefix = (c.storybookId ?? '').split('-')[0]
+  if (BLOCK_WEB_PREFIXES.has(prefix)) return 'block'
+  if (PATTERN_WEB_PREFIXES.has(prefix)) return 'pattern'
+  return 'component'
+}
+
+export const componentsByKind = (kind: Kind) => components.filter((c) => getKind(c) === kind)
+export const kindCounts = (): Record<Kind, number> => ({
+  component: componentsByKind('component').length,
+  block:     componentsByKind('block').length,
+  pattern:   componentsByKind('pattern').length,
+})
+
+export const KIND_LABEL: Record<Kind, string>      = { component: 'Components', block: 'Blocks', pattern: 'Patterns' }
+export const KIND_LABEL_ONE: Record<Kind, string>  = { component: 'Component',  block: 'Block',  pattern: 'Pattern'  }
+export const KIND_HREF: Record<Kind, string>       = { component: '/components', block: '/blocks', pattern: '/patterns' }
+export const KIND_TAGLINE: Record<Kind, string>    = {
+  component: 'Atomic UI primitives — buttons, inputs, charts, overlays.',
+  block:     'Composed sections you drop into a page — sidebars, metric cards, modals, full screens.',
+  pattern:   'Motion, backgrounds, and engagement effects — vibe over UI.',
+}
 
 export type ExampleEntry = {
   Demo: React.ComponentType

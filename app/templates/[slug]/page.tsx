@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { Nav } from '@/components/nav'
-import { Footer } from '@/components/footer'
+import { Navbar } from '@/components/otf/Navbar'
+import { Footer } from '@/components/otf/Footer'
 import { TemplatePage } from '@/components/template-detail/TemplatePage'
 import { getTemplate, templateIds } from '@/data/templates'
 
@@ -29,12 +29,12 @@ export default async function TemplateDetailPage(
   if (!config) notFound()
 
   return (
-    <main className="min-h-dvh bg-background text-foreground flex flex-col">
-      <Nav />
+    <div className="flex flex-col min-h-dvh bg-background text-foreground">
+      <Navbar />
       <div className="flex-1">
         <TemplatePage config={config} />
       </div>
       <Footer />
-    </main>
+    </div>
   )
 }

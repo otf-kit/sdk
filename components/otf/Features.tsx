@@ -1,13 +1,15 @@
-import { Blocks, Accessibility, Paintbrush, GitBranch, Feather, FileCode2 } from 'lucide-react'
+import { Blocks, Accessibility, Paintbrush, GitBranch, Feather, FileCode2, Globe, Code2 } from 'lucide-react'
 import { Reveal } from './Reveal'
 
 const features = [
+  { Icon: Globe,        title: 'Custom domain in 90 sec', desc: 'One command wires Railway custom domain + Cloudflare DNS + free email forwarding + auto-renewing TLS. Most kit shops drop you at the README. We ship you to production.' },
+  { Icon: FileCode2,    title: 'Every AI tool',    desc: 'Ships with CLAUDE.md, .cursorrules, and 20+ tested prompts. Cursor, Claude, Lovable, Bolt — your AI hits the ground running.' },
   { Icon: Blocks,       title: 'Composable',      desc: 'Built with Radix primitives. Mix, match, extend without forking the source.' },
   { Icon: Accessibility,title: 'Accessible',      desc: 'ARIA-compliant out of the box. Keyboard nav, focus rings, screen readers — all covered.' },
   { Icon: Paintbrush,   title: 'Themable',         desc: 'Tailwind v4 + CSS variables. 5 palettes: Slate, Warm, Cosmic, Terminal, and Custom.' },
-  { Icon: GitBranch,    title: 'Open Source',      desc: 'MIT licensed SDK. Read the code, fork it, contribute back — no strings attached.' },
+  { Icon: Code2,        title: 'TypeScript-first', desc: 'Strict TS across the stack. Zero `any`, full inference, generics where they matter — your IDE catches bugs before runtime.' },
   { Icon: Feather,      title: 'Zero runtime',     desc: 'Components copied into your codebase. No package bloat, no version lock-in.' },
-  { Icon: FileCode2,    title: 'Every AI tool',    desc: 'Ships with CLAUDE.md, .cursorrules, and 20+ tested prompts. Cursor, Claude, Lovable, Bolt — your AI hits the ground running.' },
+  { Icon: GitBranch,    title: 'Open Source',      desc: 'MIT licensed SDK. Read the code, fork it, contribute back — no strings attached.' },
 ]
 
 export function Features() {
@@ -23,7 +25,7 @@ export function Features() {
             </h2>
           </div>
         </Reveal>
-        <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {features.map(({ Icon, title, desc }, i) => (
             <Reveal key={title} direction="up" distance={20} delay={i * 70}>
               <div className="group flex flex-col gap-4">

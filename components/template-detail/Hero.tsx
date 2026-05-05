@@ -1,6 +1,7 @@
 import type { HeroSection, MockupShape } from '@/lib/template-config'
+import { CheckoutButton } from './CheckoutButton'
 
-export function Hero({ data, shape }: { data: HeroSection; shape: MockupShape }) {
+export function Hero({ data, shape, kitSlug }: { data: HeroSection; shape: MockupShape; kitSlug?: string }) {
   return (
     <section className="relative overflow-hidden border-b border-border/60">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
@@ -20,14 +21,22 @@ export function Hero({ data, shape }: { data: HeroSection; shape: MockupShape })
               {data.description}
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-4">
-              <a
-                href={data.primaryCta.href}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-full bg-foreground px-6 py-3 text-sm font-semibold text-background shadow-sm transition hover:opacity-90"
-              >
-                {data.primaryCta.label}
-              </a>
+              {kitSlug && data.primaryCta.href === '#checkout' ? (
+                <CheckoutButton
+                  kitSlug={kitSlug}
+                  label={data.primaryCta.label}
+                  className="inline-flex items-center gap-2 rounded-full bg-foreground px-6 py-3 text-sm font-semibold text-background shadow-sm transition hover:opacity-90 disabled:opacity-60 disabled:cursor-not-allowed"
+                />
+              ) : (
+                <a
+                  href={data.primaryCta.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full bg-foreground px-6 py-3 text-sm font-semibold text-background shadow-sm transition hover:opacity-90"
+                >
+                  {data.primaryCta.label}
+                </a>
+              )}
               {data.secondaryCta && (
                 <a
                   href={data.secondaryCta.href}

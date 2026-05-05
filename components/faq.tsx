@@ -15,6 +15,16 @@ const faqs = [
       'Templates are full-stack apps: frontend + backend + auth + payments, all pre-wired and production-ready. The SDK is just the component library. Think of the SDK as building blocks and templates as complete buildings.',
   },
   {
+    question: 'Can I deploy the kit to my own domain?',
+    answer:
+      "Yes — and we make it the easiest part. Every kit ships with `bash scripts/setup-custom-domain.sh --domain mykit.com` which wires Railway custom domain + Cloudflare DNS + free email forwarding (e.g. support@mykit.com) + auto-renewing TLS certs in one command. From 'I bought the kit' to 'live on my domain' is ~5 minutes. No registrar tabs, no `dig` commands, no Railway 404 debugging.",
+  },
+  {
+    question: 'How long does deployment take?',
+    answer:
+      "First deploy: <60 seconds via `bash scripts/deploy-railway.sh` (Railway provisions Postgres + Hono + the web frontend). Adding your custom domain on top: another ~5 minutes (mostly Let's Encrypt issuing the cert). Total time from purchase to live-on-your-domain: under 10 minutes.",
+  },
+  {
     question: 'Can I use OTF templates for client work?',
     answer:
       'Yes — a single-license template can be used for one client project. The Team bundle covers unlimited client projects across 5 seats.',
@@ -22,12 +32,12 @@ const faqs = [
   {
     question: 'What AI tools are supported?',
     answer:
-      'Cursor, Claude Code (via CLAUDE.md), Lovable, and Windsurf. Every template ships with working AI configs so your AI coding assistant understands the codebase from day one.',
+      'Cursor, Claude Code (via CLAUDE.md), Lovable, and Windsurf. Every template ships with working AI configs + 20+ tested prompts so your AI coding assistant understands the codebase from day one.',
   },
   {
     question: 'What stack do the templates use?',
     answer:
-      'Web-first: Vite 5 + React 19 + Hono for the API + Drizzle ORM + Postgres. Better Auth for authentication. Polar.sh for payments. All TypeScript, zero lock-in.',
+      'Web kit: Vite 5 + React 19 + Hono + Drizzle ORM + Postgres + Better Auth + Stripe. Mobile kit: Expo SDK 54 + Expo Router + the same Hono/Drizzle/Better Auth backend. All TypeScript, zero lock-in. Both kits deploy to Railway by default but you can swap providers — every adapter is one file.',
   },
   {
     question: 'Do you offer refunds?',
@@ -37,7 +47,7 @@ const faqs = [
   {
     question: 'When is the SaaS Dashboard Kit available?',
     answer:
-      'It shipped on 2026-04-25. You can see the live demo at saas-dashboard-production-ae3f.up.railway.app and purchase it at $149 on the templates page.',
+      'It shipped on 2026-04-25. Live demo at saas.otf-kit.dev, $149 on the templates page.',
   },
 ]
 
@@ -59,7 +69,7 @@ export function Faq() {
             </p>
           </div>
           <a
-            href="mailto:support@otf.dev"
+            href="mailto:dave@otf-kit.dev"
             className="group inline-flex items-center gap-2 font-mono text-sm text-muted-foreground transition-colors hover:text-foreground"
           >
             Still stuck? Email support

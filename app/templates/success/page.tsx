@@ -51,7 +51,7 @@ export default function TemplatesSuccessPage() {
           {/* CTAs */}
           <div className="flex flex-col gap-3 sm:flex-row">
             <a
-              href="https://saas-dashboard-production-ae3f.up.railway.app"
+              href="https://saas.otf-kit.dev"
               target="_blank"
               rel="noreferrer"
               className="flex-1 rounded-md border border-border bg-secondary/40 px-4 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-secondary"

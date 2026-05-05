@@ -3,12 +3,13 @@ import type { TemplateConfig } from '@/lib/template-config'
 const BASE  = 'https://www.reference site/img/dash'
 const ICONS = 'https://www.reference site/img'
 
-const DEMO   = 'https://saas-dashboard-production-ae3f.up.railway.app'
+const DEMO   = 'https://saas.otf-kit.dev'
 const BUNDLE = '/templates'
 
 export const saasDashboardTemplate: TemplateConfig = {
   id: 'saas-dashboard',
   name: 'SaaS Dashboard',
+  kitSlug: 'saas-dashboard',
   mockupShape: 'laptop',
   hero: {
     eyebrow: 'SaaS Dashboard Kit · Vite + Hono',
@@ -16,7 +17,7 @@ export const saasDashboardTemplate: TemplateConfig = {
     titleAccent: 'SaaS Dashboard Template.',
     description:
       'A modern, fully-featured Vite + Hono dashboard with Postgres, charts, data tables, user management, analytics, and more. Pre-loaded with CLAUDE.md and .cursorrules — your AI assistant ships features in minutes.',
-    primaryCta: { label: 'Get this kit — $149', href: '#buy' },
+    primaryCta: { label: 'Get this kit — $149', href: '#checkout' },
     secondaryCta: { label: 'View demo', href: DEMO },
     badges: [
       { src: `${ICONS}/next.svg`,       alt: 'Vite' },
@@ -80,7 +81,7 @@ export const saasDashboardTemplate: TemplateConfig = {
       'Responsive design',
       'Fully customisable',
     ],
-    cta: { label: 'Get this kit — $149', href: '#buy' },
+    cta: { label: 'Get this kit — $149', href: '#checkout' },
     image: `${BASE}/components.png`,
   },
   techStack: {

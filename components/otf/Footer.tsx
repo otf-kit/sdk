@@ -2,16 +2,16 @@ import { GithubIcon as Github } from './icons'
 import { docsLinks, componentLinks, blockLinks, patternLinks, communityLinks } from '@/data/otf-links'
 
 const featuredComponents = componentLinks.slice(0, 12)
-const featuredBlocks     = blockLinks.slice(0, 8)
-const featuredPatterns   = patternLinks.slice(0, 8)
+const featuredBlocks     = blockLinks.slice(0, 12)
+const featuredPatterns   = patternLinks.slice(0, 12)
 
 type Group = { title: string; items: { label: string; href: string }[]; viewAll?: { label: string; href: string } }
 
 const groups: Group[] = [
   { title: 'Docs',       items: docsLinks },
-  { title: 'Components', items: featuredComponents, viewAll: { label: 'View all 180+ components', href: '/components' } },
-  { title: 'Blocks',     items: featuredBlocks,     viewAll: { label: 'View all blocks', href: '/blocks' } },
-  { title: 'Patterns',   items: featuredPatterns,   viewAll: { label: 'View all patterns', href: '/patterns' } },
+  { title: 'Components', items: featuredComponents, viewAll: { label: `View all ${componentLinks.length}+ components`, href: '/components' } },
+  { title: 'Blocks',     items: featuredBlocks,     viewAll: { label: `View all ${blockLinks.length} blocks`,         href: '/blocks'     } },
+  { title: 'Patterns',   items: featuredPatterns,   viewAll: { label: `View all ${patternLinks.length} patterns`,     href: '/patterns'   } },
 ]
 
 export function Footer() {
@@ -80,7 +80,12 @@ export function Footer() {
 
         {/* Bottom bar */}
         <div className="mt-8 flex flex-col items-start justify-between gap-3 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row sm:items-center">
-          <p className="font-mono">© 2026 Open Template Forest — MIT Licensed (SDK)</p>
+          <p className="font-mono">© 2026 Factorx Inc · Open Template Forest — MIT Licensed (SDK)</p>
+          <nav className="flex items-center gap-5 font-mono">
+            <a href="/privacy" className="transition-colors hover:text-foreground">Privacy Policy</a>
+            <a href="/terms"   className="transition-colors hover:text-foreground">Terms of Service</a>
+            <a href="mailto:dave@otf-kit.dev" className="transition-colors hover:text-foreground">Contact</a>
+          </nav>
         </div>
       </div>
     </footer>

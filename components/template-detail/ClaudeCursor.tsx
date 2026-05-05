@@ -1,7 +1,8 @@
 import { Play } from 'lucide-react'
 import type { ClaudeCursorSection } from '@/lib/template-config'
+import { CheckoutButton } from './CheckoutButton'
 
-export function ClaudeCursor({ data }: { data: ClaudeCursorSection }) {
+export function ClaudeCursor({ data, kitSlug }: { data: ClaudeCursorSection; kitSlug?: string }) {
   return (
     <section className="border-b border-border/60 bg-black py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -22,15 +23,23 @@ export function ClaudeCursor({ data }: { data: ClaudeCursorSection }) {
                 {data.description2}
               </p>
             )}
-            <a
-              href={data.cta.href}
-              target="_blank"
-              rel="noreferrer"
-              className="mt-10 inline-flex items-center gap-3 rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-black transition hover:bg-white/90"
-            >
-              {data.cta.label}
-              <span className="flex h-5 w-5 items-center justify-center rounded-full bg-black/10">→</span>
-            </a>
+            {kitSlug && data.cta.href === '#checkout' ? (
+              <CheckoutButton
+                kitSlug={kitSlug}
+                label={data.cta.label}
+                className="mt-10 inline-flex items-center gap-3 rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-black transition hover:bg-white/90 disabled:opacity-60 disabled:cursor-not-allowed"
+              />
+            ) : (
+              <a
+                href={data.cta.href}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-10 inline-flex items-center gap-3 rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-black transition hover:bg-white/90"
+              >
+                {data.cta.label}
+                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-black/10">→</span>
+              </a>
+            )}
           </div>
 
           <div className="relative flex justify-center lg:justify-end">

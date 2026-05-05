@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { Search, X, ArrowUpRight,
   Blocks, Eye, MousePointer, Bell, LayoutDashboard,
   BarChart3, Globe, Smartphone } from 'lucide-react'
-import { components, type ComponentMeta } from '@/data/component-registry'
+import { components, componentsByKind, getKind, KIND_LABEL, KIND_TAGLINE, type ComponentMeta, type Kind } from '@/data/component-registry'
 
 // ── Category config ────────────────────────────────────────────────────────
 type CategoryInfo = { label: string; icon: React.ElementType; color: string }
@@ -73,12 +73,15 @@ function ComponentCard({ meta }: { meta: ComponentMeta }) {
 }
 
 // ── Main grid ─────────────────────────────────────────────────────────────
-export function ComponentsGrid() {
+export function ComponentsGrid({ kind = 'component' }: { kind?: Kind } = {}) {
   const [stack,    setStack]    = useState<Stack>('web')
   const [category, setCategory] = useState<Cat>('All')
   const [search,   setSearch]   = useState('')
 
-  const stackComponents = useMemo(() => components.filter((c) => c.stack === stack), [stack])
+  // Pool restricted to this page's kind (component / block / pattern).
+  const kindComponents = useMemo(() => componentsByKind(kind), [kind])
+
+  const stackComponents = useMemo(() => kindComponents.filter((c) => c.stack === stack), [kindComponents, stack])
 
   const visible = useMemo(() => {
     return stackComponents.filter((c) => {
@@ -96,9 +99,9 @@ export function ComponentsGrid() {
   }, [stackComponents])
 
   const stackCounts = useMemo(() => ({
-    web:    components.filter((c) => c.stack === 'web').length,
-    mobile: components.filter((c) => c.stack === 'mobile').length,
-  }), [])
+    web:    kindComponents.filter((c) => c.stack === 'web').length,
+    mobile: kindComponents.filter((c) => c.stack === 'mobile').length,
+  }), [kindComponents])
 
   const liveDemoCount = stackComponents.filter((c) => c.hasExample).length
 
@@ -114,14 +117,14 @@ export function ComponentsGrid() {
         <div className="absolute inset-0 bg-pattern-grid opacity-[0.12]" aria-hidden />
         <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" aria-hidden />
         <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20">
-          <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">— Component Library</p>
+          <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">— {KIND_LABEL[kind]} Library</p>
           <div className="mt-4 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
               <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">
-                {components.length}+ Components.
+                {kindComponents.length}+ {KIND_LABEL[kind]}.
               </h1>
               <p className="mt-3 max-w-xl text-muted-foreground">
-                {stackCounts.web} web + {stackCounts.mobile} React Native components — fully typed, dark-mode native, with live previews.
+                {KIND_TAGLINE[kind]} {stackCounts.web} web + {stackCounts.mobile} React Native — fully typed, dark-mode native, with live previews.
               </p>
               <div className="mt-4 flex flex-wrap gap-2">
                 {(['MIT', 'TypeScript', 'Tamagui', 'Tailwind v4', 'Dark-first'] as const).map((t) => (
@@ -232,9 +235,16 @@ export function ComponentsGrid() {
           <>
             <div className="grid gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {visible.map((meta) => <ComponentCard key={meta.slug} meta={meta} />)}
+              {/* Fill trailing cells in the last row so the gray wrapper bg
+                  doesn't show through. Always pads up to 4 (max xl cols);
+                  smaller breakpoints may push fillers onto a new row but they
+                  blend in as empty bg-card cells. */}
+              {Array.from({ length: (4 - (visible.length % 4)) % 4 }).map((_, i) => (
+                <div key={`filler-${i}`} className="bg-card" aria-hidden />
+              ))}
             </div>
             <p className="mt-6 text-center font-mono text-xs text-muted-foreground/60">
-              Showing {visible.length} of {stackComponents.length} {stack} components
+              Showing {visible.length} of {stackComponents.length} {stack} {KIND_LABEL[kind].toLowerCase()}
               {liveDemoCount > 0 && (
                 <> · <span className="inline-flex items-center gap-1">
                   <span className="inline-block h-1.5 w-1.5 rounded-full bg-primary" />

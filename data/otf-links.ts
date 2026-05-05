@@ -8,7 +8,7 @@
 // is /components/command-palette). When you add a component, add it to
 // component-registry.ts and these links update automatically.
 
-import { components as componentRegistry } from './component-registry'
+import { componentsByKind } from './component-registry'
 
 export const docsLinks = [
   { label: 'Introduction', href: '/docs' },
@@ -18,25 +18,23 @@ export const docsLinks = [
   { label: 'Pricing', href: '/pricing' },
   { label: 'AI Configs', href: '/docs/ai-configs' },
   { label: 'Contributing', href: '/docs/contributing' },
-  { label: 'Changelog', href: '/docs/changelog' },
+  { label: 'Changelog', href: '/changelog' },
 ]
 
-// All 212 components from the registry — web + mobile. The label includes
-// a `[Mobile]` suffix for native entries so users can tell at a glance
-// whether they're tapping into the web SDK or the React-Native showcase.
-export const componentLinks = componentRegistry.map((c) => ({
-  label: c.stack === 'mobile' ? `${c.name}` : c.name,
+// Three kind buckets — derived from `getKind(c)` in component-registry.ts.
+// Each detail page lives at `/components/<slug>` regardless of kind, so all
+// links route there. The /components, /blocks, /patterns INDEX pages filter
+// on `kind` for their own grids; this map drives the global nav surfaces.
+const toLink = (c: ReturnType<typeof componentsByKind>[number]) => ({
+  label: c.name,
   href: `/components/${c.slug}`,
   hint: c.description,
   stack: c.stack,
-}))
+})
 
-// Blocks and Patterns routes are aspirational — `/blocks/*` and `/patterns/*`
-// do not exist on this app yet. Keep these arrays empty so nothing renders
-// (and nothing 404s) until those route trees ship. The MobileNavSheet and
-// CommandPalette already handle empty arrays by hiding the corresponding tab.
-export const blockLinks: { label: string; href: string }[] = []
-export const patternLinks: { label: string; href: string }[] = []
+export const componentLinks = componentsByKind('component').map(toLink)
+export const blockLinks     = componentsByKind('block').map(toLink)
+export const patternLinks   = componentsByKind('pattern').map(toLink)
 
 export const communityLinks = [
   { label: 'GitHub', href: 'https://github.com/open-template-forest' },
