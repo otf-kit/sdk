@@ -1,7 +1,7 @@
 {
   "name": "@otfdashkit/ui",
   "version": "0.1.1",
-  "description": "OTF UI — production-quality React component library. 98 primitives + blocks + layouts + charts on Radix + Tailwind v4. Cross-platform parity API with @otfdashkit/ui-native.",
+  "description": "OTF UI \u2014 production-quality React component library. 98 primitives + blocks + layouts + charts on Radix + Tailwind v4. Cross-platform parity API with @otfdashkit/ui-native.",
   "keywords": [
     "otfdashkit",
     "ui",
@@ -102,6 +102,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "cmdk": "^1.1.1",
+    "date-fns": "^4.1.0",
     "embla-carousel-react": "^8.6.0",
     "input-otp": "^1.4.2",
     "lucide-react": "^0.400.0",
