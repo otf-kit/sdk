@@ -1,7 +1,27 @@
 {
   "name": "@otfdashkit/tokens",
-  "version": "0.1.0",
-  "description": "OTF design tokens — CSS variables (web) + Tamagui tokens (native)",
+  "version": "0.1.1",
+  "description": "OTF design tokens — CSS variables (web) + Tamagui tokens (native). 17 themes, dark mode, parity across React + React Native.",
+  "keywords": [
+    "otfdashkit",
+    "design-tokens",
+    "css-variables",
+    "tamagui",
+    "tailwind",
+    "design-system",
+    "themes"
+  ],
+  "license": "MIT",
+  "author": "otfdashkit <dave@otf-kit.dev>",
+  "homepage": "https://github.com/otf-kit/sdk#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/otf-kit/sdk.git",
+    "directory": "packages/tokens"
+  },
+  "bugs": {
+    "url": "https://github.com/otf-kit/sdk/issues"
+  },
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
@@ -15,7 +35,8 @@
   },
   "files": [
     "dist/**",
-    "src/web.css"
+    "src/web.css",
+    "README.md"
   ],
   "scripts": {
     "build": "tsup",
