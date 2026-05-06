@@ -26,6 +26,7 @@ export default defineConfig({
     'recharts',
     'react-hook-form',
     'zod',
+    'date-fns',
   ],
   esbuildOptions(options) {
     options.jsx = 'automatic'
