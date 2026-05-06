@@ -1,19 +1,32 @@
 {
   "name": "@otfdashkit/eslint-plugin-otf-design",
-  "version": "0.1.0",
-  "description": "ESLint rules for OTF design system compliance — bans hex colors and default Tailwind palette classes",
+  "version": "0.1.1",
+  "description": "ESLint rules for OTF design-system compliance. Bans hex literals and default Tailwind palette classes (gray/blue/etc.) so feature code uses tokens from @otfdashkit/tokens.",
   "main": "src/index.js",
   "type": "commonjs",
   "scripts": {
     "test": "node --test src/index.test.js"
   },
   "keywords": [
+    "otfdashkit",
     "eslint",
     "eslint-plugin",
+    "eslintplugin",
     "design-system",
-    "otf"
+    "design-tokens",
+    "tailwind"
   ],
   "license": "MIT",
+  "author": "otfdashkit <dave@otf-kit.dev>",
+  "homepage": "https://github.com/otf-kit/sdk/tree/main/packages/eslint-plugin-otf-design#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/otf-kit/sdk.git",
+    "directory": "packages/eslint-plugin-otf-design"
+  },
+  "bugs": {
+    "url": "https://github.com/otf-kit/sdk/issues"
+  },
   "publishConfig": {
     "access": "public"
   },

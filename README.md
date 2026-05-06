@@ -62,12 +62,12 @@ Two production-grade reference apps built end-to-end with the SDK &mdash; same p
 
 ## Packages
 
-| Package                                | Platform | Foundation                | Description                                  |
-|----------------------------------------|----------|---------------------------|----------------------------------------------|
-| `@otfdashkit/ui`                       | Web      | Radix UI + Tailwind v4    | 98 primitives + blocks, layouts, charts      |
-| `@otfdashkit/ui-native`                | Mobile   | Tamagui-core              | Native primitives with parity APIs           |
-| `@otfdashkit/tokens`                   | Both     | CSS vars + Tamagui tokens | 17 themes, shared scales, dark mode          |
-| `@otfdashkit/eslint-plugin-otf-design` | Tooling  | ESLint plugin             | Bans hex / default Tailwind classes          |
+| Package | Platform | Foundation | Description |
+|---|---|---|---|
+| [`@otfdashkit/ui`](https://www.npmjs.com/package/@otfdashkit/ui) | Web | Radix UI + Tailwind v4 | 98 primitives + blocks, layouts, charts |
+| [`@otfdashkit/ui-native`](https://www.npmjs.com/package/@otfdashkit/ui-native) | Mobile | Tamagui-core | Native primitives with parity APIs |
+| [`@otfdashkit/tokens`](https://www.npmjs.com/package/@otfdashkit/tokens) | Both | CSS vars + Tamagui tokens | 17 themes, shared scales, dark mode |
+| [`@otfdashkit/eslint-plugin-otf-design`](https://www.npmjs.com/package/@otfdashkit/eslint-plugin-otf-design) | Tooling | ESLint plugin | Bans hex / default Tailwind classes |
 
 ## Install
 

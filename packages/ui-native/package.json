@@ -1,7 +1,30 @@
 {
   "name": "@otfdashkit/ui-native",
-  "version": "0.1.0",
-  "description": "OTF UI Native — Tamagui-powered component library for Expo",
+  "version": "0.1.1",
+  "description": "OTF UI Native — Tamagui-powered component library for React Native + Expo. Same component API as @otfdashkit/ui (web) — port a screen by changing the import.",
+  "keywords": [
+    "otfdashkit",
+    "ui-native",
+    "react-native",
+    "expo",
+    "tamagui",
+    "components",
+    "design-system",
+    "ios",
+    "android",
+    "cross-platform"
+  ],
+  "license": "MIT",
+  "author": "otfdashkit <dave@otf-kit.dev>",
+  "homepage": "https://github.com/otf-kit/sdk/tree/main/packages/ui-native#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/otf-kit/sdk.git",
+    "directory": "packages/ui-native"
+  },
+  "bugs": {
+    "url": "https://github.com/otf-kit/sdk/issues"
+  },
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
@@ -13,7 +36,8 @@
     }
   },
   "files": [
-    "dist/**"
+    "dist/**",
+    "README.md"
   ],
   "scripts": {
     "build": "tsup && cp types/index.d.ts dist/index.d.ts",
