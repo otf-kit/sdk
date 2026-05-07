@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { Search, X } from 'lucide-react'
-import { cn } from '../utils/cn'
-import { Input } from '../primitives/input'
-import { Avatar, AvatarFallback } from '../primitives/avatar'
-import { Badge } from '../primitives/badge'
-import { Button } from '../primitives/button'
+import { cn } from '../../utils/cn'
+import { Input } from '../../primitives/input'
+import { Avatar, AvatarFallback } from '../../primitives/avatar'
+import { Badge } from '../../primitives/badge'
+import { Button } from '../../primitives/button'
 
 const MEMBERS = [
   { id: '1', name: 'Jane Doe', email: 'jane@acme.com', role: 'Owner', initials: 'JD' },

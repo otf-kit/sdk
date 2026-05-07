@@ -1,7 +1,7 @@
 import React from 'react'
 import { ChevronDown, User, Settings, CreditCard, LogOut } from 'lucide-react'
-import { cn } from '../utils/cn'
-import { Avatar, AvatarFallback } from '../primitives/avatar'
+import { cn } from '../../utils/cn'
+import { Avatar, AvatarFallback } from '../../primitives/avatar'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,7 +9,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '../primitives/dropdown-menu'
+} from '../../primitives/dropdown-menu'
 
 export interface UserMenuProps {
   name?: string

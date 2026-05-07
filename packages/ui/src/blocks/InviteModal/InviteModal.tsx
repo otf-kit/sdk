@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { X } from 'lucide-react'
-import { cn } from '../utils/cn'
-import { Input } from '../primitives/input'
-import { Button } from '../primitives/button'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../primitives/select'
-import { Avatar, AvatarFallback } from '../primitives/avatar'
-import { Badge } from '../primitives/badge'
+import { cn } from '../../utils/cn'
+import { Input } from '../../primitives/input'
+import { Button } from '../../primitives/button'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../primitives/select'
+import { Avatar, AvatarFallback } from '../../primitives/avatar'
+import { Badge } from '../../primitives/badge'
 
 const PENDING = [
   { email: 'alex@startup.io', role: 'Member' },

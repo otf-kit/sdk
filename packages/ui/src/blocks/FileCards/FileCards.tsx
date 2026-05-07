@@ -1,8 +1,8 @@
 // @ts-nocheck
 import React from 'react'
 import { FileText, Image, FileCode, Film, Archive, File } from 'lucide-react'
-import { cn } from '../utils/cn'
-import { Card, CardContent } from '../primitives/card'
+import { cn } from '../../utils/cn'
+import { Card, CardContent } from '../../primitives/card'
 
 interface FileItem { id: string; name: string; type: string; size: string; modified: string }
 

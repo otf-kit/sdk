@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { cn } from '../utils/cn'
-import { Button } from '../primitives/button'
-import { Textarea } from '../primitives/textarea'
+import { cn } from '../../utils/cn'
+import { Button } from '../../primitives/button'
+import { Textarea } from '../../primitives/textarea'
 
 const REACTIONS = ['😊', '😐', '😕', '😡', '🤩']
 

@@ -1,11 +1,11 @@
 // @ts-nocheck
 import React from 'react'
 import { LayoutDashboard, FolderOpen, Users, Settings, Bell, TrendingUp } from 'lucide-react'
-import { cn } from '../utils/cn'
-import { Avatar, AvatarFallback } from '../primitives/avatar'
-import { Badge } from '../primitives/badge'
-import { Separator } from '../primitives/separator'
-import { Card, CardContent } from '../primitives/card'
+import { cn } from '../../utils/cn'
+import { Avatar, AvatarFallback } from '../../primitives/avatar'
+import { Badge } from '../../primitives/badge'
+import { Separator } from '../../primitives/separator'
+import { Card, CardContent } from '../../primitives/card'
 
 const NAV_ITEMS = [
   { icon: LayoutDashboard, label: 'Dashboard', active: true },

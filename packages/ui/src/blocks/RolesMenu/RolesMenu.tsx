@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { ChevronDown, Check } from 'lucide-react'
-import { cn } from '../utils/cn'
+import { cn } from '../../utils/cn'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,8 +9,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '../primitives/dropdown-menu'
-import { Button } from '../primitives/button'
+} from '../../primitives/dropdown-menu'
+import { Button } from '../../primitives/button'
 
 const ROLES = [
   { value: 'owner', label: 'Owner', description: 'Full control over the workspace' },

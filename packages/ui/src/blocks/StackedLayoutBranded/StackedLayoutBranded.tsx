@@ -1,9 +1,9 @@
 import React from 'react'
 import { Bell, ChevronDown, ArrowRight } from 'lucide-react'
-import { cn } from '../utils/cn'
-import { Avatar, AvatarFallback } from '../primitives/avatar'
-import { Button } from '../primitives/button'
-import { Card, CardContent, CardHeader, CardTitle } from '../primitives/card'
+import { cn } from '../../utils/cn'
+import { Avatar, AvatarFallback } from '../../primitives/avatar'
+import { Button } from '../../primitives/button'
+import { Card, CardContent, CardHeader, CardTitle } from '../../primitives/card'
 
 const NAV_LINKS = ['Features', 'Pricing', 'Docs', 'Blog']
 

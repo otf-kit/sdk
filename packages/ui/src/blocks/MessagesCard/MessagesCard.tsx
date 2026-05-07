@@ -1,7 +1,7 @@
 import React from 'react'
-import { cn } from '../utils/cn'
-import { Avatar, AvatarFallback } from '../primitives/avatar'
-import { Card, CardContent, CardHeader, CardTitle } from '../primitives/card'
+import { cn } from '../../utils/cn'
+import { Avatar, AvatarFallback } from '../../primitives/avatar'
+import { Card, CardContent, CardHeader, CardTitle } from '../../primitives/card'
 
 interface Message {
   id: string

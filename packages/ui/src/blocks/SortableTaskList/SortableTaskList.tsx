@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { cn } from '../utils/cn'
-import { Checkbox } from '../primitives/checkbox'
-import { Avatar, AvatarFallback } from '../primitives/avatar'
+import { cn } from '../../utils/cn'
+import { Checkbox } from '../../primitives/checkbox'
+import { Avatar, AvatarFallback } from '../../primitives/avatar'
 
 type Priority = 'High' | 'Medium' | 'Low'
 type Status = 'In Progress' | 'Todo' | 'Done'

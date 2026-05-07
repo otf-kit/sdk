@@ -1,7 +1,7 @@
 import React from 'react'
 import { X } from 'lucide-react'
-import { cn } from '../utils/cn'
-import { Button } from '../primitives/button'
+import { cn } from '../../utils/cn'
+import { Button } from '../../primitives/button'
 
 interface ActionDef {
   label: string

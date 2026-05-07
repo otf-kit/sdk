@@ -1,9 +1,9 @@
 import React from 'react'
 import { Calendar } from 'lucide-react'
-import { cn } from '../utils/cn'
-import { Card, CardContent } from '../primitives/card'
-import { Avatar, AvatarFallback } from '../primitives/avatar'
-import { Badge } from '../primitives/badge'
+import { cn } from '../../utils/cn'
+import { Card, CardContent } from '../../primitives/card'
+import { Avatar, AvatarFallback } from '../../primitives/avatar'
+import { Badge } from '../../primitives/badge'
 
 const PRIORITY_COLOR: Record<string, string> = {
   High: 'bg-red-500/10 text-red-600 border-red-200',

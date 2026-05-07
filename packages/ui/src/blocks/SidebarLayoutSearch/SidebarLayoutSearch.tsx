@@ -1,9 +1,9 @@
 // @ts-nocheck
 import React, { useState } from 'react'
 import { LayoutDashboard, FolderOpen, Users, Settings, BarChart2, Bell } from 'lucide-react'
-import { cn } from '../utils/cn'
-import { Input } from '../primitives/input'
-import { Separator } from '../primitives/separator'
+import { cn } from '../../utils/cn'
+import { Input } from '../../primitives/input'
+import { Separator } from '../../primitives/separator'
 
 const ALL_ITEMS = [
   { icon: LayoutDashboard, label: 'Dashboard', active: true },

@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { X, Pencil } from 'lucide-react'
-import { cn } from '../utils/cn'
-import { Input } from '../primitives/input'
-import { Button } from '../primitives/button'
+import { cn } from '../../utils/cn'
+import { Input } from '../../primitives/input'
+import { Button } from '../../primitives/button'
 
 const COLORS = ['bg-blue-500', 'bg-green-500', 'bg-yellow-500', 'bg-purple-500', 'bg-red-500', 'bg-pink-500']
 
