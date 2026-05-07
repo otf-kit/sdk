@@ -31,3 +31,8 @@ kits/*/TODO.md
 
 # Railway deploy script byproduct (rebuild marker)
 .build-timestamp
+
+# Phase 12 · E4 — SEO audit snapshots are now stored in Postgres.
+# This dir was used by an earlier JSON-file design — keep ignored in case
+# any local script writes there as a fallback.
+data/seo-snapshots/
