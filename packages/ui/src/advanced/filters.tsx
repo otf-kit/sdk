@@ -33,7 +33,7 @@ function AddFilterPopover({ filters, onAdd }: { filters: FilterDef[]; onAdd: (v:
 
   const handleAdd = () => {
     if (!key || !val) return
-    onAdd({ key, operator: op || ops[0], value: val })
+    onAdd({ key, operator: op || ops[0]!, value: val })
     setKey(''); setOp(''); setVal('')
     setOpen(false)
   }

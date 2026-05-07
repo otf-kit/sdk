@@ -36,7 +36,7 @@ export function OrgMenu({
 }: OrgMenuProps) {
   const [internalId, setInternalId] = useState(defaultOrgId ?? ORGS[0]?.id ?? '1')
   const activeId = currentOrgId ?? internalId
-  const current = ORGS.find(o => o.id === activeId) ?? ORGS[0]
+  const current = ORGS.find(o => o.id === activeId) ?? ORGS[0]!
   const { collapsed } = useSidebar()
 
   function handleSwitch(orgId: string) {

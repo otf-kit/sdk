@@ -108,14 +108,15 @@ function FieldRenderer({ name, field, register, setValue, watch, error }: FieldR
 
 export function AutoForm({ schema, onSubmit, defaultValues, submitLabel = 'Submit' }: AutoFormProps) {
   const { register, handleSubmit, setValue, watch, formState } = useForm({
-    resolver: zodResolver(schema),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    resolver: zodResolver(schema as any),
     defaultValues: defaultValues as Record<string, unknown>,
   })
 
   const shape = schema.shape
 
   return (
-    <form onSubmit={handleSubmit(d => onSubmit(d as Record<string, unknown>))} className="flex flex-col gap-4">
+    <form onSubmit={handleSubmit((d) => onSubmit(d as unknown as Record<string, unknown>))} className="flex flex-col gap-4">
       {Object.entries(shape).map(([name, field]) => (
         <FieldRenderer
           key={name}

@@ -38,7 +38,7 @@ export function Sparkline({
   const max = Math.max(...data)
   const range = max - min || 1
   const pad = 2
-  const lastY = pad + (1 - (data[data.length - 1] - min) / range) * (height - pad * 2)
+  const lastY = pad + (1 - ((data.at(-1) ?? 0) - min) / range) * (height - pad * 2)
 
   const areaPath = type === 'area'
     ? `${path} L ${width - pad},${height - pad} L ${pad},${height - pad} Z`

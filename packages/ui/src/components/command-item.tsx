@@ -11,7 +11,7 @@ interface CommandItemProps {
   className?: string
 }
 
-export function CommandItem({ icon, label, description, shortcut, active, onClick, className }: CommandItemProps) {
+export function CommandListItem({ icon, label, description, shortcut, active, onClick, className }: CommandItemProps) {
   return (
     <div
       onClick={onClick}
