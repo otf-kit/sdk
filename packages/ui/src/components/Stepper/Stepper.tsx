@@ -1,6 +1,6 @@
 import React from 'react'
 import { Check } from 'lucide-react'
-import { cn } from '../utils/cn'
+import { cn } from '../../utils/cn'
 
 interface StepDef { title: string; description?: string }
 
@@ -40,9 +40,20 @@ interface StepperProps {
   currentStep: number
   steps: StepDef[]
   className?: string
+  /** 'horizontal' (default) | 'vertical' — vertical stacks steps as rows */
+  direction?: 'horizontal' | 'vertical'
 }
 
-export function Stepper({ currentStep, steps, className }: StepperProps) {
+export function Stepper({ currentStep, steps, className, direction = 'horizontal' }: StepperProps) {
+  if (direction === 'vertical' || (className && className.includes('flex-col'))) {
+    return (
+      <div className={cn('flex flex-col gap-0', className?.replace('flex-col', ''))}>
+        {steps.map((step, i) => (
+          <StepperStep key={i} {...step} index={i} current={currentStep} total={steps.length} />
+        ))}
+      </div>
+    )
+  }
   return (
     <div className={cn('flex gap-0', className)}>
       {steps.map((step, i) => (

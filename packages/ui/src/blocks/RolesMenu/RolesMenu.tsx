@@ -27,7 +27,7 @@ export interface RolesMenuProps {
 
 export function RolesMenu({ value = 'member', onChange, className }: RolesMenuProps) {
   const [role, setRole] = useState(value)
-  const current = ROLES.find(r => r.value === role) ?? ROLES[2]
+  const current = ROLES.find(r => r.value === role) ?? ROLES[0]!
 
   const handleChange = (v: string) => {
     setRole(v)

@@ -8,7 +8,7 @@ import {
   ColumnResizeMode,
 } from '@tanstack/react-table'
 import { cn } from '../utils/cn'
-import { Checkbox } from '../primitives/checkbox'
+import { Checkbox } from '../../primitives/checkbox'
 
 interface DataGridProps<T extends object> {
   columns: ColumnDef<T, any>[]

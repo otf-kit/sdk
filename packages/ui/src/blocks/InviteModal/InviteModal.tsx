@@ -53,7 +53,7 @@ export function InviteModal({ className }: InviteModalProps) {
           <div className="divide-y divide-[hsl(var(--border))] rounded-md border border-[hsl(var(--border))]">
             {pending.map((p, i) => (
               <div key={i} className="flex items-center gap-2 px-3 py-2">
-                <Avatar className="h-6 w-6"><AvatarFallback className="text-[10px]">{p.email[0].toUpperCase()}</AvatarFallback></Avatar>
+                <Avatar className="h-6 w-6"><AvatarFallback className="text-[10px]">{p.email.charAt(0).toUpperCase()}</AvatarFallback></Avatar>
                 <span className="flex-1 text-sm truncate">{p.email}</span>
                 <Badge variant="outline" className="text-[10px] px-1.5 py-0.5 shrink-0">{p.role}</Badge>
                 <button onClick={() => setPending(ps => ps.filter((_, j) => j !== i))}>

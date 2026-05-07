@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react'
 import { cn } from '../utils/cn'
-import { Button } from '../primitives/button'
+import { Button } from '../../primitives/button'
 
 interface TourContextValue {
   currentStep: number

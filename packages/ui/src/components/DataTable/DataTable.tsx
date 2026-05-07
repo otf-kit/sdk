@@ -11,10 +11,10 @@ import {
 } from '@tanstack/react-table'
 import { ArrowUpDown, ArrowUp, ArrowDown, ChevronLeft, ChevronRight } from 'lucide-react'
 import { cn } from '../utils/cn'
-import { Button } from '../primitives/button'
-import { Input } from '../primitives/input'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../primitives/select'
-import { Skeleton } from '../primitives/skeleton'
+import { Button } from '../../primitives/button'
+import { Input } from '../../primitives/input'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../primitives/select'
+import { Skeleton } from '../../primitives/skeleton'
 
 interface DataTableProps<T> {
   columns: ColumnDef<T>[]

@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { ChevronLeft, ChevronRight, Calendar } from 'lucide-react'
-import { Button } from '../primitives/button'
-import { Popover, PopoverContent, PopoverTrigger } from '../primitives/popover'
-import { cn } from '../utils/cn'
+import { Button } from '../../primitives/button'
+import { Popover, PopoverContent, PopoverTrigger } from '../../primitives/popover'
+import { cn } from '../../utils/cn'
 
 const DAYS = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
