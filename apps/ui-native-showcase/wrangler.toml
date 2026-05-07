@@ -1,3 +1,11 @@
 name = "otf-ui-native-storybook"
 pages_build_output_dir = "./dist"
 compatibility_date = "2024-01-01"
+
+# Expo Router uses client-side routing — every non-asset path needs to
+# serve index.html so the router can take over. Belt-and-suspenders with
+# the `_redirects` file under public/ — wrangler.toml's setting applies
+# at the project level, _redirects ships inside dist/ for portability
+# (e.g. when deploying via `wrangler pages deploy` from a different
+# working directory).
+not_found_handling = "single-page-application"

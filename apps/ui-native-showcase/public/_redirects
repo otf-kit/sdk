@@ -1,0 +1,13 @@
+# Cloudflare Pages redirects/rewrites config.
+# Syntax: https://developers.cloudflare.com/pages/configuration/redirects/
+#
+# SPA fallback: every unmatched path serves index.html with HTTP 200 so
+# Expo Router's client-side navigation can take over. Without this, deep
+# links (e.g. /interface/dialog) return 404 on hard refresh.
+#
+# This is the file-based equivalent of `not_found_handling =
+# "single-page-application"` in wrangler.toml. Belt-and-suspenders —
+# wrangler.toml may not always apply (e.g. when deploying via
+# `wrangler pages deploy` directly without the toml in scope).
+
+/*  /index.html  200

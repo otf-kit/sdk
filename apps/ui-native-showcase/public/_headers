@@ -1,0 +1,43 @@
+# Cloudflare Pages headers config.
+# Mirrors what kits/fitness-kit/server/static.ts (Hono on Railway) sets per
+# response, so showcase deployed to CF Pages behaves the same as a fitness-kit
+# Bun-server deploy.
+#
+# Syntax: https://developers.cloudflare.com/pages/configuration/headers/
+# Files in apps/ui-native-showcase/public/* are copied verbatim into dist/
+# during `expo export --platform web`, so this lands at dist/_headers.
+
+# Hashed asset chunks (entry-XXXX.js, *.png with hash) live under these
+# prefixes. Filenames include a content hash so a new version always gets
+# a new path → cache forever.
+/_expo/static/*
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
+
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
+
+# Everything else — HTML, manifest, fonts, the index entrypoint.
+# DO NOT set Cache-Control here. Cloudflare Pages MERGES headers from
+# every matching rule (it doesn't do most-specific-wins), so a Cache-Control
+# directive on `/*` would be appended to the immutable directive set above
+# for /_expo/static/* and /assets/* — and browsers obey the most-restrictive
+# concatenated value, which would defeat the immutable asset caching.
+#
+# CF Pages' default for HTML is `cache-control: public, max-age=0,
+# must-revalidate` which is functionally equivalent to no-store for the
+# purposes of "user always gets the latest bundle reference" — the HTML
+# is ~5 KB so the round-trip is cheap and bundle hashes update immediately.
+/*
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, OPTIONS
+  Access-Control-Allow-Headers: Content-Type
+  Access-Control-Max-Age: 86400
+  # Allow iframe embed from any origin — the showcase is designed to be
+  # embedded by apps/ui-native-storybook-preview/ for marketing surfaces.
+  # X-Frame-Options is omitted on purpose; CSP frame-ancestors is the
+  # modern equivalent and supports wildcard origins.
+  Content-Security-Policy: frame-ancestors *
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
