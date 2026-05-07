@@ -31,7 +31,7 @@ export const DataList = React.forwardRef<HTMLUListElement, DataListProps>(
 )
 DataList.displayName = 'DataList'
 
-export interface DataListItemProps extends React.LiHTMLAttributes<HTMLLIElement> {
+export interface DataListItemProps extends Omit<React.LiHTMLAttributes<HTMLLIElement>, 'title'> {
   left?: React.ReactNode
   title?: React.ReactNode
   description?: React.ReactNode

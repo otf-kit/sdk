@@ -25,7 +25,7 @@ export function ManageTagsModal({ className }: ManageTagsModalProps) {
   const addTag = () => {
     if (!newTag.trim()) return
     const id = `tag-${Date.now()}`
-    setTags(t => [...t, { id, name: newTag.trim(), color: COLORS[colorIdx % COLORS.length] }])
+    setTags(t => [...t, { id, name: newTag.trim(), color: COLORS[colorIdx % COLORS.length]! }])
     setNewTag('')
     setColorIdx(i => i + 1)
   }

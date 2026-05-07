@@ -20,7 +20,11 @@ export type QrCodeProps = Omit<React.HTMLAttributes<HTMLDivElement>, 'children'>
     src: string
     height: number
     width: number
-    excavate?: boolean
+    excavate: boolean
+    x?: number
+    y?: number
+    opacity?: number
+    crossOrigin?: 'anonymous' | 'use-credentials' | ''
   }
 }
 
