@@ -1,6 +1,6 @@
 import React from 'react'
 import { cn } from '../utils/cn'
-import { Avatar, AvatarFallback, AvatarImage } from '../primitives/avatar'
+import { Avatar, AvatarFallback, AvatarImage } from '../../primitives/avatar'
 
 const sizeMap = {
   sm: { avatar: 'h-7 w-7', name: 'text-sm', subtitle: 'text-xs' },

@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState } from 'react'
-import { Button } from '../primitives/button'
-import { cn } from '../utils/cn'
+import { Button } from '../../primitives/button'
+import { cn } from '../../utils/cn'
 
 interface StepFormContextValue {
   currentStep: number

@@ -1,24 +1,15 @@
 import React from 'react'
 import { cn } from '../../utils/cn'
-import { Button } from '../../primitives/Button/Button'
+import { Button } from '../../primitives/button'
 
 export const EmptyStateIcon = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => (
-    <div
-      ref={ref}
-      data-slot="empty-state-icon"
-      className={cn(
-        'flex h-12 w-12 items-center justify-center rounded-full',
-        'bg-muted text-muted-foreground',
-        className
-      )}
-      {...props}
-    />
+    <div ref={ref} className={cn('flex h-12 w-12 items-center justify-center rounded-full bg-[hsl(var(--muted))] text-[hsl(var(--muted-foreground))]', className)} {...props} />
   )
 )
 EmptyStateIcon.displayName = 'EmptyStateIcon'
 
-export interface EmptyStateProps {
+interface EmptyStateProps {
   icon?: React.ReactNode
   title: string
   description?: string
@@ -62,23 +53,16 @@ export function EmptyState({
   className,
 }: EmptyStateProps) {
   return (
-    <div
-      data-slot="empty-state"
-      className={cn(
-        'flex flex-col items-center justify-center text-center',
-        sizeMap[size],
-        className
-      )}
-    >
+    <div className={cn('flex flex-col items-center justify-center text-center', sizeMap[size], className)}>
       {icon && (
         <EmptyStateIcon className={iconSizeMap[size]}>
           {icon}
         </EmptyStateIcon>
       )}
       <div className="space-y-1 max-w-sm">
-        <h3 className={cn(titleSizeMap[size], 'text-foreground')}>{title}</h3>
+        <h3 className={cn(titleSizeMap[size], 'text-[hsl(var(--foreground))]')}>{title}</h3>
         {description && (
-          <p className={cn(descSizeMap[size], 'text-muted-foreground')}>
+          <p className={cn(descSizeMap[size], 'text-[hsl(var(--muted-foreground))]')}>
             {description}
           </p>
         )}

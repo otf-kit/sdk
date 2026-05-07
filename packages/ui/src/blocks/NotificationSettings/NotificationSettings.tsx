@@ -51,7 +51,7 @@ export function NotificationSettings({ className }: NotificationSettingsProps) {
           <NotifRow
             key={n.id}
             {...n}
-            checked={states[n.id]}
+            checked={states[n.id] ?? false}
             onChange={val => setStates(s => ({ ...s, [n.id]: val }))}
           />
         ))}

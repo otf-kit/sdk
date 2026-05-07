@@ -1,7 +1,7 @@
 import React from 'react'
 import { TrendingUp, TrendingDown } from 'lucide-react'
 import { cn } from '../utils/cn'
-import { Card, CardContent } from '../primitives/card'
+import { Card, CardContent } from '../../primitives/card'
 
 interface StatProps {
   label: string

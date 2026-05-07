@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Search, X } from 'lucide-react'
-import { cn } from '../utils/cn'
-import { type InputProps } from '../primitives/input'
+import { cn } from '../../utils/cn'
+import { type InputProps } from '../../primitives/input'
 
 export interface SearchInputProps extends Omit<InputProps, 'onChange'> {
   shortcut?: string

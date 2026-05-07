@@ -1,7 +1,7 @@
 import React from 'react'
 import { Plus, X } from 'lucide-react'
-import { Button } from '../primitives/button'
-import { cn } from '../utils/cn'
+import { Button } from '../../primitives/button'
+import { cn } from '../../utils/cn'
 
 export interface ArrayFieldProps<T> {
   value: T[]

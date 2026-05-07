@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Eye, EyeOff } from 'lucide-react'
-import { Input, type InputProps } from '../primitives/input'
-import { cn } from '../utils/cn'
+import { Input, type InputProps } from '../../primitives/input'
+import { cn } from '../../utils/cn'
 
 export interface PasswordInputProps extends InputProps {
   strength?: boolean
