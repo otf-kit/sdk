@@ -15,16 +15,17 @@
     "cross-platform"
   ],
   "license": "MIT",
-  "author": "otfdashkit <dave@otf-kit.dev>",
-  "homepage": "https://github.com/otf-kit/sdk/tree/main/packages/ui-native#readme",
+  "author": "otf-kit <dave@otf-kit.dev>",
+  "homepage": "https://otf-kit.dev",
   "repository": {
     "type": "git",
-    "url": "https://github.com/otf-kit/sdk.git",
+    "url": "git+https://github.com/otf-kit/sdk.git",
     "directory": "packages/ui-native"
   },
   "bugs": {
     "url": "https://github.com/otf-kit/sdk/issues"
   },
+  "funding": "https://otf-kit.dev/pricing",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
