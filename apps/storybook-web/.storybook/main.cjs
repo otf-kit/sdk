@@ -1,13 +1,18 @@
-import type { StorybookConfig } from '@storybook/react-vite'
-import { mergeConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import path from 'path'
-import { fileURLToPath } from 'url'
+// Native CommonJS (.cjs) — Node loads this directly without going through
+// esbuild-register's `.ts`/`.mjs` hooks. esbuild-register injects a
+// `require('url')` banner at the top of every transformed file, and on
+// Node 20+ that gets routed through `loadESMFromCJS` (because the file's
+// containing package looks like ESM to the new ESM-detection heuristic),
+// which then fails because `require` isn't defined in ESM scope.
+// `.cjs` isn't in esbuild-register's FILE_LOADERS map, so the hook is
+// bypassed entirely. See PR #26 history for the full debugging trail.
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
+const { mergeConfig } = require('vite')
+const react = require('@vitejs/plugin-react').default
+const path = require('path')
 
-const config: StorybookConfig = {
+/** @type {import('@storybook/react-vite').StorybookConfig} */
+const config = {
   stories: ['../stories/**/*.stories.@(ts|tsx)'],
   addons: [
     '@storybook/addon-essentials',
@@ -26,7 +31,7 @@ const config: StorybookConfig = {
       ],
       resolve: {
         alias: {
-          '@otfdashkit/ui/command-item': path.resolve(__dirname, '../../../packages/ui/src/components/command-item.tsx'),
+          '@otfdashkit/ui/command-item': path.resolve(__dirname, '../../../packages/ui/src/components/CommandItem/CommandItem.tsx'),
           '@otfdashkit/ui/forms-form': path.resolve(__dirname, '../../../packages/ui/src/forms/form.tsx'),
           '@otfdashkit/ui/layouts-page': path.resolve(__dirname, '../../../packages/ui/src/layouts/page.tsx'),
           '@otfdashkit/ui/layouts-sidebar': path.resolve(__dirname, '../../../packages/ui/src/layouts/sidebar.tsx'),
@@ -55,4 +60,4 @@ const config: StorybookConfig = {
   },
 }
 
-export default config
+module.exports = config
