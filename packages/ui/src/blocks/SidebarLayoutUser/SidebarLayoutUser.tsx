@@ -1,10 +1,10 @@
 // @ts-nocheck
 import React from 'react'
 import { LayoutDashboard, FolderOpen, Users, Settings, Bell } from 'lucide-react'
-import { cn } from '../utils/cn'
-import { Avatar, AvatarFallback } from '../primitives/avatar'
-import { Badge } from '../primitives/badge'
-import { Separator } from '../primitives/separator'
+import { cn } from '../../utils/cn'
+import { Avatar, AvatarFallback } from '../../primitives/avatar'
+import { Badge } from '../../primitives/badge'
+import { Separator } from '../../primitives/separator'
 
 const NAV_ITEMS = [
   { icon: LayoutDashboard, label: 'Dashboard', active: true },

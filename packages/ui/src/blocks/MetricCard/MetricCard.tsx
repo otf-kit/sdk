@@ -1,8 +1,8 @@
 import React from 'react'
 import { TrendingUp, TrendingDown } from 'lucide-react'
-import { cn } from '../utils/cn'
-import { Card, CardContent } from '../primitives/card'
-import { Button } from '../primitives/button'
+import { cn } from '../../utils/cn'
+import { Card, CardContent } from '../../primitives/card'
+import { Button } from '../../primitives/button'
 
 export interface MetricCardProps {
   label?: string

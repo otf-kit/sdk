@@ -1,11 +1,11 @@
 // @ts-nocheck
 import React from 'react'
 import { FileText, Image, FileCode, Film, Archive, MoreHorizontal, Download, Trash2 } from 'lucide-react'
-import { cn } from '../utils/cn'
-import { Button } from '../primitives/button'
+import { cn } from '../../utils/cn'
+import { Button } from '../../primitives/button'
 import {
   DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger,
-} from '../primitives/dropdown-menu'
+} from '../../primitives/dropdown-menu'
 
 interface FileItem { id: string; name: string; type: string; size: string; modified: string }
 

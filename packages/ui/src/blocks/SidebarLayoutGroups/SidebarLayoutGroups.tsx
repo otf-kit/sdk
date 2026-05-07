@@ -1,8 +1,8 @@
 // @ts-nocheck
 import React from 'react'
 import { LayoutDashboard, BarChart2, FolderOpen, Users, CreditCard, Settings, HelpCircle } from 'lucide-react'
-import { cn } from '../utils/cn'
-import { Separator } from '../primitives/separator'
+import { cn } from '../../utils/cn'
+import { Separator } from '../../primitives/separator'
 
 const NAV_GROUPS = [
   {

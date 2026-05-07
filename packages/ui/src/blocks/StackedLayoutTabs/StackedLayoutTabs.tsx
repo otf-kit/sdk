@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { Bell, ChevronDown } from 'lucide-react'
-import { cn } from '../utils/cn'
-import { Avatar, AvatarFallback } from '../primitives/avatar'
-import { Button } from '../primitives/button'
-import { Separator } from '../primitives/separator'
+import { cn } from '../../utils/cn'
+import { Avatar, AvatarFallback } from '../../primitives/avatar'
+import { Button } from '../../primitives/button'
+import { Separator } from '../../primitives/separator'
 
 const NAV_LINKS = ['Home', 'Projects', 'Analytics', 'Team']
 const TABS = ['Overview', 'Activity', 'Settings', 'Billing']

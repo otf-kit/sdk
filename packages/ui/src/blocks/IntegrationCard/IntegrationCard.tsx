@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { cn } from '../utils/cn'
-import { Badge } from '../primitives/badge'
-import { Button } from '../primitives/button'
+import { cn } from '../../utils/cn'
+import { Badge } from '../../primitives/badge'
+import { Button } from '../../primitives/button'
 
 export interface IntegrationCardProps {
   icon?: React.ReactNode

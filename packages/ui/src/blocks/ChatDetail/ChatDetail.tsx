@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { Send } from 'lucide-react'
-import { cn } from '../utils/cn'
-import { Avatar, AvatarFallback } from '../primitives/avatar'
-import { Input } from '../primitives/input'
-import { Button } from '../primitives/button'
+import { cn } from '../../utils/cn'
+import { Avatar, AvatarFallback } from '../../primitives/avatar'
+import { Input } from '../../primitives/input'
+import { Button } from '../../primitives/button'
 
 interface Message { id: string; author: string; initials: string; text: string; time: string; self?: boolean }
 

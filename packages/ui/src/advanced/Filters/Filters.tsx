@@ -1,10 +1,10 @@
 import React from 'react'
 import { Plus, X } from 'lucide-react'
-import { cn } from '../utils/cn'
-import { Button } from '../primitives/button'
-import { Popover, PopoverContent, PopoverTrigger } from '../primitives/popover'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../primitives/select'
-import { Input } from '../primitives/input'
+import { cn } from '../../utils/cn'
+import { Button } from '../../primitives/button'
+import { Popover, PopoverContent, PopoverTrigger } from '../../primitives/popover'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../primitives/select'
+import { Input } from '../../primitives/input'
 
 export interface FilterDef {
   key: string

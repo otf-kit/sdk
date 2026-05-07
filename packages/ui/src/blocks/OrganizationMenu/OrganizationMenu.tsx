@@ -1,6 +1,6 @@
 import React from 'react'
 import { ChevronDown, Check, Plus } from 'lucide-react'
-import { cn } from '../utils/cn'
+import { cn } from '../../utils/cn'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,7 +8,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '../primitives/dropdown-menu'
+} from '../../primitives/dropdown-menu'
 
 const ORGS = [
   { id: '1', name: 'Acme Corp', slug: 'acme', plan: 'Pro' },

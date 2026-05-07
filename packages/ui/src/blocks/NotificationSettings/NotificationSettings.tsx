@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { cn } from '../utils/cn'
-import { Switch } from '../primitives/switch'
-import { Separator } from '../primitives/separator'
+import { cn } from '../../utils/cn'
+import { Switch } from '../../primitives/switch'
+import { Separator } from '../../primitives/separator'
 
 const NOTIFICATIONS = [
   { id: 'comments', label: 'Comments', description: 'Get notified when someone comments on your post', default: true },

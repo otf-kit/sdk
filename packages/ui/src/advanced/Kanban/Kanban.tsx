@@ -2,7 +2,7 @@ import React from 'react'
 import { DndContext, DragEndEvent, DragOverEvent, DragOverlay, DragStartEvent, PointerSensor, useSensor, useSensors } from '@dnd-kit/core'
 import { SortableContext, useSortable, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
-import { cn } from '../utils/cn'
+import { cn } from '../../utils/cn'
 
 export interface KanbanCardDef { id: string; title: string; description?: string; badge?: string }
 export interface KanbanColumnDef { id: string; title: string; cards: KanbanCardDef[] }

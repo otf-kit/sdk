@@ -1,7 +1,7 @@
 import React from 'react'
 import { Search, X } from 'lucide-react'
-import { cn } from '../utils/cn'
-import { Dialog, DialogContent, DialogTitle } from '../primitives/dialog'
+import { cn } from '../../utils/cn'
+import { Dialog, DialogContent, DialogTitle } from '../../primitives/dialog'
 
 interface UseCommandBarReturn { open: boolean; setOpen: (v: boolean) => void }
 
