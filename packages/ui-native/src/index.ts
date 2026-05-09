@@ -326,19 +326,17 @@ export type {
   UseCollapsibleHeaderReturn,
 } from './hooks/useCollapsibleHeader'
 
-// ─── Shockwave (Skia shader transition) ─────────────────────────────────────
-// Requires `@shopify/react-native-skia` and `react-native-worklets` —
-// optional peer deps. Importing the symbol pulls the dep in only when the
-// consumer uses Shockwave. See peerDependenciesMeta in package.json.
-
-export { Shockwave } from './patterns/Shockwave'
-export type {
-  ShockwaveProps,
-  ShockwaveSlotProps,
-  ShockwaveContextValue,
-  ShockwaveOrigin,
-  ShockwaveValue,
-} from './patterns/Shockwave'
+// ─── Shockwave (Skia shader transition) — moved to `/skia` subpath ─────────
+// Shockwave imports `@shopify/react-native-skia` at module top level. Metro
+// resolves every import at bundle time regardless of `peerDependenciesMeta
+// .optional`, so re-exporting Shockwave here would force every consumer
+// (even one importing only `<Button>`) to install Skia.
+//
+// Import from the subpath instead:
+//   import { Shockwave } from '@otfdashkit/ui-native/skia'
+//
+// Pattern mirrors `react-native-reanimated/lottie`, `@tanstack/react-query
+// -devtools`, `framer-motion-3d`. See `docs/sdk-design.md#subpath-exports`.
 
 // ─── Stay (real-estate / booking marketing screens) ─────────────────────────
 
