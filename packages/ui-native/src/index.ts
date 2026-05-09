@@ -326,17 +326,22 @@ export type {
   UseCollapsibleHeaderReturn,
 } from './hooks/useCollapsibleHeader'
 
-// ─── Shockwave (Skia shader transition) — moved to `/skia` subpath ─────────
-// Shockwave imports `@shopify/react-native-skia` at module top level. Metro
-// resolves every import at bundle time regardless of `peerDependenciesMeta
-// .optional`, so re-exporting Shockwave here would force every consumer
-// (even one importing only `<Button>`) to install Skia.
+// ─── Shockwave is NOT shipped via npm — it's a CLI-installed component ────
+// Shockwave imports `@shopify/react-native-skia` + `react-native-worklets`
+// at module top level. Metro resolves every import at bundle time regardless
+// of `peerDependenciesMeta.optional`, so re-exporting it from the npm barrel
+// would force every consumer (even one importing only `<Button>`) to install
+// Skia. Subpath exports were tried (PRs #88-#90) and broke metro resolution
+// in inconsistent ways.
 //
-// Import from the subpath instead:
-//   import { Shockwave } from '@otfdashkit/ui-native/skia'
+// We follow the reacticx (the original Shockwave author) distribution model
+// instead: heavy-peer components are CLI-only, source-only. Source lives at
+// `packages/ui-native/registry/components/shockwave/`. Consumers run:
 //
-// Pattern mirrors `react-native-reanimated/lottie`, `@tanstack/react-query
-// -devtools`, `framer-motion-3d`. See `docs/sdk-design.md#subpath-exports`.
+//   npx @otfdashkit/cli add shockwave
+//
+// …which copies the source into their project + prompts them to install the
+// peer deps. Full rules: `.claude/skills/otf-arch/PEER-DEP-RULES.md`.
 
 // ─── Stay (real-estate / booking marketing screens) ─────────────────────────
 

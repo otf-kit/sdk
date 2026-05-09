@@ -1,0 +1,18 @@
+# Cloudflare Pages config for the @otfdashkit/ui-native CLI registry.
+#
+# Project: otf-ui-native-registry  (created via `wrangler pages project create
+# otf-ui-native-registry` — one-time, on first deploy).
+# Custom domain: r.otf-kit.dev (configured in the Cloudflare dashboard).
+#
+# Account / API token come from repo-root .env.local (CLOUDFLARE_ACCOUNT_ID +
+# CLOUDFLARE_API_TOKEN). CI uses repo secrets of the same name — see
+# `.github/workflows/deploy-registry.yml`.
+#
+# Custom HTTP headers (cache, content-type, CORS) are configured via the
+# `_headers` file produced by `scripts/build.sh`. CF Pages does NOT honor
+# wrangler.toml's `[[headers]]` blocks — those are Workers-only — so we keep
+# this file minimal.
+
+name = "otf-ui-native-registry"
+pages_build_output_dir = "dist"
+compatibility_date = "2025-05-09"

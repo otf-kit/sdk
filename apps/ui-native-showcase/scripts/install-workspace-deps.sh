@@ -51,20 +51,24 @@ for pkg in tokens ui-native; do
     exit 1
   fi
 
-  # ALWAYS rebuild dist/ — Metro resolves via package.json `exports` which
-  # point at `dist/index.mjs` + (now) `dist/skia.mjs`. A stale dist from a
-  # previous branch / before a subpath was added would be silently reused
-  # and metro would fail at bundle time with "Unable to resolve module
-  # @otfdashkit/ui-native/skia". Build is ~30ms — cheap insurance.
+  # ALWAYS rebuild dist/ — Metro resolves via package.json `exports` /
+  # `main` / `module` which point at `dist/`. A stale dist from a previous
+  # branch could be silently reused. Build is ~30ms — cheap insurance.
   # Use pnpm if available (CI path), fall back to bun (local dev path).
+  # Hard-fail if both fail — silently using stale dist masks broken SDK
+  # changes until they surface as runtime errors in the bundle.
   echo "  → rebuilding @otfdashkit/$pkg…"
+  built=0
   if command -v pnpm >/dev/null 2>&1; then
-    (cd "$src" && pnpm run build >/dev/null 2>&1) \
-      || (cd "$src" && bun run build >/dev/null 2>&1) \
-      || echo "    ⚠ build failed for $pkg — proceeding with whatever's in dist/"
-  else
-    (cd "$src" && bun run build >/dev/null 2>&1) \
-      || echo "    ⚠ build failed for $pkg — proceeding with whatever's in dist/"
+    if (cd "$src" && pnpm run build >/dev/null 2>&1); then built=1; fi
+  fi
+  if [ "$built" -eq 0 ] && command -v bun >/dev/null 2>&1; then
+    if (cd "$src" && bun run build >/dev/null 2>&1); then built=1; fi
+  fi
+  if [ "$built" -eq 0 ]; then
+    echo "  ✘ build failed for @otfdashkit/$pkg — re-run with verbose output:" >&2
+    echo "    (cd $src && pnpm run build)  # or: bun run build" >&2
+    exit 1
   fi
 
   # Replace any existing target (symlink or directory).
@@ -73,13 +77,45 @@ for pkg in tokens ui-native; do
   fi
 
   # Copy package contents (not just dist/) — Metro/Tailwind may scan src/.
+  # Exclude `registry/` — heavy-peer components live there and import Skia /
+  # worklets / etc. at module top-level. They're consumed by the showcase
+  # via a separate rsync below (registry → apps/ui-native-showcase/registry-local/),
+  # NOT through the npm-style package copy. Including registry/ here would
+  # mean the showcase's `node_modules/@otfdashkit/ui-native/registry/` has
+  # the heavy-peer source — currently inert (metro doesn't traverse it via
+  # `package.json#exports`) but a footgun for future bundler/scanner upgrades.
   rsync -a \
     --exclude 'node_modules' \
     --exclude '.turbo' \
     --exclude '.expo' \
     --exclude '__tests__' \
     --exclude '*.test.*' \
+    --exclude 'registry' \
     "$src/" "$dst/"
 
   echo "  ✓ installed @otfdashkit/$pkg → node_modules/@otfdashkit/$pkg"
 done
+
+# ── Copy CLI-only registry components into the showcase's local source ─────
+# Heavy-peer components (Shockwave, future Lottie/MMKV/etc.) are NOT shipped
+# via the npm package — they ship as source via the shadcn CLI registry. The
+# showcase IS a consumer, so it gets a local copy at `registry-local/<name>/`,
+# exactly as a kit consumer would after `npx @otfdashkit/cli add <name>`.
+#
+# Target is `registry-local/`, NOT `components/`, so we don't have to gitignore
+# components/<name>/ for every new heavy-peer component (`components/` is for
+# the showcase's OWN code: ShowcaseFrame, ThemePicker, catalog, etc.). The
+# whole `registry-local/` dir is gitignored — single ignore line, scales.
+REGISTRY_LOCAL="$APP_ROOT/registry-local"
+REGISTRY_SRC="$MONO_ROOT/packages/ui-native/registry/components"
+if [ -d "$REGISTRY_SRC" ]; then
+  mkdir -p "$REGISTRY_LOCAL"
+  for comp_dir in "$REGISTRY_SRC"/*/; do
+    [ -d "$comp_dir" ] || continue
+    comp_name=$(basename "$comp_dir")
+    dst="$REGISTRY_LOCAL/$comp_name"
+    if [ -e "$dst" ] || [ -L "$dst" ]; then rm -rf "$dst"; fi
+    rsync -a "$comp_dir" "$dst/"
+    echo "  ✓ installed registry component '$comp_name' → registry-local/$comp_name"
+  done
+fi

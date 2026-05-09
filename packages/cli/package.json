@@ -1,0 +1,60 @@
+{
+  "name": "@otfdashkit/cli",
+  "version": "0.1.0",
+  "description": "CLI to add OTF UI components into your project. Heavy-peer components (Skia, Lottie, MMKV, etc.) ship as source — use `npx @otfdashkit/cli add <name>` to install.",
+  "keywords": [
+    "otfdashkit",
+    "cli",
+    "shadcn",
+    "react-native",
+    "expo",
+    "components",
+    "registry"
+  ],
+  "license": "MIT",
+  "author": "otf-kit <dave@otf-kit.dev>",
+  "homepage": "https://otf-kit.dev",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/otf-kit/sdk.git",
+    "directory": "packages/cli"
+  },
+  "bugs": {
+    "url": "https://github.com/otf-kit/sdk/issues"
+  },
+  "type": "module",
+  "bin": {
+    "otfdashkit": "./dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "commander": "^12.1.0",
+    "fs-extra": "^11.2.0",
+    "ora": "^8.1.0",
+    "prompts": "^2.4.2"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^20.0.0",
+    "@types/prompts": "^2.4.9",
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

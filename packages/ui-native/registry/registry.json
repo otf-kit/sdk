@@ -1,0 +1,26 @@
+{
+  "$schema": "https://r.otf-kit.dev/registry-schema.json",
+  "version": "1.0.0",
+  "name": "@otfdashkit/ui-native",
+  "description": "Shadcn-style copy-paste registry for OTF UI Native components that have heavy native peer deps (Skia, Lottie, MMKV, Notifee, etc.) and therefore can't ship via the npm package without forcing every consumer to install those peers.",
+  "registryUrl": "https://r.otf-kit.dev",
+  "categories": ["patterns"],
+  "components": {
+    "shockwave": {
+      "name": "shockwave",
+      "category": "patterns",
+      "description": "Skia-shader chromatic-ripple transition between two views. Adapted from reacticx (MIT). Use for premium screen-to-screen transitions in marketing demos and onboarding flows.",
+      "path": "components/shockwave",
+      "folders": [],
+      "files": ["index.tsx", "types.ts", "conf.ts", "shader.ts", "utils.ts"],
+      "dependencies": [
+        "@shopify/react-native-skia@2.2.12",
+        "react-native-reanimated@~4.1.0",
+        "react-native-worklets@0.5.1"
+      ],
+      "registryDependencies": [],
+      "platform": "native-only",
+      "preview": "https://native-preview.otf-kit.dev/patterns/shockwave"
+    }
+  }
+}

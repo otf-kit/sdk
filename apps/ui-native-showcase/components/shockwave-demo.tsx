@@ -22,7 +22,16 @@ import {
   StayBrowseScreen,
   StayDetailScreen,
 } from '@otfdashkit/ui-native'
-import { Shockwave, type ShockwaveValue } from '@otfdashkit/ui-native/skia'
+// Shockwave is CLI-installed, not shipped via npm. The local copy at
+// `registry-local/shockwave/` is rsync'd from `packages/ui-native/registry/
+// components/shockwave/` by `scripts/install-workspace-deps.sh` (runs
+// pre-dev / pre-build). This is exactly how a kit consumer would consume it
+// after `npx @otfdashkit/cli add shockwave`. See PEER-DEP-RULES.md.
+//
+// Lives outside `components/` (which is for the showcase's own committed
+// code: ShowcaseFrame, ThemePicker, catalog, …) so the whole
+// `registry-local/` dir can be gitignored with one line.
+import { Shockwave, type ShockwaveValue } from '../registry-local/shockwave'
 import { ShowcaseFrame, Section } from './ShowcaseFrame'
 
 const PHONE_W = 320

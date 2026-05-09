@@ -1,6 +1,6 @@
 {
   "name": "@otfdashkit/ui-native",
-  "version": "0.1.3",
+  "version": "0.1.5",
   "description": "OTF UI Native — Tamagui-powered component library for React Native + Expo. Same component API as @otfdashkit/ui (web) — port a screen by changing the import.",
   "keywords": [
     "otfdashkit",
@@ -34,11 +34,6 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
-    },
-    "./skia": {
-      "types": "./dist/skia.d.ts",
-      "import": "./dist/skia.mjs",
-      "require": "./dist/skia.js"
     }
   },
   "files": [
@@ -46,7 +41,7 @@
     "README.md"
   ],
   "scripts": {
-    "build": "tsup && cp types/index.d.ts dist/index.d.ts && cp types/skia.d.ts dist/skia.d.ts",
+    "build": "tsup && cp types/index.d.ts dist/index.d.ts",
     "dev": "tsup --watch",
     "type-check": "tsc --noEmit",
     "clean": "rm -rf dist",
@@ -70,27 +65,21 @@
     "typescript": "^5.0.0"
   },
   "peerDependencies": {
-    "@shopify/react-native-skia": ">=2.0.0",
     "@tamagui/config": ">=1.100.0",
     "@tamagui/core": ">=1.100.0",
     "@tamagui/lucide-icons": ">=1.100.0",
+    "expo-router": ">=6.0.0",
     "react": ">=18.0.0",
     "react-native": ">=0.76.0",
+    "react-native-reanimated": ">=4.0.0",
     "react-native-svg": ">=13.0.0",
-    "react-native-worklets": ">=0.5.0",
     "tamagui": ">=1.100.0"
   },
   "peerDependenciesMeta": {
-    "@shopify/react-native-skia": {
-      "optional": true
-    },
     "expo-router": {
       "optional": true
     },
     "react-native-reanimated": {
-      "optional": true
-    },
-    "react-native-worklets": {
       "optional": true
     }
   },

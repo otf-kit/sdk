@@ -1,16 +1,12 @@
 import { defineConfig } from 'tsup'
 
 export default defineConfig({
-  // Multi-entry build: the main entry must NOT pull `@shopify/react-native-skia`
-  // (a heavy native module that would otherwise force every consumer to install
-  // it just to use a Button). Shockwave + its types ship at `dist/skia.{mjs,js}`
-  // and are surfaced via the `./skia` subpath export in package.json. Pattern
-  // mirrors `react-native-reanimated/lottie`, `@tanstack/react-query-devtools`,
-  // `framer-motion-3d`, etc. — see `docs/sdk-design.md#subpath-exports`.
-  entry: {
-    index: 'src/index.ts',
-    skia: 'src/patterns/Shockwave/index.ts',
-  },
+  // Single entry. Heavy-peer-using components (Shockwave / Skia, future
+  // Lottie / MMKV / Notifee / etc.) are NOT shipped via npm — they ship via
+  // the shadcn-CLI registry as copy-paste source files. Mirrors how
+  // reacticx (the original Shockwave author) distributes its components.
+  // See `.claude/skills/otf-arch/PEER-DEP-RULES.md`.
+  entry: ['src/index.ts'],
   format: ['cjs', 'esm'],
   // dts emit disabled — Tamagui's React 18-pinned types collide with the kit's
   // hoisted React 19 (Expo SDK 54 requirement). Consumers in this monorepo
@@ -40,10 +36,6 @@ export default defineConfig({
     '@tamagui/portal',
     'react-native-reanimated',
     'react-native-svg',
-    // Skia + worklets — used only by Shockwave. Optional peer deps so we
-    // mark them external; consumers that import Shockwave install them.
-    '@shopify/react-native-skia',
-    'react-native-worklets',
     // Expo deps used by MultiStep / ListItem / AvatarUploader / etc — must be
     // marked external so tsup doesn't try to compile their JSX-in-.js files.
     'expo-router',
