@@ -51,11 +51,20 @@ for pkg in tokens ui-native; do
     exit 1
   fi
 
-  # Build dist/ if missing — Metro resolves via package.json `main`/`exports`
-  # which point at dist/index.mjs, so a fresh checkout needs this.
-  if [ ! -d "$src/dist" ]; then
-    echo "  → building @otfdashkit/$pkg…"
-    (cd "$src" && bun run build >/dev/null 2>&1) || true
+  # ALWAYS rebuild dist/ — Metro resolves via package.json `exports` which
+  # point at `dist/index.mjs` + (now) `dist/skia.mjs`. A stale dist from a
+  # previous branch / before a subpath was added would be silently reused
+  # and metro would fail at bundle time with "Unable to resolve module
+  # @otfdashkit/ui-native/skia". Build is ~30ms — cheap insurance.
+  # Use pnpm if available (CI path), fall back to bun (local dev path).
+  echo "  → rebuilding @otfdashkit/$pkg…"
+  if command -v pnpm >/dev/null 2>&1; then
+    (cd "$src" && pnpm run build >/dev/null 2>&1) \
+      || (cd "$src" && bun run build >/dev/null 2>&1) \
+      || echo "    ⚠ build failed for $pkg — proceeding with whatever's in dist/"
+  else
+    (cd "$src" && bun run build >/dev/null 2>&1) \
+      || echo "    ⚠ build failed for $pkg — proceeding with whatever's in dist/"
   fi
 
   # Replace any existing target (symlink or directory).
