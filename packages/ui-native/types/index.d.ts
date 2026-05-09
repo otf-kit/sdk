@@ -308,13 +308,9 @@ export const useCollapsibleHeader: any
 export type UseCollapsibleHeaderOptions = any
 export type UseCollapsibleHeaderReturn = any
 
-// ─── Shockwave (Skia shader transition) ───────────────────────────────────
-export const Shockwave: any
-export type ShockwaveProps = any
-export type ShockwaveSlotProps = any
-export type ShockwaveContextValue = any
-export type ShockwaveOrigin = any
-export type ShockwaveValue = 'from' | 'to'
+// ─── Shockwave moved to `@otfdashkit/ui-native/skia` subpath ──────────────
+// See `packages/ui-native/types/skia.d.ts` for the type stubs and the
+// "Why subpath exports?" section in `docs/sdk-design.md`.
 
 // ─── Stay (real-estate / booking marketing screens) ───────────────────────
 export const StayBrowseScreen: any

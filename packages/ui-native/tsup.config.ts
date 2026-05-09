@@ -1,7 +1,16 @@
 import { defineConfig } from 'tsup'
 
 export default defineConfig({
-  entry: ['src/index.ts'],
+  // Multi-entry build: the main entry must NOT pull `@shopify/react-native-skia`
+  // (a heavy native module that would otherwise force every consumer to install
+  // it just to use a Button). Shockwave + its types ship at `dist/skia.{mjs,js}`
+  // and are surfaced via the `./skia` subpath export in package.json. Pattern
+  // mirrors `react-native-reanimated/lottie`, `@tanstack/react-query-devtools`,
+  // `framer-motion-3d`, etc. — see `docs/sdk-design.md#subpath-exports`.
+  entry: {
+    index: 'src/index.ts',
+    skia: 'src/patterns/Shockwave/index.ts',
+  },
   format: ['cjs', 'esm'],
   // dts emit disabled — Tamagui's React 18-pinned types collide with the kit's
   // hoisted React 19 (Expo SDK 54 requirement). Consumers in this monorepo

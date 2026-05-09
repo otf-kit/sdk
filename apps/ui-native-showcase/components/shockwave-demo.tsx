@@ -19,11 +19,10 @@ import {
   XStack,
   SizableText,
   Paragraph,
-  Shockwave,
   StayBrowseScreen,
   StayDetailScreen,
-  type ShockwaveValue,
 } from '@otfdashkit/ui-native'
+import { Shockwave, type ShockwaveValue } from '@otfdashkit/ui-native/skia'
 import { ShowcaseFrame, Section } from './ShowcaseFrame'
 
 const PHONE_W = 320
