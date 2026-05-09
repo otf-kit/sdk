@@ -11,11 +11,14 @@
     "prebuild:web": "bash scripts/install-workspace-deps.sh",
     "build:web": "EXPO_NO_TELEMETRY=1 npx expo export --platform web --output-dir dist",
     "deploy": "npm run build:web && npx wrangler pages deploy dist --project-name otf-ui-native-storybook --commit-dirty=true",
+    "publish:update": "bash scripts/publish-eas-update.sh",
+    "release": "npm run deploy && npm run publish:update",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@otfdashkit/ui-native": "^0.1.0",
     "@otfdashkit/tokens": "^0.1.0",
+    "@shopify/react-native-skia": "2.2.12",
     "@tamagui/lucide-icons": "^1.144.4",
     "@tamagui/portal": "^1.144.4",
     "expo": "~54.0.25",

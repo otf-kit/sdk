@@ -38,7 +38,7 @@ set -euo pipefail
 
 APP_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 MONO_ROOT="$(cd "$APP_ROOT/../.." && pwd)"
-TARGET="$APP_ROOT/node_modules/@otf"
+TARGET="$APP_ROOT/node_modules/@otfdashkit"
 
 mkdir -p "$TARGET"
 
@@ -54,7 +54,7 @@ for pkg in tokens ui-native; do
   # Build dist/ if missing — Metro resolves via package.json `main`/`exports`
   # which point at dist/index.mjs, so a fresh checkout needs this.
   if [ ! -d "$src/dist" ]; then
-    echo "  → building @otf/$pkg…"
+    echo "  → building @otfdashkit/$pkg…"
     (cd "$src" && bun run build >/dev/null 2>&1) || true
   fi
 
@@ -72,5 +72,5 @@ for pkg in tokens ui-native; do
     --exclude '*.test.*' \
     "$src/" "$dst/"
 
-  echo "  ✓ installed @otf/$pkg → node_modules/@otf/$pkg"
+  echo "  ✓ installed @otfdashkit/$pkg → node_modules/@otfdashkit/$pkg"
 done
