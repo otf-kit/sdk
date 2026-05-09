@@ -308,9 +308,10 @@ export const useCollapsibleHeader: any
 export type UseCollapsibleHeaderOptions = any
 export type UseCollapsibleHeaderReturn = any
 
-// ─── Shockwave moved to `@otfdashkit/ui-native/skia` subpath ──────────────
-// See `packages/ui-native/types/skia.d.ts` for the type stubs and the
-// "Why subpath exports?" section in `docs/sdk-design.md`.
+// ─── Shockwave is CLI-installed, not shipped via npm ─────────────────────
+// Source lives at `packages/ui-native/registry/components/shockwave/`.
+// Consumers install via the shadcn CLI; types come from the local copy.
+// See `.claude/skills/otf-arch/PEER-DEP-RULES.md`.
 
 // ─── Stay (real-estate / booking marketing screens) ───────────────────────
 export const StayBrowseScreen: any

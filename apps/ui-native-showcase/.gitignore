@@ -25,3 +25,9 @@ node_modules/.cache/wrangler
 
 # @generated expo-cli
 expo-env.d.ts
+
+# Heavy-peer components copied from packages/ui-native/registry/ at
+# predev/prebuild time. Source of truth is packages/ui-native/registry/
+# components/<name>/. Whole dir gitignored so adding new heavy-peer
+# components doesn't require maintaining a list here.
+registry-local/

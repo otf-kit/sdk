@@ -1,0 +1,11 @@
+{
+  "name": "@otfdashkit/ui-native-registry",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Static-site wrapper for the @otfdashkit/ui-native CLI registry. Builds packages/ui-native/registry/ + a tiny index.html into dist/, deploys to Cloudflare Pages project otf-ui-native-registry → https://r.otf-kit.dev.",
+  "scripts": {
+    "build": "bash scripts/build.sh",
+    "deploy": "bash scripts/build.sh && npx wrangler@latest pages deploy dist --project-name otf-ui-native-registry --commit-dirty=true",
+    "verify": "bash scripts/verify.sh"
+  }
+}
