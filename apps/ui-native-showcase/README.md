@@ -125,10 +125,6 @@ First-time setup of the Pages project — only ever needed once:
 npx wrangler pages project create otf-ui-native-storybook
 ```
 
-## Out of scope for v1
+## License
 
-- Code/Preview tab toggle (preview only).
-- Automatic prop-table introspection (each `<Section>` is hand-authored).
-- Cross-primitive search (sidebar filter only).
-
-These ride on top of the same shell once they're needed.
+MIT — see [LICENSE](./LICENSE).
