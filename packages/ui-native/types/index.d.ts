@@ -307,3 +307,20 @@ export type CardScrollerProps<T = unknown> = {
 export const useCollapsibleHeader: any
 export type UseCollapsibleHeaderOptions = any
 export type UseCollapsibleHeaderReturn = any
+
+// ─── Shockwave (Skia shader transition) ───────────────────────────────────
+export const Shockwave: any
+export type ShockwaveProps = any
+export type ShockwaveSlotProps = any
+export type ShockwaveContextValue = any
+export type ShockwaveOrigin = any
+export type ShockwaveValue = 'from' | 'to'
+
+// ─── Stay (real-estate / booking marketing screens) ───────────────────────
+export const StayBrowseScreen: any
+export const StayDetailScreen: any
+export type StayBrowseScreenProps = any
+export type StayCategoryChip = any
+export type StayDetailMetric = any
+export type StayDetailScreenProps = any
+export type StayListing = any

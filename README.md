@@ -142,10 +142,13 @@ Built-in themes: `mono`, `ocean-teal`, `warm-amber`, `rose-coral`, `lavender`, `
     <td>Every component, every variant, every state.</td>
   </tr>
   <tr>
-    <td><a href="https://native.otf-kit.dev/">Native showcase</a></td>
-    <td>iOS / Android primitives running in a single Expo app.</td>
+    <td><a href="https://native-preview.otf-kit.dev/">Native showcase</a></td>
+    <td>iOS / Android primitives in a phone-frame mockup with a per-route QR &mdash; scan to land on the same component on a real device.</td>
   </tr>
 </table>
+
+> [!TIP]
+> Every preview at `*-preview.otf-kit.dev` (`native-preview`, `fitness-preview`, &hellip;) ships a per-route QR card. Navigate inside the iframe → the QR rebuilds with a deep link to the same screen, so scanning lands you on the actual native experience for whatever you were viewing. One QR works on iPhone + Android.
 
 ## Why otfdashkit
 

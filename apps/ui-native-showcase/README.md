@@ -4,6 +4,15 @@ Custom Expo-web shell that exercises every primitive, interface block, layout,
 and pattern in [`@otfdashkit/ui-native`](https://www.npmjs.com/package/@otfdashkit/ui-native)
 with all of their prop variants on every palette in light + dark.
 
+> **Best browsing experience** &mdash; visit
+> [`https://native-preview.otf-kit.dev/`](https://native-preview.otf-kit.dev/),
+> the phone-frame wrapper that iframes this showcase with a per-component QR
+> code on the side. Each route gets its own QR so visitors can scan and land
+> on the same component on a real iOS / Android device via the OTF preview app.
+>
+> The bare showcase app (no phone frame, no QR) lives at
+> [`https://native.otf-kit.dev/`](https://native.otf-kit.dev/).
+
 > Why a custom shell instead of `@storybook/react-native`?
 > Storybook RN's web export is brittle. We already run a parallel custom
 > shell for the web `@otfdashkit/ui` library — same approach, native flavor.
@@ -99,6 +108,9 @@ bun run build:web   # → dist/  (static HTML/JS/CSS via expo export)
 Production deploys are automated via GitHub Actions: every push to `main`
 that touches the showcase rebuilds and ships to Cloudflare Pages
 (project `otf-ui-native-storybook`, alias `https://native.otf-kit.dev`).
+The phone-frame wrapper at `https://native-preview.otf-kit.dev/`
+(project `otf-ui-native-storybook-preview`) iframes this URL and adds
+the per-component QR card &mdash; that's the URL we share with visitors.
 
 For an emergency manual deploy (after sourcing
 `CLOUDFLARE_ACCOUNT_ID` + `CLOUDFLARE_API_TOKEN` into your shell):

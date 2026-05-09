@@ -18,6 +18,12 @@ export interface Entry {
   title: string
   description: string
   status: EntryStatus
+  /**
+   * Component is native-only — its route renders <MobileOnlyFallback>
+   * (QR codes pointing at the OTF preview build) on web, and the real
+   * demo on iOS / Android.
+   */
+  mobileOnly?: boolean
 }
 
 export interface Category {
@@ -132,6 +138,13 @@ export const CATALOG: Category[] = [
       { slug: 'swipe-cards', title: 'Swipe Cards', description: 'Tinder-style 5-card stack with left/right swipe callbacks.', status: 'ready' },
       { slug: 'swipeable-row', title: 'Swipeable Row', description: 'List row with left + right swipe actions.', status: 'ready' },
       { slug: 'carousel', title: 'Carousel', description: '3-card paged carousel with indicator dots.', status: 'ready' },
+      // Real-estate marketing screens — native premium experience, paired
+      // with Shockwave on the Shockwave route. Web routes show
+      // MobileOnlyFallback to drive visitors onto the QR + real device.
+      { slug: 'stay-browse', title: 'Stay Browse', description: 'Hospitality / real-estate search screen — greeting, multi-line headline, category chips, featured listing card.', status: 'ready', mobileOnly: true },
+      { slug: 'stay-detail', title: 'Stay Detail', description: 'Booking-confirmation screen — hero image, rating chip, price + owner subtitle, metric row, accent CTA.', status: 'ready', mobileOnly: true },
+      // Effects
+      { slug: 'shockwave', title: 'Shockwave', description: 'Skia-shader transition that auto-cycles between Stay Browse and Stay Detail every ~2s — chromatic ripple from a configurable origin. Adapted from reacticx (MIT).', status: 'ready', mobileOnly: true },
       { slug: 'pull-to-refresh', title: 'Pull To Refresh', description: 'Constrained list with refresh handler and indicator.', status: 'ready' },
       // Misc
       { slug: 'chat-bubble', title: 'Chat Bubble', description: 'User vs assistant bubbles with avatar + timestamp; thread mock.', status: 'ready' },

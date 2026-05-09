@@ -325,3 +325,28 @@ export type {
   UseCollapsibleHeaderOptions,
   UseCollapsibleHeaderReturn,
 } from './hooks/useCollapsibleHeader'
+
+// ─── Shockwave (Skia shader transition) ─────────────────────────────────────
+// Requires `@shopify/react-native-skia` and `react-native-worklets` —
+// optional peer deps. Importing the symbol pulls the dep in only when the
+// consumer uses Shockwave. See peerDependenciesMeta in package.json.
+
+export { Shockwave } from './patterns/Shockwave'
+export type {
+  ShockwaveProps,
+  ShockwaveSlotProps,
+  ShockwaveContextValue,
+  ShockwaveOrigin,
+  ShockwaveValue,
+} from './patterns/Shockwave'
+
+// ─── Stay (real-estate / booking marketing screens) ─────────────────────────
+
+export { StayBrowseScreen, StayDetailScreen } from './patterns/StayCard'
+export type {
+  StayBrowseScreenProps,
+  StayCategoryChip,
+  StayDetailMetric,
+  StayDetailScreenProps,
+  StayListing,
+} from './patterns/StayCard'

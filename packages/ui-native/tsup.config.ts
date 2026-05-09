@@ -31,6 +31,10 @@ export default defineConfig({
     '@tamagui/portal',
     'react-native-reanimated',
     'react-native-svg',
+    // Skia + worklets — used only by Shockwave. Optional peer deps so we
+    // mark them external; consumers that import Shockwave install them.
+    '@shopify/react-native-skia',
+    'react-native-worklets',
     // Expo deps used by MultiStep / ListItem / AvatarUploader / etc — must be
     // marked external so tsup doesn't try to compile their JSX-in-.js files.
     'expo-router',

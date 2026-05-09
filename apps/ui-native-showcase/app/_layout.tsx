@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from 'react'
 import { Platform } from 'react-native'
-import { Tabs } from 'expo-router'
+import { Tabs, usePathname } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
 import * as SplashScreen from 'expo-splash-screen'
 import { SafeAreaInsetsContext } from 'react-native-safe-area-context'
@@ -36,6 +36,31 @@ function WebSafeAreaShim({ children }: { children: React.ReactNode }) {
       {children}
     </SafeAreaInsetsContext.Provider>
   )
+}
+
+// Emit `{ type: 'otf-route', path }` to the parent window every time the
+// in-iframe route changes. The phone-frame shell at
+// apps/ui-native-storybook-preview/index.html listens for this and updates
+// its QR card per component (different deep-link, different copy).
+//
+// No-op outside an iframe and on native.
+function ParentRouteSync() {
+  const pathname = usePathname()
+  useEffect(() => {
+    if (Platform.OS !== 'web') return
+    if (typeof window === 'undefined') return
+    if (window.parent === window) return
+    try {
+      window.parent.postMessage(
+        { source: 'otf-ui-native-showcase', type: 'otf-route', path: pathname },
+        '*',
+      )
+    } catch {
+      // Cross-origin postMessage failure is fine — outer shell uses '*'
+      // listener and rejects payloads it doesn't recognise.
+    }
+  }, [pathname])
+  return null
 }
 
 SplashScreen.preventAutoHideAsync().catch(() => {})
@@ -204,6 +229,7 @@ export default function RootLayout() {
       <InjectWebStyles />
       <ShowcaseThemeProvider>
         <WebSafeAreaShim>
+          <ParentRouteSync />
           <ThemedTabsShell />
           <StatusBar style="auto" />
         </WebSafeAreaShim>
