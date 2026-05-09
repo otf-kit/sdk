@@ -26,7 +26,14 @@
       "package": "com.otf.uinative_showcase"
     },
     "extra": {
-      "router": { "origin": false }
+      "router": { "origin": false },
+      "eas": {
+        "projectId": "31d0aa44-4713-44d9-91aa-c2e2c58c08ad"
+      }
+    },
+    "owner": "otfdashkit",
+    "updates": {
+      "url": "https://u.expo.dev/31d0aa44-4713-44d9-91aa-c2e2c58c08ad"
     }
   }
 }
