@@ -40,6 +40,20 @@ bun run dev:native        # iOS / Android via Expo Dev Tools
 Web-only is enough for catalog work; native is for verifying
 platform-specific renderers (e.g. `Pressable` on iOS).
 
+<details>
+<summary><b>Optional · experimental:</b> stable HTTPS preview at <code>https://showcase.localhost</code></summary>
+
+Skip this unless `localhost:3010` is actually getting in your way. `bun run dev` is the supported path.
+
+```bash
+npx portless trust    # one-time: local CA + port 443 (asks for sudo)
+npx portless           # → https://showcase.localhost
+```
+
+Caveats: sudo prompt on first run, portless is pre-1.0, fully reversible via `npx portless clean`.
+
+</details>
+
 ## Add a new entry
 
 1. **Drop a screen** at `app/<category>/<slug>.tsx`.

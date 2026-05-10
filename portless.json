@@ -1,0 +1,9 @@
+{
+  "apps": {
+    "apps/landing": { "name": "landing" },
+    "apps/storybook-web": { "name": "storybook" },
+    "apps/ui-native-showcase": { "name": "showcase" },
+    "kits/saas-dashboard": { "name": "saas" },
+    "kits/fitness-kit": { "name": "fitness" }
+  }
+}
