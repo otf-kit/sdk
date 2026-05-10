@@ -18,6 +18,10 @@
     "agent-browser": "agent-browser",
     "agent-browser:install": "agent-browser install",
     "agent-browser:check-meta": "tsx scripts/check-deployed-meta.ts",
+    "portless": "portless",
+    "portless:trust": "portless trust",
+    "portless:list": "portless list",
+    "portless:clean": "portless clean",
     "prepare": "simple-git-hooks"
   },
   "simple-git-hooks": {
@@ -34,6 +38,7 @@
     "eslint": "^9.0.0",
     "eslint-plugin-react-hooks": "^5.0.0",
     "lint-staged": "^15.2.0",
+    "portless": "^0.13.0",
     "prettier": "^3.3.0",
     "simple-git-hooks": "^2.11.0",
     "stripe": "^22.1.0",
