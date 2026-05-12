@@ -1,8 +1,7 @@
 <h1 align="center">@otfdashkit/ui-native</h1>
 
 <p align="center">
-  React Native + Expo component library &mdash; same component API as <code>@otfdashkit/ui</code> (web).<br/>
-  Tamagui under the hood, parity primitives, tokens shared with the web SDK.
+  React Native components with the same API as <code>@otfdashkit/ui</code> on web. Port a screen by changing the import.
 </p>
 
 <p align="center">
@@ -19,10 +18,18 @@
 
 ---
 
-## Live demo
+## What you get
 
-- **[native.otf-kit.dev](https://native.otf-kit.dev/)** &mdash; full storybook in a phone-frame, with an Expo Go QR for real-device preview
-- **[fitness-preview.otf-kit.dev](https://fitness-preview.otf-kit.dev/)** &mdash; production fitness app built end-to-end with this package
+- **80 primitives** — Button, Card, Input, Avatar, Badge, Chip, Sheet, Switch, Tabs, Toast, Text, Stack — same names and props as the web SDK
+- **Apple-Fitness-style blocks** — ActivityRings, WeekStrip, StepperBig, MetricCard, SegmentedControl, MiniBarChart
+- **Animated patterns** — shaders, marquees, parallax scrolls (heavy peers ship via [`@otfdashkit/cli`](https://www.npmjs.com/package/@otfdashkit/cli) so you only pay for what you use)
+- **17 shared themes** — same `@otfdashkit/tokens` palette as web; switch palette at the Tamagui provider level
+- **One codebase, three targets** — Expo Router app renders on iOS, Android, and web export
+
+## Live demos
+
+- **[native.otf-kit.dev](https://native.otf-kit.dev/)** — full showcase in a phone-frame with per-route Expo Go QR (scan, land on the same component on a real device)
+- **[fitness-preview.otf-kit.dev](https://fitness-preview.otf-kit.dev/)** — production fitness app built end-to-end with this package
 
 ## Install
 
@@ -58,7 +65,7 @@ export default function App() {
 }
 ```
 
-The same component names, props, and variants work on web (`@otfdashkit/ui`) and native &mdash; port a screen by changing the import.
+The same component names and props work on web (`@otfdashkit/ui`) — porting a screen is a one-line import change.
 
 ## Cross-platform parity
 
@@ -70,13 +77,12 @@ The same component names, props, and variants work on web (`@otfdashkit/ui`) and
 | `<Avatar>` | Radix Avatar | Tamagui Avatar |
 | `<Text>` | Tailwind typography | Tamagui Text |
 
-Everything reads from the same [`@otfdashkit/tokens`](https://www.npmjs.com/package/@otfdashkit/tokens) palette, so switching themes from `mono` → `ocean-teal` → `forest` cascades through both runtimes.
+Both read from [`@otfdashkit/tokens`](https://www.npmjs.com/package/@otfdashkit/tokens) — flip the theme on web and native at once.
 
 ## Theming
 
 ```tsx
-// Apply a theme at the Tamagui provider level
-import { otfTamaguiConfig, OTF_DESIGN_THEMES } from '@otfdashkit/tokens'
+import { otfTamaguiConfig } from '@otfdashkit/tokens'
 
 const config = createTamagui({
   ...otfTamaguiConfig,
@@ -86,25 +92,33 @@ const config = createTamagui({
 
 All 17 themes from `@otfdashkit/tokens` are available.
 
-## AI-coding-tool-native
+## Heavy-peer components
 
-Every component ships with structured JSDoc and tested prompts (`ai/prompts/*.md`). Cursor, Claude Code, Copilot, and Lovable all generate correct native usage on the first try, including the right Expo Go imports, safe-area handling, and theme tokens.
+Skia shaders, Reanimated worklets, MMKV, Notifee — anything that would force every consumer to install peers they don't need — ships through [`@otfdashkit/cli`](https://www.npmjs.com/package/@otfdashkit/cli) instead of npm. Source-copy install, no forced peers:
 
-## Live demos
+```bash
+npx @otfdashkit/cli init
+npx @otfdashkit/cli add shockwave
+```
 
-- **Phone-frame storybook**: https://native.otf-kit.dev (every component, every variant + Expo Go QR)
-- **Fitness reference app**: https://fitness-preview.otf-kit.dev ([source](https://github.com/otf-kit/fitness-kit))
+## Works with
+
+- **Claude Code**, **Cursor**, **Lovable**, **Bolt** — every component ships structured JSDoc + tested prompts in `ai/prompts/`, including Expo Go imports, safe-area handling, and theme tokens
 
 ## Related packages
 
-- [`@otfdashkit/ui`](https://www.npmjs.com/package/@otfdashkit/ui) &mdash; web counterpart, same component API
-- [`@otfdashkit/tokens`](https://www.npmjs.com/package/@otfdashkit/tokens) &mdash; shared design tokens (CSS vars + Tamagui config)
-- [`@otfdashkit/eslint-plugin-otf-design`](https://www.npmjs.com/package/@otfdashkit/eslint-plugin-otf-design) &mdash; design-system lint rules
+- [`@otfdashkit/ui`](https://www.npmjs.com/package/@otfdashkit/ui) — web counterpart, same component API
+- [`@otfdashkit/tokens`](https://www.npmjs.com/package/@otfdashkit/tokens) — shared design tokens
+- [`@otfdashkit/cli`](https://www.npmjs.com/package/@otfdashkit/cli) — heavy-peer component installer
+
+## Community
+
+**[discord.gg/gpXyu7SqNZ](https://discord.gg/gpXyu7SqNZ)** — questions, bugs, feature requests.
 
 ## Status
 
-`v0.1.x` &mdash; alpha. APIs may change before `1.0`. Pin exact versions if you ship to production.
+`v0.1.x` — alpha. APIs may change before `1.0`. Pin exact versions in production.
 
 ## License
 
-MIT &copy; otfdashkit
+MIT. You own the source. Eject any time. Copyright &copy; otfdashkit.
