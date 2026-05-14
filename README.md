@@ -60,7 +60,7 @@ The free SDK underneath those kits — `@otfdashkit/ui` (web) and `@otfdashkit/u
   </tr>
 </table>
 
-Plus: [`ui.otf-kit.dev`](https://ui.otf-kit.dev/) (web Storybook, every component) and [`native.otf-kit.dev`](https://native.otf-kit.dev/) (native showcase with per-route Expo Go QR).
+Plus: [`ui.otf-kit.dev`](https://ui.otf-kit.dev/) (web Storybook, every component) and [`native-preview.otf-kit.dev`](https://native-preview.otf-kit.dev/) (native showcase in a phone frame with per-route Expo Go QR — scan and land on the same component on a real device).
 
 ## What you get
 

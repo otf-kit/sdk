@@ -28,7 +28,7 @@
 
 ## Live demos
 
-- **[native.otf-kit.dev](https://native.otf-kit.dev/)** — full showcase in a phone-frame with per-route Expo Go QR (scan, land on the same component on a real device)
+- **[native-preview.otf-kit.dev](https://native-preview.otf-kit.dev/)** — full showcase in a phone frame with per-route Expo Go QR (scan, land on the same component on a real device)
 - **[fitness-preview.otf-kit.dev](https://fitness-preview.otf-kit.dev/)** — production fitness app built end-to-end with this package
 
 ## Install
