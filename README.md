@@ -153,3 +153,7 @@ MIT for the SDK packages. You own the source. Eject any time.
 Kits ship under a commercial per-developer license (`LICENSE-KIT.md`) — also full source, also yours to fork. The license only covers redistribution.
 
 Copyright &copy; otfdashkit — see [LICENSE](LICENSE).
+
+---
+
+Project home: [otf-kit.dev](https://otf-kit.dev) — kits, SDK, and AI configs for every major coding agent.
