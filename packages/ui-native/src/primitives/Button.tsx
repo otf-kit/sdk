@@ -49,6 +49,24 @@ export const Button: any = styled(TamaguiButton, {
         hoverStyle: { backgroundColor: '$red10' },
         pressStyle: { backgroundColor: '$red8', opacity: 0.9 },
       },
+      // shimmer — premium CTA variant. Cross-platform parity API with
+      // @otfdashkit/ui's Button variant="shimmer". On web the conic-gradient
+      // sweep animates via CSS keyframes; on native we ship the surface
+      // treatment (saturated primary + colored shadow + thin highlight
+      // border) without continuous animation, to avoid pulling Skia / Moti
+      // as a peer dep. Animated parity is a follow-up enhancement.
+      shimmer: {
+        backgroundColor: '$color9',
+        color: '$color1',
+        shadowColor: '$color9',
+        shadowRadius: 10,
+        shadowOffset: { height: 0, width: 0 },
+        shadowOpacity: 0.5,
+        borderWidth: 1,
+        borderColor: '$color8',
+        hoverStyle: { backgroundColor: '$color10', shadowOpacity: 0.7 },
+        pressStyle: { backgroundColor: '$color8', opacity: 0.95 },
+      },
     },
     size: {
       sm: { height: '$3', paddingHorizontal: '$3', borderRadius: '$3' },

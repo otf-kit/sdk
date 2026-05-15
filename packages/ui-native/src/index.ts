@@ -318,6 +318,9 @@ export type { RulerScrubberProps } from './patterns/RulerScrubber'
 export { CardScroller } from './patterns/CardScroller'
 export type { CardScrollerProps } from './patterns/CardScroller'
 
+export { FloatingLabelInput } from './patterns/FloatingLabelInput'
+export type { FloatingLabelInputProps } from './patterns/FloatingLabelInput'
+
 // ─── Hooks ──────────────────────────────────────────────────────────────────
 
 export { useCollapsibleHeader } from './hooks/useCollapsibleHeader'

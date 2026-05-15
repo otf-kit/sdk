@@ -115,6 +115,7 @@ export const CATALOG: Category[] = [
       { slug: 'otf-popover', title: 'Popover', description: 'Anchored floating panel with placement variants.', status: 'ready' },
       // Inputs
       { slug: 'date-picker', title: 'Date Picker', description: 'Single, range, min/max bounded; Sunday-first.', status: 'ready' },
+      { slug: 'floating-label-input', title: 'Floating Label Input', description: 'Label sits inside the field at rest; floats up + shrinks on focus or when filled. Reanimated 4 spring.', status: 'ready' },
       { slug: 'otp-input', title: 'OTP Input', description: '4 / 6 digit code entry, masked, error state.', status: 'ready' },
       { slug: 'password-input', title: 'Password Input', description: 'With show/hide toggle and strength indicator.', status: 'ready' },
       { slug: 'search-bar', title: 'Search Bar', description: 'Default, with-filter, with-cancel, live-filtered, modal-overlay.', status: 'ready' },
