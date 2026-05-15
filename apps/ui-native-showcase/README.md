@@ -99,3 +99,7 @@ npx wrangler pages project create otf-ui-native-storybook
 ## License
 
 MIT — see [LICENSE](./LICENSE).
+
+---
+
+Project home: [OTF — kits and open SDK](https://otf-kit.dev). Pricing, docs, and the full component catalog.
