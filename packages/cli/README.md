@@ -1,7 +1,7 @@
 <h1 align="center">@otfdashkit/cli</h1>
 
 <p align="center">
-  Source-copy installer for heavy-peer OTF UI Native components. shadcn-style.
+  Source-copy installer for heavy-peer OTF UI Native components.
 </p>
 
 <p align="center">
