@@ -23,7 +23,7 @@
 - **80 primitives** — Button, Card, Input, Avatar, Badge, Chip, Sheet, Switch, Tabs, Toast, Text, Stack — same names and props as the web SDK
 - **Apple-Fitness-style blocks** — ActivityRings, WeekStrip, StepperBig, MetricCard, SegmentedControl, MiniBarChart
 - **Animated patterns** — shaders, marquees, parallax scrolls (heavy peers ship via [`@otfdashkit/cli`](https://www.npmjs.com/package/@otfdashkit/cli) so you only pay for what you use)
-- **17 shared themes** — same `@otfdashkit/tokens` palette as web; switch palette at the Tamagui provider level
+- **17 shared themes** — same `@otfdashkit/tokens` palette as web; switch palette via the `defaultTheme` prop on `<OTFProvider>`
 - **One codebase, three targets** — Expo Router app renders on iOS, Android, and web export
 
 ## Live demos
@@ -45,52 +45,62 @@ npx expo install react-native-svg react-native-safe-area-context
 
 ```tsx
 // App.tsx
-import { TamaguiProvider, createTamagui } from '@tamagui/core'
-import { otfTamaguiConfig } from '@otfdashkit/tokens'
-import { Button, Card, Input } from '@otfdashkit/ui-native'
-
-const config = createTamagui(otfTamaguiConfig)
+import { OTFProvider, Button, Card, Input } from '@otfdashkit/ui-native'
 
 export default function App() {
   return (
-    <TamaguiProvider config={config}>
+    <OTFProvider>
       <Card>
         <Input placeholder="Email" />
         <Button variant="primary" size="lg" onPress={handlePress}>
           Continue
         </Button>
       </Card>
-    </TamaguiProvider>
+    </OTFProvider>
   )
 }
 ```
 
-The same component names and props work on web (`@otfdashkit/ui`) — porting a screen is a one-line import change.
+One root, sensible defaults — the provider wires up OTF tokens, dark mode, and font config so your screens just render. The same component names and props work on web (`@otfdashkit/ui`); porting a screen is a one-line import change.
 
 ## Cross-platform parity
 
 | Component | Web (`@otfdashkit/ui`) | Native (`@otfdashkit/ui-native`) |
 |---|---|---|
-| `<Button>` | Radix primitive | Tamagui primitive |
-| `<Card>` | Tailwind v4 | Tamagui tokens |
-| `<Input>` | Radix Form | Tamagui Input |
-| `<Avatar>` | Radix Avatar | Tamagui Avatar |
-| `<Text>` | Tailwind typography | Tamagui Text |
+| `<Button>` | variant + size, focus-visible ring | press states, haptic-ready, same prop API |
+| `<Card>` | nested-ring surface | elevation tokens, same prop API |
+| `<Input>` | error / hint / floating-label | error / hint / floating-label, Reanimated spring |
+| `<Avatar>` | image + initials fallback | image + initials fallback |
+| `<Text>` | typography scale tokens | typography scale tokens |
 
 Both read from [`@otfdashkit/tokens`](https://www.npmjs.com/package/@otfdashkit/tokens) — flip the theme on web and native at once.
 
 ## Theming
 
 ```tsx
-import { otfTamaguiConfig } from '@otfdashkit/tokens'
-
-const config = createTamagui({
-  ...otfTamaguiConfig,
-  defaultTheme: 'ocean-teal',
-})
+<OTFProvider defaultTheme="ocean-teal">
+  <YourScreens />
+</OTFProvider>
 ```
 
-All 17 themes from `@otfdashkit/tokens` are available.
+All 17 themes from `@otfdashkit/tokens` are available — pick at the provider, switch at runtime with `useThemeName()`.
+
+### Advanced — custom config
+
+For users who need to derive a custom merged config (extra fonts, custom tokens, animation driver tweaks):
+
+```tsx
+import { OTFProvider, createOTFConfig, otfConfig } from '@otfdashkit/ui-native'
+
+const config = createOTFConfig({
+  ...otfConfig,
+  fonts: { /* your font set */ },
+})
+
+<OTFProvider config={config}>
+  <YourScreens />
+</OTFProvider>
+```
 
 ## Heavy-peer components
 

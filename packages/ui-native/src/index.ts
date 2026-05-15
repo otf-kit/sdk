@@ -1,7 +1,17 @@
 // Config
 export { otfConfig } from './config/tamagui.config'
 export type { OtfConfig } from './config/tamagui.config'
-export { defaultConfig as tamaguiDefaultConfig } from '@tamagui/config/v5'
+// `otfBaseConfig` is the brand-aligned name; `tamaguiDefaultConfig` stays
+// as a back-compat alias. Spread it into `createOTFConfig({ ...otfBaseConfig })`
+// when deriving a custom config (custom fonts, tokens, animation driver).
+export { defaultConfig as otfBaseConfig, defaultConfig as tamaguiDefaultConfig } from '@tamagui/config/v5'
+
+// ─── OTF-branded high-level provider ─────────────────────────────────────────
+// `<OTFProvider>` hides the createTamagui + config call so consumers never
+// see Tamagui-flavoured names at their app root. Power users can still
+// customise via the `config` prop.
+export { OTFProvider } from './providers/OTFProvider'
+export type { OTFProviderProps } from './providers/OTFProvider'
 
 // Design Themes (maps platform's 16 design themes to Tamagui palettes)
 export {
@@ -45,8 +55,15 @@ export {
   // Utilities
   VisuallyHidden, Unspaced,
   // Theme & config
-  Theme, TamaguiProvider, TamaguiProvider as OtfProvider,
-  createTamagui, createFont, createMedia, createTheme, createTokens,
+  Theme,
+  // Provider escape-hatches — `<OTFProvider>` (above) is the recommended root.
+  // `OtfProvider` stays for back-compat with code shipped before 0.1.8;
+  // `TamaguiProvider` is exposed for users hand-building a custom config.
+  TamaguiProvider, TamaguiProvider as OtfProvider,
+  // `createOTFConfig` is the brand-aligned re-export of `createTamagui` for
+  // advanced theming where you need to derive a config object yourself.
+  createTamagui, createTamagui as createOTFConfig,
+  createFont, createMedia, createTheme, createTokens,
   createVariable, createStyledContext,
   addTheme, updateTheme, replaceTheme,
   // Styled

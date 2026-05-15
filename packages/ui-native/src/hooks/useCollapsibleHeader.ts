@@ -135,7 +135,7 @@ export function useCollapsibleHeader(
     const translateY = interpolate(hidden.value, [0, 1], [0, -HEADER_HIDE_DISTANCE])
     const opacity = interpolate(hidden.value, [0, 1], [1, 0])
     return { transform: [{ translateY }], opacity }
-  })
+  }, [reducedMotion, hidden])
 
   const titleStyle = useAnimatedStyle(() => {
     if (reducedMotion || !shrinkTitle) {
@@ -146,7 +146,7 @@ export function useCollapsibleHeader(
     const marginTop = interpolate(clamped, [0, threshold], [0, -8])
     const opacity = interpolate(clamped, [0, threshold], [1, 0.85])
     return { transform: [{ scale }], marginTop, opacity }
-  })
+  }, [reducedMotion, shrinkTitle, scrollY, threshold])
 
   return { scrollHandler, headerStyle, titleStyle, scrollY }
 }

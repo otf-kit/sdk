@@ -112,11 +112,11 @@ export function Expandable({
     height: heightSv.value,
     opacity: opacitySv.value,
     overflow: 'hidden',
-  }))
+  }), [heightSv, opacitySv])
 
   const chevronStyle = useAnimatedStyle(() => ({
     transform: [{ rotate: `${rotationSv.value}deg` }],
-  }))
+  }), [rotationSv])
 
   const handleMeasure = useCallback(
     (e: LayoutChangeEvent) => {

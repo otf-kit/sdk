@@ -5,11 +5,11 @@ import { StatusBar } from 'expo-status-bar'
 import * as SplashScreen from 'expo-splash-screen'
 import { SafeAreaInsetsContext } from 'react-native-safe-area-context'
 import {
-  OtfProvider,
+  OTFProvider,
   Theme,
   createFont,
-  createTamagui,
-  tamaguiDefaultConfig,
+  createOTFConfig,
+  otfBaseConfig,
   useTheme,
   Layers,
   Settings,
@@ -96,10 +96,10 @@ const interFont = createFont({
   },
 })
 
-const tamaguiConfig = createTamagui({
-  ...tamaguiDefaultConfig,
+const otfAppConfig = createOTFConfig({
+  ...otfBaseConfig,
   fonts: {
-    ...tamaguiDefaultConfig.fonts,
+    ...otfBaseConfig.fonts,
     body: interFont,
     heading: interFont,
   },
@@ -222,10 +222,10 @@ export default function RootLayout() {
 
   // Memoised just for parity — config is module-level constant but keeps
   // provider props stable.
-  const config = useMemo(() => tamaguiConfig, [])
+  const config = useMemo(() => otfAppConfig, [])
 
   return (
-    <OtfProvider config={config} defaultTheme="dark">
+    <OTFProvider config={config} defaultTheme="dark">
       <InjectWebStyles />
       <ShowcaseThemeProvider>
         <WebSafeAreaShim>
@@ -234,6 +234,6 @@ export default function RootLayout() {
           <StatusBar style="auto" />
         </WebSafeAreaShim>
       </ShowcaseThemeProvider>
-    </OtfProvider>
+    </OTFProvider>
   )
 }

@@ -70,6 +70,12 @@ export function FloatingLabelInput({
       : withTiming(target, { duration: ANIMATION_DURATION, easing: EASING })
   }, [focused, filled, reduced, progress])
 
+  // NOTE: the explicit `[progress]` dependency array is REQUIRED. The SDK
+  // ships pre-built `dist/` — tsup does not run the Reanimated worklets
+  // Babel plugin, and a consumer's plugin does not retroactively transform
+  // node_modules. Without the array, `useAnimatedStyle` throws on web
+  // ("used without a dependency array or Babel plugin"). Every
+  // useAnimatedStyle / useAnimatedProps in this package must pass one.
   const labelAnim = useAnimatedStyle(() => ({
     transform: [
       // Slide up
@@ -79,7 +85,7 @@ export function FloatingLabelInput({
     ],
     // Brighter when floated
     opacity:        interpolate(progress.value, [0, 1], [0.7, 1]),
-  }))
+  }), [progress])
 
   const handleFocus  = useCallback((e: Parameters<NonNullable<TextInputProps['onFocus']>>[0]) => {
     setFocused(true)
