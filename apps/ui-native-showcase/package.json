@@ -16,7 +16,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@otfdashkit/ui-native": "^0.1.5",
+    "@otfdashkit/ui-native": "^0.1.7",
     "@otfdashkit/tokens": "^0.1.1",
     "@shopify/react-native-skia": "2.2.12",
     "@tamagui/lucide-icons": "^1.144.4",
