@@ -23,3 +23,21 @@ h1, h2, h3, h4, h5, h6 {
   line-height: var(--line-height-heading, 1.2);
   font-weight: var(--font-weight-heading, 600);
 }
+
+/* ── Animations shipped with the SDK ────────────────────────────────────────
+   Consumers get these automatically by importing '@otfdashkit/ui/styles'.
+   Keep keyframe names unique to avoid collision with consumer-defined ones. */
+
+/* Conic-gradient shimmer rotation — used by Button variant="shimmer".
+   Animation: 360deg sweep, 2.6s linear, infinite. */
+@keyframes shimmer-rotate {
+  0%   { --shimmer-angle: 0deg;   transform: rotate(0deg); }
+  100% { --shimmer-angle: 360deg; transform: rotate(360deg); }
+}
+
+/* Concentric ripple expand — reserved for future use (RippleLoader, ping).
+   The existing motion/Ripple is click-triggered; this is for ambient pulses. */
+@keyframes pulse-ring {
+  0%   { transform: scale(0.4); opacity: 0.8; }
+  100% { transform: scale(1.6); opacity: 0; }
+}

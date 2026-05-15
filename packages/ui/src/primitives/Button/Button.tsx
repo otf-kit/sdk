@@ -43,6 +43,24 @@ const buttonVariants = cva(
           'hover:border-border/60 hover:bg-accent',
           'active:shadow-none',
         ].join(' '),
+        /** Shimmer — animated conic gradient sweep with a hover highlight.
+         *  Loud + premium; reserve for primary CTAs and pricing pages, not
+         *  for in-product UI (gets tiring fast). Cross-platform parity with
+         *  @otfdashkit/ui-native via the same `shimmer` variant key. */
+        shimmer: [
+          'relative isolate overflow-hidden',
+          'bg-primary text-primary-foreground',
+          'shadow-[0_1px_0_rgba(255,255,255,0.18)_inset,0_-1px_0_rgba(0,0,0,0.25)_inset]',
+          'hover:bg-primary/95',
+          // Continuous conic-gradient sweep behind the surface.
+          'before:absolute before:inset-[-1px] before:rounded-[inherit] before:-z-10',
+          'before:bg-[conic-gradient(from_0deg,transparent_0deg,transparent_70deg,rgba(255,255,255,0.55)_90deg,transparent_110deg,transparent_360deg)]',
+          'before:animate-[shimmer-rotate_2.6s_linear_infinite]',
+          // Diagonal gloss that sweeps on hover.
+          'after:absolute after:inset-0 after:rounded-[inherit] after:pointer-events-none',
+          'after:bg-[linear-gradient(115deg,transparent_30%,rgba(255,255,255,0.22)_50%,transparent_70%)]',
+          'after:translate-x-[-120%] hover:after:translate-x-[120%] after:transition-transform after:duration-[900ms] after:ease-out',
+        ].join(' '),
       },
       size: {
         sm:      'h-8 px-3 text-xs rounded-md',

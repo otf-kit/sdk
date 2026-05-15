@@ -10,7 +10,7 @@ const meta = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['default', 'secondary', 'outline', 'ghost', 'destructive', 'gradient', 'texture'],
+      options: ['default', 'secondary', 'outline', 'ghost', 'destructive', 'gradient', 'texture', 'shimmer'],
     },
     size: {
       control: 'select',
@@ -36,8 +36,21 @@ export const AllVariants: Story = {
       <Button variant="destructive">Destructive</Button>
       <Button variant="gradient">Gradient</Button>
       <Button variant="texture">Texture</Button>
+      <Button variant="shimmer">Shimmer</Button>
     </div>
   ),
+}
+
+export const Shimmer: Story = {
+  args: { children: 'Get started', variant: 'shimmer', size: 'lg' },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Premium CTA variant with an animated conic-gradient sweep and a diagonal hover gloss. Use sparingly — reserve for primary CTAs on pricing pages and landing heroes. Cross-platform parity API with `@otfdashkit/ui-native` (visual treatment shipped without continuous animation on native to avoid pulling Skia / Moti as a peer).',
+      },
+    },
+  },
 }
 
 export const AllSizes: Story = {
