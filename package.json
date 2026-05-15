@@ -54,7 +54,10 @@
       "react-dom": "19.1.0",
       "react-native": "0.81.5",
       "postcss": ">=8.5.0",
-      "esbuild": ">=0.25.0"
+      "esbuild": ">=0.25.0",
+      "protobufjs": "7.5.8",
+      "@protobufjs/utf8": "1.1.1",
+      "kysely": "0.28.17"
     },
     "peerDependencyRules": {
       "ignoreMissing": ["react-native"],
