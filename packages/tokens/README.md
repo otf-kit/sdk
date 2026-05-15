@@ -1,7 +1,7 @@
 <h1 align="center">@otfdashkit/tokens</h1>
 
 <p align="center">
-  17 themes, dark mode, web + native parity. CSS variables on the web, Tamagui tokens on iOS / Android.
+  17 themes, dark mode, web + native parity. CSS variables on the web, native design tokens on iOS / Android.
 </p>
 
 <p align="center">
@@ -21,7 +21,7 @@
 
 - `web.css` — full CSS-variable definitions for all 17 themes (light + dark)
 - `tailwindPreset` — Tailwind v4 preset wired to the tokens
-- `otfTamaguiConfig` — Tamagui config object for React Native
+- `otfConfig` — native config object consumed by `<OTFProvider>` from [`@otfdashkit/ui-native`](https://www.npmjs.com/package/@otfdashkit/ui-native)
 - `OTF_DESIGN_THEMES`, `OtfDesignThemeId`, `OtfColorPalette`, `OtfDesignTheme` — types
 
 Used by both [`@otfdashkit/ui`](https://www.npmjs.com/package/@otfdashkit/ui) and [`@otfdashkit/ui-native`](https://www.npmjs.com/package/@otfdashkit/ui-native).
@@ -60,22 +60,23 @@ export default {
 }
 ```
 
-## Native (Tamagui)
+## Native (one provider, no config required)
+
+These tokens ship pre-wired through [`@otfdashkit/ui-native`](https://www.npmjs.com/package/@otfdashkit/ui-native) — you don't import them by hand. Just wrap your app:
 
 ```tsx
-import { TamaguiProvider, createTamagui } from '@tamagui/core'
-import { otfTamaguiConfig } from '@otfdashkit/tokens'
-
-const config = createTamagui(otfTamaguiConfig)
+import { OTFProvider } from '@otfdashkit/ui-native'
 
 export default function App() {
   return (
-    <TamaguiProvider config={config}>
+    <OTFProvider>
       {/* your app */}
-    </TamaguiProvider>
+    </OTFProvider>
   )
 }
 ```
+
+For advanced theming or custom config merging, see the [`@otfdashkit/ui-native` README → Advanced](https://www.npmjs.com/package/@otfdashkit/ui-native#advanced--custom-config).
 
 ## Built-in themes
 
@@ -99,7 +100,7 @@ export default function App() {
 | `modern-minimal` | Default-clean SaaS |
 | `bubblegum` | Kids, casual gaming |
 
-Switch at runtime by writing to `document.documentElement.dataset.theme` (web) or by swapping the Tamagui config (native).
+Switch at runtime by writing to `document.documentElement.dataset.theme` (web) or by setting `defaultTheme` on `<OTFProvider>` (native).
 
 ## Live demos
 

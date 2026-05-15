@@ -7,19 +7,31 @@
 // ─── Tamagui pass-through (full library) ──────────────────────────────────────
 export * from 'tamagui'
 
-// Aliases that don't auto-export from tamagui because they're renamed
-export { TamaguiProvider as OtfProvider, Image as TamaguiImage, ListItem as TamaguiListItem } from 'tamagui'
-import { TamaguiInternalConfig } from 'tamagui'
+// Aliases that don't auto-export from tamagui because they're renamed.
+// `OtfProvider` stays for back-compat with code shipped before 0.1.8;
+// `<OTFProvider>` (defined further down) is the recommended root.
+// `createOTFConfig` is the brand-aligned re-export of `createTamagui` for
+// users who need to derive a custom config.
+export { TamaguiProvider as OtfProvider, Image as TamaguiImage, ListItem as TamaguiListItem, createTamagui as createOTFConfig } from 'tamagui'
+import type { TamaguiInternalConfig, TamaguiProviderProps } from 'tamagui'
+import type { ReactNode } from 'react'
 
 // ─── Lucide icons pass-through ────────────────────────────────────────────────
 export * from '@tamagui/lucide-icons'
 
-// ─── Default Tamagui config re-export (for createTamagui calls) ──────────────
-export { defaultConfig as tamaguiDefaultConfig } from '@tamagui/config/v5'
+// ─── Base config re-export (spread into createOTFConfig for custom configs) ──
+export { defaultConfig as otfBaseConfig, defaultConfig as tamaguiDefaultConfig } from '@tamagui/config/v5'
 
 // ─── OTF config ───────────────────────────────────────────────────────────────
 export const otfConfig: TamaguiInternalConfig
 export type OtfConfig = typeof otfConfig
+
+// ─── <OTFProvider> — recommended app root ─────────────────────────────────────
+export type OTFProviderProps = Omit<TamaguiProviderProps, 'config'> & {
+  config?: TamaguiProviderProps['config']
+  children?: ReactNode
+}
+export function OTFProvider(props: OTFProviderProps): JSX.Element
 
 declare module 'tamagui' {
   interface TamaguiCustomConfig extends OtfConfig {}

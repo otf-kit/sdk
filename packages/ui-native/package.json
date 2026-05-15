@@ -1,7 +1,7 @@
 {
   "name": "@otfdashkit/ui-native",
-  "version": "0.1.7",
-  "description": "OTF UI Native — Tamagui-powered component library for React Native + Expo. Same component API as @otfdashkit/ui (web) — port a screen by changing the import.",
+  "version": "0.1.8",
+  "description": "OTF UI Native — cross-platform component library for React Native + Expo. Same component API as @otfdashkit/ui (web) — port a screen by changing the import.",
   "keywords": [
     "otfdashkit",
     "ui-native",

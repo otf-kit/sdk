@@ -66,11 +66,11 @@ Plus: [`ui.otf-kit.dev`](https://ui.otf-kit.dev/) (web Storybook, every componen
 
 **SDK (free, MIT):**
 
-| Package | Platform | Foundation |
+| Package | Platform | What |
 |---|---|---|
-| [`@otfdashkit/ui`](packages/ui/) | Web | Radix UI + Tailwind v4 — Button, Card, Form, Dialog, Sheet, Drawer, Command, Toast, Calendar, DataTable, BarChart, AreaChart, Tiptap editor, ImageCrop, and 130+ more |
-| [`@otfdashkit/ui-native`](packages/ui-native/) | iOS / Android | Tamagui-core — same component names and props as web; 80 primitives |
-| [`@otfdashkit/tokens`](packages/tokens/) | Both | 17 themes (Slate / Warm / Cosmic / Terminal + 13 more), CSS vars on web, Tamagui tokens on native |
+| [`@otfdashkit/ui`](packages/ui/) | Web | 137 components — Button, Card, Form, Dialog, Sheet, Drawer, Command, Toast, Calendar, DataTable, BarChart, AreaChart, Tiptap editor, ImageCrop, and 130+ more. Built on Radix + Tailwind v4, but you import from `@otfdashkit/ui`. |
+| [`@otfdashkit/ui-native`](packages/ui-native/) | iOS / Android | 80 primitives — same component names and props as web. One `<OTFProvider>` at the root, no `createTamagui` boilerplate. |
+| [`@otfdashkit/tokens`](packages/tokens/) | Both | 17 themes (Slate / Warm / Cosmic / Terminal + 13 more), CSS vars on web, native design tokens on iOS / Android |
 | [`@otfdashkit/cli`](packages/cli/) | Mobile | Registry installer for heavy-peer components (Skia shaders, Reanimated, MMKV) — copies source, no forced peers |
 | [`@otfdashkit/eslint-plugin-otf-design`](packages/eslint-plugin-otf-design/) | Tooling | Rejects hex literals and default Tailwind blues / purples / grays at lint time |
 
@@ -111,7 +111,7 @@ export default function SignInCard() {
 import { Button, Card, Input } from '@otfdashkit/ui-native'
 ```
 
-Pick a theme by setting one attribute: `<html data-theme="ocean-teal">` (web) or via the Tamagui provider (native). 17 themes ship in the box.
+Pick a theme by setting one attribute: `<html data-theme="ocean-teal">` (web) or `<OTFProvider defaultTheme="ocean-teal">` (native). 17 themes ship in the box.
 
 ## Works with
 
