@@ -221,15 +221,19 @@ function ExpandingFab({
   }, [])
 
   // FAB icon rotates 45deg when open. Reduced motion: skip the rotation.
-  const iconStyle = useAnimatedStyle(() => ({
-    transform: [
-      { rotate: reduced ? '0deg' : `${progress.value * 45}deg` },
-    ],
-  }), [reduced, progress])
+  const iconStyle = useAnimatedStyle(() => {
+    'worklet'
+    return {
+      transform: [
+        { rotate: reduced ? '0deg' : `${progress.value * 45}deg` },
+      ],
+    }
+  }, [reduced, progress])
 
   // Pill-style morph: width interpolates from `dim` (circle) to PILL_OPEN_WIDTH.
   // Circle-style: width stays at `dim`.
   const fabContainerStyle = useAnimatedStyle(() => {
+    'worklet'
     if (expandStyle === 'circle' || reduced) {
       return { width: dim }
     }
@@ -238,16 +242,18 @@ function ExpandingFab({
   }, [expandStyle, reduced, dim, progress])
 
   // The morph label fades in alongside the rotated icon when expanding into a pill.
-  const morphLabelStyle = useAnimatedStyle(() => ({
-    opacity: expandStyle === 'pill' && !reduced ? progress.value : 0,
-  }), [expandStyle, reduced, progress])
+  const morphLabelStyle = useAnimatedStyle(() => {
+    'worklet'
+    return { opacity: expandStyle === 'pill' && !reduced ? progress.value : 0 }
+  }, [expandStyle, reduced, progress])
 
   // Backdrop opacity tracks `progress`. We render unconditionally while
   // open; the press surface stays mounted for the duration of the close
   // tween so taps during the tween still close cleanly.
-  const backdropStyle = useAnimatedStyle(() => ({
-    opacity: progress.value,
-  }), [progress])
+  const backdropStyle = useAnimatedStyle(() => {
+    'worklet'
+    return { opacity: progress.value }
+  }, [progress])
 
   // We can't read `progress.value` outside a worklet for render-gating, so we
   // mount the backdrop whenever `open` is true and let `FadeOut` carry it

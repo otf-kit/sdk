@@ -126,6 +126,7 @@ function Tick({
   const tickHeight = isLabeled ? LONG_TICK_HEIGHT : SHORT_TICK_HEIGHT
 
   const animatedStyle = useAnimatedStyle(() => {
+    'worklet'
     if (reducedMotion || viewportWidth === 0) {
       return { opacity: isLabeled ? 0.95 : 0.45, backgroundColor: '#9aa0a6' }
     }
@@ -338,7 +339,7 @@ export function RulerScrubber({
         runOnJS(commitSnap)(event.contentOffset.x)
       }
     },
-  })
+  }, [scrollX, tickSpacing, totalTicks, onTickCrossed, commitSnap])
 
   /** Capture viewport width — drives the half-viewport content padding. */
   const handleLayout = useCallback((e: LayoutChangeEvent) => {

@@ -115,6 +115,7 @@ function WheelRow<T extends string | number>({
   reducedMotion,
 }: RowProps<T>): JSX.Element {
   const animatedStyle = useAnimatedStyle(() => {
+    'worklet'
     if (item.kind === 'pad' || reducedMotion) {
       return { opacity: 1, transform: [{ scale: 1 }] }
     }
@@ -232,9 +233,10 @@ export function WheelPicker<T extends string | number>(
 
   const scrollHandler = useAnimatedScrollHandler({
     onScroll: (e) => {
+      'worklet'
       scrollY.value = e.contentOffset.y
     },
-  })
+  }, [scrollY])
 
   const handleMomentumEnd = useCallback(
     (e: NativeSyntheticEvent<NativeScrollEvent>) => {

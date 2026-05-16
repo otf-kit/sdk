@@ -76,16 +76,19 @@ export function FloatingLabelInput({
   // node_modules. Without the array, `useAnimatedStyle` throws on web
   // ("used without a dependency array or Babel plugin"). Every
   // useAnimatedStyle / useAnimatedProps in this package must pass one.
-  const labelAnim = useAnimatedStyle(() => ({
-    transform: [
-      // Slide up
-      { translateY: interpolate(progress.value, [0, 1], [0, -10]) },
-      // Scale down
-      { scale:      interpolate(progress.value, [0, 1], [1, 0.78]) },
-    ],
-    // Brighter when floated
-    opacity:        interpolate(progress.value, [0, 1], [0.7, 1]),
-  }), [progress])
+  const labelAnim = useAnimatedStyle(() => {
+    'worklet'
+    return {
+      transform: [
+        // Slide up
+        { translateY: interpolate(progress.value, [0, 1], [0, -10]) },
+        // Scale down
+        { scale:      interpolate(progress.value, [0, 1], [1, 0.78]) },
+      ],
+      // Brighter when floated
+      opacity:        interpolate(progress.value, [0, 1], [0.7, 1]),
+    }
+  }, [progress])
 
   const handleFocus  = useCallback((e: Parameters<NonNullable<TextInputProps['onFocus']>>[0]) => {
     setFocused(true)
