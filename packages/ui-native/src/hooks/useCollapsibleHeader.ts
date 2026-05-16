@@ -129,6 +129,7 @@ export function useCollapsibleHeader(
   }
 
   const headerStyle = useAnimatedStyle(() => {
+    'worklet'
     if (reducedMotion) {
       return { transform: [{ translateY: 0 }], opacity: 1 }
     }
@@ -138,6 +139,7 @@ export function useCollapsibleHeader(
   }, [reducedMotion, hidden])
 
   const titleStyle = useAnimatedStyle(() => {
+    'worklet'
     if (reducedMotion || !shrinkTitle) {
       return { transform: [{ scale: 1 }], marginTop: 0, opacity: 1 }
     }

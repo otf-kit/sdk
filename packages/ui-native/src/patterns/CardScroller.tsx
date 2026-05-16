@@ -130,6 +130,7 @@ function CardRow({
 }: RowProps): JSX.Element {
   const stride = width + gap
   const animatedStyle = useAnimatedStyle(() => {
+    'worklet'
     if (!enabled) {
       return { opacity: 1, transform: [{ scale: 1 }] }
     }
@@ -243,9 +244,10 @@ export function CardScroller<T>(props: CardScrollerProps<T>): JSX.Element {
 
   const scrollHandler = useAnimatedScrollHandler({
     onScroll: (e) => {
+      'worklet'
       scrollX.value = e.contentOffset.x
     },
-  })
+  }, [scrollX])
 
   const handleMomentumEnd = useCallback(
     (e: NativeSyntheticEvent<NativeScrollEvent>) => {

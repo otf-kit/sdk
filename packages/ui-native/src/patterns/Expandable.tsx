@@ -108,15 +108,19 @@ export function Expandable({
     rotationSv.value = withTiming(targetRotation, { duration, easing: EASE })
   }, [expanded, duration, reducedMotion, heightSv, opacitySv, rotationSv])
 
-  const bodyStyle = useAnimatedStyle(() => ({
-    height: heightSv.value,
-    opacity: opacitySv.value,
-    overflow: 'hidden',
-  }), [heightSv, opacitySv])
+  const bodyStyle = useAnimatedStyle(() => {
+    'worklet'
+    return {
+      height: heightSv.value,
+      opacity: opacitySv.value,
+      overflow: 'hidden',
+    }
+  }, [heightSv, opacitySv])
 
-  const chevronStyle = useAnimatedStyle(() => ({
-    transform: [{ rotate: `${rotationSv.value}deg` }],
-  }), [rotationSv])
+  const chevronStyle = useAnimatedStyle(() => {
+    'worklet'
+    return { transform: [{ rotate: `${rotationSv.value}deg` }] }
+  }, [rotationSv])
 
   const handleMeasure = useCallback(
     (e: LayoutChangeEvent) => {
