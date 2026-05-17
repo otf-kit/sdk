@@ -160,7 +160,7 @@ function ThemedBodyBg() {
 // indicator matches the picked accent.
 //
 // When iframed by the phone-preview shell (apps/ui-native-storybook-preview)
-// — which is how the landing app at otf.sh/components embeds these routes
+// — which is how the landing app at otf-kit.dev/components embeds these routes
 // inside the iPhone frame — we hide the bottom Tab bar entirely. The phone
 // frame already provides its own visual chrome; a competing Tab bar inside
 // the iframe just looks like clutter and steals vertical space.

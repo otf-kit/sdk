@@ -74,7 +74,7 @@ export default function OtfDialogShowcase() {
               </YStack>
               <YStack gap="$1.5">
                 <SizableText size="$2" color="$color11" fontWeight="600">Email</SizableText>
-                <OtfInput value="mock@otf.sh" />
+                <OtfInput value="mock@otf-kit.dev" />
               </YStack>
             </YStack>
           </OtfDialog>

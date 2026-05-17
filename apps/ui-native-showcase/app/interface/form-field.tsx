@@ -31,7 +31,7 @@ export default function FormFieldShowcase() {
 
       <Section title="Required">
         <FormField label="Email address" required helperText="We'll never share it.">
-          <OtfInput placeholder="mock@otf.sh" />
+          <OtfInput placeholder="mock@otf-kit.dev" />
         </FormField>
       </Section>
 
@@ -42,7 +42,7 @@ export default function FormFieldShowcase() {
           error={showEmailError ? 'Enter a valid email address.' : undefined}
         >
           <OtfInput
-            placeholder="mock@otf.sh"
+            placeholder="mock@otf-kit.dev"
             value={email}
             onChangeText={setEmail}
           />

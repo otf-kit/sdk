@@ -18,11 +18,11 @@ type Col = {
 }
 
 const ROWS: Row[] = [
-  { name: 'Sarah Chen', email: 'sarah@otf.sh', role: 'Admin', status: 'Active', spend: 1234.56 },
-  { name: 'Alex Rivera', email: 'alex@otf.sh', role: 'Editor', status: 'Active', spend: 842.10 },
-  { name: 'Jordan Kim', email: 'jordan@otf.sh', role: 'Viewer', status: 'Pending', spend: 42.00 },
-  { name: 'Maya Patel', email: 'maya@otf.sh', role: 'Editor', status: 'Active', spend: 318.75 },
-  { name: 'Diego Costa', email: 'diego@otf.sh', role: 'Viewer', status: 'Pending', spend: 0.00 },
+  { name: 'Sarah Chen', email: 'sarah@otf-kit.dev', role: 'Admin', status: 'Active', spend: 1234.56 },
+  { name: 'Alex Rivera', email: 'alex@otf-kit.dev', role: 'Editor', status: 'Active', spend: 842.10 },
+  { name: 'Jordan Kim', email: 'jordan@otf-kit.dev', role: 'Viewer', status: 'Pending', spend: 42.00 },
+  { name: 'Maya Patel', email: 'maya@otf-kit.dev', role: 'Editor', status: 'Active', spend: 318.75 },
+  { name: 'Diego Costa', email: 'diego@otf-kit.dev', role: 'Viewer', status: 'Pending', spend: 0.00 },
 ]
 
 const COLS: Col[] = [
