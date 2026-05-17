@@ -11,21 +11,21 @@ export default meta
 type Story = StoryObj<typeof QrCode>
 
 export const Default: Story = {
-  render: () => <QrCode value="https://otf.sh" />,
+  render: () => <QrCode value="https://otf-kit.dev" />,
 }
 
 export const Small: Story = {
-  render: () => <QrCode value="https://otf.sh" size={128} />,
+  render: () => <QrCode value="https://otf-kit.dev" size={128} />,
 }
 
 export const Large: Story = {
-  render: () => <QrCode value="https://otf.sh" size={256} includeMargin />,
+  render: () => <QrCode value="https://otf-kit.dev" size={256} includeMargin />,
 }
 
 export const HighErrorCorrection: Story = {
   render: () => (
     <div className="flex flex-col items-center gap-3">
-      <QrCode value="https://otf.sh" level="H" />
+      <QrCode value="https://otf-kit.dev" level="H" />
       <p className="font-mono text-xs text-muted-foreground">
         Level H — recoverable up to 30% damage
       </p>
@@ -36,7 +36,7 @@ export const HighErrorCorrection: Story = {
 export const LongUrl: Story = {
   render: () => (
     <QrCode
-      value="https://otf.sh/components/qr-code?utm_source=storybook&utm_campaign=demo"
+      value="https://otf-kit.dev/components/qr-code?utm_source=storybook&utm_campaign=demo"
       size={224}
     />
   ),

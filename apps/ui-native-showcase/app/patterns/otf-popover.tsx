@@ -56,7 +56,7 @@ export default function OtfPopoverShowcase() {
             <YStack gap="$1" minWidth={200}>
               <YStack paddingHorizontal="$1" paddingBottom="$2">
                 <SizableText size="$3" fontWeight="600">Sarah Chen</SizableText>
-                <SizableText size="$2" color="$color10">mock@otf.sh</SizableText>
+                <SizableText size="$2" color="$color10">mock@otf-kit.dev</SizableText>
               </YStack>
               <Separator />
               <MenuRow icon={<User size={16} />} label="Profile" />
