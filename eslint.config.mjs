@@ -9,6 +9,10 @@ export default [
       '**/.next/**',
       '**/storybook-static/**',
       '**/.expo/**',
+      // landing-pack templates (kits/*-landing) are standalone Vite + bun
+      // apps with their own design system — not subject to the monorepo's
+      // OTF design lint (same rationale as the pnpm-workspace exclusion).
+      'kits/*-landing/**',
     ],
   },
   // TypeScript parser for all TS/TSX files
