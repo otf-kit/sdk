@@ -4,14 +4,13 @@
 
 ### One component API for web, iOS, and Android.
 
-`<Button>` from **`@otfdashkit/ui`** (React · Radix · Tailwind v4) and `<Button>` from **`@otfdashkit/ui-native`** (Expo · Tamagui) are the same name, the same props, and the same look. Build your interface once — ship it to the browser and to the App Store.
+**Stop burning AI tokens on broken UI code.** Pre-built, accessible, production-tested components your coding agent extends — instead of regenerating the same buttons, forms, and dialogs (half of them broken) on every prompt. `<Button>` from **`@otfdashkit/ui`** (React · Radix · Tailwind v4) and `<Button>` from **`@otfdashkit/ui-native`** (Expo · Tamagui) share the same name, props, and look. Build once, ship to the browser and to the App Store.
 
 <p>
   <a href="https://www.npmjs.com/package/@otfdashkit/ui"><img src="https://img.shields.io/npm/v/@otfdashkit/ui?style=flat-square&color=000&label=%40otfdashkit%2Fui" alt="@otfdashkit/ui version"></a>
   <a href="https://www.npmjs.com/package/@otfdashkit/ui-native"><img src="https://img.shields.io/npm/v/@otfdashkit/ui-native?style=flat-square&color=000&label=%40otfdashkit%2Fui-native" alt="@otfdashkit/ui-native version"></a>
   <a href="https://www.npmjs.com/package/@otfdashkit/ui"><img src="https://img.shields.io/npm/dm/@otfdashkit/ui?style=flat-square&color=000&label=downloads" alt="npm downloads"></a>
   <a href="./LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square" alt="MIT License"></a>
-  <a href="https://github.com/otf-kit/sdk/stargazers"><img src="https://img.shields.io/github/stars/otf-kit/sdk?style=flat-square&color=000&label=stars" alt="GitHub stars"></a>
   <a href="https://discord.gg/gpXyu7SqNZ"><img src="https://img.shields.io/badge/Discord-join-5865F2?style=flat-square&logo=discord&logoColor=white" alt="Discord"></a>
 </p>
 
@@ -28,7 +27,7 @@
 
 ---
 
-Most component libraries stop at the browser. **otf-ui** gives you one opinionated, accessible API that renders **truly native** on every platform — no `Platform.select`, no second design system, no `createTamagui` boilerplate. Wrap [Radix](https://www.radix-ui.com/) + [Tailwind v4](https://tailwindcss.com/) on the web and [Tamagui](https://tamagui.dev/) on native, import the same names everywhere.
+The tool that spun up your MVP — Lovable, Bolt, v0, Replit, Rork — keeps regenerating the same components on every prompt, and the bill grows as the project does. **otf-ui** is the component layer your agent should build on instead: one opinionated, accessible API that renders **truly native** on every platform — no `Platform.select`, no second design system, no `createTamagui` boilerplate. Wrap [Radix](https://www.radix-ui.com/) + [Tailwind v4](https://tailwindcss.com/) on the web and [Tamagui](https://tamagui.dev/) on native, import the same names everywhere.
 
 ## Features
 
@@ -150,7 +149,7 @@ Component categories: **Layout · Forms & inputs · Overlays (dialog/sheet/drawe
 
 ## Contributing
 
-Issues, ideas, and PRs are welcome. Found a missing variant or an a11y gap? Open an issue or send a PR — see [`CONTRIBUTING.md`](./CONTRIBUTING.md). New components follow the contract in [`docs/sdk-design.md`](docs/sdk-design.md): implementation + Storybook story + a11y test + `prompts.md` + README + export.
+Issues, ideas, and PRs are welcome. Found a missing variant or an a11y gap? Open an issue or send a PR — see [`CONTRIBUTING.md`](./CONTRIBUTING.md). Every component ships the same contract: implementation + Storybook story + a11y test + `prompts.md` + README + export.
 
 If otf-ui saves you time, a ⭐ helps other builders find it.
 
@@ -162,24 +161,17 @@ Join the **[Discord](https://discord.gg/gpXyu7SqNZ)** for help, feature requests
 
 `v0.1.x` — alpha. APIs may shift before `1.0`; pin exact versions if you ship to production.
 
-## Built for a full app?
+## Building a whole app?
 
-The free SDK is the whole UI layer. When you're ready to ship an entire product, the optional **OTF kits** drop the SDK into a wired full-stack starting point you own outright — auth + database + Stripe, deploy scripts, and an `ai/` config folder your agent reads to extend the app cleanly:
-
-- **SaaS Dashboard** — Vite + React + Hono + Postgres + Drizzle + Better Auth + Stripe. Live: [saas.otf-kit.dev](https://saas.otf-kit.dev)
-- **Fitness App** — Expo SDK 54, one codebase for iOS + Android + web. Live: [fitness-preview.otf-kit.dev](https://fitness-preview.otf-kit.dev)
-
-Details at [otf-kit.dev](https://otf-kit.dev). The SDK never depends on them — it stands on its own.
+The SDK is free, MIT, and stands entirely on its own — that's the point. If you'd rather not wire the backend from scratch, OTF also offers optional **full-stack kits** (a SaaS dashboard, a fitness app, a booking app): the same SDK dropped into a complete, owned starting point — auth, database, payments, deploy scripts, and an `ai/` config your agent reads to extend it. Live demos and details at **[otf-kit.dev](https://otf-kit.dev)**.
 
 ## License
 
-[MIT](./LICENSE) for the SDK packages — `@otfdashkit/ui`, `@otfdashkit/ui-native`, `@otfdashkit/tokens`, `@otfdashkit/cli`, `@otfdashkit/eslint-plugin-otf-design`. You own the source; eject anytime.
+**[MIT](./LICENSE)** — free forever for every SDK package. You own the source; eject anytime.
 
-## Star history
+- [`@otfdashkit/ui`](https://www.npmjs.com/package/@otfdashkit/ui) · [`@otfdashkit/ui-native`](https://www.npmjs.com/package/@otfdashkit/ui-native) · [`@otfdashkit/tokens`](https://www.npmjs.com/package/@otfdashkit/tokens) · [`@otfdashkit/cli`](https://www.npmjs.com/package/@otfdashkit/cli) · [`@otfdashkit/eslint-plugin-otf-design`](https://www.npmjs.com/package/@otfdashkit/eslint-plugin-otf-design)
 
-<a href="https://star-history.com/#otf-kit/sdk&Date">
-  <img src="https://api.star-history.com/svg?repos=otf-kit/sdk&type=Date" alt="Star History Chart" width="600" />
-</a>
+The commercial **OTF kits** ship under a per-developer license — details at [otf-kit.dev](https://otf-kit.dev).
 
 <div align="center">
   <sub>Built by <a href="https://otf-kit.dev">otf-kit.dev</a> — the cross-platform SDK + kits for builders who ship with AI agents.</sub>
