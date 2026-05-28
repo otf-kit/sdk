@@ -45,7 +45,7 @@
     "simple-git-hooks": "^2.11.0",
     "stripe": "^22.1.0",
     "tsx": "^4.0.0",
-    "turbo": "^2.0.0",
+    "turbo": "^2.9.14",
     "typescript": "^5.6.0"
   },
   "pnpm": {
@@ -59,7 +59,10 @@
       "esbuild": ">=0.25.0",
       "protobufjs": "7.5.8",
       "@protobufjs/utf8": "1.1.1",
-      "kysely": "0.28.17"
+      "kysely": "0.28.17",
+      "qs": ">=6.15.2",
+      "ws": ">=8.20.1",
+      "uuid": "^11.1.1"
     },
     "peerDependencyRules": {
       "ignoreMissing": ["react-native"],
