@@ -1,11 +1,11 @@
 import { Image, SizableText, XStack, YStack } from '@otfdashkit/ui-native'
 import { Section, ShowcaseFrame } from '../../components/ShowcaseFrame'
+import { avatar, SCENES } from '../../lib/fixtures'
 
-const PORTRAIT = 'https://images.unsplash.com/photo-1517849845537-4d257902454a?w=600&q=70'
-const LANDSCAPE =
-  'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?w=600&q=70'
-const SQUARE =
-  'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=70'
+// Real, self-hosted assets (R2) covering each aspect ratio the demo shows.
+const PORTRAIT = avatar('maya')
+const LANDSCAPE = SCENES.find((s) => s.id === 'coast')!.image
+const SQUARE = avatar('priya')
 
 export default function ImageShowcase() {
   return (

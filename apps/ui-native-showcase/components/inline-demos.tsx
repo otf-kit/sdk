@@ -40,6 +40,10 @@ import {
   OnboardingCarousel,
   type OnboardingStep,
 } from '@otfdashkit/ui-native'
+import { SCENES } from '../lib/fixtures'
+
+// Real, self-hosted editorial scenes (R2) for the inline media previews.
+const sceneImg = (id: string) => SCENES.find((s) => s.id === id)!.image
 
 // ── Primitives ──────────────────────────────────────────────────────────
 
@@ -144,7 +148,7 @@ function MediaCardDemo() {
     <XStack gap="$3">
       <YStack flex={1}>
         <MediaCard
-          image="https://picsum.photos/seed/otf-mountain/400/300"
+          image={sceneImg('mountains')}
           title="Mountain retreat"
           subtitle="Switzerland"
           overlay="gradient"
@@ -155,7 +159,7 @@ function MediaCardDemo() {
       </YStack>
       <YStack flex={1}>
         <MediaCard
-          image="https://picsum.photos/seed/otf-tokyo/400/301"
+          image={sceneImg('city')}
           title="City night"
           subtitle="Tokyo"
           overlay="dark"

@@ -1,41 +1,26 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { Platform } from 'react-native'
+import {
+  SHOWCASE_PALETTES,
+  type ShowcaseMode,
+  type ShowcasePalette,
+  type ShowcasePaletteId,
+} from '../lib/theme'
 
-// Tamagui-shipped accent palettes from @tamagui/config/v5. These are the
-// theme names the runtime knows about — wrapping <Theme name="blue"> swaps
-// the active accent ramp ($color1..12 → blue1..12). The OTF design-theme
-// IDs (`mono`, `ocean-teal`, etc.) live in @otfdashkit/ui-native and would require
-// a custom createThemes() in this app's tamagui config to actually swap;
-// that's a separate piece of work. For the showcase v1 we use the Tamagui
-// defaults so the picker is wired end-to-end.
-export type ShowcasePaletteId =
-  | 'gray'
-  | 'blue'
-  | 'green'
-  | 'red'
-  | 'purple'
-  | 'orange'
-  | 'yellow'
-  | 'pink'
-
-export interface ShowcasePalette {
-  id: ShowcasePaletteId
-  name: string
-  preview: string
+// The showcase ships the SDK's four real native palettes — Slate (default),
+// Warm, Cosmic, Terminal — each with a dark + light surface (see lib/theme.ts,
+// generated from `@otfdashkit/tokens`). Picking a palette + mode resolves to a
+// single registered Tamagui theme name (`themeNameFor`), and every SDK
+// primitive re-skins from that theme's $colorN ramp. This is a genuine
+// SDK-theming demo, not Tamagui's stock accent swatches.
+export {
+  SHOWCASE_PALETTES,
+  type ShowcaseMode,
+  type ShowcasePalette,
+  type ShowcasePaletteId,
 }
 
-export const SHOWCASE_PALETTES: ShowcasePalette[] = [
-  { id: 'gray',   name: 'Mono',    preview: '#737373' },
-  { id: 'blue',   name: 'Ocean',   preview: '#3b82f6' },
-  { id: 'green',  name: 'Forest',  preview: '#22c55e' },
-  { id: 'red',    name: 'Coral',   preview: '#ef4444' },
-  { id: 'purple', name: 'Royal',   preview: '#a855f7' },
-  { id: 'orange', name: 'Amber',   preview: '#f97316' },
-  { id: 'yellow', name: 'Solar',   preview: '#eab308' },
-  { id: 'pink',   name: 'Rose',    preview: '#ec4899' },
-]
-
-type Mode = 'light' | 'dark'
+type Mode = ShowcaseMode
 
 interface ShowcaseTheme {
   paletteId: ShowcasePaletteId
@@ -51,7 +36,7 @@ const ShowcaseThemeContext = createContext<ShowcaseTheme | null>(null)
 
 const STORAGE_KEY_PALETTE = 'otf-showcase-palette'
 const STORAGE_KEY_MODE = 'otf-showcase-mode'
-const DEFAULT_PALETTE: ShowcasePaletteId = 'orange'
+const DEFAULT_PALETTE: ShowcasePaletteId = 'otf'
 const DEFAULT_MODE: Mode = 'dark'
 
 function readPersisted<T extends string>(key: string, fallback: T): T {

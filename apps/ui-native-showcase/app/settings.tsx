@@ -91,11 +91,12 @@ export default function SettingsScreen() {
         <YStack gap="$3">
           <XStack alignItems="center" gap="$2">
             <Palette size={18} color="$color11" />
-            <H3 size="$6" fontWeight="700">Accent palette</H3>
+            <H3 size="$6" fontWeight="700">SDK palette</H3>
           </XStack>
           <Paragraph size="$3" color="$color11" maxWidth={520}>
-            Swaps the active Tamagui accent ramp ($color1..12). Every active /
-            primary tone in the showcase reads from the picked palette.
+            The SDK's native palettes ($color1..12) plus the OTF brand skin.
+            Pick one and every surface, border and primary tone in the showcase
+            re-skins live — the same theming model your kit inherits from the SDK.
           </Paragraph>
           <YStack
             flexDirection="row"

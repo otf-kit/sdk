@@ -14,12 +14,12 @@ import {
 } from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
 import { MobileOnlyFallback } from '../../components/MobileOnlyFallback'
+import { STAYS } from '../../lib/fixtures'
 
-const HOUSE_IMAGE =
-  'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=720&q=80&auto=format&fit=crop'
-
-const VILLA_IMAGE =
-  'https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=720&q=80&auto=format&fit=crop'
+// Real, self-hosted lodging photos (R2).
+const stay = (id: string) => STAYS.find((s) => s.id === id)!.image
+const HOUSE_IMAGE = stay('cabin')
+const VILLA_IMAGE = stay('villa')
 
 function PhoneFrame({ children }: { children: React.ReactNode }) {
   return (

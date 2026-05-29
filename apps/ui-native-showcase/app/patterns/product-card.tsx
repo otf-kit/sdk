@@ -6,10 +6,13 @@ import {
   SizableText,
 } from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
+import { PRODUCTS } from '../../lib/fixtures'
 
-const SHOE = 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&q=80'
-const JACKET = 'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800&q=80'
-const BAG = 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=800&q=80'
+// Real, self-hosted product shots (R2) keyed by id.
+const byId = (id: string) => PRODUCTS.find((p) => p.id === id)!.image
+const SHOE = byId('sneaker')
+const JACKET = byId('jacket')
+const BAG = byId('backpack')
 
 export default function ProductCardShowcase() {
   const [cart, setCart] = useState<string[]>([])

@@ -9,11 +9,10 @@ import {
   UserPlus,
 } from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
+import { avatar } from '../../lib/fixtures'
 
-const SARAH_AVATAR =
-  'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=160&h=160&fit=crop&crop=face'
-const ALEX_AVATAR =
-  'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=160&h=160&fit=crop&crop=face'
+const SARAH_AVATAR = avatar('sarah')
+const ALEX_AVATAR = avatar('alex')
 
 function HeaderFrame({ children }: { children: React.ReactNode }) {
   return (
