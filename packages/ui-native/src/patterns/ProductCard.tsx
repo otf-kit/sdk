@@ -68,7 +68,7 @@ export function ProductCard({ image, title, price, originalPrice, rating, review
         {badge && (
           <XStack position="absolute" top="$2" left="$2" backgroundColor="$red9"
             paddingHorizontal="$2" paddingVertical="$1" borderRadius="$10">
-            <SizableText size="$1" fontWeight="700" color="white">{badge}</SizableText>
+            <SizableText size="$1" fontWeight="700" color="$color1">{badge}</SizableText>
           </XStack>
         )}
       </YStack>

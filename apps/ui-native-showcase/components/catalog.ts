@@ -132,6 +132,11 @@ export const CATALOG: Category[] = [
       // Cards & gestures
       { slug: 'media-card', title: 'Media Card', description: 'Image + title + subtitle + actions in 2 sizes.', status: 'ready' },
       { slug: 'product-card', title: 'Product Card', description: 'E-commerce: image + title + price + rating + add-to-cart.', status: 'ready' },
+      { slug: 'price-tag', title: 'Price Tag', description: 'Currency price with compare-at strikethrough + discount pill.', status: 'ready' },
+      { slug: 'quantity-stepper', title: 'Quantity Stepper', description: 'Increment / decrement quantity control with min/max clamp.', status: 'ready' },
+      { slug: 'variant-picker', title: 'Variant Picker', description: 'Single-select product options (grind / size / color) + out-of-stock.', status: 'ready' },
+      { slug: 'cart-line-item', title: 'Cart Line Item', description: 'Cart row — thumbnail, title, variant, price, stepper, remove.', status: 'ready' },
+      { slug: 'empty-cart', title: 'Empty Cart', description: 'Empty-cart state with cart icon + continue-shopping CTA.', status: 'ready' },
       { slug: 'event-card', title: 'Event Card', description: 'Date + title + location + RSVP, 3 variants.', status: 'ready' },
       { slug: 'testimonial-card', title: 'Testimonial Card', description: 'Quote + name + role + avatar in 3 visual variants.', status: 'ready' },
       { slug: 'glass-card', title: 'Glass Card', description: 'Frosted-glass surface over colorful backgrounds — multiple intensities.', status: 'ready' },
