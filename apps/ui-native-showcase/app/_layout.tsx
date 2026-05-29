@@ -1,9 +1,22 @@
 import { useEffect, useMemo } from 'react'
-import { Platform } from 'react-native'
+import { Platform, View } from 'react-native'
 import { Tabs, usePathname } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
 import * as SplashScreen from 'expo-splash-screen'
 import { SafeAreaInsetsContext } from 'react-native-safe-area-context'
+import {
+  useFonts,
+  PlusJakartaSans_600SemiBold,
+  PlusJakartaSans_700Bold,
+  PlusJakartaSans_800ExtraBold,
+} from '@expo-google-fonts/plus-jakarta-sans'
+import {
+  Inter_400Regular,
+  Inter_500Medium,
+  Inter_600SemiBold,
+  Inter_700Bold,
+} from '@expo-google-fonts/inter'
+import { JetBrainsMono_400Regular } from '@expo-google-fonts/jetbrains-mono'
 import {
   OTFProvider,
   Theme,
@@ -15,6 +28,8 @@ import {
   Settings,
 } from '@otfdashkit/ui-native'
 import { ShowcaseThemeProvider, useShowcaseTheme } from '../components/ThemeContext'
+import { FloatingThemePicker } from '../components/FloatingThemePicker'
+import { accentFor, font, otfShowcaseThemes, themeNameFor } from '../lib/theme'
 
 // Mirrors fitness-kit's WebSafeAreaShim. ONLY when iframed by the preview
 // shell, override the safe-area top inset so the shell clears the iPhone
@@ -65,43 +80,69 @@ function ParentRouteSync() {
 
 SplashScreen.preventAutoHideAsync().catch(() => {})
 
-// Mirror fitness-kit: Roboto first so the web preview matches the Android
-// mobile experience the design is calibrated against (otherwise a Mac browser
-// would render San Francisco). Native still uses the OS UI font.
-const FONT_FAMILY = 'Roboto, -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif'
+// Type scale shared by both families. Plus Jakarta Sans is the display/heading
+// family; Inter is the body family; JetBrains Mono is exposed as `font.mono`
+// for inline tabular/label use (no mono createFont — it isn't a heading/body
+// role). Native resolves the @expo-google-fonts named weights; web resolves the
+// CSS families loaded by InjectWebStyles.
+const SIZE = {
+  1: 11, 2: 12, 3: 13, 4: 14, 5: 15, 6: 16, 7: 18, 8: 20,
+  9: 22, 10: 28, 11: 36, 12: 48, 13: 56, 14: 64, 15: 72, 16: 80,
+  true: 15,
+}
+const LINE_HEIGHT = {
+  1: 16, 2: 18, 3: 20, 4: 22, 5: 23, 6: 24, 7: 26, 8: 28,
+  9: 30, 10: 36, 11: 44, 12: 56, 13: 64, 14: 72, 15: 80, 16: 88,
+  true: 23,
+}
+const WEIGHT = {
+  1: '400', 2: '400', 3: '400', 4: '500', 5: '600', 6: '600',
+  7: '700', 8: '700', 9: '700', 10: '800', 11: '800', 12: '800',
+  13: '800', 14: '800', 15: '800', 16: '800',
+  true: '400',
+}
+const LETTER_SPACING = {
+  1: 0, 2: -0.1, 3: -0.2, 4: -0.3, 5: -0.4, 6: -0.4, 7: -0.5,
+  8: -0.5, 9: -0.6, 10: -0.7, 11: -0.8, 12: -0.9, 13: -1, 14: -1.2,
+  15: -1.4, 16: -1.6,
+  true: 0,
+}
 
-const interFont = createFont({
-  family: FONT_FAMILY,
-  size: {
-    1: 11, 2: 12, 3: 13, 4: 14, 5: 15, 6: 16, 7: 18, 8: 20,
-    9: 22, 10: 28, 11: 36, 12: 48, 13: 56, 14: 64, 15: 72, 16: 80,
-    true: 15,
-  },
-  lineHeight: {
-    1: 16, 2: 18, 3: 20, 4: 22, 5: 23, 6: 24, 7: 26, 8: 28,
-    9: 30, 10: 36, 11: 44, 12: 56, 13: 64, 14: 72, 15: 80, 16: 88,
-    true: 23,
-  },
-  weight: {
-    1: '400', 2: '400', 3: '400', 4: '500', 5: '600', 6: '600',
-    7: '700', 8: '700', 9: '700', 10: '800', 11: '800', 12: '800',
-    13: '800', 14: '800', 15: '900', 16: '900',
-    true: '400',
-  },
-  letterSpacing: {
-    1: 0, 2: -0.1, 3: -0.2, 4: -0.3, 5: -0.4, 6: -0.4, 7: -0.5,
-    8: -0.5, 9: -0.6, 10: -0.7, 11: -0.8, 12: -0.9, 13: -1, 14: -1.2,
-    15: -1.4, 16: -1.6,
-    true: 0,
-  },
+const bodyFont = createFont({
+  family: font.body,
+  size: SIZE,
+  lineHeight: LINE_HEIGHT,
+  weight: WEIGHT,
+  letterSpacing: LETTER_SPACING,
+})
+
+const headingFont = createFont({
+  family: font.display,
+  size: SIZE,
+  lineHeight: LINE_HEIGHT,
+  weight: WEIGHT,
+  letterSpacing: LETTER_SPACING,
+})
+
+// JetBrains Mono for every `$mono` surface — the showcase is full of API /
+// code blocks, so registering the config mono font (not just an inline token)
+// upgrades all of them at once. Web loads the family via InjectWebStyles;
+// native via the @expo-google-fonts JetBrainsMono weight in useFonts.
+const monoFont = createFont({
+  family: font.mono,
+  size: SIZE,
+  lineHeight: LINE_HEIGHT,
+  weight: { ...WEIGHT, 4: '400', 5: '500', 6: '500' },
 })
 
 const otfAppConfig = createOTFConfig({
   ...otfBaseConfig,
+  themes: otfShowcaseThemes,
   fonts: {
     ...otfBaseConfig.fonts,
-    body: interFont,
-    heading: interFont,
+    body: bodyFont,
+    heading: headingFont,
+    mono: monoFont,
   },
 })
 
@@ -111,14 +152,15 @@ function InjectWebStyles() {
     const fontLink = document.createElement('link')
     fontLink.id = 'otf-showcase-web-font'
     fontLink.rel = 'stylesheet'
-    fontLink.href = 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;800;900&display=swap'
+    fontLink.href =
+      'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap'
     document.head.appendChild(fontLink)
 
     const style = document.createElement('style')
     style.id = 'otf-showcase-web-styles'
     style.textContent = `
       html, body, #root {
-        font-family: 'Roboto', -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+        font-family: 'Inter', -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
         margin: 0;
         padding: 0;
       }
@@ -154,75 +196,92 @@ function ThemedBodyBg() {
   return null
 }
 
-// Apply the active palette + dark-mode inside Tamagui's Theme stack, then
-// render the Tabs navigator. Tab bar tinting reads palette.preview (the
-// human-friendly hex used in the palette swatches) so the active tab
-// indicator matches the picked accent.
+// Apply the active OTF palette + dark-mode via a single registered theme name
+// (`themeNameFor` → `dark` | `light` | `dark_warm` | `light_cosmic` | …), then
+// render the Tabs navigator. Tab-bar tinting uses `accentFor` so the active tab
+// indicator matches the picked palette and stays legible in both modes.
 //
 // When iframed by the phone-preview shell (apps/ui-native-storybook-preview)
-// — which is how the landing app at otf-kit.dev/components embeds these routes
-// inside the iPhone frame — we hide the bottom Tab bar entirely. The phone
-// frame already provides its own visual chrome; a competing Tab bar inside
-// the iframe just looks like clutter and steals vertical space.
+// — how the landing app at otf-kit.dev/components embeds these routes inside
+// the iPhone frame — we hide the bottom Tab bar entirely. The phone frame
+// already provides its own chrome; a competing Tab bar just steals space.
 function ThemedTabsShell() {
   const { palette, mode } = useShowcaseTheme()
   const isDark = mode === 'dark'
+  const accent = accentFor(palette, mode)
 
   return (
-    <Theme name={mode}>
-      <Theme name={palette.id}>
-        <ThemedBodyBg />
-        <Tabs
-          screenOptions={{
-            headerShown: false,
-            tabBarStyle: isWebIframed
-              ? { display: 'none' }
-              : {
-                  backgroundColor: isDark ? '#0a0a0a' : '#f5f5f5',
-                  borderTopColor: isDark ? '#1f1f1f' : '#e5e5e5',
-                  borderTopWidth: 0.5,
-                  height: 56,
-                  paddingBottom: 6,
-                  paddingTop: 6,
-                },
-            tabBarActiveTintColor: palette.preview,
-            tabBarInactiveTintColor: isDark ? '#525252' : '#a3a3a3',
-            tabBarLabelStyle: { fontSize: 11, fontWeight: '600' },
+    <Theme name={themeNameFor(palette.id, mode)}>
+      <ThemedBodyBg />
+      <View style={{ flex: 1 }}>
+      <Tabs
+        screenOptions={{
+          headerShown: false,
+          tabBarStyle: isWebIframed
+            ? { display: 'none' }
+            : {
+                backgroundColor: isDark ? '#0a0a0a' : '#f5f5f5',
+                borderTopColor: isDark ? '#1f1f1f' : '#e5e5e5',
+                borderTopWidth: 0.5,
+                height: 56,
+                paddingBottom: 6,
+                paddingTop: 6,
+              },
+          tabBarActiveTintColor: accent,
+          tabBarInactiveTintColor: isDark ? '#525252' : '#a3a3a3',
+          tabBarLabelStyle: { fontSize: 11, fontWeight: '600' },
+        }}
+      >
+        <Tabs.Screen
+          name="index"
+          options={{
+            title: 'Components',
+            tabBarIcon: ({ color, size }) => <Layers color={color as never} size={size} />,
           }}
-        >
-          <Tabs.Screen
-            name="index"
-            options={{
-              title: 'Components',
-              tabBarIcon: ({ color, size }) => <Layers color={color as never} size={size} />,
-            }}
-          />
-          <Tabs.Screen
-            name="settings"
-            options={{
-              title: 'Settings',
-              tabBarIcon: ({ color, size }) => <Settings color={color as never} size={size} />,
-            }}
-          />
-          {/* Hide all detail routes from the tab bar (still navigable via Link). */}
-          <Tabs.Screen name="primitives" options={{ href: null }} />
-          <Tabs.Screen name="interface" options={{ href: null }} />
-          <Tabs.Screen name="layouts" options={{ href: null }} />
-          <Tabs.Screen name="patterns" options={{ href: null }} />
-        </Tabs>
-      </Theme>
+        />
+        <Tabs.Screen
+          name="settings"
+          options={{
+            title: 'Settings',
+            tabBarIcon: ({ color, size }) => <Settings color={color as never} size={size} />,
+          }}
+        />
+        {/* Hide all detail routes from the tab bar (still navigable via Link). */}
+        <Tabs.Screen name="primitives" options={{ href: null }} />
+        <Tabs.Screen name="interface" options={{ href: null }} />
+        <Tabs.Screen name="layouts" options={{ href: null }} />
+        <Tabs.Screen name="patterns" options={{ href: null }} />
+      </Tabs>
+      <FloatingThemePicker />
+      </View>
     </Theme>
   )
 }
 
 export default function RootLayout() {
+  const [loaded, error] = useFonts({
+    PlusJakartaSans_600SemiBold,
+    PlusJakartaSans_700Bold,
+    PlusJakartaSans_800ExtraBold,
+    Inter_400Regular,
+    Inter_500Medium,
+    Inter_600SemiBold,
+    Inter_700Bold,
+    JetBrainsMono_400Regular,
+  })
+
+  // Web loads fonts via the injected <link>, not useFonts — never block on it.
+  const ready = loaded || !!error || Platform.OS === 'web'
+
   useEffect(() => {
-    SplashScreen.hideAsync().catch(() => {})
-  }, [])
+    if (ready) SplashScreen.hideAsync().catch(() => {})
+  }, [ready])
 
   // Memoised just for parity — config is module-level constant but keeps
   // provider props stable.
   const config = useMemo(() => otfAppConfig, [])
+
+  if (!ready) return null
 
   return (
     <OTFProvider config={config} defaultTheme="dark">

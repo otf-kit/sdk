@@ -1,11 +1,14 @@
 import { TestimonialCard, XStack, YStack } from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
+import { avatar } from '../../lib/fixtures'
 
-const SARAH = 'https://i.pravatar.cc/120?u=sarah-chen'
-const ALEX = 'https://i.pravatar.cc/120?u=alex-rivera'
-const JORDAN = 'https://i.pravatar.cc/120?u=jordan-kim'
-const MAYA = 'https://i.pravatar.cc/120?u=maya-patel'
-const DIEGO = 'https://i.pravatar.cc/120?u=diego-costa'
+// Real, self-hosted persona portraits (R2) — same people used across the
+// chat / avatar / swipe demos so the showcase reads as one product.
+const SARAH = avatar('sarah')
+const ALEX = avatar('alex')
+const JORDAN = avatar('jordan')
+const MAYA = avatar('maya')
+const DIEGO = avatar('diego')
 
 export default function TestimonialCardShowcase() {
   return (

@@ -1,5 +1,9 @@
 import { AvatarGroup, YStack, XStack, SizableText } from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
+import { PEOPLE } from '../../lib/fixtures'
+
+// Real persona portraits (R2) for the photo-avatar sections.
+const PHOTO_TEAM = PEOPLE.map((p) => ({ uri: p.avatar, name: p.name }))
 
 const TEAM = [
   { name: 'Sarah Chen', color: '$blue9' },
@@ -50,16 +54,17 @@ export default function AvatarGroupShowcase() {
         </YStack>
       </Section>
 
-      <Section title="With image URIs">
-        <AvatarGroup
-          avatars={[
-            { uri: 'https://i.pravatar.cc/100?img=11', name: 'Sarah Chen' },
-            { uri: 'https://i.pravatar.cc/100?img=12', name: 'Alex Rivera' },
-            { uri: 'https://i.pravatar.cc/100?img=13', name: 'Jordan Kim' },
-            { name: 'Maya Patel', color: '$purple9' },
-          ]}
-          max={4}
-        />
+      <Section title="With real photos" hint="Self-hosted persona portraits">
+        <YStack gap="$4">
+          <AvatarGroup avatars={PHOTO_TEAM} max={4} size={44} overlap={14} />
+          {/* Mixed: photos + an initials fallback for a member with no avatar. */}
+          <AvatarGroup
+            avatars={[...PHOTO_TEAM.slice(0, 3), { name: 'Taylor West', color: '$purple9' }]}
+            max={4}
+            size={44}
+            overlap={14}
+          />
+        </YStack>
       </Section>
     </ShowcaseFrame>
   )

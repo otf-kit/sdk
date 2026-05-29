@@ -16,6 +16,9 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@expo-google-fonts/inter": "^0.4.2",
+    "@expo-google-fonts/jetbrains-mono": "^0.4.1",
+    "@expo-google-fonts/plus-jakarta-sans": "^0.4.2",
     "@otfdashkit/ui-native": "^0.1.7",
     "@otfdashkit/tokens": "^0.1.1",
     "@shopify/react-native-skia": "2.2.12",

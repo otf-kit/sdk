@@ -1,12 +1,10 @@
 import { Avatar, XStack, YStack, SizableText, Circle } from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
+import { PEOPLE as ROSTER, avatar } from '../../lib/fixtures'
 
-const PEOPLE = [
-  { name: 'Sarah Chen', src: 'https://i.pravatar.cc/120?img=47' },
-  { name: 'Alex Rivera', src: 'https://i.pravatar.cc/120?img=12' },
-  { name: 'Jordan Kim', src: 'https://i.pravatar.cc/120?img=33' },
-  { name: 'Riley Patel', src: 'https://i.pravatar.cc/120?img=68' },
-] as const
+// Real, self-hosted persona portraits (R2).
+const PEOPLE = ROSTER.slice(0, 4).map((p) => ({ name: p.name, src: p.avatar }))
+const SARAH_SRC = avatar('sarah')
 
 export default function AvatarShowcase() {
   return (
@@ -19,7 +17,7 @@ export default function AvatarShowcase() {
         <XStack gap="$3" alignItems="center" flexWrap="wrap">
           {[24, 32, 40, 56, 80].map((size) => (
             <Avatar key={size} circular size={size}>
-              <Avatar.Image source={{ uri: 'https://i.pravatar.cc/120?img=47' }} />
+              <Avatar.Image source={{ uri: SARAH_SRC }} />
               <Avatar.Fallback backgroundColor="$color5">
                 <SizableText size="$2" fontWeight="600">SC</SizableText>
               </Avatar.Fallback>

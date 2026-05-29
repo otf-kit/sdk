@@ -9,9 +9,9 @@ import {
   useCollapsibleHeader,
 } from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
+import { avatar } from '../../lib/fixtures'
 
-const AVATAR =
-  'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop&crop=face'
+const AVATAR = avatar('sarah')
 
 function CollapsibleDemo() {
   const { scrollHandler, headerStyle } = useCollapsibleHeader({ threshold: 40 })

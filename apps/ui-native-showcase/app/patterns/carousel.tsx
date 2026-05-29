@@ -1,23 +1,13 @@
 import { Carousel, MediaCard, YStack, SizableText } from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
+import { SCENES } from '../../lib/fixtures'
 
-const CARDS = [
-  {
-    image: 'https://images.unsplash.com/photo-1529693662653-9d480530a697?w=1000&q=80',
-    title: 'Strength fundamentals',
-    subtitle: 'A 4-week primer',
-  },
-  {
-    image: 'https://images.unsplash.com/photo-1517649763962-0c623066013b?w=1000&q=80',
-    title: 'Trail running',
-    subtitle: 'Starter pack',
-  },
-  {
-    image: 'https://images.unsplash.com/photo-1483721310020-03333e577078?w=1000&q=80',
-    title: 'Mobility primer',
-    subtitle: '20 minutes daily',
-  },
-]
+// Real, self-hosted editorial scenes (R2) — the carousel reuses the scene set.
+const CARDS = SCENES.slice(0, 5).map((s) => ({
+  image: s.image,
+  title: s.title,
+  subtitle: s.subtitle,
+}))
 
 const CARD_WIDTH = 280
 const CARD_GAP = 12

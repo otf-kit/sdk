@@ -1,10 +1,13 @@
 import { MediaCard, XStack, YStack } from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
+import { SCENES } from '../../lib/fixtures'
 
-const COVER_1 = 'https://images.unsplash.com/photo-1529693662653-9d480530a697?w=1200&q=80'
-const COVER_2 = 'https://images.unsplash.com/photo-1517649763962-0c623066013b?w=1200&q=80'
-const COVER_3 = 'https://images.unsplash.com/photo-1483721310020-03333e577078?w=1200&q=80'
-const COVER_4 = 'https://images.unsplash.com/photo-1502810190503-8303352d0dd1?w=1200&q=80'
+// Real, self-hosted editorial scenes (R2) keyed by id.
+const scene = (id: string) => SCENES.find((s) => s.id === id)!.image
+const COVER_1 = scene('coast')
+const COVER_2 = scene('mountains')
+const COVER_3 = scene('forest')
+const COVER_4 = scene('city')
 
 export default function MediaCardShowcase() {
   return (

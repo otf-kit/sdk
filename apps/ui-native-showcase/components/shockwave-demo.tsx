@@ -33,6 +33,7 @@ import {
 // `registry-local/` dir can be gitignored with one line.
 import { Shockwave, type ShockwaveValue } from '../registry-local/shockwave'
 import { ShowcaseFrame, Section } from './ShowcaseFrame'
+import { STAYS } from '../lib/fixtures'
 
 const PHONE_W = 320
 const PHONE_H = 640
@@ -40,8 +41,7 @@ const SCREEN_PAD = 14
 const SURFACE_W = PHONE_W - SCREEN_PAD * 2
 const SURFACE_H = PHONE_H - SCREEN_PAD * 2
 
-const HOUSE_IMAGE =
-  'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=720&q=80&auto=format&fit=crop'
+const HOUSE_IMAGE = STAYS.find((s) => s.id === 'cabin')!.image
 
 const LISTING = {
   image: HOUSE_IMAGE,

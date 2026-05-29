@@ -1,8 +1,9 @@
 import { ChatBubble, YStack, type ChatMessage } from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
+import { avatar } from '../../lib/fixtures'
 
-const SARAH_AVATAR = 'https://i.pravatar.cc/64?u=sarah-chen'
-const ALEX_AVATAR = 'https://i.pravatar.cc/64?u=alex-rivera'
+const SARAH_AVATAR = avatar('sarah')
+const ALEX_AVATAR = avatar('alex')
 
 const userMsg: ChatMessage = {
   id: 'u1',
