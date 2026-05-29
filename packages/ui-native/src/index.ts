@@ -232,6 +232,21 @@ export type { PullToRefreshProps } from './patterns/PullToRefresh'
 export { ProductCard } from './patterns/ProductCard'
 export type { ProductCardProps } from './patterns/ProductCard'
 
+export { PriceTag } from './patterns/PriceTag'
+export type { PriceTagProps } from './patterns/PriceTag'
+
+export { QuantityStepper } from './patterns/QuantityStepper'
+export type { QuantityStepperProps } from './patterns/QuantityStepper'
+
+export { CartLineItem } from './patterns/CartLineItem'
+export type { CartLineItemProps } from './patterns/CartLineItem'
+
+export { VariantPicker } from './patterns/VariantPicker'
+export type { VariantPickerProps, VariantOption } from './patterns/VariantPicker'
+
+export { EmptyCart } from './patterns/EmptyCart'
+export type { EmptyCartProps } from './patterns/EmptyCart'
+
 export { PricingTable } from './patterns/PricingTable'
 export type { PricingTableProps, PricingPlan } from './patterns/PricingTable'
 

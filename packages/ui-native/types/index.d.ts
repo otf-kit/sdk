@@ -197,6 +197,17 @@ export const PullToRefresh: any
 export type PullToRefreshProps = any
 export const ProductCard: any
 export type ProductCardProps = any
+export const PriceTag: any
+export type PriceTagProps = any
+export const QuantityStepper: any
+export type QuantityStepperProps = any
+export const CartLineItem: any
+export type CartLineItemProps = any
+export const VariantPicker: any
+export type VariantPickerProps = any
+export type VariantOption = any
+export const EmptyCart: any
+export type EmptyCartProps = any
 export const PricingTable: any
 export type PricingTableProps = any
 export type PricingPlan = any
