@@ -15,7 +15,7 @@ import { Section, ShowcaseFrame } from '../../components/ShowcaseFrame'
 // in a YStack with a fixed `height` + `position: relative`.
 function Stage({ children }: { children: React.ReactNode }) {
   return (
-    <YStack height={220} position="relative" backgroundColor="$color2" borderRadius="$4" overflow="hidden">
+    <YStack height={320} position="relative" backgroundColor="$color2" borderRadius="$4" overflow="hidden">
       {children}
     </YStack>
   )
@@ -32,7 +32,7 @@ export default function FloatingActionButtonShowcase() {
     >
       <Section title="Legacy — circle (icon only)">
         <Stage>
-          <SizableText padding="$4" color="$color10">Tap count: {tapCount}</SizableText>
+          <SizableText padding="$4" color="$color11">Tap count: {tapCount}</SizableText>
           <FloatingActionButton
             icon={<Plus size={24} />}
             onPress={() => setTapCount((n) => n + 1)}
@@ -42,7 +42,7 @@ export default function FloatingActionButtonShowcase() {
 
       <Section title="Legacy — pill (icon + label)">
         <Stage>
-          <SizableText padding="$4" color="$color10">Pill grows around the label.</SizableText>
+          <SizableText padding="$4" color="$color11">Pill grows around the label.</SizableText>
           <FloatingActionButton
             icon={<Plus size={20} />}
             label="Add"
@@ -53,7 +53,7 @@ export default function FloatingActionButtonShowcase() {
 
       <Section title="Expanding (pill style) — quick-actions menu">
         <Stage>
-          <SizableText padding="$4" color="$color10">
+          <SizableText padding="$4" color="$color11">
             Tapped: {lastAction ?? 'nothing yet'}
           </SizableText>
           <FloatingActionButton

@@ -38,7 +38,7 @@ function PresetTile({ preset }: { preset: AnimationPreset }) {
       backgroundColor="$background"
       gap="$2"
     >
-      <SizableText size="$2" color="$color10">
+      <SizableText size="$2" color="$color11">
         {preset}
       </SizableText>
       <YStack height={60} alignItems="center" justifyContent="center">

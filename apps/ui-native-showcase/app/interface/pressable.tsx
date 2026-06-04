@@ -25,7 +25,7 @@ export default function PressableShowcase() {
           <SizableText size="$4" fontWeight="600" color="$color12">
             Tap me
           </SizableText>
-          <SizableText size="$2" color="$color10">
+          <SizableText size="$2" color="$color11">
             Watch the opacity drop on press
           </SizableText>
         </Pressable>
@@ -40,7 +40,7 @@ export default function PressableShowcase() {
           alignSelf="flex-start"
         >
           <XStack alignItems="center" gap="$2">
-            <Heart size={20} color={liked ? '$red10' : '$color10'} />
+            <Heart size={20} color={liked ? '$red10' : '$color11'} />
             <SizableText size="$3" color={liked ? '$red11' : '$color11'}>
               {liked ? 'Liked' : 'Like'}
             </SizableText>

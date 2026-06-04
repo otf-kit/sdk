@@ -48,7 +48,12 @@ export function ChatBubble({ message, showAvatar = true }: ChatBubbleProps) {
           {message.text}
         </SizableText>
         {message.timestamp && (
-          <SizableText size="$1" color={isUser ? '$color3' : '$color9'} alignSelf="flex-end">
+          <SizableText
+            size="$1"
+            color={isUser ? '$color1' : '$color11'}
+            opacity={isUser ? 0.7 : 1}
+            alignSelf="flex-end"
+          >
             {message.timestamp}
           </SizableText>
         )}

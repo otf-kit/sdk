@@ -24,7 +24,7 @@ export default function CountdownBannerShowcase() {
           <CountdownBanner endTime={in24h} label="Founders pricing ends in" />
           <XStack gap="$2" alignItems="center">
             <Button size="$3">Claim 30% off</Button>
-            <SizableText size="$2" color="$color10">CTA pairs naturally beneath the banner.</SizableText>
+            <SizableText size="$2" color="$color11">CTA pairs naturally beneath the banner.</SizableText>
           </XStack>
         </YStack>
       </Section>

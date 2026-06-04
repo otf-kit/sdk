@@ -189,7 +189,7 @@ function TickLabel({
       alignItems="center"
       pointerEvents="none"
     >
-      <SizableText size="$2" color="$color10" numberOfLines={1}>
+      <SizableText size="$2" color="$color11" numberOfLines={1}>
         {value}
       </SizableText>
     </View>
@@ -293,11 +293,15 @@ export function RulerScrubber({
   /** Called from worklet on momentum-end to snap + commit final value. */
   const commitSnap = useCallback(
     (rawOffset: number) => {
-      const index = quantizeIndex(
-        rawOffset / tickSpacing + min / step - min / step,
-        min,
-        step,
-        totalTicks,
+      // `rawOffset` is the horizontal scroll offset in px; dividing by
+      // `tickSpacing` IS the tick index directly. (The previous version piped
+      // this through `quantizeIndex` as if it were a *value*, which subtracted
+      // `min` and divided by `step` a second time — collapsing every release to
+      // index 0, i.e. the minimum value. That was the "always snaps to the
+      // least value" bug.)
+      const index = Math.max(
+        0,
+        Math.min(totalTicks - 1, Math.round(rawOffset / tickSpacing)),
       )
       const snappedOffset = offsetForIndex(index)
       // Snap-back if we're not exactly on the tick (sub-pixel). `animated:true`
@@ -312,7 +316,7 @@ export function RulerScrubber({
         onChange(next)
       }
     },
-    [tickSpacing, min, step, totalTicks, offsetForIndex, scrollToIndex, onChange],
+    [tickSpacing, totalTicks, min, step, offsetForIndex, scrollToIndex, onChange],
   )
 
   const scrollHandler = useAnimatedScrollHandler({
@@ -393,7 +397,7 @@ export function RulerScrubber({
             {displayValue}
           </SizableText>
           {unit ? (
-            <SizableText size="$5" color="$color10" fontWeight="500">
+            <SizableText size="$5" color="$color11" fontWeight="500">
               {unit}
             </SizableText>
           ) : null}
@@ -422,6 +426,8 @@ export function RulerScrubber({
           onScroll={scrollHandler}
           scrollEventThrottle={16}
           decelerationRate="fast"
+          snapToInterval={tickSpacing}
+          snapToAlignment="start"
           scrollEnabled={!disabled}
           contentContainerStyle={{
             paddingHorizontal: horizontalPadding,

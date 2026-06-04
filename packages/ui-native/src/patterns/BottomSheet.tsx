@@ -1,6 +1,7 @@
 import { type ReactNode } from 'react'
 import { Sheet, SizableText, XStack, YStack } from 'tamagui'
 import { ScrollView } from 'react-native'
+import { X } from '@tamagui/lucide-icons'
 
 export type BottomSheetProps = {
   open: boolean; onOpenChange: (open: boolean) => void; title?: string; children: ReactNode
@@ -29,7 +30,7 @@ export function BottomSheet({ open, onOpenChange, title, children, snapPoints = 
             {showClose && (
               <XStack width={28} height={28} borderRadius="$10" backgroundColor="$color4" alignItems="center" justifyContent="center"
                 pressStyle={{ opacity: 0.7 }} onPress={() => onOpenChange(false)}>
-                <SizableText size="$3" color="$color10" fontWeight="600">{'\u2715'}</SizableText>
+                <X size={16} color="$color11" />
               </XStack>
             )}
           </XStack>

@@ -1,5 +1,8 @@
-import { useState, useCallback, useEffect, createContext, useContext, type ReactNode } from 'react'
+import { useState, useCallback, useEffect, createContext, useContext, type ReactNode, type ComponentType } from 'react'
 import { SizableText, XStack, YStack } from 'tamagui'
+import { Check, X, Info, AlertTriangle } from '@tamagui/lucide-icons'
+
+type LucideIcon = ComponentType<{ size?: number; color?: string }>
 
 export type OtfToastVariant = 'default' | 'success' | 'error' | 'warning'
 export type OtfToastData = {
@@ -13,11 +16,11 @@ export type OtfToastContextType = {
 
 const ToastContext = createContext<OtfToastContextType | null>(null)
 
-const variantStyles: Record<OtfToastVariant, { bg: string; border: string; icon: string }> = {
-  default: { bg: '$color3', border: '$color6', icon: 'ℹ' },
-  success: { bg: '$green2', border: '$green7', icon: '✓' },
-  error: { bg: '$red2', border: '$red7', icon: '✕' },
-  warning: { bg: '$yellow2', border: '$yellow7', icon: '!' },
+const variantStyles: Record<OtfToastVariant, { bg: string; border: string; icon: LucideIcon; iconColor: string }> = {
+  default: { bg: '$color3', border: '$color6', icon: Info, iconColor: '$color11' },
+  success: { bg: '$green2', border: '$green7', icon: Check, iconColor: '$green10' },
+  error: { bg: '$red2', border: '$red7', icon: X, iconColor: '$red10' },
+  warning: { bg: '$yellow2', border: '$yellow7', icon: AlertTriangle, iconColor: '$yellow10' },
 }
 
 let globalToastShow: OtfToastContextType['show'] | null = null
@@ -59,6 +62,7 @@ export function OtfToastProvider({ children }: { children: ReactNode }) {
       >
         {toasts.map(t => {
           const style = variantStyles[t.variant ?? 'default']
+          const Icon = style.icon
           return (
             <XStack
               key={t.id}
@@ -81,22 +85,23 @@ export function OtfToastProvider({ children }: { children: ReactNode }) {
               pointerEvents="auto"
               elevation={4}
             >
-              <SizableText size="$4" fontWeight="700" marginTop="$0.5">{style.icon}</SizableText>
+              <XStack marginTop="$0.5">
+                <Icon size={16} color={style.iconColor} />
+              </XStack>
               <YStack flex={1} gap="$1">
                 <SizableText size="$4" fontWeight="600" color="$color12">{t.title}</SizableText>
                 {t.message && (
-                  <SizableText size="$3" color="$color10">{t.message}</SizableText>
+                  <SizableText size="$3" color="$color11">{t.message}</SizableText>
                 )}
               </YStack>
-              <SizableText
-                size="$3" color="$color8" fontWeight="600"
+              <XStack
                 pressStyle={{ opacity: 0.5 }}
                 onPress={() => dismiss(t.id)}
                 cursor="pointer"
                 marginTop="$0.5"
               >
-                ✕
-              </SizableText>
+                <X size={16} color="$color11" />
+              </XStack>
             </XStack>
           )
         })}

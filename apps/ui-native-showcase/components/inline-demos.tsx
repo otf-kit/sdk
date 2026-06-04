@@ -16,9 +16,12 @@
 // be inlined progressively in Phase B.
 
 import { useState, type ComponentType } from 'react'
+import { StyleSheet } from 'react-native'
+import { LinearGradient } from 'expo-linear-gradient'
 import {
   Button,
   Card,
+  Image,
   Input,
   Label,
   H4,
@@ -28,9 +31,9 @@ import {
   YStack,
   Heart,
   Plus,
-  Activity,
-  Target,
-  TrendingUp,
+  FileText,
+  Camera,
+  CalendarPlus,
   Badge,
   ChipGroup,
   ListItem,
@@ -50,10 +53,10 @@ const sceneImg = (id: string) => SCENES.find((s) => s.id === id)!.image
 function ButtonDemo() {
   return (
     <XStack gap="$2" flexWrap="wrap" alignItems="center">
-      <Button size="$3" theme="active">Primary</Button>
-      <Button size="$3">Default</Button>
-      <Button size="$3" theme="alt2">Subtle</Button>
-      <Button size="$3" icon={Heart} circular accessibilityLabel="Like" />
+      <Button size="$3" variant="primary">Primary</Button>
+      <Button size="$3" variant="default">Default</Button>
+      <Button size="$3" variant="outlined">Outlined</Button>
+      <Button size="$3" variant="default" icon={Heart} circular accessibilityLabel="Like" />
     </XStack>
   )
 }
@@ -63,7 +66,7 @@ function CardDemo() {
     <Card elevate size="$4" bordered padding="$4">
       <YStack gap="$1.5">
         <H4>Elevated card</H4>
-        <Paragraph color="$color10" size="$3">
+        <Paragraph color="$color11" size="$3">
           Surface container with shadow + border. Use for primary content
           groupings on a page.
         </Paragraph>
@@ -171,28 +174,72 @@ function MediaCardDemo() {
   )
 }
 
-function FabDemo() {
-  // FAB is `position: absolute` — wrap in a fixed-height container with
-  // overflow:hidden so the button is scoped to this section and doesn't
-  // float into the rest of the page.
+// Cinematic photo the FAB floats over — gives the stage real context (a FAB
+// always sits ON a screen) instead of an empty card, and gives the expanding
+// menu's dim backdrop a real image to darken when it opens. Same self-hosted
+// R2 imagery + scrim pattern as the immersive paywall.
+function FabStageBackdrop() {
   return (
-    <YStack
-      height={180}
-      borderRadius="$4"
-      borderWidth={1}
-      borderColor="$borderColor"
-      backgroundColor="$color2"
-      overflow="hidden"
-      position="relative"
-    >
-      <YStack flex={1} alignItems="center" justifyContent="center">
-        <SizableText size="$3" color="$color10">Container with floating action</SizableText>
-      </YStack>
-      <FloatingActionButton
-        icon={<Plus size={22} />}
-        label="Add"
-        onPress={() => {}}
+    <YStack position="absolute" top={0} left={0} right={0} bottom={0}>
+      <Image
+        source={{ uri: sceneImg('city') }}
+        position="absolute"
+        top={0}
+        left={0}
+        right={0}
+        bottom={0}
+        width="100%"
+        height="100%"
+        objectFit="cover"
       />
+      {/* Soft scrim — keeps the photo vivid up top while darkening the
+          bottom-right so the FAB + chips stay crisp. */}
+      <LinearGradient
+        colors={['rgba(0,0,0,0.32)', 'rgba(0,0,0,0.12)', 'rgba(0,0,0,0.58)']}
+        locations={[0, 0.42, 1]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 0, y: 1 }}
+        style={StyleSheet.absoluteFill}
+      />
+    </YStack>
+  )
+}
+
+function FabDemo() {
+  const [last, setLast] = useState<string | null>(null)
+  return (
+    <YStack gap="$2">
+      {/* Context label */}
+      <SizableText size="$2" color="$color11">
+        {last ? `✓ Created: ${last}` : 'Tap the button below to fan out actions'}
+      </SizableText>
+
+      {/* Fixed-height stage — tall enough that all 3 action chips fan out
+          above the FAB without clipping (chips start ~104px off the bottom and
+          the 3-chip stack is ~144px tall). A faux app screen sits behind the
+          FAB so the stage reads as a real surface, not an empty card. */}
+      <YStack
+        height={300}
+        borderRadius="$5"
+        borderWidth={1}
+        borderColor="$color4"
+        backgroundColor="$color2"
+        overflow="hidden"
+        position="relative"
+      >
+        <FabStageBackdrop />
+        <FloatingActionButton
+          icon={<Plus size={22} color="white" />}
+          label="Create"
+          expandStyle="pill"
+          position="bottom-right"
+          actions={[
+            { id: 'note',  icon: <FileText size={18} color="white" />,     label: 'New note',     onPress: () => setLast('Note')  },
+            { id: 'photo', icon: <Camera size={18} color="white" />,       label: 'Photo',        onPress: () => setLast('Photo') },
+            { id: 'event', icon: <CalendarPlus size={18} color="white" />, label: 'Event',        onPress: () => setLast('Event') },
+          ]}
+        />
+      </YStack>
     </YStack>
   )
 }
@@ -213,19 +260,22 @@ function AppHeaderDemo() {
 
 const ONBOARDING_STEPS: OnboardingStep[] = [
   {
-    title: 'Track your training',
-    description: 'Log workouts in seconds.',
-    icon: <Activity size={48} color="$color9" />,
+    eyebrow: 'Welcome',
+    title: 'Find your\nquiet place',
+    description: 'Thousands of trails, stays, and escapes — curated for the way you unwind.',
+    image: sceneImg('forest'),
   },
   {
-    title: 'Hit your goals',
-    description: 'Pick a target — strength, endurance, or recovery.',
-    icon: <Target size={48} color="$color9" />,
+    eyebrow: 'Discover',
+    title: 'Go where\nthe map ends',
+    description: 'Hand-picked routes from coastlines to ridgelines. Save the ones that call.',
+    image: sceneImg('mountains'),
   },
   {
-    title: 'See your streak',
-    description: 'Daily check-ins build the chart.',
-    icon: <TrendingUp size={48} color="$color9" />,
+    eyebrow: 'Begin',
+    title: 'Your next\nchapter awaits',
+    description: 'Book in two taps. We handle the logistics so you can just go.',
+    image: sceneImg('coast'),
   },
 ]
 
@@ -240,9 +290,11 @@ function OnboardingCarouselDemo() {
       backgroundColor="$background"
     >
       <OnboardingCarousel
+        variant="immersive"
         steps={ONBOARDING_STEPS}
         onSkip={() => {}}
         onComplete={() => {}}
+        completeLabel="Start exploring"
       />
     </YStack>
   )

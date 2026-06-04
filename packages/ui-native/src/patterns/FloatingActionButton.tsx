@@ -78,7 +78,6 @@ const positionStyles = {
   'bottom-left': { left: 20 },
 }
 
-const PILL_OPEN_WIDTH = 140
 const TWEEN_MS = 250
 const EASE = Easing.bezier(0.33, 1, 0.68, 1) // easeOutCubic
 
@@ -100,31 +99,38 @@ export function FloatingActionButton({
   // ---------------------------------------------------------------------
   if (!hasActions) {
     return (
-      <XStack
-        position="absolute"
-        bottom={32}
-        {...(positionStyles[position] as any)}
-        height={dim}
-        minWidth={dim}
-        borderRadius={label ? '$6' : '$10'}
-        backgroundColor="$color9"
-        alignItems="center"
-        justifyContent="center"
-        gap="$2"
-        paddingHorizontal={label ? '$4' : 0}
-        elevation={4}
-        pressStyle={{ scale: 0.95, opacity: 0.9 }}
+      <Pressable
         onPress={onPress}
         accessibilityRole="button"
         accessibilityLabel={label ?? 'Action'}
+        style={({ pressed }) => [
+          { position: 'absolute', bottom: 32 },
+          positionStyles[position] as object,
+          { opacity: pressed ? 0.9 : 1, transform: [{ scale: pressed ? 0.95 : 1 }] },
+        ]}
       >
-        {icon ? <SizableText color="$color1">{icon}</SizableText> : null}
-        {label ? (
-          <SizableText color="$color1" size="$4" fontWeight="600">
-            {label}
-          </SizableText>
-        ) : null}
-      </XStack>
+        <XStack
+          height={dim}
+          minWidth={dim}
+          borderRadius={label ? '$6' : '$10'}
+          backgroundColor="$color9"
+          alignItems="center"
+          justifyContent="center"
+          gap="$2"
+          paddingHorizontal={label ? '$4' : 0}
+          shadowColor="$color9"
+          shadowOpacity={0.45}
+          shadowRadius={14}
+          shadowOffset={{ height: 4, width: 0 }}
+        >
+          {icon ? <YStack alignItems="center" justifyContent="center">{icon}</YStack> : null}
+          {label ? (
+            <SizableText color="$color1" size="$4" fontWeight="600">
+              {label}
+            </SizableText>
+          ) : null}
+        </XStack>
+      </Pressable>
     )
   }
 
@@ -169,6 +175,14 @@ function ExpandingFab({
   const reduced = useReducedMotion()
   const [open, setOpen] = useState(false)
   const progress = useSharedValue(0) // 0 = closed, 1 = open
+
+  const isPill = expandStyle === 'pill'
+  const morphLabel = label ?? 'Add'
+  // Approximate rendered width of the label at size $4 (~16px glyphs). Sizes
+  // the open pill so the icon + label read as one centered group — never a
+  // dead-centered icon with a label pinned to the far right.
+  const labelW = isPill ? Math.round(morphLabel.length * 9) + 14 : 0
+  const pillOpenWidth = isPill ? dim + labelW + 16 : dim
 
   // Drive `progress` from the boolean state. Reduced motion snaps; otherwise
   // tweens with a soft ease-out curve.
@@ -230,22 +244,28 @@ function ExpandingFab({
     }
   }, [reduced, progress])
 
-  // Pill-style morph: width interpolates from `dim` (circle) to PILL_OPEN_WIDTH.
-  // Circle-style: width stays at `dim`.
+  // Pill-style morph: width interpolates from `dim` (circle) to `pillOpenWidth`.
+  // Circle-style: width stays at `dim`. (Reduced motion still widens — progress
+  // snaps to its target instantly, so the label has room and never overflows.)
   const fabContainerStyle = useAnimatedStyle(() => {
     'worklet'
-    if (expandStyle === 'circle' || reduced) {
+    if (!isPill) {
       return { width: dim }
     }
-    const width = dim + (PILL_OPEN_WIDTH - dim) * progress.value
+    const width = dim + (pillOpenWidth - dim) * progress.value
     return { width }
-  }, [expandStyle, reduced, dim, progress])
+  }, [isPill, dim, pillOpenWidth, progress])
 
-  // The morph label fades in alongside the rotated icon when expanding into a pill.
-  const morphLabelStyle = useAnimatedStyle(() => {
+  // The label lives in a centered row beside the icon; its container width
+  // grows 0 → labelW alongside the opacity so the icon + label stay a single
+  // centered group at every point of the morph.
+  const labelWrapStyle = useAnimatedStyle(() => {
     'worklet'
-    return { opacity: expandStyle === 'pill' && !reduced ? progress.value : 0 }
-  }, [expandStyle, reduced, progress])
+    return {
+      width: labelW * progress.value,
+      opacity: progress.value,
+    }
+  }, [labelW, progress])
 
   // Backdrop opacity tracks `progress`. We render unconditionally while
   // open; the press surface stays mounted for the duration of the close
@@ -259,7 +279,6 @@ function ExpandingFab({
   // mount the backdrop whenever `open` is true and let `FadeOut` carry it
   // out. Reduced-motion users get an instant unmount via the conditional.
   const renderBackdrop = open
-  const morphLabel = label ?? 'Add'
 
   return (
     <>
@@ -314,37 +333,47 @@ function ExpandingFab({
                   : FadeOutDown.delay((actions.length - 1 - i) * 30).duration(150)
               }
             >
-              <XStack
-                gap={12}
-                alignItems="center"
+              <Pressable
+                onPress={() => handleActionPress(action)}
                 accessibilityRole="button"
                 accessibilityLabel={action.label}
-                onPress={() => handleActionPress(action)}
-                pressStyle={{ opacity: 0.85, scale: 0.98 }}
+                style={({ pressed }) => ({ opacity: pressed ? 0.85 : 1, transform: [{ scale: pressed ? 0.98 : 1 }] })}
               >
-                <XStack
-                  paddingHorizontal={12}
-                  paddingVertical={8}
-                  borderRadius={999}
-                  backgroundColor="$color2"
-                  elevation={2}
-                >
-                  <SizableText size="$3" fontWeight="600" color="$color12">
-                    {action.label}
-                  </SizableText>
+                <XStack gap={12} alignItems="center">
+                  <XStack
+                    paddingHorizontal={14}
+                    paddingVertical={9}
+                    borderRadius={999}
+                    backgroundColor="$color4"
+                    borderWidth={1}
+                    borderColor="$color6"
+                    elevation={3}
+                    shadowColor="rgba(0,0,0,0.3)"
+                    shadowRadius={8}
+                    shadowOffset={{ width: 0, height: 4 }}
+                  >
+                    <SizableText size="$3" fontWeight="600" color="$color12">
+                      {action.label}
+                    </SizableText>
+                  </XStack>
+                  <XStack
+                    width={40}
+                    height={40}
+                    borderRadius={999}
+                    backgroundColor={action.accent ?? '$color9'}
+                    alignItems="center"
+                    justifyContent="center"
+                    shadowColor={action.accent ?? '$color9'}
+                    shadowOpacity={0.4}
+                    shadowRadius={8}
+                    shadowOffset={{ width: 0, height: 2 }}
+                  >
+                    <YStack alignItems="center" justifyContent="center">
+                      {action.icon}
+                    </YStack>
+                  </XStack>
                 </XStack>
-                <XStack
-                  width={40}
-                  height={40}
-                  borderRadius={999}
-                  backgroundColor={action.accent ?? '$color9'}
-                  alignItems="center"
-                  justifyContent="center"
-                  elevation={3}
-                >
-                  <SizableText color="$color1">{action.icon}</SizableText>
-                </XStack>
-              </XStack>
+              </Pressable>
             </Animated.View>
           ))}
         </YStack>
@@ -364,37 +393,53 @@ function ExpandingFab({
           fabContainerStyle,
         ]}
       >
-        <XStack
-          flex={1}
-          height={dim}
-          borderRadius={dim / 2}
-          backgroundColor="$color9"
-          alignItems="center"
-          justifyContent="center"
-          gap="$2"
-          paddingHorizontal={expandStyle === 'pill' ? '$3' : 0}
-          pressStyle={{ scale: 0.95, opacity: 0.9 }}
+        <Pressable
           onPress={handleFabPress}
           accessibilityRole="button"
           accessibilityLabel={open ? 'Close menu' : (label ?? 'Open menu')}
           accessibilityState={{ expanded: open }}
+          style={({ pressed }) => ({ flex: 1, opacity: pressed ? 0.9 : 1 })}
         >
-          <Animated.View style={iconStyle}>
-            {icon ? <SizableText color="$color1">{icon}</SizableText> : null}
-          </Animated.View>
-          {expandStyle === 'pill' ? (
-            <Animated.View style={morphLabelStyle}>
-              <SizableText
-                color="$color1"
-                size="$4"
-                fontWeight="600"
-                numberOfLines={1}
-              >
-                {morphLabel}
-              </SizableText>
+          {/* Icon + label form ONE centered group. The icon rotates; the label
+              lives in an animated-width container that grows from 0, so when
+              closed only the icon shows (perfectly centered in the circle) and
+              when open the [icon][label] pair sits centered together in the
+              pill — never a centered icon with a far-right label. */}
+          <XStack
+            flex={1}
+            height={dim}
+            borderRadius={dim / 2}
+            backgroundColor="$color9"
+            alignItems="center"
+            justifyContent="center"
+            shadowColor="$color9"
+            shadowOpacity={0.45}
+            shadowRadius={14}
+            shadowOffset={{ height: 4, width: 0 }}
+          >
+            <Animated.View style={iconStyle}>
+              {icon ? <YStack alignItems="center" justifyContent="center">{icon}</YStack> : null}
             </Animated.View>
-          ) : null}
-        </XStack>
+            {isPill ? (
+              <Animated.View
+                style={[
+                  labelWrapStyle,
+                  { overflow: 'hidden', justifyContent: 'center', pointerEvents: 'none' },
+                ]}
+              >
+                <SizableText
+                  color="$color1"
+                  size="$4"
+                  fontWeight="600"
+                  numberOfLines={1}
+                  paddingLeft={8}
+                >
+                  {morphLabel}
+                </SizableText>
+              </Animated.View>
+            ) : null}
+          </XStack>
+        </Pressable>
       </Animated.View>
     </>
   )

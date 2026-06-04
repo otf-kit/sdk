@@ -53,7 +53,7 @@ export default function ScreenLayoutShowcase() {
               borderBottomColor="$borderColor"
             >
               <SizableText size="$6" fontWeight="700">Inbox</SizableText>
-              <SizableText size="$2" color="$color10">{items.length} items</SizableText>
+              <SizableText size="$2" color="$color11">{items.length} items</SizableText>
             </XStack>
             <ScrollView flex={1}>
               <YStack padding="$4" gap="$3">
@@ -61,7 +61,7 @@ export default function ScreenLayoutShowcase() {
                   <YStack key={it.id} gap="$2">
                     <YStack gap="$1">
                       <SizableText size="$4" fontWeight="600">{it.title}</SizableText>
-                      <SizableText size="$2" color="$color10">{it.meta}</SizableText>
+                      <SizableText size="$2" color="$color11">{it.meta}</SizableText>
                     </YStack>
                     {i < items.length - 1 && <Separator />}
                   </YStack>
@@ -85,7 +85,7 @@ export default function ScreenLayoutShowcase() {
           <ScreenLayout padded>
             <YStack gap="$2">
               <SizableText size="$6" fontWeight="700">Settings</SizableText>
-              <SizableText size="$3" color="$color10">
+              <SizableText size="$3" color="$color11">
                 Padding is applied uniformly so simple stacks sit comfortably without manual insets.
               </SizableText>
             </YStack>
@@ -98,7 +98,7 @@ export default function ScreenLayoutShowcase() {
           <ScreenLayout centered padded>
             <YStack gap="$2" alignItems="center" maxWidth={280}>
               <SizableText size="$7" fontWeight="800">All caught up</SizableText>
-              <SizableText size="$3" color="$color10" textAlign="center">
+              <SizableText size="$3" color="$color11" textAlign="center">
                 You have no new notifications. Anything new will appear here.
               </SizableText>
               <OtfButton marginTop="$3" onPress={() => {}}>Refresh</OtfButton>
@@ -111,7 +111,7 @@ export default function ScreenLayoutShowcase() {
         <Frame>
           <ScreenLayout safe padded>
             <SizableText size="$6" fontWeight="700">Profile</SizableText>
-            <SizableText size="$3" color="$color10">
+            <SizableText size="$3" color="$color11">
               The safe variant pushes content below the status bar on devices without explicit safe-area context.
             </SizableText>
           </ScreenLayout>

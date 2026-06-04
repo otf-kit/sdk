@@ -1,5 +1,6 @@
 import React from 'react'
 import { Select, Adapt, Sheet, YStack, SizableText, type GetProps } from 'tamagui'
+import { Check, ChevronDown, ChevronUp } from '@tamagui/lucide-icons'
 
 export type OtfSelectItem = {
   label: string
@@ -36,7 +37,7 @@ export function OtfSelect({
         disablePreventBodyScroll
         {...(disabled ? { disabled: true } : {})}
       >
-        <Select.Trigger width="100%" iconAfter={() => <SizableText>▼</SizableText>} size={size}>
+        <Select.Trigger width="100%" iconAfter={() => <ChevronDown size={16} color="$color11" />} size={size}>
           <Select.Value placeholder={placeholder} />
         </Select.Trigger>
 
@@ -51,7 +52,7 @@ export function OtfSelect({
 
         <Select.Content zIndex={200000}>
           <Select.ScrollUpButton alignItems="center" justifyContent="center" height="$3">
-            <SizableText>▲</SizableText>
+            <ChevronUp size={16} color="$color11" />
           </Select.ScrollUpButton>
           <Select.Viewport minWidth={200}>
             <Select.Group>
@@ -59,14 +60,14 @@ export function OtfSelect({
                 <Select.Item index={i} key={item.value} value={item.value}>
                   <Select.ItemText>{item.label}</Select.ItemText>
                   <Select.ItemIndicator marginLeft="auto">
-                    <SizableText>✓</SizableText>
+                    <Check size={16} color="$color11" />
                   </Select.ItemIndicator>
                 </Select.Item>
               ))}
             </Select.Group>
           </Select.Viewport>
           <Select.ScrollDownButton alignItems="center" justifyContent="center" height="$3">
-            <SizableText>▼</SizableText>
+            <ChevronDown size={16} color="$color11" />
           </Select.ScrollDownButton>
         </Select.Content>
       </Select>

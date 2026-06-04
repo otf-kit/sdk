@@ -36,7 +36,7 @@ export function ConfirmDialog({
             <YStack gap="$2" alignItems={icon ? 'center' : 'flex-start'}>
               <AlertDialog.Title size="$6" fontWeight="700">{title}</AlertDialog.Title>
               {description && (
-                <AlertDialog.Description size="$3" color="$color10"
+                <AlertDialog.Description size="$3" color="$color11"
                   textAlign={icon ? 'center' : 'left'}>
                   {description}
                 </AlertDialog.Description>

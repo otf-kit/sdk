@@ -117,7 +117,7 @@ export default function NotificationBannerShowcase() {
           <NotificationBanner variant="success" title="Saved" />
           <NotificationBanner variant="error" title="Couldn't save changes" />
         </YStack>
-        <SizableText size="$2" color="$color10">
+        <SizableText size="$2" color="$color11">
           Useful inside dense list items or toolbars.
         </SizableText>
       </Section>

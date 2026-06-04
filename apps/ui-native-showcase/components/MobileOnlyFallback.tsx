@@ -118,7 +118,7 @@ export function MobileOnlyFallback({
 
           <Paragraph
             size="$3"
-            color="$color10"
+            color="$color11"
             textAlign="center"
             maxWidth={460}
           >
@@ -131,7 +131,7 @@ export function MobileOnlyFallback({
 
       {preview ? (
         <Section title="Preview (static, no animation)">
-          <Paragraph size="$2" color="$color10" marginBottom="$3">
+          <Paragraph size="$2" color="$color11" marginBottom="$3">
             What you'd see on a device — minus the native effect this
             component is built for.
           </Paragraph>

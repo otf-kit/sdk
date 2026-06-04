@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 import { Image, View } from 'react-native'
 import { YStack, XStack, H3, SizableText } from 'tamagui'
 import { Bed, Bath, Star, Wifi } from '@tamagui/lucide-icons'
+import { Button } from '../../primitives/Button'
 import type { StayDetailMetric, StayDetailScreenProps } from './types'
 
 const formatPrice = (n: number) =>
@@ -17,20 +18,20 @@ const buildDefaultMetrics = (props: StayDetailScreenProps): StayDetailMetric[] =
   } else if (typeof props.listing.bed === 'number') {
     out.push({
       label: 'Beds',
-      icon: <Bed size={14} color="#fafaf9" />,
+      icon: <Bed size={15} color="$color9" />,
       value: props.listing.bed,
     })
   }
   if (typeof props.listing.bath === 'number') {
     out.push({
       label: 'Baths',
-      icon: <Bath size={14} color="#fafaf9" />,
+      icon: <Bath size={15} color="$color9" />,
       value: props.listing.bath,
     })
   }
   out.push({
     label: 'Wifi',
-    icon: <Wifi size={14} color="#fafaf9" />,
+    icon: <Wifi size={15} color="$color9" />,
     value: 'Fast',
   })
   return out
@@ -41,7 +42,8 @@ const buildDefaultMetrics = (props: StayDetailScreenProps): StayDetailMetric[] =
  * eyebrow + price + owner subtitle, then a metrics row and a chunky
  * accent-tinted CTA pinned to the bottom.
  *
- * Pairs naturally with `<StayBrowseScreen>`.
+ * Fully theme-driven — adapts to dark/light and the active accent
+ * palette. Pairs naturally with `<StayBrowseScreen>`.
  *
  * @example
  * ```tsx
@@ -67,8 +69,8 @@ export function StayDetailScreen(props: StayDetailScreenProps) {
     eyebrow = 'BOOKING DETAILS',
     ctaLabel = 'Reserve now',
     onReserve,
-    backgroundColor = '#0a0a0a',
-    ctaColor = '#f97316',
+    backgroundColor = '$background',
+    ctaColor,
   } = props
 
   const resolvedMetrics: StayDetailMetric[] =
@@ -76,7 +78,7 @@ export function StayDetailScreen(props: StayDetailScreenProps) {
 
   return (
     <YStack flex={1} backgroundColor={backgroundColor as never}>
-      <View style={{ position: 'relative', height: '50%' }}>
+      <View style={{ position: 'relative', height: '46%' }}>
         <Image
           source={{ uri: listing.image }}
           style={{ width: '100%', height: '100%' }}
@@ -97,7 +99,7 @@ export function StayDetailScreen(props: StayDetailScreenProps) {
               gap: 4,
             }}
           >
-            <Star size={12} color="#f59e0b" fill="#f59e0b" />
+            <Star size={12} color="#F59E0B" fill="#F59E0B" />
             <SizableText size="$1" color="#0a0a0a" fontWeight="700">
               {listing.rating.toFixed(1)}
             </SizableText>
@@ -105,39 +107,52 @@ export function StayDetailScreen(props: StayDetailScreenProps) {
         ) : null}
       </View>
 
-      <YStack flex={1} padding={18} gap={10}>
-        <SizableText size="$2" color="#a3a3a3">
+      <YStack
+        flex={1}
+        padding={20}
+        gap={10}
+        marginTop={-24}
+        borderTopLeftRadius={28}
+        borderTopRightRadius={28}
+        backgroundColor="$background"
+      >
+        <SizableText size="$2" color="$color11" fontWeight="600" letterSpacing={1}>
           {eyebrow}
         </SizableText>
         {typeof listing.pricePerNight === 'number' ? (
-          <H3 color="#fafaf9" size="$7">
-            {formatPrice(listing.pricePerNight)}/night
-          </H3>
+          <XStack alignItems="baseline" gap={4}>
+            <H3 color="$color12" size="$9" fontWeight="800">
+              {formatPrice(listing.pricePerNight)}
+            </H3>
+            <SizableText size="$4" color="$color11" fontWeight="500">
+              / night
+            </SizableText>
+          </XStack>
         ) : (
-          <H3 color="#fafaf9" size="$7">
+          <H3 color="$color12" size="$8" fontWeight="800">
             {listing.title}
           </H3>
         )}
-        <SizableText size="$2" color="#a3a3a3">
+        <SizableText size="$3" color="$color11">
           {listing.ownerName ? listing.ownerName + ' · ' : ''}
           {listing.address}
         </SizableText>
 
-        <XStack gap={20} marginTop={6}>
+        <XStack gap={24} marginTop={10}>
           {resolvedMetrics.map((m, i) => (
-            <YStack key={i} gap={2}>
-              <SizableText size="$1" color="#737373">
+            <YStack key={i} gap={3}>
+              <SizableText size="$1" color="$color11" textTransform="uppercase" letterSpacing={0.5}>
                 {m.label}
               </SizableText>
               {m.icon ? (
-                <XStack alignItems="center" gap={4}>
+                <XStack alignItems="center" gap={5}>
                   {m.icon as ReactNode}
-                  <SizableText size="$3" color="#fafaf9" fontWeight="600">
+                  <SizableText size="$4" color="$color12" fontWeight="700">
                     {m.value as ReactNode}
                   </SizableText>
                 </XStack>
               ) : (
-                <SizableText size="$3" color="#fafaf9" fontWeight="600">
+                <SizableText size="$4" color="$color12" fontWeight="700">
                   {m.value as ReactNode}
                 </SizableText>
               )}
@@ -145,17 +160,20 @@ export function StayDetailScreen(props: StayDetailScreenProps) {
           ))}
         </XStack>
 
-        <YStack
-          marginTop="auto"
-          padding={14}
-          borderRadius={14}
-          backgroundColor={ctaColor as never}
-          alignItems="center"
-          onPress={onReserve}
-        >
-          <SizableText size="$3" color="#fff" fontWeight="700">
+        <YStack marginTop="auto">
+          <Button
+            variant="primary"
+            size="$5"
+            onPress={onReserve}
+            {...(ctaColor
+              ? {
+                  backgroundColor: ctaColor as never,
+                  pressStyle: { backgroundColor: ctaColor as never, opacity: 0.85 },
+                }
+              : {})}
+          >
             {ctaLabel}
-          </SizableText>
+          </Button>
         </YStack>
       </YStack>
     </YStack>

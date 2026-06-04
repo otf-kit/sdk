@@ -15,7 +15,7 @@ export function StepPageLayout({ title, description, children, bottom }: StepPag
         <YStack gap="$2">
           <SizableText size="$8" fontWeight="700">{title}</SizableText>
           {description && (
-            <SizableText size="$5" fontWeight="400" color="$color10">{description}</SizableText>
+            <SizableText size="$5" fontWeight="400" color="$color11">{description}</SizableText>
           )}
         </YStack>
       </YStack>

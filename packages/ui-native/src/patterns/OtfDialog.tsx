@@ -65,7 +65,7 @@ export function OtfDialog({
         >
           {title && <Dialog.Title>{title}</Dialog.Title>}
           {description && (
-            <Dialog.Description size="$3" color="$color10">
+            <Dialog.Description size="$3" color="$color11">
               {description}
             </Dialog.Description>
           )}

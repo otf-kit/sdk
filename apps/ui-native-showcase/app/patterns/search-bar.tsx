@@ -73,7 +73,7 @@ export default function SearchBarShowcase() {
             backgroundColor="$background"
           >
             {matches.length === 0 ? (
-              <SizableText size="$3" color="$color10" padding="$2">
+              <SizableText size="$3" color="$color11" padding="$2">
                 No results. Try clearing the search.
               </SizableText>
             ) : (
@@ -119,7 +119,7 @@ export default function SearchBarShowcase() {
                 }}
               />
               <YStack gap="$1">
-                <SizableText size="$2" color="$color10" paddingHorizontal="$2">
+                <SizableText size="$2" color="$color11" paddingHorizontal="$2">
                   Recent
                 </SizableText>
                 {['Hip mobility', 'Push day', 'Recovery'].map((r) => (

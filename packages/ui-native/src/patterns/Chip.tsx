@@ -1,5 +1,6 @@
 import { type ReactNode, useCallback } from 'react'
 import { SizableText, XStack } from 'tamagui'
+import { Check, X } from '@tamagui/lucide-icons'
 
 export type ChipProps = {
   label: string
@@ -38,12 +39,14 @@ export function Chip({ label, selected, onPress, onRemove, variant = 'filled', s
       alignItems="center" gap="$1.5" pressStyle={{ scale: 0.96, opacity: 0.85 }}
       animation="quick" onPress={onPress} cursor="pointer"
     >
-      {active && <SizableText size={s.text} color={fg}>✓</SizableText>}
+      {active && <Check size={14} color={fg} />}
       {icon && <SizableText color={fg}>{icon}</SizableText>}
       <SizableText size={s.text} color={fg} fontWeight="500">{label}</SizableText>
       {onRemove && (
-        <SizableText size="$2" color={fg} opacity={0.7} pressStyle={{ opacity: 1 }}
-          onPress={(e: any) => { e.stopPropagation?.(); onRemove() }} marginLeft="$1">✕</SizableText>
+        <XStack marginLeft="$1" opacity={0.7} pressStyle={{ opacity: 1 }} cursor="pointer"
+          onPress={(e: any) => { e.stopPropagation?.(); onRemove() }}>
+          <X size={14} color={fg} />
+        </XStack>
       )}
     </XStack>
   )

@@ -92,7 +92,7 @@ export function Selectable({
             {label}
           </SizableText>
           {description ? (
-            <SizableText size="$2" color="$color10">
+            <SizableText size="$2" color="$color11">
               {description}
             </SizableText>
           ) : null}
@@ -126,7 +126,7 @@ export function Selectable({
           {label}
         </SizableText>
         {description ? (
-          <SizableText size="$1" color="$color10" textAlign="center">
+          <SizableText size="$1" color="$color11" textAlign="center">
             {description}
           </SizableText>
         ) : null}
@@ -155,7 +155,7 @@ export function Selectable({
             {label}
           </SizableText>
           {description ? (
-            <SizableText size="$3" color="$color10">
+            <SizableText size="$3" color="$color11">
               {description}
             </SizableText>
           ) : null}

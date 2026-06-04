@@ -3,16 +3,21 @@ import {
   PaywallScreen,
   YStack,
   Circle,
-  Sparkles,
+  Crown,
+  Dumbbell,
   Zap,
   TrendingUp,
-  Heart,
+  Users,
   Lock,
   Shield,
   Award,
 } from '@otfdashkit/ui-native'
 import type { PlanOption, PaywallFeature, PaywallComparisonRow, PaywallTestimonial } from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
+import { SCENES } from '../../lib/fixtures'
+
+// Self-hosted R2 editorial photo for the cinematic immersive paywall.
+const sceneImg = (id: string) => SCENES.find((s) => s.id === id)!.image
 
 const PLANS: PlanOption[] = [
   {
@@ -42,21 +47,24 @@ const PLANS: PlanOption[] = [
   },
 ]
 
+// Icons render white — the BenefitRow circle is filled with the accent
+// ($color9), so a white glyph keeps them crisp (an accent glyph on an accent
+// circle would vanish).
 const FEATURES: PaywallFeature[] = [
   {
     title: 'Unlimited custom plans',
     description: 'Build any program — strength, hybrid, marathon prep.',
-    icon: <Sparkles size={20} color="$color9" />,
+    icon: <Dumbbell size={20} color="white" />,
   },
   {
     title: 'AI form check',
     description: 'Upload a clip — get cues in seconds.',
-    icon: <Zap size={20} color="$color9" />,
+    icon: <Zap size={20} color="white" />,
   },
   {
     title: 'Long-form analytics',
     description: 'Volume, rep targets, recovery score over time.',
-    icon: <TrendingUp size={20} color="$color9" />,
+    icon: <TrendingUp size={20} color="white" />,
   },
 ]
 
@@ -87,10 +95,12 @@ const TESTIMONIALS: PaywallTestimonial[] = [
   },
 ]
 
+// White glyphs — the TrustBadges circle is filled with the accent ($color9),
+// so an accent glyph on it would vanish (same trap as the feature icons).
 const TRUST = [
-  { icon: <Lock size={14} color="$color9" />, label: 'Encrypted' },
-  { icon: <Shield size={14} color="$color9" />, label: 'Cancel anytime' },
-  { icon: <Award size={14} color="$color9" />, label: '4.9 rating' },
+  { icon: <Lock size={14} color="white" />, label: 'Encrypted' },
+  { icon: <Shield size={14} color="white" />, label: 'Cancel anytime' },
+  { icon: <Award size={14} color="white" />, label: '4.9 rating' },
 ]
 
 function ScreenFrame({ children }: { children: React.ReactNode }) {
@@ -110,7 +120,7 @@ function ScreenFrame({ children }: { children: React.ReactNode }) {
 
 const HERO = (
   <Circle size={88} backgroundColor="$color3" alignItems="center" justifyContent="center">
-    <Sparkles size={42} color="$color9" />
+    <Crown size={42} color="$color9" />
   </Circle>
 )
 
@@ -118,6 +128,7 @@ export default function PaywallScreenShowcase() {
   const [defaultPlan, setDefaultPlan] = useState('yearly')
   const [proofPlan, setProofPlan] = useState('yearly')
   const [comparePlan, setComparePlan] = useState('yearly')
+  const [immersivePlan, setImmersivePlan] = useState('yearly')
 
   return (
     <ShowcaseFrame
@@ -125,6 +136,30 @@ export default function PaywallScreenShowcase() {
       description="Subscription wall — hero + features + plan rows + sticky CTA. Five variants: default, social-proof, comparison, creator-sheet, immersive-dark."
       docPath="packages/ui-native/src/patterns/PaywallScreen.tsx"
     >
+      <Section title="Immersive — cinematic background" hint="full-bleed R2 photo + dual scrim + glass plans (RevenueCat / Superwall tier)">
+        <ScreenFrame>
+          <PaywallScreen
+            variant="immersive-dark"
+            backgroundImage={sceneImg('coast')}
+            eyebrow="OTF Premium"
+            title="Go further"
+            subtitle="Every plan, AI form checks, and long-form analytics — unlocked."
+            features={FEATURES}
+            plans={PLANS}
+            selectedPlan={immersivePlan}
+            onSelectPlan={setImmersivePlan}
+            onContinue={() => {}}
+            onClose={() => {}}
+            onRestore={() => {}}
+            onTerms={() => {}}
+            onPrivacy={() => {}}
+            continueLabel="Start 7-day trial"
+            reassurance="No charge today · cancel anytime"
+            trustBadges={TRUST}
+          />
+        </ScreenFrame>
+      </Section>
+
       <Section title="Default — features + plans">
         <ScreenFrame>
           <PaywallScreen
@@ -156,8 +191,9 @@ export default function PaywallScreenShowcase() {
             title="Join the team"
             subtitle="See what members are doing differently"
             hero={
-              <Circle size={72} backgroundColor="$pink3" alignItems="center" justifyContent="center">
-                <Heart size={36} color="$pink9" />
+              <Circle size={72} backgroundColor="$color9" alignItems="center" justifyContent="center"
+                shadowColor="$color9" shadowOpacity={0.4} shadowRadius={16} shadowOffset={{ width: 0, height: 8 }}>
+                <Users size={36} color="white" />
               </Circle>
             }
             features={FEATURES.slice(0, 2)}

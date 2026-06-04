@@ -34,7 +34,7 @@ export default function DialogShowcase() {
     >
       <Section title="dialogConfirm()" hint={`Last result: ${lastResult}`}>
         <YStack gap="$2">
-          <SizableText size="$2" color="$color10">
+          <SizableText size="$2" color="$color11">
             Returns a Promise&lt;boolean&gt; — true if the user clicked Confirm.
           </SizableText>
           <XStack gap="$2" flexWrap="wrap">

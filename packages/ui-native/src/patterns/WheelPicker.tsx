@@ -1,24 +1,26 @@
 /**
- * WheelPicker — vertical scroll-wheel picker.
+ * WheelPicker — vertical ruler-style value picker.
  *
- * Premium iOS-flavored single-value picker for height / weight / any
- * enumerable scalar. Centered item is the selection; ±1 items dim & shrink,
- * ±2 items dim further. Snap-on-release with a haptic tick on iOS.
+ * The vertical counterpart of RulerScrubber: ticks scroll past a fixed
+ * center needle; the tick nearest the needle is the selected value. Long
+ * ticks (labeled) appear every `labelEvery` options; short ticks fill the
+ * gaps. Tick color interpolates from accent (at center) to muted gray
+ * as distance from the needle grows — the same `interpolateColor` pattern
+ * RulerScrubber uses for its horizontal ticks.
  *
- * Implementation: `Animated.FlatList` with `snapToInterval` + custom per-item
- * transforms via `useAnimatedStyle` reading a shared scroll-offset.
+ * Implementation: `Animated.ScrollView` (NOT FlatList) — avoids the
+ * "VirtualizedLists nested inside ScrollView" warning when the picker
+ * lives inside a page-level ScrollView.
  *
- * Honors `useReducedMotion()` — when on, renders a flat snap-scroll list
- * without per-item interpolation. A11y exposes adjustable role +
- * increment/decrement actions for VoiceOver.
+ * Honors `useReducedMotion()`. A11y: adjustable role + increment/decrement.
  *
  * @example
  * <WheelPicker
- *   options={Array.from({ length: 121 }, (_, i) => ({ value: 140 + i, label: String(140 + i) }))}
+ *   options={Array.from({ length: 81 }, (_, i) => ({ value: 140 + i, label: String(140 + i) }))}
  *   value={height}
  *   onChange={setHeight}
  *   unitLabel="cm"
- *   variant="card"
+ *   showValue
  * />
  */
 
@@ -27,31 +29,38 @@ import {
   useEffect,
   useMemo,
   useRef,
-  useState,
   type JSX,
 } from 'react'
 import {
-  FlatList,
   Platform,
-  type FlatListProps,
+  ScrollView,
+  Text,
+  View as RNView,
   type NativeScrollEvent,
   type NativeSyntheticEvent,
 } from 'react-native'
-import { SizableText, View, XStack, YStack } from 'tamagui'
+import { SizableText, View, XStack, YStack, useTheme } from 'tamagui'
+import { LinearGradient } from 'tamagui/linear-gradient'
 import Animated, {
   useAnimatedScrollHandler,
   useAnimatedStyle,
   useSharedValue,
   interpolate,
+  interpolateColor,
   Extrapolation,
   useReducedMotion,
   type SharedValue,
 } from 'react-native-reanimated'
 
-// expo-haptics is wrapped — gracefully no-op on web / older Android targets
-// where the native module isn't present. Local minimal type avoids needing
-// expo-haptics declared as a build-time dep of this package; consuming kits
-// install it themselves per the 2026-05-03 mobile primitives ADR.
+const AnimatedScrollView = Animated.createAnimatedComponent(ScrollView)
+
+// Long tick width for labeled options; short tick for unlabeled.
+const LONG_TICK_W = 48
+const SHORT_TICK_W = 20
+// px window on each side of center where ticks saturate to accent.
+const ACTIVE_WINDOW_PX = 32
+
+// expo-haptics wrapped — gracefully no-op on web / older Android.
 type HapticsModule = { selectionAsync: () => Promise<void> }
 let Haptics: HapticsModule | null = null
 try {
@@ -60,12 +69,6 @@ try {
 } catch {
   Haptics = null
 }
-
-const AnimatedFlatList = Animated.createAnimatedComponent(
-  FlatList,
-) as unknown as <ItemT>(
-  props: FlatListProps<ItemT> & { ref?: React.Ref<FlatList<ItemT>> },
-) => JSX.Element
 
 export interface WheelPickerOption<T extends string | number> {
   value: T
@@ -76,94 +79,128 @@ export interface WheelPickerProps<T extends string | number> {
   options: WheelPickerOption<T>[]
   value: T
   onChange: (v: T) => void
-  /** Per-item row height in px. Default 44. */
-  itemHeight?: number
-  /** Number of items visible at once. MUST be odd. Default 5. */
-  visibleItems?: number
-  /** Static unit label rendered to the right of the centered value (e.g. 'cm'). */
+  /**
+   * Pixel spacing between adjacent ticks (vertical distance per option).
+   * Default `10`.
+   */
+  itemSpacing?: number
+  /**
+   * Show a labeled (long) tick every N options. Default auto-detected:
+   * ≤10 options → 1, ≤50 → 5, else → 10.
+   */
+  labelEvery?: number
+  /** Total visible height of the ruler area. Default `200`. */
+  height?: number
+  /** Unit label beside the large value display. */
   unitLabel?: string
-  /** Fire `Haptics.selectionAsync()` on iOS at each snapped index. Default true. */
+  /** Fire `Haptics.selectionAsync()` on iOS at each snapped value. Default true. */
   haptic?: boolean
-  /** Visual chrome. `plain` = no background, `card` = bordered + rounded surface. Default `plain`. */
+  /** Visual chrome. `plain` = no bg, `card` = bordered surface. Default `plain`. */
   variant?: 'plain' | 'card'
-  /** Color of the centered indicator hairlines. Default `$color12`. */
+  /** Accent color for center ticks + needle. Default `$color12`. */
   accent?: string
   /** Width of the picker container. Default `'100%'`. */
   width?: number | string
   disabled?: boolean
+  /**
+   * Show the large value + unit label above the ruler — matches
+   * RulerScrubber's built-in display. Default `false`.
+   */
+  showValue?: boolean
 }
 
-type PadItem<T extends string | number> =
-  | { kind: 'pad'; key: string }
-  | { kind: 'item'; key: string; option: WheelPickerOption<T>; index: number }
-
-interface RowProps<T extends string | number> {
-  item: PadItem<T>
-  itemHeight: number
-  scrollY: SharedValue<number>
-  reducedMotion: boolean
-}
-
-/**
- * One wheel row. Reads the shared scroll offset and interpolates opacity +
- * scale based on absolute distance (in items) from the current center.
- */
-function WheelRow<T extends string | number>({
-  item,
-  itemHeight,
+/** Single horizontal tick — mirrors RulerScrubber's vertical Tick component. */
+function Tick({
+  index,
+  label,
+  isLabeled,
+  itemSpacing,
   scrollY,
+  accent,
   reducedMotion,
-}: RowProps<T>): JSX.Element {
-  const animatedStyle = useAnimatedStyle(() => {
+}: {
+  index: number
+  label: string
+  isLabeled: boolean
+  itemSpacing: number
+  scrollY: SharedValue<number>
+  accent: string
+  reducedMotion: boolean
+}): JSX.Element {
+  const tickStyle = useAnimatedStyle(() => {
     'worklet'
-    if (item.kind === 'pad' || reducedMotion) {
-      return { opacity: 1, transform: [{ scale: 1 }] }
+    if (reducedMotion) {
+      return {
+        opacity: isLabeled ? 0.95 : 0.45,
+        backgroundColor: '#9aa0a6',
+      }
     }
-    const center = scrollY.value / itemHeight
-    const distance = Math.abs(item.index - center)
+    // Distance in px from this tick to the center needle.
+    const tickY = index * itemSpacing
+    const distance = Math.abs(tickY - scrollY.value)
+
     const opacity = interpolate(
       distance,
-      [0, 1, 2],
-      [1, 0.5, 0.3],
+      [0, ACTIVE_WINDOW_PX, ACTIVE_WINDOW_PX * 3],
+      [1, 0.65, isLabeled ? 0.28 : 0.15],
       Extrapolation.CLAMP,
     )
-    const scale = interpolate(
+    // Saturate from accent to muted gray as distance grows — identical to
+    // RulerScrubber's interpolateColor on tick saturation.
+    const color = interpolateColor(
       distance,
-      [0, 1, 2],
-      [1, 0.85, 0.7],
-      Extrapolation.CLAMP,
+      [0, ACTIVE_WINDOW_PX * 1.5],
+      [accent, '#9aa0a6'],
     )
-    return { opacity, transform: [{ scale }] }
-  }, [itemHeight, item, reducedMotion])
-
-  if (item.kind === 'pad') {
-    return <View height={itemHeight} />
-  }
+    return { opacity, backgroundColor: color }
+  }, [index, itemSpacing, accent, reducedMotion, isLabeled])
 
   return (
-    <Animated.View
-      style={[
-        {
-          height: itemHeight,
-          alignItems: 'center',
-          justifyContent: 'center',
-        },
-        animatedStyle,
-      ]}
+    <RNView
+      style={{
+        height: itemSpacing,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
     >
-      <SizableText size="$7" fontWeight="700" color="$color12">
-        {item.option.label}
-      </SizableText>
-    </Animated.View>
+      {/* Horizontal tick bar, centered under the needle (the vertical mirror
+          of RulerScrubber's centered vertical bars). */}
+      <Animated.View
+        style={[
+          {
+            width: isLabeled ? LONG_TICK_W : SHORT_TICK_W,
+            height: isLabeled ? 3 : 1.5,
+            borderRadius: 2,
+          },
+          tickStyle,
+        ]}
+      />
+      {/* Measurement label floats just to the right of the long tick —
+          perpendicular to the scroll axis, like RulerScrubber's labels sit
+          below its ticks. Absolutely positioned so it never shifts the bar
+          off-center. */}
+      {isLabeled ? (
+        <Text
+          numberOfLines={1}
+          style={{
+            position: 'absolute',
+            left: '50%',
+            marginLeft: LONG_TICK_W / 2 + 12,
+            top: '50%',
+            marginTop: -8,
+            fontSize: 12,
+            lineHeight: 16,
+            color: '#9aa0a6',
+            fontWeight: '500',
+          }}
+        >
+          {label}
+        </Text>
+      ) : null}
+    </RNView>
   )
 }
 
-/**
- * WheelPicker — generic vertical scroll-wheel.
- *
- * `T` is the option value type (`string | number`). Snap-aligned to the
- * center; calls `onChange(options[index].value)` on momentum-scroll-end.
- */
 export function WheelPicker<T extends string | number>(
   props: WheelPickerProps<T>,
 ): JSX.Element {
@@ -171,63 +208,61 @@ export function WheelPicker<T extends string | number>(
     options,
     value,
     onChange,
-    itemHeight = 44,
-    visibleItems = 5,
+    itemSpacing = 10,
+    height: rulerHeight = 200,
     unitLabel,
     haptic = true,
     variant = 'plain',
     accent = '$color12',
     width = '100%',
     disabled = false,
+    showValue = false,
   } = props
 
-  if (visibleItems % 2 === 0) {
-    throw new Error('WheelPicker: `visibleItems` must be odd.')
-  }
+  // Auto-detect labelEvery if not specified.
+  const labelEvery =
+    props.labelEvery ??
+    (options.length <= 10 ? 1 : options.length <= 50 ? 5 : 10)
 
   const reducedMotion = useReducedMotion()
-  const flatListRef = useRef<FlatList<PadItem<T>>>(null)
+  const scrollRef = useRef<ScrollView>(null)
   const scrollY = useSharedValue(0)
   const lastReportedIndex = useRef<number>(-1)
 
-  const padCount = Math.floor(visibleItems / 2)
-  const containerHeight = itemHeight * visibleItems
+  // Resolve accent token to a concrete hex value for the worklet.
+  const theme = useTheme()
+  const accentHex = (() => {
+    if (typeof accent === 'string' && accent.startsWith('$')) {
+      return theme.color12?.val ?? '#ffffff'
+    }
+    return accent
+  })()
 
-  const data: PadItem<T>[] = useMemo(() => {
-    const padTop: PadItem<T>[] = Array.from({ length: padCount }, (_, i) => ({
-      kind: 'pad',
-      key: `pad-top-${i}`,
-    }))
-    const real: PadItem<T>[] = options.map((option, i) => ({
-      kind: 'item',
-      key: `item-${i}-${String(option.value)}`,
-      option,
-      index: i,
-    }))
-    const padBottom: PadItem<T>[] = Array.from({ length: padCount }, (_, i) => ({
-      kind: 'pad',
-      key: `pad-bot-${i}`,
-    }))
-    return [...padTop, ...real, ...padBottom]
-  }, [options, padCount])
+  const fadeColor =
+    (variant === 'card' ? theme.color2?.val : theme.background?.val) ??
+    theme.color1?.val ??
+    '#0a0a0a'
 
   const valueIndex = useMemo(
     () => options.findIndex((o) => o.value === value),
     [options, value],
   )
   const safeValueIndex = valueIndex === -1 ? 0 : valueIndex
+  const currentLabel = options[safeValueIndex]?.label ?? ''
 
-  // Initial scroll-to-value after layout.
+  // Padding so first/last items can reach the center needle. The extra
+  // `- itemSpacing / 2` aligns each item's *center* with the needle when its
+  // scroll offset is an exact multiple of `itemSpacing` — so the value the
+  // snap math commits (round(offsetY / itemSpacing)) is the value that visually
+  // sits on the needle. Without it the bar lands half a step below the needle.
+  const paddingEdge = rulerHeight / 2 - itemSpacing / 2
+
   useEffect(() => {
     if (safeValueIndex < 0 || options.length === 0) return
     const t = setTimeout(() => {
-      flatListRef.current?.scrollToIndex({
-        index: safeValueIndex,
-        animated: false,
-      })
+      scrollRef.current?.scrollTo({ y: safeValueIndex * itemSpacing, animated: false })
     }, 0)
     return () => clearTimeout(t)
-    // Intentionally only on mount + when the value→index mapping shifts because options changed.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [safeValueIndex, options.length])
 
@@ -238,10 +273,13 @@ export function WheelPicker<T extends string | number>(
     },
   }, [scrollY])
 
-  const handleMomentumEnd = useCallback(
-    (e: NativeSyntheticEvent<NativeScrollEvent>) => {
-      const offsetY = e.nativeEvent.contentOffset.y
-      const index = Math.round(offsetY / itemHeight)
+  // Commit the value at a given scroll offset. `offsetY / itemSpacing` IS the
+  // item index (matches the initial scrollTo + snapToInterval math), so the
+  // committed value is always the one resting on the needle — never the
+  // minimum.
+  const commitAtOffset = useCallback(
+    (offsetY: number) => {
+      const index = Math.round(offsetY / itemSpacing)
       const clamped = Math.max(0, Math.min(options.length - 1, index))
       if (clamped === lastReportedIndex.current) return
       lastReportedIndex.current = clamped
@@ -249,40 +287,49 @@ export function WheelPicker<T extends string | number>(
       if (!next) return
       if (next.value !== value) {
         if (haptic && Platform.OS === 'ios' && Haptics) {
-          Haptics.selectionAsync().catch(() => {
-            // Swallow — older devices / web may reject.
-          })
+          Haptics.selectionAsync().catch(() => {})
         }
         onChange(next.value)
       }
     },
-    [haptic, itemHeight, onChange, options, value],
+    [haptic, itemSpacing, onChange, options, value],
   )
 
-  const getItemLayout = useCallback(
-    (_: ArrayLike<PadItem<T>> | null | undefined, index: number) => ({
-      length: itemHeight,
-      offset: itemHeight * index,
-      index,
-    }),
-    [itemHeight],
+  const handleMomentumEnd = useCallback(
+    (e: NativeSyntheticEvent<NativeScrollEvent>) => {
+      commitAtOffset(e.nativeEvent.contentOffset.y)
+    },
+    [commitAtOffset],
+  )
+
+  // Fallback for slow drag-releases that never build enough velocity to fire
+  // momentum (common on Android). Only commit when velocity is ~0 so we don't
+  // commit an intermediate value mid-fling — momentumEnd handles the fling.
+  const handleScrollEndDrag = useCallback(
+    (e: NativeSyntheticEvent<NativeScrollEvent>) => {
+      const vy = e.nativeEvent.velocity?.y ?? 0
+      if (Math.abs(vy) < 0.05) {
+        commitAtOffset(e.nativeEvent.contentOffset.y)
+      }
+    },
+    [commitAtOffset],
   )
 
   const handleIncrement = useCallback(() => {
     const next = Math.min(options.length - 1, safeValueIndex + 1)
     if (next === safeValueIndex) return
-    flatListRef.current?.scrollToIndex({ index: next, animated: true })
+    scrollRef.current?.scrollTo({ y: next * itemSpacing, animated: true })
     const target = options[next]
     if (target) onChange(target.value)
-  }, [onChange, options, safeValueIndex])
+  }, [onChange, options, safeValueIndex, itemSpacing])
 
   const handleDecrement = useCallback(() => {
     const next = Math.max(0, safeValueIndex - 1)
     if (next === safeValueIndex) return
-    flatListRef.current?.scrollToIndex({ index: next, animated: true })
+    scrollRef.current?.scrollTo({ y: next * itemSpacing, animated: true })
     const target = options[next]
     if (target) onChange(target.value)
-  }, [onChange, options, safeValueIndex])
+  }, [onChange, options, safeValueIndex, itemSpacing])
 
   const onAccessibilityAction = useCallback(
     (event: { nativeEvent: { actionName: string } }) => {
@@ -292,29 +339,6 @@ export function WheelPicker<T extends string | number>(
     [handleDecrement, handleIncrement],
   )
 
-  const currentLabel = options[safeValueIndex]?.label ?? ''
-
-  // Track scroll offset in JS for the reduced-motion fallback's onChange.
-  const [, setJsScrollY] = useState(0)
-  const handleScrollJs = useCallback(
-    (e: NativeSyntheticEvent<NativeScrollEvent>) => {
-      setJsScrollY(e.nativeEvent.contentOffset.y)
-    },
-    [],
-  )
-
-  const renderItem = useCallback(
-    ({ item }: { item: PadItem<T> }) => (
-      <WheelRow
-        item={item}
-        itemHeight={itemHeight}
-        scrollY={scrollY}
-        reducedMotion={reducedMotion}
-      />
-    ),
-    [itemHeight, reducedMotion, scrollY],
-  )
-
   const cardChrome =
     variant === 'card'
       ? {
@@ -322,82 +346,142 @@ export function WheelPicker<T extends string | number>(
           borderColor: '$color5' as const,
           borderWidth: 1,
           borderRadius: '$6' as const,
+          overflow: 'hidden' as const,
         }
       : {}
 
   return (
-    <XStack
+    <YStack
       width={width as number | string}
-      alignItems="center"
-      justifyContent="center"
-      gap="$2"
       opacity={disabled ? 0.4 : 1}
       pointerEvents={disabled ? 'none' : 'auto'}
       {...cardChrome}
     >
-      <YStack
-        flex={1}
-        height={containerHeight}
+      {/* ── Large value display (identical to RulerScrubber) ─────────── */}
+      {showValue ? (
+        <XStack
+          alignItems="baseline"
+          justifyContent="center"
+          gap="$2"
+          paddingTop="$4"
+          paddingBottom="$2"
+        >
+          <SizableText fontSize={40} fontWeight="700" color="$color12" lineHeight={44}>
+            {currentLabel}
+          </SizableText>
+          {unitLabel ? (
+            <SizableText size="$5" fontWeight="500" color="$color11">
+              {unitLabel}
+            </SizableText>
+          ) : null}
+        </XStack>
+      ) : null}
+
+      {/* ── Ruler area ────────────────────────────────────────────────── */}
+      <View
+        height={rulerHeight}
         position="relative"
+        overflow="hidden"
         accessibilityRole="adjustable"
         accessibilityValue={{ text: currentLabel }}
-        accessibilityActions={[
-          { name: 'increment' },
-          { name: 'decrement' },
-        ]}
+        accessibilityActions={[{ name: 'increment' }, { name: 'decrement' }]}
         onAccessibilityAction={onAccessibilityAction}
       >
-        <AnimatedFlatList<PadItem<T>>
-          ref={flatListRef}
-          data={data}
-          keyExtractor={(item) => item.key}
-          renderItem={renderItem}
-          showsVerticalScrollIndicator={false}
-          snapToInterval={itemHeight}
-          snapToAlignment="center"
-          decelerationRate="fast"
-          getItemLayout={getItemLayout}
-          onScroll={reducedMotion ? handleScrollJs : scrollHandler}
+        <AnimatedScrollView
+          ref={scrollRef as any}
+          onScroll={scrollHandler}
           onMomentumScrollEnd={handleMomentumEnd}
+          onScrollEndDrag={handleScrollEndDrag}
           scrollEventThrottle={16}
+          snapToInterval={itemSpacing}
+          snapToAlignment="start"
+          decelerationRate="fast"
           bounces={false}
           overScrollMode="never"
+          showsVerticalScrollIndicator={false}
           scrollEnabled={!disabled}
+          contentContainerStyle={{
+            paddingTop: paddingEdge,
+            paddingBottom: paddingEdge,
+          }}
+        >
+          {options.map((opt, i) => (
+            <Tick
+              key={String(opt.value)}
+              index={i}
+              label={opt.label}
+              isLabeled={i % labelEvery === 0}
+              itemSpacing={itemSpacing}
+              scrollY={scrollY}
+              accent={accentHex}
+              reducedMotion={reducedMotion ?? false}
+            />
+          ))}
+        </AnimatedScrollView>
+
+        {/* Edge fades — ticks dissolve toward top/bottom edges, same as
+            RulerScrubber's LinearGradient edge fade. */}
+        <LinearGradient
+          pointerEvents="none"
+          position="absolute"
+          top={0}
+          left={0}
+          right={0}
+          height={rulerHeight * 0.38}
+          colors={[fadeColor, 'transparent']}
+          start={[0, 0]}
+          end={[0, 1]}
+        />
+        <LinearGradient
+          pointerEvents="none"
+          position="absolute"
+          bottom={0}
+          left={0}
+          right={0}
+          height={rulerHeight * 0.38}
+          colors={['transparent', fadeColor]}
+          start={[0, 0]}
+          end={[0, 1]}
         />
 
-        {/* Centered selection indicator — two horizontal hairlines. */}
+        {/* Center needle — a short, centered horizontal accent pill (the exact
+            vertical mirror of RulerScrubber's centered vertical indicator pill).
+            NOT a full-bleed line: the transparent full-width wrapper only
+            centers the pill, which spans just past the long ticks so the
+            selected tick visibly rests on it. */}
         <View
           pointerEvents="none"
           position="absolute"
           left={0}
           right={0}
-          top={containerHeight / 2 - itemHeight / 2}
-          height={1}
-          backgroundColor={accent}
-          opacity={0.6}
-        />
-        <View
-          pointerEvents="none"
-          position="absolute"
-          left={0}
-          right={0}
-          top={containerHeight / 2 + itemHeight / 2 - 1}
-          height={1}
-          backgroundColor={accent}
-          opacity={0.6}
-        />
-      </YStack>
+          top={rulerHeight / 2 - 2}
+          height={4}
+          alignItems="center"
+          justifyContent="center"
+        >
+          <View
+            width={LONG_TICK_W + 8}
+            height={4}
+            borderRadius={2}
+            backgroundColor={accent}
+          />
+        </View>
+      </View>
 
-      {unitLabel ? (
+      {/* Unit label in non-showValue mode */}
+      {unitLabel && !showValue ? (
         <SizableText
-          size="$5"
+          size="$4"
           fontWeight="600"
           color="$color11"
-          paddingRight="$3"
+          textAlign="center"
+          paddingVertical="$2"
         >
           {unitLabel}
         </SizableText>
       ) : null}
-    </XStack>
+
+      {showValue ? <View height={8} /> : null}
+    </YStack>
   )
 }

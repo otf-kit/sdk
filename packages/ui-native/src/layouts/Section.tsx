@@ -15,7 +15,7 @@ export function Section({ title, description, children, gap = '$3' }: SectionPro
         <YStack gap="$1">
           <SizableText size="$5" fontWeight="600" color="$color12">{title}</SizableText>
           {description && (
-            <SizableText size="$3" color="$color9">{description}</SizableText>
+            <SizableText size="$3" color="$color11">{description}</SizableText>
           )}
         </YStack>
       )}

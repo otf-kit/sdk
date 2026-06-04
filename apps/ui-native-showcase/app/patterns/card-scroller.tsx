@@ -1,9 +1,7 @@
 import { useState } from 'react'
+import { View, Text } from 'react-native'
 import {
   CardScroller,
-  Card,
-  H4,
-  Paragraph,
   SizableText,
   YStack,
 } from '@otfdashkit/ui-native'
@@ -30,14 +28,31 @@ const PLANS: DemoCard[] = [
   { id: 'p3', title: 'Daily mobility', body: '15 min/day', accent: '#fbbf24' },
 ]
 
+// Pure RN View + Text — NO Tamagui components inside Reanimated's
+// Animated.View. On Android/Hermes, Tamagui's style resolution (both $tokens
+// AND inline style overrides via the Tamagui style prop system) can silently
+// fail inside animated trees, making text invisible. RN's native Text with
+// a plain style object is always reliable.
 function renderCard(c: DemoCard) {
   return (
-    <Card padding="$5" backgroundColor="$color3" borderRadius="$5" borderColor={c.accent} borderWidth={1} flex={1}>
-      <YStack gap="$2" justifyContent="space-between" flex={1}>
-        <H4 color={c.accent}>{c.title}</H4>
-        <Paragraph size="$3" color="$color11">{c.body}</Paragraph>
-      </YStack>
-    </Card>
+    <View style={{
+      flex: 1,
+      padding: 20,
+      backgroundColor: 'rgba(255,255,255,0.06)',
+      borderRadius: 14,
+      borderWidth: 1,
+      borderColor: c.accent,
+      justifyContent: 'space-between',
+      gap: 8,
+      minHeight: 100,
+    }}>
+      <Text style={{ fontSize: 18, fontWeight: '700', color: c.accent }}>
+        {c.title}
+      </Text>
+      <Text style={{ fontSize: 13, color: 'rgba(255,255,255,0.65)' }}>
+        {c.body}
+      </Text>
+    </View>
   )
 }
 
@@ -61,7 +76,7 @@ export default function CardScrollerShowcase() {
             onIndexChange={setCenterIdx}
           />
         </YStack>
-        <SizableText size="$2" color="$color10">Centered: {WORKOUT_TYPES[centerIdx]?.title}</SizableText>
+        <SizableText size="$2" color="$color11">Centered: {WORKOUT_TYPES[centerIdx]?.title}</SizableText>
       </Section>
 
       <Section title="Percentage width — 70% of viewport">
@@ -89,7 +104,7 @@ export default function CardScrollerShowcase() {
             onIndexChange={setStartIdx}
           />
         </YStack>
-        <SizableText size="$2" color="$color10">Index: {startIdx}</SizableText>
+        <SizableText size="$2" color="$color11">Index: {startIdx}</SizableText>
       </Section>
 
       <Section title="Custom gap + small list">

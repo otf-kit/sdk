@@ -16,7 +16,7 @@ export default function SkeletonShowcase() {
       <Section title="Variants">
         <YStack gap="$3">
           <YStack gap="$1.5">
-            <SizableText size="$2" color="$color10">Text — three lines</SizableText>
+            <SizableText size="$2" color="$color11">Text — three lines</SizableText>
             <YStack gap="$1.5">
               <Skeleton variant="text" width="100%" />
               <Skeleton variant="text" width="92%" />
@@ -25,12 +25,12 @@ export default function SkeletonShowcase() {
           </YStack>
 
           <YStack gap="$1.5">
-            <SizableText size="$2" color="$color10">Circular — avatar</SizableText>
+            <SizableText size="$2" color="$color11">Circular — avatar</SizableText>
             <Skeleton variant="circular" height={48} />
           </YStack>
 
           <YStack gap="$1.5">
-            <SizableText size="$2" color="$color10">Rectangular — media tile</SizableText>
+            <SizableText size="$2" color="$color11">Rectangular — media tile</SizableText>
             <Skeleton variant="rectangular" width="100%" height={140} />
           </YStack>
         </YStack>

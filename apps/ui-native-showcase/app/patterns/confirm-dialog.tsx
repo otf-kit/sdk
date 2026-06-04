@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import {
   ConfirmDialog,
-  Button,
+  OtfButton,
   XStack,
   YStack,
   SizableText,
@@ -16,7 +16,6 @@ export default function ConfirmDialogShowcase() {
   const [openSignOut, setOpenSignOut] = useState(false)
   const [openDelete, setOpenDelete] = useState(false)
   const [openIcon, setOpenIcon] = useState(false)
-
   const [last, setLast] = useState<string | null>(null)
 
   return (
@@ -26,7 +25,7 @@ export default function ConfirmDialogShowcase() {
       docPath="packages/ui-native/src/patterns/ConfirmDialog.tsx"
     >
       <Section title="Neutral — save changes" hint={last ? `Last: ${last}` : 'No action yet'}>
-        <Button onPress={() => setOpenSave(true)}>Save changes</Button>
+        <OtfButton variant="outlined" onPress={() => setOpenSave(true)}>Save changes</OtfButton>
         <ConfirmDialog
           open={openSave}
           onOpenChange={setOpenSave}
@@ -38,8 +37,8 @@ export default function ConfirmDialogShowcase() {
         />
       </Section>
 
-      <Section title="Neutral — sign out (no destructive flag)">
-        <Button onPress={() => setOpenSignOut(true)} backgroundColor="$color4">Sign out</Button>
+      <Section title="Neutral — sign out">
+        <OtfButton variant="outlined" onPress={() => setOpenSignOut(true)} icon={<LogOut size={16} />}>Sign out</OtfButton>
         <ConfirmDialog
           open={openSignOut}
           onOpenChange={setOpenSignOut}
@@ -53,16 +52,16 @@ export default function ConfirmDialogShowcase() {
 
       <Section title="Destructive — delete account">
         <XStack gap="$3" alignItems="center">
-          <Button onPress={() => setOpenDelete(true)} backgroundColor="$red9" color="white">
+          <OtfButton variant="destructive" onPress={() => setOpenDelete(true)} icon={<Trash2 size={16} />}>
             Delete account
-          </Button>
-          <SizableText size="$2" color="$color10">Confirm button renders red.</SizableText>
+          </OtfButton>
+          <SizableText size="$2" color="$color11">Confirm button renders red.</SizableText>
         </XStack>
         <ConfirmDialog
           open={openDelete}
           onOpenChange={setOpenDelete}
           title="Delete this account?"
-          description="This will permanently remove all data for Sarah Chen. This cannot be undone."
+          description="This will permanently remove all data. This cannot be undone."
           confirmLabel="Delete forever"
           destructive
           icon={<Trash2 size={32} color="$red9" />}
@@ -72,9 +71,9 @@ export default function ConfirmDialogShowcase() {
       </Section>
 
       <Section title="With warning icon">
-        <Button onPress={() => setOpenIcon(true)} backgroundColor="$yellow9">
+        <OtfButton variant="outlined" onPress={() => setOpenIcon(true)} icon={<AlertTriangle size={16} />}>
           Discard draft
-        </Button>
+        </OtfButton>
         <ConfirmDialog
           open={openIcon}
           onOpenChange={setOpenIcon}
@@ -88,9 +87,7 @@ export default function ConfirmDialogShowcase() {
       </Section>
 
       <YStack paddingTop="$2">
-        <SizableText size="$2" color="$color10">
-          Last action: {last ?? '—'}
-        </SizableText>
+        <SizableText size="$2" color="$color11">Last action: {last ?? '—'}</SizableText>
       </YStack>
     </ShowcaseFrame>
   )

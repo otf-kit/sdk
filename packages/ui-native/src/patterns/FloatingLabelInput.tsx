@@ -20,7 +20,7 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated'
-import { SizableText, View, YStack } from 'tamagui'
+import { SizableText, View, YStack, useTheme } from 'tamagui'
 
 export type FloatingLabelInputProps = Omit<TextInputProps, 'placeholder'> & {
   /** Label that floats up when focused or filled. */
@@ -47,6 +47,10 @@ export function FloatingLabelInput({
   ...rest
 }: FloatingLabelInputProps) {
   const reduced = useReducedMotion()
+  // Resolve the foreground token to a hex for the native TextInput style
+  // (RN style needs a real color, not a $token) so text is readable in BOTH
+  // light and dark — fixes the hardcoded-#0a0a0a invisible-in-dark bug.
+  const inputColor = useTheme().color12?.val ?? '#0a0a0a'
 
   const [focused, setFocused] = useState(false)
   const [filled,  setFilled]  = useState(() => {
@@ -146,7 +150,7 @@ export function FloatingLabelInput({
           style={[
             {
               fontSize: 16,
-              color:    '#0a0a0a',
+              color:    inputColor,
               padding:  0,
               margin:   0,
               minHeight: 28,
@@ -160,7 +164,7 @@ export function FloatingLabelInput({
       {error ? (
         <SizableText size="$2" color="$red10">{error}</SizableText>
       ) : hint ? (
-        <SizableText size="$2" color="$color10">{hint}</SizableText>
+        <SizableText size="$2" color="$color11">{hint}</SizableText>
       ) : null}
     </YStack>
   )

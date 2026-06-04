@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { Link } from 'expo-router'
 import {
   ScrollView,
@@ -11,8 +12,13 @@ import {
   SearchBar,
   Pressable,
   ArrowRight,
+  Boxes,
+  LayoutGrid,
+  LayoutTemplate,
+  Shapes,
   useMedia,
 } from '@otfdashkit/ui-native'
+import type { ComponentType } from 'react'
 import { CATALOG } from '../components/catalog'
 import type { Category, Entry } from '../components/catalog'
 import { INLINE_DEMOS } from '../components/inline-demos'
@@ -22,17 +28,16 @@ type CategoryId = Category['id']
 interface CategoryChip {
   id: CategoryId
   label: string
-  emoji: string
+  Icon: ComponentType<{ size?: number; color?: string }>
 }
 
-// Emoji prefixes mirror the reference layout (Books / Podcasts) — gives the
-// chip strip visual weight + a quick scan-anchor without touching the
-// shared SDK Chip styles.
+// Lucide icon per category gives the chip strip visual weight + a quick
+// scan-anchor (emoji prefixes read template-grade in a Lucide-first kit).
 const CATEGORY_CHIPS: CategoryChip[] = [
-  { id: 'primitives', label: 'Primitives', emoji: '🧱' },
-  { id: 'interface',  label: 'Interface',  emoji: '🎛️' },
-  { id: 'layouts',    label: 'Layouts',    emoji: '📐' },
-  { id: 'patterns',   label: 'Patterns',   emoji: '✨' },
+  { id: 'primitives', label: 'Primitives', Icon: Boxes },
+  { id: 'interface',  label: 'Interface',  Icon: LayoutGrid },
+  { id: 'layouts',    label: 'Layouts',    Icon: LayoutTemplate },
+  { id: 'patterns',   label: 'Patterns',   Icon: Shapes },
 ]
 
 interface FlatEntry extends Entry {
@@ -45,6 +50,7 @@ export default function ComponentsScreen() {
   const [selectedCategoryIds, setSelectedCategoryIds] = useState<CategoryId[]>([])
 
   const media = useMedia()
+  const insets = useSafeAreaInsets()
   const horizontalPadding = media.gtSm ? '$5' : '$4'
   const maxWidth = 720
 
@@ -103,12 +109,11 @@ export default function ComponentsScreen() {
     <ScrollView
       flex={1}
       backgroundColor="$background"
-      contentContainerStyle={{ paddingBottom: 96 }}
+      contentContainerStyle={{ paddingTop: insets.top + 16, paddingBottom: 96 }}
     >
       {/* ── Header: search bar + filter icon ───────────────────────────── */}
       <YStack
         paddingHorizontal={horizontalPadding}
-        paddingTop="$5"
         paddingBottom="$4"
         maxWidth={maxWidth}
         width="100%"
@@ -165,7 +170,7 @@ export default function ComponentsScreen() {
           <H2 size="$8" fontWeight="700" letterSpacing={-0.4} color="$color12">
             {hasActiveFilter ? 'Matches' : 'Components'}
           </H2>
-          <SizableText size="$2" color="$color10">
+          <SizableText size="$2" color="$color11">
             {filteredCount === totalCount
               ? `${totalCount} total`
               : `${filteredCount} of ${totalCount}`}
@@ -182,7 +187,7 @@ export default function ComponentsScreen() {
               <YStack key={category.id} gap="$4">
                 <SizableText
                   size="$2"
-                  color="$color10"
+                  color="$color11"
                   textTransform="uppercase"
                   letterSpacing={1}
                   fontWeight="600"
@@ -230,9 +235,7 @@ function CategoryFilterChip({
         hoverStyle={{ backgroundColor: active ? '$color6' : '$color4' }}
         pressStyle={{ scale: 0.97 }}
       >
-        <SizableText fontSize={16} lineHeight={20}>
-          {chip.emoji}
-        </SizableText>
+        <chip.Icon size={16} color={active ? '$color12' : '$color11'} />
         <SizableText
           size="$3"
           fontWeight={active ? '700' : '500'}
@@ -283,7 +286,7 @@ function LinkOutCard({ entry }: { entry: FlatEntry }) {
           <SizableText size="$3" fontWeight="600" color="$color12">
             View full demo
           </SizableText>
-          <SizableText size="$2" color="$color10">
+          <SizableText size="$2" color="$color11">
             All variants of {entry.title}
           </SizableText>
         </YStack>
@@ -309,7 +312,7 @@ function EmptyResults({ query }: { query: string }) {
       <SizableText size="$5" fontWeight="700" color="$color12">
         No matches
       </SizableText>
-      <SizableText size="$3" color="$color10" textAlign="center" maxWidth={420}>
+      <SizableText size="$3" color="$color11" textAlign="center" maxWidth={420}>
         {query
           ? `Nothing matches "${query}". Try a different search or clear filters.`
           : 'No components match the active category filter.'}

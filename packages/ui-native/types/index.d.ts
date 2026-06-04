@@ -62,10 +62,17 @@ export function getOtfThemePalettes(themeId: OtfDesignThemeId): { light: any; da
 export function getOtfDesignTheme(themeId: OtfDesignThemeId): OtfDesignTheme
 
 // ─── Otf-prefixed primitives (avoid name clashes with Tamagui originals) ─────
+// `Button` is our styled, variant-aware component (NOT Tamagui's raw Button,
+// which is intentionally no longer re-exported). Declared explicitly so it
+// shadows the `export * from 'tamagui'` Button above.
+export const Button: any
+export type ButtonProps = any
 export const OtfButton: any
 export type OtfButtonProps = any
 export const OtfText: any
 export type OtfTextProps = any
+export const OtfSwitch: any
+export type OtfSwitchProps = any
 export const OtfCard: any
 export type OtfCardProps = any
 export const OtfInput: any
@@ -175,6 +182,8 @@ export type ChipsTabBarProps = any
 export type ChipsTabBarItem = any
 export const SearchBar: any
 export type SearchBarProps = any
+export const FloatingLabelInput: any
+export type FloatingLabelInputProps = any
 export const FloatingActionButton: any
 export type FABProps = any
 export const ActionSheet: any

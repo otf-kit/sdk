@@ -40,15 +40,15 @@ export default function AvatarGroupShowcase() {
       <Section title="Sizes">
         <YStack gap="$4">
           <XStack gap="$3" alignItems="center">
-            <SizableText size="$2" color="$color10" width={48}>sm</SizableText>
+            <SizableText size="$2" color="$color11" width={48}>sm</SizableText>
             <AvatarGroup avatars={TEAM.slice(0, 4)} size={24} overlap={6} />
           </XStack>
           <XStack gap="$3" alignItems="center">
-            <SizableText size="$2" color="$color10" width={48}>md</SizableText>
+            <SizableText size="$2" color="$color11" width={48}>md</SizableText>
             <AvatarGroup avatars={TEAM.slice(0, 4)} size={36} overlap={10} />
           </XStack>
           <XStack gap="$3" alignItems="center">
-            <SizableText size="$2" color="$color10" width={48}>lg</SizableText>
+            <SizableText size="$2" color="$color11" width={48}>lg</SizableText>
             <AvatarGroup avatars={TEAM.slice(0, 4)} size={56} overlap={16} />
           </XStack>
         </YStack>

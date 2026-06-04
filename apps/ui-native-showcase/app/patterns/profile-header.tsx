@@ -9,10 +9,15 @@ import {
   UserPlus,
 } from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
-import { avatar } from '../../lib/fixtures'
+import { avatar, SCENES } from '../../lib/fixtures'
 
 const SARAH_AVATAR = avatar('sarah')
 const ALEX_AVATAR = avatar('alex')
+const JORDAN_AVATAR = avatar('jordan')
+const DIEGO_AVATAR = avatar('diego')
+
+// Scene images reused as cover photos — already self-hosted on R2
+const sceneImg = (id: string) => SCENES.find((s) => s.id === id)!.image
 
 function HeaderFrame({ children }: { children: React.ReactNode }) {
   return (
@@ -32,92 +37,62 @@ export default function ProfileHeaderShowcase() {
   return (
     <ShowcaseFrame
       title="Profile Header"
-      description="Avatar + name + meta + stats + actions. Used at the top of profile, settings, and account screens."
+      description="Avatar + name + meta + stats + actions. Default (centered) and cover-photo (Instagram-style) layouts."
       docPath="packages/ui-native/src/patterns/ProfileHeader.tsx"
     >
-      <Section title="Default — avatar + subtitle">
+      <Section title="Cover photo — with stats + actions" hint="Instagram / LinkedIn style">
         <HeaderFrame>
           <ProfileHeader
             name="Sarah Chen"
-            subtitle="Member since 2024"
+            subtitle="Product designer · Member since 2024"
             avatar={SARAH_AVATAR}
-          />
-        </HeaderFrame>
-      </Section>
-
-      <Section title="With stats">
-        <HeaderFrame>
-          <ProfileHeader
-            name="Alex Rivera"
-            subtitle="Coach — Strength &amp; Conditioning"
-            avatar={ALEX_AVATAR}
+            coverImage={sceneImg('coast')}
             stats={[
               { value: '128', label: 'Workouts' },
               { value: '42', label: 'Plans' },
               { value: '1.2k', label: 'Followers' },
             ]}
-          />
-        </HeaderFrame>
-      </Section>
-
-      <Section title="With actions" hint="primary + secondary CTAs">
-        <HeaderFrame>
-          <ProfileHeader
-            name="Jordan Kim"
-            subtitle="Marathon-in-training"
-            avatar={SARAH_AVATAR}
-            stats={[
-              { value: '24', label: 'Streak' },
-              { value: '5.4k', label: 'Calories' },
-              { value: '3', label: 'PRs' },
-            ]}
             actions={
               <XStack gap="$2">
-                <OtfButton variant="primary" icon={<UserPlus size={16} />}>
-                  Follow
-                </OtfButton>
-                <OtfButton variant="outlined" icon={<MessageCircle size={16} />}>
-                  Message
-                </OtfButton>
+                <OtfButton variant="primary" size="$3" icon={<UserPlus size={14} />}>Follow</OtfButton>
+                <OtfButton variant="outlined" size="$3" icon={<MessageCircle size={14} />}>Message</OtfButton>
               </XStack>
             }
           />
         </HeaderFrame>
       </Section>
 
-      <Section title="Initials fallback" hint="no avatar URL provided">
+      <Section title="Cover photo — coach profile" hint="outdoor cover + edit button">
         <HeaderFrame>
           <ProfileHeader
-            name="Riley Park"
-            subtitle="Pro plan"
-            stats={[
-              { value: '89', label: 'Sessions' },
-              { value: '12', label: 'Badges' },
-            ]}
-          />
-        </HeaderFrame>
-      </Section>
-
-      <Section title="Compact — just name + actions">
-        <HeaderFrame>
-          <ProfileHeader
-            name="Sam Patel"
+            name="Alex Rivera"
+            subtitle="Coach — Strength &amp; Conditioning"
             avatar={ALEX_AVATAR}
+            coverImage={sceneImg('mountains')}
+            stats={[
+              { value: '4.9★', label: 'Rating' },
+              { value: '320', label: 'Athletes' },
+              { value: '6yr', label: 'Experience' },
+            ]}
             actions={
-              <OtfButton variant="outlined" icon={<Settings size={16} />}>
-                Edit profile
-              </OtfButton>
+              <OtfButton variant="outlined" size="$3" icon={<Settings size={14} />}>Edit profile</OtfButton>
             }
           />
+          <YStack paddingHorizontal="$4" paddingBottom="$4">
+            <SizableText size="$3" color="$color11">
+              Programming long-distance run blocks with strength accessory work. Active here every morning.
+            </SizableText>
+          </YStack>
         </HeaderFrame>
       </Section>
 
-      <Section title="Verbose — bio + stats + actions">
+      <Section title="Cover photo — trail runner" hint="forest cover">
         <HeaderFrame>
           <ProfileHeader
-            name="Morgan Reyes"
+            name="Diego Costa"
             subtitle="Ultra runner — building toward 100mi"
-            avatar={SARAH_AVATAR}
+            avatar={DIEGO_AVATAR}
+            coverImage={sceneImg('forest')}
             stats={[
               { value: '312', label: 'Miles' },
               { value: '18', label: 'Weeks' },
@@ -125,17 +100,32 @@ export default function ProfileHeaderShowcase() {
             ]}
             actions={
               <XStack gap="$2">
-                <OtfButton variant="primary">Follow</OtfButton>
-                <OtfButton variant="outlined">Share</OtfButton>
+                <OtfButton variant="primary" size="$3">Follow</OtfButton>
+                <OtfButton variant="outlined" size="$3">Share</OtfButton>
               </XStack>
             }
           />
-          <YStack paddingHorizontal="$4" paddingBottom="$4">
-            <SizableText size="$3" color="$color11" textAlign="center">
-              Coach + athlete based in Boulder. Programming long-distance run blocks
-              with strength accessory work. Active here every morning.
-            </SizableText>
-          </YStack>
+        </HeaderFrame>
+      </Section>
+
+      <Section title="Default — avatar + subtitle" hint="centered, no cover photo">
+        <HeaderFrame>
+          <ProfileHeader
+            name="Jordan Kim"
+            subtitle="Backend engineer · Marathon-in-training"
+            avatar={JORDAN_AVATAR}
+            stats={[
+              { value: '24', label: 'Streak' },
+              { value: '5.4k', label: 'Calories' },
+              { value: '3', label: 'PRs' },
+            ]}
+            actions={
+              <XStack gap="$2">
+                <OtfButton variant="primary" icon={<UserPlus size={16} />}>Follow</OtfButton>
+                <OtfButton variant="outlined" icon={<MessageCircle size={16} />}>Message</OtfButton>
+              </XStack>
+            }
+          />
         </HeaderFrame>
       </Section>
     </ShowcaseFrame>

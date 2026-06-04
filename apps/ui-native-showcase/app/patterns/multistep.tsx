@@ -20,7 +20,7 @@ function StepBody({ title, body }: { title: string; body: string }) {
       <H4 size="$7" fontWeight="700">
         {title}
       </H4>
-      <SizableText size="$3" color="$color10">
+      <SizableText size="$3" color="$color11">
         {body}
       </SizableText>
     </YStack>
@@ -35,7 +35,7 @@ function WizardFooter() {
       <OtfButton variant="outlined" onPress={back} disabled={index === 0}>
         Back
       </OtfButton>
-      <OtfButton onPress={next} disabled={!canGoNext}>
+      <OtfButton variant="primary" onPress={next} disabled={!canGoNext}>
         {isLast ? 'Done' : 'Next'}
       </OtfButton>
     </XStack>
@@ -114,7 +114,7 @@ export default function MultiStepShowcase() {
         <YStack gap="$4">
           {(['bar', 'dots', 'segments', 'none'] as MultiStepProgress[]).map((p) => (
             <YStack key={p} gap="$2">
-              <SizableText size="$2" color="$color10">
+              <SizableText size="$2" color="$color11">
                 progress=&quot;{p}&quot;
               </SizableText>
               <BasicWizard progress={p} />
@@ -127,7 +127,7 @@ export default function MultiStepShowcase() {
         <YStack gap="$4">
           {(['slide_horizontal', 'fade', 'none'] as MultiStepTransition[]).map((t) => (
             <YStack key={t} gap="$2">
-              <SizableText size="$2" color="$color10">
+              <SizableText size="$2" color="$color11">
                 transition=&quot;{t}&quot;
               </SizableText>
               <BasicWizard transition={t} />

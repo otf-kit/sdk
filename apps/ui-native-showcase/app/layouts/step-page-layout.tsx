@@ -54,9 +54,9 @@ export default function StepPageLayoutShowcase() {
               gap="$2"
             >
               <SizableText size="$3" fontWeight="600">What you'll do</SizableText>
-              <SizableText size="$2" color="$color10">1. Pick a display name</SizableText>
-              <SizableText size="$2" color="$color10">2. Choose your primary goal</SizableText>
-              <SizableText size="$2" color="$color10">3. Enable notifications</SizableText>
+              <SizableText size="$2" color="$color11">1. Pick a display name</SizableText>
+              <SizableText size="$2" color="$color11">2. Choose your primary goal</SizableText>
+              <SizableText size="$2" color="$color11">3. Enable notifications</SizableText>
             </YStack>
           </StepPageLayout>
         </StepFrame>
@@ -84,7 +84,7 @@ export default function StepPageLayoutShowcase() {
                 placeholder="At least 2 characters"
                 autoFocus={false}
               />
-              <SizableText size="$1" color="$color10">
+              <SizableText size="$1" color="$color11">
                 Letters, numbers, and underscores only.
               </SizableText>
             </YStack>

@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react'
 import { Input, SizableText, XStack, YStack } from 'tamagui'
+import { Eye, EyeOff } from '@tamagui/lucide-icons'
 
 export type PasswordInputProps = {
   value?: string
@@ -37,12 +38,12 @@ export function PasswordInput({ value = '', onChangeText, placeholder = 'Passwor
           placeholder={placeholder} placeholderTextColor="$color8"
           secureTextEntry={!visible} backgroundColor="transparent" borderWidth={0}
         />
-        <SizableText
-          size="$4" color="$color8" paddingHorizontal="$2"
+        <XStack
+          paddingHorizontal="$2" alignItems="center" justifyContent="center"
           pressStyle={{ opacity: 0.6 }} onPress={toggle} cursor="pointer"
         >
-          {visible ? '◉' : '◎'}
-        </SizableText>
+          {visible ? <Eye size={18} color="$color11" /> : <EyeOff size={18} color="$color11" />}
+        </XStack>
       </XStack>
       {strengthIndicator && value.length > 0 && (
         <YStack gap="$1">

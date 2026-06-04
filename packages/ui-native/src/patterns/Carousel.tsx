@@ -1,5 +1,5 @@
 import { Children, useState, type ReactNode } from 'react'
-import { Circle, XStack, YStack } from 'tamagui'
+import { Stack, XStack, YStack } from 'tamagui'
 import { ScrollView } from 'react-native'
 import type { NativeScrollEvent, NativeSyntheticEvent } from 'react-native'
 
@@ -19,10 +19,22 @@ export function Carousel({ children, gap = '$3', snapToInterval, showIndicators 
         {children}
       </ScrollView>
       {showIndicators && count > 1 && (
-        <XStack justifyContent="center" gap="$1.5">
-          {Array.from({ length: count }, (_, i) => (
-            <Circle key={i} size={6} backgroundColor={i === activeIndex ? '$color9' : '$color4'} animation="quick" />
-          ))}
+        <XStack justifyContent="center" alignItems="center" gap="$1.5">
+          {Array.from({ length: count }, (_, i) => {
+            const active = i === activeIndex
+            // Active page is an elongated pill that morphs in/out via the width
+            // animation; inactive pages stay as small dots.
+            return (
+              <Stack
+                key={i}
+                width={active ? 16 : 6}
+                height={6}
+                borderRadius={3}
+                backgroundColor={active ? '$color9' : '$color4'}
+                animation="quick"
+              />
+            )
+          })}
         </XStack>
       )}
     </YStack>

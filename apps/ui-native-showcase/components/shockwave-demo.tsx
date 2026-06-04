@@ -150,7 +150,7 @@ function StrengthDemo({
   const v = useAutoCycle('from', offsetMs)
   return (
     <YStack gap={8} alignItems="center">
-      <SizableText size="$2" color="$color10">
+      <SizableText size="$2" color="$color11">
         {label}
       </SizableText>
       <Shockwave
@@ -201,7 +201,7 @@ export default function ShockwaveDemo() {
             </Shockwave>
           </PhoneFrame>
 
-          <Paragraph size="$2" color="$color10" textAlign="center" maxWidth={420}>
+          <Paragraph size="$2" color="$color11" textAlign="center" maxWidth={420}>
             Native (iOS / Android) uses Skia's view-to-image API to
             snapshot both screens and run the shader between them, on
             a ~2s loop. No interaction required.
@@ -210,7 +210,7 @@ export default function ShockwaveDemo() {
       </Section>
 
       <Section title="Strength variants">
-        <Paragraph size="$2" color="$color10">
+        <Paragraph size="$2" color="$color11">
           shockStrength controls peak displacement. 0 = no displacement,
           0.3 = aggressive. Default 0.12. All three loop with staggered
           phase so they don't fire in lockstep.

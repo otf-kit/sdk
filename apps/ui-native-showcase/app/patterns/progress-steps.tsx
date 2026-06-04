@@ -54,7 +54,7 @@ export default function ProgressStepsShowcase() {
               Next
             </Button>
           </XStack>
-          <SizableText size="$2" color="$color10" textAlign="center">
+          <SizableText size="$2" color="$color11" textAlign="center">
             {STEPS[current]}
           </SizableText>
         </YStack>

@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import { Button, SizableText, XStack, YStack } from 'tamagui'
+import { Button, Circle, SizableText, XStack, YStack } from 'tamagui'
 
 export type ImmersiveMediaAction = {
   id: string
@@ -60,7 +60,7 @@ export function ImmersiveMediaScreen({
                   alignItems="center"
                   justifyContent="center"
                 >
-                  {action.icon ?? <SizableText size="$5" color="white">•</SizableText>}
+                  {action.icon ?? <Circle size={8} backgroundColor="white" />}
                 </YStack>
                 {action.value ? <SizableText size="$2" color="white">{action.value}</SizableText> : null}
                 {action.label ? <SizableText size="$1" color="rgba(255,255,255,0.8)">{action.label}</SizableText> : null}

@@ -1,5 +1,6 @@
 import { type ReactNode, useState } from 'react'
-import { Separator, SizableText, XStack, YStack } from 'tamagui'
+import { Separator, YStack } from 'tamagui'
+import { Expandable } from '../patterns/Expandable'
 
 export type OtfAccordionItem = { id: string; title: string; content: ReactNode }
 export type OtfAccordionProps = {
@@ -8,33 +9,35 @@ export type OtfAccordionProps = {
   allowMultiple?: boolean
 }
 
+/**
+ * List-of-items disclosure container. Owns the single-open / multi-open map and
+ * the separators; delegates each row's header layout, rotating Lucide chevron,
+ * and smooth measured-height + opacity reveal to the `Expandable` primitive — so
+ * the motion lives in exactly one place. (Previously this rendered unicode
+ * ⌃/⌄ glyphs and toggled the body with no animation.)
+ */
 export function OtfAccordion({ items, defaultOpen, allowMultiple = false }: OtfAccordionProps) {
   const [openIds, setOpenIds] = useState<string[]>(defaultOpen ?? [])
   const toggle = (id: string) => {
-    setOpenIds(prev => {
-      if (prev.includes(id)) return prev.filter(i => i !== id)
+    setOpenIds((prev) => {
+      if (prev.includes(id)) return prev.filter((i) => i !== id)
       return allowMultiple ? [...prev, id] : [id]
     })
   }
   return (
     <YStack>
-      {items.map((item, index) => {
-        const isOpen = openIds.includes(item.id)
-        return (
-          <YStack key={item.id}>
-            {index > 0 && <Separator borderColor="$borderColor" />}
-            <XStack
-              paddingVertical="$3" paddingHorizontal="$2"
-              justifyContent="space-between" alignItems="center"
-              pressStyle={{ opacity: 0.7 }} onPress={() => toggle(item.id)} cursor="pointer"
-            >
-              <SizableText size="$4" fontWeight="600">{item.title}</SizableText>
-              <SizableText size="$3" color="$color10">{isOpen ? '\u2303' : '\u2304'}</SizableText>
-            </XStack>
-            {isOpen && <YStack paddingHorizontal="$2" paddingBottom="$3">{item.content}</YStack>}
-          </YStack>
-        )
-      })}
+      {items.map((item, index) => (
+        <YStack key={item.id}>
+          {index > 0 && <Separator borderColor="$borderColor" />}
+          <Expandable
+            title={item.title}
+            expanded={openIds.includes(item.id)}
+            onToggle={() => toggle(item.id)}
+          >
+            {item.content}
+          </Expandable>
+        </YStack>
+      ))}
     </YStack>
   )
 }

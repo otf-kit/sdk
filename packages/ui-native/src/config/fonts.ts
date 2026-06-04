@@ -15,6 +15,12 @@ export const outfitFont = createFont({
     10: 28,
     11: 36,
     12: 48,
+    // String aliases so components using semantic sizes (e.g. Button
+    // size="sm|md|lg") resolve against the font scale instead of warning
+    // "No font size found md".
+    sm: 14,
+    md: 15,
+    lg: 16,
     true: 15,
   },
   lineHeight: {
@@ -30,6 +36,9 @@ export const outfitFont = createFont({
     10: 36,
     11: 44,
     12: 56,
+    sm: 20,
+    md: 22,
+    lg: 24,
     true: 23,
   },
   weight: {
@@ -38,6 +47,9 @@ export const outfitFont = createFont({
     3: '600',
     4: '700',
     5: '800',
+    sm: '600',
+    md: '600',
+    lg: '700',
     true: '400',
   },
   letterSpacing: {
@@ -45,6 +57,9 @@ export const outfitFont = createFont({
     2: -0.2,
     3: -0.4,
     4: -0.6,
+    sm: -0.2,
+    md: -0.3,
+    lg: -0.4,
     true: 0,
   },
 })

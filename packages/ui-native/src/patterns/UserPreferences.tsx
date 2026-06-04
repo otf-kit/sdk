@@ -1,4 +1,6 @@
-import { Separator, SizableText, Slider, Switch, XStack, YStack } from 'tamagui'
+import { Separator, SizableText, Slider, XStack, YStack } from 'tamagui'
+import { ChevronRight } from '@tamagui/lucide-icons'
+import { OtfSwitch } from '../primitives/OtfSwitch'
 
 export type PreferenceItem =
   | { type: 'toggle'; id: string; title: string; description?: string; value: boolean; onValueChange: (v: boolean) => void }
@@ -20,7 +22,7 @@ function ItemLabel({ title, description, color }: { title: string; description?:
   return (
     <YStack flex={1} gap="$1">
       <SizableText size="$4" fontWeight="500" color={color ?? '$color12'}>{title}</SizableText>
-      {description && <SizableText size="$2" color="$color9">{description}</SizableText>}
+      {description && <SizableText size="$2" color="$color11">{description}</SizableText>}
     </YStack>
   )
 }
@@ -29,9 +31,7 @@ function ToggleRow({ item }: { item: Extract<PreferenceItem, { type: 'toggle' }>
   return (
     <XStack alignItems="center" gap="$3" paddingVertical="$3" paddingHorizontal="$4">
       <ItemLabel title={item.title} description={item.description} />
-      <Switch size="$3" checked={item.value} onCheckedChange={item.onValueChange}>
-        <Switch.Thumb animation="quick" />
-      </Switch>
+      <OtfSwitch size="$3" checked={item.value} onCheckedChange={item.onValueChange} />
     </XStack>
   )
 }
@@ -47,8 +47,8 @@ function SelectRow({ item }: { item: Extract<PreferenceItem, { type: 'select' }>
         if (next) item.onValueChange(next.value)
       }}>
       <ItemLabel title={item.title} description={item.description} />
-      <SizableText size="$3" color="$color9" fontWeight="500">{current?.label ?? item.value}</SizableText>
-      <SizableText size="$4" color="$color8">›</SizableText>
+      <SizableText size="$3" color="$color11" fontWeight="500">{current?.label ?? item.value}</SizableText>
+      <ChevronRight size={18} color="$color8" />
     </XStack>
   )
 }
@@ -80,7 +80,7 @@ function ActionRow({ item }: { item: Extract<PreferenceItem, { type: 'action' }>
       onPress={item.onPress}>
       <ItemLabel title={item.title} description={item.description}
         color={item.destructive ? '$red10' : undefined} />
-      <SizableText size="$4" color="$color8">›</SizableText>
+      <ChevronRight size={18} color="$color8" />
     </XStack>
   )
 }
@@ -100,7 +100,7 @@ export function UserPreferences({ sections }: UserPreferencesProps) {
       {sections.map((section, si) => (
         <YStack key={si} gap="$2">
           <YStack paddingHorizontal="$1" gap="$0.5">
-            <SizableText size="$2" fontWeight="600" color="$color9" textTransform="uppercase">
+            <SizableText size="$2" fontWeight="600" color="$color11" textTransform="uppercase">
               {section.title}
             </SizableText>
             {section.description && (

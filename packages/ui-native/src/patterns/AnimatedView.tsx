@@ -30,6 +30,7 @@ import {
 } from 'react'
 import {
   Dimensions,
+  Platform,
   View,
   type LayoutChangeEvent,
   type ViewProps,
@@ -46,6 +47,7 @@ import Animated, {
   useReducedMotion,
   withDelay,
   withTiming,
+  type BaseAnimationBuilder,
   type EntryAnimationsValues,
   type EntryExitAnimationFunction,
 } from 'react-native-reanimated'
@@ -103,36 +105,45 @@ function buildEntering(
   preset: AnimationPreset,
   delay: number,
   duration: number,
-): EntryExitAnimationFunction | undefined {
+): BaseAnimationBuilder | EntryExitAnimationFunction | undefined {
+  // Pass the BUILDER to `entering` — NOT `.build()`. Reanimated's layout-
+  // animation loader (web especially) recognises a predefined animation by
+  // its builder; a pre-`.build()`-ed function fails to load ("Couldn't load
+  // entering/exiting animation"), which is why every preset silently did
+  // nothing on web. `.springify()` modifiers and custom-worklet entering
+  // functions are native-only — on web they're unsupported, so fall back to
+  // a plain predefined builder there.
+  const isWeb = Platform.OS === 'web'
   switch (preset) {
     case 'fade':
-      return FadeIn.delay(delay).duration(duration).build()
+      return FadeIn.delay(delay).duration(duration)
     case 'slide-up':
-      return FadeInDown.delay(delay).duration(duration).build()
+      return FadeInDown.delay(delay).duration(duration)
     case 'slide-down':
-      return FadeInUp.delay(delay).duration(duration).build()
+      return FadeInUp.delay(delay).duration(duration)
     case 'slide-left':
-      return FadeInRight.delay(delay).duration(duration).build()
+      return FadeInRight.delay(delay).duration(duration)
     case 'slide-right':
-      return FadeInLeft.delay(delay).duration(duration).build()
+      return FadeInLeft.delay(delay).duration(duration)
     case 'zoom-in':
-      return ZoomIn.delay(delay).duration(duration).build()
+      return ZoomIn.delay(delay).duration(duration)
     case 'zoom-out':
-      return ZoomOut.delay(delay).duration(duration).build()
-    case 'pop':
-      return ZoomIn.delay(delay)
-        .duration(duration)
-        .springify()
-        .damping(8)
-        .stiffness(120)
-        .build()
+      return ZoomOut.delay(delay).duration(duration)
     case 'bounce':
-      return BounceIn.delay(delay).duration(duration).build()
+      return BounceIn.delay(delay).duration(duration)
+    case 'pop':
+      // Spring overshoot on native; plain zoom on web (springify unsupported).
+      return isWeb
+        ? ZoomIn.delay(delay).duration(duration)
+        : ZoomIn.delay(delay)
+            .duration(duration)
+            .springify()
+            .damping(8)
+            .stiffness(120)
     case 'flip':
-      // 'flip' is a custom preset: we layer a rotateY interpolation on top of
-      // a fade-in entering animation. The keyframe approach mirrors how
-      // Reanimated builds its own presets — return the initial values + the
-      // animations toward the resting state.
+      // 3D rotateY flip via a custom worklet on native; web supports only
+      // predefined animations, so fall back to a zoom-in there.
+      if (isWeb) return ZoomIn.delay(delay).duration(duration)
       return ((values: EntryAnimationsValues) => {
         'worklet'
         const animations = {

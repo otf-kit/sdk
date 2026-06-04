@@ -1,4 +1,5 @@
 import { Button, Circle, SizableText, XStack, YStack } from 'tamagui'
+import { Check, Minus } from '@tamagui/lucide-icons'
 
 export type PricingPlan = {
   id: string
@@ -39,7 +40,7 @@ function BillingToggle({ annual, onToggle }: { annual: boolean; onToggle: (v: bo
             pressStyle={{ opacity: 0.8 }}
             animation="quick"
           >
-            <SizableText size="$3" fontWeight="600" color={active ? '$color1' : '$color10'}>{label}</SizableText>
+            <SizableText size="$3" fontWeight="600" color={active ? '$color1' : '$color11'}>{label}</SizableText>
           </XStack>
         )
       })}
@@ -85,7 +86,7 @@ function PlanRow({ plan, selected, onSelect }: { plan: PricingPlan; selected: bo
             </XStack>
           )}
         </XStack>
-        {plan.description && <SizableText size="$2" color="$color10">{plan.description}</SizableText>}
+        {plan.description && <SizableText size="$2" color="$color11">{plan.description}</SizableText>}
       </YStack>
       <SizableText size="$5" fontWeight="800">{plan.price}</SizableText>
     </XStack>
@@ -98,9 +99,7 @@ function FeatureList({ features }: { features: { label: string; included: boolea
       {features.map((f, i) => (
         <XStack key={i} gap="$2.5" alignItems="center">
           <Circle size={20} backgroundColor={f.included ? '$green3' : '$color3'}>
-            <SizableText size="$1" fontWeight="700" color={f.included ? '$green9' : '$color8'}>
-              {f.included ? '✓' : '—'}
-            </SizableText>
+            {f.included ? <Check size={16} color="$green10" /> : <Minus size={16} color="$color7" />}
           </Circle>
           <SizableText size="$3" color={f.included ? '$color11' : '$color8'} flex={1}>{f.label}</SizableText>
         </XStack>
@@ -133,7 +132,7 @@ export function PricingTable({ plans, selectedPlan, onSelectPlan, annual = false
         ))}
       </YStack>
 
-      {reassurance && <SizableText size="$2" color="$color10" textAlign="center">{reassurance}</SizableText>}
+      {reassurance && <SizableText size="$2" color="$color11" textAlign="center">{reassurance}</SizableText>}
 
       {onContinue && (
         <Button

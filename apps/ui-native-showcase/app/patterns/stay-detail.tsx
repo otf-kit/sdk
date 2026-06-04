@@ -125,7 +125,7 @@ export default function StayDetailShowcase() {
       </Section>
 
       <Section title="API">
-        <SizableText fontFamily="$mono" size="$2" color="$color10">
+        <SizableText fontFamily="$mono" size="$2" color="$color11">
           {`<StayDetailScreen
   listing={{
     image: 'https://...',
@@ -142,7 +142,7 @@ export default function StayDetailShowcase() {
   onReserve={() => router.push('/checkout')}
 />`}
         </SizableText>
-        <Paragraph size="$2" color="$color10" marginTop="$3">
+        <Paragraph size="$2" color="$color11" marginTop="$3">
           Pairs naturally with Shockwave for a chromatic-ripple transition
           from browse → detail.
         </Paragraph>

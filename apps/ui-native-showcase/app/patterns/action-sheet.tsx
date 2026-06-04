@@ -5,8 +5,17 @@ import {
   SizableText,
   YStack,
   XStack,
+  Link2,
+  Mail,
+  MessageCircle,
+  FileText,
+  Camera,
+  Image as ImageIcon,
+  FolderUp,
 } from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
+
+const ICON = { size: 18, color: '$color11' } as const
 
 export default function ActionSheetShowcase() {
   const [openShare, setOpenShare] = useState(false)
@@ -24,7 +33,7 @@ export default function ActionSheetShowcase() {
       <Section title="Share — neutral options" hint={last ? `Picked: ${last}` : 'No selection yet'}>
         <YStack gap="$3" alignItems="flex-start">
           <Button onPress={() => setOpenShare(true)}>Open share sheet</Button>
-          <SizableText size="$2" color="$color10">
+          <SizableText size="$2" color="$color11">
             {last ? `Last action: ${last}` : 'Tap to open'}
           </SizableText>
         </YStack>
@@ -33,10 +42,10 @@ export default function ActionSheetShowcase() {
           onOpenChange={setOpenShare}
           title="Share weekly report"
           items={[
-            { id: 'copy', label: 'Copy link', icon: '🔗' },
-            { id: 'mail', label: 'Email to team', icon: '📧' },
-            { id: 'slack', label: 'Send to Slack', icon: '💬' },
-            { id: 'pdf', label: 'Export as PDF', icon: '📄' },
+            { id: 'copy', label: 'Copy link', icon: <Link2 {...ICON} /> },
+            { id: 'mail', label: 'Email to team', icon: <Mail {...ICON} /> },
+            { id: 'slack', label: 'Send to Slack', icon: <MessageCircle {...ICON} /> },
+            { id: 'pdf', label: 'Export as PDF', icon: <FileText {...ICON} /> },
           ]}
           onSelect={(id: string) => setLast(id)}
         />
@@ -45,7 +54,7 @@ export default function ActionSheetShowcase() {
       <Section title="Post — destructive option">
         <XStack gap="$3" alignItems="center">
           <Button onPress={() => setOpenPost(true)} backgroundColor="$color4">More</Button>
-          <SizableText size="$2" color="$color10">Includes a destructive Delete row.</SizableText>
+          <SizableText size="$2" color="$color11">Includes a destructive Delete row.</SizableText>
         </XStack>
         <ActionSheet
           open={openPost}
@@ -67,9 +76,9 @@ export default function ActionSheetShowcase() {
           open={openMedia}
           onOpenChange={setOpenMedia}
           items={[
-            { id: 'camera', label: 'Take photo', icon: '📷' },
-            { id: 'library', label: 'Choose from library', icon: '🖼️' },
-            { id: 'file', label: 'Upload file', icon: '📁' },
+            { id: 'camera', label: 'Take photo', icon: <Camera {...ICON} /> },
+            { id: 'library', label: 'Choose from library', icon: <ImageIcon {...ICON} /> },
+            { id: 'file', label: 'Upload file', icon: <FolderUp {...ICON} /> },
           ]}
           onSelect={(id: string) => setLast(id)}
           cancelLabel="Not now"

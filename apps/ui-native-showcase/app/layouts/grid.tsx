@@ -32,7 +32,7 @@ function ProductTile({ tile }: { tile: Tile }) {
     <Card padded bordered>
       <YStack gap="$1">
         <SizableText size="$4" fontWeight="700" color="$color12">{tile.title}</SizableText>
-        <SizableText size="$2" color="$color10">{tile.subtitle}</SizableText>
+        <SizableText size="$2" color="$color11">{tile.subtitle}</SizableText>
       </YStack>
     </Card>
   )
@@ -41,13 +41,15 @@ function ProductTile({ tile }: { tile: Tile }) {
 function TeamTile({ name, role }: { name: string; role: string }) {
   return (
     <Card padded bordered>
-      <XStack alignItems="center" gap="$3">
+      {/* Compact vertical layout + single-line truncation so the card holds
+          its shape in a narrow 3-column grid instead of wrapping per-character. */}
+      <YStack alignItems="center" gap="$2">
         <OtfAvatar name={name} size="sm" />
-        <YStack flex={1}>
-          <SizableText size="$3" fontWeight="600">{name}</SizableText>
-          <SizableText size="$1" color="$color10">{role}</SizableText>
+        <YStack alignItems="center" gap="$1" width="100%">
+          <SizableText size="$3" fontWeight="600" numberOfLines={1}>{name}</SizableText>
+          <SizableText size="$1" color="$color11" numberOfLines={1}>{role}</SizableText>
         </YStack>
-      </XStack>
+      </YStack>
     </Card>
   )
 }
@@ -119,7 +121,7 @@ export default function GridShowcase() {
             gap="$1"
           >
             <SizableText size="$5" fontWeight="700">Centered content</SizableText>
-            <SizableText size="$2" color="$color10">maxWidth=360, padding=$3</SizableText>
+            <SizableText size="$2" color="$color11">maxWidth=360, padding=$3</SizableText>
           </YStack>
         </Container>
       </Section>

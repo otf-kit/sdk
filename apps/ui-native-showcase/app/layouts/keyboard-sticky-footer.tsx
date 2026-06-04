@@ -71,7 +71,7 @@ export default function KeyboardStickyFooterShowcase() {
             <YStack gap="$2">
               <Label>Display name</Label>
               <OtfInput value={name} onChangeText={setName} placeholder="What should we call you?" />
-              <SizableText size="$1" color="$color10">
+              <SizableText size="$1" color="$color11">
                 You can change this later in settings.
               </SizableText>
             </YStack>
@@ -88,7 +88,7 @@ export default function KeyboardStickyFooterShowcase() {
         <FormFrame>
           <YStack flex={1} padding="$4" gap="$2">
             <SizableText size="$5" fontWeight="600">Confirm details</SizableText>
-            <SizableText size="$3" color="$color10">
+            <SizableText size="$3" color="$color11">
               Review the information you entered before continuing.
             </SizableText>
           </YStack>
@@ -104,7 +104,7 @@ export default function KeyboardStickyFooterShowcase() {
       <Section title="With offset" hint="offset prop adds extra bottom padding">
         <FormFrame>
           <YStack flex={1} padding="$4" justifyContent="center">
-            <SizableText size="$3" color="$color10">
+            <SizableText size="$3" color="$color11">
               Pass `offset` to lift the footer above the home indicator on devices without safe-area handling.
             </SizableText>
           </YStack>

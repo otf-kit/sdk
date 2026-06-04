@@ -53,7 +53,7 @@ export default function CarouselShowcase() {
             ))}
           </Carousel>
         </YStack>
-        <SizableText size="$2" color="$color10">
+        <SizableText size="$2" color="$color11">
           Use `snapToInterval = cardWidth + gapPx` for clean paging.
         </SizableText>
       </Section>
