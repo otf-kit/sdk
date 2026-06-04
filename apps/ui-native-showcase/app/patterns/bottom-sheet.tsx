@@ -6,13 +6,15 @@ import {
   XStack,
   SizableText,
   Separator,
-  Switch,
+  OtfSwitch,
   Settings,
   User,
   Bell,
   Lock,
   Trash2,
   Share2,
+  Check,
+  ChevronRight,
   Edit3,
 } from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
@@ -38,7 +40,7 @@ export default function BottomSheetShowcase() {
           <OtfButton variant="outlined" onPress={() => setActionsOpen(true)}>
             Open action sheet
           </OtfButton>
-          <SizableText size="$2" color="$color10">
+          <SizableText size="$2" color="$color11">
             Single snap point at 40%, no title bar.
           </SizableText>
         </YStack>
@@ -99,11 +101,9 @@ export default function BottomSheetShowcase() {
                 {row.icon}
                 <YStack flex={1}>
                   <SizableText size="$4" fontWeight="600">{row.label}</SizableText>
-                  <SizableText size="$2" color="$color10">{row.desc}</SizableText>
+                  <SizableText size="$2" color="$color11">{row.desc}</SizableText>
                 </YStack>
-                <Switch checked={row.on} onCheckedChange={row.set} size="$3">
-                  <Switch.Thumb animation="quick" />
-                </Switch>
+                <OtfSwitch checked={row.on} onCheckedChange={row.set} size="$3" />
               </XStack>
             ))}
             <Separator />
@@ -111,9 +111,9 @@ export default function BottomSheetShowcase() {
               <Lock size={20} />
               <YStack flex={1}>
                 <SizableText size="$4" fontWeight="600">Privacy</SizableText>
-                <SizableText size="$2" color="$color10">Manage data + account</SizableText>
+                <SizableText size="$2" color="$color11">Manage data + account</SizableText>
               </YStack>
-              <SizableText size="$3" color="$color9">›</SizableText>
+              <ChevronRight size={18} color="$color8" />
             </XStack>
           </YStack>
         </BottomSheet>
@@ -178,9 +178,7 @@ export default function BottomSheetShowcase() {
                 <SizableText size="$4" fontWeight={filter === opt ? '700' : '400'} textTransform="capitalize">
                   {opt}
                 </SizableText>
-                {filter === opt ? (
-                  <SizableText size="$4" color="$color9">✓</SizableText>
-                ) : null}
+                {filter === opt ? <Check size={18} color="$color9" /> : null}
               </XStack>
             ))}
           </YStack>
@@ -188,7 +186,7 @@ export default function BottomSheetShowcase() {
       </Section>
 
       <Section title="No handle, no close" hint="minimal — full-bleed content">
-        <SizableText size="$2" color="$color10">
+        <SizableText size="$2" color="$color11">
           Pass <SizableText size="$2" fontFamily="$mono" color="$color12">{'showHandle={false}'}</SizableText>
           {' '}to swap the drag pill for your own header.
         </SizableText>

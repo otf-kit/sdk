@@ -6,8 +6,8 @@ import { PRODUCTS } from '../../lib/fixtures'
 export default function CartLineItemShowcase() {
   const [q1, setQ1] = useState(2)
   const [q2, setQ2] = useState(1)
-  const a = PRODUCTS[0]
-  const b = PRODUCTS[1]
+  const a = PRODUCTS[0]!
+  const b = PRODUCTS[1]!
   return (
     <ShowcaseFrame
       title="Cart Line Item"

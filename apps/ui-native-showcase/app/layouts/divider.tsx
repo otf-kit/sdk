@@ -30,17 +30,17 @@ export default function DividerShowcase() {
         <YStack gap="$3">
           <YStack gap="$1">
             <SizableText size="$5" fontWeight="600">Personal info</SizableText>
-            <SizableText size="$2" color="$color10">Name, email, profile photo.</SizableText>
+            <SizableText size="$2" color="$color11">Name, email, profile photo.</SizableText>
           </YStack>
           <Divider />
           <YStack gap="$1">
             <SizableText size="$5" fontWeight="600">Billing</SizableText>
-            <SizableText size="$2" color="$color10">Plan, payment method, invoices.</SizableText>
+            <SizableText size="$2" color="$color11">Plan, payment method, invoices.</SizableText>
           </YStack>
           <Divider />
           <YStack gap="$1">
             <SizableText size="$5" fontWeight="600">Danger zone</SizableText>
-            <SizableText size="$2" color="$color10">Delete account, export data.</SizableText>
+            <SizableText size="$2" color="$color11">Delete account, export data.</SizableText>
           </YStack>
         </YStack>
       </Section>

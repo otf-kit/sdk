@@ -9,11 +9,27 @@ const CardFrame = styled(View, {
   variants: {
     variant: {
       flat: {},
+      // Premium lift: soft shadow (carries depth in light mode) + a hairline
+      // so the surface still separates in dark mode where shadows vanish.
       elevated: {
+        backgroundColor: '$color2',
+        borderWidth: 1,
+        borderColor: '$color3',
         shadowColor: '$shadow2',
-        shadowOffset: { width: 0, height: 2 },
-        shadowRadius: 8,
-        elevation: 3,
+        shadowOffset: { width: 0, height: 8 },
+        shadowRadius: 18,
+        shadowOpacity: 0.14,
+        elevation: 4,
+      },
+      // Hairline-forward surface (inner ring) + a whisper of shadow.
+      ring: {
+        backgroundColor: '$color2',
+        borderWidth: 1,
+        borderColor: '$color4',
+        shadowColor: '$shadow2',
+        shadowOffset: { width: 0, height: 4 },
+        shadowRadius: 10,
+        shadowOpacity: 0.08,
       },
       outlined: {
         borderWidth: 1,
@@ -34,7 +50,7 @@ const CardFrame = styled(View, {
   } as const,
 
   defaultVariants: {
-    variant: 'flat',
+    variant: 'elevated',
     size: 'md',
   },
 })

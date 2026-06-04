@@ -87,7 +87,7 @@ export default function StayBrowseShowcase() {
       </Section>
 
       <Section title="Custom greeting + categories">
-        <Paragraph size="$2" color="$color10" marginBottom="$3">
+        <Paragraph size="$2" color="$color11" marginBottom="$3">
           Override `greeting`, `headline`, and `categories` to repurpose the
           screen for villas, weekend rentals, etc.
         </Paragraph>
@@ -151,7 +151,7 @@ export default function StayBrowseShowcase() {
       </Section>
 
       <Section title="API">
-        <SizableText fontFamily="$mono" size="$2" color="$color10">
+        <SizableText fontFamily="$mono" size="$2" color="$color11">
           {`<StayBrowseScreen
   greeting="Good morning"
   headline={"Unlock Your\\nPerfect Stay Today!"}

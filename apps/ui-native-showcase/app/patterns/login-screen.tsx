@@ -8,6 +8,9 @@ import {
 } from '@otfdashkit/ui-native'
 import type { AuthProvider } from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
+import { SCENES } from '../../lib/fixtures'
+
+const sceneImg = (id: string) => SCENES.find((s) => s.id === id)!.image
 
 const PROVIDERS: AuthProvider[] = [
   { id: 'apple', name: 'Continue with Apple', brand: 'apple' },
@@ -18,6 +21,24 @@ const PROVIDERS: AuthProvider[] = [
 const LOGO = (
   <Circle size={56} backgroundColor="$color9" alignItems="center" justifyContent="center">
     <Activity size={28} color="white" />
+  </Circle>
+)
+
+// Logo for the immersive (over-photo) variant — frosted white ring so it
+// reads on any background, accent icon inside.
+const IMMERSIVE_LOGO = (
+  <Circle
+    size={60}
+    backgroundColor="$color9"
+    alignItems="center"
+    justifyContent="center"
+    borderWidth={3}
+    borderColor="rgba(255,255,255,0.35)"
+    shadowColor="rgba(0,0,0,0.4)"
+    shadowRadius={16}
+    shadowOffset={{ width: 0, height: 8 }}
+  >
+    <Activity size={30} color="white" />
   </Circle>
 )
 
@@ -59,6 +80,43 @@ export default function LoginScreenShowcase() {
       description="Email + provider auth shell. Default, editorial, and centered-card variants — branded provider buttons + email form composable independently."
       docPath="packages/ui-native/src/patterns/LoginScreen.tsx"
     >
+      <Section title="Immersive — photo + glass" hint="full-bleed hero, frosted auth card">
+        <ScreenFrame>
+          <LoginScreen
+            variant="immersive"
+            image={sceneImg('coast')}
+            logo={IMMERSIVE_LOGO}
+            title="Welcome back"
+            subtitle="Sign in to pick up your streak"
+            showEmailForm
+            onEmailSubmit={() => {}}
+            onForgotPassword={() => {}}
+            onCreateAccount={() => {}}
+            onTerms={() => {}}
+            onPrivacy={() => {}}
+          />
+        </ScreenFrame>
+      </Section>
+
+      <Section title="Immersive — providers over photo" hint="glass card + SSO">
+        <ScreenFrame>
+          <LoginScreen
+            variant="immersive"
+            image={sceneImg('mountains')}
+            logo={IMMERSIVE_LOGO}
+            title="Train without limits"
+            subtitle="One account, every device"
+            providers={PROVIDERS}
+            showEmailForm
+            onProviderPress={() => {}}
+            onEmailSubmit={() => {}}
+            onForgotPassword={() => {}}
+            onTerms={() => {}}
+            onPrivacy={() => {}}
+          />
+        </ScreenFrame>
+      </Section>
+
       <Section title="Default — providers + email" hint="brand-colored buttons">
         <ScreenFrame>
           <LoginScreen

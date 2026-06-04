@@ -42,7 +42,7 @@ export default function AvatarShowcase() {
                     </SizableText>
                   </Avatar.Fallback>
                 </Avatar>
-                <SizableText size="$1" color="$color10">{person.name}</SizableText>
+                <SizableText size="$1" color="$color11">{person.name}</SizableText>
               </YStack>
             )
           })}

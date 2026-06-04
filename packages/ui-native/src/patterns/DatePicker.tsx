@@ -1,5 +1,6 @@
-import { useCallback, useMemo, useState } from 'react'
+import { type ReactNode, useCallback, useMemo, useState } from 'react'
 import { SizableText, XStack, YStack } from 'tamagui'
+import { ChevronLeft, ChevronRight } from '@tamagui/lucide-icons'
 
 export type DatePickerProps = {
   value?: Date
@@ -38,14 +39,14 @@ function buildGrid(year: number, month: number, startDay: 0 | 1) {
   return cells
 }
 
-function NavButton({ label, onPress }: { label: string; onPress: () => void }) {
+function NavButton({ icon, onPress }: { icon: ReactNode; onPress: () => void }) {
   return (
     <XStack
       width={36} height={36} borderRadius="$10" alignItems="center" justifyContent="center"
       backgroundColor="$color3" pressStyle={{ scale: 0.92, backgroundColor: '$color5' }}
       animation="quick" onPress={onPress} cursor="pointer"
     >
-      <SizableText size="$5" color="$color11" fontWeight="600">{label}</SizableText>
+      {icon}
     </XStack>
   )
 }
@@ -75,11 +76,11 @@ export function DatePicker({ value, onDateChange, minDate, maxDate, startDay = 1
   return (
     <YStack backgroundColor="$color2" borderRadius="$4" padding="$3" gap="$2" animation="quick">
       <XStack alignItems="center" justifyContent="space-between">
-        <NavButton label="‹" onPress={() => navigate(-1)} />
+        <NavButton icon={<ChevronLeft size={18} color="$color11" />} onPress={() => navigate(-1)} />
         <SizableText size="$4" fontWeight="700" color="$color12">
           {MONTH_NAMES[viewMonth]} {viewYear}
         </SizableText>
-        <NavButton label="›" onPress={() => navigate(1)} />
+        <NavButton icon={<ChevronRight size={18} color="$color11" />} onPress={() => navigate(1)} />
       </XStack>
 
       <XStack>

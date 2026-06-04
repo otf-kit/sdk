@@ -23,7 +23,7 @@ export function VariantPicker({ label, options, value, onChange, accent = '$colo
   return (
     <YStack gap="$2">
       {label ? (
-        <SizableText size="$1" fontWeight="700" color="$color10" textTransform="uppercase" letterSpacing={0.6}>
+        <SizableText size="$1" fontWeight="700" color="$color11" textTransform="uppercase" letterSpacing={0.6}>
           {label}
         </SizableText>
       ) : null}

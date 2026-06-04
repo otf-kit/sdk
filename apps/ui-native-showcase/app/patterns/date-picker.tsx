@@ -103,7 +103,7 @@ export default function DatePickerShowcase() {
             minDate={minDate}
             maxDate={maxDate}
           />
-          <SizableText size="$2" color="$color10">
+          <SizableText size="$2" color="$color11">
             Faded cells fall outside the allowed window — taps are disabled.
           </SizableText>
         </YStack>

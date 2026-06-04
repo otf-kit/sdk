@@ -34,7 +34,7 @@ export default function OTPInputShowcase() {
               Submitted: {completed}
             </SizableText>
           ) : (
-            <SizableText size="$2" color="$color10">
+            <SizableText size="$2" color="$color11">
               Type 6 digits to fire onComplete
             </SizableText>
           )}
@@ -44,7 +44,7 @@ export default function OTPInputShowcase() {
       <Section title="4-digit — short PIN" hint={four.length === 4 ? 'complete' : `${four.length}/4`}>
         <YStack gap="$3" alignItems="center">
           <OTPInput length={4} value={four} onChange={setFour} />
-          <SizableText size="$2" color="$color10">
+          <SizableText size="$2" color="$color11">
             Common for in-app PIN unlocks.
           </SizableText>
         </YStack>
@@ -53,7 +53,7 @@ export default function OTPInputShowcase() {
       <Section title="Masked entry" hint="hides digits behind dots">
         <YStack gap="$3" alignItems="center">
           <OTPInput length={6} value={masked} onChange={setMasked} secureEntry />
-          <SizableText size="$2" color="$color10">
+          <SizableText size="$2" color="$color11">
             Use for password-grade codes (parental controls, secure unlocks).
           </SizableText>
         </YStack>
@@ -90,7 +90,7 @@ export default function OTPInputShowcase() {
             <SizableText size="$6" fontWeight="700">
               Check your phone
             </SizableText>
-            <SizableText size="$3" color="$color10" textAlign="center">
+            <SizableText size="$3" color="$color11" textAlign="center">
               We sent a 6-digit code to (•••) •••-4242. Enter it below to continue.
             </SizableText>
           </YStack>

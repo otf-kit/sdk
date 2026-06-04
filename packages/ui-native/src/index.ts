@@ -38,8 +38,9 @@ export {
   Header, Footer, Main, Nav, Article, Aside,
   // Text
   H1, H2, H3, H4, H5, H6, Heading, Paragraph, SizableText, Text, Label,
-  // Forms
-  Button, Input, TextArea, Switch, Checkbox, Slider, RadioGroup, Select, Fieldset, Form,
+  // Forms (Button is intentionally NOT re-exported here — the canonical SDK
+  // Button is our styled, variant-aware extension exported below)
+  Input, TextArea, Switch, Checkbox, Slider, RadioGroup, Select, Fieldset, Form,
   // Display
   Card, Avatar, Separator, Image as TamaguiImage, Progress, Spinner,
   ListItem as TamaguiListItem, Anchor,
@@ -86,11 +87,18 @@ export {
 } from 'tamagui'
 
 // ─── Otf styled primitives (named to avoid Tamagui conflicts) ──────────────
-export { Button as OtfButton } from './primitives/Button'
-export type { ButtonProps as OtfButtonProps } from './primitives/Button'
+// Canonical SDK Button = our styled, variant-aware component. `OtfButton` is
+// kept as a back-compat alias for any consumer that already imported it.
+export { Button, Button as OtfButton } from './primitives/Button'
+export type { ButtonProps, ButtonProps as OtfButtonProps } from './primitives/Button'
 
 export { OtfText } from './primitives/Text'
 export type { OtfTextProps } from './primitives/Text'
+
+// Premium switch — accent track when on, white shadowed thumb. Use this over
+// the raw tamagui `Switch` (still exported) so toggles never read flat/dim.
+export { OtfSwitch } from './primitives/OtfSwitch'
+export type { OtfSwitchProps } from './primitives/OtfSwitch'
 
 export { Card as OtfCard } from './primitives/Card'
 export type { CardProps as OtfCardProps } from './primitives/Card'

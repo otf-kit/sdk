@@ -9,7 +9,7 @@ export function Divider({ label }: DividerProps) {
   return (
     <XStack alignItems="center" gap="$3">
       <Separator flex={1} borderColor="$color4" />
-      <SizableText size="$2" color="$color9">{label}</SizableText>
+      <SizableText size="$2" color="$color11">{label}</SizableText>
       <Separator flex={1} borderColor="$color4" />
     </XStack>
   )

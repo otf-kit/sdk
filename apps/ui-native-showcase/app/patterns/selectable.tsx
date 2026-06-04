@@ -105,7 +105,7 @@ export default function SelectableShowcase() {
             value={reminders}
             onChange={setReminders}
           />
-          <SizableText size="$2" color="$color10">
+          <SizableText size="$2" color="$color11">
             {reminders.length === 0 ? 'No reminders' : reminders.join(', ')}
           </SizableText>
         </YStack>

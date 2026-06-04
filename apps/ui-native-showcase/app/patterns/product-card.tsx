@@ -89,7 +89,7 @@ export default function ProductCardShowcase() {
         </XStack>
       </Section>
 
-      <SizableText size="$2" color="$color10">
+      <SizableText size="$2" color="$color11">
         Items added: {cart.length === 0 ? 'none' : cart.join(', ')}
       </SizableText>
     </ShowcaseFrame>

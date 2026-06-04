@@ -12,14 +12,16 @@ export const OtfText = styled(SizableText, {
       h4: { size: '$6', fontWeight: '600' },
       body: { size: '$5', fontWeight: '400' },
       bodySmall: { size: '$4', fontWeight: '400' },
-      caption: { size: '$3', fontWeight: '400', color: '$color10' },
-      small: { size: '$2', fontWeight: '400', color: '$color9' },
+      caption: { size: '$3', fontWeight: '400', color: '$color11' },
+      small: { size: '$2', fontWeight: '400', color: '$color11' },
     },
+    // $color11 = muted text; $color9/$color10 are the accent ramp (solid
+    // backgrounds), never body text.
     muted: {
-      true: { color: '$color9' },
+      true: { color: '$color11' },
     },
     secondary: {
-      true: { color: '$color10' },
+      true: { color: '$color11' },
     },
     center: {
       true: { textAlign: 'center' },

@@ -50,7 +50,7 @@ export default function ToggleGroupShowcase() {
       <Section title="Sizes">
         <YStack gap="$3">
           <YStack gap="$1">
-            <SizableText size="$2" color="$color10">Small</SizableText>
+            <SizableText size="$2" color="$color11">Small</SizableText>
             <OtfToggleGroup
               options={RANGE_OPTIONS}
               value={smallVal}
@@ -59,7 +59,7 @@ export default function ToggleGroupShowcase() {
             />
           </YStack>
           <YStack gap="$1">
-            <SizableText size="$2" color="$color10">Medium (default)</SizableText>
+            <SizableText size="$2" color="$color11">Medium (default)</SizableText>
             <OtfToggleGroup
               options={RANGE_OPTIONS}
               value={range}
@@ -68,7 +68,7 @@ export default function ToggleGroupShowcase() {
             />
           </YStack>
           <YStack gap="$1">
-            <SizableText size="$2" color="$color10">Large</SizableText>
+            <SizableText size="$2" color="$color11">Large</SizableText>
             <OtfToggleGroup
               options={RANGE_OPTIONS}
               value={largeVal}

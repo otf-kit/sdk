@@ -14,7 +14,7 @@ export function FormField({ label, error, helperText, required, children }: Form
         </SizableText>
       )}
       {children}
-      {helperText && !error && <SizableText size="$2" color="$color9">{helperText}</SizableText>}
+      {helperText && !error && <SizableText size="$2" color="$color11">{helperText}</SizableText>}
       {error && <SizableText size="$2" color="$red9">{error}</SizableText>}
     </YStack>
   )

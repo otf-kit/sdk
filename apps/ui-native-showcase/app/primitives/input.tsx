@@ -32,7 +32,7 @@ export default function InputShowcase() {
             keyboardType="email-address"
             autoCapitalize="none"
           />
-          <SizableText size="$1" color="$color10">
+          <SizableText size="$1" color="$color11">
             We never sell your address.
           </SizableText>
         </YStack>

@@ -1,4 +1,6 @@
-import { Button, Image, SizableText, XStack, YStack } from 'tamagui'
+import { Image, SizableText, XStack, YStack } from 'tamagui'
+import { ShoppingCart, Star } from '@tamagui/lucide-icons'
+import { Button } from '../primitives/Button'
 
 export type ProductCardProps = {
   image: string
@@ -17,7 +19,7 @@ function Stars({ rating = 0 }: { rating?: number }) {
   return (
     <XStack gap="$0.5">
       {Array.from({ length: 5 }, (_, i) => (
-        <SizableText key={i} size="$2" color={i < Math.round(rating) ? '$yellow9' : '$color5'}>★</SizableText>
+        <Star key={i} size={14} color={i < Math.round(rating) ? '#F59E0B' : '$color5'} fill={i < Math.round(rating) ? '#F59E0B' : 'transparent'} />
       ))}
     </XStack>
   )
@@ -31,7 +33,7 @@ function CardContent({ title, price, originalPrice, rating, reviewCount, onAddTo
         {rating !== undefined && (
           <XStack gap="$1.5" alignItems="center">
             <Stars rating={rating} />
-            {reviewCount !== undefined && <SizableText size="$2" color="$color9">({reviewCount})</SizableText>}
+            {reviewCount !== undefined && <SizableText size="$2" color="$color11">({reviewCount})</SizableText>}
           </XStack>
         )}
       </YStack>
@@ -39,14 +41,18 @@ function CardContent({ title, price, originalPrice, rating, reviewCount, onAddTo
         <XStack gap="$2" alignItems="baseline">
           <SizableText size="$6" fontWeight="700">{price}</SizableText>
           {originalPrice && (
-            <SizableText size="$3" color="$color8" textDecorationLine="line-through">{originalPrice}</SizableText>
+            <SizableText size="$3" color="$color11" textDecorationLine="line-through" opacity={0.6}>{originalPrice}</SizableText>
           )}
         </XStack>
         {onAddToCart && (
-          <Button size="$3" backgroundColor="$color9" color="$color1" borderRadius="$10"
+          <Button
+            variant="primary"
+            size="$3"
+            borderRadius="$10"
+            icon={<ShoppingCart size={14} />}
             onPress={(e: any) => { e.stopPropagation?.(); onAddToCart() }}
-            pressStyle={{ backgroundColor: '$color8', scale: 0.95 }} animation="quick">
-            + Cart
+          >
+            Add
           </Button>
         )}
       </XStack>

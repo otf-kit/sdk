@@ -6,7 +6,7 @@ import {
   H3,
   Paragraph,
   SizableText,
-  Switch,
+  OtfSwitch,
   Circle,
   Pressable,
   Separator,
@@ -15,6 +15,7 @@ import {
   Palette,
   useMedia,
 } from '@otfdashkit/ui-native'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useShowcaseTheme, SHOWCASE_PALETTES } from '../components/ThemeContext'
 import type { ShowcasePalette } from '../components/ThemeContext'
 
@@ -22,6 +23,7 @@ export default function SettingsScreen() {
   const { palette, mode, setPaletteId, toggleMode } = useShowcaseTheme()
   const isDark = mode === 'dark'
   const media = useMedia()
+  const insets = useSafeAreaInsets()
   const horizontalPadding = media.gtSm ? '$6' : '$4'
   const maxWidth = 720
 
@@ -29,11 +31,11 @@ export default function SettingsScreen() {
     <ScrollView
       flex={1}
       backgroundColor="$background"
-      contentContainerStyle={{ paddingBottom: 96 }}
+      contentContainerStyle={{ paddingTop: insets.top + 16, paddingBottom: 96 }}
     >
       <YStack
         paddingHorizontal={horizontalPadding}
-        paddingTop="$6"
+        paddingTop="$3"
         paddingBottom="$5"
         maxWidth={maxWidth}
         width="100%"
@@ -42,7 +44,7 @@ export default function SettingsScreen() {
       >
         {/* Header */}
         <YStack gap="$1.5">
-          <SizableText size="$2" color="$color10" textTransform="uppercase" letterSpacing={1}>
+          <SizableText size="$2" color="$color11" textTransform="uppercase" letterSpacing={1}>
             Showcase preferences
           </SizableText>
           <H1 size="$10" fontWeight="800" letterSpacing={-0.8}>
@@ -77,13 +79,11 @@ export default function SettingsScreen() {
               <SizableText size="$4" fontWeight="600" color="$color12">
                 {isDark ? 'Dark mode' : 'Light mode'}
               </SizableText>
-              <SizableText size="$2" color="$color10">
+              <SizableText size="$2" color="$color11">
                 Toggle the global theme for previews.
               </SizableText>
             </YStack>
-            <Switch size="$3" checked={isDark} onCheckedChange={toggleMode}>
-              <Switch.Thumb animation="quick" />
-            </Switch>
+            <OtfSwitch size="$3" checked={isDark} onCheckedChange={toggleMode} />
           </XStack>
         </YStack>
 
@@ -147,7 +147,7 @@ function PaletteSwatch({
         />
         <SizableText
           size="$2"
-          color={active ? '$color12' : '$color10'}
+          color={active ? '$color12' : '$color11'}
           fontWeight={active ? '700' : '500'}
         >
           {palette.name}

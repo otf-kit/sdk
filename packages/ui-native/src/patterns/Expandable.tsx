@@ -129,21 +129,20 @@ export function Expandable({
         measuredHeight.current = next
         if (!didMeasure) {
           setDidMeasure(true)
-          // If we mount expanded, snap the SV to the now-known height once.
+          // If mounted expanded, snap immediately — no tween, no flash.
           if (expanded) {
-            heightSv.value = reducedMotion
-              ? next
-              : withTiming(next, { duration: 0 })
+            heightSv.value = next
+            opacitySv.value = 1
           }
         } else if (expanded) {
-          // Body grew while open (e.g. dynamic children) — animate to the new height.
+          // Body grew while open (e.g. dynamic children) — animate to new height.
           heightSv.value = reducedMotion
             ? next
             : withTiming(next, { duration, easing: EASE })
         }
       }
     },
-    [didMeasure, duration, expanded, heightSv, reducedMotion],
+    [didMeasure, duration, expanded, heightSv, opacitySv, reducedMotion],
   )
 
   const handlePress = useCallback(() => {
@@ -199,7 +198,7 @@ export function Expandable({
         <YStack flex={1} gap="$1">
           {titleNode}
           {subtitle ? (
-            <SizableText size="$2" color="$color10">
+            <SizableText size="$2" color="$color11">
               {subtitle}
             </SizableText>
           ) : null}
@@ -209,13 +208,42 @@ export function Expandable({
         </Animated.View>
       </XStack>
 
-      {/* Animated body — measured natural height drives the tween. */}
-      <Animated.View style={bodyStyle} pointerEvents={expanded ? 'auto' : 'none'}>
-        <View onLayout={handleMeasure}>
-          <View paddingTop="$1" paddingBottom="$3">
+      {/*
+       * Ghost measurement view — absolutely positioned so it escapes the
+       * Animated.View's `height: 0` constraint.
+       *
+       * On React Native native (iOS/Android), Yoga constrains children to the
+       * parent's fixed height, so a View nested inside Animated.View with
+       * height:0 reports onLayout.height=0. That meant measuredHeight.current
+       * was always 0 → animation target was always 0 → nothing expanded.
+       *
+       * On web (CSS), overflow:hidden doesn't constrain layout, so onLayout
+       * fired correctly — explaining why the component worked on web but not
+       * on device/simulator.
+       *
+       * Fix: render the children once in an absolutely positioned ghost (opacity
+       * 0, pointerEvents none) to capture the true natural height. Once measured
+       * (didMeasure=true) the ghost is removed and children move into the
+       * animated container.
+       */}
+      {!didMeasure && (
+        <View
+          style={{ position: 'absolute', opacity: 0, pointerEvents: 'none', width: '100%' }}
+          onLayout={handleMeasure}
+        >
+          <View style={{ paddingTop: 4, paddingBottom: 12 }}>
             {children}
           </View>
         </View>
+      )}
+
+      {/* Animated body — height driven by the ghost measurement above. */}
+      <Animated.View style={bodyStyle} pointerEvents={expanded ? 'auto' : 'none'}>
+        {didMeasure ? (
+          <View style={{ paddingTop: 4, paddingBottom: 12 }}>
+            {children}
+          </View>
+        ) : null}
       </Animated.View>
     </YStack>
   )

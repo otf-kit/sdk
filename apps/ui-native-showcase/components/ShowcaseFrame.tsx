@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import {
   YStack,
   XStack,
@@ -23,14 +24,18 @@ interface ShowcaseFrameProps {
 // entry uses to group prop variants.
 export function ShowcaseFrame({ title, description, docPath, children }: ShowcaseFrameProps) {
   const media = useMedia()
+  const insets = useSafeAreaInsets()
   const horizontalPadding = media.gtSm ? '$6' : '$4'
   const maxWidth = 880
 
   return (
-    <ScrollView flex={1} backgroundColor="$background" contentContainerStyle={{ paddingBottom: 80 }}>
+    <ScrollView
+      flex={1}
+      backgroundColor="$background"
+      contentContainerStyle={{ paddingTop: insets.top + 20, paddingBottom: 80 }}
+    >
       <YStack
         paddingHorizontal={horizontalPadding}
-        paddingTop="$5"
         paddingBottom="$3"
         maxWidth={maxWidth}
         width="100%"
@@ -58,7 +63,7 @@ export function ShowcaseFrame({ title, description, docPath, children }: Showcas
         {children}
         {docPath ? (
           <YStack paddingTop="$4" borderTopWidth={1} borderTopColor="$borderColor">
-            <SizableText size="$2" color="$color10">
+            <SizableText size="$2" color="$color11">
               Reference: <SizableText size="$2" color="$color12">{docPath}</SizableText>
             </SizableText>
           </YStack>
@@ -90,7 +95,7 @@ export function Section({ title, hint, children }: SectionProps) {
             {title}
           </SizableText>
           {hint ? (
-            <SizableText size="$2" color="$color10">
+            <SizableText size="$2" color="$color11">
               {hint}
             </SizableText>
           ) : null}
@@ -129,7 +134,7 @@ export function ComingSoon({
       <SizableText size="$6" fontWeight="700" color="$color12">
         {title}
       </SizableText>
-      <SizableText size="$3" color="$color10" textAlign="center" maxWidth={420}>
+      <SizableText size="$3" color="$color11" textAlign="center" maxWidth={420}>
         {body}
       </SizableText>
     </YStack>

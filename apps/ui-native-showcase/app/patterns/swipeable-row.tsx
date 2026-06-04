@@ -1,20 +1,32 @@
 import { useState } from 'react'
 import {
   SwipeableRow,
+  Image,
   YStack,
   XStack,
   SizableText,
   Circle,
 } from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
+import { PEOPLE } from '../../lib/fixtures'
 
-type Row = { id: string; title: string; subtitle: string; initial: string }
+type Row = { id: string; personId: string; title: string; subtitle: string; time: string }
 
 const initialRows: Row[] = [
-  { id: 'r1', title: 'Sarah Chen', subtitle: 'Sent the deck for tomorrow', initial: 'S' },
-  { id: 'r2', title: 'Alex Rivera', subtitle: 'Re: budget review — 2 attachments', initial: 'A' },
-  { id: 'r3', title: 'Jordan Kim', subtitle: 'Standup notes are up', initial: 'J' },
+  { id: 'r1', personId: 'sarah',  title: 'Sarah Chen',   subtitle: 'Sent the deck for tomorrow',        time: '9:41 AM' },
+  { id: 'r2', personId: 'alex',   title: 'Alex Rivera',  subtitle: 'Re: budget review — 2 attachments', time: '9:18 AM' },
+  { id: 'r3', personId: 'jordan', title: 'Jordan Kim',   subtitle: 'Standup notes are up',              time: '8:55 AM' },
 ]
+
+function AvatarPhoto({ personId, size = 40 }: { personId: string; size?: number }) {
+  const person = PEOPLE.find(p => p.id === personId)
+  if (!person) return <Circle size={size} backgroundColor="$color5" />
+  return (
+    <Circle size={size} overflow="hidden" borderWidth={1.5} borderColor="$color4">
+      <Image source={{ uri: person.avatar }} width={size} height={size} objectFit="cover" />
+    </Circle>
+  )
+}
 
 function RowCard({ row }: { row: Row }) {
   return (
@@ -28,18 +40,13 @@ function RowCard({ row }: { row: Row }) {
       borderWidth={1}
       borderColor="$borderColor"
     >
-      <Circle size={36} backgroundColor="$color5">
-        <SizableText size="$3" fontWeight="700" color="$color12">
-          {row.initial}
-        </SizableText>
-      </Circle>
+      <AvatarPhoto personId={row.personId} />
       <YStack flex={1} gap="$0.5">
-        <SizableText size="$4" fontWeight="600" color="$color12">
-          {row.title}
-        </SizableText>
-        <SizableText size="$2" color="$color10" numberOfLines={1}>
-          {row.subtitle}
-        </SizableText>
+        <XStack justifyContent="space-between" alignItems="center">
+          <SizableText size="$4" fontWeight="600" color="$color12">{row.title}</SizableText>
+          <SizableText size="$1" color="$color11">{row.time}</SizableText>
+        </XStack>
+        <SizableText size="$2" color="$color11" numberOfLines={1}>{row.subtitle}</SizableText>
       </YStack>
     </XStack>
   )
@@ -81,7 +88,7 @@ export default function SwipeableRowShowcase() {
             </SwipeableRow>
           ))}
           {rows.length === 0 && (
-            <SizableText size="$3" color="$color10" textAlign="center" paddingVertical="$4">
+            <SizableText size="$3" color="$color11" textAlign="center" paddingVertical="$4">
               All caught up.
             </SizableText>
           )}
@@ -94,7 +101,7 @@ export default function SwipeableRowShowcase() {
             { id: 'pin', label: 'Pin', color: '$yellow9', onPress: () => {} },
           ]}
         >
-          <RowCard row={{ id: 'one', title: 'Maya Patel', subtitle: 'Released the design tokens', initial: 'M' }} />
+          <RowCard row={{ id: 'pin', personId: 'maya', title: 'Maya Patel', subtitle: 'Released the design tokens', time: 'Yesterday' }} />
         </SwipeableRow>
       </Section>
 
@@ -108,11 +115,11 @@ export default function SwipeableRowShowcase() {
             { id: 'flag', label: 'Flag', color: '$red9', onPress: () => {} },
           ]}
         >
-          <RowCard row={{ id: 'multi', title: 'Diego Costa', subtitle: 'Q2 retro recap', initial: 'D' }} />
+          <RowCard row={{ id: 'multi', personId: 'diego', title: 'Diego Costa', subtitle: 'Q2 retro recap', time: 'Mon' }} />
         </SwipeableRow>
       </Section>
 
-      <SizableText size="$2" color="$color10">
+      <SizableText size="$2" color="$color11">
         Archived this session: {archived.length}
       </SizableText>
     </ShowcaseFrame>

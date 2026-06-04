@@ -1,5 +1,6 @@
 import { useState, useCallback, type ReactNode } from 'react'
 import { Circle, SizableText, XStack, YStack } from 'tamagui'
+import { Heart, X } from '@tamagui/lucide-icons'
 
 export type SwipeCardItem = { id: string; [key: string]: any }
 export type SwipeCardsProps<T extends SwipeCardItem> = {
@@ -98,12 +99,12 @@ export function SwipeCards<T extends SwipeCardItem>({
         <Circle size={60} backgroundColor="$red3" borderWidth={2} borderColor="$red7"
           pressStyle={{ scale: 0.9, backgroundColor: '$red5' }} animation="quick"
           onPress={() => handleSwipe('left')} alignItems="center" justifyContent="center">
-          <SizableText size="$6" color="$red10" fontWeight="700">✕</SizableText>
+          <X size={28} color="$red10" />
         </Circle>
         <Circle size={60} backgroundColor="$green3" borderWidth={2} borderColor="$green7"
           pressStyle={{ scale: 0.9, backgroundColor: '$green5' }} animation="quick"
           onPress={() => handleSwipe('right')} alignItems="center" justifyContent="center">
-          <SizableText size="$6" color="$green10" fontWeight="700">♥</SizableText>
+          <Heart size={28} color="$green10" fill="$green10" />
         </Circle>
       </XStack>
     </YStack>

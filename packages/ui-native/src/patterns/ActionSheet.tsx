@@ -28,7 +28,11 @@ export function ActionSheet({ open, onOpenChange, title, items, onSelect, cancel
           {items.map(item => (
             <XStack key={item.id} height={52} alignItems="center" gap="$3" paddingHorizontal="$3" borderRadius="$4"
               pressStyle={{ backgroundColor: '$color3' }} onPress={() => { onSelect(item.id); onOpenChange(false) }}>
-              {item.icon && <SizableText size="$5">{item.icon}</SizableText>}
+              {item.icon && (
+                <XStack width={24} height={24} alignItems="center" justifyContent="center">
+                  {item.icon}
+                </XStack>
+              )}
               <SizableText size="$5" flex={1} color={item.destructive ? '$red9' : '$color12'}
                 fontWeight={item.destructive ? '600' : '400'}>{item.label}</SizableText>
             </XStack>

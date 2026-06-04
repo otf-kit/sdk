@@ -49,7 +49,7 @@ export function CartLineItem({
           {title}
         </SizableText>
         {variant ? (
-          <SizableText size="$2" color="$color9" numberOfLines={1}>
+          <SizableText size="$2" color="$color11" numberOfLines={1}>
             {variant}
           </SizableText>
         ) : null}
@@ -69,7 +69,7 @@ export function CartLineItem({
           accessibilityRole="button"
           accessibilityLabel={`Remove ${title}`}
         >
-          <X size={16} color="$color9" />
+          <X size={16} color="$color11" />
         </XStack>
       ) : null}
     </XStack>

@@ -27,20 +27,20 @@ export default function ListItemShowcase() {
       description="Row primitive — leading icon, title + subtitle, configurable right slot (chevron, switch, value, badge)."
       docPath="packages/ui-native/src/layouts/ListItem.tsx"
     >
-      <Section title="Basic" hint="title only, with onPress">
-        <YStack gap="$1">
-          <ListItem title="Help center" onPress={() => {}} />
-          <ListItem title="Send feedback" onPress={() => {}} />
+      <Section title="Basic" hint="grouped in a Card with hairline dividers">
+        <OtfCard padding={0} overflow="hidden">
+          <ListItem divided title="Help center" onPress={() => {}} />
+          <ListItem divided title="Send feedback" onPress={() => {}} />
           <ListItem title="What's new" onPress={() => {}} />
-        </YStack>
+        </OtfCard>
       </Section>
 
       <Section title="With icon + subtitle">
-        <YStack gap="$1">
-          <ListItem icon={<User size={20} />} title="Account" subtitle="Personal details + email" />
-          <ListItem icon={<Lock size={20} />} title="Security" subtitle="Password + 2FA" />
+        <OtfCard padding={0} overflow="hidden">
+          <ListItem divided icon={<User size={20} />} title="Account" subtitle="Personal details + email" />
+          <ListItem divided icon={<Lock size={20} />} title="Security" subtitle="Password + 2FA" />
           <ListItem icon={<CreditCard size={20} />} title="Billing" subtitle="Plan + invoices" />
-        </YStack>
+        </OtfCard>
       </Section>
 
       <Section title="Right slot — chevron + href" hint="auto-pushes via expo-router">

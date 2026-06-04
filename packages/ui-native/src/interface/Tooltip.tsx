@@ -1,12 +1,20 @@
 import { type ReactNode } from 'react'
-import { Popover, SizableText } from 'tamagui'
+import { Popover, SizableText, View } from 'tamagui'
 
 export type TooltipProps = { content: string; children: ReactNode; side?: 'top' | 'bottom' | 'left' | 'right' }
 
 export function OtfTooltip({ content, children, side = 'top' }: TooltipProps) {
   return (
     <Popover size="$2" placement={side}>
-      <Popover.Trigger asChild>{children}</Popover.Trigger>
+      {/* Wrap in a host View so the trigger ref is always a measurable DOM
+          node on web — Tamagui's Popover positions via @floating-ui/dom,
+          which calls getBoundingClientRect on the trigger. `asChild` passing
+          straight to a non-host child (e.g. an Icon/SVG) crashed with
+          "getBoundingClientRect is not a function". The View forwards to a
+          div on web and a measurable host on native. */}
+      <Popover.Trigger asChild>
+        <View>{children}</View>
+      </Popover.Trigger>
       <Popover.Content
         backgroundColor="$color11" borderRadius="$2"
         paddingHorizontal="$2.5" paddingVertical="$1.5" elevate

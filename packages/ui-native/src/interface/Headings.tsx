@@ -52,7 +52,7 @@ export const H6 = styled(SizableText, {
 export const SubHeading = styled(SizableText, {
   name: 'OtfSubHeading',
   size: '$5',
-  color: '$color10',
+  color: '$color11',
   fontWeight: '300',
   $lg: { size: '$6' },
 })
@@ -60,7 +60,7 @@ export const SubHeading = styled(SizableText, {
 export function SepHeading({ children }: { children: ReactNode }) {
   return (
     <XStack marginTop="$6" marginBottom="$4" alignItems="center" gap="$6">
-      <H3 size="$4" color="$color10">
+      <H3 size="$4" color="$color11">
         {children}
       </H3>
       <Separator opacity={0.5} />

@@ -32,7 +32,7 @@ function CollapsibleDemo() {
               <SizableText size="$3" fontWeight="500" color="$color12">
                 Row {i + 1}
               </SizableText>
-              <SizableText size="$2" color="$color10">
+              <SizableText size="$2" color="$color11">
                 Scroll down to hide the header. Scroll up to reveal it.
               </SizableText>
             </YStack>

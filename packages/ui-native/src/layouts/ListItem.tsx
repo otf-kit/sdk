@@ -21,13 +21,15 @@
 import type { ReactNode } from 'react'
 import { ChevronRight } from '@tamagui/lucide-icons'
 import { router } from 'expo-router'
-import { SizableText, styled, Switch, View, XStack, YStack } from 'tamagui'
+import { SizableText, styled, View, XStack, YStack } from 'tamagui'
+import { OtfSwitch } from '../primitives/OtfSwitch'
 
 const ListItemFrame = styled(XStack, {
   name: 'OtfListItem',
   alignItems: 'center',
   gap: '$3',
-  padding: '$3',
+  paddingVertical: '$4',
+  paddingHorizontal: '$3',
   borderRadius: '$3',
 
   variants: {
@@ -36,6 +38,16 @@ const ListItemFrame = styled(XStack, {
         cursor: 'pointer',
         hoverStyle: { backgroundColor: '$color2' },
         pressStyle: { backgroundColor: '$color3', opacity: 0.9 },
+      },
+    },
+    // Grouped-list row: square corners + a hairline bottom rule so a stack of
+    // rows inside a Card reads as a proper settings list (the premium pattern)
+    // rather than floating text. Apply to every row except the last.
+    divided: {
+      true: {
+        borderRadius: 0,
+        borderBottomWidth: 1,
+        borderBottomColor: '$color4',
       },
     },
   } as const,
@@ -74,6 +86,8 @@ export type ListItemProps = {
    */
   href?: string
   onPress?: () => void
+  /** Render a hairline bottom rule + square corners — for grouped lists inside a Card. Apply to all rows but the last. */
+  divided?: boolean
 }
 
 const BADGE_TONE_STYLES: Record<
@@ -115,27 +129,23 @@ function renderRight(
   if (right === undefined || right === null) return null
 
   if (right === 'chevron') {
-    return <ChevronRight size={20} color="$color9" />
+    return <ChevronRight size={20} color="$color8" />
   }
 
   if (right === 'switch') {
     return (
-      <Switch
+      <OtfSwitch
         size="$3"
         checked={switchValue ?? false}
         onCheckedChange={onSwitchChange}
-        accessibilityRole="switch"
         accessibilityLabel={switchAccessibilityLabel ?? title}
-        accessibilityState={{ checked: switchValue ?? false }}
-      >
-        <Switch.Thumb animation="quick" />
-      </Switch>
+      />
     )
   }
 
   if (isValueRight(right)) {
     return (
-      <SizableText size="$3" color="$color10">
+      <SizableText size="$3" color="$color11">
         {right.value}
       </SizableText>
     )
@@ -171,6 +181,7 @@ export function ListItem({
   switchAccessibilityLabel,
   href,
   onPress,
+  divided,
 }: ListItemProps) {
   const resolvedRight: ListItemRight | undefined =
     right === undefined && href !== undefined ? 'chevron' : right
@@ -184,14 +195,14 @@ export function ListItem({
   })()
 
   return (
-    <ListItemFrame pressable={!!handlePress} onPress={handlePress}>
+    <ListItemFrame pressable={!!handlePress} divided={divided} onPress={handlePress}>
       {icon && <View>{icon}</View>}
       <YStack flex={1} gap="$1">
         <SizableText size="$4" fontWeight="500" color="$color12">
           {title}
         </SizableText>
         {subtitle && (
-          <SizableText size="$2" color="$color9">
+          <SizableText size="$2" color="$color11">
             {subtitle}
           </SizableText>
         )}

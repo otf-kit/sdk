@@ -19,7 +19,7 @@ export default function ImageShowcase() {
           {[40, 64, 96, 128].map((size) => (
             <YStack key={size} gap="$1" alignItems="center">
               <Image source={{ uri: SQUARE }} width={size} height={size} borderRadius={8} />
-              <SizableText size="$1" color="$color10">
+              <SizableText size="$1" color="$color11">
                 {size}px
               </SizableText>
             </YStack>
@@ -30,7 +30,7 @@ export default function ImageShowcase() {
       <Section title="Aspect ratios">
         <YStack gap="$3">
           <YStack gap="$1">
-            <SizableText size="$2" color="$color10">16:9 landscape</SizableText>
+            <SizableText size="$2" color="$color11">16:9 landscape</SizableText>
             <Image
               source={{ uri: LANDSCAPE }}
               width="100%"
@@ -39,7 +39,7 @@ export default function ImageShowcase() {
             />
           </YStack>
           <YStack gap="$1">
-            <SizableText size="$2" color="$color10">3:4 portrait</SizableText>
+            <SizableText size="$2" color="$color11">3:4 portrait</SizableText>
             <Image
               source={{ uri: PORTRAIT }}
               width={180}
@@ -48,7 +48,7 @@ export default function ImageShowcase() {
             />
           </YStack>
           <YStack gap="$1">
-            <SizableText size="$2" color="$color10">1:1 square</SizableText>
+            <SizableText size="$2" color="$color11">1:1 square</SizableText>
             <Image
               source={{ uri: SQUARE }}
               width={120}
@@ -80,7 +80,7 @@ export default function ImageShowcase() {
                 resizeMode={mode}
                 backgroundColor="$color3"
               />
-              <SizableText size="$1" color="$color10">{mode}</SizableText>
+              <SizableText size="$1" color="$color11">{mode}</SizableText>
             </YStack>
           ))}
         </XStack>

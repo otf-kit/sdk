@@ -45,7 +45,7 @@ export default function IconShowcase() {
           {[12, 16, 20, 24, 32, 48].map((size) => (
             <YStack key={size} gap="$1" alignItems="center">
               <Heart size={size} />
-              <SizableText size="$1" color="$color10">{size}px</SizableText>
+              <SizableText size="$1" color="$color11">{size}px</SizableText>
             </YStack>
           ))}
         </XStack>
@@ -66,7 +66,7 @@ export default function IconShowcase() {
           {SAMPLE.map(({ name, Cmp }) => (
             <YStack key={name} gap="$1" alignItems="center" minWidth={80}>
               <Cmp size={20} />
-              <SizableText size="$1" color="$color10">{name}</SizableText>
+              <SizableText size="$1" color="$color11">{name}</SizableText>
             </YStack>
           ))}
         </XStack>

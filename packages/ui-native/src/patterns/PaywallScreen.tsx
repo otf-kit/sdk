@@ -1,5 +1,7 @@
 import { useState, useEffect, type ReactNode } from 'react'
-import { Button, Circle, SizableText, XStack, YStack, ScrollView } from 'tamagui'
+import { Button, Circle, Image, SizableText, XStack, YStack, ScrollView } from 'tamagui'
+import { LinearGradient } from 'tamagui/linear-gradient'
+import { Check, X, Zap } from '@tamagui/lucide-icons'
 
 export type PlanOption = {
   id: string
@@ -64,6 +66,14 @@ export type PaywallScreenProps = {
   continueLabel?: string
   reassurance?: string
   hero?: ReactNode
+  /**
+   * Full-bleed cinematic background photo (R2/CDN URL) behind the whole
+   * paywall — RevenueCat / Superwall-style. A dual scrim is layered on top
+   * automatically (light top for the close control, heavy bottom so the
+   * plan rows + CTA stay crisp over any image) and all overlaid UI switches
+   * to a legible glass-dark treatment regardless of the app theme.
+   */
+  backgroundImage?: string
   socialProof?: string
   countdownMinutes?: number
   badge?: string
@@ -96,7 +106,10 @@ function BenefitRow({ feature, tone, muted }: { feature: PaywallFeature; tone: s
   const f = normalizeFeature(feature)
   return (
     <XStack gap="$3" alignItems="center">
-      <Circle size={40} backgroundColor="$color3">{f.icon ?? <SizableText size="$5" color="$color9">✦</SizableText>}</Circle>
+      <Circle size={44} backgroundColor="$color9"
+        shadowColor="$color9" shadowOpacity={0.35} shadowRadius={8} shadowOffset={{ width: 0, height: 4 }}>
+        {f.icon ?? <Zap size={20} color="$color1" />}
+      </Circle>
       <YStack flex={1} gap="$0.5">
         <SizableText size="$4" fontWeight="700" color={tone}>{f.title}</SizableText>
         {f.description ? <SizableText size="$2" color={muted}>{f.description}</SizableText> : null}
@@ -105,42 +118,56 @@ function BenefitRow({ feature, tone, muted }: { feature: PaywallFeature; tone: s
   )
 }
 
-function PlanRow({ plan, selected, onPress }: { plan: PlanOption; selected: boolean; onPress: () => void }) {
+function PlanRow({ plan, selected, onPress, onImage }: { plan: PlanOption; selected: boolean; onPress: () => void; onImage: boolean }) {
+  // Over a photo, surfaces become translucent glass + text goes white so the
+  // rows read crisply on any image regardless of the app's light/dark theme.
+  const borderColor = selected ? '$color9' : onImage ? 'rgba(255,255,255,0.22)' : '$color5'
+  const backgroundColor = onImage
+    ? selected ? 'rgba(255,255,255,0.16)' : 'rgba(255,255,255,0.07)'
+    : selected ? '$color3' : '$color1'
+  const radioBorder = selected ? '$color9' : onImage ? 'rgba(255,255,255,0.5)' : '$color7'
+  const textColor = onImage ? 'white' : undefined
+  const subColor = onImage ? 'rgba(255,255,255,0.72)' : '$color11'
+  const pillBg = onImage ? 'rgba(74,222,128,0.18)' : '$green3'
+  const pillText = onImage ? '#4ade80' : '$green9'
+  const glow = selected
+    ? { shadowColor: '$color9' as const, shadowOpacity: onImage ? 0.45 : 0.25, shadowRadius: 12, shadowOffset: { width: 0, height: 4 } }
+    : null
   return (
     <XStack width="100%" padding="$3" paddingHorizontal="$3.5" borderRadius="$5" borderWidth={2}
-      borderColor={selected ? '$color9' : '$color5'} backgroundColor={selected ? '$color3' : '$color1'}
+      borderColor={borderColor} backgroundColor={backgroundColor}
       pressStyle={{ scale: 0.98, opacity: 0.9 }} animation="quick" onPress={onPress}
-      cursor="pointer" alignItems="center" gap="$3" position="relative">
+      cursor="pointer" alignItems="center" gap="$3" position="relative" {...glow}>
       {plan.popular && (
         <YStack position="absolute" top={-10} right={12} backgroundColor="$color9" paddingHorizontal="$2" paddingVertical={2} borderRadius="$10">
           <SizableText size="$1" color="white" fontWeight="700">BEST VALUE</SizableText>
         </YStack>
       )}
-      <Circle size={22} borderWidth={2} borderColor={selected ? '$color9' : '$color7'} backgroundColor={selected ? '$color9' : 'transparent'}>
+      <Circle size={22} borderWidth={2} borderColor={radioBorder} backgroundColor={selected ? '$color9' : 'transparent'}>
         {selected && <Circle size={8} backgroundColor="white" />}
       </Circle>
       <YStack flex={1} gap="$0.5">
         <XStack gap="$2" alignItems="center">
-          <SizableText size="$4" fontWeight="700">{plan.name}</SizableText>
+          <SizableText size="$4" fontWeight="700" color={textColor}>{plan.name}</SizableText>
           {plan.trial && (
-            <YStack backgroundColor="$green3" paddingHorizontal="$1.5" paddingVertical={2} borderRadius="$10">
-              <SizableText size="$1" color="$green9" fontWeight="700">{plan.trial}</SizableText>
+            <YStack backgroundColor={pillBg} paddingHorizontal="$1.5" paddingVertical={2} borderRadius="$10">
+              <SizableText size="$1" color={pillText} fontWeight="700">{plan.trial}</SizableText>
             </YStack>
           )}
         </XStack>
-        {plan.tagline ? <SizableText size="$2" color="$color10">{plan.tagline}</SizableText> : null}
+        {plan.tagline ? <SizableText size="$2" color={subColor}>{plan.tagline}</SizableText> : null}
       </YStack>
       <YStack alignItems="flex-end" gap="$0.5">
         <XStack alignItems="baseline" gap="$1">
-          <SizableText size="$5" fontWeight="800">{plan.price}</SizableText>
-          <SizableText size="$2" color="$color10">/{plan.period}</SizableText>
+          <SizableText size="$5" fontWeight="800" color={textColor}>{plan.price}</SizableText>
+          <SizableText size="$2" color={subColor}>/{plan.period}</SizableText>
         </XStack>
         {plan.savings && (
-          <YStack backgroundColor="$green3" paddingHorizontal="$1.5" paddingVertical={1} borderRadius="$10">
-            <SizableText size="$1" color="$green9" fontWeight="700">{plan.savings}</SizableText>
+          <YStack backgroundColor={pillBg} paddingHorizontal="$1.5" paddingVertical={1} borderRadius="$10">
+            <SizableText size="$1" color={pillText} fontWeight="700">{plan.savings}</SizableText>
           </YStack>
         )}
-        {plan.pricePerWeek && <SizableText size="$1" color="$color10">{plan.pricePerWeek}</SizableText>}
+        {plan.pricePerWeek && <SizableText size="$1" color={subColor}>{plan.pricePerWeek}</SizableText>}
       </YStack>
     </XStack>
   )
@@ -149,9 +176,7 @@ function PlanRow({ plan, selected, onPress }: { plan: PlanOption; selected: bool
 function ComparisonIcon({ enabled }: { enabled?: boolean }) {
   return (
     <Circle size={24} backgroundColor={enabled ? '$green3' : '$color4'}>
-      <SizableText size="$2" color={enabled ? '$green10' : '$color8'} fontWeight="700">
-        {enabled ? '✓' : '✕'}
-      </SizableText>
+      {enabled ? <Check size={16} color="$green10" /> : <X size={16} color="$color8" />}
     </Circle>
   )
 }
@@ -164,7 +189,7 @@ function TestimonialCard({ t }: { t: PaywallTestimonial }) {
         <Circle size={32} backgroundColor="$color5"><SizableText size="$2" fontWeight="700">{t.author[0]}</SizableText></Circle>
         <YStack>
           <SizableText size="$2" fontWeight="700">{t.author}</SizableText>
-          {t.meta ? <SizableText size="$1" color="$color10">{t.meta}</SizableText> : null}
+          {t.meta ? <SizableText size="$1" color="$color11">{t.meta}</SizableText> : null}
         </YStack>
       </XStack>
     </YStack>
@@ -177,7 +202,7 @@ function CreatorHeader({ c }: { c: PaywallCreator }) {
       {c.avatar && <Circle size={72} overflow="hidden" backgroundColor="$color3">{c.avatar}</Circle>}
       <YStack alignItems="center" gap="$1">
         <SizableText size="$6" fontWeight="800">{c.name}</SizableText>
-        {c.meta ? <SizableText size="$3" color="$color10">{c.meta}</SizableText> : null}
+        {c.meta ? <SizableText size="$3" color="$color11">{c.meta}</SizableText> : null}
       </YStack>
     </XStack>
   )
@@ -188,10 +213,10 @@ function TrustBadges({ badges }: { badges: { icon?: ReactNode; label: string }[]
     <XStack justifyContent="center" gap="$4" paddingTop="$1">
       {badges.map((b, i) => (
         <YStack key={i} alignItems="center" gap="$1">
-          <Circle size={28} backgroundColor="$color3">
-            {b.icon ?? <SizableText size="$2" color="$color9">✦</SizableText>}
+          <Circle size={32} backgroundColor="$color9">
+            {b.icon ?? <Zap size={14} color="$color1" />}
           </Circle>
-          <SizableText size="$1" color="$color10" textAlign="center">{b.label}</SizableText>
+          <SizableText size="$1" color="$color11" textAlign="center">{b.label}</SizableText>
         </YStack>
       ))}
     </XStack>
@@ -215,6 +240,7 @@ export function PaywallScreen({
   continueLabel = 'Continue',
   reassurance = 'Cancel anytime',
   hero,
+  backgroundImage,
   socialProof,
   countdownMinutes,
   badge,
@@ -227,17 +253,57 @@ export function PaywallScreen({
 }: PaywallScreenProps) {
   const selected = selectedPlan ?? plans.find((p) => p.popular)?.id ?? plans[0]?.id
   const countdown = useCountdown(countdownMinutes)
-  const dark = variant === 'immersive-dark'
+  const onImage = !!backgroundImage
+  const dark = variant === 'immersive-dark' || onImage
   const bg = dark ? '$color1' : '$background'
-  const tone = dark ? '$color12' : '$color11'
-  const muted = '$color10'
+  const tone = onImage ? 'white' : dark ? '$color12' : '$color11'
+  const muted = onImage ? 'rgba(255,255,255,0.72)' : '$color11'
+  const linkColor = onImage ? 'rgba(255,255,255,0.65)' : '$color8'
 
   return (
     <YStack flex={1} backgroundColor={bg}>
+      {/* Cinematic full-bleed background (RevenueCat / Superwall-style): the
+          photo, then a dual scrim — a light top wash so the close control
+          stays legible and a heavy bottom wash so the plan rows + CTA read
+          crisply over any image. */}
+      {onImage ? (
+        <>
+          <Image
+            source={{ uri: backgroundImage }}
+            position="absolute"
+            top={0}
+            left={0}
+            right={0}
+            bottom={0}
+            width="100%"
+            height="100%"
+            objectFit="cover"
+          />
+          <LinearGradient
+            colors={['rgba(0,0,0,0.55)', 'rgba(0,0,0,0.34)', 'rgba(0,0,0,0.68)', 'rgba(0,0,0,0.97)']}
+            locations={[0, 0.4, 0.72, 1]}
+            start={[0, 0]}
+            end={[0, 1]}
+            position="absolute"
+            top={0}
+            left={0}
+            right={0}
+            bottom={0}
+          />
+        </>
+      ) : null}
+
       {onClose && (
         <XStack position="absolute" top="$4" right="$4" zIndex={10}>
-          <Button size="$3" circular chromeless onPress={onClose} pressStyle={{ opacity: 0.6 }}>
-            <SizableText size="$5" color={muted}>✕</SizableText>
+          <Button
+            size="$3"
+            circular
+            chromeless
+            onPress={onClose}
+            pressStyle={{ opacity: 0.6 }}
+            {...(onImage ? { backgroundColor: 'rgba(0,0,0,0.35)' } : null)}
+          >
+            <X size={18} color={onImage ? 'white' : muted} />
           </Button>
         </XStack>
       )}
@@ -314,6 +380,7 @@ export function PaywallScreen({
                 plan={plan}
                 selected={selected === plan.id}
                 onPress={() => onSelectPlan?.(plan.id)}
+                onImage={onImage}
               />
             ))}
           </YStack>
@@ -321,16 +388,34 @@ export function PaywallScreen({
       </ScrollView>
 
       <YStack position="absolute" bottom={0} left={0} right={0} padding="$4" paddingBottom="$6"
-        backgroundColor={bg} borderTopWidth={1} borderTopColor="$color4" gap="$2.5">
+        backgroundColor={onImage ? 'transparent' : bg}
+        borderTopWidth={onImage ? 0 : 1} borderTopColor="$color4" gap="$2.5">
+        {/* Over a photo the footer fades up out of the scrim (instead of a hard
+            bordered bar) so the CTA zone stays dark + crisp while the image
+            still breathes above it. */}
+        {onImage ? (
+          <LinearGradient
+            colors={['rgba(8,8,10,0)', 'rgba(8,8,10,0.92)', 'rgba(8,8,10,1)']}
+            locations={[0, 0.24, 1]}
+            start={[0, 0]}
+            end={[0, 1]}
+            position="absolute"
+            top={-28}
+            left={0}
+            right={0}
+            bottom={0}
+          />
+        ) : null}
         <Button size="$5" backgroundColor="$color9" color="$color1" onPress={onContinue}
-          pressStyle={{ backgroundColor: '$color8', scale: 0.98 }} animation="quick" borderRadius="$10" fontWeight="700">
+          pressStyle={{ backgroundColor: '$color8', scale: 0.98 }} animation="quick" borderRadius="$10" fontWeight="700"
+          shadowColor="$color9" shadowOpacity={onImage ? 0.5 : 0} shadowRadius={18} shadowOffset={{ width: 0, height: 6 }}>
           {continueLabel}
         </Button>
-        {reassurance && <SizableText size="$2" color="$color9" textAlign="center">{reassurance}</SizableText>}
+        {reassurance && <SizableText size="$2" color={muted} textAlign="center">{reassurance}</SizableText>}
         <XStack justifyContent="center" gap="$3">
-          {onRestore && <SizableText size="$2" color="$color8" onPress={onRestore} pressStyle={{ opacity: 0.6 }}>Restore</SizableText>}
-          {onTerms && <SizableText size="$2" color="$color8" onPress={onTerms} pressStyle={{ opacity: 0.6 }}>Terms</SizableText>}
-          {onPrivacy && <SizableText size="$2" color="$color8" onPress={onPrivacy} pressStyle={{ opacity: 0.6 }}>Privacy</SizableText>}
+          {onRestore && <SizableText size="$2" color={linkColor} onPress={onRestore} pressStyle={{ opacity: 0.6 }}>Restore</SizableText>}
+          {onTerms && <SizableText size="$2" color={linkColor} onPress={onTerms} pressStyle={{ opacity: 0.6 }}>Terms</SizableText>}
+          {onPrivacy && <SizableText size="$2" color={linkColor} onPress={onPrivacy} pressStyle={{ opacity: 0.6 }}>Privacy</SizableText>}
         </XStack>
         {trustBadges && trustBadges.length > 0 && <TrustBadges badges={trustBadges} />}
         {footerSlot}

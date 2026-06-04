@@ -25,6 +25,7 @@
 import { Platform } from 'react-native'
 import Animated, { type AnimatedStyle } from 'react-native-reanimated'
 import { SizableText, XStack, YStack } from 'tamagui'
+import { ChevronLeft } from '@tamagui/lucide-icons'
 import { Avatar as OtfAvatar } from '../primitives/Avatar'
 
 // Conditional require — `expo-blur` is iOS-only quality, and not every kit
@@ -96,15 +97,15 @@ export function AppHeader({
   const leftContent = (() => {
     if (variant === 'back')
       return (
-        <SizableText
-          size="$6"
+        <XStack
           paddingRight="$2"
           onPress={onBack}
           pressStyle={{ opacity: 0.6 }}
           cursor="pointer"
+          alignItems="center"
         >
-          {'‹'}
-        </SizableText>
+          <ChevronLeft size={22} color="$color12" />
+        </XStack>
       )
     if (variant === 'profile') return <OtfAvatar uri={avatar} name={title} size="sm" />
     if (variant === 'centered') return left ?? null
@@ -139,7 +140,7 @@ export function AppHeader({
             {title}
           </SizableText>
           {subtitle && (
-            <SizableText size="$2" color="$color9" numberOfLines={1}>
+            <SizableText size="$2" color="$color11" numberOfLines={1}>
               {subtitle}
             </SizableText>
           )}

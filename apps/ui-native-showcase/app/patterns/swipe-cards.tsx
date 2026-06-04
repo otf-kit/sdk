@@ -83,7 +83,7 @@ export default function SwipeCardsShowcase() {
           </YStack>
           <YStack alignItems="center" backgroundColor="$color3" paddingHorizontal="$5" paddingVertical="$2" borderRadius="$4" minWidth={80}>
             <SizableText size="$7" fontWeight="800" color="$color11">{remaining}</SizableText>
-            <SizableText size="$1" color="$color10">Left</SizableText>
+            <SizableText size="$1" color="$color11">Left</SizableText>
           </YStack>
         </XStack>
 

@@ -58,7 +58,7 @@ export default function ChipShowcase() {
             onSelectionChange={setSelected}
             multiSelect
           />
-          <SizableText size="$2" color="$color10">
+          <SizableText size="$2" color="$color11">
             {selected.length === 0 ? 'No chips selected' : selected.join(', ')}
           </SizableText>
         </YStack>

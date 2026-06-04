@@ -1,8 +1,6 @@
 import { useState } from 'react'
 import {
   WheelPicker,
-  YStack,
-  SizableText,
   type WheelPickerOption,
 } from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
@@ -24,18 +22,6 @@ const SIZE_OPTIONS: WheelPickerOption<Size>[] = [
   { value: 'lg', label: 'Large' },
 ]
 
-interface CurrentValueProps {
-  label: string
-}
-
-function CurrentValue({ label }: CurrentValueProps) {
-  return (
-    <SizableText size="$3" color="$color11" fontWeight="600">
-      {label}
-    </SizableText>
-  )
-}
-
 export default function WheelPickerShowcase() {
   const [height, setHeight] = useState<number>(170)
   const [weight, setWeight] = useState<number>(70)
@@ -46,73 +32,63 @@ export default function WheelPickerShowcase() {
   return (
     <ShowcaseFrame
       title="WheelPicker"
-      description="Vertical scroll-wheel picker — premium iOS-flavored single-value picker for height, weight, or any enumerable scalar."
+      description="Vertical scroll-wheel — iOS-flavored with color interpolation, accent hairlines, and built-in value display. Like RulerScrubber but vertical."
       docPath="packages/ui-native/src/patterns/WheelPicker.tsx"
     >
-      <Section title="Height (cm)" hint="card variant">
-        <YStack gap="$2">
-          <CurrentValue label={`${height} cm`} />
-          <WheelPicker
-            options={HEIGHT_OPTIONS}
-            value={height}
-            onChange={setHeight}
-            unitLabel="cm"
-            variant="card"
-          />
-        </YStack>
+      <Section title="Height (cm)" hint="showValue + card variant">
+        <WheelPicker
+          options={HEIGHT_OPTIONS}
+          value={height}
+          onChange={setHeight}
+          unitLabel="cm"
+          variant="card"
+          showValue
+        />
       </Section>
 
-      <Section title="Weight (kg)" hint="plain variant">
-        <YStack gap="$2">
-          <CurrentValue label={`${weight} kg`} />
-          <WheelPicker
-            options={WEIGHT_OPTIONS}
-            value={weight}
-            onChange={setWeight}
-            unitLabel="kg"
-            variant="plain"
-          />
-        </YStack>
+      <Section title="Weight (kg)" hint="showValue + plain variant">
+        <WheelPicker
+          options={WEIGHT_OPTIONS}
+          value={weight}
+          onChange={setWeight}
+          unitLabel="kg"
+          variant="plain"
+          showValue
+        />
       </Section>
 
       <Section title="Custom enum" hint="non-numeric values">
-        <YStack gap="$2">
-          <CurrentValue label={size} />
-          <WheelPicker<Size>
-            options={SIZE_OPTIONS}
-            value={size}
-            onChange={setSize}
-            variant="card"
-          />
-        </YStack>
+        <WheelPicker<Size>
+          options={SIZE_OPTIONS}
+          value={size}
+          onChange={setSize}
+          variant="card"
+          showValue
+        />
       </Section>
 
-      <Section title="No haptic" hint="visual only — haptic={false}">
-        <YStack gap="$2">
-          <CurrentValue label={`${heightNoHaptic} cm`} />
-          <WheelPicker
-            options={HEIGHT_OPTIONS}
-            value={heightNoHaptic}
-            onChange={setHeightNoHaptic}
-            unitLabel="cm"
-            variant="card"
-            haptic={false}
-          />
-        </YStack>
+      <Section title="No haptic" hint="haptic={false}">
+        <WheelPicker
+          options={HEIGHT_OPTIONS}
+          value={heightNoHaptic}
+          onChange={setHeightNoHaptic}
+          unitLabel="cm"
+          variant="card"
+          showValue
+          haptic={false}
+        />
       </Section>
 
       <Section title="Disabled">
-        <YStack gap="$2">
-          <CurrentValue label={`${heightDisabled} cm`} />
-          <WheelPicker
-            options={HEIGHT_OPTIONS}
-            value={heightDisabled}
-            onChange={setHeightDisabled}
-            unitLabel="cm"
-            variant="card"
-            disabled
-          />
-        </YStack>
+        <WheelPicker
+          options={HEIGHT_OPTIONS}
+          value={heightDisabled}
+          onChange={setHeightDisabled}
+          unitLabel="cm"
+          variant="card"
+          showValue
+          disabled
+        />
       </Section>
     </ShowcaseFrame>
   )

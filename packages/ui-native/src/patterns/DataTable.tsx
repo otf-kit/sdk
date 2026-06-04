@@ -1,5 +1,6 @@
 import { type ReactNode, useMemo, useState } from 'react'
 import { SizableText, Separator, XStack, YStack, useMedia, styled, View } from 'tamagui'
+import { ChevronDown, ChevronUp } from '@tamagui/lucide-icons'
 
 export type DataTableColumn<T> = {
   key: string
@@ -34,15 +35,20 @@ export function StatusBadge({ status }: { status: string }) {
 
 function HeaderCell({ col, sort, onSort }: { col: DataTableColumn<any>; sort: SortState; onSort: () => void }) {
   const active = sort?.key === col.key
-  const indicator = active ? (sort!.dir === 'asc' ? ' ▲' : ' ▼') : ''
+  const sortIcon = active
+    ? sort!.dir === 'asc'
+      ? <ChevronUp size={14} color="$color11" />
+      : <ChevronDown size={14} color="$color11" />
+    : null
   return (
-    <TH key={col.key} width={col.width} flexDirection="row" alignItems="center"
+    <TH key={col.key} width={col.width} flexDirection="row" alignItems="center" gap="$1"
       cursor={col.sortable ? 'pointer' : undefined} onPress={col.sortable ? onSort : undefined}
       pressStyle={col.sortable ? { opacity: 0.7 } : undefined}>
-      <SizableText size="$2" fontWeight="700" color={active ? '$color12' : '$color9'}
+      <SizableText size="$2" fontWeight="700" color={active ? '$color12' : '$color11'}
         textTransform="uppercase" letterSpacing={0.5}>
-        {col.header}{indicator}
+        {col.header}
       </SizableText>
+      {sortIcon}
     </TH>
   )
 }
@@ -77,7 +83,7 @@ function CardRow<T extends Record<string, any>>({ row, columns, onPress }: {
         <YStack key={col.key}>
           {i > 0 && <Separator marginVertical="$1.5" borderColor="$color4" />}
           <XStack justifyContent="space-between" alignItems="center">
-            <SizableText size="$2" color="$color9" fontWeight="600">{col.header}</SizableText>
+            <SizableText size="$2" color="$color11" fontWeight="600">{col.header}</SizableText>
             {col.render ? col.render(row[col.key], row) : (
               <SizableText size="$3" color="$color11">{String(row[col.key] ?? '')}</SizableText>
             )}
@@ -109,7 +115,7 @@ export function DataTable<T extends Record<string, any>>({ columns, data, onRowP
   if (!data.length) {
     return (
       <YStack padding="$6" alignItems="center">
-        <SizableText size="$4" color="$color9">{emptyMessage}</SizableText>
+        <SizableText size="$4" color="$color11">{emptyMessage}</SizableText>
       </YStack>
     )
   }

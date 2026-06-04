@@ -56,7 +56,7 @@ export function FloatingThemePicker() {
           animation="quick"
         >
           <XStack alignItems="center" justifyContent="space-between">
-            <SizableText size="$1" fontFamily="$mono" color="$color10" textTransform="uppercase" letterSpacing={1}>
+            <SizableText size="$1" fontFamily="$mono" color="$color11" textTransform="uppercase" letterSpacing={1}>
               Theme · {palette.name}
             </SizableText>
             <Pressable
@@ -107,7 +107,7 @@ export function FloatingThemePicker() {
                     >
                       {active ? <Check size={18} color={fgOn(p.preview)} strokeWidth={3} /> : null}
                     </Circle>
-                    <SizableText size="$1" color={active ? '$color12' : '$color10'} fontWeight={active ? '700' : '500'}>
+                    <SizableText size="$1" color={active ? '$color12' : '$color11'} fontWeight={active ? '700' : '500'}>
                       {p.name}
                     </SizableText>
                   </YStack>

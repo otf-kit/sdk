@@ -21,19 +21,19 @@ export default function BrandIconsShowcase() {
         <XStack gap="$5" alignItems="center" flexWrap="wrap">
           <YStack gap="$1" alignItems="center">
             <GoogleLogo />
-            <SizableText size="$1" color="$color10">Google</SizableText>
+            <SizableText size="$1" color="$color11">Google</SizableText>
           </YStack>
           <YStack gap="$1" alignItems="center">
             <AppleLogo />
-            <SizableText size="$1" color="$color10">Apple</SizableText>
+            <SizableText size="$1" color="$color11">Apple</SizableText>
           </YStack>
           <YStack gap="$1" alignItems="center">
             <GitHubLogo color="#fff" />
-            <SizableText size="$1" color="$color10">GitHub</SizableText>
+            <SizableText size="$1" color="$color11">GitHub</SizableText>
           </YStack>
           <YStack gap="$1" alignItems="center">
             <MicrosoftLogo />
-            <SizableText size="$1" color="$color10">Microsoft</SizableText>
+            <SizableText size="$1" color="$color11">Microsoft</SizableText>
           </YStack>
         </XStack>
       </Section>
@@ -43,27 +43,33 @@ export default function BrandIconsShowcase() {
           {[16, 20, 24, 32, 48].map((size) => (
             <YStack key={size} gap="$1" alignItems="center">
               <GoogleLogo size={size} />
-              <SizableText size="$1" color="$color10">{size}px</SizableText>
+              <SizableText size="$1" color="$color11">{size}px</SizableText>
             </YStack>
           ))}
         </XStack>
       </Section>
 
       <Section title="Apple — light vs dark">
+        {/* Absolute light/dark swatches — NOT $color1/$color12 (those are
+            theme-relative, so the "Light bg" swatch went black in dark theme
+            and the Apple vanished). Fixed white + near-black demonstrate the
+            real contrast the logo must hold on either surface. */}
         <XStack gap="$4" alignItems="center" flexWrap="wrap">
           <YStack
-            padding="$3" borderRadius="$3" backgroundColor="$color1"
-            alignItems="center" gap="$1"
+            padding="$4" borderRadius="$3" backgroundColor="#FFFFFF"
+            borderWidth={1} borderColor="$color5"
+            alignItems="center" gap="$2" minWidth={96}
           >
-            <AppleLogo size={32} color="#000" />
-            <SizableText size="$1" color="$color10">Light bg</SizableText>
+            <AppleLogo size={32} color="#000000" />
+            <SizableText size="$1" color="#6B6B70">Light bg</SizableText>
           </YStack>
           <YStack
-            padding="$3" borderRadius="$3" backgroundColor="$color12"
-            alignItems="center" gap="$1"
+            padding="$4" borderRadius="$3" backgroundColor="#0E0F1A"
+            borderWidth={1} borderColor="$color5"
+            alignItems="center" gap="$2" minWidth={96}
           >
-            <AppleLogo size={32} color="#fff" />
-            <SizableText size="$1" color="$color1">Dark bg</SizableText>
+            <AppleLogo size={32} color="#FFFFFF" />
+            <SizableText size="$1" color="#9DA2C0">Dark bg</SizableText>
           </YStack>
         </XStack>
       </Section>

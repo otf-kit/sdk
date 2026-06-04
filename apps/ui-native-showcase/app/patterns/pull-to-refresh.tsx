@@ -29,7 +29,7 @@ function ListRow({ item }: { item: Item }) {
       </Circle>
       <YStack flex={1} gap="$0.5">
         <SizableText size="$3" fontWeight="600">{item.title}</SizableText>
-        <SizableText size="$2" color="$color10">{item.meta}</SizableText>
+        <SizableText size="$2" color="$color11">{item.meta}</SizableText>
       </YStack>
     </XStack>
   )
@@ -95,13 +95,13 @@ export default function PullToRefreshShowcase() {
           <PullToRefresh refreshing={false} onRefresh={() => {}}>
             <YStack flex={1} alignItems="center" justifyContent="center" padding="$4" gap="$1">
               <SizableText size="$4" fontWeight="600" color="$color12">No activity yet</SizableText>
-              <SizableText size="$2" color="$color10">Pull down to check again.</SizableText>
+              <SizableText size="$2" color="$color11">Pull down to check again.</SizableText>
             </YStack>
           </PullToRefresh>
         </YStack>
       </Section>
 
-      <SizableText size="$2" color="$color10">
+      <SizableText size="$2" color="$color11">
         Tip: gesture only triggers on native. On web the wrapper renders a normal scroll view.
       </SizableText>
     </ShowcaseFrame>

@@ -10,23 +10,35 @@ export default function ToastShowcase() {
       description="Transient banner — call toast() from anywhere, or the useOtfToast() hook inside React. Wrap your tree in OtfToastProvider once."
       docPath="packages/ui-native/src/interface/OtfToast.tsx"
     >
+      {/* Use explicit variant/color props — theme="green/red/yellow" on OtfButton
+          doesn't work because our variant system uses explicit backgroundColor
+          overrides that win over Tamagui's theme tinting. */}
       <Section title="Variants" hint="Auto-dismiss after 3s">
         <XStack gap="$2" flexWrap="wrap">
-          <OtfButton onPress={() => toast('Heads up.')}>Default</OtfButton>
           <OtfButton
-            theme="green"
+            variant="default"
+            onPress={() => toast('Heads up.')}
+          >
+            Default
+          </OtfButton>
+          <OtfButton
+            variant="primary"
+            backgroundColor="#16a34a"
+            pressStyle={{ backgroundColor: '#15803d', scale: 0.97 }}
             onPress={() => toast('Profile saved.', 'success')}
           >
             Success
           </OtfButton>
           <OtfButton
-            theme="red"
+            variant="destructive"
             onPress={() => toast('Could not save profile.', 'error')}
           >
             Error
           </OtfButton>
           <OtfButton
-            theme="yellow"
+            variant="primary"
+            backgroundColor="#d97706"
+            pressStyle={{ backgroundColor: '#b45309', scale: 0.97 }}
             onPress={() => toast('Connection unstable.', 'warning')}
           >
             Warning
@@ -37,6 +49,9 @@ export default function ToastShowcase() {
       <Section title="With message body">
         <XStack gap="$2" flexWrap="wrap">
           <OtfButton
+            variant="primary"
+            backgroundColor="#16a34a"
+            pressStyle={{ backgroundColor: '#15803d', scale: 0.97 }}
             onPress={() =>
               toast('Workout logged', {
                 variant: 'success',
@@ -47,6 +62,7 @@ export default function ToastShowcase() {
             Success + body
           </OtfButton>
           <OtfButton
+            variant="destructive"
             onPress={() =>
               toast('Sync failed', {
                 variant: 'error',
@@ -62,11 +78,13 @@ export default function ToastShowcase() {
       <Section title="Custom duration">
         <XStack gap="$2" flexWrap="wrap">
           <OtfButton
+            variant="outlined"
             onPress={() => toast('Quick toast', { duration: 1000 })}
           >
             1s
           </OtfButton>
           <OtfButton
+            variant="outlined"
             onPress={() => toast('Sticky toast', { duration: 8000 })}
           >
             8s
@@ -76,13 +94,16 @@ export default function ToastShowcase() {
 
       <Section title="useOtfToast() hook" hint="Same API, scoped to React tree">
         <YStack gap="$2">
-          <SizableText size="$2" color="$color10">
+          <SizableText size="$2" color="$color11">
             Inside components, prefer the hook — it doesn&apos;t depend on the
             module-level singleton.
           </SizableText>
           <XStack gap="$2" flexWrap="wrap">
-            <OtfButton onPress={() => show('Hook fired')}>show()</OtfButton>
+            <OtfButton variant="default" onPress={() => show('Hook fired')}>show()</OtfButton>
             <OtfButton
+              variant="primary"
+              backgroundColor="#16a34a"
+              pressStyle={{ backgroundColor: '#15803d', scale: 0.97 }}
               onPress={() =>
                 show('Hook fired with body', {
                   variant: 'success',

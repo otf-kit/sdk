@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import { SizableText, XStack, YStack } from 'tamagui'
+import { Circle, SizableText, XStack, YStack } from 'tamagui'
 
 export type FinanceMetric = {
   label: string
@@ -54,13 +54,13 @@ export function FinanceDashboard({
       <XStack justifyContent="space-between" alignItems="center" paddingTop="$4">
         <YStack gap="$1">
           <SizableText size="$6" fontWeight="700">{title}</SizableText>
-          {rangeLabel ? <SizableText size="$2" color="$color9">{rangeLabel}</SizableText> : null}
+          {rangeLabel ? <SizableText size="$2" color="$color11">{rangeLabel}</SizableText> : null}
         </YStack>
         {topRight}
       </XStack>
 
       <YStack backgroundColor="$color1" borderRadius="$7" padding="$4" gap="$2" borderWidth={1} borderColor="$color4">
-        <SizableText size="$3" color="$color10">{balanceLabel}</SizableText>
+        <SizableText size="$3" color="$color11">{balanceLabel}</SizableText>
         <SizableText size="$11" fontWeight="800">{balance}</SizableText>
         {chartSlot ? <YStack marginTop="$2">{chartSlot}</YStack> : null}
       </YStack>
@@ -69,9 +69,17 @@ export function FinanceDashboard({
         <XStack gap="$3" flexWrap="wrap">
           {metrics.map((metric) => (
             <YStack key={metric.label} flex={1} minWidth={120} backgroundColor="$color1" borderRadius="$6" padding="$3" gap="$1" borderWidth={1} borderColor="$color4">
-              <SizableText size="$2" color="$color10">{metric.label}</SizableText>
+              <SizableText size="$2" color="$color11">{metric.label}</SizableText>
               <SizableText size="$7" fontWeight="800">{metric.value}</SizableText>
-              {metric.change ? <SizableText size="$2" color="$color9">{metric.change}</SizableText> : null}
+              {metric.change ? (
+                <SizableText
+                  size="$2"
+                  fontWeight="600"
+                  color={metric.change.startsWith('+') ? '$green9' : metric.change.startsWith('-') ? '$red9' : '$color11'}
+                >
+                  {metric.change}
+                </SizableText>
+              ) : null}
             </YStack>
           ))}
         </XStack>
@@ -95,7 +103,7 @@ export function FinanceDashboard({
               onPress={action.onPress}
             >
               <YStack width={36} height={36} borderRadius="$10" backgroundColor="$color3" alignItems="center" justifyContent="center">
-                {action.icon ?? <SizableText size="$4">•</SizableText>}
+                {action.icon ?? <Circle size={7} backgroundColor="$color9" />}
               </YStack>
               <SizableText size="$2" textAlign="center">{action.label}</SizableText>
             </YStack>
@@ -126,7 +134,7 @@ export function FinanceDashboard({
                   ) : null}
                   <YStack flex={1}>
                     <SizableText size="$3" fontWeight="600">{row.title}</SizableText>
-                    {row.subtitle ? <SizableText size="$2" color="$color10">{row.subtitle}</SizableText> : null}
+                    {row.subtitle ? <SizableText size="$2" color="$color11">{row.subtitle}</SizableText> : null}
                   </YStack>
                   {row.value ? <SizableText size="$3" color="$color11">{row.value}</SizableText> : null}
                 </XStack>

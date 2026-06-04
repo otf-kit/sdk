@@ -3,7 +3,7 @@ import { Platform, View } from 'react-native'
 import { Tabs, usePathname } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
 import * as SplashScreen from 'expo-splash-screen'
-import { SafeAreaInsetsContext } from 'react-native-safe-area-context'
+import { SafeAreaInsetsContext, SafeAreaProvider } from 'react-native-safe-area-context'
 import {
   useFonts,
   PlusJakartaSans_600SemiBold,
@@ -19,6 +19,8 @@ import {
 import { JetBrainsMono_400Regular } from '@expo-google-fonts/jetbrains-mono'
 import {
   OTFProvider,
+  OtfToastProvider,
+  DialogProvider,
   Theme,
   createFont,
   createOTFConfig,
@@ -85,26 +87,33 @@ SplashScreen.preventAutoHideAsync().catch(() => {})
 // for inline tabular/label use (no mono createFont — it isn't a heading/body
 // role). Native resolves the @expo-google-fonts named weights; web resolves the
 // CSS families loaded by InjectWebStyles.
+// String aliases (sm/md/lg) so components using semantic sizes — e.g. Button
+// size="md" — resolve against the font scale instead of warning "No font size
+// found md" on every render.
 const SIZE = {
   1: 11, 2: 12, 3: 13, 4: 14, 5: 15, 6: 16, 7: 18, 8: 20,
   9: 22, 10: 28, 11: 36, 12: 48, 13: 56, 14: 64, 15: 72, 16: 80,
+  sm: 14, md: 15, lg: 16,
   true: 15,
 }
 const LINE_HEIGHT = {
   1: 16, 2: 18, 3: 20, 4: 22, 5: 23, 6: 24, 7: 26, 8: 28,
   9: 30, 10: 36, 11: 44, 12: 56, 13: 64, 14: 72, 15: 80, 16: 88,
+  sm: 20, md: 22, lg: 24,
   true: 23,
 }
 const WEIGHT = {
   1: '400', 2: '400', 3: '400', 4: '500', 5: '600', 6: '600',
   7: '700', 8: '700', 9: '700', 10: '800', 11: '800', 12: '800',
   13: '800', 14: '800', 15: '800', 16: '800',
+  sm: '600', md: '600', lg: '700',
   true: '400',
 }
 const LETTER_SPACING = {
   1: 0, 2: -0.1, 3: -0.2, 4: -0.3, 5: -0.4, 6: -0.4, 7: -0.5,
   8: -0.5, 9: -0.6, 10: -0.7, 11: -0.8, 12: -0.9, 13: -1, 14: -1.2,
   15: -1.4, 16: -1.6,
+  sm: -0.2, md: -0.3, lg: -0.4,
   true: 0,
 }
 
@@ -209,9 +218,35 @@ function ThemedTabsShell() {
   const { palette, mode } = useShowcaseTheme()
   const isDark = mode === 'dark'
   const accent = accentFor(palette, mode)
+  const inactiveColor = isDark ? '#525252' : '#a3a3a3'
+
+  // Use `focused` directly rather than relying on React Navigation's `color`
+  // prop — on Android the color prop sometimes doesn't reflect the initial
+  // active tab correctly on first render, causing all tabs to look inactive
+  // until the user taps one. Deriving color + strokeWidth from `focused`
+  // in the icon callback is the reliable cross-platform approach (same as
+  // fitness-kit's tabIcon helper).
+  function tabIcon(Icon: typeof Layers) {
+    return ({ focused }: { focused: boolean }) => (
+      <View style={{ alignItems: 'center', gap: 3 }}>
+        <Icon
+          size={22}
+          color={focused ? accent : inactiveColor}
+          strokeWidth={focused ? 2.5 : 1.8}
+        />
+        {/* Accent dot — unambiguous active indicator on all platforms */}
+        <View style={{
+          width: 4, height: 4, borderRadius: 2,
+          backgroundColor: focused ? accent : 'transparent',
+        }} />
+      </View>
+    )
+  }
 
   return (
     <Theme name={themeNameFor(palette.id, mode)}>
+      <OtfToastProvider>
+      <DialogProvider>
       <ThemedBodyBg />
       <View style={{ flex: 1 }}>
       <Tabs
@@ -223,27 +258,29 @@ function ThemedTabsShell() {
                 backgroundColor: isDark ? '#0a0a0a' : '#f5f5f5',
                 borderTopColor: isDark ? '#1f1f1f' : '#e5e5e5',
                 borderTopWidth: 0.5,
-                height: 56,
-                paddingBottom: 6,
+                height: 60,
+                paddingBottom: 4,
                 paddingTop: 6,
               },
           tabBarActiveTintColor: accent,
-          tabBarInactiveTintColor: isDark ? '#525252' : '#a3a3a3',
+          tabBarInactiveTintColor: inactiveColor,
           tabBarLabelStyle: { fontSize: 11, fontWeight: '600' },
+          // Disable Android's default ripple/indicator — we draw our own dot
+          tabBarActiveBackgroundColor: 'transparent',
         }}
       >
         <Tabs.Screen
           name="index"
           options={{
             title: 'Components',
-            tabBarIcon: ({ color, size }) => <Layers color={color as never} size={size} />,
+            tabBarIcon: tabIcon(Layers),
           }}
         />
         <Tabs.Screen
           name="settings"
           options={{
             title: 'Settings',
-            tabBarIcon: ({ color, size }) => <Settings color={color as never} size={size} />,
+            tabBarIcon: tabIcon(Settings),
           }}
         />
         {/* Hide all detail routes from the tab bar (still navigable via Link). */}
@@ -254,6 +291,8 @@ function ThemedTabsShell() {
       </Tabs>
       <FloatingThemePicker />
       </View>
+      </DialogProvider>
+      </OtfToastProvider>
     </Theme>
   )
 }
@@ -284,15 +323,22 @@ export default function RootLayout() {
   if (!ready) return null
 
   return (
-    <OTFProvider config={config} defaultTheme="dark">
-      <InjectWebStyles />
-      <ShowcaseThemeProvider>
-        <WebSafeAreaShim>
-          <ParentRouteSync />
-          <ThemedTabsShell />
-          <StatusBar style="auto" />
-        </WebSafeAreaShim>
-      </ShowcaseThemeProvider>
-    </OTFProvider>
+    // SafeAreaProvider must wrap everything on native so useSafeAreaInsets()
+    // returns real device values (dynamic island, home indicator, etc.).
+    // WebSafeAreaShim overrides the context on web with a static mock, so
+    // ordering is: SafeAreaProvider (native real values) → WebSafeAreaShim
+    // (web override) → consumers.
+    <SafeAreaProvider>
+      <OTFProvider config={config} defaultTheme="dark">
+        <InjectWebStyles />
+        <ShowcaseThemeProvider>
+          <WebSafeAreaShim>
+            <ParentRouteSync />
+            <ThemedTabsShell />
+            <StatusBar style="auto" />
+          </WebSafeAreaShim>
+        </ShowcaseThemeProvider>
+      </OTFProvider>
+    </SafeAreaProvider>
   )
 }

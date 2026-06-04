@@ -1,5 +1,6 @@
 import {
   ImmersiveMediaScreen,
+  Image,
   YStack,
   XStack,
   SizableText,
@@ -12,6 +13,7 @@ import {
   type ImmersiveMediaAction,
 } from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
+import { SCENES, PEOPLE } from '../../lib/fixtures'
 
 function FrameBox({ children }: { children: React.ReactNode }) {
   return (
@@ -27,15 +29,9 @@ function FrameBox({ children }: { children: React.ReactNode }) {
   )
 }
 
-function GradientMedia({ from, to }: { from: string; to: string }) {
-  return (
-    <YStack
-      flex={1}
-      style={{
-        background: `linear-gradient(180deg, ${from} 0%, ${to} 100%)`,
-      }}
-    />
-  )
+// Real R2 images — full-bleed via Tamagui Image (same pattern as MediaCard/LoginScreen)
+function PhotoMedia({ uri }: { uri: string }) {
+  return <Image source={{ uri }} width="100%" height="100%" objectFit="cover" />
 }
 
 const REEL_ACTIONS: ImmersiveMediaAction[] = [
@@ -52,13 +48,13 @@ export default function ImmersiveMediaScreenShowcase() {
       description="Full-bleed media with floating overlay actions — reels, stories, lookbooks."
       docPath="packages/ui-native/src/patterns/ImmersiveMediaScreen.tsx"
     >
-      <Section title="Reel variant" hint="default — actions on right rail">
+      <Section title="Reel variant" hint="real photo — actions on right rail">
         <FrameBox>
           <ImmersiveMediaScreen
             variant="reel"
-            media={<GradientMedia from="#0f172a" to="#7c3aed" />}
-            title="Sarah Chen"
-            subtitle="Sunset over the Pacific — handheld run, no edits."
+            media={<PhotoMedia uri={SCENES.find(s => s.id === 'coast')!.image} />}
+            title={PEOPLE.find(p => p.id === 'sarah')!.name}
+            subtitle="Big Sur — handheld run, no edits."
             topLeft={<ArrowLeft size={22} color="white" />}
             topRight={<MoreHorizontal size={22} color="white" />}
             actions={REEL_ACTIONS}
@@ -66,12 +62,12 @@ export default function ImmersiveMediaScreenShowcase() {
         </FrameBox>
       </Section>
 
-      <Section title="Story variant" hint="with reply input at bottom">
+      <Section title="Story variant" hint="progress bar + reply input">
         <FrameBox>
           <ImmersiveMediaScreen
             variant="story"
-            media={<GradientMedia from="#f97316" to="#ec4899" />}
-            title="Alex Rivera"
+            media={<PhotoMedia uri={SCENES.find(s => s.id === 'mountains')!.image} />}
+            title={PEOPLE.find(p => p.id === 'alex')!.name}
             subtitle="2h ago"
             topLeft={<ArrowLeft size={22} color="white" />}
             topCenter={
@@ -91,7 +87,7 @@ export default function ImmersiveMediaScreenShowcase() {
         <FrameBox>
           <ImmersiveMediaScreen
             variant="sheet"
-            media={<GradientMedia from="#10b981" to="#0891b2" />}
+            media={<PhotoMedia uri={SCENES.find(s => s.id === 'forest')!.image} />}
             title="Pottery Workshop"
             subtitle="Maker Lab · Sun 1:00 PM"
             topLeft={<ArrowLeft size={22} color="white" />}

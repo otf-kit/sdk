@@ -1,10 +1,10 @@
 import {
   Card,
+  OtfButton,
   YStack,
   XStack,
   H4,
   Paragraph,
-  Button,
   SizableText,
   Heart,
 } from '@otfdashkit/ui-native'
@@ -27,7 +27,7 @@ export default function CardShowcase() {
           </Card.Header>
           <Card.Footer padded>
             <XStack flex={1} />
-            <Button size="$3">Start</Button>
+            <OtfButton variant="primary" size="$3">Start</OtfButton>
           </Card.Footer>
         </Card>
       </Section>
@@ -36,15 +36,15 @@ export default function CardShowcase() {
         <YStack gap="$3">
           <Card padded bordered size="$2">
             <SizableText size="$3" fontWeight="600">Compact card</SizableText>
-            <SizableText size="$2" color="$color10">Tight padding for dense lists.</SizableText>
+            <SizableText size="$2" color="$color11">Tight padding for dense lists.</SizableText>
           </Card>
           <Card padded bordered size="$4">
             <SizableText size="$5" fontWeight="600">Standard card</SizableText>
-            <SizableText size="$3" color="$color10">Default padding for content rows.</SizableText>
+            <SizableText size="$3" color="$color11">Default padding for content rows.</SizableText>
           </Card>
           <Card padded bordered size="$6">
             <SizableText size="$7" fontWeight="700">Hero card</SizableText>
-            <SizableText size="$4" color="$color10">Generous padding for landing-page tiles.</SizableText>
+            <SizableText size="$4" color="$color11">Generous padding for landing-page tiles.</SizableText>
           </Card>
         </YStack>
       </Section>
@@ -53,11 +53,11 @@ export default function CardShowcase() {
         <XStack gap="$3" flexWrap="wrap">
           <Card padded bordered elevate flex={1} minWidth={200}>
             <SizableText size="$4" fontWeight="600">Elevated</SizableText>
-            <SizableText size="$2" color="$color10">Subtle shadow lift.</SizableText>
+            <SizableText size="$2" color="$color11">Subtle shadow lift.</SizableText>
           </Card>
           <Card padded bordered flex={1} minWidth={200}>
             <SizableText size="$4" fontWeight="600">Flat</SizableText>
-            <SizableText size="$2" color="$color10">Border only — no shadow.</SizableText>
+            <SizableText size="$2" color="$color11">Border only — no shadow.</SizableText>
           </Card>
         </XStack>
       </Section>
@@ -69,7 +69,7 @@ export default function CardShowcase() {
               <H4>Daily streak</H4>
               <Paragraph theme="alt2" size="$2">14 days</Paragraph>
             </YStack>
-            <Button icon={Heart} size="$3" circular accessibilityLabel="Save streak" />
+            <OtfButton variant="outlined" size="$3" icon={<Heart size={16} />} circular accessibilityLabel="Save streak" />
           </XStack>
         </Card>
       </Section>

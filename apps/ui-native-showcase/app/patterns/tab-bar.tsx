@@ -41,7 +41,7 @@ export default function TabBarShowcase() {
       <Section title="Default — 4 tabs" hint={`Active: ${primary}`}>
         <TabBarFrame>
           <YStack height={120} alignItems="center" justifyContent="center">
-            <SizableText size="$3" color="$color10">
+            <SizableText size="$3" color="$color11">
               Body content for {primary}
             </SizableText>
           </YStack>
@@ -61,7 +61,7 @@ export default function TabBarShowcase() {
       <Section title="With badges" hint={`Active: ${withBadges}`}>
         <TabBarFrame>
           <YStack height={120} alignItems="center" justifyContent="center">
-            <SizableText size="$3" color="$color10">
+            <SizableText size="$3" color="$color11">
               Inbox + alerts surface unread counts via the icon badge.
             </SizableText>
           </YStack>
@@ -173,7 +173,7 @@ export default function TabBarShowcase() {
             <SizableText size="$3" color="$color12">
               Tab content swaps with the bar selection.
             </SizableText>
-            <SizableText size="$2" color="$color10">
+            <SizableText size="$2" color="$color11">
               Tap the icons below to update both the title bar and this body.
             </SizableText>
           </YStack>

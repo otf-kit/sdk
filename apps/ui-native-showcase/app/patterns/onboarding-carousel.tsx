@@ -7,11 +7,37 @@ import {
   Heart,
   Bell,
   Lock,
-  Sparkles,
+  Sprout,
+  Flame,
   TrendingUp,
 } from '@otfdashkit/ui-native'
 import type { OnboardingStep } from '@otfdashkit/ui-native'
 import { ShowcaseFrame, Section } from '../../components/ShowcaseFrame'
+import { SCENES } from '../../lib/fixtures'
+
+const sceneImg = (id: string) => SCENES.find((s) => s.id === id)!.image
+
+// Full-bleed photo onboarding — the premium "first impression" pattern.
+const IMMERSIVE_STEPS: OnboardingStep[] = [
+  {
+    eyebrow: 'Welcome',
+    title: 'Find your\nquiet place',
+    description: 'Thousands of trails, stays, and escapes — curated for the way you actually unwind.',
+    image: sceneImg('forest'),
+  },
+  {
+    eyebrow: 'Discover',
+    title: 'Go where\nthe map ends',
+    description: 'Hand-picked routes from coastlines to ridgelines. Save the ones that call to you.',
+    image: sceneImg('mountains'),
+  },
+  {
+    eyebrow: 'Begin',
+    title: 'Your next\nchapter awaits',
+    description: 'Book in two taps. We handle the logistics so you can just go.',
+    image: sceneImg('coast'),
+  },
+]
 
 const DEFAULT_STEPS: OnboardingStep[] = [
   {
@@ -42,7 +68,7 @@ const CALM_STEPS: OnboardingStep[] = [
     eyebrow: 'Daily',
     title: 'One small habit',
     description: 'Five minutes of movement. The rest follows.',
-    icon: <Sparkles size={56} color="$pink9" />,
+    icon: <Sprout size={56} color="$pink9" />,
   },
   {
     eyebrow: 'Always',
@@ -84,7 +110,7 @@ const TILT_STEPS: OnboardingStep[] = [
     hero: (
       <YStack alignItems="center" gap="$2">
         <Circle size={88} backgroundColor="$color9" alignItems="center" justifyContent="center">
-          <Sparkles size={40} color="white" />
+          <Flame size={40} color="white" />
         </Circle>
       </YStack>
     ),
@@ -113,6 +139,18 @@ export default function OnboardingCarouselShowcase() {
       description="Multi-step intro with progress dots and primary CTA. Six variants — default, calm-gradient, card-tilt, editorial, selection-step, permission-prompt."
       docPath="packages/ui-native/src/patterns/OnboardingCarousel.tsx"
     >
+      <Section title="Immersive" hint="full-bleed photo, dark scrim, low-anchored copy">
+        <ScreenFrame>
+          <OnboardingCarousel
+            variant="immersive"
+            steps={IMMERSIVE_STEPS}
+            onSkip={() => {}}
+            onComplete={() => {}}
+            completeLabel="Start exploring"
+          />
+        </ScreenFrame>
+      </Section>
+
       <Section title="Default" hint="circular hero, centered title">
         <ScreenFrame>
           <OnboardingCarousel

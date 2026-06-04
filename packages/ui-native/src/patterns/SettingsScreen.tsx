@@ -1,4 +1,6 @@
-import { Separator, SizableText, Switch, XStack, YStack } from 'tamagui'
+import { Separator, SizableText, XStack, YStack } from 'tamagui'
+import { ChevronRight } from '@tamagui/lucide-icons'
+import { OtfSwitch } from '../primitives/OtfSwitch'
 import type { ReactNode } from 'react'
 
 export type SettingsItem = {
@@ -45,22 +47,18 @@ function SettingsItemRow({ item }: { item: SettingsItem }) {
           {item.title}
         </SizableText>
         {item.subtitle && (
-          <SizableText size="$2" color="$color9">
+          <SizableText size="$2" color="$color11">
             {item.subtitle}
           </SizableText>
         )}
       </YStack>
       {item.type === 'toggle' ? (
-        <Switch size="$3" checked={item.value} onCheckedChange={item.onValueChange}>
-          <Switch.Thumb animation="quick" />
-        </Switch>
+        <OtfSwitch size="$3" checked={item.value} onCheckedChange={item.onValueChange} />
       ) : item.right ? (
         item.right
       ) : (
         item.onPress && (
-          <SizableText size="$5" color="$color8">
-            ›
-          </SizableText>
+          <ChevronRight size={18} color="$color8" />
         )
       )}
     </XStack>
@@ -78,7 +76,7 @@ export function SettingsScreen({ sections, header }: SettingsScreenProps) {
               <SizableText
                 size="$2"
                 fontWeight="600"
-                color="$color9"
+                color="$color11"
                 paddingHorizontal="$4"
                 paddingBottom="$2"
                 textTransform="uppercase"
