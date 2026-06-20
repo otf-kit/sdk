@@ -1,5 +1,7 @@
 <div align="center">
 
+<a href="https://otf-kit.dev"><img src="https://cdn.otf-kit.dev/readme/hero.png" alt="OTF — one component API for web, iOS, and Android" width="100%" /></a>
+
 # otf-ui
 
 ### One component API for web, iOS, and Android.
@@ -32,7 +34,7 @@ The tool that spun up your MVP — Lovable, Bolt, v0, Replit, Rork — keeps reg
 ## Features
 
 - 🧩 **One API, three platforms** — identical component names and props on web, iOS, and Android. Learn it once.
-- 📦 **200+ components** — 137 web (Button → Dialog → DataTable → charts → a Tiptap editor) + 80 native primitives, all keyboard- and screen-reader-accessible.
+- 📦 **215+ components** — 137 web (Button → Dialog → DataTable → charts → a Tiptap editor) + 80 native primitives, all keyboard- and screen-reader-accessible.
 - 🎨 **17 themes, zero config** — flip a single attribute. Shared design tokens are CSS variables on web and native tokens on mobile.
 - ⚡ **Copy-paste *or* `npm install`** — `pnpm add @otfdashkit/ui`, or copy the source via the CLI registry. Your code either way.
 - 🪶 **Wrap, don't reinvent** — opinionated APIs on top of battle-tested primitives, not yet-another-from-scratch widget set.
@@ -42,6 +44,8 @@ The tool that spun up your MVP — Lovable, Bolt, v0, Replit, Rork — keeps reg
 ## See it live
 
 Everything below is open and clickable — no signup, no install required to look around.
+
+<a href="https://otf-kit.dev" target="_blank"><img src="https://cdn.otf-kit.dev/readme/motion.gif" alt="OTF — the live experience at otf-kit.dev" width="100%" /></a>
 
 <table>
   <tr>
@@ -72,7 +76,7 @@ Everything below is open and clickable — no signup, no install required to loo
   </tr>
 </table>
 
-Prefer browsing by category? The [**component gallery**](https://otf-kit.dev/components) has all 200+ with copy-paste install per component.
+Prefer browsing by category? The [**component gallery**](https://otf-kit.dev/components) has all 215+ with copy-paste install per component.
 
 ## Quick start
 
@@ -163,7 +167,20 @@ Join the **[Discord](https://discord.gg/gpXyu7SqNZ)** for help, feature requests
 
 ## Building a whole app?
 
-The SDK is free, MIT, and stands entirely on its own — that's the point. If you'd rather not wire the backend from scratch, OTF also offers optional **full-stack kits** (a SaaS dashboard, a fitness app, a booking app): the same SDK dropped into a complete, owned starting point — auth, database, payments, deploy scripts, and an `ai/` config your agent reads to extend it. Live demos and details at **[otf-kit.dev](https://otf-kit.dev)**.
+The SDK is free, MIT, and stands entirely on its own — that's the point. If you'd rather not wire the backend from scratch, OTF also offers optional **full-stack kits** (a SaaS dashboard, a fitness app, a booking app): the same SDK dropped into a complete, owned starting point — auth, database, payments, deploy scripts, and an `ai/` config your agent reads to extend it.
+
+<table>
+  <tr>
+    <td align="center" width="58%"><a href="https://saas.otf-kit.dev" target="_blank"><img src="https://cdn.otf-kit.dev/readme/kits-web.png" alt="OTF SaaS Dashboard kit — web" width="100%" /></a></td>
+    <td align="center" width="42%"><a href="https://fitness-preview.otf-kit.dev" target="_blank"><img src="https://cdn.otf-kit.dev/readme/kits-mobile.png" alt="OTF Fitness kit — iOS, Android, and web from one codebase" width="100%" /></a></td>
+  </tr>
+  <tr>
+    <td align="center"><sub>SaaS Dashboard — live at <a href="https://saas.otf-kit.dev">saas.otf-kit.dev</a></sub></td>
+    <td align="center"><sub>Fitness — iOS · Android · web, one codebase, at <a href="https://fitness-preview.otf-kit.dev">fitness-preview.otf-kit.dev</a></sub></td>
+  </tr>
+</table>
+
+Live demos and details at **[otf-kit.dev](https://otf-kit.dev)**.
 
 ## License
 
