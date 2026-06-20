@@ -132,6 +132,23 @@ otf-ui is designed to be *read* by the agents you already code with. Every compo
 
 …produces real, accessible components with correct props, because the model can read the source and the prompt library.
 
+### Agent Skills
+
+Prefer to drive the SDK straight from your coding agent? OTF ships installable
+[**Agent Skills**](https://agentskills.io) — drop them into Claude Code, Cursor, Codex,
+and 70+ skills-compatible agents:
+
+```bash
+npx skills add otf-kit/skills
+```
+
+- **otf-cross-platform-ui** — one component API, web + native
+- **otf-ui** — web components (`@otfdashkit/ui`)
+- **otf-ui-native** — native components (`@otfdashkit/ui-native`)
+- **otf-tokens** — theming (`@otfdashkit/tokens`)
+
+Source: [**github.com/otf-kit/skills**](https://github.com/otf-kit/skills).
+
 ## What's in the box
 
 | Package | Platform | What |
