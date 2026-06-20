@@ -45,7 +45,7 @@ The tool that spun up your MVP — Lovable, Bolt, v0, Replit, Rork — keeps reg
 
 Everything below is open and clickable — no signup, no install required to look around.
 
-<a href="https://otf-kit.dev" target="_blank"><img src="https://cdn.otf-kit.dev/readme/motion.gif" alt="OTF — the live experience at otf-kit.dev" width="100%" /></a>
+<a href="https://otf-kit.dev/components" target="_blank"><img src="https://cdn.otf-kit.dev/readme/components-motion.gif" alt="Scrolling the live OTF component gallery — web and native components, one API" width="100%" /></a>
 
 <table>
   <tr>
