@@ -142,6 +142,8 @@ and 70+ skills-compatible agents:
 npx skills add otf-kit/skills
 ```
 
+[![skills.sh](https://skills.sh/b/otf-kit/skills)](https://www.skills.sh/otf-kit/skills)
+
 - **otf-cross-platform-ui** — one component API, web + native
 - **otf-ui** — web components (`@otfdashkit/ui`)
 - **otf-ui-native** — native components (`@otfdashkit/ui-native`)
