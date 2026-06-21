@@ -135,7 +135,7 @@ otf-ui is designed to be *read* by the agents you already code with. Every compo
 ### Agent Skills
 
 Prefer to drive the SDK straight from your coding agent? OTF ships installable
-[**Agent Skills**](https://agentskills.io) — drop them into Claude Code, Cursor, Codex,
+[**Agent Skills**](https://www.skills.sh/otf-kit/skills) — drop them into Claude Code, Cursor, Codex,
 and 70+ skills-compatible agents:
 
 ```bash
