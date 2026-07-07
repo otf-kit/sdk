@@ -36,3 +36,6 @@ kits/*/TODO.md
 # This dir was used by an earlier JSON-file design — keep ignored in case
 # any local script writes there as a fallback.
 data/seo-snapshots/
+
+# scripts/audit-site.mjs output — generated per-run, uploaded as a CI artifact.
+reports/

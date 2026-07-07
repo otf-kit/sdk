@@ -20,6 +20,8 @@
     "agent-browser": "agent-browser",
     "agent-browser:install": "agent-browser install",
     "agent-browser:check-meta": "tsx scripts/check-deployed-meta.ts",
+    "audit:site": "node scripts/audit-site.mjs",
+    "audit:site:pages": "node scripts/audit-site-pages.mjs",
     "portless": "portless",
     "portless:trust": "portless trust",
     "portless:list": "portless list",
