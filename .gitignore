@@ -18,6 +18,11 @@ coverage
 # Playwright MCP temp
 .playwright-mcp/
 
+# Local agent-tool config (duplicated internal skills tree + Codex CLI setup) —
+# must never be committed or reach the public sync (see publish-public-sdk.sh)
+.agents/
+.codex/
+
 # graphify outputs + chats
 graphify-out/
 .graphifyignore
