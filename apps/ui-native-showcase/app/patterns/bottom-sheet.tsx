@@ -24,6 +24,7 @@ export default function BottomSheetShowcase() {
   const [settingsOpen, setSettingsOpen] = useState(false)
   const [confirmOpen, setConfirmOpen] = useState(false)
   const [filterOpen, setFilterOpen] = useState(false)
+  const [footerOpen, setFooterOpen] = useState(false)
 
   const [pushOn, setPushOn] = useState(true)
   const [emailOn, setEmailOn] = useState(false)
@@ -180,6 +181,28 @@ export default function BottomSheetShowcase() {
                 </SizableText>
                 {filter === opt ? <Check size={18} color="$color9" /> : null}
               </XStack>
+            ))}
+          </YStack>
+        </BottomSheet>
+      </Section>
+
+      <Section title="Pinned footer" hint="CTA stays on screen while the body scrolls">
+        <OtfButton variant="outlined" onPress={() => setFooterOpen(true)}>
+          Open rules sheet
+        </OtfButton>
+
+        <BottomSheet
+          open={footerOpen}
+          onOpenChange={setFooterOpen}
+          title="How to play"
+          snapPoints={[85]}
+          footer={<OtfButton onPress={() => setFooterOpen(false)}>Got it</OtfButton>}
+        >
+          <YStack gap="$3">
+            {Array.from({ length: 16 }, (_, i) => (
+              <SizableText key={i} size="$4" color="$color11">
+                {`${i + 1}. Rule ${i + 1} — the button below never scrolls away.`}
+              </SizableText>
             ))}
           </YStack>
         </BottomSheet>

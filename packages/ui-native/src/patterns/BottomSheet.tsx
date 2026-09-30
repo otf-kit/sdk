@@ -7,9 +7,12 @@ export type BottomSheetProps = {
   open: boolean; onOpenChange: (open: boolean) => void; title?: string; children: ReactNode
   snapPoints?: number[]; dismissOnSnapToBottom?: boolean; showHandle?: boolean; showClose?: boolean
   zIndex?: number
+  /** Pinned below the scrolling body. Has 28 dp bottom padding; the sheet reads no safe-area insets. */
+  footer?: ReactNode
 }
 
-export function BottomSheet({ open, onOpenChange, title, children, snapPoints = [85], dismissOnSnapToBottom = true, showHandle = true, showClose = false, zIndex = 100_000 }: BottomSheetProps) {
+export function BottomSheet({ open, onOpenChange, title, children, snapPoints = [85], dismissOnSnapToBottom = true, showHandle = true, showClose = false, zIndex = 100_000, footer }: BottomSheetProps) {
+  const hasFooter = Boolean(footer)
   return (
     <Sheet
       modal
@@ -23,7 +26,7 @@ export function BottomSheet({ open, onOpenChange, title, children, snapPoints = 
     >
       <Sheet.Overlay animation="lazy" enterStyle={{ opacity: 0 }} exitStyle={{ opacity: 0 }} />
       {showHandle && <Sheet.Handle />}
-      <Sheet.Frame>
+      <Sheet.Frame adjustPaddingForOffscreenContent={hasFooter && snapPoints.length > 1}>
         {(title || showClose) && (
           <XStack paddingHorizontal="$4" paddingTop="$3" paddingBottom="$2" alignItems="center" justifyContent="space-between">
             <SizableText size="$6" fontWeight="600" flexShrink={1}>{title}</SizableText>
@@ -35,9 +38,14 @@ export function BottomSheet({ open, onOpenChange, title, children, snapPoints = 
             )}
           </XStack>
         )}
-        <ScrollView contentContainerStyle={{ paddingBottom: 40 }}>
+        <ScrollView contentContainerStyle={{ paddingBottom: hasFooter ? 16 : 40 }}>
           <YStack padding="$4">{children}</YStack>
         </ScrollView>
+        {hasFooter && (
+          <YStack paddingHorizontal="$4" paddingTop="$3" paddingBottom={28} borderTopWidth={1} borderTopColor="$borderColor">
+            {footer}
+          </YStack>
+        )}
       </Sheet.Frame>
     </Sheet>
   )

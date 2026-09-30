@@ -195,6 +195,12 @@ export type { ProfileHeaderProps } from './patterns/ProfileHeader'
 export { AppHeader } from './patterns/AppHeader'
 export type { AppHeaderProps, AppHeaderVariant } from './patterns/AppHeader'
 
+export { AnimatedNumber } from './patterns/AnimatedNumber'
+export type { AnimatedNumberProps } from './patterns/AnimatedNumber'
+
+export { useCountUp } from './hooks/useCountUp'
+export type { UseCountUpOptions } from './hooks/useCountUp'
+
 export { BottomSheet } from './patterns/BottomSheet'
 export type { BottomSheetProps } from './patterns/BottomSheet'
 

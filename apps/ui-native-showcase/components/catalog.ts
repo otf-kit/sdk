@@ -98,6 +98,7 @@ export const CATALOG: Category[] = [
       { slug: 'fab', title: 'Floating Action Button', description: 'Anchored CTA — legacy circle/pill + expanding actions menu w/ backdrop.', status: 'ready' },
       { slug: 'wheel-picker', title: 'WheelPicker', description: 'iOS-flavored vertical scroll-wheel for height / weight / enums.', status: 'ready' },
       { slug: 'ruler-scrubber', title: 'RulerScrubber', description: 'Horizontal ruler scrubber with snap, ticks, value display.', status: 'ready' },
+      { slug: 'animated-number', title: 'AnimatedNumber', description: 'Count-up number — same props as web, plus delay; reduced-motion safe.', status: 'ready' },
       // Premium screens
       { slug: 'paywall-screen', title: 'Paywall Screen', description: 'Subscription wall — default, social-proof, comparison, countdown urgency.', status: 'ready' },
       { slug: 'login-screen', title: 'Login Screen', description: 'Email + provider auth — providers, email-only, editorial, branded.', status: 'ready' },
@@ -108,7 +109,7 @@ export const CATALOG: Category[] = [
       { slug: 'settings-screen', title: 'Settings Screen', description: 'Sectioned account / preferences / legal screen.', status: 'ready' },
       { slug: 'profile-header', title: 'Profile Header', description: 'Avatar + name + meta + actions — default, with-stats, compact, verbose.', status: 'ready' },
       // Sheets, dialogs, popovers
-      { slug: 'bottom-sheet', title: 'Bottom Sheet', description: 'Bottom-anchored sheet — action menu, settings, destructive confirm, filter.', status: 'ready' },
+      { slug: 'bottom-sheet', title: 'Bottom Sheet', description: 'Bottom-anchored sheet — action menu, settings, destructive confirm, filter, pinned footer.', status: 'ready' },
       { slug: 'action-sheet', title: 'Action Sheet', description: 'iOS-style action sheet with destructive + neutral options.', status: 'ready' },
       { slug: 'confirm-dialog', title: 'Confirm Dialog', description: 'Centered confirm/cancel with destructive variant.', status: 'ready' },
       { slug: 'otf-dialog', title: 'Dialog', description: 'Centered modal dialog with multiple sizes.', status: 'ready' },
