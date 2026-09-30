@@ -167,8 +167,44 @@ export type ProfileHeaderProps = any
 export const AppHeader: any
 export type AppHeaderProps = any
 export type AppHeaderVariant = any
-export const BottomSheet: any
-export type BottomSheetProps = any
+export function BottomSheet(props: BottomSheetProps): JSX.Element
+export type BottomSheetProps = {
+  open: boolean
+  onOpenChange: (open: boolean) => void
+  title?: string
+  children: ReactNode
+  snapPoints?: number[]
+  dismissOnSnapToBottom?: boolean
+  showHandle?: boolean
+  showClose?: boolean
+  zIndex?: number
+  /** Pinned below the scrolling body. Has 28 dp bottom padding; the sheet reads no safe-area insets. */
+  footer?: ReactNode
+}
+export function AnimatedNumber(props: AnimatedNumberProps): JSX.Element
+export type AnimatedNumberProps = Omit<OtfTextProps, 'children'> & {
+  value: number
+  /** Starting figure of the first count. Default `0`. */
+  from?: number
+  /** Count length in ms. Default `1200`; `0` renders `value` statically. */
+  duration?: number
+  /** Wait in ms before counting. Default `0`. */
+  delay?: number
+  /** Values with an absolute value below this render statically. Default `10`. */
+  countMin?: number
+  /** Decimal places. Default `0`. */
+  decimals?: number
+  /** Text before the number, e.g. `$`. */
+  prefix?: string
+  /** Text after the number, e.g. `%`. */
+  suffix?: string
+  /** `true` (default) groups thousands, `false` prints plain digits, a function formats the figure itself. */
+  format?: boolean | ((n: number) => string)
+  /** Locale for thousands grouping when `format` is `true`. Default `en-US`. */
+  locale?: string
+}
+export type UseCountUpOptions = { delay?: number; duration?: number; countMin?: number; from?: number; decimals?: number }
+export function useCountUp(target: number, options?: UseCountUpOptions): number | null
 export const LoginScreen: any
 export type LoginScreenProps = any
 export type AuthProvider = any
