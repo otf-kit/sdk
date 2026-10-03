@@ -46,6 +46,9 @@ const config = {
         },
       },
       build: {
+        // Keep Vite's final esbuild pass on a target that supports the
+        // destructuring emitted by the Storybook and UI dependencies.
+        target: 'es2022',
         rollupOptions: {
           onwarn(warning, warn) {
             if (
