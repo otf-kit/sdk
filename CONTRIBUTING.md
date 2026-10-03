@@ -1,35 +1,27 @@
-# Contributing to OTF
+# Contributing to the OTF SDK
 
-## Setup
+Thanks for helping improve the packages in this repository.
+
+## Report an issue
+
+Search [existing issues](https://github.com/otf-kit/sdk/issues) first. For a bug, include the package and version, a small reproduction, expected and actual behavior, and the relevant web or native environment. Remove secrets and personal data from logs and screenshots.
+
+## Make a change
 
 ```bash
-git clone https://github.com/your-org/otf.git
-cd otf
+git clone https://github.com/otf-kit/sdk.git
+cd sdk
 pnpm install
 ```
 
-## Development
+Create a branch from `main` and keep the change focused. Update the relevant package README or example when behavior changes. Before opening a pull request, run the checks that apply to your change:
 
 ```bash
-pnpm dev          # start all packages in watch mode
-pnpm build        # build all packages
-pnpm type-check   # run TypeScript across workspace
-pnpm lint         # run ESLint across workspace
-pnpm test         # run all tests
+pnpm type-check
+pnpm lint
+pnpm test
 ```
 
-## Pull Requests
+In the pull request, describe the behavior change, link the issue if there is one, and state which checks you ran. For a visual change, include a screenshot or a short recording. A maintainer will review the PR before merge.
 
-1. Branch from `main`: `git checkout -b feat/your-feature`
-2. Make changes, run `pnpm type-check && pnpm lint`
-3. Open a PR — CI runs lint, type-check, and rebrand-verify automatically
-4. One approval required to merge
-
-## Package structure
-
-| Package | Description |
-|---------|-------------|
-| `@otfdashkit/tokens` | CSS variables + Tamagui tokens + design themes |
-| `@otfdashkit/ui` | Web components (Radix UI + Tailwind) |
-| `@otfdashkit/ui-native` | Mobile components (Tamagui) |
-| `@otfdashkit/config` | Shared ESLint / Prettier / Tailwind configs |
+Package-specific guidance lives in [`packages/ui`](packages/ui/README.md), [`packages/ui-native`](packages/ui-native/README.md), and [`packages/tokens`](packages/tokens/README.md).
