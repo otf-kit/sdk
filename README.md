@@ -11,9 +11,11 @@
 ```bash
 # Web
 pnpm add @otfdashkit/ui @otfdashkit/tokens
+npm install @otfdashkit/ui @otfdashkit/tokens
 
 # Expo
 pnpm add @otfdashkit/ui-native @otfdashkit/tokens
+npm install @otfdashkit/ui-native @otfdashkit/tokens
 ```
 
 For web, import the token and component styles once in your app entry point:
@@ -63,9 +65,15 @@ The separate [OTF Agent Skills](https://github.com/otf-kit/skills) repository co
 npx skills add otf-kit/skills
 ```
 
-## Kits
+## Building a whole app?
 
-The [OTF site](https://otf-kit.dev/) currently lists 3 Live kits, 15 landing templates, and 1 Preview kit. The kits are separate from this open source SDK.
+The SDK packages are free and MIT licensed. For complete apps and landing pages, the site offers:
+
+- [Landing templates — $9](https://otf-kit.dev/templates)
+- [Full stack kits — $99](https://otf-kit.dev/pricing), with live demos for the [SaaS kit](https://saas.otf-kit.dev) and [Fitness kit](https://fitness-preview.otf-kit.dev)
+- [Everything Bundle — $149](https://otf-kit.dev/pricing)
+
+These commercial products are separate from the open source SDK.
 
 ## Contributing
 
