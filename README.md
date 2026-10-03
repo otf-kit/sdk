@@ -18,6 +18,8 @@ pnpm add @otfdashkit/ui-native @otfdashkit/tokens
 npm install @otfdashkit/ui-native @otfdashkit/tokens
 ```
 
+If this saves you time, a star on the repo helps others find it.
+
 For web, import the token and component styles once in your app entry point:
 
 ```tsx
