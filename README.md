@@ -45,6 +45,8 @@ The tool that spun up your MVP — Lovable, Bolt, v0, Replit, Rork — keeps reg
 
 Everything below is open and clickable — no signup, no install required to look around.
 
+Source apps: [web Storybook](https://github.com/otf-kit/sdk/tree/main/apps/storybook-web) · [native registry](https://github.com/otf-kit/sdk/tree/main/apps/ui-native-registry) · [native showcase](https://github.com/otf-kit/sdk/tree/main/apps/ui-native-showcase).
+
 <a href="https://otf-kit.dev/components" target="_blank"><img src="https://cdn.otf-kit.dev/readme/components-motion.gif" alt="Scrolling the live OTF component gallery — web and native components, one API" width="100%" /></a>
 
 <table>
