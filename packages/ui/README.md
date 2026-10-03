@@ -1,7 +1,7 @@
 <h1 align="center">@otfdashkit/ui</h1>
 
 <p align="center">
-  137 React components for builders shipping production apps — Radix under the hood, Tailwind v4 on top, AI-agent-readable by design.
+  138 cataloged web components for builders shipping production apps — Radix under the hood, Tailwind v4 on top, AI-agent-readable by design.
 </p>
 
 <p align="center">
@@ -27,7 +27,7 @@
 - **Advanced** — Tiptap editor, ImageCrop, file uploaders, marquees, shiki-powered code blocks, video player
 - **17 themes** out of the box from [`@otfdashkit/tokens`](https://www.npmjs.com/package/@otfdashkit/tokens) — swap palette by changing one attribute on `<html>`
 
-137 components in [`src/`](src/). Full catalog at the Storybook below.
+138 cataloged components in [`src/`](src/). Full catalog at the Storybook below.
 
 ## Live demos
 

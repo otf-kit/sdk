@@ -42,6 +42,8 @@ Package setup and API details: [`ui`](packages/ui/README.md), [`ui-native`](pack
 
 ## See the components
 
+The catalog contains **220 components (138 web + 82 React Native)**.
+
 [![Screenshot of the OTF component gallery](https://cdn.otf-kit.dev/readme/components-motion.gif)](https://otf-kit.dev/components)
 
 - [Web Storybook](https://ui.otf-kit.dev/) shows the React components and their variants.

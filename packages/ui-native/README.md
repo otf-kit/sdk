@@ -1,7 +1,7 @@
 <h1 align="center">@otfdashkit/ui-native</h1>
 
 <p align="center">
-  React Native components with the same API as <code>@otfdashkit/ui</code> on web. Port a screen by changing the import.
+  82 cataloged React Native components with the same API as <code>@otfdashkit/ui</code> on web. Port a screen by changing the import.
 </p>
 
 <p align="center">
@@ -20,7 +20,7 @@
 
 ## What you get
 
-- **80 primitives** — Button, Card, Input, Avatar, Badge, Chip, Sheet, Switch, Tabs, Toast, Text, Stack — same names and props as the web SDK
+- **Primitives** — Button, Card, Input, Avatar, Badge, Chip, Sheet, Switch, Tabs, Toast, Text, Stack — same names and props as the web SDK
 - **Apple-Fitness-style blocks** — ActivityRings, WeekStrip, StepperBig, MetricCard, SegmentedControl, MiniBarChart
 - **Animated patterns** — shaders, marquees, parallax scrolls (heavy peers ship via [`@otfdashkit/cli`](https://www.npmjs.com/package/@otfdashkit/cli) so you only pay for what you use)
 - **17 shared themes** — same `@otfdashkit/tokens` palette as web; switch palette via the `defaultTheme` prop on `<OTFProvider>`
