@@ -6,7 +6,7 @@
 
 <p align="center">
   <a href="https://www.npmjs.com/package/@otfdashkit/ui-native" target="_blank">
-    <img src="https://img.shields.io/npm/v/@otfdashkit/ui-native?style=flat-square&color=000" alt="npm version">
+    <img src="https://img.shields.io/npm/v/@otfdashkit/ui-native?style=flat-square&color=000" alt="npm release">
   </a>
   <a href="https://www.npmjs.com/package/@otfdashkit/ui-native" target="_blank">
     <img src="https://img.shields.io/npm/dm/@otfdashkit/ui-native?style=flat-square&color=000" alt="npm downloads">
@@ -20,7 +20,7 @@
 
 ## What you get
 
-- **80 primitives** — Button, Card, Input, Avatar, Badge, Chip, Sheet, Switch, Tabs, Toast, Text, Stack — same names and props as the web SDK
+- **19 React Native components** — Button, Card, Input, Avatar, Badge, Chip, Sheet, Switch, Tabs, Toast, Text, Stack — same names and props as the web SDK
 - **Apple-Fitness-style blocks** — ActivityRings, WeekStrip, StepperBig, MetricCard, SegmentedControl, MiniBarChart
 - **Animated patterns** — shaders, marquees, parallax scrolls (heavy peers ship via [`@otfdashkit/cli`](https://www.npmjs.com/package/@otfdashkit/cli) so you only pay for what you use)
 - **17 shared themes** — same `@otfdashkit/tokens` palette as web; switch palette via the `defaultTheme` prop on `<OTFProvider>`
@@ -127,7 +127,7 @@ npx @otfdashkit/cli add shockwave
 
 ## Status
 
-`v0.1.x` — alpha. APIs may change before `1.0`. Pin exact versions in production.
+`v0.1.x` — alpha. APIs may change before `1.0`. Pin exact releases in production.
 
 ## License
 
