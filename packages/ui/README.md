@@ -1,12 +1,12 @@
 <h1 align="center">@otfdashkit/ui</h1>
 
 <p align="center">
-  137 React components for builders shipping production apps — Radix under the hood, Tailwind v4 on top, AI-agent-readable by design.
+  89 web components for builders shipping production apps — Radix under the hood, Tailwind v4 on top, AI-agent-readable by design.
 </p>
 
 <p align="center">
   <a href="https://www.npmjs.com/package/@otfdashkit/ui" target="_blank">
-    <img src="https://img.shields.io/npm/v/@otfdashkit/ui?style=flat-square&color=000" alt="npm version">
+    <img src="https://img.shields.io/npm/v/@otfdashkit/ui?style=flat-square&color=000" alt="npm release">
   </a>
   <a href="https://www.npmjs.com/package/@otfdashkit/ui" target="_blank">
     <img src="https://img.shields.io/npm/dm/@otfdashkit/ui?style=flat-square&color=000" alt="npm downloads">
@@ -27,7 +27,7 @@
 - **Advanced** — Tiptap editor, ImageCrop, file uploaders, marquees, shiki-powered code blocks, video player
 - **17 themes** out of the box from [`@otfdashkit/tokens`](https://www.npmjs.com/package/@otfdashkit/tokens) — swap palette by changing one attribute on `<html>`
 
-137 components in [`src/`](src/). Full catalog at the Storybook below.
+89 installable web components in [`src/`](src/). Full catalog at the Storybook below.
 
 ## Live demos
 
@@ -92,7 +92,7 @@ Questions, bugs, feature requests: **[discord.gg/gpXyu7SqNZ](https://discord.gg/
 
 ## Status
 
-`v0.1.x` — alpha. APIs may change before `1.0`. Pin exact versions in production.
+`v0.1.x` — alpha. APIs may change before `1.0`. Pin exact releases in production.
 
 ## License
 

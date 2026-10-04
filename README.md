@@ -9,8 +9,8 @@
 **Stop burning AI tokens on broken UI code.** Pre-built, accessible, production-tested components your coding agent extends — instead of regenerating the same buttons, forms, and dialogs (half of them broken) on every prompt. `<Button>` from **`@otfdashkit/ui`** (React · Radix · Tailwind v4) and `<Button>` from **`@otfdashkit/ui-native`** (Expo · Tamagui) share the same name, props, and look. Build once, ship to the browser and to the App Store.
 
 <p>
-  <a href="https://www.npmjs.com/package/@otfdashkit/ui"><img src="https://img.shields.io/npm/v/@otfdashkit/ui?style=flat-square&color=000&label=%40otfdashkit%2Fui" alt="@otfdashkit/ui version"></a>
-  <a href="https://www.npmjs.com/package/@otfdashkit/ui-native"><img src="https://img.shields.io/npm/v/@otfdashkit/ui-native?style=flat-square&color=000&label=%40otfdashkit%2Fui-native" alt="@otfdashkit/ui-native version"></a>
+  <a href="https://www.npmjs.com/package/@otfdashkit/ui"><img src="https://img.shields.io/npm/v/@otfdashkit/ui?style=flat-square&color=000&label=%40otfdashkit%2Fui" alt="@otfdashkit/ui release"></a>
+  <a href="https://www.npmjs.com/package/@otfdashkit/ui-native"><img src="https://img.shields.io/npm/v/@otfdashkit/ui-native?style=flat-square&color=000&label=%40otfdashkit%2Fui-native" alt="@otfdashkit/ui-native release"></a>
   <a href="https://www.npmjs.com/package/@otfdashkit/ui"><img src="https://img.shields.io/npm/dm/@otfdashkit/ui?style=flat-square&color=000&label=downloads" alt="npm downloads"></a>
   <a href="./LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square" alt="MIT License"></a>
   <a href="https://discord.gg/gpXyu7SqNZ"><img src="https://img.shields.io/badge/Discord-join-5865F2?style=flat-square&logo=discord&logoColor=white" alt="Discord"></a>
@@ -34,8 +34,8 @@ The tool that spun up your MVP — Lovable, Bolt, v0, Replit, Rork — keeps reg
 ## Features
 
 - 🧩 **One API, three platforms** — identical component names and props on web, iOS, and Android. Learn it once.
-- 📦 **215+ components** — 137 web (Button → Dialog → DataTable → charts → a Tiptap editor) + 80 native primitives, all keyboard- and screen-reader-accessible.
-- 🎨 **17 themes, zero config** — flip a single attribute. Shared design tokens are CSS variables on web and native tokens on mobile.
+- 📦 **108 installable components** — 89 web and 19 React Native, with blocks and patterns cataloged separately.
+- 🎨 **17 design-theme definitions** in shared tokens for web and native.
 - ⚡ **Copy-paste *or* `npm install`** — `pnpm add @otfdashkit/ui`, or copy the source via the CLI registry. Your code either way.
 - 🪶 **Wrap, don't reinvent** — opinionated APIs on top of battle-tested primitives, not yet-another-from-scratch widget set.
 - 🤖 **Built for AI coding agents** — structured JSDoc + tested prompts so Claude Code and Cursor scaffold real screens instead of guessing.
@@ -76,7 +76,7 @@ Everything below is open and clickable — no signup, no install required to loo
   </tr>
 </table>
 
-Prefer browsing by category? The [**component gallery**](https://otf-kit.dev/components) has all 215+ with copy-paste install per component.
+Prefer browsing by category? The [**component gallery**](https://otf-kit.dev/components) lists all 108 installable components with per-component install instructions.
 
 ## Quick start
 
@@ -113,11 +113,11 @@ Wrap the app root once (`<OTFProvider>` on native, the CSS imports on web) and y
 
 ## Theming
 
-17 themes ship in the box — Slate, Warm, Cosmic, Terminal, and 13 more. Switch with one attribute:
+17 design themes ship in the tokens package, including Mono, Ocean Teal, Warm Amber, and Cosmic Night. Use the matching web class or native token ID:
 
 ```tsx
-<html data-theme="cosmic">                  // web
-<OTFProvider defaultTheme="cosmic">         // native
+<html className="theme-cosmic">                 // web
+<OTFProvider defaultTheme="cosmic-night">    // native
 ```
 
 Tokens live in [`@otfdashkit/tokens`](packages/tokens/) and resolve to CSS variables on web and native design tokens on mobile — the same palette, both targets.
@@ -155,8 +155,8 @@ Source: [**github.com/otf-kit/skills**](https://github.com/otf-kit/skills).
 
 | Package | Platform | What |
 |---|---|---|
-| [`@otfdashkit/ui`](packages/ui/) | Web | 137 components — Button, Card, Form, Dialog, Sheet, Drawer, Command palette, Toast, Calendar, DataTable, BarChart/AreaChart, Tiptap editor, ImageCrop, and 120+ more. Built on Radix + Tailwind v4. |
-| [`@otfdashkit/ui-native`](packages/ui-native/) | iOS · Android | 80 primitives — same names and props as web, one `<OTFProvider>` at the root. |
+| [`@otfdashkit/ui`](packages/ui/) | Web | 89 installable components, counted from the shared component registry. Built on Radix + Tailwind v4. |
+| [`@otfdashkit/ui-native`](packages/ui-native/) | iOS · Android | 19 React Native components — same names and props as web, one `<OTFProvider>` at the root. |
 | [`@otfdashkit/tokens`](packages/tokens/) | Both | 17 themes — CSS vars on web, native tokens on mobile. |
 | [`@otfdashkit/cli`](packages/cli/) | Mobile | Registry installer for heavy-peer components (Skia, Reanimated, MMKV) — copies source, no forced peer deps. |
 | [`@otfdashkit/eslint-plugin-otf-design`](packages/eslint-plugin-otf-design/) | Tooling | Catches hex literals and default Tailwind blues/purples/grays at lint time. |
@@ -182,7 +182,7 @@ Join the **[Discord](https://discord.gg/gpXyu7SqNZ)** for help, feature requests
 
 ## Status
 
-`v0.1.x` — alpha. APIs may shift before `1.0`; pin exact versions if you ship to production.
+`v0.1.x` — alpha. APIs may shift before `1.0`; pin exact releases if you ship to production.
 
 ## Building a whole app?
 
