@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { EmptyState } from '@otfdashkit/ui'
-import { Button } from '@otfdashkit/ui'
 import { Inbox, FileX, Search } from 'lucide-react'
 
 const meta = {
@@ -17,7 +16,7 @@ export const Default: StoryObj = {
       icon={<Inbox className="h-10 w-10" />}
       title="No messages yet"
       description="When you receive messages, they will appear here."
-      action={<Button>Compose</Button>}
+      action={{ label: 'Compose', onClick: () => {} }}
     />
   ),
 }
@@ -28,8 +27,8 @@ export const WithSecondaryAction: StoryObj = {
       icon={<FileX className="h-10 w-10" />}
       title="No files found"
       description="Upload your first file to get started."
-      action={<Button>Upload file</Button>}
-      secondaryAction={<Button variant="ghost">Learn more</Button>}
+      action={{ label: 'Upload file', onClick: () => {} }}
+      secondaryAction={{ label: 'Learn more', onClick: () => {} }}
     />
   ),
 }
