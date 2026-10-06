@@ -6,6 +6,7 @@ const meta = {
   component: AnimatedNumber,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
+  args: { value: 1234 },
 } satisfies Meta<typeof AnimatedNumber>
 
 export default meta

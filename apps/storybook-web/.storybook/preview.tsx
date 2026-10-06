@@ -1,6 +1,6 @@
 import React from 'react'
 import type { Preview, Decorator } from '@storybook/react'
-import { themes } from '@storybook/theming'
+import { themes } from 'storybook/internal/theming'
 import { Title, Description, Subtitle, Canvas, DocsContext } from '@storybook/blocks'
 import '../stories/globals.css'
 import '../../../packages/ui/src/styles.css'

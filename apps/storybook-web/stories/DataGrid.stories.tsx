@@ -37,80 +37,11 @@ const meta = {
   component: DataGrid<User>,
   parameters: { layout: 'fullscreen' },
   tags: ['autodocs'],
+  args: { columns, data: makeUsers(20) },
+  decorators: [(Story) => <div className="p-6"><Story /></div>],
 } satisfies Meta<typeof DataGrid<User>>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Basic: Story = {
-  render: () => (
-    <div className="p-6">
-      <DataGrid columns={columns} data={makeUsers(20)} />
-    </div>
-  ),
-}
-
-export const WithSelection: Story = {
-  render: () => (
-    <div className="p-6">
-      <DataGrid
-        columns={columns}
-        data={makeUsers(20)}
-        selectable
-        onSelectionChange={(rows) => console.log('selected', rows.length)}
-      />
-    </div>
-  ),
-}
-
-export const WithColumnVisibility: Story = {
-  render: () => (
-    <div className="p-6">
-      <DataGrid
-        columns={columns}
-        data={makeUsers(20)}
-        columnVisibility
-        selectable
-      />
-    </div>
-  ),
-}
-
-export const VirtualScrolling: Story = {
-  render: () => (
-    <div className="p-6">
-      <DataGrid
-        columns={columns}
-        data={makeUsers(500)}
-        virtual
-        virtualHeight={500}
-        columnVisibility
-      />
-    </div>
-  ),
-}
-
-export const Loading: Story = {
-  render: () => (
-    <div className="p-6">
-      <DataGrid columns={columns} data={[]} loading skeletonRows={8} />
-    </div>
-  ),
-}
-
-export const Empty: Story = {
-  render: () => (
-    <div className="p-6">
-      <DataGrid
-        columns={columns}
-        data={[]}
-        emptyState={
-          <div className="flex flex-col items-center gap-2">
-            <p className="text-sm font-medium text-foreground">No users yet</p>
-            <p className="text-xs text-muted-foreground">Invite your first team member to get started.</p>
-          </div>
-        }
-      />
-    </div>
-  ),
-}
+export const Basic: Story = {}

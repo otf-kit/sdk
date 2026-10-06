@@ -10,11 +10,11 @@ const meta = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['default', 'secondary', 'outline', 'ghost', 'destructive', 'gradient', 'texture', 'shimmer'],
+      options: ['default', 'secondary', 'outline', 'ghost', 'destructive', 'link'],
     },
     size: {
       control: 'select',
-      options: ['sm', 'default', 'lg', 'xl', 'icon', 'icon-sm'],
+      options: ['sm', 'default', 'lg', 'icon'],
     },
   },
 } satisfies Meta<typeof Button>
@@ -34,23 +34,9 @@ export const AllVariants: Story = {
       <Button variant="outline">Outline</Button>
       <Button variant="ghost">Ghost</Button>
       <Button variant="destructive">Destructive</Button>
-      <Button variant="gradient">Gradient</Button>
-      <Button variant="texture">Texture</Button>
-      <Button variant="shimmer">Shimmer</Button>
+      <Button variant="link">Link</Button>
     </div>
   ),
-}
-
-export const Shimmer: Story = {
-  args: { children: 'Get started', variant: 'shimmer', size: 'lg' },
-  parameters: {
-    docs: {
-      description: {
-        story:
-          'Premium CTA variant with an animated conic-gradient sweep and a diagonal hover gloss. Use sparingly — reserve for primary CTAs on pricing pages and landing heroes. Cross-platform parity API with `@otfdashkit/ui-native` (visual treatment shipped without continuous animation on native to avoid pulling Skia / Moti as a peer).',
-      },
-    },
-  },
 }
 
 export const AllSizes: Story = {
@@ -59,7 +45,6 @@ export const AllSizes: Story = {
       <Button size="sm">Small</Button>
       <Button size="default">Default</Button>
       <Button size="lg">Large</Button>
-      <Button size="xl">Extra Large</Button>
     </div>
   ),
 }

@@ -8,7 +8,7 @@ const meta = {
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
   decorators: [
-    (Story: any) => (
+    (Story) => (
       <div className="relative min-h-[300px] w-full">
         <Story />
         <Toaster />
@@ -22,11 +22,11 @@ export default meta
 export const AllTypes: StoryObj = {
   render: () => (
     <div className="flex flex-wrap gap-2">
-      <Button onClick={() => toast('Default toast', 'This is a default toast message')}>Default</Button>
-      <Button variant="outline" onClick={() => toast.success('Success', 'Operation completed')}>Success</Button>
-      <Button variant="outline" onClick={() => toast.error('Error', 'Something went wrong')}>Error</Button>
-      <Button variant="outline" onClick={() => toast.warning('Warning', 'Please review before continuing')}>Warning</Button>
-      <Button variant="outline" onClick={() => toast.info('Info', 'New version available')}>Info</Button>
+      <Button onClick={() => toast('Default toast', { description: 'This is a default toast message' })}>Default</Button>
+      <Button variant="outline" onClick={() => toast.success('Success', { description: 'Operation completed' })}>Success</Button>
+      <Button variant="outline" onClick={() => toast.error('Error', { description: 'Something went wrong' })}>Error</Button>
+      <Button variant="outline" onClick={() => toast.warning('Warning', { description: 'Please review before continuing' })}>Warning</Button>
+      <Button variant="outline" onClick={() => toast.info('Info', { description: 'New version available' })}>Info</Button>
     </div>
   ),
 }

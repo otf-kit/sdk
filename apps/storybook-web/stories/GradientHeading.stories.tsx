@@ -31,7 +31,7 @@ export const AllPresets: Story = {
 
 export const Animated: Story = {
   render: () => (
-    <GradientHeading preset="cosmic" animated as="h1" className="text-5xl">
+    <GradientHeading preset="cosmic" animate as="h1" className="text-5xl">
       Animated gradient text
     </GradientHeading>
   ),
