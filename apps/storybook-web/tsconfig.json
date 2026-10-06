@@ -13,6 +13,16 @@
     "allowImportingTsExtensions": true,
     "baseUrl": ".",
     "paths": {
+      "@otfdashkit/ui/command-item": ["../../packages/ui/src/components/CommandItem/CommandItem.tsx"],
+      "@otfdashkit/ui/forms-form": ["../../packages/ui/src/forms/form.tsx"],
+      "@otfdashkit/ui/layouts-page": ["../../packages/ui/src/layouts/page.tsx"],
+      "@otfdashkit/ui/layouts-sidebar": ["../../packages/ui/src/layouts/sidebar.tsx"],
+      "@otfdashkit/ui/layouts-app-shell": ["../../packages/ui/src/layouts/app-shell.tsx"],
+      "@otfdashkit/ui/layouts-navbar": ["../../packages/ui/src/layouts/navbar.tsx"],
+      "@otfdashkit/ui/layouts-split-page": ["../../packages/ui/src/layouts/split-page.tsx"],
+      "@otfdashkit/ui/layouts-stack": ["../../packages/ui/src/layouts/stack.tsx"],
+      "@otfdashkit/ui/layouts-container": ["../../packages/ui/src/layouts/container.tsx"],
+      "@otfdashkit/ui/layouts-resize-box": ["../../packages/ui/src/layouts/resize-box.tsx"],
       "@otfdashkit/ui": ["../../packages/ui/src/index.ts"],
       "@otfdashkit/tokens": ["../../packages/tokens/src/index.ts"]
     }

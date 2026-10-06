@@ -78,6 +78,12 @@ export const WithCallbacks: Story = {
     const [log, setLog] = React.useState<string[]>([])
     const push = (msg: string) =>
       setLog((l) => [`${new Date().toLocaleTimeString()}  ${msg}`, ...l].slice(0, 8))
+    // The prop type also inherits the DOM handler signature, so both overloads are declared.
+    function handleTimeUpdate(event: React.SyntheticEvent<HTMLVideoElement>): void
+    function handleTimeUpdate(time: number, duration: number): void
+    function handleTimeUpdate(time: number | React.SyntheticEvent<HTMLVideoElement>, duration = 0) {
+      if (typeof time === 'number') push(`timeupdate ${time.toFixed(1)}s / ${duration.toFixed(1)}s`)
+    }
     return (
       <div className="w-[800px] space-y-3">
         <VideoPlayer
@@ -85,9 +91,7 @@ export const WithCallbacks: Story = {
           poster={SAMPLE_POSTER}
           onPlay={() => push('play')}
           onPause={() => push('pause')}
-          onTimeUpdate={(t, d) =>
-            push(`timeupdate ${t.toFixed(1)}s / ${d.toFixed(1)}s`)
-          }
+          onTimeUpdate={handleTimeUpdate}
           onEnded={() => push('ended')}
         />
         <pre className="rounded-md border border-border bg-muted/30 p-3 font-mono text-xs leading-relaxed">

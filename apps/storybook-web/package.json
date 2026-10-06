@@ -6,6 +6,7 @@
     "dev": "storybook dev -p 6006",
     "build": "storybook build",
     "build-storybook": "storybook build",
+    "type-check": "tsc --noEmit -p .",
     "preview": "npx serve storybook-static",
     "deploy": "set -a && . ../../.env && set +a && pnpm build && npx wrangler pages deploy storybook-static --project-name otf-storybook --commit-dirty=true"
   },

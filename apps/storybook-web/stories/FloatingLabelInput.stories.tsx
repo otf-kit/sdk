@@ -6,6 +6,7 @@ const meta = {
   component: FloatingLabelInput,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
+  args: { label: 'Email' },
 } satisfies Meta<typeof FloatingLabelInput>
 
 export default meta
