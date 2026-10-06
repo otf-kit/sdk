@@ -14,12 +14,42 @@ const buttonVariants = cva(
         ghost:       'hover:bg-accent hover:text-accent-foreground',
         destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
         link:        'text-primary underline-offset-4 hover:underline',
+        gradient: [
+          'bg-gradient-to-b from-primary to-[hsl(var(--primary)/0.8)]',
+          'text-primary-foreground',
+          'shadow-[0_1px_0_0_rgba(255,255,255,0.1)_inset,0_-1px_0_0_rgba(0,0,0,0.25)_inset]',
+          'hover:from-[hsl(var(--primary)/0.9)] hover:to-[hsl(var(--primary)/0.7)]',
+          'active:from-[hsl(var(--primary)/0.8)] active:to-[hsl(var(--primary)/0.6)]',
+        ].join(' '),
+        texture: [
+          'relative border border-border/40',
+          'bg-gradient-to-b from-card to-[hsl(var(--card)/0.9)]',
+          'text-foreground',
+          'shadow-[0_0_0_1px_hsl(var(--border)/0.2)_inset]',
+          'hover:border-border/60 hover:bg-accent',
+          'active:shadow-none',
+        ].join(' '),
+        // Loud by design: keep for primary CTAs. The sweep keyframe ships in themes/base.css.
+        shimmer: [
+          'relative isolate overflow-hidden',
+          'bg-primary text-primary-foreground',
+          'shadow-[0_1px_0_rgba(255,255,255,0.18)_inset,0_-1px_0_rgba(0,0,0,0.25)_inset]',
+          'hover:bg-primary/95',
+          'before:absolute before:inset-[-1px] before:rounded-[inherit] before:-z-10',
+          'before:bg-[conic-gradient(from_0deg,transparent_0deg,transparent_70deg,rgba(255,255,255,0.55)_90deg,transparent_110deg,transparent_360deg)]',
+          'before:animate-[shimmer-rotate_2.6s_linear_infinite] motion-reduce:before:animate-none',
+          'after:absolute after:inset-0 after:rounded-[inherit] after:pointer-events-none',
+          'after:bg-[linear-gradient(115deg,transparent_30%,rgba(255,255,255,0.22)_50%,transparent_70%)]',
+          'after:translate-x-[-120%] hover:after:translate-x-[120%] after:transition-transform after:duration-[900ms] after:ease-out',
+        ].join(' '),
       },
       size: {
         sm:      'h-8 px-3 text-xs',
         default: 'h-9 px-4 py-2',
         lg:      'h-11 px-6 text-base',
+        xl:      'h-12 px-8 text-base',
         icon:    'h-9 w-9',
+        'icon-sm': 'h-7 w-7 p-0 text-xs',
       },
     },
     defaultVariants: { variant: 'default', size: 'default' },
@@ -39,5 +69,27 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   }
 )
 Button.displayName = 'Button'
+
+export interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  icon: React.ReactNode
+  /** Accessible name; an icon-only button has no visible text. */
+  label: string
+  size?: 'sm' | 'default' | 'lg'
+  variant?: VariantProps<typeof buttonVariants>['variant']
+  asChild?: boolean
+}
+
+export const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
+  ({ icon, label, size = 'default', variant = 'ghost', className, asChild = false, ...props }, ref) => {
+    const Comp = asChild ? Slot : 'button'
+    const sizeClass = size === 'sm' ? 'h-7 w-7' : size === 'lg' ? 'h-10 w-10' : 'h-9 w-9'
+    return (
+      <Comp ref={ref} aria-label={label} className={cn(buttonVariants({ variant }), sizeClass, 'p-0 shrink-0', className)} {...props}>
+        {icon}
+      </Comp>
+    )
+  }
+)
+IconButton.displayName = 'IconButton'
 
 export { buttonVariants }

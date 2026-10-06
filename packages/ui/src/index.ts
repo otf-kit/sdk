@@ -167,7 +167,8 @@ export * from './text'
 export * from './backgrounds'
 export * from './headers'
 export * from './motion'
-// export * from './data'      // conflicts with components/data-grid (DataGrid)
+// './data' is not star-exported: its DataGrid name collides with components/data-grid.
+export { DataGrid as AdvancedDataGrid, type DataGridProps as AdvancedDataGridProps } from './data/DataGrid'
 export * from './data/DataList'
 export * from './data/EventCalendar'
 export * from './data/GridList'
