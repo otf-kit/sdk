@@ -168,6 +168,9 @@ importers:
       resend:
         specifier: ^4
         version: 4.8.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      sharp:
+        specifier: 0.34.5
+        version: 0.34.5
       stripe:
         specifier: ^17
         version: 17.7.0
