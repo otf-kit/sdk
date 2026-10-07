@@ -3,12 +3,8 @@ import { defineConfig } from 'tsup'
 export default defineConfig({
   entry: ['src/index.ts'],
   format: ['cjs', 'esm'],
-  // dts disabled: src/index.ts re-exports cause name clashes
-  // (CommandItem, Form*, PageHeader between primitives vs blocks vs
-  // layouts). Runtime is fine because JS modules pick a winner; tsup
-  // .d.ts emit refuses ambiguity. TODO: replace `export *` with
-  // explicit named re-exports for the colliding modules and re-enable.
-  dts: false,
+  // Declarations ship with the package; scripts/check-types-consumer.sh proves they resolve.
+  dts: true,
   splitting: false,
   sourcemap: true,
   clean: true,
