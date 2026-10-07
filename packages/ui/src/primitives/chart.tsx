@@ -101,17 +101,20 @@ ${colorConfig
 
 const ChartTooltip = RechartsPrimitive.Tooltip
 
-const ChartTooltipContent = React.forwardRef<
-  HTMLDivElement,
-  React.ComponentProps<typeof RechartsPrimitive.Tooltip> &
-    React.ComponentProps<"div"> & {
-      hideLabel?: boolean
-      hideIndicator?: boolean
-      indicator?: "line" | "dot" | "dashed"
-      nameKey?: string
-      labelKey?: string
-    }
->(
+// Named and annotated so the emitted declarations reference recharts' public types by name;
+// an inferred type expands into recharts' internal file paths, which consumers cannot resolve.
+export type ChartTooltipContentProps = React.ComponentProps<typeof RechartsPrimitive.Tooltip> &
+  React.ComponentProps<"div"> & {
+    hideLabel?: boolean
+    hideIndicator?: boolean
+    indicator?: "line" | "dot" | "dashed"
+    nameKey?: string
+    labelKey?: string
+  }
+
+const ChartTooltipContent: React.ForwardRefExoticComponent<
+  React.PropsWithoutRef<ChartTooltipContentProps> & React.RefAttributes<HTMLDivElement>
+> = React.forwardRef<HTMLDivElement, ChartTooltipContentProps>(
   (
     {
       active,
@@ -259,14 +262,17 @@ ChartTooltipContent.displayName = "ChartTooltip"
 
 const ChartLegend = RechartsPrimitive.Legend
 
-const ChartLegendContent = React.forwardRef<
-  HTMLDivElement,
-  React.ComponentProps<"div"> &
-    Pick<RechartsPrimitive.LegendProps, "payload" | "verticalAlign"> & {
-      hideIcon?: boolean
-      nameKey?: string
-    }
->(
+// Declared here, not picked from LegendProps: newer recharts releases drop `payload` from it.
+export type ChartLegendContentProps = React.ComponentProps<"div"> & {
+  payload?: ReadonlyArray<RechartsPrimitive.LegendPayload>
+  verticalAlign?: "top" | "middle" | "bottom"
+  hideIcon?: boolean
+  nameKey?: string
+}
+
+const ChartLegendContent: React.ForwardRefExoticComponent<
+  React.PropsWithoutRef<ChartLegendContentProps> & React.RefAttributes<HTMLDivElement>
+> = React.forwardRef<HTMLDivElement, ChartLegendContentProps>(
   (
     { className, hideIcon = false, payload, verticalAlign = "bottom", nameKey },
     ref
