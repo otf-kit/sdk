@@ -18,6 +18,8 @@ pnpm lint         # run ESLint across workspace
 pnpm test         # run all tests
 ```
 
+Two of these do not yet check what the comments say: `pnpm test` currently fails (it points at a test file that does not exist, and the UI tests are not run; see issue #13), and `pnpm lint` runs zero tasks and exits 0 (see issue #9). `pnpm build` and `pnpm type-check` are the reliable checks today.
+
 ## Pull Requests
 
 1. Branch from `main`: `git checkout -b feat/your-feature`
@@ -27,7 +29,7 @@ pnpm test         # run all tests
 
 ## How an accepted change lands
 
-This repository is published from a source repository that we maintain. A pull request opened here is read and discussed here. When it is accepted, a maintainer applies the change to the source repository with you as the commit author, then closes your PR with a link. A change merged only on this repository would be overwritten by the next publish, so we do not merge here.
+This repository is published from a source repository that we maintain. A pull request opened here is read and discussed here. When it is accepted, a maintainer applies the change to the source repository with you as the commit author, then closes your PR with a link to that commit. Your PR will show as Closed, not Merged, even when your change was accepted; the commit in the source repository, published here with you as its author, is the record. A change merged only on this repository would be overwritten by the next publish, so we do not merge here.
 
 ## Package structure
 
