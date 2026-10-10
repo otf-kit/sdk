@@ -1,10 +1,10 @@
 <div align="center">
 
-<a href="https://otf-kit.dev"><img src="https://cdn.otf-kit.dev/readme/hero.png" alt="OTF — one component API for web, iOS, and Android" width="100%" /></a>
+<a href="https://otf-kit.dev"><img src="https://cdn.otf-kit.dev/readme/hero.png" alt="OTF — one component set for web, iOS, and Android" width="100%" /></a>
 
 # otf-ui
 
-### One component API for web, iOS, and Android.
+### One component set for web, iOS, and Android.
 
 **Stop burning AI tokens on broken UI code.** Pre-built, accessible, production-tested components your coding agent extends — instead of regenerating the same buttons, forms, and dialogs (half of them broken) on every prompt. `<Button>` from **`@otfdashkit/ui`** (React · Radix · Tailwind v4) and `<Button>` from **`@otfdashkit/ui-native`** (Expo · Tamagui) share the same name, props, and look. Build once, ship to the browser and to the App Store.
 
@@ -33,8 +33,8 @@ The tool that spun up your MVP — Lovable, Bolt, v0, Replit, Rork — keeps reg
 
 ## Features
 
-- 🧩 **One API, three platforms** — identical component names and props on web, iOS, and Android. Learn it once.
-- 📦 **108 installable components** — 89 web and 19 React Native, with blocks and patterns cataloged separately.
+- 🧩 **One component set, three platforms** — the same component names for the components both packages ship, the same design tokens, and one install per platform. Props are not identical: each package has its own variants and sizes, so check the component's page.
+- 📦 **109 installable components** — 90 web and 19 React Native, with blocks and patterns cataloged separately.
 - 🎨 **17 design-theme definitions** in shared tokens for web and native.
 - ⚡ **Copy-paste *or* `npm install`** — `pnpm add @otfdashkit/ui`, or copy the source via the CLI registry. Your code either way.
 - 🪶 **Wrap, don't reinvent** — opinionated APIs on top of battle-tested primitives, not yet-another-from-scratch widget set.
@@ -45,7 +45,7 @@ The tool that spun up your MVP — Lovable, Bolt, v0, Replit, Rork — keeps reg
 
 Everything below is open and clickable — no signup, no install required to look around.
 
-<a href="https://otf-kit.dev/components" target="_blank"><img src="https://cdn.otf-kit.dev/readme/components-motion.gif" alt="Scrolling the live OTF component gallery — web and native components, one API" width="100%" /></a>
+<a href="https://otf-kit.dev/components" target="_blank"><img src="https://cdn.otf-kit.dev/readme/components-motion.gif" alt="Scrolling the live OTF component gallery — web and native components with shared names and design tokens" width="100%" /></a>
 
 <table>
   <tr>
@@ -76,7 +76,7 @@ Everything below is open and clickable — no signup, no install required to loo
   </tr>
 </table>
 
-Prefer browsing by category? The [**component gallery**](https://otf-kit.dev/components) lists all 108 installable components with per-component install instructions.
+Prefer browsing by category? The [**component gallery**](https://otf-kit.dev/components) lists all 109 installable components with per-component install instructions.
 
 ## Quick start
 
@@ -98,14 +98,18 @@ export function SignInCard() {
   return (
     <Card>
       <Input placeholder="Email" />
-      <Button variant="primary" size="lg">Continue</Button>
+      <Button variant="default" size="lg">Continue</Button>
     </Card>
   )
 }
 ```
 
 ```tsx
-// Native — same names, same props. That's the whole point.
+// Native — same component names, its own props. Button takes variant
+// primary | default | outlined | transparent | floating | destructive | shimmer
+// and a Tamagui size token such as "$4"; the web Button takes variant
+// default | secondary | outline | ghost | destructive | link | gradient | texture | shimmer
+// and size sm | default | lg | xl | icon | icon-sm.
 import { Button, Card, Input } from '@otfdashkit/ui-native'
 ```
 
@@ -144,7 +148,7 @@ npx skills add otf-kit/skills
 
 [![skills.sh](https://skills.sh/b/otf-kit/skills)](https://www.skills.sh/otf-kit/skills)
 
-- **otf-cross-platform-ui** — one component API, web + native
+- **otf-cross-platform-ui** — one component set (shared names and tokens, props differ), web + native
 - **otf-ui** — web components (`@otfdashkit/ui`)
 - **otf-ui-native** — native components (`@otfdashkit/ui-native`)
 - **otf-tokens** — theming (`@otfdashkit/tokens`)
@@ -155,7 +159,7 @@ Source: [**github.com/otf-kit/skills**](https://github.com/otf-kit/skills).
 
 | Package | Platform | What |
 |---|---|---|
-| [`@otfdashkit/ui`](packages/ui/) | Web | 89 installable components, counted from the shared component registry. Built on Radix + Tailwind v4. |
+| [`@otfdashkit/ui`](packages/ui/) | Web | 90 installable components, counted from the shared component registry. Built on Radix + Tailwind v4. |
 | [`@otfdashkit/ui-native`](packages/ui-native/) | iOS · Android | 19 React Native components — same names and props as web, one `<OTFProvider>` at the root. |
 | [`@otfdashkit/tokens`](packages/tokens/) | Both | 17 themes — CSS vars on web, native tokens on mobile. |
 | [`@otfdashkit/cli`](packages/cli/) | Mobile | Registry installer for heavy-peer components (Skia, Reanimated, MMKV) — copies source, no forced peer deps. |

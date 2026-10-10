@@ -1,7 +1,7 @@
 <h1 align="center">@otfdashkit/ui-native</h1>
 
 <p align="center">
-  React Native components with the same API as <code>@otfdashkit/ui</code> on web. Port a screen by changing the import.
+  React Native components that share component names and design tokens with <code>@otfdashkit/ui</code> on web. Props differ per platform: check each component's page.
 </p>
 
 <p align="center">
@@ -63,12 +63,14 @@ export default function App() {
 
 One root, sensible defaults — the provider wires up OTF tokens, dark mode, and font config so your screens just render. The same component names and props work on web (`@otfdashkit/ui`); porting a screen is a one-line import change.
 
-## Cross-platform parity
+## Shared component names
+
+These components exist in both packages under the same name and share design tokens. Props are not identical: each package has its own variants and sizes, so check the component's page for the exact props.
 
 | Component | Web (`@otfdashkit/ui`) | Native (`@otfdashkit/ui-native`) |
 |---|---|---|
-| `<Button>` | variant + size, focus-visible ring | press states, haptic-ready, same prop API |
-| `<Card>` | nested-ring surface | elevation tokens, same prop API |
+| `<Button>` | variant + size, focus-visible ring | press states, haptic-ready, native variants (primary, outlined, transparent, floating, …) |
+| `<Card>` | nested-ring surface | elevation tokens |
 | `<Input>` | error / hint / floating-label | error / hint / floating-label, Reanimated spring |
 | `<Avatar>` | image + initials fallback | image + initials fallback |
 | `<Text>` | typography scale tokens | typography scale tokens |
@@ -117,7 +119,7 @@ npx @otfdashkit/cli add shockwave
 
 ## Related packages
 
-- [`@otfdashkit/ui`](https://www.npmjs.com/package/@otfdashkit/ui) — web counterpart, same component API
+- [`@otfdashkit/ui`](https://www.npmjs.com/package/@otfdashkit/ui) — web counterpart, same component names for the shared set
 - [`@otfdashkit/tokens`](https://www.npmjs.com/package/@otfdashkit/tokens) — shared design tokens
 - [`@otfdashkit/cli`](https://www.npmjs.com/package/@otfdashkit/cli) — heavy-peer component installer
 
