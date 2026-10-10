@@ -22,7 +22,7 @@ pnpm test         # run all tests
 
 1. Branch from `main`: `git checkout -b feat/your-feature`
 2. Make changes, run `pnpm type-check && pnpm lint`
-3. Open a PR — CI runs lint, type-check, and rebrand-verify automatically
+3. Open a PR. No GitHub Actions run on this repository.
 4. One approval required to merge
 
 ## Package structure
