@@ -78,6 +78,8 @@ Everything below is open and clickable — no signup, no install required to loo
 
 Prefer browsing by category? The [**component gallery**](https://otf-kit.dev/components) lists all 109 installable components with per-component install instructions.
 
+Source apps: [web Storybook](https://github.com/otf-kit/sdk/tree/main/apps/storybook-web) · [native registry](https://github.com/otf-kit/sdk/tree/main/apps/ui-native-registry) · [native showcase](https://github.com/otf-kit/sdk/tree/main/apps/ui-native-showcase).
+
 ## Quick start
 
 ```bash
@@ -86,6 +88,13 @@ pnpm add @otfdashkit/ui @otfdashkit/tokens
 
 # Native (Expo)
 pnpm add @otfdashkit/ui-native @otfdashkit/tokens
+```
+
+Using npm instead:
+
+```bash
+npm install @otfdashkit/ui @otfdashkit/tokens
+npm install @otfdashkit/ui-native @otfdashkit/tokens
 ```
 
 ```tsx
