@@ -9,7 +9,7 @@ export default function AnimatedNumberShowcase() {
   return (
     <ShowcaseFrame
       title="AnimatedNumber"
-      description="Number that counts up to its value, with the same props as the web AnimatedNumber. Blank figure spaces hold the final width so nothing shifts."
+      description="Number that counts up to its value, with most of the web AnimatedNumber's props, plus delay. Blank figure spaces hold the final width so nothing shifts."
       docPath="packages/ui-native/src/patterns/AnimatedNumber.tsx"
     >
       <Section title="Count-up with delay" hint="duration 450, delay 300">

@@ -98,7 +98,7 @@ export const CATALOG: Category[] = [
       { slug: 'fab', title: 'Floating Action Button', description: 'Anchored CTA — legacy circle/pill + expanding actions menu w/ backdrop.', status: 'ready' },
       { slug: 'wheel-picker', title: 'WheelPicker', description: 'iOS-flavored vertical scroll-wheel for height / weight / enums.', status: 'ready' },
       { slug: 'ruler-scrubber', title: 'RulerScrubber', description: 'Horizontal ruler scrubber with snap, ticks, value display.', status: 'ready' },
-      { slug: 'animated-number', title: 'AnimatedNumber', description: 'Count-up number — same props as web, plus delay; reduced-motion safe.', status: 'ready' },
+      { slug: 'animated-number', title: 'AnimatedNumber', description: 'Count-up number — shares most props with the web one, plus delay; reduced-motion safe.', status: 'ready' },
       // Premium screens
       { slug: 'paywall-screen', title: 'Paywall Screen', description: 'Subscription wall — default, social-proof, comparison, countdown urgency.', status: 'ready' },
       { slug: 'login-screen', title: 'Login Screen', description: 'Email + provider auth — providers, email-only, editorial, branded.', status: 'ready' },

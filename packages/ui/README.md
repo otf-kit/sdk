@@ -1,7 +1,7 @@
 <h1 align="center">@otfdashkit/ui</h1>
 
 <p align="center">
-  89 web components for builders shipping production apps — Radix under the hood, Tailwind v4 on top, AI-agent-readable by design.
+  90 web components for builders shipping production apps — Radix under the hood, Tailwind v4 on top, AI-agent-readable by design.
 </p>
 
 <p align="center">
@@ -27,7 +27,7 @@
 - **Advanced** — Tiptap editor, ImageCrop, file uploaders, marquees, shiki-powered code blocks, video player
 - **17 themes** out of the box from [`@otfdashkit/tokens`](https://www.npmjs.com/package/@otfdashkit/tokens) — swap palette by changing one attribute on `<html>`
 
-89 installable web components in [`src/`](src/). Full catalog at the Storybook below.
+90 installable web components in [`src/`](src/). Full catalog at the Storybook below.
 
 ## Live demos
 
@@ -82,7 +82,7 @@ Pair with [`@otfdashkit/eslint-plugin-otf-design`](https://www.npmjs.com/package
 
 ## Related packages
 
-- [`@otfdashkit/ui-native`](https://www.npmjs.com/package/@otfdashkit/ui-native) — mobile counterpart, same component API
+- [`@otfdashkit/ui-native`](https://www.npmjs.com/package/@otfdashkit/ui-native) — mobile counterpart, same component names for the shared set (props differ per platform)
 - [`@otfdashkit/tokens`](https://www.npmjs.com/package/@otfdashkit/tokens) — design tokens (CSS vars + Tamagui config)
 - [`@otfdashkit/cli`](https://www.npmjs.com/package/@otfdashkit/cli) — heavy-peer component installer (Skia, Reanimated, MMKV)
 

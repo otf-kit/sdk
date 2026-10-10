@@ -27,8 +27,9 @@ export interface AnimatedNumberProps extends Omit<OtfTextProps, 'children'> {
 const FIGURE_SPACE = '\u2007'
 
 /**
- * Number that counts up to `value`. Same props as the web `AnimatedNumber`,
- * minus `autoStart`, which has no scroll-into-view trigger on native.
+ * Number that counts up to `value`. Shares `value`, `from`, `duration`, `decimals`,
+ * `prefix`, `suffix`, `format` and `locale` with the web `AnimatedNumber`; adds `delay`,
+ * `countMin` and `variant`; has no `autoStart` (no scroll-into-view trigger on native) or `easing`.
  * Blank figure spaces hold the final width so the count never shifts layout.
  *
  * @example
