@@ -3,8 +3,8 @@
 ## Setup
 
 ```bash
-git clone https://github.com/your-org/otf.git
-cd otf
+git clone https://github.com/otf-kit/sdk.git
+cd sdk
 pnpm install
 ```
 
