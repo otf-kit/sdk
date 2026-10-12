@@ -20,7 +20,7 @@
 
 ## What you get
 
-- **19 React Native components** — Button, Card, Input, Avatar, Badge, Chip, Sheet, Switch, Tabs, Toast, Text, Stack — same names and props as the web SDK
+- **19 React Native components** — Button, Card, Input, Avatar, Badge, Chip, Sheet, Switch, Tabs, Toast, Text, Stack — component names and design tokens shared with the web SDK; props differ per platform
 - **Apple-Fitness-style blocks** — ActivityRings, WeekStrip, StepperBig, MetricCard, SegmentedControl, MiniBarChart
 - **Animated patterns** — shaders, marquees, parallax scrolls (heavy peers ship via [`@otfdashkit/cli`](https://www.npmjs.com/package/@otfdashkit/cli) so you only pay for what you use)
 - **17 shared themes** — same `@otfdashkit/tokens` palette as web; switch palette via the `defaultTheme` prop on `<OTFProvider>`
@@ -61,7 +61,7 @@ export default function App() {
 }
 ```
 
-One root, sensible defaults — the provider wires up OTF tokens, dark mode, and font config so your screens just render. The same component names and props work on web (`@otfdashkit/ui`); porting a screen is a one-line import change.
+One root, sensible defaults — the provider wires up OTF tokens, dark mode, and font config so your screens just render. The same component names exist on web (`@otfdashkit/ui`) for the shared set; props differ per platform, so check each component's page when porting a screen.
 
 ## Shared component names
 
