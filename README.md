@@ -6,7 +6,7 @@
 
 ### One component set for web, iOS, and Android.
 
-**Stop burning AI tokens on broken UI code.** Pre-built, accessible, production-tested components your coding agent extends — instead of regenerating the same buttons, forms, and dialogs (half of them broken) on every prompt. `<Button>` from **`@otfdashkit/ui`** (React · Radix · Tailwind v4) and `<Button>` from **`@otfdashkit/ui-native`** (Expo · Tamagui) share the same name, props, and look. Build once, ship to the browser and to the App Store.
+**Stop burning AI tokens on broken UI code.** Pre-built, accessible, production-tested components your coding agent extends — instead of regenerating the same buttons, forms, and dialogs (half of them broken) on every prompt. `<Button>` from **`@otfdashkit/ui`** (React · Radix · Tailwind v4) and `<Button>` from **`@otfdashkit/ui-native`** (Expo · Tamagui) share component names and design tokens; each package has its own props, variants and sizes. One install per platform.
 
 <p>
   <a href="https://www.npmjs.com/package/@otfdashkit/ui"><img src="https://img.shields.io/npm/v/@otfdashkit/ui?style=flat-square&color=000&label=%40otfdashkit%2Fui" alt="@otfdashkit/ui release"></a>
@@ -29,7 +29,7 @@
 
 ---
 
-The tool that spun up your MVP — Lovable, Bolt, v0, Replit, Rork — keeps regenerating the same components on every prompt, and the bill grows as the project does. **otf-ui** is the component layer your agent should build on instead: one opinionated, accessible API that renders **truly native** on every platform — no `Platform.select`, no second design system, no `createTamagui` boilerplate. Wrap [Radix](https://www.radix-ui.com/) + [Tailwind v4](https://tailwindcss.com/) on the web and [Tamagui](https://tamagui.dev/) on native, import the same names everywhere.
+The tool that spun up your MVP — Lovable, Bolt, v0, Replit, Rork — keeps regenerating the same components on every prompt, and the bill grows as the project does. **otf-ui** is the component layer your agent should build on instead: one opinionated, accessible component set that renders **truly native** on every platform — no `Platform.select`, no second design system, no `createTamagui` boilerplate. Wrap [Radix](https://www.radix-ui.com/) + [Tailwind v4](https://tailwindcss.com/) on the web and [Tamagui](https://tamagui.dev/) on native, import the same component names on web and native; props differ per platform.
 
 ## Features
 
@@ -169,7 +169,7 @@ Source: [**github.com/otf-kit/skills**](https://github.com/otf-kit/skills).
 | Package | Platform | What |
 |---|---|---|
 | [`@otfdashkit/ui`](packages/ui/) | Web | 90 installable components, counted from the shared component registry. Built on Radix + Tailwind v4. |
-| [`@otfdashkit/ui-native`](packages/ui-native/) | iOS · Android | 19 React Native components — same names and props as web, one `<OTFProvider>` at the root. |
+| [`@otfdashkit/ui-native`](packages/ui-native/) | iOS · Android | 19 React Native components — component names and design tokens shared with web; props differ per platform. One `<OTFProvider>` at the root. |
 | [`@otfdashkit/tokens`](packages/tokens/) | Both | 17 themes — CSS vars on web, native tokens on mobile. |
 | [`@otfdashkit/cli`](packages/cli/) | Mobile | Registry installer for heavy-peer components (Skia, Reanimated, MMKV) — copies source, no forced peer deps. |
 | [`@otfdashkit/eslint-plugin-otf-design`](packages/eslint-plugin-otf-design/) | Tooling | Catches hex literals and default Tailwind blues/purples/grays at lint time. |
