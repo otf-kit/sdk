@@ -1,6 +1,6 @@
 <div align="center">
 
-<a href="https://ui.otf-kit.dev"><img src="https://cdn.otf-kit.dev/readme/sdk-2610/hero-270.gif" alt="The same OTF components (Button, Card, Input, Tabs, Accordion) rendered live on the web in Storybook and on a phone in the native showcase" width="100%" /></a>
+<a href="https://ui.otf-kit.dev"><img src="https://cdn.otf-kit.dev/readme/sdk-2610/hero-240.gif" alt="The same OTF components (Button, Card, Input, Tabs, Accordion) rendered live on the web in Storybook and on a phone in the native showcase" width="100%" /></a>
 
 # OTF UI
 
@@ -19,7 +19,7 @@
 
 `<Button>` from `@otfdashkit/ui` on the web and `<Button>` from `@otfdashkit/ui-native` on iOS and Android share a name and one set of design tokens. You import the same component names on every platform. Each package keeps the props that suit its platform, so check a component's page when you port a screen.
 
-**270+ components: 190+ web and 85+ native.** We count component modules: `.tsx` files in `packages/ui/src` and `packages/ui-native/src` that export at least one component, leaving out stories and tests (192 web + 86 native on `main`, October 2026). Of these, the [component gallery](https://otf-kit.dev/components) documents **109 installable components** one by one (90 web and 19 React Native), each with its own install steps.
+**240+ components: 150+ web and 85+ native.** At least 240, counting only components exported from the npm packages (`@otfdashkit/ui` and `@otfdashkit/ui-native`), leaving out stories and tests. Of these, the [component gallery](https://otf-kit.dev/components) documents **109 installable components** one by one (90 web and 19 React Native), each with its own install steps.
 
 ## Quick start (30 seconds)
 
