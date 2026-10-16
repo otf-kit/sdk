@@ -41,11 +41,13 @@ pnpm add @otfdashkit/tokens
 import '@otfdashkit/tokens/web.css'
 ```
 
-Pick a theme by setting an attribute on `<html>`:
+Pick one of the four CSS palettes by setting a class on `<html>`, and add `dark` for dark mode:
 
 ```html
-<html data-theme="ocean-teal" class="dark">
+<html class="theme-slate dark">
 ```
+
+The CSS file ships only `theme-slate`, `theme-warm`, `theme-cosmic` and `theme-terminal`. The other ids in the table below are TypeScript design themes; they are not applied by the CSS file.
 
 Every component, every Tailwind utility class that reads `hsl(var(--*))`, every chart color now resolves through this token set.
 
@@ -53,7 +55,7 @@ Every component, every Tailwind utility class that reads `hsl(var(--*))`, every 
 
 ```ts
 // tailwind.config.ts
-import { tailwindPreset } from '@otfdashkit/tokens/tailwind'
+import { tailwindPreset } from '@otfdashkit/tokens'
 
 export default {
   presets: [tailwindPreset],
