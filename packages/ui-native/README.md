@@ -52,7 +52,7 @@ export default function App() {
     <OTFProvider>
       <Card>
         <Input placeholder="Email" />
-        <Button variant="primary" size="lg" onPress={handlePress}>
+        <Button variant="primary" size="$4" onPress={handlePress}>
           Continue
         </Button>
       </Card>
