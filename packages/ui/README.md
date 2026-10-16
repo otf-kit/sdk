@@ -1,7 +1,7 @@
 <h1 align="center">@otfdashkit/ui</h1>
 
 <p align="center">
-  90 web components for builders shipping production apps — Radix under the hood, Tailwind v4 on top, AI-agent-readable by design.
+  90 web components for builders shipping production apps — Radix under the hood, Tailwind CSS v3 on top, AI-agent-readable by design.
 </p>
 
 <p align="center">
@@ -13,7 +13,7 @@
   </a>
   <img src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square" alt="MIT License">
   <img src="https://img.shields.io/badge/React-19-000?style=flat-square" alt="React 19">
-  <img src="https://img.shields.io/badge/Tailwind-v4-000?style=flat-square" alt="Tailwind v4">
+  <img src="https://img.shields.io/badge/Tailwind-v3-000?style=flat-square" alt="Tailwind v3">
 </p>
 
 ---

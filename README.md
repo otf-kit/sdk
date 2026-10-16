@@ -27,9 +27,24 @@
 
 ```bash
 npm install @otfdashkit/ui @otfdashkit/tokens
+npm install -D tailwindcss@3 tailwindcss-animate postcss autoprefixer
 ```
 
-The web components are styled with Tailwind CSS utility classes, so your app needs Tailwind CSS v3 with `./node_modules/@otfdashkit/ui/src/**/*.{ts,tsx}` in its `content` paths. For the full theme setup, see the [getting started guide](https://otf-kit.dev/docs/getting-started).
+The web components are styled with Tailwind CSS v3. Add the OTF preset, the animation plugin and the component sources to your Tailwind config:
+
+```ts
+// tailwind.config.ts
+import animate from 'tailwindcss-animate'
+import { otfPreset } from '@otfdashkit/tokens/tailwind-preset'
+
+export default {
+  presets: [otfPreset],
+  plugins: [animate],
+  content: ['./src/**/*.{ts,tsx}', './node_modules/@otfdashkit/ui/src/**/*.{ts,tsx}'],
+}
+```
+
+Add a `postcss.config.mjs` with `export default { plugins: { tailwindcss: {}, autoprefixer: {} } }`, and keep the usual `@tailwind base; @tailwind components; @tailwind utilities;` lines in your global stylesheet. Then import the two stylesheets once and use the components:
 
 ```tsx
 import '@otfdashkit/tokens/web.css'
@@ -68,7 +83,7 @@ export default function App() {
 }
 ```
 
-On native, one `<OTFProvider>` at the root is all the setup. On the web, follow the [getting started guide](https://otf-kit.dev/docs/getting-started) for the Tailwind theme setup, then add the two CSS imports.
+On native, one `<OTFProvider>` at the root is all the setup. On the web, it's the Tailwind preset above plus the two CSS imports; the [getting started guide](https://otf-kit.dev/docs/getting-started) covers theme switching.
 
 ## What you get
 
