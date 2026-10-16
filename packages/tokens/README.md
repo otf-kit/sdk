@@ -19,12 +19,15 @@
 
 ## What you get
 
-- `web.css` — full CSS-variable definitions for all 17 themes (light + dark)
-- `tailwindPreset` — Tailwind v4 preset wired to the tokens
-- `otfConfig` — native config object consumed by `<OTFProvider>` from [`@otfdashkit/ui-native`](https://www.npmjs.com/package/@otfdashkit/ui-native)
-- `OTF_DESIGN_THEMES`, `OtfDesignThemeId`, `OtfColorPalette`, `OtfDesignTheme` — types
+| Import | What it is | Platform |
+|---|---|---|
+| `@otfdashkit/tokens/web.css` | CSS variables for the four web palettes (`theme-slate`, `theme-warm`, `theme-cosmic`, `theme-terminal`), light and dark | Web |
+| `@otfdashkit/tokens/tailwind-preset` | `otfPreset`, a Tailwind CSS v3 preset that maps `bg-primary`, `text-foreground`, `border-border` and the rest to those variables. Safe in a web-only project: it never loads native code. | Web |
+| `@otfdashkit/tokens` | `otfPreset` again, plus the native palettes (`slateDarkColors` … `terminalLightColors`, `otfThemes`), the native config `otfConfig`, `THEMES` / `getThemeClass`, and the 17 design-theme definitions (`OTF_DESIGN_THEMES`, `OtfDesignThemeId`, `OtfColorPalette`, `OtfDesignTheme`, `getOtfDesignTheme`) | Native (needs `tamagui` and `@tamagui/core`) |
 
-Used by both [`@otfdashkit/ui`](https://www.npmjs.com/package/@otfdashkit/ui) and [`@otfdashkit/ui-native`](https://www.npmjs.com/package/@otfdashkit/ui-native).
+On the web, import the preset from `@otfdashkit/tokens/tailwind-preset`, not from the package root. The root entry also loads the native config, which needs `tamagui` and `@tamagui/core`; a web-only install doesn't have them, so Tailwind stops with `Cannot find module '@tamagui/core'`.
+
+Pairs with [`@otfdashkit/ui`](https://www.npmjs.com/package/@otfdashkit/ui) and [`@otfdashkit/ui-native`](https://www.npmjs.com/package/@otfdashkit/ui-native).
 
 ## Install
 
@@ -47,24 +50,37 @@ Pick one of the four CSS palettes by setting a class on `<html>`, and add `dark`
 <html class="theme-slate dark">
 ```
 
+Switch at runtime by changing that class, for example `document.documentElement.className = 'theme-warm dark'`.
+
 The CSS file ships only `theme-slate`, `theme-warm`, `theme-cosmic` and `theme-terminal`. The other ids in the table below are TypeScript design themes; they are not applied by the CSS file.
 
 Every component, every Tailwind utility class that reads `hsl(var(--*))`, every chart color now resolves through this token set.
 
-## Tailwind v4 preset
+## Tailwind preset (Tailwind CSS v3)
+
+`otfPreset` matches the Tailwind config the `@otfdashkit/ui` components are built with. Add the `tailwindcss-animate` plugin next to it for the dialog and menu animations:
+
+```bash
+npm install -D tailwindcss@3 tailwindcss-animate
+```
 
 ```ts
 // tailwind.config.ts
-import { tailwindPreset } from '@otfdashkit/tokens'
+import animate from 'tailwindcss-animate'
+import { otfPreset } from '@otfdashkit/tokens/tailwind-preset'
 
 export default {
-  presets: [tailwindPreset],
+  presets: [otfPreset],
+  plugins: [animate],
+  content: ['./src/**/*.{ts,tsx}', './node_modules/@otfdashkit/ui/src/**/*.{ts,tsx}'],
 }
 ```
 
+A default import works too (`import otfPreset from '@otfdashkit/tokens/tailwind-preset'`), and so does CommonJS (`require('@otfdashkit/tokens/tailwind-preset').otfPreset`).
+
 ## Native (one provider, no config required)
 
-These tokens ship pre-wired through [`@otfdashkit/ui-native`](https://www.npmjs.com/package/@otfdashkit/ui-native) — you don't import them by hand. Just wrap your app:
+[`@otfdashkit/ui-native`](https://www.npmjs.com/package/@otfdashkit/ui-native) needs no token setup: `<OTFProvider>` ships the default Tamagui-based `light` and `dark` themes. Wrap your app once:
 
 ```tsx
 import { OTFProvider } from '@otfdashkit/ui-native'
@@ -102,7 +118,7 @@ For advanced theming or custom config merging, see the [`@otfdashkit/ui-native` 
 | `modern-minimal` | Default-clean SaaS |
 | `bubblegum` | Kids, casual gaming |
 
-Switch at runtime by writing to `document.documentElement.dataset.theme` (web) or by setting `defaultTheme` on `<OTFProvider>` (native).
+On native, `<OTFProvider defaultTheme="dark">` picks light or dark; to theme native screens with the OTF palettes, build themes from `otfThemes` or the `*DarkColors` / `*LightColors` ramps. On the web, use the four `theme-*` classes above.
 
 ## Live demos
 

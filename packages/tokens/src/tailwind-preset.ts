@@ -5,44 +5,25 @@ function hslVar(name: string): string {
   return `hsl(var(${name}))`
 }
 
+// Mirrors packages/ui/tailwind.config.ts (spacing = Tailwind default = --space-* tokens).
+// Add the tailwindcss-animate plugin in the app config: the package root re-exports this file.
 export const otfPreset: Partial<Config> = {
   darkMode: ['class'],
   theme: {
     extend: {
       colors: {
-        background:  { DEFAULT: hslVar('--background') },
-        foreground:  { DEFAULT: hslVar('--foreground') },
-        card: {
-          DEFAULT:    hslVar('--card'),
-          foreground: hslVar('--card-foreground'),
-        },
-        popover: {
-          DEFAULT:    hslVar('--popover'),
-          foreground: hslVar('--popover-foreground'),
-        },
-        primary: {
-          DEFAULT:    hslVar('--primary'),
-          foreground: hslVar('--primary-foreground'),
-        },
-        secondary: {
-          DEFAULT:    hslVar('--secondary'),
-          foreground: hslVar('--secondary-foreground'),
-        },
-        muted: {
-          DEFAULT:    hslVar('--muted'),
-          foreground: hslVar('--muted-foreground'),
-        },
-        accent: {
-          DEFAULT:    hslVar('--accent'),
-          foreground: hslVar('--accent-foreground'),
-        },
-        destructive: {
-          DEFAULT:    hslVar('--destructive'),
-          foreground: hslVar('--destructive-foreground'),
-        },
-        border:  { DEFAULT: hslVar('--border') },
-        input:   { DEFAULT: hslVar('--input') },
-        ring:    { DEFAULT: hslVar('--ring') },
+        background:  hslVar('--background'),
+        foreground:  hslVar('--foreground'),
+        card:        { DEFAULT: hslVar('--card'),        foreground: hslVar('--card-foreground') },
+        popover:     { DEFAULT: hslVar('--popover'),     foreground: hslVar('--popover-foreground') },
+        primary:     { DEFAULT: hslVar('--primary'),     foreground: hslVar('--primary-foreground') },
+        secondary:   { DEFAULT: hslVar('--secondary'),   foreground: hslVar('--secondary-foreground') },
+        muted:       { DEFAULT: hslVar('--muted'),       foreground: hslVar('--muted-foreground') },
+        accent:      { DEFAULT: hslVar('--accent'),      foreground: hslVar('--accent-foreground') },
+        destructive: { DEFAULT: hslVar('--destructive'), foreground: hslVar('--destructive-foreground') },
+        border: hslVar('--border'),
+        input:  hslVar('--input'),
+        ring:   hslVar('--ring'),
         // Status + priority tokens (OTF-specific)
         'status-backlog':     hslVar('--status-backlog'),
         'status-todo':        hslVar('--status-todo'),
@@ -51,32 +32,39 @@ export const otfPreset: Partial<Config> = {
         'status-cancelled':   hslVar('--status-cancelled'),
       },
       borderRadius: {
-        lg:  'var(--radius)',
-        md:  'calc(var(--radius) - 2px)',
-        sm:  'calc(var(--radius) - 4px)',
+        sm:      'var(--radius-sm)',
+        md:      'var(--radius-md)',
+        lg:      'var(--radius-lg)',
+        xl:      'var(--radius-xl)',
+        full:    'var(--radius-full)',
+        DEFAULT: 'var(--radius-md)',
         inner:     'var(--radius-inner)',
         innermost: 'var(--radius-innermost)',
       },
-      fontFamily: {
-        sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
-        mono: ['var(--font-mono)', 'ui-monospace', 'monospace'],
+      boxShadow: {
+        sm:      'var(--shadow-sm)',
+        DEFAULT: 'var(--shadow-md)',
+        md:      'var(--shadow-md)',
+        lg:      'var(--shadow-lg)',
+        xl:      'var(--shadow-xl)',
+        card:    'var(--shadow-card)',
       },
-      spacing: {
-        '0.5': 'var(--space-0\\.5)',
-        '1':   'var(--space-1)',
-        '2':   'var(--space-2)',
-        '3':   'var(--space-3)',
-        '4':   'var(--space-4)',
-        '5':   'var(--space-5)',
-        '6':   'var(--space-6)',
-        '8':   'var(--space-8)',
-        '10':  'var(--space-10)',
-        '12':  'var(--space-12)',
-        '16':  'var(--space-16)',
+      fontFamily: {
+        sans:    'var(--font-sans)',
+        heading: 'var(--font-heading)',
+        mono:    'var(--font-mono)',
+      },
+      fontSize: {
+        xs:    ['var(--font-size-xs)',   { lineHeight: 'var(--line-height-tight)' }],
+        sm:    ['var(--font-size-sm)',   { lineHeight: 'var(--line-height-normal)' }],
+        base:  ['var(--font-size-base)', { lineHeight: 'var(--line-height-normal)' }],
+        lg:    ['var(--font-size-lg)',   { lineHeight: 'var(--line-height-relaxed)' }],
+        xl:    ['var(--font-size-xl)',   { lineHeight: 'var(--line-height-heading)' }],
+        '2xl': ['var(--font-size-2xl)',  { lineHeight: 'var(--line-height-heading)' }],
       },
       transitionTimingFunction: {
-        'out-expo':   'var(--ease-out-expo)',
-        'spring':     'var(--ease-spring)',
+        'out-expo': 'var(--ease-out-expo)',
+        'spring':   'var(--ease-spring)',
       },
       transitionDuration: {
         'instant': 'var(--duration-instant)',
@@ -86,8 +74,31 @@ export const otfPreset: Partial<Config> = {
       },
       keyframes: {
         shimmer: {
-          '0%':   { backgroundPosition: '200% 0' },
-          '100%': { backgroundPosition: '-200% 0' },
+          from: { backgroundPosition: '200% 0' },
+          to:   { backgroundPosition: '-200% 0' },
+        },
+        'gradient-shift': {
+          '0%, 100%': { backgroundPosition: '0% 50%' },
+          '50%':      { backgroundPosition: '100% 50%' },
+        },
+        'gradient-pulse': {
+          '0%, 100%': { opacity: '1', transform: 'scale(1)' },
+          '50%':      { opacity: '0.7', transform: 'scale(1.08)' },
+        },
+        'blob-float-0': {
+          '0%, 100%': { transform: 'translate(0, 0) scale(1)' },
+          '33%':      { transform: 'translate(5%, 8%) scale(1.05)' },
+          '66%':      { transform: 'translate(-4%, 4%) scale(0.97)' },
+        },
+        'blob-float-1': {
+          '0%, 100%': { transform: 'translate(0, 0) scale(1)' },
+          '33%':      { transform: 'translate(-6%, -5%) scale(1.06)' },
+          '66%':      { transform: 'translate(3%, -8%) scale(0.96)' },
+        },
+        'blob-float-2': {
+          '0%, 100%': { transform: 'translate(0, 0) scale(1)' },
+          '33%':      { transform: 'translate(4%, -6%) scale(0.98)' },
+          '66%':      { transform: 'translate(-5%, 5%) scale(1.04)' },
         },
         'fade-in': {
           from: { opacity: '0' },
@@ -99,10 +110,18 @@ export const otfPreset: Partial<Config> = {
         },
       },
       animation: {
-        shimmer:   'shimmer 2s linear infinite',
-        'fade-in': 'fade-in var(--duration-fast) var(--ease-out-expo)',
-        'slide-up':'slide-up var(--duration-normal) var(--ease-out-expo)',
+        shimmer:          'shimmer 2s ease-in-out infinite',
+        'gradient-shift': 'gradient-shift 8s ease infinite',
+        'gradient-pulse': 'gradient-pulse 6s ease-in-out infinite',
+        'blob-float-0':   'blob-float-0 12s ease-in-out infinite',
+        'blob-float-1':   'blob-float-1 18s ease-in-out infinite',
+        'blob-float-2':   'blob-float-2 24s ease-in-out infinite',
+        'fade-in':  'fade-in var(--duration-fast) var(--ease-out-expo)',
+        'slide-up': 'slide-up var(--duration-normal) var(--ease-out-expo)',
       },
     },
   },
 }
+
+// Web-only entry (`@otfdashkit/tokens/tailwind-preset`): keep this file free of native imports.
+export default otfPreset

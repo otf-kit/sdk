@@ -1,6 +1,6 @@
 {
   "name": "@otfdashkit/tokens",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "OTF design tokens — CSS variables (web) + Tamagui tokens (native). 17 themes, dark mode, parity across React + React Native.",
   "keywords": [
     "otfdashkit",
@@ -26,11 +26,33 @@
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "tailwind-preset": [
+        "./dist/tailwind-preset.d.ts"
+      ]
+    }
+  },
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    },
+    "./tailwind-preset": {
+      "import": {
+        "types": "./dist/tailwind-preset.d.mts",
+        "default": "./dist/tailwind-preset.mjs"
+      },
+      "require": {
+        "types": "./dist/tailwind-preset.d.ts",
+        "default": "./dist/tailwind-preset.js"
+      }
     },
     "./web.css": "./src/web.css"
   },
