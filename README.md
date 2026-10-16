@@ -1,104 +1,37 @@
 <div align="center">
 
-<a href="https://otf-kit.dev"><img src="https://cdn.otf-kit.dev/readme/hero.png" alt="OTF — one component set for web, iOS, and Android" width="100%" /></a>
+<a href="https://ui.otf-kit.dev"><img src="https://cdn.otf-kit.dev/readme/sdk-2610/hero-270.gif" alt="The same OTF components (Button, Card, Input, Tabs, Accordion) rendered live on the web in Storybook and on a phone in the native showcase" width="100%" /></a>
 
-# otf-ui
+# OTF UI
 
-### One component set for web, iOS, and Android.
+### One component set for web, iOS and Android. Free, MIT, and easy for your AI agent to build on.
 
-**Stop burning AI tokens on broken UI code.** Pre-built, accessible, production-tested components your coding agent extends — instead of regenerating the same buttons, forms, and dialogs (half of them broken) on every prompt. `<Button>` from **`@otfdashkit/ui`** (React · Radix · Tailwind v4) and `<Button>` from **`@otfdashkit/ui-native`** (Expo · Tamagui) share component names and design tokens; each package has its own props, variants and sizes. One install per platform.
-
-<p>
-  <a href="https://www.npmjs.com/package/@otfdashkit/ui"><img src="https://img.shields.io/npm/v/@otfdashkit/ui?style=flat-square&color=000&label=%40otfdashkit%2Fui" alt="@otfdashkit/ui release"></a>
-  <a href="https://www.npmjs.com/package/@otfdashkit/ui-native"><img src="https://img.shields.io/npm/v/@otfdashkit/ui-native?style=flat-square&color=000&label=%40otfdashkit%2Fui-native" alt="@otfdashkit/ui-native release"></a>
-  <a href="https://www.npmjs.com/package/@otfdashkit/ui"><img src="https://img.shields.io/npm/dm/@otfdashkit/ui?style=flat-square&color=000&label=downloads" alt="npm downloads"></a>
-  <a href="./LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square" alt="MIT License"></a>
-  <a href="https://discord.gg/gpXyu7SqNZ"><img src="https://img.shields.io/badge/Discord-join-5865F2?style=flat-square&logo=discord&logoColor=white" alt="Discord"></a>
-</p>
+**[Storybook](https://ui.otf-kit.dev)** · **[Native showcase](https://native-preview.otf-kit.dev)** · **[Android APK](https://otf-kit.dev/download)** · **[Component gallery](https://otf-kit.dev/components)** · **[Docs](https://otf-kit.dev/docs)**
 
 <p>
-  <img src="https://img.shields.io/badge/platforms-Web%20%C2%B7%20iOS%20%C2%B7%20Android-000?style=flat-square" alt="platforms">
-  <img src="https://img.shields.io/badge/React-19-000?style=flat-square" alt="React 19">
-  <img src="https://img.shields.io/badge/Tailwind-v4-000?style=flat-square" alt="Tailwind v4">
-  <img src="https://img.shields.io/badge/Expo-SDK%2054-000?style=flat-square" alt="Expo SDK 54">
+  <a href="https://www.npmjs.com/package/@otfdashkit/ui"><img src="https://img.shields.io/npm/v/@otfdashkit/ui?style=flat-square&color=000&label=%40otfdashkit%2Fui" alt="@otfdashkit/ui on npm"></a>
+  <a href="https://www.npmjs.com/package/@otfdashkit/ui-native"><img src="https://img.shields.io/npm/v/@otfdashkit/ui-native?style=flat-square&color=000&label=%40otfdashkit%2Fui-native" alt="@otfdashkit/ui-native on npm"></a>
+  <a href="./LICENSE"><img src="https://img.shields.io/badge/license-MIT-000?style=flat-square" alt="MIT license"></a>
+  <a href="https://discord.gg/gpXyu7SqNZ"><img src="https://img.shields.io/badge/Discord-join-000?style=flat-square&logo=discord&logoColor=white" alt="Discord"></a>
 </p>
-
-[**Storybook**](https://ui.otf-kit.dev) · [**Live native showcase**](https://native-preview.otf-kit.dev) · [**Component gallery**](https://otf-kit.dev/components) · [**Docs**](https://otf-kit.dev/docs)
 
 </div>
 
----
+`<Button>` from `@otfdashkit/ui` on the web and `<Button>` from `@otfdashkit/ui-native` on iOS and Android share a name and one set of design tokens. You import the same component names on every platform. Each package keeps the props that suit its platform, so check a component's page when you port a screen.
 
-The tool that spun up your MVP — Lovable, Bolt, v0, Replit, Rork — keeps regenerating the same components on every prompt, and the bill grows as the project does. **otf-ui** is the component layer your agent should build on instead: one opinionated, accessible component set that renders **truly native** on every platform — no `Platform.select`, no second design system, no `createTamagui` boilerplate. Wrap [Radix](https://www.radix-ui.com/) + [Tailwind v4](https://tailwindcss.com/) on the web and [Tamagui](https://tamagui.dev/) on native, import the same component names on web and native; props differ per platform.
+**270+ components: 190+ web and 85+ native.** We count component modules: `.tsx` files in `packages/ui/src` and `packages/ui-native/src` that export at least one component, leaving out stories and tests (192 web + 86 native on `main`, October 2026). Of these, the [component gallery](https://otf-kit.dev/components) documents **109 installable components** one by one (90 web and 19 React Native), each with its own install steps.
 
-## Features
+## Quick start (30 seconds)
 
-- 🧩 **One component set, three platforms** — the same component names for the components both packages ship, the same design tokens, and one install per platform. Props are not identical: each package has its own variants and sizes, so check the component's page.
-- 📦 **109 installable components** — 90 web and 19 React Native, with blocks and patterns cataloged separately.
-- 🎨 **17 design-theme definitions** in shared tokens for web and native.
-- ⚡ **Copy-paste *or* `npm install`** — `pnpm add @otfdashkit/ui`, or copy the source via the CLI registry. Your code either way.
-- 🪶 **Wrap, don't reinvent** — opinionated APIs on top of battle-tested primitives, not yet-another-from-scratch widget set.
-- 🤖 **Built for AI coding agents** — structured JSDoc + tested prompts so Claude Code and Cursor scaffold real screens instead of guessing.
-- 🆓 **MIT** — own the source, eject anytime, no lock-in.
-
-## See it live
-
-Everything below is open and clickable — no signup, no install required to look around.
-
-<a href="https://otf-kit.dev/components" target="_blank"><img src="https://cdn.otf-kit.dev/readme/components-motion.gif" alt="Scrolling the live OTF component gallery — web and native components with shared names and design tokens" width="100%" /></a>
-
-<table>
-  <tr>
-    <th align="center" width="60%">Storybook — every component, every variant</th>
-    <th align="center" width="40%">Native showcase — on a real phone</th>
-  </tr>
-  <tr>
-    <td align="center">
-      <a href="https://ui.otf-kit.dev/" target="_blank">
-        <img src="https://api.microlink.io/?url=https%3A%2F%2Fui.otf-kit.dev%2F&screenshot=true&meta=false&embed=screenshot.url&waitForTimeout=3000" alt="otf-ui Storybook" width="100%" />
-      </a>
-    </td>
-    <td align="center">
-      <a href="https://native-preview.otf-kit.dev/" target="_blank">
-        <img src="https://api.microlink.io/?url=https%3A%2F%2Fnative-preview.otf-kit.dev%2F&screenshot=true&meta=false&embed=screenshot.url&waitForTimeout=4000" alt="otf-ui native showcase" width="100%" />
-      </a>
-    </td>
-  </tr>
-  <tr>
-    <td align="center">
-      <a href="https://ui.otf-kit.dev/"><b>ui.otf-kit.dev</b></a><br/>
-      <sub>The full web component library — props, variants, and a11y states, live.</sub>
-    </td>
-    <td align="center">
-      <a href="https://native-preview.otf-kit.dev/"><b>native-preview.otf-kit.dev</b></a><br/>
-      <sub>Phone-framed showcase with a per-screen Expo Go QR — scan and land on the same component on your device.</sub>
-    </td>
-  </tr>
-</table>
-
-Prefer browsing by category? The [**component gallery**](https://otf-kit.dev/components) lists all 109 installable components with per-component install instructions.
-
-Source apps: [web Storybook](https://github.com/otf-kit/sdk/tree/main/apps/storybook-web) · [native registry](https://github.com/otf-kit/sdk/tree/main/apps/ui-native-registry) · [native showcase](https://github.com/otf-kit/sdk/tree/main/apps/ui-native-showcase).
-
-## Quick start
-
-```bash
-# Web (Next.js / Vite)
-pnpm add @otfdashkit/ui @otfdashkit/tokens
-
-# Native (Expo)
-pnpm add @otfdashkit/ui-native @otfdashkit/tokens
-```
-
-Using npm instead:
+**Web** (Next.js, Vite, Remix)
 
 ```bash
 npm install @otfdashkit/ui @otfdashkit/tokens
-npm install @otfdashkit/ui-native @otfdashkit/tokens
 ```
 
+The web components are styled with Tailwind CSS utility classes, so your app needs Tailwind CSS v3 with `./node_modules/@otfdashkit/ui/src/**/*.{ts,tsx}` in its `content` paths. For the full theme setup, see the [getting started guide](https://otf-kit.dev/docs/getting-started).
+
 ```tsx
-// Web — app/layout.tsx (Next.js) or src/main.tsx (Vite)
 import '@otfdashkit/tokens/web.css'
 import '@otfdashkit/ui/styles'
 import { Button, Card, Input } from '@otfdashkit/ui'
@@ -107,121 +40,109 @@ export function SignInCard() {
   return (
     <Card>
       <Input placeholder="Email" />
-      <Button variant="default" size="lg">Continue</Button>
+      <Button size="lg">Continue</Button>
     </Card>
   )
 }
 ```
 
-```tsx
-// Native — same component names, its own props. Button takes variant
-// primary | default | outlined | transparent | floating | destructive | shimmer
-// and a Tamagui size token such as "$4"; the web Button takes variant
-// default | secondary | outline | ghost | destructive | link | gradient | texture | shimmer
-// and size sm | default | lg | xl | icon | icon-sm.
-import { Button, Card, Input } from '@otfdashkit/ui-native'
-```
-
-Wrap the app root once (`<OTFProvider>` on native, the CSS imports on web) and you're done. No `createTamagui` config, no token wiring.
-
-## Theming
-
-17 design themes ship in the tokens package, including Mono, Ocean Teal, Warm Amber, and Cosmic Night. Use the matching web class or native token ID:
-
-```tsx
-<html className="theme-cosmic">                 // web
-<OTFProvider defaultTheme="cosmic-night">    // native
-```
-
-Tokens live in [`@otfdashkit/tokens`](packages/tokens/) and resolve to CSS variables on web and native design tokens on mobile — the same palette, both targets.
-
-## Built for AI coding agents
-
-otf-ui is designed to be *read* by the agents you already code with. Every component ships structured JSDoc and a `prompts.md` with tested prompts, so Claude Code, Cursor, and friends generate working screens instead of hallucinating props.
-
-```
-"Build a settings page with a profile form, a danger zone, and a theme picker — use @otfdashkit/ui."
-```
-
-…produces real, accessible components with correct props, because the model can read the source and the prompt library.
-
-### Agent Skills
-
-Prefer to drive the SDK straight from your coding agent? OTF ships installable
-[**Agent Skills**](https://www.skills.sh/otf-kit/skills) — drop them into Claude Code, Cursor, Codex,
-and 70+ skills-compatible agents:
+**iOS and Android** (Expo)
 
 ```bash
-npx skills add otf-kit/skills
+npm install @otfdashkit/ui-native @otfdashkit/tokens
+npx expo install react-native-svg react-native-safe-area-context
 ```
 
-[![skills.sh](https://skills.sh/b/otf-kit/skills)](https://www.skills.sh/otf-kit/skills)
+```tsx
+import { OTFProvider, Button, Card, Input } from '@otfdashkit/ui-native'
 
-- **otf-cross-platform-ui** — one component set (shared names and tokens, props differ), web + native
-- **otf-ui** — web components (`@otfdashkit/ui`)
-- **otf-ui-native** — native components (`@otfdashkit/ui-native`)
-- **otf-tokens** — theming (`@otfdashkit/tokens`)
+export default function App() {
+  return (
+    <OTFProvider>
+      <Card>
+        <Input placeholder="Email" />
+        <Button variant="primary" size="$4">Continue</Button>
+      </Card>
+    </OTFProvider>
+  )
+}
+```
 
-Source: [**github.com/otf-kit/skills**](https://github.com/otf-kit/skills).
+On native, one `<OTFProvider>` at the root is all the setup. On the web, follow the [getting started guide](https://otf-kit.dev/docs/getting-started) for the Tailwind theme setup, then add the two CSS imports.
 
-## What's in the box
-
-| Package | Platform | What |
-|---|---|---|
-| [`@otfdashkit/ui`](packages/ui/) | Web | 90 installable components, counted from the shared component registry. Built on Radix + Tailwind v4. |
-| [`@otfdashkit/ui-native`](packages/ui-native/) | iOS · Android | 19 React Native components — component names and design tokens shared with web; props differ per platform. One `<OTFProvider>` at the root. |
-| [`@otfdashkit/tokens`](packages/tokens/) | Both | 17 themes — CSS vars on web, native tokens on mobile. |
-| [`@otfdashkit/cli`](packages/cli/) | Mobile | Registry installer for heavy-peer components (Skia, Reanimated, MMKV) — copies source, no forced peer deps. |
-| [`@otfdashkit/eslint-plugin-otf-design`](packages/eslint-plugin-otf-design/) | Tooling | Catches hex literals and default Tailwind blues/purples/grays at lint time. |
-
-Component categories: **Layout · Forms & inputs · Overlays (dialog/sheet/drawer/popover) · Data (tables, trees, charts) · Navigation · Feedback · Media · Editors**. Browse them all in [Storybook](https://ui.otf-kit.dev) or the [gallery](https://otf-kit.dev/components).
-
-## Documentation
-
-- 📖 **Docs** — [otf-kit.dev/docs](https://otf-kit.dev/docs)
-- 🧪 **Storybook (web)** — [ui.otf-kit.dev](https://ui.otf-kit.dev)
-- 📱 **Native showcase** — [native-preview.otf-kit.dev](https://native-preview.otf-kit.dev)
-- 🗂 **Component gallery** — [otf-kit.dev/components](https://otf-kit.dev/components)
-
-## Contributing
-
-Issues, ideas, and PRs are welcome. Found a missing variant or an a11y gap? Open an issue or send a PR — see [`CONTRIBUTING.md`](./CONTRIBUTING.md). Every component ships the same contract: implementation + Storybook story + a11y test + `prompts.md` + README + export.
-
-If otf-ui saves you time, a ⭐ helps other builders find it.
-
-## Community
-
-Join the **[Discord](https://discord.gg/gpXyu7SqNZ)** for help, feature requests, bug reports, and release announcements.
-
-## Status
-
-`v0.1.x` — alpha. APIs may shift before `1.0`; pin exact releases if you ship to production.
-
-## Building a whole app?
-
-The SDK is free, MIT, and stands entirely on its own — that's the point. If you'd rather not wire the backend from scratch, OTF also offers optional **full-stack kits** (a SaaS dashboard, a fitness app, a booking app): the same SDK dropped into a complete, owned starting point — auth, database, payments, deploy scripts, and an `ai/` config your agent reads to extend it.
+## What you get
 
 <table>
   <tr>
-    <td align="center" width="58%"><a href="https://saas.otf-kit.dev" target="_blank"><img src="https://cdn.otf-kit.dev/readme/kits-web.png" alt="OTF SaaS Dashboard kit — web" width="100%" /></a></td>
-    <td align="center" width="42%"><a href="https://fitness-preview.otf-kit.dev" target="_blank"><img src="https://cdn.otf-kit.dev/readme/kits-mobile.png" alt="OTF Fitness kit — iOS, Android, and web from one codebase" width="100%" /></a></td>
+    <td width="50%"><a href="https://otf-kit.dev/components"><img src="https://cdn.otf-kit.dev/readme/sdk-2610/gallery-eventcalendar.jpg" alt="Event calendar, month view, web" width="100%" /></a></td>
+    <td width="50%"><a href="https://otf-kit.dev/components"><img src="https://cdn.otf-kit.dev/readme/sdk-2610/gallery-colorpicker.jpg" alt="Color picker with swatches, web" width="100%" /></a></td>
   </tr>
   <tr>
-    <td align="center"><sub>SaaS Dashboard — live at <a href="https://saas.otf-kit.dev">saas.otf-kit.dev</a></sub></td>
-    <td align="center"><sub>Fitness — iOS · Android · web, one codebase, at <a href="https://fitness-preview.otf-kit.dev">fitness-preview.otf-kit.dev</a></sub></td>
+    <td width="50%"><a href="https://otf-kit.dev/components"><img src="https://cdn.otf-kit.dev/readme/sdk-2610/gallery-advanceddatagrid.jpg" alt="Data grid with sortable columns, web" width="100%" /></a></td>
+    <td width="50%"><a href="https://otf-kit.dev/blocks"><img src="https://cdn.otf-kit.dev/readme/sdk-2610/gallery-sidebar-dashboard.jpg" alt="Dashboard sidebar block, web" width="100%" /></a></td>
+  </tr>
+  <tr>
+    <td width="50%"><a href="https://native-preview.otf-kit.dev"><img src="https://cdn.otf-kit.dev/readme/sdk-2610/gallery-date-picker.jpg" alt="Date picker on iOS and Android" width="100%" /></a></td>
+    <td width="50%"><a href="https://native-preview.otf-kit.dev"><img src="https://cdn.otf-kit.dev/readme/sdk-2610/gallery-chat-bubble.jpg" alt="Chat bubbles on iOS and Android" width="100%" /></a></td>
   </tr>
 </table>
 
-Live demos and details at **[otf-kit.dev](https://otf-kit.dev)**.
+Every image above is a screenshot of the live [Storybook](https://ui.otf-kit.dev) or [native showcase](https://native-preview.otf-kit.dev). The [component gallery](https://otf-kit.dev/components) lists all 109 installable components with install steps for each one. Blocks (full page sections) and patterns (motion and effects) are listed separately at [/blocks](https://otf-kit.dev/blocks) and [/patterns](https://otf-kit.dev/patterns).
+
+| Package | Platform | What |
+|---|---|---|
+| [`@otfdashkit/ui`](packages/ui/) | Web | 90 installable components, counted from the shared component registry: forms, overlays, data tables, charts, calendar, editor. |
+| [`@otfdashkit/ui-native`](packages/ui-native/) | iOS · Android | 19 React Native components, with names and design tokens shared with web. One `<OTFProvider>` at the root. |
+| [`@otfdashkit/tokens`](packages/tokens/) | Both | 17 palette definitions, CSS variables on web, native tokens on mobile. |
+| [`@otfdashkit/cli`](packages/cli/) | Mobile | Copies heavy components (shaders, worklets) into your project as source, so you only install the native libraries you use. |
+| [`@otfdashkit/eslint-plugin-otf-design`](packages/eslint-plugin-otf-design/) | Tooling | Flags hard-coded hex colors and stock blue, purple and gray utility classes at lint time. |
+
+## Try it on your phone
+
+- **Browser:** [native-preview.otf-kit.dev](https://native-preview.otf-kit.dev) shows the native showcase in a phone frame. Each screen has its own Expo Go QR code, so a scan opens the same component on your device.
+- **Android:** install the showcase app from [otf-kit.dev/download](https://otf-kit.dev/download).
+
+## Works with Claude Code and Cursor
+
+Your agent reads the same files you do. These are in the repo or on the site today:
+
+- **Agent Skills.** `npx skills add otf-kit/skills` installs the `otf-ui`, `otf-ui-native`, `otf-tokens` and `otf-cross-platform-ui` skills for Claude Code, Cursor, Codex and other skills-compatible agents. Source: [`otf-kit/skills`](https://github.com/otf-kit/skills).
+- **Component conventions.** [`packages/ui-native/AGENTS.md`](packages/ui-native/AGENTS.md) says where components live, the authoring rules, and what belongs in the SDK.
+- **`llms.txt`.** [otf-kit.dev/llms.txt](https://otf-kit.dev/llms.txt) indexes every docs and component page for LLMs.
+- **Markdown mirror.** Any page on the site is plain Markdown if you add `/md/` and `.md` to the path, for example [otf-kit.dev/md/docs.md](https://otf-kit.dev/md/docs.md).
+- **Design lint.** [`eslint-plugin-otf-design`](packages/eslint-plugin-otf-design/) stops generated code from adding hard-coded colors.
+
+```text
+Build a settings screen with a profile form, a danger zone and a theme picker.
+Use @otfdashkit/ui on web and @otfdashkit/ui-native in the Expo app.
+```
+
+## Theming
+
+`@otfdashkit/tokens` ships 17 palette definitions, including Mono, Ocean Teal, Warm Amber and Cosmic Night. On the web, four of them are ready-made CSS classes:
+
+```html
+<html class="theme-cosmic dark">   <!-- theme-slate | theme-warm | theme-cosmic | theme-terminal -->
+```
+
+On native, build themes from any of the 17 with `getOtfThemePalettes('ocean-teal')` from `@otfdashkit/ui-native`. See [`packages/tokens`](packages/tokens/).
+
+## Need a full app?
+
+The SDK is free and works on its own. If you want auth, a database, payments and deploy scripts already wired, [**OTF kits**](https://otf-kit.dev) are complete apps built on this SDK. Each one ships an `ai/` folder your agent reads. You can open the live demos before you buy.
+
+## Contributing
+
+Bug reports, missing variants and accessibility fixes are welcome. Start with an issue labelled [`good first issue`](https://github.com/otf-kit/sdk/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22), then read [`CONTRIBUTING.md`](./CONTRIBUTING.md). Questions and ideas go to [Discord](https://discord.gg/gpXyu7SqNZ).
+
+If OTF UI saves you time, a star helps other builders find it.
+
+<a href="https://star-history.com/#otf-kit/sdk&Date"><img src="https://api.star-history.com/svg?repos=otf-kit/sdk&type=Date&theme=dark" alt="Star history for otf-kit/sdk" width="600" /></a>
+
+## Status
+
+`v0.x`, alpha. APIs may change before `1.0`, so pin exact versions if you ship to production.
 
 ## License
 
-**[MIT](./LICENSE)** — free forever for every SDK package. You own the source; eject anytime.
-
-- [`@otfdashkit/ui`](https://www.npmjs.com/package/@otfdashkit/ui) · [`@otfdashkit/ui-native`](https://www.npmjs.com/package/@otfdashkit/ui-native) · [`@otfdashkit/tokens`](https://www.npmjs.com/package/@otfdashkit/tokens) · [`@otfdashkit/cli`](https://www.npmjs.com/package/@otfdashkit/cli) · [`@otfdashkit/eslint-plugin-otf-design`](https://www.npmjs.com/package/@otfdashkit/eslint-plugin-otf-design)
-
-The commercial **OTF kits** ship under a per-developer license — details at [otf-kit.dev](https://otf-kit.dev).
-
-<div align="center">
-  <sub>Built by <a href="https://otf-kit.dev">otf-kit.dev</a> — the cross-platform SDK + kits for builders who ship with AI agents.</sub>
-</div>
+[MIT](./LICENSE) for every SDK package: [`@otfdashkit/ui`](https://www.npmjs.com/package/@otfdashkit/ui) · [`@otfdashkit/ui-native`](https://www.npmjs.com/package/@otfdashkit/ui-native) · [`@otfdashkit/tokens`](https://www.npmjs.com/package/@otfdashkit/tokens) · [`@otfdashkit/cli`](https://www.npmjs.com/package/@otfdashkit/cli) · [`@otfdashkit/eslint-plugin-otf-design`](https://www.npmjs.com/package/@otfdashkit/eslint-plugin-otf-design). The paid OTF kits use a per-developer license, described at [otf-kit.dev](https://otf-kit.dev).
