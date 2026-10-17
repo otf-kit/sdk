@@ -55,7 +55,7 @@ export const LongText: Story = {
         {Array.from({ length: 8 })
           .map(
             () =>
-              'OpenTemplateForest is a marketplace of fully-built application templates — kits, blocks, and components that ship with source code. Drop one in, restyle it, ship it. Every kit passes the same 24-item design checklist before launch — same visual quality bar across the catalog.',
+              'OpenTemplateForest is a marketplace of fully-built application templates — kits, blocks, and components that ship with source code. Drop one in, restyle it, ship it. Every kit is design-reviewed before launch — same visual quality bar across the catalog.',
           )
           .join(' ')}
       </p>
