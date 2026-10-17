@@ -1,7 +1,7 @@
 <h1 align="center">@otfdashkit/ui</h1>
 
 <p align="center">
-  90 web components for builders shipping production apps — Radix under the hood, Tailwind CSS v3 on top, AI-agent-readable by design.
+  150+ web components for builders shipping production apps, 90 of them documented one by one. Tailwind CSS v3 on top, AI-agent-readable by design.
 </p>
 
 <p align="center">
@@ -27,7 +27,7 @@
 - **Advanced** — Tiptap editor, ImageCrop, file uploaders, marquees, shiki-powered code blocks, video player
 - **17 themes** out of the box from [`@otfdashkit/tokens`](https://www.npmjs.com/package/@otfdashkit/tokens) — swap palette by changing one attribute on `<html>`
 
-90 installable web components in [`src/`](src/). Full catalog at the Storybook below.
+150+ web components in [`src/`](src/), 90 documented one by one. Full catalog at the Storybook below.
 
 ## Live demos
 

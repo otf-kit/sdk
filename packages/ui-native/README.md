@@ -20,7 +20,7 @@
 
 ## What you get
 
-- **19 React Native components** — Button, Card, Input, Avatar, Badge, Chip, Sheet, Switch, Tabs, Toast, Text, Stack — component names and design tokens shared with the web SDK; props differ per platform
+- **85+ React Native components**, 19 documented one by one — Button, Card, Input, Avatar, Badge, Chip, Sheet, Switch, Tabs, Toast, Text, Stack — component names and design tokens shared with the web SDK; props differ per platform
 - **Apple-Fitness-style blocks** — ActivityRings, WeekStrip, StepperBig, MetricCard, SegmentedControl, MiniBarChart
 - **Animated patterns** — shaders, marquees, parallax scrolls (heavy peers ship via [`@otfdashkit/cli`](https://www.npmjs.com/package/@otfdashkit/cli) so you only pay for what you use)
 - **17 shared themes** — same `@otfdashkit/tokens` palette as web; switch palette via the `defaultTheme` prop on `<OTFProvider>`
