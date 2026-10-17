@@ -129,7 +129,7 @@ npx @otfdashkit/cli add shockwave
 
 ## Status
 
-`v0.1.x` — alpha. APIs may change before `1.0`. Pin exact releases in production.
+Live on npm and in production: the OTF Fitness, Booking, Arcade and Marketplace kits are built on it. Versions follow semver; while on `0.x`, a minor release can change an API, so pin exact versions in production.
 
 ## License
 

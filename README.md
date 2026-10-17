@@ -156,7 +156,7 @@ If OTF UI saves you time, a star helps other builders find it.
 
 ## Status
 
-`v0.x`, alpha. APIs may change before `1.0`, so pin exact versions if you ship to production.
+Live on npm and in production: all five OTF kits (SaaS Dashboard, Fitness, Booking, Arcade, Marketplace) are built on it. Versions follow semver; while on `0.x`, a minor release can change an API, so pin exact versions in production.
 
 ## License
 
