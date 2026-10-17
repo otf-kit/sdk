@@ -92,7 +92,7 @@ Questions, bugs, feature requests: **[discord.gg/gpXyu7SqNZ](https://discord.gg/
 
 ## Status
 
-`v0.1.x` — alpha. APIs may change before `1.0`. Pin exact releases in production.
+Live on npm and in production: the OTF SaaS Dashboard kit is built on it. Versions follow semver; while on `0.x`, a minor release can change an API, so pin exact versions in production.
 
 ## License
 
