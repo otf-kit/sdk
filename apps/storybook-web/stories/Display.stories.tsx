@@ -141,7 +141,7 @@ export const AvatarGroupStory: StoryObj = {
         <AvatarGroup
           max={3}
           size={48}
-          renderOverflow={(n) => `${n}+ more`}
+          renderOverflow={(n) => `+${n}`}
         >
           {TEAM.map((m) => (
             <Avatar key={m.initials}>
@@ -163,6 +163,21 @@ export const AvatarGroupStory: StoryObj = {
         </AvatarGroup>
       </div>
     </div>
+  ),
+}
+
+// Catalog tile (otf-kit.dev/components): one group, no labels.
+export const AvatarGroupTile: StoryObj = {
+  name: 'AvatarGroup tile',
+  render: () => (
+    <AvatarGroup max={4} size={44}>
+      {TEAM.map((m) => (
+        <Avatar key={m.initials}>
+          <AvatarImage src={m.src} alt={m.initials} />
+          <AvatarFallback>{m.initials}</AvatarFallback>
+        </Avatar>
+      ))}
+    </AvatarGroup>
   ),
 }
 

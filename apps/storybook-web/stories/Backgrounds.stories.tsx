@@ -120,3 +120,40 @@ export const HeroShaderAFrozen: StoryObj = {
     </div>
   ),
 }
+
+// Catalog tiles (otf-kit.dev/patterns): the effect alone, full bleed, no caption.
+export const DottedBackgroundTile: StoryObj = {
+  parameters: { layout: 'fullscreen' },
+  render: () => (
+    <div className="relative h-screen w-full bg-background">
+      <DottedBackground dotSize={2} gap={16} color="hsl(var(--muted-foreground) / 0.45)" />
+    </div>
+  ),
+}
+
+export const NoiseBackgroundTile: StoryObj = {
+  parameters: { layout: 'fullscreen' },
+  render: () => (
+    <div className="relative h-screen w-full bg-card">
+      <NoiseBackground opacity={0.35} />
+    </div>
+  ),
+}
+
+export const AnimatedGradientTile: StoryObj = {
+  parameters: { layout: 'fullscreen' },
+  render: () => (
+    <div className="relative h-screen w-full">
+      <AnimatedGradient variant="mesh" />
+    </div>
+  ),
+}
+
+export const HeroShaderATile: StoryObj = {
+  parameters: { layout: 'fullscreen' },
+  render: () => (
+    <div className="relative h-screen w-full bg-black">
+      <HeroShaderA />
+    </div>
+  ),
+}
