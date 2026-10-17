@@ -128,7 +128,7 @@ const withTheme: Decorator = (Story, context) => {
   if (layout === 'fullscreen') return <Story />
 
   return (
-    <div
+    <ReportHeight
       style={{
         display: layout === 'centered' ? 'flex' : 'block',
         justifyContent: 'center',
@@ -138,8 +138,23 @@ const withTheme: Decorator = (Story, context) => {
       }}
     >
       <Story />
-    </div>
+    </ReportHeight>
   )
+}
+
+// Posts the story's height to an embedding page (otf-kit.dev component pages) so its stage fits the story.
+function ReportHeight({ style, children }: { style: React.CSSProperties; children: React.ReactNode }) {
+  const ref = React.useRef<HTMLDivElement>(null)
+  React.useEffect(() => {
+    const node = ref.current
+    if (!node || window.parent === window || typeof ResizeObserver === 'undefined') return
+    const post = () => window.parent.postMessage({ type: 'otf-story-height', height: node.getBoundingClientRect().height }, '*')
+    const observer = new ResizeObserver(post)
+    observer.observe(node)
+    post()
+    return () => observer.disconnect()
+  }, [])
+  return <div ref={ref} style={style}>{children}</div>
 }
 
 /**

@@ -93,3 +93,91 @@ export const TransitionDemo: StoryObj = {
     )
   },
 }
+
+// Catalog loops (otf-kit.dev/patterns): each effect replays on its own so a tile shows the motion without a click.
+function Replay({ every = 2400, children }: { every?: number; children: React.ReactNode }) {
+  const [run, setRun] = useState(0)
+  React.useEffect(() => {
+    const id = window.setInterval(() => setRun((n) => n + 1), every)
+    return () => window.clearInterval(id)
+  }, [every])
+  return <React.Fragment key={run}>{children}</React.Fragment>
+}
+
+const LoopCard = ({ children }: { children: React.ReactNode }) => (
+  <div className="rounded-lg border border-border bg-card p-6 text-foreground">{children}</div>
+)
+
+export const FadeInLoop: StoryObj = {
+  render: () => <Replay><FadeIn><LoopCard>Fades in</LoopCard></FadeIn></Replay>,
+}
+
+export const SlideInLoop: StoryObj = {
+  render: () => (
+    <Replay every={2800}>
+      <div className="space-y-3">
+        <SlideIn direction="up"><LoopCard>Slide up</LoopCard></SlideIn>
+        <SlideIn direction="left" delay={0.15}><LoopCard>Slide left</LoopCard></SlideIn>
+      </div>
+    </Replay>
+  ),
+}
+
+export const ScaleInLoop: StoryObj = {
+  render: () => <Replay><ScaleIn><LoopCard>Scales in</LoopCard></ScaleIn></Replay>,
+}
+
+export const StaggerLoop: StoryObj = {
+  render: () => (
+    <Replay every={3000}>
+      <Stagger preset="slideUp" staggerDelay={0.1}>
+        {['Item one', 'Item two', 'Item three', 'Item four'].map((item) => (
+          <div key={item} className="mb-2 rounded-md border border-border bg-card px-4 py-2.5 text-foreground">{item}</div>
+        ))}
+      </Stagger>
+    </Replay>
+  ),
+}
+
+export const RevealLoop: StoryObj = {
+  render: () => <Replay><Reveal><LoopCard>Revealed into view</LoopCard></Reveal></Replay>,
+}
+
+export const RippleLoop: StoryObj = {
+  render: () => {
+    const ref = React.useRef<HTMLDivElement>(null)
+    React.useEffect(() => {
+      const press = () => {
+        const node = ref.current
+        if (!node) return
+        const rect = node.getBoundingClientRect()
+        node.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, clientX: rect.left + rect.width / 2, clientY: rect.top + rect.height / 2 }))
+      }
+      press()
+      const id = window.setInterval(press, 1400)
+      return () => window.clearInterval(id)
+    }, [])
+    return (
+      <Ripple ref={ref} duration={1.1} className="inline-block cursor-pointer select-none rounded-lg border border-border bg-card px-10 py-5">
+        <span className="font-medium text-foreground">Press feedback</span>
+      </Ripple>
+    )
+  },
+}
+
+export const TransitionLoop: StoryObj = {
+  render: () => {
+    const [show, setShow] = React.useState(true)
+    React.useEffect(() => {
+      const id = window.setInterval(() => setShow((s) => !s), 1600)
+      return () => window.clearInterval(id)
+    }, [])
+    return (
+      <div className="h-24 w-64">
+        <Transition show={show}>
+          <FadeIn><LoopCard>Enter and exit</LoopCard></FadeIn>
+        </Transition>
+      </div>
+    )
+  },
+}
