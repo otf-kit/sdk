@@ -78,7 +78,7 @@ export function BarChart({
         <Chart
           data={data.map((d) => ({ ...d }))}
           layout={layout}
-          margin={{ top: 4, right: lineDataKey ? 8 : 4, left: -20, bottom: 0 }}
+          margin={{ top: 4, right: lineDataKey ? 8 : 4, left: 0, bottom: 0 }}
           barSize={barSize}
           maxBarSize={maxBarSize}
           barCategoryGap={barCategoryGap}
@@ -87,14 +87,14 @@ export function BarChart({
           {isVertical ? (
             <>
               <XAxis type="number" tick={{ fontSize: 12, fill: 'hsl(var(--muted-foreground))' }} axisLine={false} tickLine={false} />
-              <YAxis type="category" dataKey={xAxisKey} tick={{ fontSize: 12, fill: 'hsl(var(--muted-foreground))' }} axisLine={false} tickLine={false} />
+              <YAxis width="auto" type="category" dataKey={xAxisKey} tick={{ fontSize: 12, fill: 'hsl(var(--muted-foreground))' }} axisLine={false} tickLine={false} />
             </>
           ) : (
             <>
               <XAxis dataKey={xAxisKey} tick={{ fontSize: 12, fill: 'hsl(var(--muted-foreground))' }} axisLine={false} tickLine={false} />
-              <YAxis yAxisId="left" tick={{ fontSize: 12, fill: 'hsl(var(--muted-foreground))' }} axisLine={false} tickLine={false} />
+              <YAxis width="auto" yAxisId="left" tick={{ fontSize: 12, fill: 'hsl(var(--muted-foreground))' }} axisLine={false} tickLine={false} />
               {lineDataKey && (
-                <YAxis
+                <YAxis width="auto"
                   yAxisId="right"
                   orientation="right"
                   tick={{ fontSize: 12, fill: 'hsl(var(--muted-foreground))' }}
