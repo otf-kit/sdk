@@ -55,10 +55,10 @@ export function LineChart({
   return (
     <div className={cn('w-full overflow-hidden', className)} style={{ minWidth: 0 }}>
       <ResponsiveContainer width="100%" height={height}>
-        <RechartsLineChart data={data.map((d) => ({ ...d }))} margin={{ top: 4, right: 4, left: -20, bottom: 0 }}>
+        <RechartsLineChart data={data.map((d) => ({ ...d }))} margin={{ top: 4, right: 4, left: 0, bottom: 0 }}>
           {showGrid && <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />}
           <XAxis dataKey={xAxisKey} tick={{ fontSize: 12, fill: 'hsl(var(--muted-foreground))' }} axisLine={false} tickLine={false} />
-          <YAxis tick={{ fontSize: 12, fill: 'hsl(var(--muted-foreground))' }} axisLine={false} tickLine={false} />
+          <YAxis width="auto" tick={{ fontSize: 12, fill: 'hsl(var(--muted-foreground))' }} axisLine={false} tickLine={false} />
           {showTooltip && (
             <Tooltip
               contentStyle={{
