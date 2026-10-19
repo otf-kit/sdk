@@ -1,7 +1,7 @@
 <h1 align="center">@otfdashkit/ui</h1>
 
 <p align="center">
-  150+ web components for builders shipping production apps, 90 of them documented one by one. Tailwind CSS v3 on top, AI-agent-readable by design.
+  150+ web components for builders shipping production apps, 90 of them documented one by one. Tailwind CSS v3 or v4 on top, AI-agent-readable by design.
 </p>
 
 <p align="center">
@@ -13,7 +13,7 @@
   </a>
   <img src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square" alt="MIT License">
   <img src="https://img.shields.io/badge/React-19-000?style=flat-square" alt="React 19">
-  <img src="https://img.shields.io/badge/Tailwind-v3-000?style=flat-square" alt="Tailwind v3">
+  <img src="https://img.shields.io/badge/Tailwind-v3%20%7C%20v4-000?style=flat-square" alt="Tailwind v3 or v4">
 </p>
 
 ---
@@ -43,6 +43,47 @@ pnpm add @otfdashkit/ui @otfdashkit/tokens
 # or:  bun add @otfdashkit/ui @otfdashkit/tokens
 ```
 
+## Tailwind setup
+
+Tailwind needs two things: scan the package source, and map the theme tokens (HSL channels) to colours.
+
+```css
+/* Tailwind v4: in your global CSS */
+@source "../node_modules/@otfdashkit/ui/src/**/*.{ts,tsx}";
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+}
+```
+
+```js
+// Tailwind v3: tailwind.config.js
+import { otfPreset } from '@otfdashkit/tokens/tailwind-preset'
+
+export default {
+  presets: [otfPreset],
+  content: ['./src/**/*.{ts,tsx}', './node_modules/@otfdashkit/ui/src/**/*.{ts,tsx}'],
+}
+```
+
 ## Quick start
 
 ```tsx
@@ -58,7 +99,7 @@ export default function SignInCard() {
   return (
     <Card>
       <Input placeholder="Email" />
-      <Button variant="primary" size="lg">Continue</Button>
+      <Button size="lg">Continue</Button>
     </Card>
   )
 }
