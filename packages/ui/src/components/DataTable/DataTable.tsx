@@ -34,7 +34,7 @@ export function DataTableColumnHeader({ column, title }: { column: any; title: s
       className="flex items-center gap-1 hover:text-[hsl(var(--foreground))]"
     >
       {title}
-      {sorted === 'asc' ? <ArrowUp className="h-3 w-3" /> : sorted === 'desc' ? <ArrowDown className="h-3 w-3" /> : <ArrowUpDown className="h-3 w-3 opacity-50" />}
+      {sorted === 'asc' ? <ArrowUp className="h-3 w-3" /> : sorted === 'desc' ? <ArrowDown className="h-3 w-3" /> : <ArrowUpDown className="h-3 w-3" />}
     </button>
   )
 }
