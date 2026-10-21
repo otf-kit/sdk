@@ -181,7 +181,7 @@ export const EventCalendar = React.forwardRef<HTMLDivElement, EventCalendarProps
         {/* Header */}
         <div
           data-slot="event-calendar-header"
-          className="flex items-center justify-between gap-2 border-b border-border px-3 py-2"
+          className="flex flex-wrap items-center justify-between gap-2 border-b border-border px-3 py-2"
         >
           <div className="flex items-center gap-1">
             <Button
@@ -214,7 +214,7 @@ export const EventCalendar = React.forwardRef<HTMLDivElement, EventCalendarProps
 
           <div
             data-slot="event-calendar-title"
-            className="text-sm font-medium tabular-nums"
+            className="whitespace-nowrap text-sm font-medium tabular-nums"
           >
             {headerLabel}
           </div>
@@ -314,9 +314,19 @@ function MonthView({
   }, [weekStartsOn])
 
   const today = new Date()
+  // Day cells under ~72px cannot hold a readable title, so chips collapse to their colour dot.
+  const gridRef = React.useRef<HTMLDivElement>(null)
+  const [compact, setCompact] = React.useState(false)
+  React.useEffect(() => {
+    const el = gridRef.current
+    if (!el || typeof ResizeObserver === 'undefined') return
+    const ro = new ResizeObserver(() => setCompact(el.clientWidth / 7 < 72))
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [])
 
   return (
-    <div className="flex flex-col" data-slot="event-calendar-month">
+    <div ref={gridRef} className="flex flex-col" data-slot="event-calendar-month">
       <div className="grid grid-cols-7 border-b border-border">
         {weekdayLabels.map((label) => (
           <div
@@ -388,6 +398,7 @@ function MonthView({
                   <EventChip
                     key={ev.id}
                     event={ev}
+                    compact={compact}
                     onClick={() => onEventClick?.(ev)}
                   />
                 ))}
@@ -432,9 +443,11 @@ function MonthView({
 
 function EventChip({
   event,
+  compact,
   onClick,
 }: {
   event: CalendarEvent
+  compact?: boolean
   onClick?: () => void
 }) {
   const color = event.color ?? DEFAULT_COLOR
@@ -447,7 +460,10 @@ function EventChip({
         onClick?.()
       }}
       title={event.title}
-      className="group/chip flex w-full items-center gap-1.5 truncate rounded px-1.5 py-0.5 text-left text-[11px] font-medium text-foreground hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+      className={cn(
+        'group/chip flex w-full items-center gap-1.5 truncate rounded px-1.5 py-0.5 text-left text-[11px] font-medium text-foreground hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+        compact && 'h-4 justify-center px-0'
+      )}
       style={{
         backgroundColor: `color-mix(in oklab, ${color} 22%, transparent)`,
       }}
@@ -457,7 +473,7 @@ function EventChip({
         className="h-2 w-2 flex-shrink-0 rounded-full"
         style={{ backgroundColor: color }}
       />
-      <span className="truncate">{event.title}</span>
+      <span className={compact ? 'sr-only' : 'truncate'}>{event.title}</span>
     </button>
   )
 }

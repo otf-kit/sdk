@@ -63,7 +63,7 @@ export type RichEditorProps = Omit<
   onChange?: (html: string) => void
   /** Placeholder shown when the document is empty. */
   placeholder?: string
-  /** Default true. When false the toolbar is visually disabled and content read-only. */
+  /** Default true. When false the content is read-only and no toolbar is shown. */
   editable?: boolean
   /** Toolbar layout. Default 'full'. */
   toolbar?: RichEditorToolbarVariant
@@ -657,20 +657,12 @@ export const RichEditor = React.forwardRef<HTMLDivElement, RichEditorProps>(
           className={cn(
             'overflow-hidden rounded-md border border-[hsl(var(--border))] bg-[hsl(var(--card))] text-[hsl(var(--card-foreground))]',
             'focus-within:ring-2 focus-within:ring-[hsl(var(--ring))]',
-            !editable && 'opacity-90',
             className
           )}
           {...rest}
         >
-          <div
-            className={cn(
-              !editable && 'pointer-events-none select-none opacity-60'
-            )}
-            aria-hidden={!editable || undefined}
-          >
-            {toolbar === 'full' ? <FullToolbar editor={editor} /> : null}
-            {toolbar === 'minimal' ? <MinimalToolbar editor={editor} /> : null}
-          </div>
+          {editable && toolbar === 'full' ? <FullToolbar editor={editor} /> : null}
+          {editable && toolbar === 'minimal' ? <MinimalToolbar editor={editor} /> : null}
 
           <EditorContent editor={editor} />
 
