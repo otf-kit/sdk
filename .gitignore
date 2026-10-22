@@ -34,7 +34,7 @@ graphify-out/
 # Kit-local TODO tracker
 kits/*/TODO.md
 
-# Railway deploy script byproduct (rebuild marker)
+# Buyer kits' deploy-railway.sh byproduct (rebuild marker)
 .build-timestamp
 
 # Phase 12 · E4 — SEO audit snapshots are now stored in Postgres.

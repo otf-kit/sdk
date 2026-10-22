@@ -74,7 +74,7 @@ bun run build:web   # → dist/  (static HTML/JS/CSS via expo export)
 
 ## Deploy
 
-Auto-deploys on push to `main` via GitHub Actions (`.github/workflows/deploy-ui-native-showcase.yml`). Ships to Cloudflare Pages project `otf-ui-native-storybook` → `https://native.otf-kit.dev`. The phone-frame wrapper at `https://native-preview.otf-kit.dev/` (project `otf-ui-native-storybook-preview`) iframes this URL and adds the per-component QR card.
+Deployed by hand with `bun run deploy` (nothing deploys automatically on push). Ships to Cloudflare Pages project `otf-ui-native-storybook` → `https://native.otf-kit.dev`. The phone-frame wrapper at `https://native-preview.otf-kit.dev/` (project `otf-ui-native-storybook-preview`) iframes this URL and adds the per-component QR card.
 
 Manual deploy (after sourcing `CLOUDFLARE_ACCOUNT_ID` + `CLOUDFLARE_API_TOKEN`):
 

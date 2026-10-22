@@ -33,16 +33,14 @@ ls dist/
 # Verify only — re-runs the file-existence check without rebuilding
 pnpm --filter @otfdashkit/ui-native-registry run verify
 
-# Deploy (manual; CI does this on push to main)
+# Deploy (run by hand; nothing deploys on push)
 set -a && source ../../.env && set +a
 pnpm --filter @otfdashkit/ui-native-registry run deploy
 ```
 
-## CI
+## Deploys
 
-[`.github/workflows/deploy-registry.yml`](../../.github/workflows/deploy-registry.yml) auto-deploys on push to `main` when `packages/ui-native/registry/**` or this app changes.
-
-Repo secrets used: `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_API_TOKEN`.
+Nothing deploys automatically: after a change to `packages/ui-native/registry/**` or this app, run the deploy command above by hand. It needs `CLOUDFLARE_ACCOUNT_ID` and `CLOUDFLARE_API_TOKEN` in the environment.
 
 ## First-time project setup (do once)
 
@@ -51,7 +49,7 @@ npx wrangler pages project create otf-ui-native-registry
 # Then in the CF dashboard: Custom domains → add r.otf-kit.dev
 ```
 
-After that the workflow handles every deploy.
+After that, every deploy is the hand-run deploy command above.
 
 ## Verifying the live registry
 
