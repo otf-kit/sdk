@@ -1,5 +1,5 @@
 # Cloudflare Pages headers config.
-# Mirrors what kits/fitness-kit/server/static.ts (Hono on Railway) sets per
+# Mirrors what kits/fitness-kit/server/static.ts (the kit's Hono server) sets per
 # response, so showcase deployed to CF Pages behaves the same as a fitness-kit
 # Bun-server deploy.
 #
