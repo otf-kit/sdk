@@ -14,7 +14,7 @@ export interface MetricCardProps {
 
 export function MetricCard({ label = 'Total Revenue', value = '$48,295', change = '+12.5%', trend = 'up', className }: MetricCardProps) {
   const TrendIcon = trend === 'up' ? TrendingUp : TrendingDown
-  const trendColor = trend === 'up' ? 'text-green-600' : 'text-red-500'
+  const trendColor = trend === 'up' ? 'text-green-700 dark:text-green-400' : 'text-red-700 dark:text-red-400'
   return (
     <Card className={cn('', className)}>
       <CardContent className="p-4">
@@ -35,7 +35,7 @@ export interface MetricCardWithIconProps extends MetricCardProps {
 
 export function MetricCardWithIcon({ icon, iconColor = 'bg-[hsl(var(--primary)/0.1)] text-[hsl(var(--primary))]', ...props }: MetricCardWithIconProps) {
   const TrendIcon = (props.trend ?? 'up') === 'up' ? TrendingUp : TrendingDown
-  const trendColor = (props.trend ?? 'up') === 'up' ? 'text-green-600' : 'text-red-500'
+  const trendColor = (props.trend ?? 'up') === 'up' ? 'text-green-700 dark:text-green-400' : 'text-red-700 dark:text-red-400'
   return (
     <Card className={cn('', props.className)}>
       <CardContent className="p-4">
@@ -63,7 +63,7 @@ export interface MetricCardWithButtonProps extends MetricCardProps {
 
 export function MetricCardWithButton({ actionLabel = 'View details', onAction, ...props }: MetricCardWithButtonProps) {
   const TrendIcon = (props.trend ?? 'up') === 'up' ? TrendingUp : TrendingDown
-  const trendColor = (props.trend ?? 'up') === 'up' ? 'text-green-600' : 'text-red-500'
+  const trendColor = (props.trend ?? 'up') === 'up' ? 'text-green-700 dark:text-green-400' : 'text-red-700 dark:text-red-400'
   return (
     <Card className={cn('', props.className)}>
       <CardContent className="p-4">

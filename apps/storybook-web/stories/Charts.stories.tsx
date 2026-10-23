@@ -33,7 +33,7 @@ const meta: Meta<typeof AreaChart> = {
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
   // Explicit width: in the centered layout a bare maxWidth collapses and the chart gets zero width.
-  decorators: [(Story) => <div style={{ width: 'min(800px, 92vw)' }}><Story /></div>],
+  decorators: [(Story) => <div style={{ width: 'min(800px, calc(100vw - 5rem))' }}><Story /></div>],
 }
 export default meta
 type AreaStory = StoryObj<typeof AreaChart>
