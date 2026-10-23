@@ -78,7 +78,7 @@ export function BarChart({
         <Chart
           data={data.map((d) => ({ ...d }))}
           layout={layout}
-          margin={{ top: 4, right: lineDataKey ? 8 : 4, left: 0, bottom: 0 }}
+          margin={{ top: 4, right: lineDataKey ? 8 : 4, left: 8, bottom: 0 }}
           barSize={barSize}
           maxBarSize={maxBarSize}
           barCategoryGap={barCategoryGap}

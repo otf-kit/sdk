@@ -692,7 +692,7 @@ function GanttBar({
 
       <span className="relative z-10 truncate">{item.title}</span>
       {showProgress && (
-        <span className="relative z-10 ml-auto pl-2 text-[10px] tabular-nums text-muted-foreground">
+        <span className="relative z-10 ml-auto pl-2 text-[10px] tabular-nums text-foreground">
           {progress}%
         </span>
       )}

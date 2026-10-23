@@ -68,7 +68,7 @@ export function SidebarLayoutDashboard({ className }: SidebarLayoutDashboardProp
                 <CardContent className="p-3">
                   <p className="text-xs text-[hsl(var(--muted-foreground))]">{k.label}</p>
                   <p className="text-lg font-bold mt-0.5">{k.value}</p>
-                  <p className={cn('text-xs flex items-center gap-0.5 mt-0.5', k.change.startsWith('+') ? 'text-green-600' : 'text-red-500')}>
+                  <p className={cn('text-xs flex items-center gap-0.5 mt-0.5', k.change.startsWith('+') ? 'text-green-700 dark:text-green-400' : 'text-red-700 dark:text-red-400')}>
                     <TrendingUp className="h-3 w-3" />{k.change}
                   </p>
                 </CardContent>
