@@ -6,9 +6,9 @@ import { Avatar, AvatarFallback } from '../../primitives/avatar'
 import { Badge } from '../../primitives/badge'
 
 const PRIORITY_COLOR: Record<string, string> = {
-  High: 'bg-red-500/10 text-red-600 border-red-200',
-  Medium: 'bg-yellow-500/10 text-yellow-600 border-yellow-200',
-  Low: 'bg-green-500/10 text-green-600 border-green-200',
+  High: 'bg-red-500/10 text-red-800 border-red-200 dark:text-red-400 dark:border-red-500/30',
+  Medium: 'bg-yellow-500/10 text-yellow-800 border-yellow-200 dark:text-yellow-400 dark:border-yellow-500/30',
+  Low: 'bg-green-500/10 text-green-800 border-green-200 dark:text-green-400 dark:border-green-500/30',
 }
 
 export interface TaskCardProps {
@@ -49,7 +49,7 @@ export function TaskCard({
   )
 }
 
-const LABEL_COLORS = ['bg-blue-100 text-blue-700', 'bg-purple-100 text-purple-700', 'bg-green-100 text-green-700']
+const LABEL_COLORS = ['bg-blue-100 text-blue-700', 'bg-purple-100 text-purple-700', 'bg-green-100 text-green-800']
 
 export interface TaskCardWithLabelsProps extends TaskCardProps {
   labels?: string[]
