@@ -28,7 +28,7 @@ export function Stat({ label, value, trend, trendLabel, icon, description, class
         {(trend !== undefined || description) && (
           <div className="mt-2 flex items-center gap-1">
             {trend !== undefined && (
-              <span className={cn('flex items-center gap-0.5 text-xs font-medium', isPositive ? 'text-green-600' : 'text-red-600')}>
+              <span className={cn('flex items-center gap-0.5 text-xs font-medium', isPositive ? 'text-green-700 dark:text-green-400' : 'text-red-700 dark:text-red-400')}>
                 {isPositive ? <TrendingUp className="h-3 w-3" /> : <TrendingDown className="h-3 w-3" />}
                 {Math.abs(trend)}%
               </span>

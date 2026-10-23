@@ -24,7 +24,7 @@ export function StackedLayoutBranded({
         <span className="font-bold text-sm text-[hsl(var(--primary-foreground))] shrink-0">{brandName}</span>
         <div className="flex flex-1 items-center gap-1">
           {NAV_LINKS.map(link => (
-            <button key={link} className="px-3 py-1.5 text-sm text-[hsl(var(--primary-foreground)/0.8)] hover:text-[hsl(var(--primary-foreground))] transition-colors rounded-md hover:bg-white/10">
+            <button key={link} className="px-3 py-1.5 text-sm text-[hsl(var(--primary-foreground))] transition-colors rounded-md hover:bg-white/10">
               {link}
             </button>
           ))}
@@ -33,7 +33,7 @@ export function StackedLayoutBranded({
           <Bell className="h-4 w-4 text-[hsl(var(--primary-foreground)/0.8)]" />
           <div className="flex items-center gap-1.5 cursor-pointer">
             <Avatar className="h-7 w-7 ring-2 ring-white/30">
-              <AvatarFallback className="bg-white/20 text-[hsl(var(--primary-foreground))] text-xs">JD</AvatarFallback>
+              <AvatarFallback className="bg-black/25 text-[hsl(var(--primary-foreground))] text-xs">JD</AvatarFallback>
             </Avatar>
             <ChevronDown className="h-3 w-3 text-[hsl(var(--primary-foreground)/0.8)]" />
           </div>
