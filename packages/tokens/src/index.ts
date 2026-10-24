@@ -1,6 +1,7 @@
 export * from './themes'
 export * from './native'
 export * from './tailwind-preset'
+export * from './brand'
 
 /** Phase 1.5 — 4 OTF CSS palette names (applied as class on :root or html element) */
 export const THEMES = ['slate', 'warm', 'cosmic', 'terminal'] as const

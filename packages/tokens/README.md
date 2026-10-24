@@ -29,6 +29,22 @@ On the web, import the preset from `@otfdashkit/tokens/tailwind-preset`, not fro
 
 Pairs with [`@otfdashkit/ui`](https://www.npmjs.com/package/@otfdashkit/ui) and [`@otfdashkit/ui-native`](https://www.npmjs.com/package/@otfdashkit/ui-native).
 
+## OTF brand lock
+
+The design system of otf-kit.dev and every OTF kit: Geist 400 headings (hero tracking -0.055em, line-height 1.05; section -0.03em), Inter body, a light primary button with a 10px radius, neutral surfaces, and one accent per kit.
+
+```ts
+import { otfBrand } from '@otfdashkit/tokens'
+otfBrand.dark.background // '#0a0a0a'
+otfBrand.type.hero       // { fontWeight: '400', lineHeight: 1.05, letterSpacing: -0.055 } (em)
+```
+
+```css
+@import '@otfdashkit/tokens/brand.css'; /* --otf-* variables + .otf-hero, .otf-display, .otf-btn-primary, ... */
+```
+
+Load Geist, Inter and Geist Mono yourself (`next/font`, `@expo-google-fonts/geist`, `@expo-google-fonts/inter`). Override only `--otf-accent`.
+
 ## Install
 
 ```bash
