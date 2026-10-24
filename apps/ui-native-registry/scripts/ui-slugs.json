@@ -1,0 +1,799 @@
+[
+  {
+    "slug": "accordion",
+    "category": "Layout",
+    "description": "Collapsible sections with smooth spring animation and keyboard support — single + multiple modes.",
+    "source": "src/primitives/accordion.tsx",
+    "note": ""
+  },
+  {
+    "slug": "activity-heatmap",
+    "category": "Data",
+    "description": "GitHub-style yearly activity contribution grid with hover tooltips.",
+    "source": "src/blocks/activity-heatmap.tsx"
+  },
+  {
+    "slug": "animated-gradient",
+    "category": "Display",
+    "description": "Slow-drifting animated gradient mesh for ambient hero backgrounds.",
+    "source": "src/backgrounds/AnimatedGradient.tsx",
+    "note": "Exact export match: the component AnimatedGradient, from backgrounds/AnimatedGradient.tsx."
+  },
+  {
+    "slug": "animated-number",
+    "category": "Display",
+    "description": "Smooth animated number ticker — for stat counters and metric reveals.",
+    "source": "src/text/AnimatedNumber.tsx",
+    "note": "Exact export match: the component AnimatedNumber, from text/AnimatedNumber.tsx."
+  },
+  {
+    "slug": "area-chart",
+    "category": "Data",
+    "description": "Smooth gradient area chart with series, tooltip, and legend.",
+    "source": "src/charts/area-chart.tsx"
+  },
+  {
+    "slug": "array-field",
+    "category": "Input",
+    "description": "Dynamic array form field for repeating row inputs with add / remove controls.",
+    "source": "src/forms/array-field.tsx"
+  },
+  {
+    "slug": "auto-form",
+    "category": "Input",
+    "description": "Schema-driven auto-generated form from a Zod schema — labels, helpers, and validation.",
+    "source": "src/forms/auto-form.tsx"
+  },
+  {
+    "slug": "avatar",
+    "category": "Display",
+    "description": "User avatar with image, fallback initials, and optional status indicator.",
+    "source": "src/primitives/avatar.tsx",
+    "note": ""
+  },
+  {
+    "slug": "avatar-group",
+    "category": "Display",
+    "description": "Stacked overlapping avatars with overflow count for team and member lists.",
+    "source": "src/primitives/avatar.tsx",
+    "note": "Exact export match: the component AvatarGroup, from primitives/avatar.tsx."
+  },
+  {
+    "slug": "badge",
+    "category": "Display",
+    "description": "Status and category labels in default, secondary, destructive, and outline variants.",
+    "source": "src/primitives/badge.tsx",
+    "note": ""
+  },
+  {
+    "slug": "banner",
+    "category": "Feedback",
+    "description": "Alert banner with info, success, warning, error, and neutral variants plus dismiss.",
+    "source": "src/components/Banner/Banner.tsx",
+    "note": "The lowercase file is a re-export; this item serves the defining file components/Banner/Banner.tsx."
+  },
+  {
+    "slug": "bar-chart",
+    "category": "Data",
+    "description": "A bar graph with one or more series, an optional stack, and a tooltip.",
+    "source": "src/charts/bar-chart.tsx"
+  },
+  {
+    "slug": "bar-list",
+    "category": "Data",
+    "description": "Tremor-style ranked bar list with values and optional links — top sources, top pages.",
+    "source": "src/blocks/bar-list.tsx"
+  },
+  {
+    "slug": "beacon",
+    "category": "Display",
+    "description": "Pulsing onboarding beacon dot for highlighting new features and call-to-action targets.",
+    "source": "src/engagement/Beacon/Beacon.tsx",
+    "note": "The lowercase file is a re-export; this item serves the defining file engagement/Beacon/Beacon.tsx."
+  },
+  {
+    "slug": "breadcrumb",
+    "category": "Layout",
+    "description": "Path-style hierarchy navigation with separators and overflow handling.",
+    "source": "src/components/Breadcrumb/Breadcrumb.tsx",
+    "note": "The lowercase file is a re-export; this item serves the defining file components/Breadcrumb/Breadcrumb.tsx."
+  },
+  {
+    "slug": "bulk-actions",
+    "category": "Input",
+    "description": "Floating action bar that appears when rows are selected, with configurable actions.",
+    "source": "src/advanced/bulk-actions.tsx"
+  },
+  {
+    "slug": "button",
+    "category": "Input",
+    "description": "Solid, outline, ghost, and destructive variants with icon and loading state support.",
+    "source": "src/primitives/button.tsx",
+    "note": ""
+  },
+  {
+    "slug": "calendar",
+    "category": "Display",
+    "description": "A monthly calendar with week and day views. Click to create when onEventCreate is set. Drag to resize in week or day when onEventResize is set.",
+    "source": "src/primitives/calendar.tsx",
+    "note": ""
+  },
+  {
+    "slug": "card",
+    "category": "Layout",
+    "description": "Composable card with header, title, description, content, and footer slots.",
+    "source": "src/primitives/card.tsx",
+    "note": ""
+  },
+  {
+    "slug": "cart-line-item",
+    "category": "Display",
+    "description": "Cart row with thumbnail, title, variant, price, quantity stepper, and remove action.",
+    "source": "src/primitives/cart-line-item.tsx"
+  },
+  {
+    "slug": "chat-detail",
+    "category": "Layout",
+    "description": "Full-featured messaging UI with thread view, reactions, and file attachments.",
+    "source": "src/blocks/chat-detail.tsx"
+  },
+  {
+    "slug": "checkbox",
+    "category": "Input",
+    "description": "Accessible checkbox with indeterminate state and label support.",
+    "source": "src/primitives/checkbox.tsx",
+    "note": ""
+  },
+  {
+    "slug": "checklist",
+    "category": "Feedback",
+    "description": "Step-by-step onboarding checklist with progress tracking and completion state.",
+    "source": "src/engagement/checklist.tsx"
+  },
+  {
+    "slug": "code-block",
+    "category": "Display",
+    "description": "Syntax-highlighted code preview powered by Shiki, with copy button, line numbers, and line highlights.",
+    "source": "src/primitives/code-block.tsx"
+  },
+  {
+    "slug": "color-picker",
+    "category": "Input",
+    "description": "Inline color picker with HEX / RGB / HSL formats, optional alpha + swatches, and native eye-dropper.",
+    "source": "src/forms/color-picker.tsx"
+  },
+  {
+    "slug": "color-scheme-select",
+    "category": "Input",
+    "description": "Color palette picker dropdown — switch between branded color schemes.",
+    "source": "src/theme/ColorSchemeSelect.tsx",
+    "note": "Exact export match: the component ColorSchemeSelect, from theme/ColorSchemeSelect.tsx."
+  },
+  {
+    "slug": "combobox",
+    "category": "Input",
+    "description": "Autocomplete combo box with searchable options and keyboard navigation.",
+    "source": "src/forms/combobox.tsx"
+  },
+  {
+    "slug": "command-bar",
+    "category": "Input",
+    "description": "Keyboard-driven command bar (⌘K) with grouped actions, search, and shortcuts.",
+    "source": "src/advanced/command-bar.tsx"
+  },
+  {
+    "slug": "command-item",
+    "category": "Input",
+    "description": "Single-row primitive for command menus — leading icon, label, hotkey badge.",
+    "source": "src/components/command-item.tsx"
+  },
+  {
+    "slug": "comparison",
+    "category": "Display",
+    "description": "Before / after image slider with horizontal or vertical orientation and full keyboard support.",
+    "source": "src/primitives/comparison.tsx"
+  },
+  {
+    "slug": "container",
+    "category": "Layout",
+    "description": "Width-constrained content container with sm / md / lg / xl size variants.",
+    "source": "src/layouts/container.tsx",
+    "note": ""
+  },
+  {
+    "slug": "data-grid",
+    "category": "Data",
+    "description": "Data grid with row selection and inline cell editing.",
+    "source": "src/components/data-grid.tsx"
+  },
+  {
+    "slug": "data-table",
+    "category": "Data",
+    "description": "Paginated, searchable data table with sortable columns and loading state.",
+    "source": "src/components/data-table.tsx"
+  },
+  {
+    "slug": "date-picker",
+    "category": "Input",
+    "description": "Calendar-based date picker with input field and range selection support.",
+    "source": "src/forms/date-picker.tsx"
+  },
+  {
+    "slug": "dialog",
+    "category": "Feedback",
+    "description": "Accessible modal dialog with focus trap, animation, and portal rendering.",
+    "source": "src/primitives/dialog.tsx",
+    "note": ""
+  },
+  {
+    "slug": "dotted-background",
+    "category": "Display",
+    "description": "Dotted-grid background pattern — subtle texture without competing for attention.",
+    "source": "src/backgrounds/DottedBackground.tsx",
+    "note": "Exact export match: the component DottedBackground, from backgrounds/DottedBackground.tsx."
+  },
+  {
+    "slug": "dropdown-menu",
+    "category": "Input",
+    "description": "Accessible dropdown menu with groups, separators, shortcuts, icons, checkboxes, and radio items.",
+    "source": "src/primitives/dropdown-menu.tsx"
+  },
+  {
+    "slug": "empty-cart",
+    "category": "Feedback",
+    "description": "Bespoke empty-cart state with icon, message, and continue-shopping CTA.",
+    "source": "src/primitives/empty-cart.tsx"
+  },
+  {
+    "slug": "empty-state",
+    "category": "Feedback",
+    "description": "Illustration + heading + call-to-action for empty data views.",
+    "source": "src/components/empty-state.tsx"
+  },
+  {
+    "slug": "fade-in",
+    "category": "Display",
+    "description": "Fade-in entrance primitive with configurable delay and duration.",
+    "source": "src/motion/FadeIn.tsx",
+    "note": "Exact export match: the component FadeIn, from motion/FadeIn.tsx."
+  },
+  {
+    "slug": "feedback-modal",
+    "category": "Feedback",
+    "description": "Send-feedback modal with category selector and optional screenshot attachment.",
+    "source": "src/blocks/feedback-modal.tsx"
+  },
+  {
+    "slug": "field",
+    "category": "Input",
+    "description": "Label + input + helper / error wrapper — the building block for every form row.",
+    "source": "src/forms/Field/Field.tsx",
+    "note": "The lowercase file is a re-export; this item serves the defining file forms/Field/Field.tsx."
+  },
+  {
+    "slug": "file-cards",
+    "category": "Display",
+    "description": "File/document preview card grid with type icon, size, and metadata.",
+    "source": "src/blocks/file-cards.tsx"
+  },
+  {
+    "slug": "file-upload",
+    "category": "Input",
+    "description": "Drag-and-drop file upload with preview, validation, and progress.",
+    "source": "src/forms/file-upload.tsx"
+  },
+  {
+    "slug": "files-list",
+    "category": "Display",
+    "description": "Compact file list view with type icons, size, and last-modified — sibling to file-cards grid.",
+    "source": "src/blocks/files-list.tsx"
+  },
+  {
+    "slug": "filters",
+    "category": "Input",
+    "description": "Composable filter builder with text, select, and number filter types.",
+    "source": "src/advanced/Filters/Filters.tsx",
+    "note": "The lowercase file is a re-export; this item serves the defining file advanced/Filters/Filters.tsx."
+  },
+  {
+    "slug": "floating-label-input",
+    "category": "Input",
+    "description": "Label sits inside the field at rest, floats up + shrinks on focus or when filled.",
+    "source": "src/forms/floating-label-input.tsx"
+  },
+  {
+    "slug": "form",
+    "category": "Input",
+    "description": "Form primitives integrated with React Hook Form and Zod schema validation.",
+    "source": "src/primitives/form.tsx",
+    "note": ""
+  },
+  {
+    "slug": "gantt",
+    "category": "Data",
+    "description": "A gantt chart maker: bars with start and end, plus optional progress, group, and dependency arrows. Omit move and resize callbacks for a read-only chart.",
+    "source": "src/advanced/gantt.tsx"
+  },
+  {
+    "slug": "gradient-background",
+    "category": "Display",
+    "description": "Static gradient backgrounds in multiple presets — for hero sections and banners.",
+    "source": "src/backgrounds/GradientBackground.tsx",
+    "note": "Exact export match: the component GradientBackground, from backgrounds/GradientBackground.tsx."
+  },
+  {
+    "slug": "gradient-heading",
+    "category": "Display",
+    "description": "Gradient-fill heading text with multiple presets — for hero sections.",
+    "source": "src/text/GradientHeading.tsx",
+    "note": "Exact export match: the component GradientHeading, from text/GradientHeading.tsx."
+  },
+  {
+    "slug": "heatmap",
+    "category": "Data",
+    "description": "Cell-grid heatmap with color ramp legend — usage, density, and correlation matrices.",
+    "source": "src/charts/heatmap.tsx"
+  },
+  {
+    "slug": "hotkey-badge",
+    "category": "Display",
+    "description": "Compact keyboard shortcut chip — ⌘K, ⇧⌘P, etc.",
+    "source": "src/components/Hotkeys/Hotkeys.tsx",
+    "note": "Exact export match: the component HotkeyBadge, from components/Hotkeys/Hotkeys.tsx."
+  },
+  {
+    "slug": "hotkeys",
+    "category": "Display",
+    "description": "Keyboard shortcut reference list grouped by section.",
+    "source": "src/components/Hotkeys/Hotkeys.tsx",
+    "note": "The lowercase file is a re-export; this item serves the defining file components/Hotkeys/Hotkeys.tsx."
+  },
+  {
+    "slug": "icon-badge",
+    "category": "Display",
+    "description": "Iconographic status badge with color tokens — for activity feeds and notifications.",
+    "source": "src/components/icon-badge.tsx"
+  },
+  {
+    "slug": "image-crop",
+    "category": "Display",
+    "description": "Drag-to-crop image utility with optional aspect-ratio lock, circular mask, and canvas export.",
+    "source": "src/data/ImageCrop.tsx",
+    "note": "Exact export match: the component ImageCrop, from data/ImageCrop.tsx."
+  },
+  {
+    "slug": "input",
+    "category": "Input",
+    "description": "Text input field with full HTML input attribute support and accessible labeling.",
+    "source": "src/primitives/input.tsx",
+    "note": ""
+  },
+  {
+    "slug": "integration-card",
+    "category": "Display",
+    "description": "Third-party service integration card with connected/disconnected toggle.",
+    "source": "src/blocks/integration-card.tsx"
+  },
+  {
+    "slug": "intro-disclosure",
+    "category": "Feedback",
+    "description": "First-time-user disclosure card with multi-step walkthrough.",
+    "source": "src/engagement/intro-disclosure.tsx"
+  },
+  {
+    "slug": "invite-modal",
+    "category": "Feedback",
+    "description": "Team invite modal with role selector and email input.",
+    "source": "src/blocks/invite-modal.tsx"
+  },
+  {
+    "slug": "kanban",
+    "category": "Layout",
+    "description": "Drag-and-drop kanban board for task management with multi-column layout controls.",
+    "source": "src/advanced/Kanban/Kanban.tsx",
+    "note": "The lowercase file is a re-export; this item serves the defining file advanced/Kanban/Kanban.tsx."
+  },
+  {
+    "slug": "line-chart",
+    "category": "Data",
+    "description": "Multi-series line chart with dot markers, legend, and tooltip.",
+    "source": "src/charts/line-chart.tsx"
+  },
+  {
+    "slug": "loading-overlay",
+    "category": "Feedback",
+    "description": "Full-area blocking spinner overlay for async views — drop-in for any container.",
+    "source": "src/components/loading-overlay.tsx"
+  },
+  {
+    "slug": "logo-carousel",
+    "category": "Display",
+    "description": "Auto-scrolling logo strip for marketing social-proof sections.",
+    "source": "src/primitives/logo-carousel.tsx"
+  },
+  {
+    "slug": "marquee",
+    "category": "Display",
+    "description": "Infinite-scrolling row of children — logos, testimonials, badges. Pure CSS, fade edges, pause-on-hover.",
+    "source": "src/primitives/marquee.tsx"
+  },
+  {
+    "slug": "messages-card",
+    "category": "Display",
+    "description": "Compact message thread preview card with avatar and unread count.",
+    "source": "src/blocks/messages-card.tsx"
+  },
+  {
+    "slug": "metric-card",
+    "category": "Data",
+    "description": "Self-contained KPI card block with trend, icon, and comparison period.",
+    "source": "src/blocks/metric-card.tsx"
+  },
+  {
+    "slug": "noise-background",
+    "category": "Display",
+    "description": "Subtle noise texture overlay for added depth on flat surfaces.",
+    "source": "src/backgrounds/NoiseBackground.tsx",
+    "note": "Exact export match: the component NoiseBackground, from backgrounds/NoiseBackground.tsx."
+  },
+  {
+    "slug": "notification-settings",
+    "category": "Layout",
+    "description": "Notification preferences screen with grouped channels and per-event toggles.",
+    "source": "src/blocks/notification-settings.tsx"
+  },
+  {
+    "slug": "object-field",
+    "category": "Input",
+    "description": "Nested object form section with grouped fields and collapsible state.",
+    "source": "src/forms/object-field.tsx"
+  },
+  {
+    "slug": "org-menu",
+    "category": "Layout",
+    "description": "Organization / workspace switcher dropdown with avatar, name, and create-new.",
+    "source": "src/blocks/OrganizationMenu/OrganizationMenu.tsx",
+    "note": "Exact export match: the component OrgMenu, from blocks/OrganizationMenu/OrganizationMenu.tsx."
+  },
+  {
+    "slug": "page-layout",
+    "category": "Layout",
+    "description": "Page shell with header, actions, and body — for settings, forms, and dashboards.",
+    "source": "src/layout/PageLayout.tsx",
+    "note": "Exact export match: the component PageLayout, from layout/PageLayout.tsx."
+  },
+  {
+    "slug": "password-input",
+    "category": "Input",
+    "description": "Password field with show/hide toggle and accessible labeling.",
+    "source": "src/forms/password-input.tsx"
+  },
+  {
+    "slug": "persona",
+    "category": "Display",
+    "description": "User identity card combining avatar, name, role, and status.",
+    "source": "src/components/Persona/Persona.tsx",
+    "note": "The lowercase file is a re-export; this item serves the defining file components/Persona/Persona.tsx."
+  },
+  {
+    "slug": "popover",
+    "category": "Display",
+    "description": "Floating popover with configurable placement and focus management.",
+    "source": "src/primitives/popover.tsx",
+    "note": ""
+  },
+  {
+    "slug": "price-tag",
+    "category": "Display",
+    "description": "Formatted currency price with optional compare-at strikethrough and discount pill.",
+    "source": "src/primitives/price-tag.tsx"
+  },
+  {
+    "slug": "progress",
+    "category": "Feedback",
+    "description": "Progress bar for task completion, upload progress, and loading states.",
+    "source": "src/primitives/progress.tsx",
+    "note": ""
+  },
+  {
+    "slug": "property-list",
+    "category": "Display",
+    "description": "Key-value metadata display for detail panels and settings.",
+    "source": "src/components/property-list.tsx"
+  },
+  {
+    "slug": "qr-code",
+    "category": "Display",
+    "description": "Theme-aware QR code generator with adjustable size, error-correction level, and optional center logo.",
+    "source": "src/primitives/qr-code.tsx"
+  },
+  {
+    "slug": "quantity-stepper",
+    "category": "Input",
+    "description": "Increment / decrement quantity control with min/max clamping and keyboard support.",
+    "source": "src/primitives/quantity-stepper.tsx"
+  },
+  {
+    "slug": "radio-group",
+    "category": "Input",
+    "description": "Single-choice radio button group with label, helper text, and disabled states.",
+    "source": "src/primitives/radio.tsx",
+    "note": "Exact export match: the component RadioGroup, from primitives/radio.tsx."
+  },
+  {
+    "slug": "rating",
+    "category": "Input",
+    "description": "Interactive 0..N star rating with half-step support and full keyboard control.",
+    "source": "src/primitives/rating.tsx"
+  },
+  {
+    "slug": "resize-box",
+    "category": "Layout",
+    "description": "Drag-handle resizable panel container — for split panes and adjustable sidebars.",
+    "source": "src/layouts/resize-box.tsx"
+  },
+  {
+    "slug": "reveal",
+    "category": "Display",
+    "description": "Scroll-triggered reveal animation primitive for content-rich pages.",
+    "source": "src/motion/Reveal.tsx"
+  },
+  {
+    "slug": "rich-editor",
+    "category": "Input",
+    "description": "Tiptap-based WYSIWYG editor with full toolbar, bubble menu, slash commands, tables, and markdown shortcuts.",
+    "source": "src/advanced/rich-editor.tsx"
+  },
+  {
+    "slug": "ripple",
+    "category": "Display",
+    "description": "Material-style ripple effect on press — for buttons and tappable surfaces.",
+    "source": "src/motion/Ripple.tsx"
+  },
+  {
+    "slug": "roles-menu",
+    "category": "Input",
+    "description": "Role assignment dropdown with descriptions and current-role check.",
+    "source": "src/blocks/roles-menu.tsx"
+  },
+  {
+    "slug": "scale-in",
+    "category": "Display",
+    "description": "Scale-up entrance primitive for cards, badges, and modal content.",
+    "source": "src/motion/ScaleIn.tsx",
+    "note": "Exact export match: the component ScaleIn, from motion/ScaleIn.tsx."
+  },
+  {
+    "slug": "scroll-area",
+    "category": "Layout",
+    "description": "Custom scrollbar with cross-browser styling consistency — vertical, horizontal, both.",
+    "source": "src/primitives/scroll-area.tsx"
+  },
+  {
+    "slug": "search-input",
+    "category": "Input",
+    "description": "Search-styled input with icon, clear button, and keyboard handling.",
+    "source": "src/forms/search-input.tsx"
+  },
+  {
+    "slug": "select",
+    "category": "Input",
+    "description": "Dropdown select with options, groups, search, and full keyboard navigation.",
+    "source": "src/primitives/select.tsx",
+    "note": ""
+  },
+  {
+    "slug": "separator",
+    "category": "Layout",
+    "description": "Horizontal or vertical visual divider.",
+    "source": "src/primitives/separator.tsx",
+    "note": ""
+  },
+  {
+    "slug": "sheet",
+    "category": "Feedback",
+    "description": "Slide-in panel from any edge with backdrop overlay.",
+    "source": "src/primitives/sheet.tsx",
+    "note": ""
+  },
+  {
+    "slug": "sidebar",
+    "category": "Layout",
+    "description": "A React sidebar that groups navigation, marks active items, and can collapse to a compact rail.",
+    "source": "src/layouts/sidebar.tsx",
+    "note": ""
+  },
+  {
+    "slug": "sidebar-layout-dashboard",
+    "category": "Layout",
+    "description": "Sidebar + main layout with mobile trigger, collapse, and responsive behavior.",
+    "source": "src/blocks/sidebar-layout-dashboard.tsx"
+  },
+  {
+    "slug": "skeleton",
+    "category": "Feedback",
+    "description": "Layout-mirroring skeleton loaders for async content — never plain spinners.",
+    "source": "src/primitives/skeleton.tsx",
+    "note": ""
+  },
+  {
+    "slug": "slide-in",
+    "category": "Display",
+    "description": "Slide-in entrance primitive from any edge — top / right / bottom / left.",
+    "source": "src/motion/SlideIn.tsx",
+    "note": "Exact export match: the component SlideIn, from motion/SlideIn.tsx."
+  },
+  {
+    "slug": "slider",
+    "category": "Input",
+    "description": "Range slider with draggable handle and configurable min/max/step.",
+    "source": "src/primitives/slider.tsx",
+    "note": ""
+  },
+  {
+    "slug": "sortable-task-list",
+    "category": "Layout",
+    "description": "Drag-to-reorder task list with status, priority, and assignee per row.",
+    "source": "src/blocks/sortable-task-list.tsx"
+  },
+  {
+    "slug": "sparkline",
+    "category": "Data",
+    "description": "Compact inline trend chart for embedding in stat cards and tables.",
+    "source": "src/charts/sparkline.tsx"
+  },
+  {
+    "slug": "split-page",
+    "category": "Layout",
+    "description": "Two-panel layout with list and detail panes for email/file browsers.",
+    "source": "src/layouts/split-page.tsx"
+  },
+  {
+    "slug": "stack",
+    "category": "Layout",
+    "description": "Flex-based HStack and VStack layout primitives with gap, align, and justify.",
+    "source": "src/layouts/stack.tsx",
+    "note": ""
+  },
+  {
+    "slug": "stagger",
+    "category": "Display",
+    "description": "Staggered children animation primitive for animating lists and grids.",
+    "source": "src/motion/Stagger.tsx"
+  },
+  {
+    "slug": "stat",
+    "category": "Data",
+    "description": "KPI metric card with trend indicator, icon, and period comparison. Group with StatGroup.",
+    "source": "src/components/Stat/Stat.tsx",
+    "note": "The lowercase file is a re-export; this item serves the defining file components/Stat/Stat.tsx."
+  },
+  {
+    "slug": "step-form",
+    "category": "Input",
+    "description": "Multi-step form pattern with progress indicator and per-step validation.",
+    "source": "src/forms/step-form.tsx"
+  },
+  {
+    "slug": "stepper",
+    "category": "Layout",
+    "description": "OTF's React stepper marks the current stage in a multi-step flow with titles, optional descriptions, and horizontal or vertical layouts.",
+    "source": "src/components/Stepper/Stepper.tsx",
+    "note": "The lowercase file is a re-export; this item serves the defining file components/Stepper/Stepper.tsx."
+  },
+  {
+    "slug": "structured-list",
+    "category": "Display",
+    "description": "Sectioned settings-style list with icons, descriptions, and right-side content.",
+    "source": "src/components/structured-list.tsx"
+  },
+  {
+    "slug": "switch",
+    "category": "Input",
+    "description": "Toggle switch for boolean settings with smooth animation.",
+    "source": "src/primitives/switch.tsx",
+    "note": ""
+  },
+  {
+    "slug": "tabs",
+    "category": "Layout",
+    "description": "Tabs that switch between related views on one screen, with arrow-key, Home and End navigation.",
+    "source": "src/primitives/tabs.tsx",
+    "note": ""
+  },
+  {
+    "slug": "tags",
+    "category": "Input",
+    "description": "Multi-select tag input with type-to-add, autocomplete suggestions, validation, and max-tags limit.",
+    "source": "src/forms/tags.tsx"
+  },
+  {
+    "slug": "task-card",
+    "category": "Display",
+    "description": "Rich task item with priority, assignee, due date, and labels.",
+    "source": "src/blocks/task-card.tsx"
+  },
+  {
+    "slug": "texture-card",
+    "category": "Layout",
+    "description": "Premium textured card surface with subtle gradient layers — for hero blocks and stat cards.",
+    "source": "src/primitives/texture-card.tsx"
+  },
+  {
+    "slug": "theme-switch",
+    "category": "Input",
+    "description": "Segmented dark / light / system theme switcher with smooth icon transitions.",
+    "source": "src/theme/ThemeSwitch.tsx",
+    "note": "Exact export match: the component ThemeSwitch, from theme/ThemeSwitch.tsx."
+  },
+  {
+    "slug": "timeline",
+    "category": "Display",
+    "description": "A timeline template: a chronological event list with an optional icon, a title, a description, a timestamp, and a connector.",
+    "source": "src/components/Timeline/Timeline.tsx",
+    "note": "The lowercase file is a re-export; this item serves the defining file components/Timeline/Timeline.tsx."
+  },
+  {
+    "slug": "toggle-button",
+    "category": "Input",
+    "description": "Segmented toggle button group for exclusive or multi-select mode switching.",
+    "source": "src/advanced/toggle-button.tsx"
+  },
+  {
+    "slug": "tooltip",
+    "category": "Display",
+    "description": "Hover tooltip with configurable delay, placement, and content.",
+    "source": "src/primitives/tooltip.tsx",
+    "note": ""
+  },
+  {
+    "slug": "tour",
+    "category": "Feedback",
+    "description": "Step-by-step product tour overlay with anchored tooltips and progress indicator.",
+    "source": "src/engagement/Tour/Tour.tsx",
+    "note": "The lowercase file is a re-export; this item serves the defining file engagement/Tour/Tour.tsx."
+  },
+  {
+    "slug": "transition",
+    "category": "Display",
+    "description": "Smooth transition primitive for animating value changes between states.",
+    "source": "src/motion/Transition.tsx"
+  },
+  {
+    "slug": "tree",
+    "category": "Display",
+    "description": "Recursive expandable tree view with selection, drag-reorder, and virtualization for 1000+ nodes.",
+    "source": "src/data/Tree.tsx"
+  },
+  {
+    "slug": "typewriter",
+    "category": "Display",
+    "description": "Character-by-character typewriter text animation with configurable speed.",
+    "source": "src/text/Typewriter.tsx"
+  },
+  {
+    "slug": "user-menu",
+    "category": "Layout",
+    "description": "Authenticated user dropdown with profile, settings, and sign-out.",
+    "source": "src/blocks/user-menu.tsx"
+  },
+  {
+    "slug": "variant-picker",
+    "category": "Input",
+    "description": "Single-select product-option swatches (grind, size, color) with selected + out-of-stock states.",
+    "source": "src/primitives/variant-picker.tsx"
+  },
+  {
+    "slug": "video-player",
+    "category": "Display",
+    "description": "HTML5 video player with custom controls, scrubber, volume, fullscreen, and chapters.",
+    "source": "src/data/VideoPlayer.tsx",
+    "note": "Exact export match: the component VideoPlayer, from data/VideoPlayer.tsx."
+  },
+  {
+    "slug": "workspace-members",
+    "category": "Layout",
+    "description": "Team member management with roles, permissions, and invite actions.",
+    "source": "src/blocks/workspace-members.tsx"
+  }
+]

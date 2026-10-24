@@ -91,10 +91,26 @@ cat > "$DIST/_headers" <<'HEADERS'
   Access-Control-Allow-Origin: *
 HEADERS
 
+# Per-slug shadcn items for the public, free @otfdashkit/ui components (OTFDA-958 E23). Adds dist/<slug>.json and
+# the component sources, and merges the slugs into registry.json beside the existing shockwave entry.
+node "$APP_ROOT/scripts/build-ui-slugs.mjs" "$DIST" "$APP_ROOT/scripts/ui-slugs.json"
+
+# Unknown paths must 404, not fall back to the index page (the Pages SPA fallback served index HTML for every
+# missing <slug>.json before this). Pages serves /404.html with a 404 status for paths with no file. There is no
+# _redirects catch-all: Pages ignores a /* rule like that. The per-slug .json files get application/json from Pages'
+# extension mapping; scripts/curl-check.sh checks the live content type after the deploy.
+cat > "$DIST/404.html" <<'HTML'
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8" /><title>Not found — OTF UI Native Registry</title></head>
+<body><main><h1>Not found</h1><p>No registry item at this path. See <a href="/registry.json">/registry.json</a>.</p></main></body>
+</html>
+HTML
+
 echo "▸ dist/ contents:"
 find "$DIST" -type f | sed "s|^$DIST/|  |" | sort
 
 # Final invariant check — every registry-listed file must exist in dist/.
-node "$APP_ROOT/scripts/verify.mjs" "$DIST"
+node "$APP_ROOT/scripts/verify.mjs" "$DIST" "$SRC/registry.json"
 
 echo "✓ Build complete: $DIST"
