@@ -30,6 +30,9 @@
     "*": {
       "tailwind-preset": [
         "./dist/tailwind-preset.d.ts"
+      ],
+      "brand": [
+        "./dist/brand.d.ts"
       ]
     }
   },
@@ -52,6 +55,16 @@
       "require": {
         "types": "./dist/tailwind-preset.d.ts",
         "default": "./dist/tailwind-preset.js"
+      }
+    },
+    "./brand": {
+      "import": {
+        "types": "./dist/brand.d.mts",
+        "default": "./dist/brand.mjs"
+      },
+      "require": {
+        "types": "./dist/brand.d.ts",
+        "default": "./dist/brand.js"
       }
     },
     "./web.css": "./src/web.css",

@@ -34,7 +34,7 @@ Pairs with [`@otfdashkit/ui`](https://www.npmjs.com/package/@otfdashkit/ui) and 
 The design system of otf-kit.dev and every OTF kit: Geist 400 headings (hero tracking -0.055em, line-height 1.05; section -0.03em), Inter body, a light primary button with a 10px radius, neutral surfaces, and one accent per kit.
 
 ```ts
-import { otfBrand } from '@otfdashkit/tokens'
+import { otfBrand } from '@otfdashkit/tokens/brand' // side-effect free; also re-exported from the root
 otfBrand.dark.background // '#0a0a0a'
 otfBrand.type.hero       // { fontWeight: '400', lineHeight: 1.05, letterSpacing: -0.055 } (em)
 ```
