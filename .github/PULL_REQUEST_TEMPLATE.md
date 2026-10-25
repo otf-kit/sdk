@@ -7,7 +7,7 @@ Link the issue this closes or relates to, if there is one.
 No GitHub Actions run on this repository. Run `pnpm build` and `pnpm type-check` and paste the result here, with the exit codes.
 
 ## Design
-Link the approved design (canvas or frames). For a visitor-facing change, give the 1440 and 390 frames, light and dark, or say why the change is exempt.
+Link the approved design (canvas or frames). For a visitor-facing change, give the 1440 and 390 frames, light and dark. No visitor-facing change is exempt from `/design` (AGENTS.md, standing order 25).
 
 ## Gate
 Paste the link to the local gate comment on this PR head (`otf-gate`, once it runs).
