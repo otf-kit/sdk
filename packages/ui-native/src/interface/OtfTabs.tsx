@@ -8,6 +8,7 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated'
+import { useLabelOnFill } from '../hooks/useLabelOnFill'
 
 export type OtfTabItem = { key: string; label: string }
 export type OtfTabsProps = {
@@ -33,6 +34,7 @@ export function OtfTabs({ tabs, activeTab, onTabChange, variant = 'underline' }:
   const current = activeTab ?? internalActive
   const theme = useTheme()
   const accent = theme.color9?.get?.() ?? '#f97316'
+  const onAccent = useLabelOnFill('$color9')
 
   const [rects, setRects] = useState<Record<string, Rect>>({})
   const active = rects[current]
@@ -120,7 +122,7 @@ export function OtfTabs({ tabs, activeTab, onTabChange, variant = 'underline' }:
                 <SizableText
                   size="$3"
                   fontWeight={isActive ? '600' : '500'}
-                  color={isPill && isActive ? '$color1' : isActive ? '$color12' : '$color11'}
+                  color={isPill && isActive ? onAccent : isActive ? '$color12' : '$color11'}
                 >
                   {tab.label}
                 </SizableText>

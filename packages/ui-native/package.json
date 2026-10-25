@@ -1,6 +1,6 @@
 {
   "name": "@otfdashkit/ui-native",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "description": "OTF UI Native: 85+ React Native components for Expo apps on iOS, Android and web. Shares component names and design tokens with @otfdashkit/ui; props differ per platform.",
   "keywords": [
     "otfdashkit",

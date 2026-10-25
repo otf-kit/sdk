@@ -1,6 +1,7 @@
 import { type ReactNode, useCallback } from 'react'
 import { SizableText, XStack } from 'tamagui'
 import { Check, X } from '@tamagui/lucide-icons'
+import { useLabelOnFill } from '../hooks/useLabelOnFill'
 
 export type ChipProps = {
   label: string
@@ -28,9 +29,10 @@ export function Chip({ label, selected, onPress, onRemove, variant = 'filled', s
   const s = sizes[size]
   const filled = variant === 'filled'
   const active = selected ?? false
+  const onFill = useLabelOnFill(color ?? '$color9')
   const bg = active ? (color ?? '$color9') : filled ? '$color3' : 'transparent'
   const border = active ? (color ?? '$color9') : '$color6'
-  const fg = active ? '$color1' : '$color11'
+  const fg = active ? onFill : '$color11'
 
   return (
     <XStack
