@@ -1,0 +1,83 @@
+/* OTF brand lock as a Storybook theme: the default. The SDK themes stay in the toolbar as options.
+   Neutrals, ink button and type follow @otfdashkit/tokens brand.css; the accent is the lock's orange. */
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@400&family=Geist+Mono:wght@400&family=Inter:wght@400;500;600&display=swap');
+
+.theme-otf {
+  --background: 60 9.1% 97.8%;
+  --foreground: 0 0% 3.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 3.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 0 0% 3.9%;
+  --primary: 60 6.2% 6.3%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 60 6.7% 94.1%;
+  --secondary-foreground: 0 0% 3.9%;
+  --muted: 60 6.7% 94.1%;
+  --muted-foreground: 0 0% 42%;
+  --accent: 60 6.7% 94.1%;
+  --accent-foreground: 0 0% 3.9%;
+  --destructive: 0 72% 45%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 60 3.7% 89.4%;
+  --input: 60 3.7% 89.4%;
+  --ring: 17.5 87.5% 40%;
+
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-heading: 'Geist', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, monospace;
+  --font-weight-heading: 400;
+  --letter-spacing-heading: -0.03em;
+  --line-height-heading: 1.1;
+
+  --radius: 0.625rem;
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-full: 9999px;
+
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 2px 8px 0 rgb(0 0 0 / 0.08);
+  --shadow-lg: 0 4px 16px 0 rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 8px 32px 0 rgb(0 0 0 / 0.12);
+  --shadow-card: 0 0 0 1px hsl(var(--border));
+}
+
+.theme-otf.dark {
+  --background: 0 0% 3.9%;
+  --foreground: 34.3 18.9% 92.7%;
+  --card: 0 0% 6.7%;
+  --card-foreground: 34.3 18.9% 92.7%;
+  --popover: 0 0% 6.7%;
+  --popover-foreground: 34.3 18.9% 92.7%;
+  --primary: 34.3 18.9% 92.7%;
+  --primary-foreground: 60 6.2% 6.3%;
+  --secondary: 0 0% 9%;
+  --secondary-foreground: 34.3 18.9% 92.7%;
+  --muted: 0 0% 9%;
+  --muted-foreground: 0 0% 62%;
+  --accent: 0 0% 9%;
+  --accent-foreground: 34.3 18.9% 92.7%;
+  --destructive: 0 72% 45%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 0 0% 12.2%;
+  --input: 0 0% 12.2%;
+  --ring: 24.6 95% 53.1%;
+
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.4);
+  --shadow-md: 0 2px 8px 0 rgb(0 0 0 / 0.5);
+  --shadow-lg: 0 4px 16px 0 rgb(0 0 0 / 0.55);
+  --shadow-xl: 0 8px 32px 0 rgb(0 0 0 / 0.6);
+}
+
+.theme-otf body, body.theme-otf { font-family: var(--font-sans); }
+.theme-otf :is(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-heading);
+  letter-spacing: var(--letter-spacing-heading);
+  line-height: var(--line-height-heading);
+}
+
+/* Docs title needs air above the lede at 390 (design review P3). */
+h1.sbdocs-title { margin-bottom: 16px !important; }

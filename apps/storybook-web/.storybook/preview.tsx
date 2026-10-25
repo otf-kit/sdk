@@ -1,11 +1,15 @@
 import React from 'react'
 import type { Preview, Decorator } from '@storybook/react'
-import { themes } from 'storybook/internal/theming'
+import { create } from 'storybook/internal/theming'
 import { Title, Description, Subtitle, Canvas, DocsContext } from '@storybook/blocks'
 import '../stories/globals.css'
 import '../../../packages/ui/src/styles.css'
+import '../../../packages/tokens/src/brand.css'
+import './otf-theme.css'
 
 type ThemeKey =
+  | 'otf-dark'
+  | 'otf-light'
   | 'linear-light'
   | 'linear-dark'
   | 'glass-light'
@@ -15,6 +19,8 @@ type ThemeKey =
   | 'minimal-dark'
 
 const THEME_MAP: Record<ThemeKey, { className: string; label: string }> = {
+  'otf-dark':      { className: 'theme-otf dark',          label: 'OTF Dark' },
+  'otf-light':     { className: 'theme-otf light',         label: 'OTF Light' },
   'linear-light':  { className: 'theme-linear',            label: 'Linear Light' },
   'linear-dark':   { className: 'theme-linear dark',       label: 'Linear Dark' },
   'glass-light':   { className: 'theme-glass',             label: 'Glass Light' },
@@ -24,8 +30,8 @@ const THEME_MAP: Record<ThemeKey, { className: string; label: string }> = {
   'minimal-dark':  { className: 'theme-minimal dark',      label: 'Minimal Dark' },
 }
 
-const DARK_THEMES: ThemeKey[] = ['minimal-dark', 'linear-dark', 'glass-dark', 'midnight']
-const LIGHT_THEMES: ThemeKey[] = ['minimal-light', 'linear-light', 'glass-light']
+const DARK_THEMES: ThemeKey[] = ['otf-dark', 'minimal-dark', 'linear-dark', 'glass-dark', 'midnight']
+const LIGHT_THEMES: ThemeKey[] = ['otf-light', 'minimal-light', 'linear-light', 'glass-light']
 
 function isDarkTheme(key: ThemeKey) {
   return THEME_MAP[key].className.includes('dark')
@@ -48,7 +54,7 @@ function ThemeCard({ themeKey, children }: { themeKey: ThemeKey; children: React
         style={{
           padding: '6px 12px',
           fontSize: 11,
-          fontWeight: 600,
+          fontWeight: 500,
           letterSpacing: 0.5,
           textTransform: 'uppercase',
           background: 'hsl(var(--muted))',
@@ -79,7 +85,7 @@ function applyRootTheme(themeKey: ThemeKey | null) {
 }
 
 const withTheme: Decorator = (Story, context) => {
-  const themeKey = (context.globals?.theme as ThemeKey | undefined) ?? 'minimal-dark'
+  const themeKey = (context.globals?.theme as ThemeKey | undefined) ?? 'otf-dark'
   const allThemes = context.globals?.allThemes === 'on'
 
   React.useEffect(() => {
@@ -168,7 +174,7 @@ function ShowcaseDocsPage() {
       <Title />
       <Subtitle />
       <Description />
-      <p style={{ opacity: 0.7, fontSize: 13, marginTop: -8 }}>
+      <p style={{ opacity: 0.7, fontSize: 13, marginTop: 0 }}>
         Each story below is an interactive preview. Click <b>Open ↗</b> to
         inspect controls, actions, and source in a dedicated tab.
       </p>
@@ -196,7 +202,7 @@ function StoryShowcase() {
               borderBottom: '1px solid rgba(255,255,255,0.08)',
             }}
           >
-            <h3 style={{ margin: 0, fontSize: 17, fontWeight: 600, flex: 1 }}>
+            <h3 style={{ margin: 0, fontSize: 17, fontFamily: 'var(--otf-font-display)', fontWeight: 400, letterSpacing: '-0.03em', flex: 1 }}>
               {story.name}
             </h3>
             <a
@@ -207,7 +213,7 @@ function StoryShowcase() {
                 padding: '4px 10px',
                 borderRadius: 6,
                 border: '1px solid rgba(255,255,255,0.15)',
-                color: '#f97316',
+                color: '#f0ede9', // the Docs page stays dark in every theme
                 textDecoration: 'none',
                 fontWeight: 500,
                 whiteSpace: 'nowrap',
@@ -229,10 +235,12 @@ const preview: Preview = {
     theme: {
       name: 'Theme',
       description: 'OTF theme + dark/light',
-      defaultValue: 'minimal-dark',
+      defaultValue: 'otf-dark',
       toolbar: {
         icon: 'paintbrush',
         items: [
+          { value: 'otf-dark',      title: 'OTF Dark' },
+          { value: 'otf-light',     title: 'OTF Light' },
           { value: 'minimal-dark',  title: 'Minimal Dark' },
           { value: 'minimal-light', title: 'Minimal Light' },
           { value: 'linear-dark',   title: 'Linear Dark' },
@@ -268,7 +276,16 @@ const preview: Preview = {
     },
     backgrounds: { disable: true },
     docs: {
-      theme: themes.dark,
+      theme: create({
+        base: 'dark',
+        appBg: '#0a0a0a',
+        appContentBg: '#0a0a0a',
+        appBorderColor: '#1f1f1f',
+        textColor: '#f0ede9',
+        textMutedColor: '#9e9e9e',
+        fontBase: '"Inter", ui-sans-serif, system-ui, sans-serif',
+        fontCode: '"Geist Mono", ui-monospace, monospace',
+      }),
       page: ShowcaseDocsPage,
       // Hide "Show code" toggle on every story canvas — Docs is a showcase,
       // not a code reference. Users click "Open ↗" to inspect source.
