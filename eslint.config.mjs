@@ -1,5 +1,6 @@
 import otfDesign from './packages/config/eslint-plugin-otf-design.mjs'
 import tsParser from '@typescript-eslint/parser'
+import tsPlugin from '@typescript-eslint/eslint-plugin'
 
 export default [
   {
@@ -15,9 +16,13 @@ export default [
       'kits/*-landing/**',
     ],
   },
-  // TypeScript parser for all TS/TSX files
+  // TypeScript parser for all TS/TSX files. The plugin is registered so eslint-disable comments
+  // for its rules (e.g. kits/saas-dashboard/server/request.ts) resolve instead of erroring.
   {
     files: ['**/*.{ts,tsx}'],
+    plugins: {
+      '@typescript-eslint': tsPlugin,
+    },
     languageOptions: {
       parser: tsParser,
       parserOptions: {
