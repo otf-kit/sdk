@@ -11,17 +11,19 @@ interface StatProps {
   icon?: React.ReactNode
   description?: string
   className?: string
+  /** For a tile in a 2-up grid on phones: tighter padding and value, and the label wraps below sm */
+  compact?: boolean
 }
 
-export function Stat({ label, value, trend, trendLabel, icon, description, className }: StatProps) {
+export function Stat({ label, value, trend, trendLabel, icon, description, className, compact }: StatProps) {
   const isPositive = trend !== undefined && trend >= 0
   return (
     <Card className={cn('', className)}>
-      <CardContent className="p-5">
+      <CardContent className={compact ? 'p-4 sm:p-5' : 'p-5'}>
         <div className="flex items-start justify-between">
           <div className="space-y-1 min-w-0">
-            <p className="text-sm font-medium text-[hsl(var(--muted-foreground))] truncate">{label}</p>
-            <p className="text-2xl font-bold text-[hsl(var(--foreground))]">{value}</p>
+            <p className={cn('text-sm font-medium text-[hsl(var(--muted-foreground))]', compact ? 'sm:truncate' : 'truncate')}>{label}</p>
+            <p className={cn('font-bold text-[hsl(var(--foreground))]', compact ? 'text-lg sm:text-2xl' : 'text-2xl')}>{value}</p>
           </div>
           {icon && <div className="text-[hsl(var(--muted-foreground))] shrink-0 ml-2">{icon}</div>}
         </div>

@@ -107,12 +107,16 @@ export function ActivityHeatmap({
           />
         </div>
 
+        {/* Four tiles sit 2-up on a phone: four across at 390 clipped the labels and values (OTFDA-1094). */}
         {stats && stats.length > 0 && (
           <div
-            className={cn('grid gap-4 mt-5 pt-5 border-t border-[hsl(var(--border))]', `grid-cols-${Math.min(stats.length, 4)}`)}
+            className={cn(
+              'grid gap-3 sm:gap-4 mt-5 pt-5 border-t border-[hsl(var(--border))]',
+              stats.length >= 4 ? 'grid-cols-2 sm:grid-cols-4' : `grid-cols-${stats.length}`,
+            )}
           >
             {stats.map((s) => (
-              <Stat key={s.label} label={s.label} value={s.value} />
+              <Stat key={s.label} label={s.label} value={s.value} compact />
             ))}
           </div>
         )}
