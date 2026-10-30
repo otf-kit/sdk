@@ -1,27 +1,44 @@
 <div align="center">
 
-<a href="https://ui.otf-kit.dev"><img src="https://cdn.otf-kit.dev/readme/sdk-1017r/hero.gif" alt="Screen recording: a cursor types into Input, switches Tabs, opens an Accordion item and a Dialog, first in the live web Storybook and then in the live native showcase, shown in a phone frame" width="100%" /></a>
-
-<sub>A real screen recording of <a href="https://ui.otf-kit.dev">ui.otf-kit.dev</a> and the <a href="https://native-preview.otf-kit.dev">native showcase</a> (its web build, from the same Expo code that runs on iOS and Android). Frames, title cards and the cursor were added on top. <a href="https://cdn.otf-kit.dev/readme/sdk-1017r/hero.mp4">Watch it as MP4</a>.</sub>
+<a href="https://otf-kit.dev"><img src="https://otf-kit.dev/logo.svg" alt="OTF logo" width="64" height="64" /></a>
 
 # OTF UI
 
-### One component set for web, iOS and Android. Free, MIT, and easy for your AI agent to build on.
-
-**[Storybook](https://ui.otf-kit.dev)** · **[Native showcase](https://native-preview.otf-kit.dev)** · **[Android APK](https://otf-kit.dev/download)** · **[Component gallery](https://otf-kit.dev/components)** · **[Docs](https://otf-kit.dev/docs)**
+**One component set for web, iOS and Android.** Free, MIT, and easy for your AI agent to build on.
 
 <p>
   <a href="https://www.npmjs.com/package/@otfdashkit/ui"><img src="https://img.shields.io/npm/v/@otfdashkit/ui?style=flat-square&color=000&label=%40otfdashkit%2Fui" alt="@otfdashkit/ui on npm"></a>
-  <a href="https://www.npmjs.com/package/@otfdashkit/ui-native"><img src="https://img.shields.io/npm/v/@otfdashkit/ui-native?style=flat-square&color=000&label=%40otfdashkit%2Fui-native" alt="@otfdashkit/ui-native on npm"></a>
   <a href="./LICENSE"><img src="https://img.shields.io/badge/license-MIT-000?style=flat-square" alt="MIT license"></a>
-  <a href="https://discord.gg/gpXyu7SqNZ"><img src="https://img.shields.io/badge/Discord-join-000?style=flat-square&logo=discord&logoColor=white" alt="Discord"></a>
 </p>
+
+**[Docs](https://otf-kit.dev/docs)** · **[Storybook](https://ui.otf-kit.dev)** · **[Native showcase](https://native-preview.otf-kit.dev)** · **[Components](https://otf-kit.dev/components)** · **[Kits](https://otf-kit.dev/templates)**
+
+<br />
+
+<a href="https://otf-kit.dev">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://cdn.otf-kit.dev/readme/sdk-v4-20261030/hero-dark.gif" />
+    <source media="(prefers-color-scheme: light)" srcset="https://cdn.otf-kit.dev/readme/sdk-v4-20261030/hero-light.gif" />
+    <img src="https://cdn.otf-kit.dev/readme/sdk-v4-20261030/hero-dark.gif" alt="Recording of real apps built on OTF UI: in the AI Agent workspace a user asks the Writer agent for a follow-up email and the reply streams in, over a SaaS dashboard, while the Fitness and Arcade iPhones switch screens" width="100%" />
+  </picture>
+</a>
+
+<sub>A recording of the live demos (the AI Agent loop is the one on <a href="https://otf-kit.dev">otf-kit.dev</a>), all built on this SDK: the <a href="https://ai-app.otf-kit.dev">AI Agent</a> and <a href="https://saas-app.otf-kit.dev">SaaS Dashboard</a> web apps, and the <a href="https://fitness-app.otf-kit.dev">Fitness</a> and <a href="https://arcade-app.otf-kit.dev">Arcade</a> apps for iOS and Android.</sub>
 
 </div>
 
-`<Button>` from `@otfdashkit/ui` on the web and `<Button>` from `@otfdashkit/ui-native` on iOS and Android share a name and one set of design tokens. You import the same component names on every platform. Each package keeps the props that suit its platform, so check a component's page when you port a screen.
+## What's inside
 
 **240+ components: 150+ web and 85+ native.** At least 240, counting only components exported from the npm packages (`@otfdashkit/ui` and `@otfdashkit/ui-native`), leaving out stories and tests. Of these, the [component gallery](https://otf-kit.dev/components) documents **109 installable components** one by one (90 web and 19 React Native), each with its own install steps.
+
+| Part | What you get |
+|---|---|
+| Web components | App shells, boards, data tables and charts, calendars, editors, menus and commands, messaging |
+| Native components | The same names and design tokens, rendered natively on iOS and Android |
+| Kits built on it | AI Agent, SaaS Dashboard, Fitness, Arcade, Booking, Marketplace |
+| Agent files | Skills, `AGENTS.md` conventions, `llms.txt` and a Markdown mirror of the docs |
+
+`<Button>` from `@otfdashkit/ui` on the web and `<Button>` from `@otfdashkit/ui-native` on iOS and Android share a name and one set of design tokens. You import the same component names on every platform. Each package keeps the props that suit its platform, so check a component's page when you port a screen.
 
 ## Quick start (30 seconds)
 
@@ -87,24 +104,72 @@ export default function App() {
 
 On native, one `<OTFProvider>` at the root is all the setup. On the web, it's the Tailwind preset above plus the two CSS imports; the [getting started guide](https://otf-kit.dev/docs/getting-started) covers theme switching.
 
-## What you get
+## Real apps built with it
+
+Every screen below is a live demo you can click through. They are the six [OTF kits](https://otf-kit.dev/templates), complete apps built on this SDK.
 
 <table>
   <tr>
-    <td width="50%" valign="top"><a href="https://ui.otf-kit.dev/?path=/story/data-eventcalendar--month-view"><img src="https://cdn.otf-kit.dev/readme/sdk-1017r/g-ev.gif" alt="Recording: Event calendar, paging to next month and back to today" width="100%" /></a><br /><sub><b>EventCalendar</b>: page months, jump back to today (web) · <a href="https://cdn.otf-kit.dev/readme/sdk-1017r/g-ev.mp4">MP4</a></sub></td>
-    <td width="50%" valign="top"><a href="https://ui.otf-kit.dev/?path=/story/advanced--kanban-story"><img src="https://cdn.otf-kit.dev/readme/sdk-1017r/g-kb.gif" alt="Recording: dragging cards between Kanban columns" width="100%" /></a><br /><sub><b>Kanban</b>: drag cards between columns (web) · <a href="https://cdn.otf-kit.dev/readme/sdk-1017r/g-kb.mp4">MP4</a></sub></td>
+    <td width="50%" valign="top">
+      <a href="https://ai-app.otf-kit.dev"><picture>
+        <source media="(prefers-color-scheme: dark)" srcset="https://cdn.otf-kit.dev/readme/sdk-v4-20261030/g-ai-dark.webp" />
+        <source media="(prefers-color-scheme: light)" srcset="https://cdn.otf-kit.dev/readme/sdk-v4-20261030/g-ai-light.webp" />
+        <img src="https://cdn.otf-kit.dev/readme/sdk-v4-20261030/g-ai-dark.webp" alt="AI Agent workspace: agent list, a chat thread with an analyst reply, and the credits panel" width="100%" />
+      </picture></a>
+      <br /><b><a href="https://otf-kit.dev/templates/ai-saas-kit">AI agent workspace</a></b><br /><sub>Agents with skills, memory, tools and credits · <a href="https://ai-app.otf-kit.dev">live demo</a></sub>
+    </td>
+    <td width="50%" valign="top">
+      <a href="https://saas-app.otf-kit.dev"><picture>
+        <source media="(prefers-color-scheme: dark)" srcset="https://cdn.otf-kit.dev/readme/sdk-v4-20261030/g-saas-dark.webp" />
+        <source media="(prefers-color-scheme: light)" srcset="https://cdn.otf-kit.dev/readme/sdk-v4-20261030/g-saas-light.webp" />
+        <img src="https://cdn.otf-kit.dev/readme/sdk-v4-20261030/g-saas-dark.webp" alt="SaaS Dashboard: issue board with backlog, todo, in progress and review columns" width="100%" />
+      </picture></a>
+      <br /><b><a href="https://otf-kit.dev/templates/saas-dashboard">SaaS issue board</a></b><br /><sub>Board, backlog and dashboard on sample data · <a href="https://saas-app.otf-kit.dev">live demo</a></sub>
+    </td>
   </tr>
   <tr>
-    <td width="50%" valign="top"><a href="https://ui.otf-kit.dev/?path=/story/data-advanceddatagrid--with-selection"><img src="https://cdn.otf-kit.dev/readme/sdk-1017r/g-dg.gif" alt="Recording: sorting the data grid by name and selecting rows" width="100%" /></a><br /><sub><b>AdvancedDataGrid</b>: sort a column, select rows (web) · <a href="https://cdn.otf-kit.dev/readme/sdk-1017r/g-dg.mp4">MP4</a></sub></td>
-    <td width="50%" valign="top"><a href="https://ui.otf-kit.dev/?path=/story/forms-colorpicker--with-swatches"><img src="https://cdn.otf-kit.dev/readme/sdk-1017r/g-cp-v2.gif" alt="Recording: picking a swatch, dragging saturation and hue in the color picker" width="100%" /></a><br /><sub><b>ColorPicker</b>: swatches, saturation and hue (web) · <a href="https://cdn.otf-kit.dev/readme/sdk-1017r/g-cp.mp4">MP4</a></sub></td>
+    <td width="50%" valign="top">
+      <a href="https://fitness-app.otf-kit.dev"><picture>
+        <source media="(prefers-color-scheme: dark)" srcset="https://cdn.otf-kit.dev/readme/sdk-v4-20261030/g-fitness-dark.webp" />
+        <source media="(prefers-color-scheme: light)" srcset="https://cdn.otf-kit.dev/readme/sdk-v4-20261030/g-fitness-light.webp" />
+        <img src="https://cdn.otf-kit.dev/readme/sdk-v4-20261030/g-fitness-dark.webp" alt="Fitness app on two iPhones: daily summary with activity rings, and the ring detail" width="100%" />
+      </picture></a>
+      <br /><b><a href="https://otf-kit.dev/templates/fitness-kit">Fitness summary</a></b><br /><sub>Activity rings, stats and workouts, native · <a href="https://fitness-app.otf-kit.dev">live demo</a></sub>
+    </td>
+    <td width="50%" valign="top">
+      <a href="https://arcade-app.otf-kit.dev"><picture>
+        <source media="(prefers-color-scheme: dark)" srcset="https://cdn.otf-kit.dev/readme/sdk-v4-20261030/g-arcade-dark.webp" />
+        <source media="(prefers-color-scheme: light)" srcset="https://cdn.otf-kit.dev/readme/sdk-v4-20261030/g-arcade-light.webp" />
+        <img src="https://cdn.otf-kit.dev/readme/sdk-v4-20261030/g-arcade-dark.webp" alt="Arcade app on two iPhones: browse screen with a featured game, and a game detail page" width="100%" />
+      </picture></a>
+      <br /><b><a href="https://otf-kit.dev/templates/arcade-kit">Arcade store</a></b><br /><sub>Featured carousel, genres and game detail · <a href="https://arcade-app.otf-kit.dev">live demo</a></sub>
+    </td>
   </tr>
   <tr>
-    <td width="50%" valign="top"><a href="https://native-preview.otf-kit.dev"><img src="https://cdn.otf-kit.dev/readme/sdk-1017r/g-dp.gif" alt="Recording: picking dates and paging months in the native date picker, shown in a phone frame" width="100%" /></a><br /><sub><b>DatePicker</b>: pick a date, page months (<code>ui-native</code> for iOS and Android, recorded in the showcase's web build) · <a href="https://cdn.otf-kit.dev/readme/sdk-1017r/g-dp.mp4">MP4</a></sub></td>
-    <td width="50%" valign="top"><a href="https://native-preview.otf-kit.dev"><img src="https://cdn.otf-kit.dev/readme/sdk-1017r/g-sw.gif" alt="Recording: tapping like and nope on the native swipe cards, shown in a phone frame" width="100%" /></a><br /><sub><b>SwipeCards</b>: like and nope through a deck (<code>ui-native</code> for iOS and Android, recorded in the showcase's web build) · <a href="https://cdn.otf-kit.dev/readme/sdk-1017r/g-sw.mp4">MP4</a></sub></td>
+    <td width="50%" valign="top">
+      <a href="https://booking-app.otf-kit.dev"><picture>
+        <source media="(prefers-color-scheme: dark)" srcset="https://cdn.otf-kit.dev/readme/sdk-v4-20261030/g-booking-dark.webp" />
+        <source media="(prefers-color-scheme: light)" srcset="https://cdn.otf-kit.dev/readme/sdk-v4-20261030/g-booking-light.webp" />
+        <img src="https://cdn.otf-kit.dev/readme/sdk-v4-20261030/g-booking-dark.webp" alt="Booking app on two iPhones: a session calendar, and the discover list of providers" width="100%" />
+      </picture></a>
+      <br /><b><a href="https://otf-kit.dev/templates/booking-kit">Booking calendar</a></b><br /><sub>Providers, availability and bookings · <a href="https://booking-app.otf-kit.dev">live demo</a></sub>
+    </td>
+    <td width="50%" valign="top">
+      <a href="https://otf-kit.dev/blocks"><picture>
+        <source media="(prefers-color-scheme: dark)" srcset="https://cdn.otf-kit.dev/readme/sdk-v4-20261030/g-blocks-dark.webp" />
+        <source media="(prefers-color-scheme: light)" srcset="https://cdn.otf-kit.dev/readme/sdk-v4-20261030/g-blocks-light.webp" />
+        <img src="https://cdn.otf-kit.dev/readme/sdk-v4-20261030/g-blocks-dark.webp" alt="Dashboard blocks: revenue, orders and users metrics, a task board and a command menu" width="100%" />
+      </picture></a>
+      <br /><b><a href="https://otf-kit.dev/blocks">Dashboard blocks</a></b><br /><sub>Metrics, boards and a command menu to start from · <a href="https://otf-kit.dev/blocks">all blocks</a></sub>
+    </td>
   </tr>
 </table>
 
-Every clip above is a screen recording of a real cursor using the live [Storybook](https://ui.otf-kit.dev) or [native showcase](https://native-preview.otf-kit.dev). Only the browser and phone frames, their labels and the cursor were added. The [component gallery](https://otf-kit.dev/components) lists all 109 installable components with install steps for each one. Blocks (full page sections) and patterns (motion and effects) are listed separately at [/blocks](https://otf-kit.dev/blocks) and [/patterns](https://otf-kit.dev/patterns).
+<sub>The first two and the blocks are web. Fitness, Arcade and Booking are Expo apps for iOS, Android and the web from one codebase; so is the <a href="https://marketplace-app.otf-kit.dev">Marketplace</a> kit.</sub>
+
+## Packages
+
+The [component gallery](https://otf-kit.dev/components) lists all 109 installable components with install steps for each one. Blocks (full page sections) and patterns (motion and effects) are listed separately at [/blocks](https://otf-kit.dev/blocks) and [/patterns](https://otf-kit.dev/patterns).
 
 | Package | Platform | What |
 |---|---|---|
@@ -145,27 +210,6 @@ Use @otfdashkit/ui on web and @otfdashkit/ui-native in the Expo app.
 ```
 
 On native, build themes from any of the 17 with `getOtfThemePalettes('ocean-teal')` from `@otfdashkit/ui-native`. See [`packages/tokens`](packages/tokens/).
-
-## Need a full app?
-
-The SDK is free and works on its own. If you want auth, a database, payments and deploy scripts already wired, [**OTF kits**](https://otf-kit.dev/templates) are complete apps built on this SDK. Each one ships an `ai/` folder your agent reads, and every demo below is live, so you can click through before you buy.
-
-<table>
-  <tr>
-    <td width="50%" valign="top"><a href="https://ai-app.otf-kit.dev"><img src="https://cdn.otf-kit.dev/img/kits/ai-saas-kit/20261029-live/chat-dark.webp" alt="AI Agent kit: agent chat with a task list and credits panel, dark theme" width="100%" /></a><br /><sub><b><a href="https://otf-kit.dev/templates/ai-saas-kit">AI Agent</a></b>: an agent workspace with chat, tasks and credits (web) · <a href="https://ai-app.otf-kit.dev">live demo</a></sub></td>
-    <td width="50%" valign="top"><a href="https://saas.otf-kit.dev"><img src="https://cdn.otf-kit.dev/img/kits/20261025b/saas/dashboard-dark.webp" alt="SaaS Dashboard kit: overview dashboard with charts, dark theme" width="100%" /></a><br /><sub><b><a href="https://otf-kit.dev/templates/saas-dashboard">SaaS Dashboard</a></b>: analytics, issues, inbox and team (web) · <a href="https://saas.otf-kit.dev">live demo</a></sub></td>
-  </tr>
-</table>
-<table>
-  <tr>
-    <td width="25%" valign="top"><a href="https://fitness-preview.otf-kit.dev"><img src="https://cdn.otf-kit.dev/img/kits/20261025d/fitness/summary-dark.webp" alt="Fitness kit: daily summary with activity rings on a phone" width="100%" /></a><br /><sub><b><a href="https://otf-kit.dev/templates/fitness-kit">Fitness</a></b>: workouts, nutrition, progress · <a href="https://fitness-preview.otf-kit.dev">live demo</a></sub></td>
-    <td width="25%" valign="top"><a href="https://booking-preview.otf-kit.dev"><img src="https://cdn.otf-kit.dev/img/kits/20261025d/booking/discover-dark.webp" alt="Booking kit: discover screen on a phone" width="100%" /></a><br /><sub><b><a href="https://otf-kit.dev/templates/booking-kit">Booking</a></b>: discover and book · <a href="https://booking-preview.otf-kit.dev">live demo</a></sub></td>
-    <td width="25%" valign="top"><a href="https://arcade-preview.otf-kit.dev"><img src="https://cdn.otf-kit.dev/img/kits/20261025b/arcade/store-dark.webp" alt="Arcade kit: game store screen on a phone" width="100%" /></a><br /><sub><b><a href="https://otf-kit.dev/templates/arcade-kit">Arcade</a></b>: discover games, play instantly · <a href="https://arcade-preview.otf-kit.dev">live demo</a></sub></td>
-    <td width="25%" valign="top"><a href="https://marketplace-preview.otf-kit.dev"><img src="https://cdn.otf-kit.dev/img/kits/20261025d/marketplace/home-dark.webp" alt="Marketplace kit: home screen on a phone" width="100%" /></a><br /><sub><b><a href="https://otf-kit.dev/templates/marketplace-kit">Marketplace</a></b>: browse and hire, seller workspace · <a href="https://marketplace-preview.otf-kit.dev">live demo</a></sub></td>
-  </tr>
-</table>
-
-<sub>The first two are web apps. The other four are Expo apps for iOS, Android and the web, from one codebase.</sub>
 
 ## Contributing
 
