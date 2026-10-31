@@ -19,7 +19,7 @@ export type EmptyStateProps = {
  */
 export function EmptyState({ icon, title, description, actionLabel, onAction }: EmptyStateProps) {
   return (
-    <YStack flex={1} alignItems="center" justifyContent="center" gap="$4" padding="$6">
+    <YStack flexGrow={1} alignItems="center" justifyContent="center" gap="$4" padding="$6">
       {icon && (
         <Circle size={76} backgroundColor="$color3" borderWidth={1} borderColor="$color5">
           {icon}
