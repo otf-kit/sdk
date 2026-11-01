@@ -48,6 +48,7 @@ export function SearchBar({
         placeholderTextColor="$color8"
         backgroundColor="transparent"
         borderWidth={0}
+        focusVisibleStyle={{ outlineWidth: 0, outlineStyle: 'none' }}
         autoFocus={autoFocus}
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}

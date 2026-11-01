@@ -11,7 +11,7 @@
  */
 
 import { useCallback, useEffect, useState } from 'react'
-import { TextInput, type TextInputProps } from 'react-native'
+import { Platform, TextInput, type TextInputProps } from 'react-native'
 import Animated, {
   Easing,
   interpolate,
@@ -155,6 +155,8 @@ export function FloatingLabelInput({
               margin:   0,
               minHeight: 28,
               fontFamily: undefined,
+              // The bordered frame shows focus; web would otherwise draw its own outline inside it.
+              ...(Platform.OS === 'web' ? { outlineStyle: 'none' as never } : {}),
             },
             style as object,
           ]}

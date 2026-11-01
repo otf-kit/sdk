@@ -22,6 +22,7 @@ function getStrength(pw: string): { label: string; color: string; width: string 
 
 export function PasswordInput({ value = '', onChangeText, placeholder = 'Password', label, error, size = '$4', strengthIndicator }: PasswordInputProps) {
   const [visible, setVisible] = useState(false)
+  const [focused, setFocused] = useState(false)
   const toggle = useCallback(() => setVisible(v => !v), [])
   const strength = getStrength(value)
 
@@ -29,14 +30,15 @@ export function PasswordInput({ value = '', onChangeText, placeholder = 'Passwor
     <YStack gap="$1.5">
       {label && <SizableText size="$3" color="$color11" fontWeight="500">{label}</SizableText>}
       <XStack
-        borderWidth={1} borderColor={error ? '$red9' : '$color6'} borderRadius="$3"
+        borderWidth={1} borderColor={error ? '$red9' : focused ? '$color9' : '$color6'} borderRadius="$3"
         backgroundColor="$color2" alignItems="center" paddingRight="$2"
-        focusStyle={{ borderColor: '$color9' }}
       >
         <Input
           flex={1} size={size} value={value} onChangeText={onChangeText}
           placeholder={placeholder} placeholderTextColor="$color8"
           secureTextEntry={!visible} backgroundColor="transparent" borderWidth={0}
+          focusVisibleStyle={{ outlineWidth: 0, outlineStyle: 'none' }}
+          onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}
         />
         <XStack
           paddingHorizontal="$2" alignItems="center" justifyContent="center"
