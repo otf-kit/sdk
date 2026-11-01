@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from 'react'
-import { Platform, View } from 'react-native'
+import { KeyboardAvoidingView, Platform, View } from 'react-native'
 import { Tabs, usePathname } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
 import * as SplashScreen from 'expo-splash-screen'
@@ -249,46 +249,50 @@ function ThemedTabsShell() {
       <DialogProvider>
       <ThemedBodyBg />
       <View style={{ flex: 1 }}>
-      <Tabs
-        screenOptions={{
-          headerShown: false,
-          tabBarStyle: isWebIframed
-            ? { display: 'none' }
-            : {
-                backgroundColor: isDark ? '#0a0a0a' : '#f5f5f5',
-                borderTopColor: isDark ? '#1f1f1f' : '#e5e5e5',
-                borderTopWidth: 0.5,
-                height: 60,
-                paddingBottom: 4,
-                paddingTop: 6,
-              },
-          tabBarActiveTintColor: accent,
-          tabBarInactiveTintColor: inactiveColor,
-          tabBarLabelStyle: { fontSize: 11, fontWeight: '600' },
-          // Disable Android's default ripple/indicator — we draw our own dot
-          tabBarActiveBackgroundColor: 'transparent',
-        }}
-      >
-        <Tabs.Screen
-          name="index"
-          options={{
-            title: 'Components',
-            tabBarIcon: tabIcon(Layers),
+      {/* Android draws edge to edge, so the keyboard no longer resizes the window: pad the app up by it,
+          as adjustResize did (KeyboardStickyFooter relies on it). iOS screens keep their own handling. */}
+      <KeyboardAvoidingView behavior="padding" enabled={Platform.OS === 'android'} style={{ flex: 1 }}>
+        <Tabs
+          screenOptions={{
+            headerShown: false,
+            tabBarStyle: isWebIframed
+              ? { display: 'none' }
+              : {
+                  backgroundColor: isDark ? '#0a0a0a' : '#f5f5f5',
+                  borderTopColor: isDark ? '#1f1f1f' : '#e5e5e5',
+                  borderTopWidth: 0.5,
+                  height: 60,
+                  paddingBottom: 4,
+                  paddingTop: 6,
+                },
+            tabBarActiveTintColor: accent,
+            tabBarInactiveTintColor: inactiveColor,
+            tabBarLabelStyle: { fontSize: 11, fontWeight: '600' },
+            // Disable Android's default ripple/indicator — we draw our own dot
+            tabBarActiveBackgroundColor: 'transparent',
           }}
-        />
-        <Tabs.Screen
-          name="settings"
-          options={{
-            title: 'Settings',
-            tabBarIcon: tabIcon(Settings),
-          }}
-        />
-        {/* Hide all detail routes from the tab bar (still navigable via Link). */}
-        <Tabs.Screen name="primitives" options={{ href: null }} />
-        <Tabs.Screen name="interface" options={{ href: null }} />
-        <Tabs.Screen name="layouts" options={{ href: null }} />
-        <Tabs.Screen name="patterns" options={{ href: null }} />
-      </Tabs>
+        >
+          <Tabs.Screen
+            name="index"
+            options={{
+              title: 'Components',
+              tabBarIcon: tabIcon(Layers),
+            }}
+          />
+          <Tabs.Screen
+            name="settings"
+            options={{
+              title: 'Settings',
+              tabBarIcon: tabIcon(Settings),
+            }}
+          />
+          {/* Hide all detail routes from the tab bar (still navigable via Link). */}
+          <Tabs.Screen name="primitives" options={{ href: null }} />
+          <Tabs.Screen name="interface" options={{ href: null }} />
+          <Tabs.Screen name="layouts" options={{ href: null }} />
+          <Tabs.Screen name="patterns" options={{ href: null }} />
+        </Tabs>
+      </KeyboardAvoidingView>
       <FloatingThemePicker />
       </View>
       </DialogProvider>
