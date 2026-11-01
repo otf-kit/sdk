@@ -34,8 +34,8 @@ export function luminance(color: string): number | null {
   return 0.2126 * r + 0.7152 * g + 0.0722 * b
 }
 
-/** The on thumb for an accent: white when it clears 3:1 (WCAG 1.4.11), otherwise dark ink. */
+/** The on thumb for an accent: white unless it sits under 2:1 (pale accents like yellow), then dark ink. */
 export function switchThumbOn(accent: string): string {
   const l = luminance(accent)
-  return l === null || 1.05 / (l + 0.05) >= 3 ? '#ffffff' : INK
+  return l === null || 1.05 / (l + 0.05) >= 2 ? '#ffffff' : INK
 }

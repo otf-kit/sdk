@@ -26,7 +26,7 @@ export type OtfSwitchProps = {
   inactiveColor?: string
   /** Off track fill. Defaults to the surface (`$color2`). */
   trackColor?: string
-  /** On thumb. Defaults to white, or dark ink when white would sit under 3:1 on the accent. */
+  /** On thumb. Defaults to white, or dark ink on pale accents where white would sit under 2:1. */
   activeThumbColor?: string
   accessibilityLabel?: string
 }

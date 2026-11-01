@@ -1,4 +1,4 @@
-// The OtfSwitch on thumb must clear 3:1 on every accent format a theme hands it (Tamagui v5 ramps are hsla()).
+// The OtfSwitch on thumb is white like iOS and design B, and only turns ink on pale accents where white falls under 2:1.
 import { describe, expect, it } from 'bun:test'
 import { luminance, switchThumbOn } from '../src/primitives/switchThumb'
 
@@ -15,11 +15,19 @@ const ACCENTS = [
 
 describe('switchThumbOn', () => {
   for (const accent of ACCENTS) {
-    it(`clears 3:1 on ${accent}`, () => {
+    it(`stays visible (2:1) on ${accent}`, () => {
       expect(luminance(accent)).not.toBeNull()
-      expect(ratio(switchThumbOn(accent), accent)).toBeGreaterThanOrEqual(3)
+      expect(ratio(switchThumbOn(accent), accent)).toBeGreaterThanOrEqual(2)
     })
   }
+
+  it('is white on the brand oranges, as in design B', () => {
+    for (const accent of ['#f97316', '#fb923c', 'rgb(218, 91, 7)']) expect(switchThumbOn(accent)).toBe('#ffffff')
+  })
+
+  it('is ink on pale accents where white disappears', () => {
+    for (const accent of ['hsla(53, 92%, 55%, 1)', '#eab308', '#e5e5e5', '#fff']) expect(switchThumbOn(accent)).toBe('#111111')
+  })
 
   it('reads hsl the same as the equivalent hex', () => {
     expect(luminance('hsl(0, 0%, 100%)')).toBeCloseTo(luminance('#ffffff')!, 5)
