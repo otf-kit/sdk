@@ -17,9 +17,9 @@
 
 <a href="https://otf-kit.dev">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://cdn.otf-kit.dev/readme/sdk-v4-20261030/hero-dark.gif" />
-    <source media="(prefers-color-scheme: light)" srcset="https://cdn.otf-kit.dev/readme/sdk-v4-20261030/hero-light.gif" />
-    <img src="https://cdn.otf-kit.dev/readme/sdk-v4-20261030/hero-dark.gif" alt="Recording of real apps built on OTF UI: in the AI Agent workspace a user asks the Writer agent for a follow-up email and the reply streams in, over a SaaS dashboard, while the Fitness and Arcade iPhones switch screens" width="100%" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://cdn.otf-kit.dev/readme/sdk-v4-20261102/hero-dark.gif" />
+    <source media="(prefers-color-scheme: light)" srcset="https://cdn.otf-kit.dev/readme/sdk-v4-20261102/hero-light.gif" />
+    <img src="https://cdn.otf-kit.dev/readme/sdk-v4-20261102/hero-dark.gif" alt="Recording of real apps built on OTF UI: in the AI Agent workspace a user asks the Writer agent for a follow-up email and the reply streams in, over a SaaS dashboard, while the Fitness and Arcade iPhones switch screens" width="100%" />
   </picture>
 </a>
 
@@ -130,17 +130,17 @@ Every screen below is a live demo you can click through. They are the six [OTF k
   <tr>
     <td width="50%" valign="top">
       <a href="https://fitness-app.otf-kit.dev"><picture>
-        <source media="(prefers-color-scheme: dark)" srcset="https://cdn.otf-kit.dev/readme/sdk-v4-20261030/g-fitness-dark.webp" />
-        <source media="(prefers-color-scheme: light)" srcset="https://cdn.otf-kit.dev/readme/sdk-v4-20261030/g-fitness-light.webp" />
-        <img src="https://cdn.otf-kit.dev/readme/sdk-v4-20261030/g-fitness-dark.webp" alt="Fitness app on two iPhones: daily summary with activity rings, and the ring detail" width="100%" />
+        <source media="(prefers-color-scheme: dark)" srcset="https://cdn.otf-kit.dev/readme/sdk-v4-20261102/g-fitness-dark.webp" />
+        <source media="(prefers-color-scheme: light)" srcset="https://cdn.otf-kit.dev/readme/sdk-v4-20261102/g-fitness-light.webp" />
+        <img src="https://cdn.otf-kit.dev/readme/sdk-v4-20261102/g-fitness-dark.webp" alt="Fitness app on two iPhones: daily summary with activity rings, and the ring detail" width="100%" />
       </picture></a>
       <br /><b><a href="https://otf-kit.dev/templates/fitness-kit">Fitness summary</a></b><br /><sub>Activity rings, stats and workouts, native · <a href="https://fitness-app.otf-kit.dev">live demo</a></sub>
     </td>
     <td width="50%" valign="top">
       <a href="https://arcade-app.otf-kit.dev"><picture>
-        <source media="(prefers-color-scheme: dark)" srcset="https://cdn.otf-kit.dev/readme/sdk-v4-20261030/g-arcade-dark.webp" />
-        <source media="(prefers-color-scheme: light)" srcset="https://cdn.otf-kit.dev/readme/sdk-v4-20261030/g-arcade-light.webp" />
-        <img src="https://cdn.otf-kit.dev/readme/sdk-v4-20261030/g-arcade-dark.webp" alt="Arcade app on two iPhones: browse screen with a featured game, and a game detail page" width="100%" />
+        <source media="(prefers-color-scheme: dark)" srcset="https://cdn.otf-kit.dev/readme/sdk-v4-20261102/g-arcade-dark.webp" />
+        <source media="(prefers-color-scheme: light)" srcset="https://cdn.otf-kit.dev/readme/sdk-v4-20261102/g-arcade-light.webp" />
+        <img src="https://cdn.otf-kit.dev/readme/sdk-v4-20261102/g-arcade-dark.webp" alt="Arcade app on two iPhones: browse screen with a featured game, and a game detail page" width="100%" />
       </picture></a>
       <br /><b><a href="https://otf-kit.dev/templates/arcade-kit">Arcade store</a></b><br /><sub>Featured carousel, genres and game detail · <a href="https://arcade-app.otf-kit.dev">live demo</a></sub>
     </td>
@@ -148,9 +148,9 @@ Every screen below is a live demo you can click through. They are the six [OTF k
   <tr>
     <td width="50%" valign="top">
       <a href="https://booking-app.otf-kit.dev"><picture>
-        <source media="(prefers-color-scheme: dark)" srcset="https://cdn.otf-kit.dev/readme/sdk-v4-20261030/g-booking-dark.webp" />
-        <source media="(prefers-color-scheme: light)" srcset="https://cdn.otf-kit.dev/readme/sdk-v4-20261030/g-booking-light.webp" />
-        <img src="https://cdn.otf-kit.dev/readme/sdk-v4-20261030/g-booking-dark.webp" alt="Booking app on two iPhones: a session calendar, and the discover list of providers" width="100%" />
+        <source media="(prefers-color-scheme: dark)" srcset="https://cdn.otf-kit.dev/readme/sdk-v4-20261102/g-booking-dark.webp" />
+        <source media="(prefers-color-scheme: light)" srcset="https://cdn.otf-kit.dev/readme/sdk-v4-20261102/g-booking-light.webp" />
+        <img src="https://cdn.otf-kit.dev/readme/sdk-v4-20261102/g-booking-dark.webp" alt="Booking app on two iPhones: a session calendar, and the discover list of providers" width="100%" />
       </picture></a>
       <br /><b><a href="https://otf-kit.dev/templates/booking-kit">Booking calendar</a></b><br /><sub>Providers, availability and bookings · <a href="https://booking-app.otf-kit.dev">live demo</a></sub>
     </td>

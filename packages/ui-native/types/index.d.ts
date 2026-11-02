@@ -71,8 +71,19 @@ export const OtfButton: any
 export type OtfButtonProps = any
 export const OtfText: any
 export type OtfTextProps = any
-export const OtfSwitch: any
-export type OtfSwitchProps = any
+export type OtfSwitchProps = {
+  checked?: boolean
+  defaultChecked?: boolean
+  onCheckedChange?: (checked: boolean) => void
+  disabled?: boolean
+  size?: 'sm' | 'md' | '$2' | '$3' | '$4'
+  activeColor?: string
+  inactiveColor?: string
+  trackColor?: string
+  activeThumbColor?: string
+  accessibilityLabel?: string
+}
+export const OtfSwitch: (props: OtfSwitchProps) => any
 export const OtfCard: any
 export type OtfCardProps = any
 export const OtfInput: any
